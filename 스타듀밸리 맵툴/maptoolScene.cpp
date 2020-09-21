@@ -139,7 +139,7 @@ void maptoolScene::render()
 	{
 		for (int j = 0; j < DISPLAYX; j++)
 		{
-			switch (_tile[i + tileY][j + tileX].season)
+			switch (_currentSeason)
 			{
 			case SPRING:
 				IMAGEMANAGER->frameRender("outdoorSpring", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -262,7 +262,6 @@ void maptoolScene::maptoolSetup()
 			{
 				_tile[i][j].rc = RectMake(50 + j * TILESIZE, 50 + i * TILESIZE, TILESIZE, TILESIZE);
 			}
-			_tile[i][j].season = SPRING;
 			_tile[i][j].terrainFrameX = 0;
 			_tile[i][j].terrainFrameY = 6;
 			_tile[i][j].objFrameX = 0;
@@ -313,7 +312,6 @@ void maptoolScene::setMap()
 				{
 					_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
 					_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
-					_tile[i + tileY][j + tileX].season = _currentSeason;
 					_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
 				}
 
@@ -322,7 +320,6 @@ void maptoolScene::setMap()
 				{
 					_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
 					_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
-					_tile[i + tileY][j + tileX].season = _currentSeason;
 					_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
 				}
 				//현재버튼이 지우개냐?
@@ -390,7 +387,6 @@ void maptoolScene::setTerrainMap()
 			{
 				_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
 				_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
-				_tile[i + tileY][j + tileX].season = _currentSeason;
 				_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
 			}
 		}
