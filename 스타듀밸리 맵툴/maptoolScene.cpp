@@ -5,7 +5,6 @@ HRESULT maptoolScene::init()
 {
 	//타일맵 이미지 초기화
 
-
 	//맵툴세팅
 	sampleTileMaxFrameX = IMAGEMANAGER->findImage("outdoorSpring")->getMaxFrameX() + 1;
 	sampleTileMaxFrameY = IMAGEMANAGER->findImage("outdoorSpring")->getMaxFrameY() + 1;
@@ -624,12 +623,77 @@ void maptoolScene::resetSampleTile()
 	}
 }
 
+void maptoolScene::checkHacked()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			if (_tile[i][j].terrain == TR_HACKED)
+			{
+				if (_tile[i][j-1].terrain == TR_HACKED) //왼쪽
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //오른쪽
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //아래
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위+왼
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위+오
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //아래+왼
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //아래+오
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위+왼+왼대각
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위+오+오대각
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //아래+왼+왼대각
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //아래+오+오대각
+				{
+
+				}
+				if (_tile[i][j - 1].terrain == TR_HACKED) //위+왼+아래 || 위+오+아래 || 아래+왼+오 || 왼+오 || 위+아래 || 위+아래+왼+오 || 팔방모두
+				{
+					//기본 네모
+				}
+			}
+		}
+	}
+}
+
 TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 {
 	//시멘트
 	if (frameX == 1 && frameY == 0)
 	{
-		return TR_CEMENT;
+		return TR_GROUND;
 	}
 	//땅
 	if (frameX == 2 && frameY == 0)
@@ -639,12 +703,12 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 	//잔디
 	if (frameX == 3 && frameY == 0)
 	{
-		return TR_GRASS;
+		return TR_GROUND;
 	}
 	//물
 	if (frameX == 4 && frameY == 0)
 	{
-		return TR_WATER;
+		return TR_HACKED;
 	}
 	//기타
 	return TR_GROUND;
