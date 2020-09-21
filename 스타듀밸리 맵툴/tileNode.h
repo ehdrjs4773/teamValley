@@ -49,7 +49,6 @@ struct tagTile
 	TERRAIN terrain;
 	OBJECT obj;
 	RECT rc;
-	SEASON season;
 
 	int terrainFrameX;
 	int terrainFrameY;
