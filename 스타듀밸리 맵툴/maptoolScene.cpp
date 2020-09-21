@@ -62,17 +62,17 @@ void maptoolScene::update()
 		if (PtInRect(&_rcTerrain, _ptMouse))
 		{
 			_ctrlSelect = CTRL_TERRAIN;
-			isSelectSeason = true;
+			if(!isSelectSeason)isSelectSeason = true;
+			else isSelectSeason = false;
 		}
 		if (PtInRect(&_rcObject, _ptMouse))
 		{
 			_ctrlSelect = CTRL_OBJECT;
-			isSelectSeason = true;
 		}
 		if (PtInRect(&_rcEraser, _ptMouse))
 		{
 			_ctrlSelect = CTRL_ERASER;
-			isSelectSeason = false;
+	
 		}
 	}
 	if (INPUT->GetKeyUp(VK_LBUTTON))
@@ -195,14 +195,17 @@ void maptoolScene::render()
 	Rectangle(getMemDC(), _rcLoad);
 	IMAGEMANAGER->findImage("로드")->render(getMemDC(), _rcLoad.left, _rcLoad.top);
 	Rectangle(getMemDC(), _rcTerrain);
+	IMAGEMANAGER->findImage("지형")->render(getMemDC(), _rcTerrain.left, _rcTerrain.top);
 	Rectangle(getMemDC(), _rcObject);
+	IMAGEMANAGER->findImage("오브젝트")->render(getMemDC(), _rcObject.left, _rcObject.top);
 	Rectangle(getMemDC(), _rcEraser);
+	IMAGEMANAGER->findImage("지우개")->render(getMemDC(), _rcEraser.left, _rcEraser.top);
 
 	//textOut(getMemDC(), _rcSave.left + 20, _rcSave.top + 20, "세이브");
 	//textOut(getMemDC(), _rcLoad.left + 20, _rcLoad.top + 20, "로드");
-	textOut(getMemDC(), _rcTerrain.left + 20, _rcTerrain.top + 20, "지형");
-	textOut(getMemDC(), _rcObject.left + 20, _rcObject.top + 20, "오브젝트");
-	textOut(getMemDC(), _rcEraser.left + 20, _rcEraser.top + 20, "지우개");
+	//textOut(getMemDC(), _rcTerrain.left + 20, _rcTerrain.top + 20, "지형");
+	//textOut(getMemDC(), _rcObject.left + 20, _rcObject.top + 20, "오브젝트");
+	//textOut(getMemDC(), _rcEraser.left + 20, _rcEraser.top + 20, "지우개");
 
 	if (isSelectSeason)
 	{
