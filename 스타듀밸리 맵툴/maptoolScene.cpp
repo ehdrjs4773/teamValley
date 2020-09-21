@@ -91,7 +91,7 @@ void maptoolScene::update()
 	}
 	moveTile();
 
-	std::cout << _sampleTile.size() << "\t" << _sampleTileX.size() << std::endl;
+	//std::cout << _sampleTile.size() << "\t" << _sampleTileX.size() << std::endl;
 }
 
 void maptoolScene::render()
@@ -132,7 +132,7 @@ void maptoolScene::render()
 		}
 		break;
 	}
-	
+
 	//인게임 화면 지형을 그린다
 	for (int i = 0; i < DISPLAYY; i++)
 	{
@@ -227,7 +227,29 @@ void maptoolScene::render()
 	if (sampleTileMaxFrameY > SAMPLEDISPLAYY) { Rectangle(getMemDC(), sampleVertScroll); }
 
 
-	if(_click) FrameRect(getMemDC(), RectMake(first.left, first.top, last.right - first.left, last.bottom - first.top), RGB(255, 0, 0));
+	if (_click)
+	{
+		//드래그 오른쪽 아래
+		if (first_i <= last_i && first_j <= last_j)
+		{
+			FrameRect(getMemDC(), RectMake(first.left, first.top, last.right - first.left, last.bottom - first.top), RGB(255, 0, 0));
+		}
+		//드래그 왼쪽 아래
+		else if (first_i <= last_i && first_j > last_j)
+		{
+			FrameRect(getMemDC(), RectMake(last.left, first.top, first.right - last.left, last.bottom - first.top), RGB(255, 0, 0));
+		}
+		//드래그 왼쪽 위
+		else if (first_i > last_i && first_j > last_j)
+		{
+			FrameRect(getMemDC(), RectMake(last.left, last.top, first.right - last.left, first.bottom - last.top), RGB(255, 0, 0));
+		}
+		//드래그 오른쪽 위
+		else if (first_i > last_i && first_j <= last_j)
+		{
+			FrameRect(getMemDC(), RectMake(first.left, last.top, last.right - first.left, first.bottom - last.top), RGB(255, 0, 0));
+		}
+	}
 }
 
 void maptoolScene::maptoolSetup()
@@ -372,7 +394,7 @@ void maptoolScene::setTerrainMap()
 	}
 	if (_click)
 	{
-		if (_ptMouse.x >= _tile[0][DISPLAYX].rc.right)
+		if (_ptMouse.x >= _tile[0][DISPLAYX-1].rc.right)
 		{
 			_click = false;
 			_release = true;
@@ -380,6 +402,16 @@ void maptoolScene::setTerrainMap()
 	}
 	if (_release)
 	{
+		if (first_i > last_i)
+		{
+			swap(first_i, last_i);
+		}
+
+		if (first_j > last_j)
+		{
+			swap(first_j, last_j);
+		}
+
 		for (int i = first_i; i <= last_i; i++)
 		{
 			for (int j = first_j; j <= last_j; j++)
