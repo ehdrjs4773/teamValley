@@ -26,6 +26,7 @@ private:
 	RECT sampleVertScroll;
 
 	CTRL _ctrlSelect;	//현재 어떤 컨트롤 상태인지
+	CTRL _prevCtrl;		//지우개 눌렀을때 샘플 사라지지 않게 하기 위한 변수
 
 	RECT first, last;
 	int first_i, first_j;
@@ -35,6 +36,8 @@ private:
 
 	bool isSelectSeason;
 	SEASON _currentSeason;
+
+	bool isHackedTile;
 
 	int tileX, tileY;
 	int sampleTileX, sampleTileY;
@@ -57,6 +60,7 @@ public:
 	void load();
 
 	void setScroll();
+	void resetSampleScrollBar();
 	void lockScroll();
 	void moveScroll();
 	void moveTile();
@@ -64,6 +68,12 @@ public:
 	void resetSampleTile();
 
 	void checkHacked();
+
+	void showMapTile();
+	void showControlButton();
+	void showScrollBar();
+	void showSampleTerrainTile();
+	void showSampleObjectTile();
 
 	//지형, 오브젝트 선택하기
 	TERRAIN terrainSelect(int frameX, int frameY);

@@ -10,8 +10,6 @@
 #define TILESIZEY (TILEY * TILESIZE) //640
 
 //이미지 타일 (화면 우측상단에 붙여놓을 샘플타일)
-//#define SAMPLETILEX 25
-//#define SAMPLETILEY 80
 #define SAMPLEDISPLAYX 20
 #define SAMPLEDISPLAYY 20
 
