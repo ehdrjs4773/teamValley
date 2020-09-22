@@ -28,9 +28,6 @@ HRESULT maptoolScene::init()
 
 	isSelectSeason = isHorLock = isVertLock = isSampleHorLock = isSampleVertLock = false;
 
-	//갈린 타일 선택시 사용 (타일[12][20])
-	isHackedTile = false;
-
 	//지형그리기 속성으로 시작하기
 	_ctrlSelect = CTRL_TERRAIN;
 
