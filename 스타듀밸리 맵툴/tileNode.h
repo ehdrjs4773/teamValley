@@ -52,6 +52,8 @@ struct tagTile
 	int terrainFrameY;
 	int objFrameX;
 	int objFrameY;
+
+	bool isWet;
 };
 
 enum HACK_DIRRECTION

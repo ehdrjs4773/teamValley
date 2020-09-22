@@ -227,6 +227,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].objFrameY = 0;
 			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 			_tile[i][j].obj = OBJ_NONE;
+			_tile[i][j].isWet = false;
 		}
 	}
 
@@ -632,95 +633,217 @@ void maptoolScene::checkHacked()
 		{
 			if (_tile[i][j].terrain == TR_HACKED)
 			{
+				if (_tile[i][j].isWet)
+				{
+					_tile[i][j].terrainFrameX = 20;
+					_tile[i][j].terrainFrameY = 14;
+				}
+				else
+				{
+					_tile[i][j].terrainFrameX = 20;
+					_tile[i][j].terrainFrameY = 12;
+				}
 				if (_tile[i][j - 1].terrain == TR_HACKED) //왼쪽
 				{
-					_tile[i][j].terrainFrameX = 21;
-					_tile[i][j].terrainFrameY = 13;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 15;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 13;
+					}
 				}
 				if (_tile[i][j + 1].terrain == TR_HACKED) //오른쪽
 				{
-					_tile[i][j].terrainFrameX = 20;
-					_tile[i][j].terrainFrameY = 13;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 15;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 13;
+					}
 				}
 				if (_tile[i - 1][j].terrain == TR_HACKED) //위
 				{
-					_tile[i][j].terrainFrameX = 22;
-					_tile[i][j].terrainFrameY = 13;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 15;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 13;
+					}
 				}
 				if (_tile[i + 1][j].terrain == TR_HACKED) //아래
 				{
-					_tile[i][j].terrainFrameX = 22;
-					_tile[i][j].terrainFrameY = 12;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 14;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 12;
+					}
 				}
 				if (_tile[i][j - 1].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)			//왼+오
 				{
-					_tile[i][j].terrainFrameX = 21;
-					_tile[i][j].terrainFrameY = 20;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 22;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 20;
+					}
 				}
 				if (_tile[i - 1][j].terrain == TR_HACKED && _tile[i + 1][j].terrain == TR_HACKED)			//위+아래
 				{
-					_tile[i][j].terrainFrameX = 20;
-					_tile[i][j].terrainFrameY = 20;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 20;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 20;
+					}
 				}
 				if ((_tile[i - 1][j].terrain == TR_HACKED && _tile[i][j - 1].terrain == TR_HACKED)
 					|| (_tile[i - 1][j].terrain == TR_HACKED 
 						&& _tile[i][j - 1].terrain == TR_HACKED
 						&& _tile[i - 1][j - 1].terrain == TR_HACKED))	//위+왼 ||  //위+왼+왼대각
 				{
-					_tile[i][j].terrainFrameX = 22;
-					_tile[i][j].terrainFrameY = 21;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 23;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 21;
+					}
 				}
 				if ((_tile[i - 1][j].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)
 					|| (_tile[i - 1][j].terrain == TR_HACKED
 						&& _tile[i][j + 1].terrain == TR_HACKED
 						&& _tile[i + 1][j + 1].terrain == TR_HACKED))	 //위+오 || 위+오+오대각
 				{
-					_tile[i][j].terrainFrameX = 20;
-					_tile[i][j].terrainFrameY = 21;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 23;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 21;
+					}
 				}
 				if ((_tile[i + 1][j].terrain == TR_HACKED && _tile[i][j - 1].terrain == TR_HACKED)
 					|| (_tile[i + 1][j].terrain == TR_HACKED
 						&& _tile[i][j - 1].terrain == TR_HACKED
 						&& _tile[i + 1][j - 1].terrain == TR_HACKED))	//아래+왼 || 아래+왼+왼대각
 				{
-					_tile[i][j].terrainFrameX = 22;
-					_tile[i][j].terrainFrameY = 16;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 18;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 16;
+					}
 				}
 				if ((_tile[i + 1][j].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)
 					|| (_tile[i + 1][j].terrain == TR_HACKED
 						&& _tile[i][j + 1].terrain == TR_HACKED
 						&& _tile[i + 1][j + 1].terrain == TR_HACKED))	//아래+오 || 아래+오+오대각
 				{
-					_tile[i][j].terrainFrameX = 20;
-					_tile[i][j].terrainFrameY = 16;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 18;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 16;
+					}
 				}
 				if (_tile[i - 1][j].terrain == TR_HACKED
 					&& _tile[i][j - 1].terrain == TR_HACKED
 					&& _tile[i + 1][j].terrain == TR_HACKED)		//위+왼+아래
 				{
-					_tile[i][j].terrainFrameX = 22;
-					_tile[i][j].terrainFrameY = 17;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 19;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 17;
+					}
 				}
 				if (_tile[i - 1][j].terrain == TR_HACKED
 					&& _tile[i][j + 1].terrain == TR_HACKED
 					&& _tile[i + 1][j].terrain == TR_HACKED)		//위+오+아래
 				{
-					_tile[i][j].terrainFrameX = 20;
-					_tile[i][j].terrainFrameY = 17;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 19;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 17;
+					}
 				}
 				if (_tile[i - 1][j].terrain == TR_HACKED
 					&& _tile[i][j - 1].terrain == TR_HACKED
 					&& _tile[i][j + 1].terrain == TR_HACKED)		//위+왼+오
 				{
-					_tile[i][j].terrainFrameX = 21;
-					_tile[i][j].terrainFrameY = 21;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 23;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 21;
+					}
 				}
 				if (_tile[i + 1][j].terrain == TR_HACKED
 					&& _tile[i][j - 1].terrain == TR_HACKED
 					&& _tile[i][j + 1].terrain == TR_HACKED)		//아래+왼+오 
 				{
-					_tile[i][j].terrainFrameX = 21;
-					_tile[i][j].terrainFrameY = 16;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 18;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 16;
+					}
 				}
 				if (	(_tile[i - 1][j].terrain == TR_HACKED
 						&& _tile[i + 1][j].terrain == TR_HACKED
@@ -736,8 +859,16 @@ void maptoolScene::checkHacked()
 						&& _tile[i + 1][j + 1].terrain == TR_HACKED))	//위아래양옆대각4개 모두	(8방)
 				{
 					//기본 네모
-					_tile[i][j].terrainFrameX = 21;
-					_tile[i][j].terrainFrameY = 17;
+					if (_tile[i][j].isWet)
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 19;
+					}
+					else
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 17;
+					}
 				}
 			}
 		}
