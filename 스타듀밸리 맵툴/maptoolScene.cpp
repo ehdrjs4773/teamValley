@@ -547,11 +547,25 @@ void maptoolScene::selectSeason()
 			}
 			if (PtInRect(&_rcSummer, _ptMouse))
 			{
+				sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
+				sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+
 				_currentSeason = SUMMER;
+				sampleTileMaxFrameX = IMAGEMANAGER->findImage("농장(여름)")->getMaxFrameX() + 1;
+				sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장(여름)")->getMaxFrameY() + 1;
+				resetSampleTile();
+				sampleTileX = sampleTileY = 0;
 			}
 			if (PtInRect(&_rcAutumn, _ptMouse))
 			{
+				sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
+				sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+
 				_currentSeason = AUTUMN;
+				sampleTileMaxFrameX = IMAGEMANAGER->findImage("농장(가을)")->getMaxFrameX() + 1;
+				sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장(가을)")->getMaxFrameY() + 1;
+				resetSampleTile();
+				sampleTileX = sampleTileY = 0;
 			}
 			if (PtInRect(&_rcWinter, _ptMouse))
 			{
@@ -563,7 +577,6 @@ void maptoolScene::selectSeason()
 				sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장(겨울)")->getMaxFrameY() + 1;
 				resetSampleTile();
 				sampleTileX = sampleTileY = 0;
-
 			}
 			break;
 		case CTRL_OBJECT:
@@ -579,11 +592,23 @@ void maptoolScene::selectSeason()
 			}
 			if (PtInRect(&_rcSummer, _ptMouse))
 			{
+				sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
+				sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+
 				_currentSeason = SUMMER;
+				sampleTileMaxFrameX = IMAGEMANAGER->findImage("농장오브젝트(여름)")->getMaxFrameX() + 1;
+				sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장오브젝트(여름)")->getMaxFrameY() + 1;
+				resetSampleTile();
 			}
 			if (PtInRect(&_rcAutumn, _ptMouse))
 			{
+				sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
+				sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+
 				_currentSeason = AUTUMN;
+				sampleTileMaxFrameX = IMAGEMANAGER->findImage("농장오브젝트(가을)")->getMaxFrameX() + 1;
+				sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장오브젝트(가을)")->getMaxFrameY() + 1;
+				resetSampleTile();
 			}
 			if (PtInRect(&_rcWinter, _ptMouse))
 			{
@@ -894,8 +919,22 @@ void maptoolScene::showMapTile()
 					_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 				break;
 			case SUMMER:
+				IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+
+				//인게임 화면 오브젝트 그린다
+				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
+				IMAGEMANAGER->frameRender("농장오브젝트(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 				break;
 			case AUTUMN:
+				IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+				_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+
+				//인게임 화면 오브젝트 그린다
+				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
+				IMAGEMANAGER->frameRender("농장오브젝트(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 				break;
 			case WINTER:
 				IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -964,8 +1003,30 @@ void maptoolScene::showSampleTerrainTile()
 		}
 		break;
 	case SUMMER:
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		{
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			{
+				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				{
+					IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+				}
+			}
+		}
 		break;
-	case AUTUMN:
+	case AUTUMN:	
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		{
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			{
+				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				{
+					IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+				}
+			}
+		}
 		break;
 	case WINTER:
 		for (int i = 0; i < SAMPLEDISPLAYY; i++)
@@ -1001,8 +1062,30 @@ void maptoolScene::showSampleObjectTile()
 		}
 		break;
 	case SUMMER:
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		{
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			{
+				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				{
+					IMAGEMANAGER->frameRender("농장오브젝트(여름)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+				}
+			}
+		}
 		break;
 	case AUTUMN:
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		{
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			{
+				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				{
+					IMAGEMANAGER->frameRender("농장오브젝트(가을)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+				}
+			}
+		}
 		break;
 	case WINTER:
 		for (int i = 0; i < SAMPLEDISPLAYY; i++)
