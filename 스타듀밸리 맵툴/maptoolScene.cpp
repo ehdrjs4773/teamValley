@@ -11,9 +11,13 @@ HRESULT maptoolScene::init()
 	this->maptoolSetup();
 	this->setScroll();
 
+	//드래그
 	first_i = first_j = last_i = last_j = 0;
 	_click = false;
 	_release = false;
+	_isSampleDrag = false;
+	_ischange = false;
+	_isDragSet = false;
 
 	//현재타일 초기화 (지형 = 잔디)
 	_currentTile.x = 0;
@@ -41,73 +45,84 @@ void maptoolScene::release()
 void maptoolScene::update()
 {
 	//드래그
-	setTerrainMap();
-
-	//버튼 눌렀을때 컨트롤
-	if (INPUT->GetKeyDown(VK_LBUTTON))
+	if (_isDragSet)
 	{
-		lockScroll();
-		selectSeason();
+		setMap_Drag();
+	}
+	else
+	{
+		//버튼 눌렀을때 컨트롤
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			lockScroll();
+			selectSeason();
 
-		if (PtInRect(&_rcSave, _ptMouse))
-		{
-			_ctrlSelect = CTRL_SAVE;
-			this->save();
-		}
-		if (PtInRect(&_rcLoad, _ptMouse))
-		{
-			_ctrlSelect = CTRL_LOAD;
-			this->load();
-		}
-		if (PtInRect(&_rcTerrain, _ptMouse))
-		{
-			//지형 일때 or 계절 창이 없을때, 버튼을 누르면 계절선택 창 사라짐
-			if (_ctrlSelect != CTRL_TERRAIN || !isSelectSeason)
+			if (PtInRect(&_rcSave, _ptMouse))
 			{
-				_ctrlSelect = CTRL_TERRAIN;	
-				_prevCtrl = _ctrlSelect;
-				isSelectSeason = true;
-				resetSampleScrollBar();
+				_ctrlSelect = CTRL_SAVE;
+				this->save();
 			}
-			else isSelectSeason = false;
-		}
-		if (PtInRect(&_rcObject, _ptMouse))
-		{
-			//오브젝트 일때 or 계절 창이 없을때, 버튼을 누르면 계절선택 창 사라짐
-			if (_ctrlSelect != CTRL_OBJECT || !isSelectSeason)
+			if (PtInRect(&_rcLoad, _ptMouse))
 			{
-				_ctrlSelect = CTRL_OBJECT;
-				_prevCtrl = _ctrlSelect;
-				isSelectSeason = true;
-				resetSampleScrollBar();
+				_ctrlSelect = CTRL_LOAD;
+				this->load();
 			}
-			else isSelectSeason = false;
+			if (PtInRect(&_rcTerrain, _ptMouse))
+			{
+				//지형 일때 or 계절 창이 없을때, 버튼을 누르면 계절선택 창 사라짐
+				if (_ctrlSelect != CTRL_TERRAIN || !isSelectSeason)
+				{
+					_ctrlSelect = CTRL_TERRAIN;
+					_prevCtrl = _ctrlSelect;
+					isSelectSeason = true;
+					resetSampleScrollBar();
+				}
+				else isSelectSeason = false;
+			}
+			if (PtInRect(&_rcObject, _ptMouse))
+			{
+				//오브젝트 일때 or 계절 창이 없을때, 버튼을 누르면 계절선택 창 사라짐
+				if (_ctrlSelect != CTRL_OBJECT || !isSelectSeason)
+				{
+					_ctrlSelect = CTRL_OBJECT;
+					_prevCtrl = _ctrlSelect;
+					isSelectSeason = true;
+					resetSampleScrollBar();
+				}
+				else isSelectSeason = false;
+			}
+			if (PtInRect(&_rcEraser, _ptMouse))
+			{
+				_ctrlSelect = CTRL_ERASER;
+				isSelectSeason = false;
+			}
 		}
-		if (PtInRect(&_rcEraser, _ptMouse))
+
+		//버튼 떼면 스크롤 락 false
+		if (INPUT->GetKeyUp(VK_LBUTTON))
 		{
-			_ctrlSelect = CTRL_ERASER;
-			isSelectSeason = false;
+			isHorLock = isVertLock = isSampleHorLock = isSampleVertLock = false;
+		}
+		//누르고 있는 상황
+		if (INPUT->GetKey(VK_LBUTTON))
+		{
+			//스크롤을 누르고 있다면
+			if (isHorLock || isVertLock || isSampleHorLock || isSampleVertLock)
+			{
+				moveScroll();
+			}
+			else
+			{
+				this->setMap();
+			}
 		}
 	}
 
-	//버튼 떼면 스크롤 락 false
-	if (INPUT->GetKeyUp(VK_LBUTTON))
-	{
-		isHorLock = isVertLock = isSampleHorLock = isSampleVertLock = false;
-	}
-	//누르고 있는 상황
-	if (INPUT->GetKey(VK_LBUTTON))
-	{
-		//스크롤을 누르고 있다면
-		if (isHorLock || isVertLock || isSampleHorLock || isSampleVertLock)
-		{
-			moveScroll();
-		}
-		else
-		{
-			this->setMap();
-		}
-	}
+	isChange();
+
+	if (_isSampleDrag) this->sample_Drag();
+	else this->setTerrainMap();
+
 	moveTile();
 	checkHacked();
 }
@@ -186,6 +201,146 @@ void maptoolScene::render()
 		{
 			FrameRect(getMemDC(), RectMake(first.left, last.top, last.right - first.left, first.bottom - last.top), RGB(255, 0, 0));
 		}
+	}
+
+	if (_isDragSet)
+	{
+		for (int i = 0; i < DISPLAYX; i++)
+		{
+			for (int j = 0; j < DISPLAYY; j++)
+			{
+				if (PtInRect(&_tile[i][j].rc, _ptMouse))
+				{
+					RECT temp = { _tile[i][j].rc.left, _tile[i][j].rc.top, \
+						_tile[i + (last_i - first_i)][j + (last_j - first_j)].rc.right, \
+						_tile[i + (last_i - first_i)][j + (last_j - first_j)].rc.bottom };
+					FrameRect(getMemDC(), temp, RGB(255, 0, 0));
+				}
+			}
+		}
+	}
+}
+
+void maptoolScene::setMap_Drag()
+{
+	for (int i = 0; i < DISPLAYY; i++)
+	{
+		for (int j = 0; j < DISPLAYX; j++)
+		{
+			if (PtInRect(&_tile[i][j].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					for (int q = first_i; q <= last_i; q++)
+					{
+						for (int w = first_j; w <= last_j; w++)
+						{
+							_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+							_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+							cout << i + tileY << endl;
+							cout << j + tileX << endl;
+							cout << i + tileY + q << endl;
+							cout << i + tileX + w << endl;
+
+						}
+					}
+					_isDragSet = false;
+				}
+			}
+		}
+	}
+}
+
+void maptoolScene::sample_Drag()
+{
+	for (int i = 0; i < sampleTileMaxFrameY; i++)
+	{
+		for (int j = 0; j < sampleTileMaxFrameX; j++)
+		{
+			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_RBUTTON))
+				{
+					_click = true;
+					first = _sampleTile[i][j].rc;
+					first_i = i;
+					first_j = j;
+				}
+				if (INPUT->GetKey(VK_RBUTTON))
+				{
+					last = _sampleTile[i][j].rc;
+					last_i = i;
+					last_j = j;
+				}
+				if (INPUT->GetKeyUp(VK_RBUTTON))
+				{
+					last = _sampleTile[i][j].rc;
+					last_i = i;
+					last_j = j;
+					_click = false;
+					_release = true;
+					_isDragSet = true;
+				}
+			}
+		}
+	}
+	if (_click)
+	{
+		if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+		{
+			_click = false;
+			_release = true;
+		}
+	}
+	if (_release)
+	{
+		if (first_i > last_i)
+		{
+			swap(first_i, last_i);
+		}
+
+		if (first_j > last_j)
+		{
+			swap(first_j, last_j);
+		}
+
+		_release = false;
+	}
+}
+
+void maptoolScene::isChange()
+{
+	if (_ptMouse.x < _tile[0][DISPLAYX - 1].rc.right + 50)
+	{
+		if (_isSampleDrag == true)
+		{
+			_ischange = true;
+		}
+		if (_ischange && !_isDragSet)
+		{
+			first_i = -1;
+			first_j = -1;
+			last_i = -1;
+			last_j = -1;
+			_ischange = false;
+		}
+		_isSampleDrag = false;
+	}
+	else
+	{
+		if (_isSampleDrag == false)
+		{
+			_ischange = true;
+		}
+		if (_ischange == true && !_isDragSet)
+		{
+			first_i = -1;
+			first_j = -1;
+			last_i = -1;
+			last_j = -1;
+			_ischange = false;
+		}
+		_isSampleDrag = true;
 	}
 }
 

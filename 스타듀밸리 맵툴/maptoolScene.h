@@ -28,11 +28,15 @@ private:
 	CTRL _ctrlSelect;	//현재 어떤 컨트롤 상태인지
 	CTRL _prevCtrl;		//지우개 눌렀을때 샘플 사라지지 않게 하기 위한 변수
 
+	//드래그
 	RECT first, last;
 	int first_i, first_j;
 	int last_i, last_j;
 	bool _click;
 	bool _release;
+	bool _isSampleDrag;
+	bool _ischange;
+	bool _isDragSet;
 
 	bool isSelectSeason;
 	SEASON _currentSeason;
@@ -51,6 +55,18 @@ public:
 	void release();
 	void update();
 	void render();
+
+	//샘플타일에서 드래그 한 부분을 그려주는 함수
+	void setMap_Drag();
+
+	// 샘플타일 드래그 하는 함수
+	void sample_Drag();
+
+	/*
+	마우스가 왼쪽에서 오른쪽으로
+	오른쪽에서 왼쪽으로 움직였을때 초기화 해주는 함수
+	*/
+	void isChange();
 
 	//맵툴세팅
 	void maptoolSetup();
