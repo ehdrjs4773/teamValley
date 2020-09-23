@@ -26,18 +26,23 @@ private:
 	RECT sampleVertScroll;
 
 	CTRL _ctrlSelect;	//현재 어떤 컨트롤 상태인지
-	CTRL _prevCtrl;		//지우개 눌렀을때 샘플 사라지지 않게 하기 위한 변수
 
+	//인게임드래그
 	RECT first, last;
 	int first_i, first_j;
 	int last_i, last_j;
 	bool _click;
 	bool _release;
+	bool _isSampleDrag;
+	bool _ischange;
+	bool _isDragSet;
+
+	char check[20][256];
+
+
 
 	bool isSelectSeason;
 	SEASON _currentSeason;
-
-	bool isHackedTile;
 
 	int tileX, tileY;
 	int sampleTileX, sampleTileY;
@@ -55,25 +60,30 @@ public:
 	//맵툴세팅
 	void maptoolSetup();
 	void setMap();
+
+	//샘플타일에서 드래그 한 부분을 그려주는 함수
+	void setMap_Drag();
+	
+	// 샘플타일 드래그 하는 함수
+	void sample_Drag();
+
+	/*
+	마우스가 왼쪽에서 오른쪽으로
+	오른쪽에서 왼쪽으로 움직였을때 초기화 해주는 함수
+	*/
+	void isChange();
+
 	void setTerrainMap();
 	void save();
 	void load();
 
 	void setScroll();
-	void resetSampleScrollBar();
 	void lockScroll();
 	void moveScroll();
 	void moveTile();
 	void selectSeason();
 	void resetSampleTile();
-
 	void checkHacked();
-
-	void showMapTile();
-	void showControlButton();
-	void showScrollBar();
-	void showSampleTerrainTile();
-	void showSampleObjectTile();
 
 	//지형, 오브젝트 선택하기
 	TERRAIN terrainSelect(int frameX, int frameY);
