@@ -222,9 +222,6 @@ void maptoolScene::render()
 			}
 		}
 	}
-
-	//Å×½ºÆ®
-	cout << gameNode::getKeyinput() << endl;
 }
 
 void maptoolScene::setMap_Drag()

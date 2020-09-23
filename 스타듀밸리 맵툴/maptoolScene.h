@@ -39,8 +39,6 @@ private:
 	bool _isDragSet;
 	bool _prevent_double;
 
-	char test;
-
 	bool isSelectSeason;
 	SEASON _currentSeason;
 
