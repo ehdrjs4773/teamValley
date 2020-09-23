@@ -227,6 +227,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].objFrameY = 0;
 			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 			_tile[i][j].obj = OBJ_NONE;
+			_tile[i][j].objType = OT_ACCESSIBLE;
 			_tile[i][j].isWet = false;
 		}
 	}
@@ -1115,10 +1116,10 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 	{
 		return TR_GROUND;
 	}
-	//잔디
-	if (frameX == 3 && frameY == 0)
+	//물
+	if ((frameX == 7 || frameX == 8 || frameX == 9 || frameX == 10) && frameY == 6)
 	{
-		return TR_GROUND;
+		return TR_WATER;
 	}
 	//경작지
 	if (frameX == 20 && frameY == 12)
@@ -1131,5 +1132,5 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 
 OBJECT maptoolScene::objectSelect(int frameX, int frameY)
 {
-	return OBJ_BLOCKS;
+	return OBJ_INDESTRUCTIBLE;
 }
