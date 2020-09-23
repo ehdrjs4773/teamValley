@@ -18,6 +18,7 @@ HRESULT maptoolScene::init()
 	_isSampleDrag = false;
 	_ischange = false;
 	_isDragSet = false;
+	_prevent_double = false;
 
 	//현재타일 초기화 (지형 = 잔디)
 	_currentTile.x = 0;
@@ -49,7 +50,7 @@ void maptoolScene::update()
 	{
 		setMap_Drag();
 	}
-	else
+	else if(!_isDragSet/* && !_prevent_double*/)
 	{
 		//버튼 눌렀을때 컨트롤
 		if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -203,7 +204,9 @@ void maptoolScene::render()
 		}
 	}
 
-	if (_isDragSet)
+	//복사한 타일 크기만큼 따라다니는 빨간 렉트
+
+	if (_isDragSet && !_prevent_double)
 	{
 		for (int i = 0; i < DISPLAYX; i++)
 		{
@@ -219,6 +222,9 @@ void maptoolScene::render()
 			}
 		}
 	}
+
+	//테스트
+	cout << gameNode::getKeyinput() << endl;
 }
 
 void maptoolScene::setMap_Drag()
@@ -231,21 +237,34 @@ void maptoolScene::setMap_Drag()
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					_prevent_double = true;
 					for (int q = first_i; q <= last_i; q++)
 					{
 						for (int w = first_j; w <= last_j; w++)
 						{
-							_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
-							_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
-							cout << i + tileY << endl;
-							cout << j + tileX << endl;
-							cout << i + tileY + q << endl;
-							cout << i + tileX + w << endl;
 
+							if (_ctrlSelect == CTRL_TERRAIN) 
+							{
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrain = terrainSelect(q + sampleTileY, w + sampleTileX);
+
+							}
+							else if (_ctrlSelect == CTRL_OBJECT)
+							{
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
+
+							}
 						}
 					}
-					_isDragSet = false;
 				}
+				if (INPUT->GetKeyUp(VK_LBUTTON))
+					{
+						_prevent_double = false;
+						_isDragSet = false;
+					}
 			}
 		}
 	}
@@ -456,7 +475,7 @@ void maptoolScene::setTerrainMap()
 		{
 			if (PtInRect(&_tile[i][j].rc, _ptMouse))
 			{
-				if (_ctrlSelect == CTRL_TERRAIN)
+				if (_ctrlSelect == CTRL_TERRAIN || _ctrlSelect == CTRL_OBJECT || _ctrlSelect == CTRL_ERASER)
 				{
 					if (INPUT->GetKeyDown(VK_RBUTTON))
 					{
@@ -481,6 +500,7 @@ void maptoolScene::setTerrainMap()
 						_release = true;
 					}
 				}
+
 			}
 		}
 	}
@@ -508,9 +528,25 @@ void maptoolScene::setTerrainMap()
 		{
 			for (int j = first_j; j <= last_j; j++)
 			{
-				_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
-				_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
-				_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
+
+				if (_ctrlSelect == CTRL_TERRAIN)
+				{
+					_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
+					_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
+					_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
+				}
+				else if (_ctrlSelect == CTRL_OBJECT)
+				{
+					_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
+					_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
+					_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
+				}
+				if (_ctrlSelect == CTRL_ERASER)
+				{
+					_tile[i + tileY][j + tileX].objFrameX = 0;
+					_tile[i + tileY][j + tileX].objFrameY = 0;
+					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
+				}
 			}
 		}
 		_release = false;

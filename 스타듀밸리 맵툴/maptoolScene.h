@@ -9,7 +9,7 @@ private:
 	std::vector<std::vector<tagTile>> _sampleTile;
 	std::vector<tagTile> _sampleTileX;
 	tagCurrentTile _currentTile; //현재타일
-
+	
 	RECT _rcSave;		//세이브
 	RECT _rcLoad;		//로드
 	RECT _rcTerrain;	//지형
@@ -37,6 +37,9 @@ private:
 	bool _isSampleDrag;
 	bool _ischange;
 	bool _isDragSet;
+	bool _prevent_double;
+
+	char test;
 
 	bool isSelectSeason;
 	SEASON _currentSeason;
