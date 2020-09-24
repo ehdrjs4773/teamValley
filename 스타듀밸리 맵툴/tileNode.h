@@ -43,6 +43,11 @@ enum OBJECT
 	OBJ_NONE
 };
 
+enum OBJECTIMG
+{
+
+};
+
 enum OBJ_TYPE
 {
 	OT_ACCESSIBLE,

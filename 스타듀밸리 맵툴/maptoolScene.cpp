@@ -252,7 +252,6 @@ void maptoolScene::setMap_Drag()
 								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
 								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
-
 							}
 						}
 					}
@@ -303,6 +302,11 @@ void maptoolScene::sample_Drag()
 	if (_click)
 	{
 		if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+		{
+			_click = false;
+			_release = true;
+		}
+		if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
 		{
 			_click = false;
 			_release = true;
