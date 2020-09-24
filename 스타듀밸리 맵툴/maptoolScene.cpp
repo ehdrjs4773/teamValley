@@ -121,7 +121,7 @@ void maptoolScene::update()
 
 	isChange();
 
-	if (_isSampleDrag) this->sample_Drag();
+	if (_isSampleDrag && _ctrlSelect != CTRL_ERASER) this->sample_Drag();
 	else this->setTerrainMap();
 
 	moveTile();
@@ -264,7 +264,7 @@ void maptoolScene::setMap_Drag()
 							{
 								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = overlappedSelect(w + sampleTileX, q + sampleTileY);
 
-								if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver == OVR_OVER)
+								if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver != OVR_NONE)
 								{
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
@@ -275,7 +275,7 @@ void maptoolScene::setMap_Drag()
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
 								}
-							}	
+							}
 						}
 					}
 				}
@@ -581,6 +581,7 @@ void maptoolScene::setTerrainMap()
 					_tile[i + tileY][j + tileX].objFrameX = 0;
 					_tile[i + tileY][j + tileX].objFrameY = 0;
 					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
+					_tile[i + tileY][j + tileX].objOver = OVR_NONE;
 				}
 			}
 		}
@@ -1141,12 +1142,11 @@ void maptoolScene::showMapTile()
 					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
 
 				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj != OBJ_NONE) 
+				if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
 				{
 					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 				}
-
 				if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
 				{
 					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
