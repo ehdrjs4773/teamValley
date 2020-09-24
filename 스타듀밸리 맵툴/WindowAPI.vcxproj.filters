@@ -19,17 +19,11 @@
     <Filter Include="WinMain">
       <UniqueIdentifier>{68b7cb8f-01ee-485e-8a9d-54f0e06f6040}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameFramework\이미지">
-      <UniqueIdentifier>{1e616e04-3329-41d7-b6ed-02b7d269f51f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameFramework\카메라">
       <UniqueIdentifier>{aa4ae9bf-5abe-4eee-a0e5-fe3d8d17ea5b}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFramework\총알">
       <UniqueIdentifier>{0850c6c3-b3ea-4bbc-818b-2f7be3085366}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameFramework\싱글톤데이터">
-      <UniqueIdentifier>{4f9c286a-e4c3-42c7-9fce-71a675503514}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameFramework\체력바">
       <UniqueIdentifier>{bc1fad6b-64c5-4477-8b5e-8fc16bc693dd}</UniqueIdentifier>
@@ -37,7 +31,37 @@
     <Filter Include="GameFramework\로딩">
       <UniqueIdentifier>{380f7478-b624-45de-aeae-2ccb9055ab48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\로딩화면">
+    <Filter Include="GameFramework\매니져\타임매니저">
+      <UniqueIdentifier>{b0fa6e30-ac11-4dce-9dad-d353a564fb73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\이미지 매니저">
+      <UniqueIdentifier>{d319bc5b-78f2-485b-84ec-e652bce47b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\씬 매니저">
+      <UniqueIdentifier>{ea67ad37-174c-4bf4-b825-7f3645e04b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\사운드 매니저">
+      <UniqueIdentifier>{db97af5d-2a72-4050-90bb-c4202966ae2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\세이브 매니저">
+      <UniqueIdentifier>{763c280d-1379-4296-9f2b-b06e5db89152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\세이브 매니저\싱글톤 데이터 세이브">
+      <UniqueIdentifier>{4f9c286a-e4c3-42c7-9fce-71a675503514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\세이브 매니저\ini데이터 매니저">
+      <UniqueIdentifier>{cbcc0af2-d0da-44d5-bd63-18c789bb476d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\이미지 매니저\이미지">
+      <UniqueIdentifier>{1e616e04-3329-41d7-b6ed-02b7d269f51f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="맵툴 씬">
+      <UniqueIdentifier>{8b584442-1628-47c1-bf86-63dba08a05c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인 씬">
+      <UniqueIdentifier>{87ef43df-c57a-4e43-a3a2-0adb83382829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="로딩 씬">
       <UniqueIdentifier>{7e12b8a1-bff7-4c0e-8411-c665eda32360}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -61,10 +85,7 @@
       <Filter>GameFramework\유틸</Filter>
     </ClCompile>
     <ClCompile Include="image.cpp">
-      <Filter>GameFramework\이미지</Filter>
-    </ClCompile>
-    <ClCompile Include="imageManager.cpp">
-      <Filter>GameFramework\매니져</Filter>
+      <Filter>GameFramework\매니져\이미지 매니저\이미지</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>GameFramework\카메라</Filter>
@@ -76,31 +97,38 @@
       <Filter>GameFramework\유틸</Filter>
     </ClCompile>
     <ClCompile Include="playerData.cpp">
-      <Filter>GameFramework\싱글톤데이터</Filter>
+      <Filter>GameFramework\매니져\세이브 매니저\싱글톤 데이터 세이브</Filter>
     </ClCompile>
     <ClCompile Include="progressBar.cpp">
       <Filter>GameFramework\체력바</Filter>
-    </ClCompile>
-    <ClCompile Include="sceneManager.cpp">
-      <Filter>GameFramework\매니져</Filter>
-    </ClCompile>
-    <ClCompile Include="iniData.cpp">
-      <Filter>GameFramework\매니져</Filter>
-    </ClCompile>
-    <ClCompile Include="soundManager.cpp">
-      <Filter>GameFramework\매니져</Filter>
     </ClCompile>
     <ClCompile Include="loading.cpp">
       <Filter>GameFramework\로딩</Filter>
     </ClCompile>
     <ClCompile Include="loadingScene.cpp">
-      <Filter>MainGame\로딩화면</Filter>
+      <Filter>로딩 씬</Filter>
     </ClCompile>
-    <ClCompile Include="maptoolScene.cpp" />
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>GameFramework\매니져\씬 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="soundManager.cpp">
+      <Filter>GameFramework\매니져\사운드 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="imageManager.cpp">
+      <Filter>GameFramework\매니져\이미지 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="timeManager.cpp">
+      <Filter>GameFramework\매니져\타임매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="iniData.cpp">
+      <Filter>GameFramework\매니져\세이브 매니저\ini데이터 매니저</Filter>
+    </ClCompile>
     <ClCompile Include="mainScene.cpp">
-      <Filter>MainGame</Filter>
+      <Filter>메인 씬</Filter>
     </ClCompile>
-    <ClCompile Include="timeManager.cpp" />
+    <ClCompile Include="maptoolScene.cpp">
+      <Filter>맵툴 씬</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -125,10 +153,7 @@
       <Filter>GameFramework\유틸</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>GameFramework\이미지</Filter>
-    </ClInclude>
-    <ClInclude Include="imageManager.h">
-      <Filter>GameFramework\매니져</Filter>
+      <Filter>GameFramework\매니져\이미지 매니저\이미지</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>GameFramework\카메라</Filter>
@@ -140,33 +165,42 @@
       <Filter>GameFramework\유틸</Filter>
     </ClInclude>
     <ClInclude Include="playerData.h">
-      <Filter>GameFramework\싱글톤데이터</Filter>
+      <Filter>GameFramework\매니져\세이브 매니저\싱글톤 데이터 세이브</Filter>
     </ClInclude>
     <ClInclude Include="progressBar.h">
       <Filter>GameFramework\체력바</Filter>
-    </ClInclude>
-    <ClInclude Include="sceneManager.h">
-      <Filter>GameFramework\매니져</Filter>
-    </ClInclude>
-    <ClInclude Include="iniData.h">
-      <Filter>GameFramework\매니져</Filter>
-    </ClInclude>
-    <ClInclude Include="soundManager.h">
-      <Filter>GameFramework\매니져</Filter>
     </ClInclude>
     <ClInclude Include="loading.h">
       <Filter>GameFramework\로딩</Filter>
     </ClInclude>
     <ClInclude Include="loadingScene.h">
-      <Filter>MainGame\로딩화면</Filter>
+      <Filter>로딩 씬</Filter>
     </ClInclude>
-    <ClInclude Include="maptoolScene.h" />
-    <ClInclude Include="tileNode.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="mainScene.h">
-      <Filter>MainGame</Filter>
+    <ClInclude Include="sceneManager.h">
+      <Filter>GameFramework\매니져\씬 매니저</Filter>
     </ClInclude>
-    <ClInclude Include="timeManager.h" />
+    <ClInclude Include="soundManager.h">
+      <Filter>GameFramework\매니져\사운드 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="imageManager.h">
+      <Filter>GameFramework\매니져\이미지 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="timeManager.h">
+      <Filter>GameFramework\매니져\타임매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="iniData.h">
+      <Filter>GameFramework\매니져\세이브 매니저\ini데이터 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="mainScene.h">
+      <Filter>메인 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="maptoolScene.h">
+      <Filter>맵툴 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="tileNode.h">
+      <Filter>맵툴 씬</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

@@ -1372,15 +1372,15 @@ OBJECT maptoolScene::objectSelect(int frameX, int frameY)
 
 OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)
 {
-	if (frameX > 24 && frameX < 42 && frameY == 18)
+	if (frameX > 24 && frameX < 42 && frameY == 18)						//다리 손잡이
 	{
 		return OVR_OVER;
 	}
-	if ((frameX == 30 || frameX == 33) && frameY == 24)
+	if ((frameX == 30 || frameX == 33) && frameY == 24)					//다리 끊어진 손잡이
 	{
 		return OVR_OVER;
 	}
-	if (frameX >= 17 && frameX <= 21 && frameY >= 18 && frameY <= 22)
+	if (frameX >= 17 && frameX <= 21 && frameY >= 18 && frameY <= 22)	//벛나무
 	{
 		return OVR_OVER;
 	}
