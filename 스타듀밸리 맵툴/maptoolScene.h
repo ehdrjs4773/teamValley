@@ -5,6 +5,10 @@
 class maptoolScene : public gameNode
 {
 private:
+
+	static TCHAR saveName[MAX_PATH];
+	static bool _isSave;
+
 	tagTile _tile[TILEY][TILEX]; //인게임화면(왼쪽화면)에 사용되는 타일 총 400개
 	std::vector<std::vector<tagTile>> _sampleTile;
 	std::vector<tagTile> _sampleTileX;
@@ -96,6 +100,8 @@ public:
 	TERRAIN terrainSelect(int frameX, int frameY);
 	OBJECT objectSelect(int frameX, int frameY);
 	OBJ_OVERLAPPED overlappedSelect(int frameX, int frameY);
+
+	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 };
 

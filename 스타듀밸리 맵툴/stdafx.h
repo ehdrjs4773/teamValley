@@ -39,6 +39,7 @@ using namespace MY_UTIL;
 #include "iniData.h"
 #include "soundManager.h"
 #include "timeManager.h"
+#include "resource.h"
 
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
