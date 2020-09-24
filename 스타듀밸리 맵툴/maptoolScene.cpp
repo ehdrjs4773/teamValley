@@ -296,9 +296,9 @@ void maptoolScene::setMap_Drag()
 
 void maptoolScene::sample_Drag()
 {
-	for (int i = 0; i < sampleTileMaxFrameY; i++)
+	for (int i = 0; i < SAMPLEDISPLAYY; i++)
 	{
-		for (int j = 0; j < sampleTileMaxFrameX; j++)
+		for (int j = 0; j < SAMPLEDISPLAYX; j++)
 		{
 			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
 			{
@@ -308,14 +308,28 @@ void maptoolScene::sample_Drag()
 					first = _sampleTile[i][j].rc;
 					first_i = i;
 					first_j = j;
+					first_j = j;
 				}
-				if (INPUT->GetKey(VK_RBUTTON))
+				if (INPUT->GetKey(VK_RBUTTON) && _click)
 				{
 					last = _sampleTile[i][j].rc;
 					last_i = i;
 					last_j = j;
+					if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+					{
+						_click = false;
+						_release = true;
+						_isDragSet = true;
+
+					}
+					if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
+					{
+						_click = false;
+						_release = true;
+						_isDragSet = true;
+					}
 				}
-				if (INPUT->GetKeyUp(VK_RBUTTON))
+				if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
 				{
 					last = _sampleTile[i][j].rc;
 					last_i = i;
@@ -333,13 +347,17 @@ void maptoolScene::sample_Drag()
 		{
 			_click = false;
 			_release = true;
+			_isDragSet = true;
+
 		}
 		if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
 		{
 			_click = false;
 			_release = true;
+			_isDragSet = true;
 		}
 	}
+
 	if (_release)
 	{
 		if (first_i > last_i)
@@ -351,7 +369,6 @@ void maptoolScene::sample_Drag()
 		{
 			swap(first_j, last_j);
 		}
-
 		_release = false;
 	}
 }
@@ -531,7 +548,7 @@ void maptoolScene::setTerrainMap()
 						last_i = i;
 						last_j = j;		
 					}
-					if (INPUT->GetKeyUp(VK_RBUTTON))
+					if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
 					{
 						last = _tile[i][j].rc;
 						last_i = i;
@@ -542,14 +559,6 @@ void maptoolScene::setTerrainMap()
 				}
 
 			}
-		}
-	}
-	if (_click)
-	{
-		if (_ptMouse.x >= _tile[0][DISPLAYX-1].rc.right)
-		{
-			_click = false;
-			_release = true;
 		}
 	}
 	if (_release)
@@ -592,6 +601,7 @@ void maptoolScene::setTerrainMap()
 		}
 		_release = false;
 	}
+
 }
 
 void maptoolScene::save()
