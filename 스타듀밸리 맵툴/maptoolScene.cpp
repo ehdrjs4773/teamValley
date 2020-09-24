@@ -1221,14 +1221,18 @@ void maptoolScene::showControlButton()
 	if (isSelectSeason)
 	{
 		Rectangle(getMemDC(), _rcSpring);
+		IMAGEMANAGER->render("봄", getMemDC(), _rcSpring.left, _rcSpring.top);
 		Rectangle(getMemDC(), _rcSummer);
+		IMAGEMANAGER->render("여름", getMemDC(), _rcSummer.left, _rcSummer.top);
 		Rectangle(getMemDC(), _rcAutumn);
+		IMAGEMANAGER->render("가을", getMemDC(), _rcAutumn.left, _rcAutumn.top);
 		Rectangle(getMemDC(), _rcWinter);
+		IMAGEMANAGER->render("겨울", getMemDC(), _rcWinter.left, _rcWinter.top);
 
-		textOut(getMemDC(), _rcSpring.left + 10, _rcSpring.top + 5, "봄");
-		textOut(getMemDC(), _rcSummer.left + 10, _rcSummer.top + 5, "여름");
-		textOut(getMemDC(), _rcAutumn.left + 10, _rcAutumn.top + 5, "가을");
-		textOut(getMemDC(), _rcWinter.left + 10, _rcWinter.top + 5, "겨울");
+		//textOut(getMemDC(), _rcSpring.left + 10, _rcSpring.top + 5, "봄");
+		//textOut(getMemDC(), _rcSummer.left + 10, _rcSummer.top + 5, "여름");
+		//textOut(getMemDC(), _rcAutumn.left + 10, _rcAutumn.top + 5, "가을");
+		//textOut(getMemDC(), _rcWinter.left + 10, _rcWinter.top + 5, "겨울");
 	}
 }
 
