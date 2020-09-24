@@ -100,6 +100,7 @@
     <ClCompile Include="mainScene.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
+    <ClCompile Include="timeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -165,6 +166,7 @@
     <ClInclude Include="mainScene.h">
       <Filter>MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="timeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

@@ -83,7 +83,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//GetMessage : 메세지를 꺼내올 수 있을때까지 멈춰있는 함수
 	//PeekMessage : 메세지가 없더라도 리턴되는 함수
 
-	/*
+	
 	//게임용 나중에 사용한다
 	while (true)
 	{
@@ -93,15 +93,20 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
+		else
+		{
+			TIME->update(60.0f);
+			_mg->update();
+			_mg->render();
+		}
 	}
-	*/
-
+	
 	//일반 프로그래밍용
-	while (GetMessage(&message, 0, 0, 0))
+	/*while (GetMessage(&message, 0, 0, 0))
 	{
 		TranslateMessage(&message);
 		DispatchMessage(&message);
-	}
+	}*/
 
 	//메인게임 클래스 해제
 	_mg->release();

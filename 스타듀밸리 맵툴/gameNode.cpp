@@ -15,6 +15,7 @@ HRESULT gameNode::init()
 	SCENEMANAGER->init();				//씬매니져 초기화
 	INIDATA->init();					//INI데이터 초기화
 	SOUNDMANAGER->init();				//사운드매니져 초기화
+	TIME->init();
 
 	return S_OK;
 }
@@ -47,6 +48,9 @@ void gameNode::release()
 	//사운드매니져 해제
 	SOUNDMANAGER->release();
 	SOUNDMANAGER->releaseSingleton();
+	//타임매니져 해제
+	TIME->release();
+	TIME->releaseSingleton();
 
 	//HDC 해제
 	ReleaseDC(_hWnd, _hdc);
@@ -59,7 +63,8 @@ void gameNode::update()
 {
 	//새로고침 (나중에 고성능 타이머를 만든후에는 사용하지 않는다)
 	//더블버퍼링 이후 사용하지 않는다 (true => false)
-	InvalidateRect(_hWnd, NULL, FALSE);
+	
+	//InvalidateRect(_hWnd, NULL, FALSE);
 }
 
 //=============================================================
@@ -76,12 +81,12 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 {
 	switch (message)
 	{
-	case WM_TIMER:
+	/*case WM_TIMER:
 		this->update();
 		break;
 	case WM_PAINT:
 		this->render();
-		break;
+		break;*/
 	case WM_MOUSEMOVE:
 		_ptMouse.x = LOWORD(lParam);
 		_ptMouse.y = HIWORD(lParam);

@@ -38,6 +38,8 @@ using namespace MY_UTIL;
 #include "sceneManager.h"
 #include "iniData.h"
 #include "soundManager.h"
+#include "timeManager.h"
+
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 
@@ -51,6 +53,7 @@ using namespace MY_UTIL;
 #define SCENEMANAGER sceneManager::getSingleton()
 #define INIDATA iniData::getSingleton()
 #define SOUNDMANAGER soundManager::getSingleton()
+#define TIME timeManager::getSingleton()
 
 //=============================================================
 //	## 디파인문 ## (윈도우창 초기화)
