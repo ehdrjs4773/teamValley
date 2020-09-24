@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "mainScene.h"
 
+TCHAR mainScene::saveName[MAX_PATH];
+
 HRESULT mainScene::init()
 {
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));

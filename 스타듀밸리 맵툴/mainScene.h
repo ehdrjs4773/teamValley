@@ -5,6 +5,8 @@ class mainScene : public gameNode
 {
 
 private :
+	static TCHAR saveName[MAX_PATH];
+
 	RECT _newRc;
 	RECT _loadRc;
 	RECT _mapRc;
@@ -15,5 +17,6 @@ public :
 	void release();
 	void update();
 	void render();
+
 };
 

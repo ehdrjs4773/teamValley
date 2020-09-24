@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "maptoolScene.h"
 
+TCHAR maptoolScene::saveName[MAX_PATH];
+bool maptoolScene::_isSave;
+
 HRESULT maptoolScene::init()
 {
 	//≈∏¿œ∏  ¿ÃπÃ¡ˆ √ ±‚»≠ -> 09.22 ∑Œµ˘ æ¿¿∏∑Œ ≥—æÓ∞®
-
+	_isSave = false;
 	//∏ ≈¯ºº∆√
 	sampleTileMaxFrameX = IMAGEMANAGER->findImage("≥Û¿Â(∫Ω)")->getMaxFrameX() + 1;
 	sampleTileMaxFrameY = IMAGEMANAGER->findImage("≥Û¿Â(∫Ω)")->getMaxFrameY() + 1;
@@ -61,11 +64,13 @@ void maptoolScene::update()
 			if (PtInRect(&_rcSave, _ptMouse))
 			{
 				_ctrlSelect = CTRL_SAVE;
+				_isSave = true;
 				this->save();
 			}
 			if (PtInRect(&_rcLoad, _ptMouse))
 			{
 				_ctrlSelect = CTRL_LOAD;
+				_isSave = false;
 				this->load();
 			}
 			if (PtInRect(&_rcTerrain, _ptMouse))
@@ -591,20 +596,24 @@ void maptoolScene::setTerrainMap()
 
 void maptoolScene::save()
 {
+	DialogBox(_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), _hWnd, maptoolScene::DlgProc);
+	
 	HANDLE file;
 	DWORD write;
-
-	file = CreateFile("save.map", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile(saveName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
 }
 
 void maptoolScene::load()
 {
+
+	DialogBox(_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), _hWnd, maptoolScene::DlgProc);
+
 	HANDLE file;
 	DWORD read;
 
-	file = CreateFile("save.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
 }
@@ -1385,4 +1394,33 @@ OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)
 		return OVR_OVER;
 	}
 	return OVR_NONE;
+}
+
+INT_PTR maptoolScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		if (_isSave)
+		{
+			SetWindowText(hWnd, "ºº¿Ã∫Í");
+		}
+		else
+		{
+			SetWindowText(hWnd, "∑ŒµÂ");
+		}
+		return TRUE;
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+			memset(saveName, 0, sizeof(saveName));
+			GetDlgItemText(hWnd, IDC_EDIT1, saveName, MAX_PATH);
+		case IDCANCEL:
+			EndDialog(hWnd, IDOK);
+			return TRUE;
+		}
+		return FALSE;
+	}
+	return FALSE;
 }
