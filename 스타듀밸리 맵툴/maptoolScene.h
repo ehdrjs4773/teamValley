@@ -95,6 +95,7 @@ public:
 	//지형, 오브젝트 선택하기
 	TERRAIN terrainSelect(int frameX, int frameY);
 	OBJECT objectSelect(int frameX, int frameY);
+	OBJ_OVERLAPPED overlappedSelect(int frameX, int frameY);
 
 };
 

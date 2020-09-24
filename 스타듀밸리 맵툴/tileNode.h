@@ -43,9 +43,10 @@ enum OBJECT
 	OBJ_NONE
 };
 
-enum OBJECTIMG
+enum OBJ_OVERLAPPED
 {
-
+	OVR_NONE,
+	OVR_OVER
 };
 
 enum OBJ_TYPE
@@ -61,12 +62,15 @@ struct tagTile
 	TERRAIN terrain;
 	OBJECT obj;
 	OBJ_TYPE objType;
+	OBJ_OVERLAPPED objOver;
 	RECT rc;
 
 	int terrainFrameX;
 	int terrainFrameY;
 	int objFrameX;
 	int objFrameY;
+	int ovlFrameX;
+	int ovlFrameY;
 
 	bool isWet;
 };

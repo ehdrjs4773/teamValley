@@ -126,6 +126,19 @@ void maptoolScene::update()
 
 	moveTile();
 	checkHacked();
+
+	for (int i = 0; i < SAMPLEDISPLAYY; i++)
+	{
+		for (int j = 0; j < SAMPLEDISPLAYX; j++)
+		{
+			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
+			{
+			
+				std::cout << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY 
+					<< "\t" << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX << std::endl;
+			}
+		}
+	}
 }
 
 void maptoolScene::render()
@@ -249,10 +262,20 @@ void maptoolScene::setMap_Drag()
 							}
 							else if (_ctrlSelect == CTRL_OBJECT)
 							{
-								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
-								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
-								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
-							}
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = overlappedSelect(w + sampleTileX, q + sampleTileY);
+
+								if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver == OVR_OVER)
+								{
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+								}
+								else if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver == OVR_NONE)
+								{
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
+								}
+							}	
 						}
 					}
 				}
@@ -452,9 +475,19 @@ void maptoolScene::setMap()
 				//현재버튼이 오브젝트냐?
 				if (_ctrlSelect == CTRL_OBJECT)
 				{
-					_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
-					_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
-					_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
+					_tile[i + tileY][j + tileX].objOver = overlappedSelect(_currentTile.x, _currentTile.y);
+
+					if (_tile[i + tileY][j + tileX].objOver == OVR_OVER)
+					{
+						_tile[i + tileY][j + tileX].ovlFrameX = _currentTile.x;
+						_tile[i + tileY][j + tileX].ovlFrameY = _currentTile.y;
+					}
+					else if (_tile[i + tileY][j + tileX].objOver == OVR_NONE)
+					{
+						_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
+						_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
+						_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
+					}
 				}
 				//현재버튼이 지우개냐?
 				if (_ctrlSelect == CTRL_ERASER)
@@ -462,6 +495,7 @@ void maptoolScene::setMap()
 					_tile[i + tileY][j + tileX].objFrameX = 0;
 					_tile[i + tileY][j + tileX].objFrameY = 0;
 					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
+					_tile[i + tileY][j + tileX].objOver = OVR_NONE;
 				}
 			}
 		}
@@ -1107,9 +1141,18 @@ void maptoolScene::showMapTile()
 					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
 
 				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
-				IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+				if (_tile[i + tileY][j + tileX].obj != OBJ_NONE) 
+				{
+					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+				}
+
+				if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
+				{
+					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
+				}
+				
 				break;
 			case SUMMER:
 				IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -1324,5 +1367,22 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 
 OBJECT maptoolScene::objectSelect(int frameX, int frameY)
 {
-	return OBJ_INDESTRUCTIBLE;
+		return OBJ_INDESTRUCTIBLE;
+}
+
+OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)
+{
+	if (frameX > 24 && frameX < 42 && frameY == 18)
+	{
+		return OVR_OVER;
+	}
+	if ((frameX == 30 || frameX == 33) && frameY == 24)
+	{
+		return OVR_OVER;
+	}
+	if (frameX >= 17 && frameX <= 21 && frameY >= 18 && frameY <= 22)
+	{
+		return OVR_OVER;
+	}
+	return OVR_NONE;
 }
