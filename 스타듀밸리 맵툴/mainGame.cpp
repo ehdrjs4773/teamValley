@@ -57,7 +57,7 @@ void mainGame::render()
 	//씬매니져 렌더
 	SCENEMANAGER->render();
 	//타임매니져 렌더
-	TIME->render(getMemDC());
+	//TIME->render(getMemDC());
 	
 //=============================================================
 	//백버퍼의 내용을 화면DC에 그린다 (이것도 렌더에 그냥 두기)

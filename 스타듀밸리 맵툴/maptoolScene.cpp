@@ -1407,6 +1407,48 @@ OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)
 	{
 		return OVR_OVER;
 	}
+	if (frameX >= 4 && frameX <= 6 && frameY >= 19 && frameY <= 23)	//唱公1
+	{
+		return OVR_OVER;
+	}
+	if (frameX >= 7 && frameX <= 9 && frameY >= 19 && frameY <= 23)	//唱公2
+	{
+		return OVR_OVER;
+	}
+	if (frameX >= 10 && frameX <= 12 && frameY >= 19 && frameY <= 23)	//唱公3
+	{
+		return OVR_OVER;
+	}
+	if (frameX >= 13 && frameX <= 16 && frameY >= 18 && frameY <= 22)	//唱公4
+	{
+		return OVR_OVER;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	return OVR_NONE;
 }
 

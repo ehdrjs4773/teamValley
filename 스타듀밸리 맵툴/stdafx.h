@@ -59,7 +59,7 @@ using namespace MY_UTIL;
 //=============================================================
 //	## 디파인문 ## (윈도우창 초기화)
 //=============================================================
-#define WINNAME (LPTSTR)(TEXT(" 프로그래밍 22기 "))
+#define WINNAME (LPTSTR)(TEXT(" 김현정, 최동건, 김재현, 김의겸 "))
 #define WINSTARTX	100
 #define WINSTARTY	0
 #define WINSIZEX		1200
