@@ -129,6 +129,9 @@
     <ClCompile Include="maptoolScene.cpp">
       <Filter>맵툴 씬</Filter>
     </ClCompile>
+    <ClCompile Include="cameraManager.cpp">
+      <Filter>GameFramework\매니져</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="tileNode.h">
       <Filter>맵툴 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraManager.h">
+      <Filter>GameFramework\매니져</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
