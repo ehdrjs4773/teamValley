@@ -8,7 +8,6 @@ cameraManager::cameraManager()
 {
 }
 
-
 cameraManager::~cameraManager()
 {
 }
@@ -50,7 +49,6 @@ void cameraManager::release()
 
 		SAFE_DELETE(_cameraInfo);
 	}
-
 }
 
 void cameraManager::cameraMove(int focusX, int focusY)
@@ -75,8 +73,8 @@ void cameraManager::render(HDC hdc)
 		hdc,               //복사될 영역의 DC
 		0,                  //복사될 좌표 X
 		0,                  //복사될 좌표 Y
-		WINSIZEX,            //복사될 크기(가로)
-		WINSIZEY,            //복사될 크기(세로)
+		_cameraInfo->width,            //복사될 크기(가로)
+		_cameraInfo->height,            //복사될 크기(세로)
 		_cameraInfo->hMemDC,            //복사해올 DC
 		_cameraInfo->x, _cameraInfo->y,      //복사해올 좌표X,Y
 		_cameraInfo->width,               //복사해올 크기
@@ -133,7 +131,6 @@ void cameraManager::strechRender(HDC hdc, int destX, int destY, int sizeX, int s
 			sizeY,
 			_cameraInfo->transColor
 		);
-
 	}
 	else
 	{
@@ -151,5 +148,4 @@ void cameraManager::strechRender(HDC hdc, int destX, int destY, int sizeX, int s
 			SRCCOPY
 		);
 	}
-
 }

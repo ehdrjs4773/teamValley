@@ -100,6 +100,7 @@ public:
 	TERRAIN terrainSelect(int frameX, int frameY);
 	OBJECT objectSelect(int frameX, int frameY);
 	OBJ_OVERLAPPED overlappedSelect(int frameX, int frameY);
+	OBJ_TYPE objectTypeSelect(int frameX, int frameY);
 
 	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

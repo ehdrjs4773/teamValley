@@ -15,8 +15,9 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("로딩화면", new loadingScene);
 	SCENEMANAGER->addScene("맵툴화면", new maptoolScene);
 	SCENEMANAGER->addScene("스타트화면", new mainScene);
+	SCENEMANAGER->addScene("인게임화면", new inGameScene);
 	/*현재씬*/
-	SCENEMANAGER->loadScene("스타트화면");
+	SCENEMANAGER->loadScene("로딩화면");
 	return S_OK;
 }
 
@@ -57,7 +58,7 @@ void mainGame::render()
 	//씬매니져 렌더
 	SCENEMANAGER->render();
 	//타임매니져 렌더
-	//TIME->render(getMemDC());
+	TIME->render(getMemDC());
 	
 //=============================================================
 	//백버퍼의 내용을 화면DC에 그린다 (이것도 렌더에 그냥 두기)

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "mainScene.h"
 
-TCHAR mainScene::saveName[MAX_PATH];
-
 HRESULT mainScene::init()
 {
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
@@ -25,26 +23,22 @@ void mainScene::update()
 	{
 		if (PtInRect(&_mapRc, _ptMouse))
 		{
-
-			SCENEMANAGER->loadScene("로딩화면");
+			SCENEMANAGER->loadScene("맵툴화면");
 		}
 
 		if (PtInRect(&_newRc, _ptMouse))
 		{
-
+			SCENEMANAGER->loadScene("인게임화면");
 		}
-
 		if (PtInRect(&_loadRc, _ptMouse))
 		{
-
+			SCENEMANAGER->loadScene("인게임화면");
 		}
 		if (PtInRect(&_exitRc, _ptMouse))
 		{
 			exit(0);
 		}
-		
 	}
-
 }
 
 void mainScene::render()
@@ -58,5 +52,4 @@ void mainScene::render()
 		Rectangle(getMemDC(), _mapRc);
 		Rectangle(getMemDC(), _exitRc);
 	}
-
 }

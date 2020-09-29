@@ -64,6 +64,12 @@
     <Filter Include="로딩 씬">
       <UniqueIdentifier>{7e12b8a1-bff7-4c0e-8411-c665eda32360}</UniqueIdentifier>
     </Filter>
+    <Filter Include="인게임 씬">
+      <UniqueIdentifier>{5a20d81e-ace2-4ea0-9958-93a239ce93fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameFramework\매니져\카메라 매니저">
+      <UniqueIdentifier>{a38852bc-4939-4333-b677-5c366beb2ffb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -129,8 +135,11 @@
     <ClCompile Include="maptoolScene.cpp">
       <Filter>맵툴 씬</Filter>
     </ClCompile>
+    <ClCompile Include="inGameScene.cpp">
+      <Filter>인게임 씬</Filter>
+    </ClCompile>
     <ClCompile Include="cameraManager.cpp">
-      <Filter>GameFramework\매니져</Filter>
+      <Filter>GameFramework\매니져\카메라 매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,8 +213,11 @@
     <ClInclude Include="tileNode.h">
       <Filter>맵툴 씬</Filter>
     </ClInclude>
+    <ClInclude Include="inGameScene.h">
+      <Filter>인게임 씬</Filter>
+    </ClInclude>
     <ClInclude Include="cameraManager.h">
-      <Filter>GameFramework\매니져</Filter>
+      <Filter>GameFramework\매니져\카메라 매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

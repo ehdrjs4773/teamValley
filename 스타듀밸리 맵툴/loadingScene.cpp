@@ -29,7 +29,7 @@ void loadingScene::update()
 	//로딩완료후 화면 변경
 	if (_loading->loadingDone())
 	{
-		SCENEMANAGER->loadScene("맵툴화면");
+		SCENEMANAGER->loadScene("스타트화면");
 	}
 
 }
