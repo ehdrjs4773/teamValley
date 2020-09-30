@@ -13,6 +13,14 @@ private:
 
 	SEASON _currentSeason;
 
+	string imageName;
+	string objectImageName;
+
+	int _currentX;
+	int _currentY;
+
+
+	bool isShowRect;
 
 public:
 
@@ -23,10 +31,14 @@ public:
 
 	void load();
 	void setTileRect();
+	void changeSeason(SEASON season);
 
 	void showEntireMap();
 
 	void playerMove();
+	void checkPlayerTile();
+	void hackGround();
+	void checkHacked();
 
 	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

@@ -266,14 +266,14 @@ void maptoolScene::setMap_Drag()
 							}
 							else if (_ctrlSelect == CTRL_OBJECT)
 							{
-								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = overlappedSelect(w + sampleTileX, q + sampleTileY);
-
-								if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver != OVR_NONE)
+								if (overlappedSelect(w + sampleTileX, q + sampleTileY) == OVR_OVER)
 								{
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].ovlFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = overlappedSelect(w + sampleTileX, q + sampleTileY);
 								}
-								else if (_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver == OVR_NONE)
+								else if (overlappedSelect(w + sampleTileX, q + sampleTileY) == OVR_NONE)
 								{
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
@@ -565,7 +565,6 @@ void maptoolScene::setTerrainMap()
 						_release = true;
 					}
 				}
-
 			}
 		}
 	}
@@ -1433,6 +1432,7 @@ OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)
 	{
 		return OVR_OVER;
 	}
+
 	return OVR_NONE;
 }
 

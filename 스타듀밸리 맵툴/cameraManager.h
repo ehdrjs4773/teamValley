@@ -1,5 +1,6 @@
 #pragma once
 #include "singletonBase.h"
+#include "tileNode.h"
 
 class cameraManager : public singletonBase<cameraManager>
 {

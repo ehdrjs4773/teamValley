@@ -60,7 +60,6 @@ void cameraManager::cameraMove(int focusX, int focusY)
 		_cameraInfo->x = 0;
 	if (_cameraInfo->x + _cameraInfo->width > _cameraInfo->groundWidth)
 		_cameraInfo->x = _cameraInfo->groundWidth - _cameraInfo->width;
-
 	if (_cameraInfo->y < 0)
 		_cameraInfo->y = 0;
 	if (_cameraInfo->y + _cameraInfo->height > _cameraInfo->groundHeight)
@@ -73,8 +72,8 @@ void cameraManager::render(HDC hdc)
 		hdc,               //복사될 영역의 DC
 		0,                  //복사될 좌표 X
 		0,                  //복사될 좌표 Y
-		_cameraInfo->width,            //복사될 크기(가로)
-		_cameraInfo->height,            //복사될 크기(세로)
+		WINSIZEX,            //복사될 크기(가로)
+		WINSIZEY,            //복사될 크기(세로)
 		_cameraInfo->hMemDC,            //복사해올 DC
 		_cameraInfo->x, _cameraInfo->y,      //복사해올 좌표X,Y
 		_cameraInfo->width,               //복사해올 크기

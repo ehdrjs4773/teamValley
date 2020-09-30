@@ -5,14 +5,19 @@ TCHAR inGameScene::saveName[MAX_PATH];
 
 HRESULT inGameScene::init()
 {
-	CAMERAMANAGER->init(WINSIZEX, WINSIZEY, 20*16, 11*16);
+	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30*16, 15*16);
 	load();
 	setTileRect();
 	
 	playerCenterX = WINSIZEX / 2;
 	playerCenterY = WINSIZEY / 2;
 	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
-	_currentSeason = SPRING;
+
+	checkPlayerTile();
+	changeSeason(SPRING);
+
+	isShowRect = false;
+
 	return S_OK;
 }
 
@@ -23,14 +28,42 @@ void inGameScene::release()
 void inGameScene::update()
 {
 	playerMove();
-	//CAMERAMANAGER->cameraMove(playerCenterX, playerCenterY);
+	CAMERAMANAGER->cameraMove(playerCenterX, playerCenterY);
+	hackGround();
+
+	if (INPUT->GetKeyDown(VK_F1))
+	{
+		if (isShowRect)
+		{
+			isShowRect = false;
+		}
+		else
+		{
+			isShowRect = true;
+		}
+	}
 }
 
 void inGameScene::render()
 {
 	showEntireMap();
-	Rectangle(getMemDC(), playerRc);
+	Rectangle(CAMERAMANAGER->getMemDC(), playerRc);
 	
+	if (isShowRect)
+	{
+		for (int i = _currentY - 8; i < _currentY + 8; i++)
+		{
+			for (int j = _currentX - 16; j < _currentX + 16; j++)
+			{
+				if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
+				{
+					Rectangle(CAMERAMANAGER->getMemDC(), _tile[i][j].rc);
+				}
+			}
+		}
+	}
+
+	CAMERAMANAGER->render(getMemDC());
 }
 
 void inGameScene::load()
@@ -56,53 +89,57 @@ void inGameScene::setTileRect()
 	}
 }
 
+void inGameScene::changeSeason(SEASON season)
+{
+	_currentSeason = season;
+	switch (_currentSeason)
+	{
+	case SPRING:
+		imageName = "농장(봄)";
+		objectImageName = "농장오브젝트(봄)";
+		break;
+	case SUMMER:
+		imageName = "농장(여름)";
+		objectImageName = "농장오브젝트(여름)";
+		break;
+	case AUTUMN:
+		imageName = "농장(가을)";
+		objectImageName = "농장오브젝트(가을)";
+		break;
+	case WINTER:
+		imageName = "농장(겨울)";
+		objectImageName = "농장오브젝트(겨울)";
+		break;
+	}
+}
+
 void inGameScene::showEntireMap()
 {
-	for (int i = 0; i < TILEY; i++)
+	for (int i = _currentY - 8; i < _currentY + 8; i++)
 	{
-		for (int j = 0; j < TILEX; j++)
+		for (int j = _currentX - 16; j < _currentX + 16; j++)
 		{
-			string imageName;
-			string objectImageName;
-			switch (_currentSeason)
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
-			case SPRING:
-				imageName = "농장(봄)";
-				objectImageName = "농장오브젝트(봄)";
-				break;
-			case SUMMER:
-				imageName = "농장(여름)";
-				objectImageName = "농장오브젝트(여름)";
-				break;
-			case AUTUMN:
-				imageName = "농장(가을)";
-				objectImageName = "농장오브젝트(가을)";
-				break;
-			case WINTER:
-				imageName = "농장(겨울)";
-				objectImageName = "농장오브젝트(겨울)";
-				break;
-			}
+				IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 
-			IMAGEMANAGER->frameRender(imageName, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-				_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
-
-			if (_tile[i][j].isWet)
-			{
-				IMAGEMANAGER->frameRender(imageName, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
-			}
-
-			//인게임 화면 오브젝트 그린다
-			if (_tile[i][j].obj != OBJ_NONE)
-			{
-				IMAGEMANAGER->frameRender(objectImageName, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-			}
-			if (_tile[i][j].objOver != OVR_NONE)
-			{
-				IMAGEMANAGER->frameRender(objectImageName, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+				if (_tile[i][j].isWet)
+				{
+					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
+				}
+				//인게임 화면 오브젝트 그린다
+				if (_tile[i][j].obj != OBJ_NONE)
+				{
+					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				if (_tile[i][j].objOver != OVR_NONE)
+				{
+					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+				}
 			}
 		}
 	}
@@ -112,21 +149,165 @@ void inGameScene::playerMove()
 {
 	if (INPUT->GetKey(VK_LEFT))
 	{
-		playerCenterX -= 5.0f;
+		playerCenterX -= 2.0f;
 	}
 	if (INPUT->GetKey(VK_RIGHT))
 	{
-		playerCenterX += 5.0f;
+		playerCenterX += 2.0f;
 	}
 	if (INPUT->GetKey(VK_UP))
 	{
-		playerCenterY -= 5.0f;
+		playerCenterY -= 2.0f;
 	}
 	if (INPUT->GetKey(VK_DOWN))
 	{
-		playerCenterY += 5.0f;
+		playerCenterY += 2.0f;
 	}
 	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
+	checkPlayerTile();
+}
+
+void inGameScene::checkPlayerTile()
+{
+	_currentX = playerCenterX / 16;
+	_currentY = playerCenterY / 16;
+}
+
+void inGameScene::hackGround()
+{
+	if (INPUT->GetKeyDown(VK_LBUTTON))
+	{
+		int MouseIndexX, MouseIndexY;
+		MouseIndexX = _ptMouse.x / 16;
+		MouseIndexY = _ptMouse.y / 16;
+		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+		checkHacked();
+	}
+}
+
+void inGameScene::checkHacked()
+{
+	for (int i = _currentY - 8; i < _currentY + 8; i++)
+	{
+		for (int j = _currentX - 16; j < _currentX + 16; j++)
+		{
+			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
+			{
+				if (_tile[i][j].terrain == TR_HACKED)
+				{
+					_tile[i][j].terrainFrameX = 20;
+					_tile[i][j].terrainFrameY = 12;
+					if (_tile[i][j - 1].terrain == TR_HACKED) //왼쪽
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 13;
+					}
+					if (_tile[i][j + 1].terrain == TR_HACKED) //오른쪽
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 13;
+					}
+					if (_tile[i - 1][j].terrain == TR_HACKED) //위
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 13;
+					}
+					if (_tile[i + 1][j].terrain == TR_HACKED) //아래
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 12;
+					}
+					if (_tile[i][j - 1].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)			//왼+오
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 20;
+					}
+					if (_tile[i - 1][j].terrain == TR_HACKED && _tile[i + 1][j].terrain == TR_HACKED)			//위+아래
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 20;
+					}
+					if ((_tile[i - 1][j].terrain == TR_HACKED && _tile[i][j - 1].terrain == TR_HACKED)
+						|| (_tile[i - 1][j].terrain == TR_HACKED
+							&& _tile[i][j - 1].terrain == TR_HACKED
+							&& _tile[i - 1][j - 1].terrain == TR_HACKED))	//위+왼 ||  //위+왼+왼대각
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 21;
+					}
+					if ((_tile[i - 1][j].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)
+						|| (_tile[i - 1][j].terrain == TR_HACKED
+							&& _tile[i][j + 1].terrain == TR_HACKED
+							&& _tile[i + 1][j + 1].terrain == TR_HACKED))	 //위+오 || 위+오+오대각
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 21;
+					}
+					if ((_tile[i + 1][j].terrain == TR_HACKED && _tile[i][j - 1].terrain == TR_HACKED)
+						|| (_tile[i + 1][j].terrain == TR_HACKED
+							&& _tile[i][j - 1].terrain == TR_HACKED
+							&& _tile[i + 1][j - 1].terrain == TR_HACKED))	//아래+왼 || 아래+왼+왼대각
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 16;
+					}
+					if ((_tile[i + 1][j].terrain == TR_HACKED && _tile[i][j + 1].terrain == TR_HACKED)
+						|| (_tile[i + 1][j].terrain == TR_HACKED
+							&& _tile[i][j + 1].terrain == TR_HACKED
+							&& _tile[i + 1][j + 1].terrain == TR_HACKED))	//아래+오 || 아래+오+오대각
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 16;
+					}
+					if (_tile[i - 1][j].terrain == TR_HACKED
+						&& _tile[i][j - 1].terrain == TR_HACKED
+						&& _tile[i + 1][j].terrain == TR_HACKED)		//위+왼+아래
+					{
+						_tile[i][j].terrainFrameX = 22;
+						_tile[i][j].terrainFrameY = 17;
+					}
+					if (_tile[i - 1][j].terrain == TR_HACKED
+						&& _tile[i][j + 1].terrain == TR_HACKED
+						&& _tile[i + 1][j].terrain == TR_HACKED)		//위+오+아래
+					{
+						_tile[i][j].terrainFrameX = 20;
+						_tile[i][j].terrainFrameY = 17;
+					}
+					if (_tile[i - 1][j].terrain == TR_HACKED
+						&& _tile[i][j - 1].terrain == TR_HACKED
+						&& _tile[i][j + 1].terrain == TR_HACKED)		//위+왼+오
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 21;
+					}
+					if (_tile[i + 1][j].terrain == TR_HACKED
+						&& _tile[i][j - 1].terrain == TR_HACKED
+						&& _tile[i][j + 1].terrain == TR_HACKED)		//아래+왼+오 
+					{
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 16;
+					}
+					if ((_tile[i - 1][j].terrain == TR_HACKED
+						&& _tile[i + 1][j].terrain == TR_HACKED
+						&& _tile[i][j - 1].terrain == TR_HACKED
+						&& _tile[i][j + 1].terrain == TR_HACKED)		//위아래왼오 (4방)
+						|| (_tile[i - 1][j].terrain == TR_HACKED
+							&& _tile[i + 1][j].terrain == TR_HACKED
+							&& _tile[i][j - 1].terrain == TR_HACKED
+							&& _tile[i][j + 1].terrain == TR_HACKED
+							&& _tile[i - 1][j - 1].terrain == TR_HACKED
+							&& _tile[i + 1][j - 1].terrain == TR_HACKED
+							&& _tile[i - 1][j + 1].terrain == TR_HACKED
+							&& _tile[i + 1][j + 1].terrain == TR_HACKED))	//위아래양옆대각4개 모두	(8방)
+					{
+						//기본 네모
+						_tile[i][j].terrainFrameX = 21;
+						_tile[i][j].terrainFrameY = 17;
+					}
+				}
+			}
+		}
+	}
 }
 
 
