@@ -1,5 +1,5 @@
 #pragma once
-#include "gameNode.h"
+#include "singletonBase.h"
 
 enum STATE
 {
@@ -7,7 +7,6 @@ enum STATE
 	cutdownTree,
 	cutGrass,
 	fillWater,
-
 };
 
 enum DIRECTION
@@ -15,45 +14,49 @@ enum DIRECTION
 	RIGHT,
 	LEFT,
 	UP,
-	DOWN
+	DOWN,
+	IDLE
 };
 
 
 struct tagPlayer
 {
-
 	RECT rc;
-	//float x, y;
-	//float speed;
 	int count; 
 	int index;
-
+	float _playerX;
+	float _playerY;
 };
 
-class player
+class player : public singletonBase<player>
 {
-
-
-	tagPlayer _player;
+private:
+	RECT rc;
+	float centerX, centerY;
+	float speed;
+	int count;
+	int index;
 
 	STATE _pState;
 	DIRECTION _pDirection;
 	
-	image* _right;
-	image* _left;
-	image* _up;
-	image* _down;
+	image* move;
+	
 	image* _cutdownTree;
 
-
-
+public:
 	HRESULT init();
 	void release();
 	void update();
 	void render();
+
+	float getCenterX() { return centerX; }
+	float getCenterY() { return centerY; }
+
+	DIRECTION getDirection() { return _pDirection; }
+	RECT getRc() { return rc; }
+
 	void playerMovement();
 	void playerAnimation();
-
-
 };
 

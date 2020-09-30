@@ -9,6 +9,7 @@ private:
 	tagTile _tile[TILEY][TILEX]; //인게임화면(왼쪽화면)에 사용되는 타일 총 400개
 
 	RECT playerRc;
+
 	float playerCenterX, playerCenterY;
 
 	SEASON _currentSeason;
@@ -18,7 +19,7 @@ private:
 
 	int _currentX;
 	int _currentY;
-
+	int MouseIndexX, MouseIndexY;
 
 	bool isShowRect;
 
@@ -33,9 +34,12 @@ public:
 	void setTileRect();
 	void changeSeason(SEASON season);
 
-	void showEntireMap();
+	void renderMap();
 
 	void playerMove();
+	void playerRender();
+
+
 	void checkPlayerTile();
 	void hackGround();
 	void checkHacked();

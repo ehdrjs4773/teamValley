@@ -27,8 +27,10 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	playerMove();
-	CAMERAMANAGER->cameraMove(playerCenterX, playerCenterY);
+	PLAYER->update();
+	checkPlayerTile();
+	//playerMove();
+	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	hackGround();
 
 	if (INPUT->GetKeyDown(VK_F1))
@@ -46,24 +48,18 @@ void inGameScene::update()
 
 void inGameScene::render()
 {
-	showEntireMap();
+	renderMap();
+	PLAYER->render();
 	Rectangle(CAMERAMANAGER->getMemDC(), playerRc);
-	
 	if (isShowRect)
 	{
-		for (int i = _currentY - 8; i < _currentY + 8; i++)
-		{
-			for (int j = _currentX - 16; j < _currentX + 16; j++)
-			{
-				if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
-				{
-					Rectangle(CAMERAMANAGER->getMemDC(), _tile[i][j].rc);
-				}
-			}
-		}
+		Rectangle(CAMERAMANAGER->getMemDC(), _tile[_currentY][_currentX].rc);
+		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
 
 	CAMERAMANAGER->render(getMemDC());
+
+	
 }
 
 void inGameScene::load()
@@ -113,9 +109,9 @@ void inGameScene::changeSeason(SEASON season)
 	}
 }
 
-void inGameScene::showEntireMap()
+void inGameScene::renderMap()
 {
-	for (int i = _currentY - 8; i < _currentY + 8; i++)
+	for (int i = _currentY - 9; i < _currentY + 9; i++)
 	{
 		for (int j = _currentX - 16; j < _currentX + 16; j++)
 		{
@@ -164,32 +160,42 @@ void inGameScene::playerMove()
 		playerCenterY += 2.0f;
 	}
 	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
+
 	checkPlayerTile();
 }
 
+void inGameScene::playerRender()
+{
+	
+}
+ 
 void inGameScene::checkPlayerTile()
 {
-	_currentX = playerCenterX / 16;
-	_currentY = playerCenterY / 16;
+	_currentX = PLAYER->getCenterX() / 16;
+	_currentY = PLAYER->getCenterY() / 16;
 }
 
 void inGameScene::hackGround()
 {
+	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
+	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
+
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
-		int MouseIndexX, MouseIndexY;
-		MouseIndexX = _ptMouse.x / 16;
-		MouseIndexY = _ptMouse.y / 16;
 		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
-		checkHacked();
 	}
+	if (INPUT->GetKeyDown(VK_RBUTTON))
+	{
+		_tile[MouseIndexY][MouseIndexX].isWet = true;
+	}
+	checkHacked();
 }
 
 void inGameScene::checkHacked()
 {
-	for (int i = _currentY - 8; i < _currentY + 8; i++)
+	for (int i = _currentY - 10; i < _currentY + 10; i++)
 	{
-		for (int j = _currentX - 16; j < _currentX + 16; j++)
+		for (int j = _currentX - 20; j < _currentX + 20; j++)
 		{
 			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
 			{
@@ -303,6 +309,118 @@ void inGameScene::checkHacked()
 						//기본 네모
 						_tile[i][j].terrainFrameX = 21;
 						_tile[i][j].terrainFrameY = 17;
+					}
+				}
+				if (_tile[i][j].isWet)
+				{
+					_tile[i][j].wetFrameX = 20;
+					_tile[i][j].wetFrameY = 14;
+					if (_tile[i][j - 1].isWet) //왼쪽
+					{
+						_tile[i][j].wetFrameX = 21;
+						_tile[i][j].wetFrameY = 15;
+					}
+					if (_tile[i][j + 1].isWet) //오른쪽
+					{
+						_tile[i][j].wetFrameX = 20;
+						_tile[i][j].wetFrameY = 15;
+					}
+					if (_tile[i - 1][j].isWet) //위
+					{
+						_tile[i][j].wetFrameX = 22;
+						_tile[i][j].wetFrameY = 15;
+					}
+					if (_tile[i + 1][j].isWet) //아래
+					{
+						_tile[i][j].wetFrameX = 22;
+						_tile[i][j].wetFrameY = 14;
+					}
+					if (_tile[i][j - 1].isWet && _tile[i][j + 1].isWet)			//왼+오
+					{
+						_tile[i][j].wetFrameX = 21;
+						_tile[i][j].wetFrameY = 22;
+					}
+					if (_tile[i - 1][j].isWet && _tile[i + 1][j].isWet)			//위+아래
+					{
+						_tile[i][j].wetFrameX = 20;
+						_tile[i][j].wetFrameY = 22;
+					}
+					if ((_tile[i - 1][j].isWet && _tile[i][j - 1].isWet)
+						|| (_tile[i - 1][j].isWet
+							&& _tile[i][j - 1].isWet
+							&& _tile[i - 1][j - 1].isWet))	//위+왼 ||  //위+왼+왼대각
+					{
+						_tile[i][j].wetFrameX = 22;
+						_tile[i][j].wetFrameY = 23;
+					}
+					if ((_tile[i - 1][j].isWet && _tile[i][j + 1].isWet)
+						|| (_tile[i - 1][j].isWet
+							&& _tile[i][j + 1].isWet
+							&& _tile[i + 1][j + 1].isWet))	 //위+오 || 위+오+오대각
+					{
+						_tile[i][j].wetFrameX = 20;
+						_tile[i][j].wetFrameY = 23;
+					}
+					if ((_tile[i + 1][j].isWet && _tile[i][j - 1].isWet)
+						|| (_tile[i + 1][j].isWet
+							&& _tile[i][j - 1].isWet
+							&& _tile[i + 1][j - 1].isWet))	//아래+왼 || 아래+왼+왼대각
+					{
+						_tile[i][j].wetFrameX = 22;
+						_tile[i][j].wetFrameY = 18;
+					}
+					if ((_tile[i + 1][j].isWet && _tile[i][j + 1].isWet)
+						|| (_tile[i + 1][j].isWet
+							&& _tile[i][j + 1].isWet
+							&& _tile[i + 1][j + 1].isWet))	//아래+오 || 아래+오+오대각
+					{
+						_tile[i][j].wetFrameX = 20;
+						_tile[i][j].wetFrameY = 18;
+					}
+					if (_tile[i - 1][j].isWet
+						&& _tile[i][j - 1].isWet
+						&& _tile[i + 1][j].isWet)		//위+왼+아래
+					{
+						_tile[i][j].wetFrameX = 22;
+						_tile[i][j].wetFrameY = 19;
+					}
+					if (_tile[i - 1][j].isWet
+						&& _tile[i][j + 1].isWet
+						&& _tile[i + 1][j].isWet)		//위+오+아래
+					{
+						_tile[i][j].wetFrameX = 20;
+						_tile[i][j].wetFrameY = 19;
+					}
+					if (_tile[i - 1][j].isWet
+						&& _tile[i][j - 1].isWet
+						&& _tile[i][j + 1].isWet)		//위+왼+오
+					{
+						_tile[i][j].wetFrameX = 21;
+						_tile[i][j].wetFrameY = 23;
+					}
+					if (_tile[i + 1][j].isWet
+						&& _tile[i][j - 1].isWet
+						&& _tile[i][j + 1].isWet)		//아래+왼+오 
+					{
+						_tile[i][j].wetFrameX = 21;
+						_tile[i][j].wetFrameY = 18;
+					}
+					if ((_tile[i - 1][j].isWet
+						&& _tile[i + 1][j].isWet
+						&& _tile[i][j - 1].isWet
+						&& _tile[i][j + 1].isWet)		//위아래왼오 (4방)
+						|| (_tile[i - 1][j].isWet
+							&& _tile[i + 1][j].isWet
+							&& _tile[i][j - 1].isWet
+							&& _tile[i][j + 1].isWet
+							&& _tile[i - 1][j - 1].isWet
+							&& _tile[i + 1][j - 1].isWet
+							&& _tile[i - 1][j + 1].isWet
+							&& _tile[i + 1][j + 1].isWet))	//위아래양옆대각4개 모두	(8방)
+					{
+						//기본 네모
+						_tile[i][j].wetFrameX = 21;
+						_tile[i][j].wetFrameY = 19;
 					}
 				}
 			}

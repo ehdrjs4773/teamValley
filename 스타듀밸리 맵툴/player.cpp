@@ -1,46 +1,32 @@
 #include "stdafx.h"
 #include "player.h"
 
-
 HRESULT player::init()
 {
+	index = 0;
+	count = 0;
+	centerX = WINSIZEX / 2;
+	centerY = WINSIZEY / 2;
 
-	_player.count = _player.index - 0;
-	int _playerX = WINSIZEX / 2;
-	int _playerY = WINSIZEY / 2;
+	speed = 2.0f;
 
+	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
-	IMAGEMANAGER->addFrameImage("right", "player", 3000, 4250, 6, 1,true,RGB(255,0,255));
-	_right = IMAGEMANAGER->findImage("right");
-
-	IMAGEMANAGER->addFrameImage("left", "player", 3000, 4250, 6, 1, true, RGB(255, 0, 255));
-	_left = IMAGEMANAGER->findImage("left");
-
-	IMAGEMANAGER->addFrameImage("up", "player", 3000, 4250, 6, 1, true, RGB(255, 0, 255));
-	_up = IMAGEMANAGER->findImage("up");
-
-	IMAGEMANAGER->addFrameImage("down", "player", 3000, 4250, 6, 1, true, RGB(255, 0, 255));
-	_down = IMAGEMANAGER->findImage("down");
-
-
-
-
-	_player.rc = RectMakeCenter(_playerX, _playerY, 16, 32);
+	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
+	move = IMAGEMANAGER->findImage("playerMove");
 
 	return S_OK;
 }
 
 void  player::release()
 {
-
-
-
 }
 
 void  player::update()
 {
-
-
+	playerMovement();
+	playerAnimation(); 
+	rc = RectMakeCenter(centerX, centerY, 16, 32);
 	//if (_pState == RIGHT && //플레이어의 오른쪽 타일이 나무밑둥 프레임일때 )
 	//{
 	//	if(_ptInRect(//나무..와 충돌하면  )
@@ -48,7 +34,6 @@ void  player::update()
 	//			STATE = cutdownTree; 
 	//		}
 	//}
-
 
 	//if (_pState == RIGHT)
 	//{
@@ -70,17 +55,6 @@ void  player::update()
 
 	//					}
 	//}
-
-
-
-	
-
-
-
-
-
-
-
 }
 
 void  player::render()
@@ -88,120 +62,98 @@ void  player::render()
 	switch (_pDirection)
 	{
 	case DIRECTION::RIGHT:
-		IMAGEMANAGER->frameRender("right", getMemDC(), _player.rc.left, _player.rc.top);
+		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
 		break;
 	case DIRECTION::LEFT:
-		IMAGEMANAGER->frameRender("left", getMemDC(), _player.rc.left, _player.rc.top);
+		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 1);
 		break;
 	case DIRECTION::UP:
-		IMAGEMANAGER->frameRender("up", getMemDC(), _player.rc.left, _player.rc.top);
+		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 2);
 		break;
 	case DIRECTION::DOWN:
-		IMAGEMANAGER->frameRender("down", getMemDC(), _player.rc.left, _player.rc.top);
+		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 3);
+		break;
+	case DIRECTION::IDLE:
+		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
 		break;
 	}
-
 }
 
 void  player::playerMovement()
 {
-
-
-	//if (INPUT->GetKeyDown('D'))  //좌표이동이 아니라 타일 이동... 
-	//{
-	//	_player.rc.left +=
-	//		_player.rc.right +=
-	//		_pState = RIGHT;
-	//}
-	//if (INPUT->GetKeyDown('A'))
-	//{
-	//	_player.rc.left -=
-	//		_player.rc.right -=
-	//		_pState = LEFT;
-	//}
-
-	//if (INPUT->GetKeyDown('W'))
-	//{
-	//	_player.rc.top -=
-	//		_player.rc.bottom -=
-	//		_pState = UP;
-	//}
-
-	//if (INPUT->GetKeyDown('S'))
-	//{
-	//	_player.rc.top +=
-	//		_player.rc.bottom +=
-	//		_pState = DOWN;
-	//}
-
-
+	if (INPUT->GetKey(VK_RIGHT))  //좌표이동이 아니라 타일이동... 
+	{
+		centerX += speed;
+		_pDirection = RIGHT;
+	}
+	if (INPUT->GetKey(VK_LEFT))
+	{
+		centerX -= speed;
+		_pDirection = LEFT;
+	}
+	if (INPUT->GetKey(VK_UP))
+	{
+		centerY -= speed;
+		_pDirection = UP;
+	}
+	if (INPUT->GetKey(VK_DOWN))
+	{
+		centerY += speed;
+		_pDirection = DOWN;
+	}
+	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
+	{
+		index = 0;
+		_pDirection = IDLE;
+	}
 }
 
 void player::playerAnimation()
 {
-	_player.count++;
+	count++;
 
-	switch (_pState)
+	switch (_pDirection)
 	{
 	case RIGHT:
-		if (_player.count & 10 == 0)
+		if (count % 5 == 0)
 		{
-			_player.index++;
-			_right->setFrameY(0);
-
-			if (_player.index > 6)
+			index++;
+			if (index > 5)
 			{
-				_player.index = 0;
+				index = 0;
 			}
-			_right->setFrameX(_player.index);
 		}
 		break;
 	case LEFT:
-		if (_player.count & 10 == 0)
+		if (count % 5 == 0)
 		{
-			_player.index++;
-			_right->setFrameY(0);
-
-			if (_player.index > 12)
+			index++;
+			if (index > 5)
 			{
-				_player.index = 7;
+				index = 0;
 			}
-			_right->setFrameX(_player.index);
 		}
 		break;
 	case UP:
-		if (_player.count & 10 == 0)
+		if (count % 5 == 0)
 		{
-			_player.index++;
-			_right->setFrameY(1);
-
-			if (_player.index > 8)
+			index++;
+			if (index > 7)
 			{
-				_player.index = 0;
+				index = 0;
 			}
-			_right->setFrameX(_player.index);
 		}
 		break;
 	case DOWN:
-		if (_player.count & 10 == 0)
+		if (count % 5 == 0)
 		{
-			_player.index++;
-			_right->setFrameY(1);
-
-			if (_player.index > 12)
+			index++;
+			if (index > 6)
 			{
-				_right->setFrameY(2);
-				_player.index = 0;
-				if (_player.index > 3)
-				{
-					_right->setFrameY(1);
-					_player.index = 9;
-				}
+				index = 0;
 			}
-			_right->setFrameX(_player.index);
 		}
 		break;
 	}
-
-
+	
 }
