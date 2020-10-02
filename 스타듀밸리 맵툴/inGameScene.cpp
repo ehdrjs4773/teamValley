@@ -44,13 +44,17 @@ void inGameScene::update()
 			isShowRect = true;
 		}
 	}
+	if (INPUT->GetKeyDown(VK_F2))
+	{
+		setRandomObstacles();
+	}
 }
 
 void inGameScene::render()
 {
 	renderMap();
 	PLAYER->render();
-	Rectangle(CAMERAMANAGER->getMemDC(), playerRc);
+
 	if (isShowRect)
 	{
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[_currentY][_currentX].rc);
@@ -111,9 +115,9 @@ void inGameScene::changeSeason(SEASON season)
 
 void inGameScene::renderMap()
 {
-	for (int i = _currentY - 9; i < _currentY + 9; i++)
+	for (int i =(float)((float)CAMERAMANAGER->getY() / 16); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40); i++)
 	{
-		for (int j = _currentX - 16; j < _currentX + 16; j++)
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16); j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40); j++)
 		{
 			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
@@ -128,8 +132,17 @@ void inGameScene::renderMap()
 				//인게임 화면 오브젝트 그린다
 				if (_tile[i][j].obj != OBJ_NONE)
 				{
-					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+					if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
+						|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE)
+					{
+						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+					}
+					else
+					{
+						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+					}
 				}
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
@@ -172,7 +185,7 @@ void inGameScene::playerRender()
 void inGameScene::checkPlayerTile()
 {
 	_currentX = PLAYER->getCenterX() / 16;
-	_currentY = PLAYER->getCenterY() / 16;
+	_currentY = (PLAYER->getCenterY() + 8) / 16;
 }
 
 void inGameScene::hackGround()
@@ -182,11 +195,25 @@ void inGameScene::hackGround()
 
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
-		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+		if (((MouseIndexX == _currentX + 1 || MouseIndexX == _currentX - 1) && MouseIndexY == _currentY)
+			|| (MouseIndexX == _currentX && (MouseIndexY == _currentY + 1 || MouseIndexY == _currentY - 1)))
+		{
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			{
+				_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+			}
+		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
-		_tile[MouseIndexY][MouseIndexX].isWet = true;
+		if (((MouseIndexX == _currentX + 1 || MouseIndexX == _currentX - 1) && MouseIndexY == _currentY)
+			|| (MouseIndexX == _currentX && (MouseIndexY == _currentY + 1 || MouseIndexY == _currentY - 1)))
+		{
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			{
+				_tile[MouseIndexY][MouseIndexX].isWet = true;
+			}
+		}
 	}
 	checkHacked();
 }
@@ -428,6 +455,114 @@ void inGameScene::checkHacked()
 	}
 }
 
+void inGameScene::setRandomObstacles()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			if (_tile[i][j].obj != OBJ_NONE) { continue; }
+			if (RANDOM->range(20) == 0)
+			{
+				switch (RANDOM->range(4))
+				{
+				case 0:
+					_tile[i][j].obj = OBJ_DESTRUCTIBE;
+					_tile[i][j].objType = OTY_STONE;
+					switch (RANDOM->range(4))
+					{
+					case 0:
+						_tile[i][j].objFrameX = 2;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 1:
+						_tile[i][j].objFrameX = 3;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 2:
+						_tile[i][j].objFrameX = 4;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 3:
+						_tile[i][j].objFrameX = 5;
+						_tile[i][j].objFrameY = 0;
+						break;
+					}
+					break;
+				case 1:
+					if (i + 1 < TILEY && j + 1 < TILEX)
+					{
+						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE)
+						{
+							_tile[i][j].objType = OTY_LARGESTONE;
+							_tile[i][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j].objFrameX = 2;
+							_tile[i][j].objFrameY = 1;
+
+							_tile[i + 1][j].objType = OTY_LARGESTONE;
+							_tile[i + 1][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j].objFrameX = 2;
+							_tile[i + 1][j].objFrameY = 2;
+
+							_tile[i][j + 1].objType = OTY_LARGESTONE;
+							_tile[i][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j + 1].objFrameX = 3;
+							_tile[i][j + 1].objFrameY = 1;
+
+							_tile[i + 1][j + 1].objType = OTY_LARGESTONE;
+							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j + 1].objFrameX = 3;
+							_tile[i + 1][j + 1].objFrameY = 2;
+						}
+					}
+					break;
+				case 2:
+					_tile[i][j].obj = OBJ_DESTRUCTIBE;
+					_tile[i][j].objType = OTY_BRANCH;
+					switch (RANDOM->range(2))
+					{
+					case 0:
+						_tile[i][j].objFrameX = 0;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 1:
+						_tile[i][j].objFrameX = 1;
+						_tile[i][j].objFrameY = 0;
+						break;
+					}
+					break;
+				case 3:
+					if (i + 1 < TILEY && j + 1 < TILEX)
+					{
+						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE)
+						{
+							_tile[i][j].objType = OTY_HARDTREE;
+							_tile[i][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j].objFrameX = 0;
+							_tile[i][j].objFrameY = 1;
+
+							_tile[i + 1][j].objType = OTY_HARDTREE;
+							_tile[i + 1][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j].objFrameX = 0;
+							_tile[i + 1][j].objFrameY = 2;
+
+							_tile[i][j + 1].objType = OTY_HARDTREE;
+							_tile[i][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j + 1].objFrameX = 1;
+							_tile[i][j + 1].objFrameY = 1;
+
+							_tile[i + 1][j + 1].objType = OTY_HARDTREE;
+							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j + 1].objFrameX = 1;
+							_tile[i + 1][j + 1].objFrameY = 2;
+						}
+					}
+					break;
+				}
+			}
+		}
+	}
+}
 
 INT_PTR inGameScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

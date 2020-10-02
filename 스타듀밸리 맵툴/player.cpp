@@ -55,6 +55,7 @@ void  player::update()
 
 void  player::render()
 {
+<<<<<<< HEAD
 	switch (_pDirection)
 	{
 	case DIRECTION::RIGHT:
@@ -97,6 +98,27 @@ void  player::render()
 	//}
 
 
+=======
+	//switch (_pDirection)
+	//{
+	//case DIRECTION::RIGHT:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
+	//	break;
+	//case DIRECTION::LEFT:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 1);
+	//	break;
+	//case DIRECTION::UP:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 2);
+	//	break;
+	//case DIRECTION::DOWN:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 3);
+	//	break;
+	//case DIRECTION::IDLE:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
+	//	break;
+	//}
+	Rectangle(CAMERAMANAGER->getMemDC(), rc);
+>>>>>>> 30aa737919d7d1fe2186d172a9ae824c17d8a58f
 }
 
 void  player::playerMovement()
