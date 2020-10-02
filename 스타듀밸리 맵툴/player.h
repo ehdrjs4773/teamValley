@@ -1,12 +1,16 @@
 #pragma once
 #include "singletonBase.h"
+#include "tileNode.h"
 
 enum STATE
 {
 	digGround,
 	cutdownTree,
 	cutGrass,
+	breakStone,
+	pourwater,
 	fillWater,
+	attackMonster
 };
 
 enum DIRECTION
@@ -18,6 +22,16 @@ enum DIRECTION
 	IDLE
 };
 
+enum PLAYERTOOL
+{
+	SHOVEL, //»ð
+	AX,     //µµ³¢
+	PICKAX, //°î±ªÀÌ
+	SICKLE, //³´
+	SWORD,  //°Ë
+	KETTLE  //ÁÖÀüÀÚ
+
+};
 
 struct tagPlayer
 {
@@ -33,14 +47,21 @@ class player : public singletonBase<player>
 private:
 	RECT rc;
 	float centerX, centerY;
+	int currentX, currentY;
+	int MouseIndexX, MouseIndexY;
 	float speed;
 	int count;
 	int index;
 
+	tagTile _tile[TILEY][TILEX];
+	OBJ_TYPE objType;
+
 	STATE _pState;
 	DIRECTION _pDirection;
+	PLAYERTOOL _pTool;
 	
 	image* move;
+	image* state;
 	
 	image* _cutdownTree;
 
@@ -58,5 +79,6 @@ public:
 
 	void playerMovement();
 	void playerAnimation();
+	void checkTile();
 };
 
