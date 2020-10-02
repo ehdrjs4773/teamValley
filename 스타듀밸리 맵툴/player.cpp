@@ -59,24 +59,25 @@ void  player::update()
 
 void  player::render()
 {
-	switch (_pDirection)
-	{
-	case DIRECTION::RIGHT:
-		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
-		break;
-	case DIRECTION::LEFT:
-		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 1);
-		break;
-	case DIRECTION::UP:
-		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 2);
-		break;
-	case DIRECTION::DOWN:
-		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 3);
-		break;
-	case DIRECTION::IDLE:
-		move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
-		break;
-	}
+	//switch (_pDirection)
+	//{
+	//case DIRECTION::RIGHT:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
+	//	break;
+	//case DIRECTION::LEFT:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 1);
+	//	break;
+	//case DIRECTION::UP:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 2);
+	//	break;
+	//case DIRECTION::DOWN:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 3);
+	//	break;
+	//case DIRECTION::IDLE:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
+	//	break;
+	//}
+	Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 
 void  player::playerMovement()

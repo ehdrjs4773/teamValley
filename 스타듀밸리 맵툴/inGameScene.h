@@ -44,6 +44,8 @@ public:
 	void hackGround();
 	void checkHacked();
 
+	void setRandomObstacles();
+
 	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
 
