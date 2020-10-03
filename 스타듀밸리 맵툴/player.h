@@ -33,15 +33,6 @@ enum PLAYERTOOL
 
 };
 
-struct tagPlayer
-{
-	RECT rc;
-	int count; 
-	int index;
-	float _playerX;
-	float _playerY;
-};
-
 class player : public singletonBase<player>
 {
 private:
@@ -52,6 +43,7 @@ private:
 	float speed;
 	int count;
 	int index;
+
 
 	tagTile _tile[TILEY][TILEX];
 	OBJ_TYPE objType;
@@ -64,6 +56,7 @@ private:
 	image* state;
 	
 	image* _cutdownTree;
+	
 
 public:
 	HRESULT init();
@@ -71,13 +64,20 @@ public:
 	void update();
 	void render();
 
+	void setIndex(int inx) { index = inx; }
+	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }
+	void setCenterX(float cX) { centerX = cX; }
 	float getCenterY() { return centerY; }
+	void setCenterY(float cY) { centerY = cY; }
+
+	int getCurrentX() { return currentX; }
+	int getCurrentY() { return currentY; }
 
 	DIRECTION getDirection() { return _pDirection; }
+	void setDirection(DIRECTION dir) { _pDirection = dir; }
 	RECT getRc() { return rc; }
 
-	void playerMovement();
 	void playerAnimation();
 	void checkTile();
 };

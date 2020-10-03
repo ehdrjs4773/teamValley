@@ -8,17 +8,7 @@ HRESULT player::init()
 	centerX = WINSIZEX / 2;
 	centerY = WINSIZEY / 2;
 
-
-	currentX = centerX / 16;
-	currentY = centerY / 16;
-
-	
-
-
-
 	speed = 2.0f;
-
-	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
@@ -36,11 +26,12 @@ void  player::release()
 
 void  player::update()
 {
-	playerMovement();
-
 	playerAnimation();
 
 	checkTile();
+
+	currentX = centerX / 16;
+	currentY = (centerY + 8) / 16;
 
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
@@ -48,9 +39,6 @@ void  player::update()
 
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
-
-
-
 }
 
 void  player::render()
@@ -100,35 +88,6 @@ void  player::render()
 	//}
 	Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
-}
-
-void  player::playerMovement()
-{
-	if (INPUT->GetKey(VK_RIGHT))
-	{
-		centerX += speed;
-		_pDirection = RIGHT;
-	}
-	if (INPUT->GetKey(VK_LEFT))
-	{
-		centerX -= speed;
-		_pDirection = LEFT;
-	}
-	if (INPUT->GetKey(VK_UP))
-	{
-		centerY -= speed;
-		_pDirection = UP;
-	}
-	if (INPUT->GetKey(VK_DOWN))
-	{
-		centerY += speed;
-		_pDirection = DOWN;
-	}
-	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
-	{
-		index = 0;
-		_pDirection = IDLE;
-	}
 }
 
 void player::playerAnimation()
@@ -300,7 +259,7 @@ void player::checkTile()
 					//µ¹ÀÌ ±úÁü
 				}
 				break;
-			case  OTY_SEED:
+			case  OTY_CROP:
 				if (_pTool == KETTLE)
 				{
 					//¹°À» ºÎÀ½ 

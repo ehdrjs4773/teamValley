@@ -18,8 +18,8 @@ private:
 	string imageName;
 	string objectImageName;
 
-	int _currentX;
-	int _currentY;
+	int currentIndexX;
+	int currentIndexY;
 	int MouseIndexX, MouseIndexY;
 
 	bool isShowRect;

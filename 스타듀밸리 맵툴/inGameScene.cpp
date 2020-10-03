@@ -35,10 +35,10 @@ void inGameScene::update()
 
 	_playerInventory->update();
 
-
 	PLAYER->update();
-	checkPlayerTile();
-	//playerMove();
+
+	playerMove();
+
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	hackGround();
 
@@ -78,12 +78,14 @@ void inGameScene::update()
 void inGameScene::render()
 {
 	renderMap();
-	PLAYER->render();
+	
 	if (isShowRect)
 	{
-		Rectangle(CAMERAMANAGER->getMemDC(), _tile[_currentY][_currentX].rc);
+		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
+
+	PLAYER->render();
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -182,25 +184,44 @@ void inGameScene::renderMap()
 
 void inGameScene::playerMove()
 {
-	if (INPUT->GetKey(VK_LEFT))
-	{
-		playerCenterX -= 2.0f;
-	}
+	checkPlayerTile();
 	if (INPUT->GetKey(VK_RIGHT))
 	{
-		playerCenterX += 2.0f;
+		if (_tile[currentIndexY][currentIndexX + 1].obj == OBJ_NONE)
+		{
+			PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+			PLAYER->setDirection(RIGHT);
+		}
+	}
+	if (INPUT->GetKey(VK_LEFT))
+	{
+		if (_tile[currentIndexY][currentIndexX - 1].obj == OBJ_NONE)
+		{
+			PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+			PLAYER->setDirection(LEFT);
+		}
 	}
 	if (INPUT->GetKey(VK_UP))
 	{
-		playerCenterY -= 2.0f;
+		if (_tile[currentIndexY - 1][currentIndexX].obj == OBJ_NONE)
+		{
+			PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+			PLAYER->setDirection(UP);
+		}
 	}
 	if (INPUT->GetKey(VK_DOWN))
 	{
-		playerCenterY += 2.0f;
+		if (_tile[currentIndexY + 1][currentIndexX].obj == OBJ_NONE)
+		{
+			PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+			PLAYER->setDirection(DOWN);
+		}
 	}
-	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
-
-	checkPlayerTile();
+	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
+	{
+		PLAYER->setIndex(0);
+		PLAYER->setDirection(IDLE);
+	}
 }
 
 void inGameScene::playerRender()
@@ -210,8 +231,8 @@ void inGameScene::playerRender()
  
 void inGameScene::checkPlayerTile()
 {
-	_currentX = PLAYER->getCenterX() / 16;
-	_currentY = (PLAYER->getCenterY() + 8) / 16;
+	currentIndexX = PLAYER->getCurrentX();
+	currentIndexY = PLAYER->getCurrentY();
 }
 
 void inGameScene::hackGround()
@@ -221,8 +242,8 @@ void inGameScene::hackGround()
 
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
-		if (((MouseIndexX == _currentX + 1 || MouseIndexX == _currentX - 1) && MouseIndexY == _currentY)
-			|| (MouseIndexX == _currentX && (MouseIndexY == _currentY + 1 || MouseIndexY == _currentY - 1)))
+		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
@@ -232,8 +253,8 @@ void inGameScene::hackGround()
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
-		if (((MouseIndexX == _currentX + 1 || MouseIndexX == _currentX - 1) && MouseIndexY == _currentY)
-			|| (MouseIndexX == _currentX && (MouseIndexY == _currentY + 1 || MouseIndexY == _currentY - 1)))
+		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
@@ -246,9 +267,9 @@ void inGameScene::hackGround()
 
 void inGameScene::checkHacked()
 {
-	for (int i = _currentY - 10; i < _currentY + 10; i++)
+	for (int i = currentIndexY - 10; i < currentIndexY + 10; i++)
 	{
-		for (int j = _currentX - 20; j < _currentX + 20; j++)
+		for (int j = currentIndexX - 20; j < currentIndexX + 20; j++)
 		{
 			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
 			{
