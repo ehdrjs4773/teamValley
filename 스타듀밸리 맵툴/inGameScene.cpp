@@ -56,6 +56,22 @@ void inGameScene::update()
 	{
 		setRandomObstacles();
 	}
+	if (INPUT->GetKeyDown(VK_F3))
+	{
+		changeSeason(SPRING);
+	}
+	if (INPUT->GetKeyDown(VK_F4))
+	{
+		changeSeason(SUMMER);
+	}
+	if (INPUT->GetKeyDown(VK_F5))
+	{
+		changeSeason(AUTUMN);
+	}
+	if (INPUT->GetKeyDown(VK_F6))
+	{
+		changeSeason(WINTER);
+	}
 }
 
 void inGameScene::render()
@@ -475,7 +491,7 @@ void inGameScene::setRandomObstacles()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_NONE) { continue; }
+			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
 				switch (RANDOM->range(4))
@@ -506,7 +522,8 @@ void inGameScene::setRandomObstacles()
 				case 1:
 					if (i + 1 < TILEY && j + 1 < TILEX)
 					{
-						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE)
+						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE
+							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
 						{
 							_tile[i][j].objType = OTY_LARGESTONE;
 							_tile[i][j].obj = OBJ_DESTRUCTIBE;
@@ -548,7 +565,8 @@ void inGameScene::setRandomObstacles()
 				case 3:
 					if (i + 1 < TILEY && j + 1 < TILEX)
 					{
-						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE)
+						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE
+							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
 						{
 							_tile[i][j].objType = OTY_HARDTREE;
 							_tile[i][j].obj = OBJ_DESTRUCTIBE;
