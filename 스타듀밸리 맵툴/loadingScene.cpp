@@ -68,6 +68,9 @@ void loadingScene::loadingImage()
 
 	//플레이어
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
+
+	//플레이어 인벤토리
+	IMAGEMANAGER->addImage("playerInventory", "Images/playerInventory/캐릭터 인벤토리.bmp", 208, 32, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()
