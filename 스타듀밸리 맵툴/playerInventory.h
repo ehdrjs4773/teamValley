@@ -2,15 +2,6 @@
 #include "gameNode.h"
 #include "player.h"
 
-
-
-
-
-
-
-
-
-
 class playerInventory:public gameNode
 {
 private:
@@ -18,12 +9,7 @@ private:
 
 	RECT _playerInventory;
 
-
 	RECT _playerTool[12];
-
-
-	player* _player;
-
 
 	int MouseIndexX, MouseIndexY;
 

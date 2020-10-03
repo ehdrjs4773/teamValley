@@ -27,6 +27,7 @@ HRESULT inGameScene::init()
 
 void inGameScene::release()
 {
+	//SAFE_DELETE(_playerInventory);
 }
 
 void inGameScene::update()
@@ -78,22 +79,17 @@ void inGameScene::render()
 {
 	renderMap();
 	PLAYER->render();
-
 	if (isShowRect)
 	{
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[_currentY][_currentX].rc);
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
 
-	_playerInventory->render();
-
 	CAMERAMANAGER->render(getMemDC());
 
+	_playerInventory->render();
 
 
-
-
-	
 }
 
 void inGameScene::load()
