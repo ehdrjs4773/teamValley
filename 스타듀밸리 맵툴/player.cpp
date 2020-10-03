@@ -8,12 +8,24 @@ HRESULT player::init()
 	centerX = WINSIZEX / 2;
 	centerY = WINSIZEY / 2;
 
+
+	currentX = centerX / 16;
+	currentY = centerY / 16;
+
+	
+
+
+
 	speed = 2.0f;
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
+
+	IMAGEMANAGER->addFrameImage("playerState", "Images/BMP/playerState.bmp", 3000, 4250, 12, 17, true, RGB(255, 0, 255));
+	state = IMAGEMANAGER->findImage("playerState");
+
 
 	return S_OK;
 }
@@ -25,40 +37,49 @@ void  player::release()
 void  player::update()
 {
 	playerMovement();
-	playerAnimation(); 
+
+	playerAnimation();
+
+	checkTile();
+
+	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
+	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
+
+
+
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
-	//if (_pState == RIGHT && //플레이어의 오른쪽 타일이 나무밑둥 프레임일때 )
-	//{
-	//	if(_ptInRect(//나무..와 충돌하면  )
-	//		{
-	//			STATE = cutdownTree; 
-	//		}
-	//}
 
-	//if (_pState == RIGHT)
-	//{
-	//	if(//오른쪽 타일이 나무)
-	//		{
 
-	//		}
 
-	//		if(//오른쪽 타일이 돌이)
-	//			{
-
-	//			}
-	//			if (//오른쪽 타일이 잔디)
-	//				{
-
-	//				}
-	//				if (//오른쪽 타일이 돌)
-	//					{
-
-	//					}
-	//}
 }
 
 void  player::render()
 {
+
+	//switch (_pState)
+	//{
+	//case STATE::digGround:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 4);
+	//	break;
+	//case STATE::cutdownTree:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 0);
+	//	break;
+	//case STATE::cutGrass:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 7);
+	//	break;
+	//case STATE::breakStone:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 13);
+	//	break;
+	//case STATE::fillWater:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 11);
+	//	break;
+	//case STATE::attackMonster:
+	//	move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 125, centerY - 125, index, 12);
+	//	break;
+	//}
+
+
+
 	//switch (_pDirection)
 	//{
 	//case DIRECTION::RIGHT:
@@ -78,11 +99,12 @@ void  player::render()
 	//	break;
 	//}
 	Rectangle(CAMERAMANAGER->getMemDC(), rc);
+
 }
 
 void  player::playerMovement()
 {
-	if (INPUT->GetKey(VK_RIGHT))  //좌표이동이 아니라 타일이동... 
+	if (INPUT->GetKey(VK_RIGHT))
 	{
 		centerX += speed;
 		_pDirection = RIGHT;
@@ -156,5 +178,262 @@ void player::playerAnimation()
 		}
 		break;
 	}
-	
+
+
+	/*switch (_pState)
+	{
+	case digGround:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 4)
+			{
+				index = 0;
+			}
+		}
+		break;
+	case cutdownTree:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 5)
+			{
+				index = 0;
+			}
+		}
+		break;
+	case cutGrass:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 5)
+			{
+				index = 0;
+			}
+		}
+		break;
+
+	case breakStone:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 6)
+			{
+				index = 0;
+			}
+		}
+		break;
+
+	case fillWater:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 4)
+			{
+				index = 0;
+			}
+		}
+		break;
+
+	case attackMonster:
+		if (count % 5 == 0)
+		{
+			index++;
+			if (index > 5)
+			{
+				index = 0;
+			}
+		}
+		break;
+	}
+			*/
+}
+
+void player::checkTile()
+{
+	switch (_pDirection)
+	{
+	case RIGHT:
+
+		if (MouseIndexX== currentX + 1 && MouseIndexY== currentY - 1)  // 마우스 위치가 1번 타일일 때
+		{
+			switch (_tile[currentY - 1][currentX + 1].objType)
+			{
+
+
+
+
+
+
+
+			}
+			switch (_tile[currentY - 1][currentX + 1].terrain)
+			{
+			}
+		
+		}
+		else if (MouseIndexX == currentX + 1 && MouseIndexY == currentY)// 마우스 위치가 2번 타일일 때 
+		{
+			switch (_tile[currentY][currentX + 1].objType)
+			{
+			case OTY_TREE:
+				if (_pTool == AX)
+				{
+					//나무가 잘림 
+				}
+				break;
+			case OTY_BRANCH:
+				if (_pTool == AX)
+				{
+					//나뭇가지가 잘림 
+				}
+				break;
+			case  OTY_GRASS:
+				if (_pTool == SICKLE)
+				{
+					//풀이 잘림 
+				}
+				break;
+			case  OTY_STONE:
+				if (_pTool == PICKAX)
+				{
+					//돌이 깨짐
+				}
+				break;
+			case  OTY_SEED:
+				if (_pTool == KETTLE)
+				{
+					//물을 부음 
+				}
+				break;
+			case  OTY_MONSTER:
+				if (_pTool == SWORD)
+				{
+					//몬스터를 공격함
+				}
+				break;
+			}
+			switch (_tile[currentY][currentX + 1].terrain)
+			{
+			case  TR_GROUND:
+				if (_pTool == SHOVEL)
+				{
+					//땅을 팜 => TR_HACKED가 됨 
+				}
+				break;
+			case  TR_HACKED:
+				if (_pTool == KETTLE)
+				{
+					//물 뿌림 => 땅이 WET 됨 
+				}
+				break;
+			case  TR_WATER:
+				if (_pTool == KETTLE)
+				{
+					//물을 채움
+				}
+				break;
+			}
+		}
+		else if (MouseIndexX == currentX + 1 && MouseIndexY == currentY+1) //마우스 위치가 3번 타일일 때  
+		{
+			switch (_tile[currentY + 1][currentX + 1].objType)
+			{
+			}
+			switch (_tile[currentY + 1][currentX + 1].terrain)
+			{
+			}
+		}
+
+	case LEFT:
+		if (MouseIndexX == currentX - 1 && MouseIndexY == currentY + 1)//마우스 위치가 5번 타일일 때  
+		{
+			switch (_tile[currentY + 1][currentX - 1].objType)
+			{
+			}
+			switch (_tile[currentY + 1][currentX - 1].terrain)
+			{
+			}
+		}
+		else if (MouseIndexX == currentX - 1 && MouseIndexY == currentY)//마우스 위치가 6번 타일일 때
+		{
+			switch (_tile[currentY][currentX - 1].objType)
+			{
+			}
+			switch (_tile[currentY][currentX - 1].terrain)
+			{
+			}
+		}
+
+		else if (MouseIndexX == currentX - 1 && MouseIndexY == currentY-1)// 마우스 위치가 7번 타일일 때 
+		{
+			switch (_tile[currentY - 1][currentX - 1].objType)
+			{
+			}
+			switch (_tile[currentY - 1][currentX - 1].terrain)
+			{
+			}
+		}
+		break;
+
+	case UP:
+		if (MouseIndexX == currentX - 1 && MouseIndexY == currentY - 1)// 마우스 위치가 7번 타일일 때 
+		{
+			switch (_tile[currentY - 1][currentX - 1].objType)
+			{
+			}
+			switch (_tile[currentY - 1][currentX - 1].terrain)
+			{
+			}
+		}
+		else if (MouseIndexX == currentX && MouseIndexY == currentY - 1)// 마우스 위치가 8번 타일일 때 
+		{
+			switch (_tile[currentY - 1][currentX].objType)
+			{
+			}
+			switch (_tile[currentY - 1][currentX].terrain)
+			{
+			}
+		}
+		else if (MouseIndexX == currentX + 1 && MouseIndexY == currentY - 1)// 마우스 위치가 1번 타일일 때 
+		{
+			switch (_tile[currentY - 1][currentX + 1].objType)
+			{
+			}
+			switch (_tile[currentY - 1][currentX + 1].terrain)
+			{
+			}
+		}
+		break;
+
+	case DOWN:
+		if (MouseIndexX == currentX + 1 && MouseIndexY == currentY + 1)// 마우스 위치가 3번 타일일 때 
+		{
+			switch (_tile[currentY + 1][currentX + 1].objType)
+			{
+			}
+			switch (_tile[currentY + 1][currentX + 1].terrain)
+			{
+			}
+		}
+		else if (MouseIndexX == currentX && MouseIndexY == currentY + 1)// 마우스 위치가 4번 타일일 때 
+		{
+			switch (_tile[currentY + 1][currentX].objType)
+			{
+			}
+			switch (_tile[currentY + 1][currentX].terrain)
+			{
+			}
+		}
+		else if (MouseIndexX == currentX - 1 && MouseIndexY == currentY + 1)// 마우스 위치가 5번 타일일 때 
+		{
+			switch (_tile[currentY + 1][currentX - 1].objType)
+			{
+			}
+			switch (_tile[currentY + 1][currentX - 1].terrain)
+			{
+			}
+		}
+		break;
+	}
 }

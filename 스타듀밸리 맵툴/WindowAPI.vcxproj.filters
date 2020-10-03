@@ -144,6 +144,9 @@
     <ClCompile Include="player.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
+    <ClCompile Include="playerInventory.cpp">
+      <Filter>MainGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -223,6 +226,9 @@
       <Filter>GameFramework\매니져\카메라 매니저</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
+      <Filter>MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="playerInventory.h">
       <Filter>MainGame</Filter>
     </ClInclude>
   </ItemGroup>

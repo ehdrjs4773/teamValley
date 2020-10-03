@@ -18,6 +18,10 @@ HRESULT inGameScene::init()
 
 	isShowRect = false;
 
+	_playerInventory = new playerInventory;
+	_playerInventory->init();
+
+
 	return S_OK;
 }
 
@@ -27,6 +31,10 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+
+	_playerInventory->update();
+
+
 	PLAYER->update();
 	checkPlayerTile();
 	//playerMove();
@@ -77,7 +85,13 @@ void inGameScene::render()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
 
+	_playerInventory->render();
+
 	CAMERAMANAGER->render(getMemDC());
+
+
+
+
 
 	
 }

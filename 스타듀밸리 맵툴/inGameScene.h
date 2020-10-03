@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
+#include "playerInventory.h"
 
 class inGameScene : public gameNode
 {
@@ -22,6 +23,8 @@ private:
 	int MouseIndexX, MouseIndexY;
 
 	bool isShowRect;
+
+	playerInventory* _playerInventory;
 
 public:
 
