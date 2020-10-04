@@ -16,6 +16,11 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("playerState", "Images/BMP/playerState.bmp", 3000, 4250, 12, 17, true, RGB(255, 0, 255));
 	state = IMAGEMANAGER->findImage("playerState");
 
+	_inventory = new inventory;
+	_inventory->init();
+
+	isShowInventory = false;
+
 
 	return S_OK;
 }
@@ -37,11 +42,19 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 
-
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
+
+	if (INPUT->GetToggleKey('E'))
+	{
+
+		isShowInventory = true;
+	}
+
+
+
 }
 
-void  player::render()
+void  player::render(HDC hdc)
 {
 
 	//switch (_pState)
@@ -87,6 +100,13 @@ void  player::render()
 	//	break;
 	//}
 	Rectangle(CAMERAMANAGER->getMemDC(), rc);
+
+
+	if (isShowInventory)
+	{
+
+		_inventory->render(hdc);
+	}
 
 }
 

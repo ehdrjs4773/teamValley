@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "gameNode.h"
 
 enum ITEM
 {
@@ -22,8 +21,7 @@ struct tagItem {
 	int sell_price;
 };
 
-class item :
-	public gameNode
+class item 
 {
 private:
 	

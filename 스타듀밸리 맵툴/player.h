@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "tileNode.h"
+#include "inventory.h"
 
 enum STATE
 {
@@ -45,6 +46,8 @@ private:
 	int index;
 
 
+	bool isShowInventory;
+
 	tagTile _tile[TILEY][TILEX];
 	OBJ_TYPE objType;
 
@@ -56,13 +59,15 @@ private:
 	image* state;
 	
 	image* _cutdownTree;
+
+	inventory* _inventory;
 	
 
 public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
@@ -77,6 +82,7 @@ public:
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
 	RECT getRc() { return rc; }
+	
 
 	void playerAnimation();
 	void checkTile();

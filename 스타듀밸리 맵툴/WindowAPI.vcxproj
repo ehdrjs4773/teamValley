@@ -167,7 +167,6 @@
     <ClInclude Include="maptoolScene.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
-    <ClInclude Include="playerInventory.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="resource.h" />
@@ -200,7 +199,6 @@
     <ClCompile Include="maptoolScene.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
-    <ClCompile Include="playerInventory.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="sceneManager.cpp" />

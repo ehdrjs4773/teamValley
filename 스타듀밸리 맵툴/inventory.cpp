@@ -1,10 +1,8 @@
 #include "stdafx.h"
 #include "inventory.h"
 
-HRESULT inventory::init()
+void inventory::init()
 {
-	IMAGEMANAGER->addImage("¿Œ∫•≈‰∏Æ_æ∆¿Ã≈€","Images/shop/inventory.bmp", 750, 200,true,RGB(255,0,255));
-
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp;
@@ -13,7 +11,12 @@ HRESULT inventory::init()
 		_vItem.push_back(temp);
 	}
 
-	return S_OK;
+	for (int i = 0; i < 12; i++)
+	{
+		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
+	}
+
+
 }
 
 void inventory::release()
@@ -22,19 +25,65 @@ void inventory::release()
 
 void inventory::update()
 {
+	cout << _ptMouse.x << "\t" << _ptMouse.y << endl;
 
+	for (int i = 0; i < 12; i++)
+	{
+		if (PtInRect(&_playerTool[i], _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				//if (_playerTool[i] == //µµ≥¢)
+				//{
+				//	
+				//}
+
+				//else if (_playerTool[i] == //∞Ó±™¿Ã)
+				//{
+
+				//}
+
+				//else if (_playerTool[i] == //ª)
+				//{
+
+				//}
+
+				//else if (_playerTool[i] == //¡÷¿¸¿⁄)
+				//{
+
+				//}
+
+				//else if (_playerTool[i] == //≥¥)
+				//{
+
+				//}
+			}
+		}
+	}
 }
 
 
-void inventory::render()
+void inventory::render(HDC hdc)
 {
 	inventory_img = IMAGEMANAGER->findImage("¿Œ∫•≈‰∏Æ_æ∆¿Ã≈€");
-	inventory_img->render(getMemDC(), 250,375);
+	inventory_img->render(hdc, 250,375);
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{
-			_vItem[i].item_image->render(getMemDC(), _vItem[i].rc.left, _vItem[i].rc.top);
+			_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+		}
+	}
+
+	IMAGEMANAGER->render("playerInventory", hdc, WINSIZEX / 2 - 282, 520);
+
+	for (int i = 0; i < 12; i++)
+	{
+		Rectangle(hdc, _playerTool[i]);
+		if (PtInRect(&_playerTool[i], _ptMouse))
+		{
+			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
+			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
 	}
 }
