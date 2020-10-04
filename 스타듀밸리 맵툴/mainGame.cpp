@@ -16,8 +16,9 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("¸ÊÅøÈ­¸é", new maptoolScene);
 	SCENEMANAGER->addScene("½ºÅ¸Æ®È­¸é", new mainScene);
 	SCENEMANAGER->addScene("ÀÎ°ÔÀÓÈ­¸é", new inGameScene);
+	SCENEMANAGER->addScene("»óÁ¡¾À", new shopScene);
 	/*ÇöÀç¾À*/
-	SCENEMANAGER->loadScene("·ÎµùÈ­¸é");
+	SCENEMANAGER->loadScene("»óÁ¡¾À");
 	return S_OK;
 }
 

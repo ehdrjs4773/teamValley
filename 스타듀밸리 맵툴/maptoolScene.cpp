@@ -23,6 +23,7 @@ HRESULT maptoolScene::init()
 	_isDragSet = false;
 	_prevent_double = false;
 
+
 	//현재타일 초기화 (지형 = 잔디)
 	_currentTile.x = 0;
 	_currentTile.y = 6;
@@ -60,6 +61,11 @@ void maptoolScene::update()
 		{
 			lockScroll();
 			selectSeason();
+
+			if (PtInRect(&_rcobjectDelete, _ptMouse))
+			{
+				_ctrlSelect = CTRL_OBJECTDELETE;
+			}
 
 			if (PtInRect(&_rcSave, _ptMouse))
 			{
@@ -179,9 +185,9 @@ void maptoolScene::render()
 				FrameRect(getMemDC(), _tile[i][j].rc, RGB(255, 255, 0));
 			}
 		}
-		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		for (int i = 0; i < sampleTileMaxFrameY; i++)
 		{
-			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			for (int j = 0; j < sampleTileMaxFrameX; j++)
 			{
 				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
 				{
@@ -458,6 +464,7 @@ void maptoolScene::maptoolSetup()
 	_rcTerrain = RectMake(660, 400 + 100, 100, 50);
 	_rcObject = RectMake(660 + 100, 400 + 100, 100, 50);
 	_rcEraser = RectMake(660 + 200, 400 + 100, 100, 50);
+	_rcobjectDelete = RectMake(860, 400, 100, 50);
 
 	_rcSpring = RectMake(660 - 100, 450, 50, 30);
 	_rcSummer = RectMake(660 - 50, 450, 50, 30);
@@ -525,6 +532,12 @@ void maptoolScene::setMap()
 				{
 					_tile[i + tileY][j + tileX].objFrameX = 0;
 					_tile[i + tileY][j + tileX].objFrameY = 0;
+					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
+					_tile[i + tileY][j + tileX].objOver = OVR_NONE;
+				}
+
+				if (_ctrlSelect == CTRL_OBJECTDELETE)
+				{
 					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
 					_tile[i + tileY][j + tileX].objOver = OVR_NONE;
 				}
@@ -683,6 +696,8 @@ void maptoolScene::lockScroll()
 		currentScroll.y = sampleVertScroll.top;
 		isSampleVertLock = true;
 	}
+	
+
 }
 
 void maptoolScene::moveScroll()
@@ -1232,6 +1247,8 @@ void maptoolScene::showControlButton()
 	IMAGEMANAGER->findImage("오브젝트")->render(getMemDC(), _rcObject.left, _rcObject.top);
 	Rectangle(getMemDC(), _rcEraser);
 	IMAGEMANAGER->findImage("지우개")->render(getMemDC(), _rcEraser.left, _rcEraser.top);
+	Rectangle(getMemDC(), _rcobjectDelete);
+
 
 	if (isSelectSeason)
 	{

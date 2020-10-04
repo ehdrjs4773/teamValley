@@ -6,6 +6,7 @@
 #include "maptoolScene.h"
 #include "mainScene.h"
 #include "inGameScene.h"
+#include "shopScene.h"
 
 class mainGame : public gameNode
 {

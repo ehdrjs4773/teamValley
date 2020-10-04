@@ -76,7 +76,6 @@ void inGameScene::update()
 void inGameScene::render()
 {
 	renderMap();
-	
 	if (isShowRect)
 	{
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
@@ -84,7 +83,6 @@ void inGameScene::render()
 	}
 
 	PLAYER->render();
-
 	CAMERAMANAGER->render(getMemDC());
 
 	_playerInventory->render();
@@ -166,10 +164,15 @@ void inGameScene::renderMap()
 					}
 					else
 					{
+					
 						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
 				}
+			
+
+
+
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
 					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
