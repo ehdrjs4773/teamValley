@@ -5,7 +5,6 @@
 class maptoolScene : public gameNode
 {
 private:
-
 	static TCHAR saveName[MAX_PATH];
 	static bool _isSave;
 

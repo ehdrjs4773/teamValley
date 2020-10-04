@@ -21,7 +21,6 @@ HRESULT inGameScene::init()
 	_playerInventory = new playerInventory;
 	_playerInventory->init();
 
-
 	return S_OK;
 }
 
@@ -32,7 +31,6 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-
 	_playerInventory->update();
 
 	PLAYER->update();
@@ -91,7 +89,6 @@ void inGameScene::render()
 
 	_playerInventory->render();
 
-
 }
 
 void inGameScene::load()
@@ -143,9 +140,9 @@ void inGameScene::changeSeason(SEASON season)
 
 void inGameScene::renderMap()
 {
-	for (int i =(float)((float)CAMERAMANAGER->getY() / 16); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40); i++)
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
 	{
-		for (int j = (float)((float)CAMERAMANAGER->getX() / 16); j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40); j++)
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
 			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
@@ -157,6 +154,7 @@ void inGameScene::renderMap()
 					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
 				}
+
 				//인게임 화면 오브젝트 그린다
 				if (_tile[i][j].obj != OBJ_NONE)
 				{
@@ -185,7 +183,7 @@ void inGameScene::renderMap()
 void inGameScene::playerMove()
 {
 	checkPlayerTile();
-	if (INPUT->GetKey(VK_RIGHT))
+	if (INPUT->GetKey('D'))
 	{
 		if (_tile[currentIndexY][currentIndexX + 1].obj == OBJ_NONE)
 		{
@@ -193,7 +191,7 @@ void inGameScene::playerMove()
 			PLAYER->setDirection(RIGHT);
 		}
 	}
-	if (INPUT->GetKey(VK_LEFT))
+	if (INPUT->GetKey('A'))
 	{
 		if (_tile[currentIndexY][currentIndexX - 1].obj == OBJ_NONE)
 		{
@@ -201,7 +199,7 @@ void inGameScene::playerMove()
 			PLAYER->setDirection(LEFT);
 		}
 	}
-	if (INPUT->GetKey(VK_UP))
+	if (INPUT->GetKey('W'))
 	{
 		if (_tile[currentIndexY - 1][currentIndexX].obj == OBJ_NONE)
 		{
@@ -209,7 +207,7 @@ void inGameScene::playerMove()
 			PLAYER->setDirection(UP);
 		}
 	}
-	if (INPUT->GetKey(VK_DOWN))
+	if (INPUT->GetKey('S'))
 	{
 		if (_tile[currentIndexY + 1][currentIndexX].obj == OBJ_NONE)
 		{
@@ -222,11 +220,6 @@ void inGameScene::playerMove()
 		PLAYER->setIndex(0);
 		PLAYER->setDirection(IDLE);
 	}
-}
-
-void inGameScene::playerRender()
-{
-	
 }
  
 void inGameScene::checkPlayerTile()
