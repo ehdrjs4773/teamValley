@@ -44,17 +44,31 @@ void  player::update()
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
-	if (INPUT->GetToggleKey('E'))
+	if (INPUT->GetKeyDown('E'))
 	{
-
-		isShowInventory = true;
+		_inventory->update();
+		if (isShowInventory) isShowInventory = false;
+		else isShowInventory = true;
 	}
+
 
 
 
 }
 
-void  player::render(HDC hdc)
+void player::InventroyRender(HDC hdc)
+{
+	if (isShowInventory)
+	{
+
+		_inventory->render(hdc);
+	}
+
+	else _inventory->quickSlot(hdc);
+
+}
+
+void  player::render()
 {
 
 	//switch (_pState)
@@ -102,11 +116,6 @@ void  player::render(HDC hdc)
 	Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
 
-	if (isShowInventory)
-	{
-
-		_inventory->render(hdc);
-	}
 
 }
 

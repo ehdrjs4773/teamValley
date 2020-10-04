@@ -11,6 +11,21 @@ void inventory::init()
 		_vItem.push_back(temp);
 	}
 
+
+	_vItem[0].item_image = IMAGEMANAGER->addFrameImage("ÀÛ¹°", "Images/BMP/ÀÛ¹°.bmp", 256, 784, 16, 49);
+	_vItem[0].item_info = "ÆÄ½º´Õ¾¾¾Ñ";
+	_vItem[0].buy_price = 0;
+	_vItem[0].item_kind = SEED;
+	_vItem[0].indexX = 0;
+	_vItem[0].indexY = 42;
+
+
+
+
+
+
+
+
 	for (int i = 0; i < 12; i++)
 	{
 		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
@@ -45,7 +60,7 @@ void inventory::update()
 
 				//else if (_playerTool[i] == //»ð)
 				//{
-
+				 
 				//}
 
 				//else if (_playerTool[i] == //ÁÖÀüÀÚ)
@@ -65,25 +80,51 @@ void inventory::update()
 
 void inventory::render(HDC hdc)
 {
+
 	inventory_img = IMAGEMANAGER->findImage("ÀÎº¥Åä¸®_¾ÆÀÌÅÛ");
 	inventory_img->render(hdc, 250,375);
+
+
+
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{
-			_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top,_vItem[i].indexX,_vItem[i].indexY);
 		}
 	}
 
+
+
+	
+
+
+
+
+
+
+}
+
+void inventory::quickSlot(HDC hdc)
+{
 	IMAGEMANAGER->render("playerInventory", hdc, WINSIZEX / 2 - 282, 520);
 
 	for (int i = 0; i < 12; i++)
 	{
-		Rectangle(hdc, _playerTool[i]);
+		if (_vItem[i].item_image != NULL)
+		{
+			_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
+		}
+
 		if (PtInRect(&_playerTool[i], _ptMouse))
 		{
 			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
 			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
 	}
+
+
+
+
 }
+

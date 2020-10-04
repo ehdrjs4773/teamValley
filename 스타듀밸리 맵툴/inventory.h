@@ -20,6 +20,7 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
+	void quickSlot(HDC hdc);
 	vector<tagItem>* getInven() { return &_vItem; }
 };
 

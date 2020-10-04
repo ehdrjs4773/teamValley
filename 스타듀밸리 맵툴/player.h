@@ -23,16 +23,24 @@ enum DIRECTION
 	IDLE
 };
 
-enum PLAYERTOOL
+enum TOOL
 {
-	SHOVEL, //»ð
-	AX,     //µµ³¢
-	PICKAX, //°î±ªÀÌ
-	SICKLE, //³´
-	SWORD,  //°Ë
-	KETTLE  //ÁÖÀüÀÚ
+	TOOL_SHOVEL, //»ð
+	TOOL_AX,     //µµ³¢
+	TOOL_PICKAX, //°î±ªÀÌ
+	TOOL_SICKLE, //³´
+	TOOL_SWORD,  //°Ë
+	TOOL_KETTLE,  //ÁÖÀüÀÚ
+};
+
+enum SEED
+{
+
 
 };
+
+
+
 
 class player : public singletonBase<player>
 {
@@ -53,7 +61,7 @@ private:
 
 	STATE _pState;
 	DIRECTION _pDirection;
-	PLAYERTOOL _pTool;
+	TOOL _pTool;
 	
 	image* move;
 	image* state;
@@ -67,8 +75,9 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render(HDC hdc);
-
+	void render();
+	void InventroyRender(HDC hdc);
+	
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }

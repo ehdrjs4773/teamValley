@@ -24,13 +24,6 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-<<<<<<< HEAD
-
-
-=======
-	_playerInventory->update();
->>>>>>> 9e92f0788c1801c7eb4f3387692e458f765c7c4d
-
 	PLAYER->update();
 
 	playerMove();
@@ -80,10 +73,12 @@ void inGameScene::render()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
 
-	PLAYER->render(getMemDC());
+	PLAYER->render();
+
 	CAMERAMANAGER->render(getMemDC());
-
-
+	
+	PLAYER->InventroyRender(getMemDC());
+	
 
 }
 

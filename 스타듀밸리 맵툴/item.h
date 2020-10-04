@@ -3,13 +3,16 @@
 
 enum ITEM
 {
-	WEAPON,
-	TOOL,
-	BIGCRAFTABLE,
-	RESOURCE,
-	FORAGE,
-	ENDITEM
+	ITEM_WEAPON,
+	ITEM_TOOL,
+	ITEM_BIGCRAFTABLE,
+	ITEM_RESOURCE,
+	ITEM_FORAGE,
+	ITEM_ENDITEM,
+	ITEM_SEED
 };
+
+
 
 struct tagItem {
 
@@ -19,6 +22,7 @@ struct tagItem {
 	const char* item_info;
 	int buy_price;
 	int sell_price;
+	int indexX, indexY;
 };
 
 class item 
