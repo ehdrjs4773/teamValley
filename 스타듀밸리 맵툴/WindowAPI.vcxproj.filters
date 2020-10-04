@@ -252,6 +252,7 @@
     <ClInclude Include="inventory.h">
       <Filter>상점</Filter>
     </ClInclude>
+    <ClInclude Include="decleration.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

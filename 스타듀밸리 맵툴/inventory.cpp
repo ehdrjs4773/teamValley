@@ -3,6 +3,8 @@
 
 void inventory::init()
 {
+	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
+
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp;
@@ -11,21 +13,23 @@ void inventory::init()
 		_vItem.push_back(temp);
 	}
 
-
-	_vItem[0].item_image = IMAGEMANAGER->addFrameImage("ÀÛ¹°", "Images/BMP/ÀÛ¹°.bmp", 256, 784, 16, 49);
-	_vItem[0].item_info = "ÆÄ½º´Õ¾¾¾Ñ";
+	_vItem[0].item_image = IMAGEMANAGER->findImage("¾¾¾Ñ");
+	_vItem[0].item_info = "ÆÄ½º´Õ ¾¾¾Ñ";
 	_vItem[0].buy_price = 0;
 	_vItem[0].item_kind = ITEM_SEED;
-	_vItem[0].seedKind = SEED_PASNIP;
+	_vItem[0].seedKind = SEED_PARSNIP;
 	_vItem[0].indexX = 0;
-	_vItem[0].indexY = 42;
+	_vItem[0].indexY = 0;
+
+	_vItem[2].item_image = IMAGEMANAGER->findImage("¾¾¾Ñ");
+	_vItem[2].item_info = "¿ÏµÎÄá ¾¾¾Ñ";
+	_vItem[2].buy_price = 0;
+	_vItem[2].item_kind = ITEM_SEED;
+	_vItem[2].seedKind = SEED_GREENBEAN;
+	_vItem[2].indexX = 1;
+	_vItem[2].indexY = 0;
 
 	currentSlotNumber = 0;
-
-
-
-
-
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -41,7 +45,7 @@ void inventory::release()
 
 void inventory::update()
 {
-	cout << _ptMouse.x << "\t" << _ptMouse.y << endl;
+	std::cout << currentSlotNumber << std::endl;
 
 	for (int i = 0; i < 12; i++)
 	{

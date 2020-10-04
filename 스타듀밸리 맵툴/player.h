@@ -3,40 +3,6 @@
 #include "tileNode.h"
 #include "inventory.h"
 
-enum STATE
-{
-	digGround,
-	cutdownTree,
-	cutGrass,
-	breakStone,
-	pourwater,
-	fillWater,
-	attackMonster
-};
-
-enum DIRECTION
-{
-	RIGHT,
-	LEFT,
-	UP,
-	DOWN,
-	IDLE
-};
-
-enum TOOL
-{
-	TOOL_SHOVEL, //»ð
-	TOOL_AX,     //µµ³¢
-	TOOL_PICKAX, //°î±ªÀÌ
-	TOOL_SICKLE, //³´
-	TOOL_SWORD,  //°Ë
-	TOOL_KETTLE,  //ÁÖÀüÀÚ
-};
-
-
-
-
-
 class player : public singletonBase<player>
 {
 private:
@@ -83,6 +49,7 @@ public:
 	void setCenterY(float cY) { centerY = cY; }
 
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
+	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(_inventory->getCurrentSlotNumber() + a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 
 	int getCurrentX() { return currentX; }

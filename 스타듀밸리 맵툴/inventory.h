@@ -24,6 +24,21 @@ public:
 	void quickSlot(HDC hdc);
 
 	int getCurrentSlotNumber() { return currentSlotNumber; }
+	void setCurrentSlotNumber(int a)
+	{ 
+		if (a < 0)
+		{
+			currentSlotNumber = 0;
+		}
+		else if (a > 11)
+		{
+			currentSlotNumber = 11;
+		}
+		else
+		{
+			currentSlotNumber = a;
+		}
+	}
 	tagItem* getInven(int a) { return &_vItem[a]; }
 	vector<tagItem>* getInven() { return &_vItem; }
 };

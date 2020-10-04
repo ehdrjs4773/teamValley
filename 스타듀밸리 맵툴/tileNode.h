@@ -1,4 +1,5 @@
 #pragma once
+#include "decleration.h"
 
 //게임화면 타일
 #define TILESIZE 16
@@ -28,6 +29,7 @@ enum SEASON
 	AUTUMN,
 	WINTER,
 };
+
 //지형
 enum TERRAIN
 {
@@ -70,6 +72,7 @@ struct tagTile
 	OBJECT obj;
 	OBJ_TYPE objType;
 	OBJ_OVERLAPPED objOver;
+	SEED seedType;
 	RECT rc;
 
 	int terrainFrameX;

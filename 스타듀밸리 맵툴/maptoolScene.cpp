@@ -437,6 +437,7 @@ void maptoolScene::maptoolSetup()
 	}
 
 	//왼쪽 인게임 화면 모두 잔디가 기본 타일이 되도록 세팅하기
+	memset(_tile, 0, sizeof(_tile));
 	for (int i = 0; i < TILEY; i++)
 	{
 		for (int j = 0; j < TILEX; j++)
@@ -454,6 +455,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].obj = OBJ_NONE;
 			_tile[i][j].objType = OTY_NONE;
 			_tile[i][j].objOver = OVR_NONE;
+			_tile[i][j].seedType = SEED_NONE;
 			_tile[i][j].grownLevel = 0;
 			_tile[i][j].isWet = false;
 		}
@@ -906,7 +908,7 @@ void maptoolScene::resetSampleTile()
 		for (int j = 0; j < sampleTileMaxFrameX; j++)
 		{
 			tagTile temp;
-			if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+			if (j < SAMPLEDISPLAYX && i < SAMPLEDISPLAYY)
 			{
 				temp.rc = RectMake(660 + j * TILESIZE, 50 + i * TILESIZE, TILESIZE, TILESIZE);
 			}
