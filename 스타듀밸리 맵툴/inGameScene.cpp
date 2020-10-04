@@ -8,12 +8,7 @@ HRESULT inGameScene::init()
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30*16, 15*16);
 	load();
 	setTileRect();
-	
-	playerCenterX = WINSIZEX / 2;
-	playerCenterY = WINSIZEY / 2;
-	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
 
-	checkPlayerTile();
 	changeSeason(SPRING);
 
 	isShowRect = false;
@@ -164,15 +159,10 @@ void inGameScene::renderMap()
 					}
 					else
 					{
-					
 						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
 				}
-			
-
-
-
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
 					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -259,7 +249,9 @@ void inGameScene::hackGround()
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
@@ -270,7 +262,9 @@ void inGameScene::hackGround()
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{

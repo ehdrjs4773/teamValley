@@ -11,7 +11,7 @@ HRESULT shopScene::init()
 
 void shopScene::release()
 {
-	_shop->release();
+	//_shop->release();
 }
 
 void shopScene::update()
