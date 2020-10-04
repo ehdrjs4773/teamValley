@@ -185,34 +185,54 @@ void inGameScene::playerMove()
 	checkPlayerTile();
 	if (INPUT->GetKey('D'))
 	{
-		if (_tile[currentIndexY][currentIndexX + 1].obj == OBJ_NONE)
+		rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
+		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 		{
-			PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
-			PLAYER->setDirection(RIGHT);
+			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+				PLAYER->setDirection(RIGHT);
+			}
 		}
 	}
 	if (INPUT->GetKey('A'))
 	{
-		if (_tile[currentIndexY][currentIndexX - 1].obj == OBJ_NONE)
+		leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
+		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 		{
-			PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
-			PLAYER->setDirection(LEFT);
+			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+				PLAYER->setDirection(LEFT);
+			}
 		}
 	}
 	if (INPUT->GetKey('W'))
 	{
-		if (_tile[currentIndexY - 1][currentIndexX].obj == OBJ_NONE)
+		upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
+		if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 		{
-			PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
-			PLAYER->setDirection(UP);
+			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setDirection(UP);
+			}
 		}
 	}
 	if (INPUT->GetKey('S'))
 	{
-		if (_tile[currentIndexY + 1][currentIndexX].obj == OBJ_NONE)
+		downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
+		if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 		{
-			PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-			PLAYER->setDirection(DOWN);
+			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+				PLAYER->setDirection(DOWN);
+			}
 		}
 	}
 	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
