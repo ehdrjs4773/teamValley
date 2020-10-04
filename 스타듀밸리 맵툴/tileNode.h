@@ -37,19 +37,21 @@ enum TERRAIN
 //오브젝트
 enum OBJECT
 {
-	OBJ_DESTRUCTIBE,
-	OBJ_INDESTRUCTIBLE,
-	OBJ_NONE
+	OBJ_NONE,
+	OBJ_SEED,
+	OBJ_DESTRUCTIBLE,
+	OBJ_INDESTRUCTIBLE
 };
 
 enum OBJ_OVERLAPPED
 {
-	OVR_OVER,
-	OVR_NONE
+	OVR_NONE,
+	OVR_OVER
 };
 
 enum OBJ_TYPE
 {
+	OTY_NONE,
 	OTY_STONE,
 	OTY_LARGESTONE,
 	OTY_BRANCH,
@@ -58,8 +60,7 @@ enum OBJ_TYPE
 	OTY_CROP,
 	OTY_WEED,
 	OTY_GRASS,
-	OTY_MONSTER,
-	OTY_NONE
+	OTY_MONSTER
 };
 
 //타일구조체
@@ -79,6 +80,7 @@ struct tagTile
 	int ovlFrameY;
 	int wetFrameX;
 	int wetFrameY;
+	int grownLevel;
 
 	bool isWet;
 };

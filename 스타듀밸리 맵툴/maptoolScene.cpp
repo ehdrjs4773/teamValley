@@ -454,6 +454,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].obj = OBJ_NONE;
 			_tile[i][j].objType = OTY_NONE;
 			_tile[i][j].objOver = OVR_NONE;
+			_tile[i][j].grownLevel = 0;
 			_tile[i][j].isWet = false;
 		}
 	}

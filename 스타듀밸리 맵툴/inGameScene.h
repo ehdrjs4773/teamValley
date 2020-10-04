@@ -43,12 +43,12 @@ public:
 	void renderMap();
 
 	void playerMove();
-	void playerRender();
 
 
 	void checkPlayerTile();
-	void hackGround();
+	void playerInteraction();
 	void checkHacked();
+
 
 	void setRandomObstacles();
 

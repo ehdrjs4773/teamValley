@@ -14,6 +14,7 @@ private:
 	RECT _playerTool[12];
 
 	int MouseIndexX, MouseIndexY;
+	int currentSlotNumber;
 
 public:
 	void init();
@@ -21,6 +22,9 @@ public:
 	void update();
 	void render(HDC hdc);
 	void quickSlot(HDC hdc);
+
+	int getCurrentSlotNumber() { return currentSlotNumber; }
+	tagItem* getInven(int a) { return &_vItem[a]; }
 	vector<tagItem>* getInven() { return &_vItem; }
 };
 

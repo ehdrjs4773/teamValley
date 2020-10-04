@@ -117,26 +117,26 @@ void shop::render()
 
 			switch (_vItem[i + current_index].item_kind)
 			{
-			case WEAPON:
+			case ITEM_WEAPON:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
-			case TOOL:
+			case ITEM_TOOL:
 
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "TOOL", sizeof("TOOL"));
 				break;
-			case BIGCRAFTABLE:
+			case ITEM_BIGCRAFTABLE:
 
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "BIGCRAFTABLE", sizeof("BIGCRAFTABLE"));
 				break;
-			case RESOURCE:
+			case ITEM_RESOURCE:
 
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "RESOURCE", sizeof("RESOURCE"));
 				break;
-			case FORAGE:
+			case ITEM_FORAGE:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "FORAGE", sizeof("FORAGE"));
 				break;
@@ -174,7 +174,7 @@ void shop::sell()
 				(*_vInven)[i].buy_price = NULL;
 				(*_vInven)[i].item_image = NULL;
 				(*_vInven)[i].item_info = NULL;
-				(*_vInven)[i].item_kind = ENDITEM;
+				(*_vInven)[i].item_kind = ITEM_ENDITEM;
 				(*_vInven)[i].sell_price = NULL;
 			}
 		}

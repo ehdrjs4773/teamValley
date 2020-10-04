@@ -265,37 +265,37 @@ void player::checkTile()
 			switch (_tile[currentY][currentX + 1].objType)
 			{
 			case OTY_TREE:
-				if (_pTool == AX)
+				if (_pTool == TOOL_AX)
 				{
 					//나무가 잘림 
 				}
 				break;
 			case OTY_BRANCH:
-				if (_pTool == AX)
+				if (_pTool == TOOL_AX)
 				{
 					//나뭇가지가 잘림 
 				}
 				break;
 			case  OTY_GRASS:
-				if (_pTool == SICKLE)
+				if (_pTool == TOOL_SICKLE)
 				{
 					//풀이 잘림 
 				}
 				break;
 			case  OTY_STONE:
-				if (_pTool == PICKAX)
+				if (_pTool == TOOL_PICKAX)
 				{
 					//돌이 깨짐
 				}
 				break;
 			case  OTY_CROP:
-				if (_pTool == KETTLE)
+				if (_pTool == TOOL_KETTLE)
 				{
 					//물을 부음 
 				}
 				break;
 			case  OTY_MONSTER:
-				if (_pTool == SWORD)
+				if (_pTool == TOOL_SWORD)
 				{
 					//몬스터를 공격함
 				}
@@ -304,19 +304,19 @@ void player::checkTile()
 			switch (_tile[currentY][currentX + 1].terrain)
 			{
 			case  TR_GROUND:
-				if (_pTool == SHOVEL)
+				if (_pTool == TOOL_SHOVEL)
 				{
 					//땅을 팜 => TR_HACKED가 됨 
 				}
 				break;
 			case  TR_HACKED:
-				if (_pTool == KETTLE)
+				if (_pTool == TOOL_KETTLE)
 				{
 					//물 뿌림 => 땅이 WET 됨 
 				}
 				break;
 			case  TR_WATER:
-				if (_pTool == KETTLE)
+				if (_pTool == TOOL_KETTLE)
 				{
 					//물을 채움
 				}

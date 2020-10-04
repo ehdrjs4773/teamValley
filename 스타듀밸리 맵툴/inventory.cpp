@@ -15,11 +15,12 @@ void inventory::init()
 	_vItem[0].item_image = IMAGEMANAGER->addFrameImage("ÀÛ¹°", "Images/BMP/ÀÛ¹°.bmp", 256, 784, 16, 49);
 	_vItem[0].item_info = "ÆÄ½º´Õ¾¾¾Ñ";
 	_vItem[0].buy_price = 0;
-	_vItem[0].item_kind = SEED;
+	_vItem[0].item_kind = ITEM_SEED;
+	_vItem[0].seedKind = SEED_PASNIP;
 	_vItem[0].indexX = 0;
 	_vItem[0].indexY = 42;
 
-
+	currentSlotNumber = 0;
 
 
 
@@ -93,16 +94,6 @@ void inventory::render(HDC hdc)
 			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top,_vItem[i].indexX,_vItem[i].indexY);
 		}
 	}
-
-
-
-	
-
-
-
-
-
-
 }
 
 void inventory::quickSlot(HDC hdc)
@@ -118,13 +109,13 @@ void inventory::quickSlot(HDC hdc)
 
 		if (PtInRect(&_playerTool[i], _ptMouse))
 		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				currentSlotNumber = i;
+			}
 			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
 			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
 	}
-
-
-
-
 }
 

@@ -29,7 +29,7 @@ void inGameScene::update()
 	playerMove();
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
-	hackGround();
+	playerInteraction();
 
 	if (INPUT->GetKeyDown(VK_F1))
 	{
@@ -155,6 +155,11 @@ void inGameScene::renderMap()
 						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
+					else if (_tile[i][j].objType == OTY_CROP)
+					{
+						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+					}
 					else
 					{
 						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -180,7 +185,7 @@ void inGameScene::playerMove()
 		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
 		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 		{
-			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE)
+			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].obj == OBJ_SEED)
 			{
 				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 				PLAYER->setDirection(RIGHT);
@@ -193,7 +198,7 @@ void inGameScene::playerMove()
 		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
 		if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 		{
-			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE)
+			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].obj == OBJ_SEED)
 			{
 				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 				PLAYER->setDirection(LEFT);
@@ -206,7 +211,7 @@ void inGameScene::playerMove()
 		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
 		if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 		{
-			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
+			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].obj == OBJ_SEED)
 			{
 				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
 				PLAYER->setDirection(UP);
@@ -219,7 +224,7 @@ void inGameScene::playerMove()
 		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
 		if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 		{
-			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE)
+			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].obj == OBJ_SEED)
 			{
 				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
 				PLAYER->setDirection(DOWN);
@@ -239,7 +244,7 @@ void inGameScene::checkPlayerTile()
 	currentIndexY = PLAYER->getCurrentY();
 }
 
-void inGameScene::hackGround()
+void inGameScene::playerInteraction()
 {
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
@@ -251,9 +256,26 @@ void inGameScene::hackGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			//if (PLAYER->getCurrentInven()->item_kind == ITEM_TOOL)
+			//{
+			//	if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			//	{
+					_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+			//	}
+			//}
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 			{
-				_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+				if (PLAYER->getCurrentInven()-> seedKind == SEED_PASNIP)
+				{
+					if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+					{
+						_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
+						_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
+						_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+						_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+						_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+					}
+				}
 			}
 		}
 	}
@@ -264,10 +286,14 @@ void inGameScene::hackGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
-			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE || _tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
 			{
-				_tile[MouseIndexY][MouseIndexX].isWet = true;
+				if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+				{
+					_tile[MouseIndexY][MouseIndexX].isWet = true;
+				}
 			}
+			
 		}
 	}
 	checkHacked();
@@ -522,7 +548,7 @@ void inGameScene::setRandomObstacles()
 				switch (RANDOM->range(4))
 				{
 				case 0:
-					_tile[i][j].obj = OBJ_DESTRUCTIBE;
+					_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 					_tile[i][j].objType = OTY_STONE;
 					switch (RANDOM->range(4))
 					{
@@ -551,29 +577,29 @@ void inGameScene::setRandomObstacles()
 							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
 						{
 							_tile[i][j].objType = OTY_LARGESTONE;
-							_tile[i][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 							_tile[i][j].objFrameX = 2;
 							_tile[i][j].objFrameY = 1;
 
 							_tile[i + 1][j].objType = OTY_LARGESTONE;
-							_tile[i + 1][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j].obj = OBJ_DESTRUCTIBLE;
 							_tile[i + 1][j].objFrameX = 2;
 							_tile[i + 1][j].objFrameY = 2;
 
 							_tile[i][j + 1].objType = OTY_LARGESTONE;
-							_tile[i][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j + 1].obj = OBJ_DESTRUCTIBLE;
 							_tile[i][j + 1].objFrameX = 3;
 							_tile[i][j + 1].objFrameY = 1;
 
 							_tile[i + 1][j + 1].objType = OTY_LARGESTONE;
-							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBLE;
 							_tile[i + 1][j + 1].objFrameX = 3;
 							_tile[i + 1][j + 1].objFrameY = 2;
 						}
 					}
 					break;
 				case 2:
-					_tile[i][j].obj = OBJ_DESTRUCTIBE;
+					_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 					_tile[i][j].objType = OTY_BRANCH;
 					switch (RANDOM->range(2))
 					{
@@ -594,22 +620,22 @@ void inGameScene::setRandomObstacles()
 							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
 						{
 							_tile[i][j].objType = OTY_HARDTREE;
-							_tile[i][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 							_tile[i][j].objFrameX = 0;
 							_tile[i][j].objFrameY = 1;
 
 							_tile[i + 1][j].objType = OTY_HARDTREE;
-							_tile[i + 1][j].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j].obj = OBJ_DESTRUCTIBLE;
 							_tile[i + 1][j].objFrameX = 0;
 							_tile[i + 1][j].objFrameY = 2;
 
 							_tile[i][j + 1].objType = OTY_HARDTREE;
-							_tile[i][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i][j + 1].obj = OBJ_DESTRUCTIBLE;
 							_tile[i][j + 1].objFrameX = 1;
 							_tile[i][j + 1].objFrameY = 1;
 
 							_tile[i + 1][j + 1].objType = OTY_HARDTREE;
-							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBE;
+							_tile[i + 1][j + 1].obj = OBJ_DESTRUCTIBLE;
 							_tile[i + 1][j + 1].objFrameX = 1;
 							_tile[i + 1][j + 1].objFrameY = 2;
 						}

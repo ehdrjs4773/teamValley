@@ -33,11 +33,6 @@ enum TOOL
 	TOOL_KETTLE,  //ÁÖÀüÀÚ
 };
 
-enum SEED
-{
-
-
-};
 
 
 
@@ -69,6 +64,8 @@ private:
 	image* _cutdownTree;
 
 	inventory* _inventory;
+
+
 	
 
 public:
@@ -84,6 +81,9 @@ public:
 	void setCenterX(float cX) { centerX = cX; }
 	float getCenterY() { return centerY; }
 	void setCenterY(float cY) { centerY = cY; }
+
+	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
+	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
