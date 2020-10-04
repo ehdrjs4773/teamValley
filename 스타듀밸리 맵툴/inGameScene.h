@@ -1,7 +1,6 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
-#include "playerInventory.h"
 
 class inGameScene : public gameNode
 {
@@ -22,9 +21,13 @@ private:
 	int currentIndexY;
 	int MouseIndexX, MouseIndexY;
 
+	int leftIndexX, leftIndexY;
+	int rightIndexX, rightIndexY;
+	int upIndexX, upIndexY;
+	int downIndexX, downIndexY;
+
 	bool isShowRect;
 
-	playerInventory* _playerInventory;
 
 public:
 
@@ -40,12 +43,12 @@ public:
 	void renderMap();
 
 	void playerMove();
-	void playerRender();
 
 
 	void checkPlayerTile();
-	void hackGround();
+	void playerInteraction();
 	void checkHacked();
+
 
 	void setRandomObstacles();
 

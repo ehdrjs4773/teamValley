@@ -158,6 +158,8 @@
     <ClInclude Include="inGameScene.h" />
     <ClInclude Include="iniData.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mainGame.h" />
@@ -165,11 +167,12 @@
     <ClInclude Include="maptoolScene.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
-    <ClInclude Include="playerInventory.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="shop.h" />
+    <ClInclude Include="shopScene.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -187,6 +190,8 @@
     <ClCompile Include="inGameScene.cpp" />
     <ClCompile Include="iniData.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainGame.cpp" />
@@ -194,10 +199,11 @@
     <ClCompile Include="maptoolScene.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
-    <ClCompile Include="playerInventory.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="shop.cpp" />
+    <ClCompile Include="shopScene.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

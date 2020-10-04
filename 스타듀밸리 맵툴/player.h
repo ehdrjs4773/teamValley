@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "tileNode.h"
+#include "inventory.h"
 
 enum STATE
 {
@@ -22,16 +23,19 @@ enum DIRECTION
 	IDLE
 };
 
-enum PLAYERTOOL
+enum TOOL
 {
-	SHOVEL, //»ð
-	AX,     //µµ³¢
-	PICKAX, //°î±ªÀÌ
-	SICKLE, //³´
-	SWORD,  //°Ë
-	KETTLE  //ÁÖÀüÀÚ
-
+	TOOL_SHOVEL, //»ð
+	TOOL_AX,     //µµ³¢
+	TOOL_PICKAX, //°î±ªÀÌ
+	TOOL_SICKLE, //³´
+	TOOL_SWORD,  //°Ë
+	TOOL_KETTLE,  //ÁÖÀüÀÚ
 };
+
+
+
+
 
 class player : public singletonBase<player>
 {
@@ -45,17 +49,23 @@ private:
 	int index;
 
 
+	bool isShowInventory;
+
 	tagTile _tile[TILEY][TILEX];
 	OBJ_TYPE objType;
 
 	STATE _pState;
 	DIRECTION _pDirection;
-	PLAYERTOOL _pTool;
+	TOOL _pTool;
 	
 	image* move;
 	image* state;
 	
 	image* _cutdownTree;
+
+	inventory* _inventory;
+
+
 	
 
 public:
@@ -63,7 +73,8 @@ public:
 	void release();
 	void update();
 	void render();
-
+	void InventroyRender(HDC hdc);
+	
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }
@@ -71,12 +82,16 @@ public:
 	float getCenterY() { return centerY; }
 	void setCenterY(float cY) { centerY = cY; }
 
+	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
+	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
+
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
 	RECT getRc() { return rc; }
+	
 
 	void playerAnimation();
 	void checkTile();

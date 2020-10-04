@@ -70,6 +70,9 @@
     <Filter Include="GameFramework\매니져\카메라 매니저">
       <UniqueIdentifier>{a38852bc-4939-4333-b677-5c366beb2ffb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="상점">
+      <UniqueIdentifier>{80f80063-9eee-44c1-8f50-0f881ab2e641}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -144,8 +147,17 @@
     <ClCompile Include="player.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
-    <ClCompile Include="playerInventory.cpp">
-      <Filter>MainGame</Filter>
+    <ClCompile Include="shopScene.cpp">
+      <Filter>상점</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>상점</Filter>
+    </ClCompile>
+    <ClCompile Include="shop.cpp">
+      <Filter>상점</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>상점</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,8 +240,17 @@
     <ClInclude Include="player.h">
       <Filter>MainGame</Filter>
     </ClInclude>
-    <ClInclude Include="playerInventory.h">
-      <Filter>MainGame</Filter>
+    <ClInclude Include="shopScene.h">
+      <Filter>상점</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>상점</Filter>
+    </ClInclude>
+    <ClInclude Include="shop.h">
+      <Filter>상점</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>상점</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

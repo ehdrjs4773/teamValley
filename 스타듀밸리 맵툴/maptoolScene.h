@@ -5,7 +5,6 @@
 class maptoolScene : public gameNode
 {
 private:
-
 	static TCHAR saveName[MAX_PATH];
 	static bool _isSave;
 
@@ -23,6 +22,7 @@ private:
 	RECT _rcSummer;
 	RECT _rcAutumn;
 	RECT _rcWinter;
+	RECT _rcobjectDelete;
 
 	RECT horScroll;
 	RECT vertScroll;
@@ -42,6 +42,7 @@ private:
 	bool _ischange;
 	bool _isDragSet;
 	bool _prevent_double;
+
 
 	bool isSelectSeason;
 	SEASON _currentSeason;

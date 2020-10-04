@@ -17,7 +17,8 @@
 enum CTRL
 {
 	CTRL_SAVE, CTRL_LOAD,
-	CTRL_TERRAIN, CTRL_OBJECT, CTRL_ERASER
+	CTRL_TERRAIN, CTRL_OBJECT, CTRL_ERASER,
+	CTRL_OBJECTDELETE
 };
 
 enum SEASON
@@ -36,9 +37,10 @@ enum TERRAIN
 //오브젝트
 enum OBJECT
 {
-	OBJ_DESTRUCTIBE,
-	OBJ_INDESTRUCTIBLE,
-	OBJ_NONE
+	OBJ_NONE,
+	OBJ_SEED,
+	OBJ_DESTRUCTIBLE,
+	OBJ_INDESTRUCTIBLE
 };
 
 enum OBJ_OVERLAPPED
@@ -49,6 +51,7 @@ enum OBJ_OVERLAPPED
 
 enum OBJ_TYPE
 {
+	OTY_NONE,
 	OTY_STONE,
 	OTY_LARGESTONE,
 	OTY_BRANCH,
@@ -57,8 +60,7 @@ enum OBJ_TYPE
 	OTY_CROP,
 	OTY_WEED,
 	OTY_GRASS,
-	OTY_MONSTER,
-	OTY_NONE
+	OTY_MONSTER
 };
 
 //타일구조체
@@ -78,6 +80,7 @@ struct tagTile
 	int ovlFrameY;
 	int wetFrameX;
 	int wetFrameY;
+	int grownLevel;
 
 	bool isWet;
 };

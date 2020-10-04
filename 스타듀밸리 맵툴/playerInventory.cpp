@@ -21,8 +21,6 @@ void playerInventory::release()
 
 void playerInventory::update()
 {
-	cout << _ptMouse.x << "\t" << _ptMouse.y << endl;
-
 	for (int i = 0; i < 12; i++)
 	{
 		if (PtInRect(&_playerTool[i], _ptMouse))
