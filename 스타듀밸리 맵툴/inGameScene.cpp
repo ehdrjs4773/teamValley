@@ -263,18 +263,158 @@ void inGameScene::playerInteraction()
 					_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 			//	}
 			//}
-			if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 			{
-				if (PLAYER->getCurrentInven()-> seedKind == SEED_PASNIP)
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
+				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+
+				switch (PLAYER->getCurrentInven()->seedKind)
 				{
-					if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
-					{
-						_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
-						_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
-						_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-						_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-						_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
-					}
+				case SEED_PASNIP:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+					break;
+				case SEED_CABBAGE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+					break;
+				case SEED_ONION:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
+					break;
+				case SEED_CARROT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
+					break;
+				case SEED_TOMATO:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
+					break;
+				case SEED_CHILLI:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+					break;
+				case SEED_RADISH:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
+					break;
+				case SEED_STARFRUIT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
+					break;
+				case SEED_EGGPLANT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
+					break;
+				case SEED_PUMPKIN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
+					break;
+				case SEED_TARO:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
+					break;
+				case SEED_BEET:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 23;
+					break;
+				case SEED_TULIP:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 25;
+					break;
+				case SEED_MIN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
+					break;
+				case SEED_SUNFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
+					break;
+				case SEED_PEPPER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
+					break;
+				case SEED_STRAWBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
+					break;
+				case SEED_GRAPE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
+					break;
+				case SEED_COFFEEBEAN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
+					break;
+				case SEED_BEAN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+					break;
+				case SEED_POTATO:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+					break;
+				case SEED_GREEN1:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
+					break;
+				case SEED_MELON:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
+					break;
+				case SEED_BLUEBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
+					break;
+				case SEED_WHEAT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+					break;
+				case SEED_REDCABBAGE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
+					break;
+				case SEED_CORN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
+					break;
+				case SEED_SPINICH:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
+					break;
+				case SEED_CHUNG:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
+					break;
+				case SEED_RASBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
+					break;
+				case SEED_BLUEFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
+					break;
+				case SEED_YELLOWFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
+					break;
+				case SEED_PINKFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
+					break;
+				case SEED_GREENGRAPE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
+					break;
+				case SEED_PURPLEWHEAT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
+					break;
+				case SEED_CATUS:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
+					break;
 				}
 			}
 		}
