@@ -8,16 +8,10 @@ HRESULT inGameScene::init()
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30*16, 15*16);
 	load();
 	setTileRect();
-	
-	playerCenterX = WINSIZEX / 2;
-	playerCenterY = WINSIZEY / 2;
-	playerRc = RectMakeCenter(playerCenterX, playerCenterY, 16, 32);
 
-	checkPlayerTile();
 	changeSeason(SPRING);
 
 	isShowRect = false;
-
 
 
 	return S_OK;
@@ -30,8 +24,12 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+<<<<<<< HEAD
 
 
+=======
+	_playerInventory->update();
+>>>>>>> 9e92f0788c1801c7eb4f3387692e458f765c7c4d
 
 	PLAYER->update();
 
@@ -87,7 +85,6 @@ void inGameScene::render()
 
 
 
-
 }
 
 void inGameScene::load()
@@ -139,9 +136,9 @@ void inGameScene::changeSeason(SEASON season)
 
 void inGameScene::renderMap()
 {
-	for (int i =(float)((float)CAMERAMANAGER->getY() / 16); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40); i++)
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
 	{
-		for (int j = (float)((float)CAMERAMANAGER->getX() / 16); j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40); j++)
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
 			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
@@ -153,6 +150,7 @@ void inGameScene::renderMap()
 					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
 				}
+
 				//인게임 화면 오브젝트 그린다
 				if (_tile[i][j].obj != OBJ_NONE)
 				{
@@ -164,15 +162,10 @@ void inGameScene::renderMap()
 					}
 					else
 					{
-					
 						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
 				}
-			
-
-
-
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
 					IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -186,36 +179,56 @@ void inGameScene::renderMap()
 void inGameScene::playerMove()
 {
 	checkPlayerTile();
-	if (INPUT->GetKey(VK_RIGHT))
+	if (INPUT->GetKey('D'))
 	{
-		if (_tile[currentIndexY][currentIndexX + 1].obj == OBJ_NONE)
+		rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
+		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 		{
-			PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
-			PLAYER->setDirection(RIGHT);
+			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+				PLAYER->setDirection(RIGHT);
+			}
 		}
 	}
-	if (INPUT->GetKey(VK_LEFT))
+	if (INPUT->GetKey('A'))
 	{
-		if (_tile[currentIndexY][currentIndexX - 1].obj == OBJ_NONE)
+		leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
+		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 		{
-			PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
-			PLAYER->setDirection(LEFT);
+			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+				PLAYER->setDirection(LEFT);
+			}
 		}
 	}
-	if (INPUT->GetKey(VK_UP))
+	if (INPUT->GetKey('W'))
 	{
-		if (_tile[currentIndexY - 1][currentIndexX].obj == OBJ_NONE)
+		upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
+		if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 		{
-			PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
-			PLAYER->setDirection(UP);
+			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setDirection(UP);
+			}
 		}
 	}
-	if (INPUT->GetKey(VK_DOWN))
+	if (INPUT->GetKey('S'))
 	{
-		if (_tile[currentIndexY + 1][currentIndexX].obj == OBJ_NONE)
+		downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
+		if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 		{
-			PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-			PLAYER->setDirection(DOWN);
+			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE)
+			{
+				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+				PLAYER->setDirection(DOWN);
+			}
 		}
 	}
 	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
@@ -223,11 +236,6 @@ void inGameScene::playerMove()
 		PLAYER->setIndex(0);
 		PLAYER->setDirection(IDLE);
 	}
-}
-
-void inGameScene::playerRender()
-{
-	
 }
  
 void inGameScene::checkPlayerTile()
@@ -244,7 +252,9 @@ void inGameScene::hackGround()
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
@@ -255,7 +265,9 @@ void inGameScene::hackGround()
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)))
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{

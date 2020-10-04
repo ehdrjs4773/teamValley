@@ -44,8 +44,8 @@ enum OBJECT
 
 enum OBJ_OVERLAPPED
 {
-	OVR_NONE,
-	OVR_OVER
+	OVR_OVER,
+	OVR_NONE
 };
 
 enum OBJ_TYPE

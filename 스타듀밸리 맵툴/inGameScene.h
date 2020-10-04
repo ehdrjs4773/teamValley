@@ -21,6 +21,11 @@ private:
 	int currentIndexY;
 	int MouseIndexX, MouseIndexY;
 
+	int leftIndexX, leftIndexY;
+	int rightIndexX, rightIndexY;
+	int upIndexX, upIndexY;
+	int downIndexX, downIndexY;
+
 	bool isShowRect;
 
 
