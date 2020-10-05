@@ -27,11 +27,11 @@ public:
 	{ 
 		if (a < 0)
 		{
-			currentSlotNumber = 0;
+			currentSlotNumber = 11;
 		}
 		else if (a > 11)
 		{
-			currentSlotNumber = 11;
+			currentSlotNumber = 0;
 		}
 		else
 		{

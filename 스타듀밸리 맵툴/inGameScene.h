@@ -55,6 +55,7 @@ public:
 	void checkHacked();
 
 	void setRandomObstacles();
+	void changeGrass();
 
 	void setCurrentSlotNumber(int mouseWheel);
 
