@@ -315,6 +315,10 @@ void inGameScene::hackGround()
 
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
 	{
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_HARDTREE)
+		{
+
+		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 		{
 
@@ -330,6 +334,10 @@ void inGameScene::hackGround()
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
 		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
+		{
+
+		}
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_LARGESTONE)
 		{
 
 		}
@@ -364,7 +372,7 @@ void inGameScene::hackGround()
 
 	}
 
-	if (PLAYER->getCurrentInven->toolKind == TOOL_SWORD)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
 	{
 		//몬스터 공격
 	}

@@ -45,14 +45,14 @@ void loadingScene::render()
 void loadingScene::loadingImage()
 {
 	//로딩이 너무 빠르게 진행되서 천천히 돌아가도록 테스트용으로 만들기
-	IMAGEMANAGER->addFrameImage("농장(봄)", "Images/BMP/농장(봄).bmp", 384, 400, 24, 25);
-	IMAGEMANAGER->addFrameImage("농장(여름)", "Images/BMP/농장(여름).bmp", 384, 400, 24, 25);
-	IMAGEMANAGER->addFrameImage("농장(가을)", "Images/BMP/농장(가을).bmp", 384, 400, 24, 25);
-	IMAGEMANAGER->addFrameImage("농장(겨울)", "Images/BMP/농장(겨울).bmp", 384, 400, 24, 25);
-	IMAGEMANAGER->addFrameImage("농장오브젝트(봄)", "Images/BMP/농장 오브젝트(봄).bmp", 1120, 400, 70, 25);
-	IMAGEMANAGER->addFrameImage("농장오브젝트(여름)", "Images/BMP/농장 오브젝트(여름).bmp", 1120, 400, 70, 25);
-	IMAGEMANAGER->addFrameImage("농장오브젝트(가을)", "Images/BMP/농장 오브젝트(가을).bmp", 1120, 400, 70, 25);
-	IMAGEMANAGER->addFrameImage("농장오브젝트(겨울)", "Images/BMP/농장 오브젝트(겨울).bmp", 1120, 400, 70, 25);
+	IMAGEMANAGER->addFrameImage("농장(봄)", "Images/맵툴/농장(봄).bmp", 384, 400, 24, 25);
+	IMAGEMANAGER->addFrameImage("농장(여름)", "Images/맵툴/농장(여름).bmp", 384, 400, 24, 25);
+	IMAGEMANAGER->addFrameImage("농장(가을)", "Images/맵툴/농장(가을).bmp", 384, 400, 24, 25);
+	IMAGEMANAGER->addFrameImage("농장(겨울)", "Images/맵툴/농장(겨울).bmp", 384, 400, 24, 25);
+	IMAGEMANAGER->addFrameImage("농장오브젝트(봄)", "Images/맵툴/농장 오브젝트(봄).bmp", 1120, 400, 70, 25);
+	IMAGEMANAGER->addFrameImage("농장오브젝트(여름)", "Images/맵툴/농장 오브젝트(여름).bmp", 1120, 400, 70, 25);
+	IMAGEMANAGER->addFrameImage("농장오브젝트(가을)", "Images/맵툴/농장 오브젝트(가을).bmp", 1120, 400, 70, 25);
+	IMAGEMANAGER->addFrameImage("농장오브젝트(겨울)", "Images/맵툴/농장 오브젝트(겨울).bmp", 1120, 400, 70, 25);
 	IMAGEMANAGER->addImage("배경", "Images/background.bmp", WINSIZEX, WINSIZEY);
 	IMAGEMANAGER->addImage("세이브", "Images/save.bmp", 100, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("로드", "Images/load.bmp", 100, 50, true, RGB(255, 0, 255));
@@ -72,7 +72,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
 
 	//플레이어 인벤토리
-	IMAGEMANAGER->addImage("playerInventory", "Images/playerInventory/캐릭터 인벤토리.bmp", 565, 69, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));
 
 }
 

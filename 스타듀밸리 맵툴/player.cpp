@@ -304,7 +304,7 @@ void player::checkTile()
 			switch (_tile[currentY][currentX + 1].terrain)
 			{
 			case  TR_GROUND:
-				if (_pTool == TOOL_SHOVEL)
+				if (_pTool == TOOL_HOE)
 				{
 					//¶¥À» ÆÊ => TR_HACKED°¡ µÊ 
 				}

@@ -161,7 +161,7 @@ void inventory::render(HDC hdc)
 
 void inventory::quickSlot(HDC hdc)
 {
-	IMAGEMANAGER->render("playerInventory", hdc, WINSIZEX / 2 - 282, 520);
+	IMAGEMANAGER->render("ÇÃŽ¥ÀÌ¾î Äü½½·Ô", hdc, WINSIZEX / 2 - 282, 520);
 
 	for (int i = 0; i < 12; i++)
 	{

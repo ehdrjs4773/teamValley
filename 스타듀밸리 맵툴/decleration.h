@@ -56,7 +56,8 @@ enum SEED
 
 enum TOOL
 {
-	TOOL_SHOVEL, //È£¹Ì
+	TOOL_NONE,
+	TOOL_HOE, //È£¹Ì
 	TOOL_AX,     //µµ³¢
 	TOOL_PICKAX, //°î±ªÀÌ
 	TOOL_SICKLE, //³´
@@ -65,7 +66,8 @@ enum TOOL
 	TOOL_FISHINGROD //³¬½Ã´ë
 };
 
-struct tagItem {
+struct tagItem 
+{
 
 	RECT rc;
 	image *item_image;
@@ -98,23 +100,3 @@ enum DIRECTION
 	DOWN,
 	IDLE
 };
-
-<<<<<<< HEAD
-
-=======
-enum TOOL
-{
-	TOOL_NONE,
-	TOOL_SHOVEL, //»ð
-	TOOL_AX,     //µµ³¢
-	TOOL_PICKAX, //°î±ªÀÌ
-	TOOL_SICKLE, //³´
-	TOOL_SWORD,  //°Ë
-	TOOL_KETTLE  //ÁÖÀüÀÚ
-};
->>>>>>> fc687ec4c4509354df8d7cb6e89af99c0b5261ea
-
-
-
-
-
