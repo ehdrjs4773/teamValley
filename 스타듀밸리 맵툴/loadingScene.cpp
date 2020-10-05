@@ -73,6 +73,7 @@ void loadingScene::loadingImage()
 
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("playerInventory", "Images/playerInventory/캐릭터 인벤토리.bmp", 565, 69, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("도구", "Images/BMP/도구.bmp", 360, 160, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()
