@@ -44,7 +44,6 @@ private:
 
 	vector<tagItem>* _vInven;
 
-	static WPARAM wparam;
 public:
 
 	HRESULT init();

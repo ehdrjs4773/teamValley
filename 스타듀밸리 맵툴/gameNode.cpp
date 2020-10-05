@@ -16,6 +16,7 @@ HRESULT gameNode::init()
 	INIDATA->init();					//INI데이터 초기화
 	SOUNDMANAGER->init();				//사운드매니져 초기화
 	TIME->init();
+	ITEMMANAGER->init();
 	PLAYER->init();
 
 	return S_OK;
@@ -55,6 +56,8 @@ void gameNode::release()
 	//플레이어 해제
 	PLAYER->release();
 	PLAYER->releaseSingleton();
+
+	ITEMMANAGER->releaseSingleton();
 
 	//HDC 해제
 	ReleaseDC(_hWnd, _hdc);

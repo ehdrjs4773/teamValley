@@ -1,20 +1,15 @@
 #include "stdafx.h"
 #include "shop.h"
 
-WPARAM shop::wparam;
-
 HRESULT shop::init()
 {
-	_item = new item;
-	_item->init();
-	
 	_inven = new inventory;
 	_inven->init();
 
 	is_click = false;
 	click_index = 0;
 
-	_vItem = _item->getItem();
+	_vItem = ITEMMANAGER->getItem();
 
 	_vInven = _inven->getInven();
 
@@ -23,7 +18,6 @@ HRESULT shop::init()
 	IMAGEMANAGER->addImage("상점슬롯클릭", "Images/shop_itemslot_click.bmp", 875, 70, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("업버튼", "Images/shop/up_BT.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("다운버튼", "Images/shop/down_BT.bmp", 50, 50, true, RGB(255, 0, 255));
-
 
 	current_index = 0;
 	down_BT = RectMake(1100, 500, 50, 50);
@@ -72,7 +66,7 @@ void shop::update()
 void shop::render()
 {
 	//상점 인벤토리 출력
-	_inven->render(getMemDC());
+	//_inven->render(getMemDC());
 
 	//마우스 좌표 출력
 	char temp[256];
@@ -102,7 +96,15 @@ void shop::render()
 	//아이템 이미지와 정보 출력
 	for (int i = 0; i < _vslot.size(); i++)
 	{
-		_vItem[i+current_index].item_image->render(getMemDC(), _vslot[i].rc.left+16, _vslot[i].rc.top+13);
+		if (_vItem[i + current_index].isFrame)
+		{
+			_vItem[i + current_index].item_image->frameRender(getMemDC(), _vslot[i].rc.left + 18, _vslot[i].rc.top + 15, _vItem[i + current_index].indexX, _vItem[i + current_index].indexY);
+		}
+		else
+		{
+			_vItem[i+current_index].item_image->render(getMemDC(), _vslot[i].rc.left+16, _vslot[i].rc.top+13);
+		}
+
 		if (_vslot[i].on_cursor)
 		{
 			RECT temp1 = RectMake(_ptMouse.x + 25, _ptMouse.y + 25, 200, 100);
@@ -118,6 +120,7 @@ void shop::render()
 			switch (_vItem[i + current_index].item_kind)
 			{
 			case ITEM_WEAPON:
+
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
@@ -157,7 +160,14 @@ void shop::render()
 
 	if (is_click)
 	{
-		_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
+		if (_vItem[click_index].isFrame)
+		{
+			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
+		}
+		else
+		{
+			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
+		}
 	}
 
 
@@ -219,7 +229,20 @@ void shop::buy()
 
 void shop::shop_scroll()
 {
+	if (_mouseWheel == 1)
+	{
+		current_index++;
+		if (current_index > _vItem.size() - _vslot.size()) current_index = _vItem.size() - _vslot.size();
+		_mouseWheel = 0;
+	}
+	else if(_mouseWheel == -1)
+	{
+		current_index--;
+		if (current_index < 0) current_index = 0;
+		_mouseWheel = 0;
+	}
 	//스크롤 위방향 버튼
+	cout << current_index << endl;
 	if (PtInRect(&up_BT, _ptMouse))
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -251,12 +274,6 @@ void shop::shop_scroll()
 	//스크롤 누르고 이동
 	if (PtInRect(&rc_scroll, _ptMouse))
 	{
-		static int save_point = 0;
-		static int change = 0;
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			save_point = _ptMouse.y;
-		}
 		if (INPUT->GetKey(VK_LBUTTON))
 		{
 			//change = _ptMouse.y - save_point;
@@ -272,11 +289,13 @@ void shop::shop_scroll()
 				rc_scroll.bottom = down_BT.top - 10;
 				rc_scroll.top = rc_scroll.bottom - 38;
 			}
-		}
 
+		}
 		//스크롤 계산
-		float result = (float)(((float)rc_scroll.top - (float)up_BT.bottom + 10) / (float)342 * (float)(_vItem.size() - _vslot.size()));
+		float result = (float)((((float)rc_scroll.top - ((float)up_BT.bottom + 10)) / (float)342) * (float)(_vItem.size() - _vslot.size()));
+
 		current_index = result;
 	}
+
 }
 
