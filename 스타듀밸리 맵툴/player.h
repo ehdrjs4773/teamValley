@@ -58,8 +58,8 @@ public:
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
 	RECT getRc() { return rc; }
 	
+	void setState(STATE dir) { _pState = dir; }
 
 	void playerAnimation();
-	void checkTile();
 };
 

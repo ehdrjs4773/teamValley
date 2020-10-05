@@ -30,6 +30,7 @@ void inGameScene::update()
 	playerMove();
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+
 	playerInteraction();
 
 	setCurrentSlotNumber(_mouseWheel);
@@ -74,6 +75,7 @@ void inGameScene::update()
 void inGameScene::render()
 {
 	renderMap();
+
 	if (isShowRect)
 	{
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
@@ -210,6 +212,7 @@ void inGameScene::playerMove()
 					&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
 			{
 				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+				PLAYER->setState(RUN);
 				PLAYER->setDirection(RIGHT);
 			}
 		}
@@ -227,6 +230,7 @@ void inGameScene::playerMove()
 					&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
 			{
 				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+				PLAYER->setState(RUN);
 				PLAYER->setDirection(LEFT);
 			}
 		}
@@ -244,6 +248,7 @@ void inGameScene::playerMove()
 					&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
 			{
 				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setState(RUN);
 				PLAYER->setDirection(UP);
 			}
 		}
@@ -261,14 +266,15 @@ void inGameScene::playerMove()
 					&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
 			{
 				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+				PLAYER->setState(RUN);
 				PLAYER->setDirection(DOWN);
 			}
 		}
 	}
-	if (!INPUT->GetKey(VK_RIGHT) && !INPUT->GetKey(VK_LEFT) && !INPUT->GetKey(VK_UP) && !INPUT->GetKey(VK_DOWN))
+	if (!INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D') && !INPUT->GetKey('W'))
 	{
 		PLAYER->setIndex(0);
-		PLAYER->setDirection(IDLE);
+		PLAYER->setState(STAND);
 	}
 }
  
@@ -329,6 +335,7 @@ void inGameScene::hackGround()
 		{
 
 		}
+
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 		{
 
@@ -347,10 +354,12 @@ void inGameScene::hackGround()
 		{
 
 		}
+
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_LARGESTONE)
 		{
 
 		}
+
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
 		{
 
@@ -378,7 +387,6 @@ void inGameScene::hackGround()
 
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_FISHINGROD && _tile[MouseIndexY][MouseIndexX].terrain == TR_WATER)
 	{
-
 
 	}
 

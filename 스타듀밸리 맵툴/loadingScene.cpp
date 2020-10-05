@@ -80,4 +80,5 @@ void loadingScene::loadingImage()
 
 void loadingScene::loadingSound()
 {
+
 }

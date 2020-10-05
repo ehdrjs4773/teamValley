@@ -63,14 +63,15 @@ enum TOOL
 	TOOL_PICKAX, //곡괭이
 	TOOL_SICKLE, //낫
 	TOOL_SWORD,  //검
-	TOOL_KETTLE, //주전자
+	TOOL_KETTLE,  //주전자
 	TOOL_FISHINGROD //낚시대
 };
-
 
 //플레이어
 enum STATE
 {
+	STAND,
+	RUN,
 	DIGGROUND,
 	CUTDOWNTREE,
 	CUTGRASS,
@@ -82,6 +83,7 @@ enum STATE
 
 enum DIRECTION
 {
+
 	RIGHT,
 	LEFT,
 	UP,

@@ -3,6 +3,12 @@
 
 void inventory::init()
 {
+
+	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, 9, 4);
+
+
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 
 	for (int i = 0; i < INVENMAX; i++)
@@ -21,6 +27,7 @@ void inventory::init()
 	_vItem[6] = ITEMMANAGER->findItem("주전자");
 	_vItem[7] = ITEMMANAGER->findItem("낚시대");
 	_vItem[8] = ITEMMANAGER->findItem("칼");
+
 
 	currentSlotNumber = 0;
 
