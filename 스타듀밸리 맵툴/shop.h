@@ -1,9 +1,7 @@
 #pragma once
 #include "gameNode.h"
-#include "item.h"
 #include "inventory.h"
 
-class gameNode;
 
 struct SLOT {
 
@@ -18,9 +16,6 @@ class shop :
 private:
 
 	inventory *_inven;
-
-	item *_item;
-
 	bool is_click;
 	int click_index;
 

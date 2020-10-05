@@ -5,7 +5,7 @@ void inventory::init()
 {
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
-
+	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
@@ -30,6 +30,16 @@ void inventory::init()
 	_vItem[1].seedKind = SEED_GREENBEAN;
 	_vItem[1].indexX = 1;
 	_vItem[1].indexY = 0;
+
+
+	_vItem[2].item_image = IMAGEMANAGER->findImage("도구");
+	_vItem[2].item_info = "칼";
+	_vItem[2].buy_price = 0;
+	_vItem[2].item_kind = ITEM_TOOL;
+	_vItem[2].toolKind = TOOL_SWORD;
+	_vItem[2].indexX = 5;
+	_vItem[2].indexY = 0;
+
 
 	_vItem[3].item_image = IMAGEMANAGER->findImage("도구");
 	_vItem[3].item_info = "호미";
@@ -79,15 +89,6 @@ void inventory::init()
 	_vItem[8].indexX = 5;
 	_vItem[8].indexY = 0;
 
-	_vItem[4].item_image = IMAGEMANAGER->findImage("씨앗");
-	_vItem[4].item_info = "도끼";
-	_vItem[4].buy_price = 0;
-	_vItem[4].item_kind = ITEM_TOOL;
-	_vItem[4].toolKind = TOOL_AX;
-	_vItem[4].seedKind = SEED_NONE;
-	_vItem[4].indexX = 3;
-	_vItem[4].indexY = 0;
-
 	currentSlotNumber = 0;
 
 	for (int i = 0; i < 12; i++)
@@ -104,7 +105,6 @@ void inventory::release()
 
 void inventory::update()
 {
-	std::cout << currentSlotNumber << std::endl;
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -145,14 +145,21 @@ void inventory::update()
 void inventory::render(HDC hdc)
 {
 
-	inventory_img = IMAGEMANAGER->findImage("인벤토리_아이템");
+	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
 	inventory_img->render(hdc, 250,375);
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{
-			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top,_vItem[i].indexX,_vItem[i].indexY);
+			if (_vItem[i].isFrame)
+			{
+				_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left+10, _vItem[i].rc.top+2,_vItem[i].indexX,_vItem[i].indexY);
+			}
+			else
+			{
+				_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+			}
 		}
 	}
 }

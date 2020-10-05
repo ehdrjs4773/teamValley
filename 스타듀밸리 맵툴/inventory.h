@@ -1,5 +1,4 @@
 #pragma once
-#include "item.h"
 #define INVENMAX 36
 
 class inventory 
