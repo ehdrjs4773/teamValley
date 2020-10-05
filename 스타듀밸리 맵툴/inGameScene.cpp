@@ -280,13 +280,8 @@ void inGameScene::playerInteraction()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-			//if (PLAYER->getCurrentInven()->item_kind == ITEM_TOOL)
-			//{
-			//	if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
-			//	{
-					_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
-			//	}
-			//}
+			hackGround();
+
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 			{
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
@@ -549,6 +544,17 @@ void inGameScene::playerInteraction()
 		}
 	}
 	checkHacked();
+}
+
+void inGameScene::hackGround()
+{
+	//if (PLAYER->getCurrentInven()->item_kind == ITEM_TOOL)
+			//{
+			//	if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			//	{
+	_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+	//	}
+	//}
 }
 
 void inGameScene::checkHacked()

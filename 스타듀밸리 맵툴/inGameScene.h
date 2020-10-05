@@ -47,6 +47,7 @@ public:
 
 	void checkPlayerTile();
 	void playerInteraction();
+	void hackGround();
 	void checkHacked();
 
 

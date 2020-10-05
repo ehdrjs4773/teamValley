@@ -52,7 +52,6 @@ enum SEED
 	SEED_HOPS,
 	SEED_AMARANTH,
 	SEED_CATUS
-
 };
 
 struct tagItem {
