@@ -392,7 +392,7 @@ void inGameScene::waterGround()
 
 void inGameScene::spreadSeed()
 {
-	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
 		_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
 		_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;

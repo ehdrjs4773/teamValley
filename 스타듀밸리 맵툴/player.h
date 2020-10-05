@@ -14,6 +14,7 @@ private:
 	int count;
 	int index;
 
+	item* _item;
 
 	bool isShowInventory;
 
@@ -31,7 +32,7 @@ private:
 
 	inventory* _inventory;
 
-
+	
 	
 
 public:

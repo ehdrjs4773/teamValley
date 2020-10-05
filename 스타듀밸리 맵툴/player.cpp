@@ -21,7 +21,6 @@ HRESULT player::init()
 
 	isShowInventory = false;
 
-
 	return S_OK;
 }
 
@@ -50,10 +49,6 @@ void  player::update()
 		if (isShowInventory) isShowInventory = false;
 		else isShowInventory = true;
 	}
-
-
-
-
 }
 
 void player::InventroyRender(HDC hdc)
