@@ -57,41 +57,16 @@ enum SEED
 enum TOOL
 {
 	TOOL_NONE,
-<<<<<<< HEAD
-=======
 	TOOL_HOE, //È£¹Ì
->>>>>>> 33b353bfd3c2938572e2a07c2a36aed6d1d31ae1
 	TOOL_SHOVEL, //»ð
 	TOOL_AX,     //µµ³¢
 	TOOL_PICKAX, //°î±ªÀÌ
 	TOOL_SICKLE, //³´
 	TOOL_SWORD,  //°Ë
-<<<<<<< HEAD
-	TOOL_KETTLE  //ÁÖÀüÀÚ
-};
-
-
-struct tagItem {
-=======
-	TOOL_KETTLE,  //ÁÖÀüÀÚ
+	TOOL_KETTLE, //ÁÖÀüÀÚ
 	TOOL_FISHINGROD //³¬½Ã´ë
 };
 
-struct tagItem 
-{
->>>>>>> 33b353bfd3c2938572e2a07c2a36aed6d1d31ae1
-
-	RECT rc;
-	image *item_image;
-	bool isFrame;
-	ITEM item_kind;
-	TOOL toolKind;
-	SEED seedKind;
-	const char* item_info;
-	int buy_price;
-	int sell_price;
-	int indexX, indexY;
-};
 
 //ÇÃ·¹ÀÌ¾î
 enum STATE
@@ -114,13 +89,8 @@ enum DIRECTION
 	IDLE
 };
 
-<<<<<<< HEAD
 
-
-=======
 struct tagItem {
->>>>>>> 33b353bfd3c2938572e2a07c2a36aed6d1d31ae1
-
 	RECT rc;
 	image* item_image;
 	ITEM item_kind;
@@ -130,4 +100,5 @@ struct tagItem {
 	int buy_price;
 	int sell_price;
 	int indexX, indexY;
+	bool isFrame;
 };

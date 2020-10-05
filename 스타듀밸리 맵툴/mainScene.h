@@ -9,7 +9,7 @@ private :
 	RECT _loadRc;
 	RECT _mapRc;
 	RECT _exitRc;
-	int frameY[3]; 
+	int frameY[4]; 
 
 public :
 	HRESULT init();

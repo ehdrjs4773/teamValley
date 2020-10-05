@@ -15,6 +15,10 @@ HRESULT itemManager::init()
 	return S_OK;
 }
 
+void itemManager::release()
+{
+}
+
 void itemManager::addSeed()
 {
 	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 0, SEED_PARSNIP, "ÆÄ½º´Õ ¾¾¾Ñ");

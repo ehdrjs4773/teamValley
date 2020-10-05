@@ -3,8 +3,6 @@
 
 HRESULT mainScene::init()
 {
-	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -15,7 +13,6 @@ HRESULT mainScene::init()
 
 void mainScene::release()
 {
-
 }
 
 void mainScene::update()

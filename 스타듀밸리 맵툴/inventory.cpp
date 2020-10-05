@@ -159,7 +159,7 @@ void inventory::render(HDC hdc)
 
 void inventory::quickSlot(HDC hdc)
 {
-	IMAGEMANAGER->render("플렏이어 퀵슬롯", hdc, WINSIZEX / 2 - 282, 520);
+	IMAGEMANAGER->render("플레이어 퀵슬롯", hdc, WINSIZEX / 2 - 282, 520);
 
 	for (int i = 0; i < 12; i++)
 	{
