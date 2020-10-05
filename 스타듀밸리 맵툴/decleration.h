@@ -63,9 +63,10 @@ enum TOOL
 	TOOL_PICKAX, //곡괭이
 	TOOL_SICKLE, //낫
 	TOOL_SWORD,  //검
-	TOOL_KETTLE,  //주전자
+	TOOL_KETTLE, //주전자
 	TOOL_FISHINGROD //낚시대
 };
+
 
 //플레이어
 enum STATE
@@ -88,11 +89,10 @@ enum DIRECTION
 	IDLE
 };
 
-struct tagItem
-{
+
+struct tagItem {
 	RECT rc;
-	image *item_image;
-	bool isFrame;
+	image* item_image;
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
@@ -100,4 +100,5 @@ struct tagItem
 	int buy_price;
 	int sell_price;
 	int indexX, indexY;
+	bool isFrame;
 };

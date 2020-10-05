@@ -3,6 +3,10 @@
 
 void inventory::init()
 {
+	IMAGEMANAGER->addFrameImage("æææ—", "Images/BMP/æææ—æ∆¿Ã≈€.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("µµ±∏", "Images/BMP/µµ±∏.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addImage("ªÛ¡°¿Œ∫•≈‰∏Æ", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
+
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp;
@@ -11,14 +15,79 @@ void inventory::init()
 		_vItem.push_back(temp);
 	}
 
-	_vItem[0] = ITEMMANAGER->findItem("∆ƒΩ∫¥’ æææ—");
-	_vItem[1] = ITEMMANAGER->findItem("øœµŒƒ· æææ—");
-	_vItem[3] = ITEMMANAGER->findItem("»£πÃ");
-	_vItem[4] = ITEMMANAGER->findItem("∞Ó±™¿Ã");
-	_vItem[5] = ITEMMANAGER->findItem("µµ≥¢");
-	_vItem[6] = ITEMMANAGER->findItem("¡÷¿¸¿⁄");
-	_vItem[7] = ITEMMANAGER->findItem("≥¨Ω√¥Î");
-	_vItem[8] = ITEMMANAGER->findItem("ƒÆ");
+	_vItem[0].item_image = IMAGEMANAGER->findImage("æææ—");
+	_vItem[0].item_info = "∆ƒΩ∫¥’ æææ—";
+	_vItem[0].buy_price = 0;
+	_vItem[0].item_kind = ITEM_SEED;
+	_vItem[0].seedKind = SEED_PARSNIP;
+	_vItem[0].indexX = 0;
+	_vItem[0].indexY = 0;
+
+	_vItem[1].item_image = IMAGEMANAGER->findImage("æææ—");
+	_vItem[1].item_info = "øœµŒƒ· æææ—";
+	_vItem[1].buy_price = 0;
+	_vItem[1].item_kind = ITEM_SEED;
+	_vItem[1].seedKind = SEED_GREENBEAN;
+	_vItem[1].indexX = 1;
+	_vItem[1].indexY = 0;
+
+
+	_vItem[2].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[2].item_info = "ƒÆ";
+	_vItem[2].buy_price = 0;
+	_vItem[2].item_kind = ITEM_TOOL;
+	_vItem[2].toolKind = TOOL_SWORD;
+	_vItem[2].indexX = 5;
+	_vItem[2].indexY = 0;
+
+
+	_vItem[3].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[3].item_info = "»£πÃ";
+	_vItem[3].buy_price = 0;
+	_vItem[3].item_kind = ITEM_TOOL;
+	_vItem[3].toolKind= TOOL_HOE;
+	_vItem[3].indexX = 0;
+	_vItem[3].indexY = 0;
+
+	_vItem[4].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[4].item_info = "∞Ó±™¿Ã";
+	_vItem[4].buy_price = 0;
+	_vItem[4].item_kind = ITEM_TOOL;
+	_vItem[4].toolKind = TOOL_PICKAX;
+	_vItem[4].indexX = 1;
+	_vItem[4].indexY = 0;
+
+	_vItem[5].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[5].item_info = "µµ≥¢";
+	_vItem[5].buy_price = 0;
+	_vItem[5].item_kind = ITEM_TOOL;
+	_vItem[5].toolKind = TOOL_AX;
+	_vItem[5].indexX = 2;
+	_vItem[5].indexY = 0;
+
+	_vItem[6].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[6].item_info = "¡÷¿¸¿⁄";
+	_vItem[6].buy_price = 0;
+	_vItem[6].item_kind = ITEM_TOOL;
+	_vItem[6].toolKind = TOOL_KETTLE;
+	_vItem[6].indexX = 3;
+	_vItem[6].indexY = 0;
+
+	_vItem[7].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[7].item_info = "≥¨Ω√¥Î";
+	_vItem[7].buy_price = 0;
+	_vItem[7].item_kind = ITEM_TOOL;
+	_vItem[7].toolKind = TOOL_FISHINGROD;
+	_vItem[7].indexX = 4;
+	_vItem[7].indexY = 0;
+
+	_vItem[8].item_image = IMAGEMANAGER->findImage("µµ±∏");
+	_vItem[8].item_info = "ƒÆ";
+	_vItem[8].buy_price = 0;
+	_vItem[8].item_kind = ITEM_TOOL;
+	_vItem[8].toolKind = TOOL_SWORD;
+	_vItem[8].indexX = 5;
+	_vItem[8].indexY = 0;
 
 	currentSlotNumber = 0;
 
@@ -26,6 +95,8 @@ void inventory::init()
 	{
 		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
 	}
+
+
 }
 
 void inventory::release()
@@ -34,21 +105,61 @@ void inventory::release()
 
 void inventory::update()
 {
-	setCurrentSlotNumber(_mouseWheel);
+
+	for (int i = 0; i < 12; i++)
+	{
+		if (PtInRect(&_playerTool[i], _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				//if (_playerTool[i] == //µµ≥¢)
+				//{
+				//	
+				//}
+
+				//else if (_playerTool[i] == //∞Ó±™¿Ã)
+				//{
+
+				//}
+
+				//else if (_playerTool[i] == //ª)
+				//{
+				 
+				//}
+
+				//else if (_playerTool[i] == //¡÷¿¸¿⁄)
+				//{
+
+				//}
+
+				//else if (_playerTool[i] == //≥¥)
+				//{
+
+				//}
+			}
+		}
+	}
 }
 
 
 void inventory::render(HDC hdc)
 {
 
-	inventory_img = IMAGEMANAGER->findImage("¿Œ∫•≈‰∏Æ_æ∆¿Ã≈€");
+	inventory_img = IMAGEMANAGER->findImage("ªÛ¡°¿Œ∫•≈‰∏Æ");
 	inventory_img->render(hdc, 250,375);
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{
-			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top,_vItem[i].indexX,_vItem[i].indexY);
+			if (_vItem[i].isFrame)
+			{
+				_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left+10, _vItem[i].rc.top+2,_vItem[i].indexX,_vItem[i].indexY);
+			}
+			else
+			{
+				_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+			}
 		}
 	}
 }
@@ -70,63 +181,15 @@ void inventory::quickSlot(HDC hdc)
 			{
 				currentSlotNumber = i;
 			}
-			
-			//RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
-			//FrameRect(hdc, temp, RGB(0, 0, 255));
-		}
-		else
-		{
-			RECT temp{ _playerTool[currentSlotNumber].left,_playerTool[currentSlotNumber].top,_playerTool[currentSlotNumber].right,_playerTool[currentSlotNumber].bottom };
+			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
 			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
+
+
 	}
-	if (INPUT->GetKeyDown('1'))
-	{
-		currentSlotNumber = 0;
-	}
-	if (INPUT->GetKeyDown('2'))
-	{
-		currentSlotNumber = 1;
-	}
-	if (INPUT->GetKeyDown('3'))
-	{
-		currentSlotNumber = 2;
-	}
-	if (INPUT->GetKeyDown('4'))
-	{
-		currentSlotNumber = 3;
-	}
-	if (INPUT->GetKeyDown('5'))
-	{
-		currentSlotNumber = 4;
-	}
-	if (INPUT->GetKeyDown('6'))
-	{
-		currentSlotNumber = 5;
-	}
-	if (INPUT->GetKeyDown('7'))
-	{
-		currentSlotNumber = 6;
-	}
-	if (INPUT->GetKeyDown('8'))
-	{
-		currentSlotNumber = 7;
-	}
-	if (INPUT->GetKeyDown('9'))
-	{
-		currentSlotNumber = 8;
-	}
-	if (INPUT->GetKeyDown('0'))
-	{
-		currentSlotNumber = 9;
-	}
-	if (INPUT->GetKeyDown(VK_OEM_MINUS))
-	{
-		currentSlotNumber = 10;
-	}
-	if (INPUT->GetKeyDown(VK_OEM_PLUS))
-	{
-		currentSlotNumber = 11;
-	}
+
+
+
+
 }
 

@@ -11,7 +11,9 @@ private:
 
 public:
 	HRESULT init();
+	void release();
 	void addSeed();
+
 	void addWeapon();
 	void addTool();
 	//아이템 추가하는 함수

@@ -14,8 +14,6 @@ private:
 	int count;
 	int index;
 
-	item* _item;
-
 	bool isShowInventory;
 
 	tagTile _tile[TILEY][TILEX];
