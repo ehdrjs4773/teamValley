@@ -148,8 +148,6 @@ void inventory::render(HDC hdc)
 	inventory_img = IMAGEMANAGER->findImage("인벤토리_아이템");
 	inventory_img->render(hdc, 250,375);
 
-
-
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)

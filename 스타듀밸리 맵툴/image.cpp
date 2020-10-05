@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "image.h"
+
 image::image() : _imageInfo(NULL), _fileName(NULL), _blendImage(NULL)
 {
+
 }
 image::~image()
 {
+
 }
 
 //∫Û ∫Ò∆Æ∏  √ ±‚»≠

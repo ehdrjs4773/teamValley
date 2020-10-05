@@ -16,6 +16,7 @@ HRESULT gameNode::init()
 	INIDATA->init();					//INI데이터 초기화
 	SOUNDMANAGER->init();				//사운드매니져 초기화
 	TIME->init();
+	ITEMMANAGER->init();
 	PLAYER->init();
 
 	return S_OK;
@@ -55,6 +56,8 @@ void gameNode::release()
 	//플레이어 해제
 	PLAYER->release();
 	PLAYER->releaseSingleton();
+
+	ITEMMANAGER->releaseSingleton();
 
 	//HDC 해제
 	ReleaseDC(_hWnd, _hdc);
@@ -106,11 +109,11 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 	case WM_MOUSEWHEEL:
 		if (GET_WHEEL_DELTA_WPARAM(wParam) > 0)
 		{
-			PLAYER->setCurrentSlotNumber(-1);
+			_mouseWheel = 1;
 		}
 		else
 		{
-			PLAYER->setCurrentSlotNumber(1);
+			_mouseWheel = -1;
 		}
 		break;
 	case WM_DESTROY:

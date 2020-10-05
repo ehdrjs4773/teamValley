@@ -11,6 +11,7 @@
 
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
 // Windows 헤더 파일:
+
 #include <Windows.h>
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
@@ -42,7 +43,7 @@ using namespace MY_UTIL;
 #include "resource.h"
 #include "cameraManager.h"
 #include "player.h"
-
+#include "itemManager.h"
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 
@@ -59,6 +60,7 @@ using namespace MY_UTIL;
 #define TIME timeManager::getSingleton()
 #define CAMERAMANAGER cameraManager::getSingleton()
 #define PLAYER player::getSingleton()
+#define ITEMMANAGER itemManager::getSingleton()
 
 //=============================================================
 //	## 디파인문 ## (윈도우창 초기화)
@@ -82,3 +84,4 @@ using namespace MY_UTIL;
 extern HINSTANCE	_hInstance;
 extern HWND			_hWnd;
 extern POINT		_ptMouse;
+extern INT			_mouseWheel;
