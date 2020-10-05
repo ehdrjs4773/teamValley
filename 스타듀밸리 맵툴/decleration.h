@@ -54,11 +54,23 @@ enum SEED
 	SEED_CATUS
 };
 
+enum TOOL
+{
+	TOOL_SHOVEL, //È£¹Ì
+	TOOL_AX,     //µµ³¢
+	TOOL_PICKAX, //°î±ªÀÌ
+	TOOL_SICKLE, //³´
+	TOOL_SWORD,  //°Ë
+	TOOL_KETTLE,  //ÁÖÀüÀÚ
+	TOOL_FISHINGROD //³¬½Ã´ë
+};
+
 struct tagItem {
 
 	RECT rc;
 	image *item_image;
 	ITEM item_kind;
+	TOOL toolKind;
 	SEED seedKind;
 	const char* item_info;
 	int buy_price;
@@ -87,15 +99,7 @@ enum DIRECTION
 	IDLE
 };
 
-enum TOOL
-{
-	TOOL_SHOVEL, //»ð
-	TOOL_AX,     //µµ³¢
-	TOOL_PICKAX, //°î±ªÀÌ
-	TOOL_SICKLE, //³´
-	TOOL_SWORD,  //°Ë
-	TOOL_KETTLE,  //ÁÖÀüÀÚ
-};
+
 
 
 

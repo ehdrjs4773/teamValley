@@ -548,13 +548,68 @@ void inGameScene::playerInteraction()
 
 void inGameScene::hackGround()
 {
-	//if (PLAYER->getCurrentInven()->item_kind == ITEM_TOOL)
-			//{
-			//	if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
-			//	{
-	_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
-	//	}
-	//}
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE && _tile[MouseIndexY][MouseIndexX].terrain == TR_GROUND)
+	{
+		_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
+		_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
+	}
+
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
+	{
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
+		{
+
+		}
+
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
+		{
+
+
+		}
+	}
+
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
+	{
+		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
+		{
+
+		}
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
+		{
+
+		}
+	}
+
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE && _tile[MouseIndexY][MouseIndexX].objType == OTY_GRASS)
+	{
+
+	}
+
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE)
+	{
+		if (_tile[MouseIndexY][MouseIndexX].terrain == TR_WATER)
+		{
+
+		}
+
+		if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+		{
+
+		}
+
+	}
+
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_FISHINGROD && _tile[MouseIndexY][MouseIndexX].terrain == TR_WATER)
+	{
+
+
+	}
+
+	if (PLAYER->getCurrentInven->toolKind == TOOL_SWORD)
+	{
+		//몬스터 공격
+	}
+
 }
 
 void inGameScene::checkHacked()
