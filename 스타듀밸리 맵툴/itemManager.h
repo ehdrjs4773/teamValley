@@ -13,6 +13,7 @@ public:
 	HRESULT init();
 	void addSeed();
 	void addWeapon();
+	void addTool();
 	//아이템 추가하는 함수
 	void addItem(
 		const char* strKey,
@@ -58,5 +59,7 @@ public:
 		int _sellPrice = 0);
 
 	vector<tagItem> getItem() { return _vItem; }
+	tagItem findItem(const char* strKey);
+	
 };
 

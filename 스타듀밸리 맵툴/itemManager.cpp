@@ -7,10 +7,13 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("galaxy_sword", "Images/sword/galaxy_sword.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("pencil", "Images/sword/pencil.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
-	
+	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
+
 	addSeed();
 
 	addWeapon();
+
+	addTool();
 
 	return S_OK;
 }
@@ -57,6 +60,16 @@ void itemManager::addWeapon()
 	addWeapon("pencil", ITEM_WEAPON, false, "¿¬ÇÊ");
 }
 
+void itemManager::addTool()
+{
+	addTool("µµ±¸", ITEM_TOOL, true, 0, 0, TOOL_HOE, "È£¹Ì");
+	addTool("µµ±¸", ITEM_TOOL, true, 1, 0, TOOL_PICKAX, "°î±ªÀÌ");
+	addTool("µµ±¸", ITEM_TOOL, true, 2, 0, TOOL_AX, "µµ³¢");
+	addTool("µµ±¸", ITEM_TOOL, true, 3, 0, TOOL_KETTLE, "ÁÖÀüÀÚ");
+	addTool("µµ±¸", ITEM_TOOL, true, 4, 0, TOOL_FISHINGROD, "³¬½Ã´ë");
+	addTool("µµ±¸", ITEM_TOOL, true, 5, 0, TOOL_SWORD, "Ä®");
+}
+
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, RECT rc, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
@@ -101,6 +114,7 @@ void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.indexY = _indexY;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = _toolKind;
+	temp.seedKind = SEED_NONE;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -118,4 +132,15 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
 	_vItem.push_back(temp);
+}
+
+tagItem itemManager::findItem(const char * strKey)
+{
+	for (auto iter : _vItem)
+	{
+		if (iter.item_info == strKey)
+		{
+			return iter;
+		}
+	}
 }

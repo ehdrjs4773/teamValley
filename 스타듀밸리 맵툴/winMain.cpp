@@ -10,11 +10,7 @@
 HWND		_hWnd;
 HINSTANCE	_hInstance;
 POINT		_ptMouse = { 0, 0 };
-<<<<<<< HEAD
-int			_mouseWheel = 0;
-=======
 INT			_mouseWheel = 0;
->>>>>>> 5ec59701faeec804a169c4b9c60b80c38dd81614
 //메인게임 클래스 선언
 mainGame* _mg;
 

@@ -84,8 +84,4 @@ using namespace MY_UTIL;
 extern HINSTANCE	_hInstance;
 extern HWND			_hWnd;
 extern POINT		_ptMouse;
-<<<<<<< HEAD
-extern int			_mouseWheel;
-=======
 extern INT			_mouseWheel;
->>>>>>> 5ec59701faeec804a169c4b9c60b80c38dd81614
