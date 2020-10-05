@@ -14,8 +14,6 @@ private:
 	int count;
 	int index;
 
-	item* _item;
-
 	bool isShowInventory;
 
 	tagTile _tile[TILEY][TILEX];
@@ -50,7 +48,7 @@ public:
 	void setCenterY(float cY) { centerY = cY; }
 
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
-	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(_inventory->getCurrentSlotNumber() + a); }
+	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 
 	int getCurrentX() { return currentX; }

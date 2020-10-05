@@ -54,8 +54,9 @@ public:
 
 	void checkHacked();
 
-
 	void setRandomObstacles();
+
+	void setCurrentSlotNumber(int mouseWheel);
 
 	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

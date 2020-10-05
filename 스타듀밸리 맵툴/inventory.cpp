@@ -3,10 +3,14 @@
 
 void inventory::init()
 {
+<<<<<<< HEAD
 	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("ÁÖÀüÀÚ ¹Ù", "Images/BMP/ÁÖÀüÀÚ ¹Ù.bmp", 40, 10, 9, 4);
 
+=======
+	IMAGEMANAGER->addImage("»óÁ¡ÀÎº¥Åä¸®", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
+>>>>>>> 997524e2cd608d2345e17b2a8aa9a355f8d3f79b
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
@@ -16,6 +20,7 @@ void inventory::init()
 		_vItem.push_back(temp);
 	}
 
+<<<<<<< HEAD
 	_vItem[0].item_image = IMAGEMANAGER->findImage("¾¾¾Ñ");
 	_vItem[0].item_info = "ÆÄ½º´Õ ¾¾¾Ñ";
 	_vItem[0].buy_price = 0;
@@ -79,6 +84,16 @@ void inventory::init()
 	_vItem[8].toolKind = TOOL_SWORD;
 	_vItem[8].indexX = 5;
 	_vItem[8].indexY = 0;
+=======
+	_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
+	_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
+	_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
+	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
+	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
+	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
+	_vItem[7] = ITEMMANAGER->findItem("³¬½Ã´ë");
+	_vItem[8] = ITEMMANAGER->findItem("Ä®");
+>>>>>>> 997524e2cd608d2345e17b2a8aa9a355f8d3f79b
 
 	currentSlotNumber = 0;
 
@@ -86,8 +101,6 @@ void inventory::init()
 	{
 		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
 	}
-
-
 }
 
 void inventory::release()
@@ -96,57 +109,26 @@ void inventory::release()
 
 void inventory::update()
 {
-	std::cout << currentSlotNumber << std::endl;
-
-	for (int i = 0; i < 12; i++)
-	{
-		if (PtInRect(&_playerTool[i], _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				//if (_playerTool[i] == //µµ³¢)
-				//{
-				//	
-				//}
-
-				//else if (_playerTool[i] == //°î±ªÀÌ)
-				//{
-
-				//}
-
-				//else if (_playerTool[i] == //»ð)
-				//{
-				 
-				//}
-
-				//else if (_playerTool[i] == //ÁÖÀüÀÚ)
-				//{
-
-				//}
-
-				//else if (_playerTool[i] == //³´)
-				//{
-
-				//}
-			}
-		}
-	}
 }
 
 
 void inventory::render(HDC hdc)
 {
-
-	inventory_img = IMAGEMANAGER->findImage("ÀÎº¥Åä¸®_¾ÆÀÌÅÛ");
+	inventory_img = IMAGEMANAGER->findImage("»óÁ¡ÀÎº¥Åä¸®");
 	inventory_img->render(hdc, 250,375);
-
-
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{
-			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top,_vItem[i].indexX,_vItem[i].indexY);
+			if (_vItem[i].isFrame)
+			{
+				_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left+10, _vItem[i].rc.top+2,_vItem[i].indexX,_vItem[i].indexY);
+			}
+			else
+			{
+				_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+			}
 		}
 	}
 }
@@ -168,12 +150,60 @@ void inventory::quickSlot(HDC hdc)
 			{
 				currentSlotNumber = i;
 			}
-			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
-			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
 	}
 
+	if (INPUT->GetKeyDown('1'))
+	{
+		currentSlotNumber = 0;
+	}
+	if (INPUT->GetKeyDown('2'))
+	{
+		currentSlotNumber = 1;
+	}
+	if (INPUT->GetKeyDown('3'))
+	{
+		currentSlotNumber = 2;
+	}
+	if (INPUT->GetKeyDown('4'))
+	{
+		currentSlotNumber = 3;
+	}
+	if (INPUT->GetKeyDown('5'))
+	{
+		currentSlotNumber = 4;
+	}
+	if (INPUT->GetKeyDown('6'))
+	{
+		currentSlotNumber = 5;
+	}
+	if (INPUT->GetKeyDown('7'))
+	{
+		currentSlotNumber = 6;
+	}
+	if (INPUT->GetKeyDown('8'))
+	{
+		currentSlotNumber = 7;
+	}
+	if (INPUT->GetKeyDown('9'))
+	{
+		currentSlotNumber = 8;
+	}
+	if (INPUT->GetKeyDown('0'))
+	{
+		currentSlotNumber = 9;
+	}
+	if (INPUT->GetKeyDown(VK_OEM_MINUS))
+	{
+		currentSlotNumber = 10;
+	}
+	if (INPUT->GetKeyDown(VK_OEM_PLUS))
+	{
+		currentSlotNumber = 11;
+	}
 
+	RECT temp{ _playerTool[currentSlotNumber].left,_playerTool[currentSlotNumber].top,_playerTool[currentSlotNumber].right,_playerTool[currentSlotNumber].bottom };
+	FrameRect(hdc, temp, RGB(255, 0, 0));
 
 
 }
