@@ -39,7 +39,7 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 
-	rc = RectMakeCenter(centerX, centerY, 48, 32);
+	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
 	if (INPUT->GetKeyDown('E'))
 	{
@@ -85,7 +85,6 @@ void  player::render()
 	//	break;
 	//}
 
-	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
 	switch (_pState)
 	{
@@ -93,35 +92,38 @@ void  player::render()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 0);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 1);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
 			break;
 		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 2);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
 			break;
 		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 3);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
 			break;
 		}
 	case RUN:
 		switch (_pDirection)
 		{
 		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 0);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 1);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
 			break;
 		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 2);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
 			break;
 		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 24, index, 3);
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
 			break;
 		}
 	}
+
+
+	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 
 void player::playerAnimation()

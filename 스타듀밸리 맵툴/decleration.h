@@ -63,29 +63,9 @@ enum TOOL
 	TOOL_PICKAX, //°î±ªÀÌ
 	TOOL_SICKLE, //³´
 	TOOL_SWORD,  //°Ë
-<<<<<<< HEAD
 	TOOL_KETTLE,  //ÁÖÀüÀÚ
 	TOOL_FISHINGROD //³¬½Ã´ë
 };
-
-struct tagItem 
-{
-	RECT rc;
-	image *item_image;
-	ITEM item_kind;
-	TOOL toolKind;
-	SEED seedKind;
-	const char* item_info;
-	int buy_price;
-	int sell_price;
-	int indexX, indexY;
-};
-=======
-	TOOL_KETTLE, //ÁÖÀüÀÚ
-	TOOL_FISHINGROD //³¬½Ã´ë
-};
-
->>>>>>> 997524e2cd608d2345e17b2a8aa9a355f8d3f79b
 
 //ÇÃ·¹ÀÌ¾î
 enum STATE
@@ -107,10 +87,6 @@ enum DIRECTION
 	RIGHT,
 	LEFT,
 	UP,
-<<<<<<< HEAD
-	DOWN
-
-=======
 	DOWN,
 	IDLE
 };
@@ -127,5 +103,4 @@ struct tagItem {
 	int sell_price;
 	int indexX, indexY;
 	bool isFrame;
->>>>>>> 997524e2cd608d2345e17b2a8aa9a355f8d3f79b
 };
