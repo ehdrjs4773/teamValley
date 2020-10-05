@@ -5,6 +5,7 @@ void inventory::init()
 {
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, 9, 4);
 
 
 	for (int i = 0; i < INVENMAX; i++)
@@ -161,7 +162,7 @@ void inventory::render(HDC hdc)
 
 void inventory::quickSlot(HDC hdc)
 {
-	IMAGEMANAGER->render("플렏이어 퀵슬롯", hdc, WINSIZEX / 2 - 282, 520);
+	IMAGEMANAGER->render("플레이어 퀵슬롯", hdc, WINSIZEX / 2 - 282, 520);
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -179,8 +180,6 @@ void inventory::quickSlot(HDC hdc)
 			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
 			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
-
-
 	}
 
 
