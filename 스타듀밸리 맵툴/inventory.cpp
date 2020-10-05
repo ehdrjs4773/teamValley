@@ -6,7 +6,6 @@ void inventory::init()
 	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
 
-
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp;
@@ -94,8 +93,6 @@ void inventory::init()
 	{
 		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
 	}
-
-
 }
 
 void inventory::release()
@@ -105,6 +102,8 @@ void inventory::release()
 void inventory::update()
 {
 	std::cout << currentSlotNumber << std::endl;
+
+	setCurrentSlotNumber(_mouseWheel);
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -148,8 +147,6 @@ void inventory::render(HDC hdc)
 	inventory_img = IMAGEMANAGER->findImage("ÀÎº¥Åä¸®_¾ÆÀÌÅÛ");
 	inventory_img->render(hdc, 250,375);
 
-
-
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image != NULL)
@@ -161,7 +158,7 @@ void inventory::render(HDC hdc)
 
 void inventory::quickSlot(HDC hdc)
 {
-	IMAGEMANAGER->render("ÇÃŽ¥ÀÌ¾î Äü½½·Ô", hdc, WINSIZEX / 2 - 282, 520);
+	IMAGEMANAGER->render("ÇÃ·¹ÀÌ¾î Äü½½·Ô", hdc, WINSIZEX / 2 - 282, 520);
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -176,15 +173,10 @@ void inventory::quickSlot(HDC hdc)
 			{
 				currentSlotNumber = i;
 			}
+			
 			RECT temp{ _playerTool[i].left,_playerTool[i].top,_playerTool[i].right,_playerTool[i].bottom };
 			FrameRect(hdc, temp, RGB(255, 0, 0));
 		}
-
-
 	}
-
-
-
-
 }
 

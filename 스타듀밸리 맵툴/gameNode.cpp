@@ -104,13 +104,13 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 		}
 		break;
 	case WM_MOUSEWHEEL:
-		if (GET_WHEEL_DELTA_WPARAM(wParam) > 0)
+		if ((SHORT)HIWORD(wParam) > 0)
 		{
-			PLAYER->setCurrentSlotNumber(-1);
+			_mouseWheel = 1;
 		}
-		else
+		else if ((SHORT)HIWORD(wParam) < 0)
 		{
-			PLAYER->setCurrentSlotNumber(1);
+			_mouseWheel = -1;
 		}
 		break;
 	case WM_DESTROY:

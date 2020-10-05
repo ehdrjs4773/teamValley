@@ -10,9 +10,9 @@
 HWND		_hWnd;
 HINSTANCE	_hInstance;
 POINT		_ptMouse = { 0, 0 };
+int			_mouseWheel = 0;
 //메인게임 클래스 선언
 mainGame* _mg;
-
 
 //=============================================================
 //	## 함수 전방선언 ##

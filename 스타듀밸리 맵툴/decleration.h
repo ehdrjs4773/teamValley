@@ -67,20 +67,6 @@ enum TOOL
 	TOOL_FISHINGROD //낚시대
 };
 
-struct tagItem 
-{
-
-	RECT rc;
-	image *item_image;
-	ITEM item_kind;
-	TOOL toolKind;
-	SEED seedKind;
-	const char* item_info;
-	int buy_price;
-	int sell_price;
-	int indexX, indexY;
-};
-
 //플레이어
 enum STATE
 {

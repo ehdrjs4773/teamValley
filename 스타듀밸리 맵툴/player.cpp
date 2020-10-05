@@ -60,7 +60,6 @@ void player::InventroyRender(HDC hdc)
 	}
 
 	else _inventory->quickSlot(hdc);
-
 }
 
 void  player::render()

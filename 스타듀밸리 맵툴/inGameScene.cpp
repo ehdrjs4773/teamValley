@@ -24,12 +24,15 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	cout << PLAYER->getCurrentSlotNumber() << endl;
 	PLAYER->update();
 
 	playerMove();
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	playerInteraction();
+
+	setCurrentSlotNumber(_mouseWheel);
 
 	if (INPUT->GetKeyDown(VK_F1))
 	{
@@ -78,8 +81,6 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 	
 	PLAYER->InventroyRender(getMemDC());
-	
-
 }
 
 void inGameScene::load()
@@ -997,6 +998,20 @@ void inGameScene::setRandomObstacles()
 				}
 			}
 		}
+	}
+}
+
+void inGameScene::setCurrentSlotNumber(int mouseWheel)
+{
+	if (mouseWheel > 0)
+	{
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
+		_mouseWheel = 0;
+	}
+	else if (mouseWheel < 0)
+	{
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
+		_mouseWheel = 0;
 	}
 }
 
