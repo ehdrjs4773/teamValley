@@ -86,6 +86,7 @@ struct tagTile
 	int grownLevel;
 
 	bool isWet;
+	bool isFullyGrown;
 };
 
 //이미지 타일 구조체

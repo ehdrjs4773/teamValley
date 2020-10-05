@@ -29,6 +29,15 @@ void inventory::init()
 	_vItem[2].indexX = 1;
 	_vItem[2].indexY = 0;
 
+	_vItem[4].item_image = IMAGEMANAGER->findImage("¾¾¾Ñ");
+	_vItem[4].item_info = "µµ³¢";
+	_vItem[4].buy_price = 0;
+	_vItem[4].item_kind = ITEM_TOOL;
+	_vItem[4].toolKind = TOOL_AX;
+	_vItem[4].seedKind = SEED_NONE;
+	_vItem[4].indexX = 3;
+	_vItem[4].indexY = 0;
+
 	currentSlotNumber = 0;
 
 	for (int i = 0; i < 12; i++)

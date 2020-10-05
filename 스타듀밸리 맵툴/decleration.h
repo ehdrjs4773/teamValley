@@ -8,8 +8,8 @@ enum ITEM
 	ITEM_BIGCRAFTABLE,
 	ITEM_RESOURCE,
 	ITEM_FORAGE,
-	ITEM_ENDITEM,
-	ITEM_SEED
+	ITEM_SEED,
+	ITEM_ENDITEM
 };
 
 enum SEED
@@ -59,6 +59,7 @@ struct tagItem {
 	RECT rc;
 	image *item_image;
 	ITEM item_kind;
+	TOOL toolKind;
 	SEED seedKind;
 	const char* item_info;
 	int buy_price;
@@ -89,12 +90,13 @@ enum DIRECTION
 
 enum TOOL
 {
+	TOOL_NONE,
 	TOOL_SHOVEL, //»נ
 	TOOL_AX,     //µµ³¢
 	TOOL_PICKAX, //°מ±×ÀÌ
 	TOOL_SICKLE, //³´
 	TOOL_SWORD,  //°Ë
-	TOOL_KETTLE,  //ÁÖÀüÀÚ
+	TOOL_KETTLE  //ÁÖÀüÀÚ
 };
 
 
