@@ -458,6 +458,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].seedType = SEED_NONE;
 			_tile[i][j].grownLevel = 0;
 			_tile[i][j].isWet = false;
+			_tile[i][j].isFullyGrown = false;
 		}
 	}
 
