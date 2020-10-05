@@ -54,29 +54,27 @@ enum SEED
 	SEED_CATUS
 };
 
-struct tagItem {
-
-	RECT rc;
-	image *item_image;
-	ITEM item_kind;
-	TOOL toolKind;
-	SEED seedKind;
-	const char* item_info;
-	int buy_price;
-	int sell_price;
-	int indexX, indexY;
+enum TOOL
+{
+	TOOL_NONE,
+	TOOL_SHOVEL, //»ð
+	TOOL_AX,     //µµ³¢
+	TOOL_PICKAX, //°î±ªÀÌ
+	TOOL_SICKLE, //³´
+	TOOL_SWORD,  //°Ë
+	TOOL_KETTLE  //ÁÖÀüÀÚ
 };
 
 //ÇÃ·¹ÀÌ¾î
 enum STATE
 {
-	digGround,
-	cutdownTree,
-	cutGrass,
-	breakStone,
-	pourwater,
-	fillWater,
-	attackMonster
+	DIGGROUND,
+	CUTDOWNTREE,
+	CUTGRASS,
+	BREAKSTONE,
+	SPRAYWATER,
+	FILLWATER,
+	ATTACK
 };
 
 enum DIRECTION
@@ -88,16 +86,20 @@ enum DIRECTION
 	IDLE
 };
 
-enum TOOL
-{
-	TOOL_NONE,
-	TOOL_SHOVEL, //»ð
-	TOOL_AX,     //µµ³¢
-	TOOL_PICKAX, //°î±ªÀÌ
-	TOOL_SICKLE, //³´
-	TOOL_SWORD,  //°Ë
-	TOOL_KETTLE  //ÁÖÀüÀÚ
+struct tagItem {
+
+	RECT rc;
+	image* item_image;
+	ITEM item_kind;
+	TOOL toolKind;
+	SEED seedKind;
+	const char* item_info;
+	int buy_price;
+	int sell_price;
+	int indexX, indexY;
 };
+
+
 
 
 
