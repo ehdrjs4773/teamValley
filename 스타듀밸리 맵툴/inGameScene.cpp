@@ -338,7 +338,6 @@ void inGameScene::spreadSeed()
 
 		_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
 		_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
-		_tile[MouseIndexY - 1][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
 		_tile[MouseIndexY - 1][MouseIndexX].grownLevel = 0;
 
 		switch (PLAYER->getCurrentInven()->seedKind)
