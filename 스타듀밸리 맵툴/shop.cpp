@@ -211,28 +211,36 @@ void shop::buy()
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
-		{
-			if (is_click)
+		{	
+			if ((*_vInven)[i].item_image == NULL)
 			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
+				if (is_click)
 				{
-					(*_vInven)[i].buy_price = _vItem[click_index].buy_price;
-					(*_vInven)[i].item_image = _vItem[click_index].item_image;
-					(*_vInven)[i].indexX = _vItem[click_index].indexX;
-					(*_vInven)[i].indexY = _vItem[click_index].indexY;
-					(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
-					(*_vInven)[i].item_info = _vItem[click_index].item_info;
-					(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
-					(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
+					if (INPUT->GetKeyDown(VK_LBUTTON))
+					{
+						(*_vInven)[i].buy_price = _vItem[click_index].buy_price;
+						(*_vInven)[i].item_image = _vItem[click_index].item_image;
+						(*_vInven)[i].indexX = _vItem[click_index].indexX;
+						(*_vInven)[i].indexY = _vItem[click_index].indexY;
+						(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
+						(*_vInven)[i].item_info = _vItem[click_index].item_info;
+						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
+						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
+						is_click = false;
+					}
 				}
 			}
+			else
+			{
+				continue;
+			}
+			
 		}
 	}
 }
 
 void shop::shop_scroll()
 {
-
 
 	//스크롤 누르고 이동
 	if (PtInRect(&rc_scroll, _ptMouse))
@@ -252,12 +260,10 @@ void shop::shop_scroll()
 				rc_scroll.bottom = down_BT.top - 10;
 				rc_scroll.top = rc_scroll.bottom - 38;
 			}
-
+			float result = (float)((((float)rc_scroll.top - ((float)up_BT.bottom + 10)) / (float)342) * (float)(_vItem.size() - _vslot.size()));
+			current_index = result;
 		}
 		//스크롤 계산
-		float result = (float)((((float)rc_scroll.top - ((float)up_BT.bottom + 10)) / (float)342) * (float)(_vItem.size() - _vslot.size()));
-
-		current_index = result;
 	}
 	else
 	{
@@ -274,7 +280,6 @@ void shop::shop_scroll()
 			_mouseWheel = 0;
 		}
 		//스크롤 위방향 버튼
-		cout << current_index << endl;
 		if (PtInRect(&up_BT, _ptMouse))
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -295,13 +300,27 @@ void shop::shop_scroll()
 				cout << current_index << endl;
 
 				if (current_index > _vItem.size() - _vslot.size()) current_index = _vItem.size() - _vslot.size();
-
-
 			}
 		}
 		rc_scroll.top = (up_BT.bottom + 10) + ((float)current_index / (float)(_vItem.size() - _vslot.size())) * (float)342;
 		rc_scroll.bottom = rc_scroll.top + 38;
 	}
-
+	if (_ptMouse.x >= rc_scroll.left && _ptMouse.x <= rc_scroll.right)
+	{
+		if (_ptMouse.y < rc_scroll.top)
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				current_index--;
+			}
+		}
+		if (_ptMouse.y > rc_scroll.bottom)
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				current_index++;
+			}
+		}
+	}
 }
 
