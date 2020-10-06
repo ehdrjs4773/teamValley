@@ -37,7 +37,7 @@ private:
 	typedef vector<tagItem>::iterator vi_ITEM;
 	vi_ITEM _viItem;
 
-	vector<tagItem>* _vInven;
+	vector<tagItem> _vInven;
 
 public:
 

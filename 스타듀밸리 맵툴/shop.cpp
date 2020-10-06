@@ -177,15 +177,15 @@ void shop::sell()
 {
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&(_vInven)[i].rc, _ptMouse))
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				(*_vInven)[i].buy_price = NULL;
-				(*_vInven)[i].item_image = NULL;
-				(*_vInven)[i].item_info = NULL;
-				(*_vInven)[i].item_kind = ITEM_ENDITEM;
-				(*_vInven)[i].sell_price = NULL;
+				(_vInven)[i].buy_price = NULL;
+				(_vInven)[i].item_image = NULL;
+				(_vInven)[i].item_info = NULL;
+				(_vInven)[i].item_kind = ITEM_ENDITEM;
+				(_vInven)[i].sell_price = NULL;
 			}
 		}
 	}
@@ -210,22 +210,22 @@ void shop::buy()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&(_vInven)[i].rc, _ptMouse))
 		{	
-			if ((*_vInven)[i].item_image == NULL)
+			if ((_vInven)[i].item_image == NULL)
 			{
 				if (is_click)
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
-						(*_vInven)[i].buy_price = _vItem[click_index].buy_price;
-						(*_vInven)[i].item_image = _vItem[click_index].item_image;
-						(*_vInven)[i].indexX = _vItem[click_index].indexX;
-						(*_vInven)[i].indexY = _vItem[click_index].indexY;
-						(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
-						(*_vInven)[i].item_info = _vItem[click_index].item_info;
-						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
-						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
+						(_vInven)[i].buy_price = _vItem[click_index].buy_price;
+						(_vInven)[i].item_image = _vItem[click_index].item_image;
+						(_vInven)[i].indexX = _vItem[click_index].indexX;
+						(_vInven)[i].indexY = _vItem[click_index].indexY;
+						(_vInven)[i].isFrame = _vItem[click_index].isFrame;
+						(_vInven)[i].item_info = _vItem[click_index].item_info;
+						(_vInven)[i].item_kind = _vItem[click_index].item_kind;
+						(_vInven)[i].sell_price = _vItem[click_index].sell_price;
 						is_click = false;
 					}
 				}

@@ -27,7 +27,8 @@ void inventory::init()
 	_vItem[6] = ITEMMANAGER->findItem("주전자");
 	_vItem[7] = ITEMMANAGER->findItem("낚시대");
 	_vItem[8] = ITEMMANAGER->findItem("칼");
-
+	
+	_vItem[6].waterAmount = 100;
 
 	currentSlotNumber = 0;
 
@@ -51,7 +52,7 @@ void inventory::render(HDC hdc)
 	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
 	inventory_img->render(hdc, 250,375);
 
-	for (int i = 0; i < INVENMAX; i++)
+	for (int i = 0; i < _vItem.size(); i++)
 	{
 		if (_vItem[i].item_image != NULL)
 		{

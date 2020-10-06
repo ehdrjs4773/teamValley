@@ -24,7 +24,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	cout << PLAYER->getCurrentSlotNumber() << endl;
+	
 	PLAYER->update();
 
 	playerMove();
@@ -70,6 +70,12 @@ void inGameScene::update()
 		changeSeason(WINTER);
 		changeGrass();
 	}
+	if (INPUT->GetKeyDown(VK_F7))
+	{
+		makeCropGrow();
+	}
+
+	cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "\t" << _tile[MouseIndexY][MouseIndexX].isFullyGrown << endl;
 }
 
 void inGameScene::render()
@@ -146,7 +152,11 @@ void inGameScene::renderMap()
 			{
 				IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
-
+				if (_tile[i][j].isWet)
+				{
+					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
+				}
 				//인게임 화면 오브젝트 그린다
 				if (_tile[i][j].obj != OBJ_NONE)
 				{
@@ -168,11 +178,7 @@ void inGameScene::renderMap()
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
 				}
-				if (_tile[i][j].isWet)
-				{
-					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
-				}
+				
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
 					if (_tile[i][j].objType == OTY_CROP)
@@ -180,7 +186,7 @@ void inGameScene::renderMap()
 						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
 					}
-					else if (_tile[i][j].objType == OTY_GRASS)
+					else if (_tile[i + 1][j].objType == OTY_GRASS && i + 1 < TILEY)
 					{
 						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
@@ -223,7 +229,7 @@ void inGameScene::playerMove()
 		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
 		if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 		{
-			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE
+			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].objType == OTY_GRASS
 				|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED &&
 					_tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
 					&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
@@ -241,7 +247,7 @@ void inGameScene::playerMove()
 		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
 		if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 		{
-			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE
+			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].objType == OTY_GRASS
 				|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED &&
 					_tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
 					&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
@@ -259,7 +265,7 @@ void inGameScene::playerMove()
 		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
 		if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 		{
-			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE
+			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].objType == OTY_GRASS
 				|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED &&
 					_tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
 					&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
@@ -300,10 +306,10 @@ void inGameScene::playerInteraction()
 			hackGround();
 
 			//씨 심기
-			spreadSeed();
-			
-			//수확
-			harvest();
+			plantSeed();
+
+			//물뿌리기
+			waterGround();
 		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -313,9 +319,8 @@ void inGameScene::playerInteraction()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
-			//물뿌리기
-			waterGround();
-			
+			//수확
+			harvest();
 		}
 	}
 	checkHacked();
@@ -323,8 +328,9 @@ void inGameScene::playerInteraction()
 
 void inGameScene::hackGround()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE && _tile[MouseIndexY][MouseIndexX].terrain == TR_GROUND)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE) // && _tile[MouseIndexY][MouseIndexX].terrain == TR_GROUND)
 	{
+		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 	}
@@ -399,16 +405,13 @@ void inGameScene::hackGround()
 
 void inGameScene::waterGround()
 {
-	if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE || _tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
-		if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
-		{
-			_tile[MouseIndexY][MouseIndexX].isWet = true;
-		}
+		_tile[MouseIndexY][MouseIndexX].isWet = true;
 	}
 }
 
-void inGameScene::spreadSeed()
+void inGameScene::plantSeed()
 {
 	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
@@ -416,6 +419,7 @@ void inGameScene::spreadSeed()
 		_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
 		_tile[MouseIndexY][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
 		_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+		_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
 
 		_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
 		_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
@@ -655,17 +659,353 @@ void inGameScene::spreadSeed()
 
 void inGameScene::harvest()
 {
-	if (PLAYER->getCurrentInven()->item_kind == ITEM_TOOL
-		&& PLAYER->getCurrentInven()->item_kind == ITEM_WEAPON)
-	{
+		switch (PLAYER->getCurrentInven()->toolKind)
+		{
+		case TOOL_NONE:
+			if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
+			{
+				getItem(_tile[MouseIndexY][MouseIndexX].seedType);
 
-	}
-	else if (PLAYER->getCurrentInven()->item_kind != ITEM_TOOL
-		&& PLAYER->getCurrentInven()->item_kind == ITEM_WEAPON)
-	{
+				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
+				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
+				_tile[MouseIndexY - 1][MouseIndexX].seedType = SEED_NONE;
+			}
+			break;
+		case TOOL_HOE:
+			break;
+		case TOOL_SHOVEL:
+			break;
+		case TOOL_AX:
+			break;
+		case TOOL_PICKAX:
+			break;
+		case TOOL_SICKLE:
+			break;
+		case TOOL_SWORD:
+			break;
+		case TOOL_KETTLE:
+			break;
+		case TOOL_FISHINGROD:
+			break;
+		default:
+			break;
+		}
 		if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 		{
 
+		}
+}
+
+void inGameScene::makeCropGrow()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			if (_tile[i][j].obj != OBJ_SEED) continue;
+			if (_tile[i][j].isFullyGrown == false)
+			{
+				_tile[i][j].grownLevel += 1;
+				_tile[i][j].objFrameX += 1;
+				_tile[i - 1][j].ovlFrameX += 1;
+
+				//다자랐는지 확인
+				_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
+			}
+		}
+	}
+}
+
+bool inGameScene::checkFullyGrown(tagTile tile)
+{
+	switch (tile.seedType)
+	{
+	case SEED_NONE:
+		break;
+	case SEED_PARSNIP:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_CAULIFLOWER:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_GARLIC:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_RHUBARB:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_TOMATO:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_HOTPEPPER:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_RADISH:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_STARFRUIT:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_EGGPLANT:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_PUMPKIN:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_YAM:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_BEET:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_ANCIENTFRUIT:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_TULIP:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_POPPY:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_SUNFLOWER:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_SWEETGEMBERRY:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_STRAWBERRY:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_GRAPE:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_COFFEEBEAN:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_GREENBEAN:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_POTATO:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_KALE:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_MELON:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_BLUEBERRY:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_WHEAT:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_REDCABBAGE:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_CORN:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_ARTICHOKE:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_BOKCHOY:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_CRANBERRY:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_BLUEJAZZ:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_SUMMERSPANGLE:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_FAIRYROSE:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_HOPS:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	case SEED_AMARANTH:
+		if (tile.grownLevel == 5) { return true; }
+		else { return false; }
+		break;
+	case SEED_CATUS:
+		if (tile.grownLevel == 6) { return true; }
+		else { return false; }
+		break;
+	}
+}
+
+void inGameScene::getItem(SEED seedType)
+{
+	const char* str;
+	switch (seedType)
+	{
+	case SEED_NONE:
+		break;
+	case SEED_PARSNIP:
+		str = "파스닙";
+		break;
+	case SEED_CAULIFLOWER:
+		str = "콜리플라워";
+		break;
+	case SEED_GARLIC:
+		str = "마늘";
+		break;
+	case SEED_RHUBARB:
+		str = "대황";
+		break;
+	case SEED_TOMATO:
+		str = "토마토";
+		break;
+	case SEED_HOTPEPPER:
+		str = "고추";
+		break;
+	case SEED_RADISH:
+		str = "무";
+		break;
+	case SEED_STARFRUIT:
+		str = "스타후르츠";
+		break;
+	case SEED_EGGPLANT:
+		str = "가지";
+		break;
+	case SEED_PUMPKIN:
+		str = "호박";
+		break;
+	case SEED_YAM:
+		str = "참마";
+		break;
+	case SEED_BEET:
+		str = "비";
+		break;
+	case SEED_ANCIENTFRUIT:
+		str = "고대과일";
+		break;
+	case SEED_TULIP:
+		str = "튤립";
+		break;
+	case SEED_POPPY:
+		str = "양귀비";
+		break;
+	case SEED_SUNFLOWER:
+		str = "해바라기";
+		break;
+	case SEED_SWEETGEMBERRY:
+		str = "달콤보석베리";
+		break;
+	case SEED_STRAWBERRY:
+		str = "딸기";
+		break;
+	case SEED_GRAPE:
+		str = "포도";
+		break;
+	case SEED_COFFEEBEAN:
+		str = "커피콩";
+		break;
+	case SEED_GREENBEAN:
+		str = "완두콩";
+		break;
+	case SEED_POTATO:
+		str = "감자";
+		break;
+	case SEED_KALE:
+		str = "케일";
+		break;
+	case SEED_MELON:
+		str = "멜론";
+		break;
+	case SEED_BLUEBERRY:
+		str = "블루베리";
+		break;
+	case SEED_WHEAT:
+		str = "밀";
+		break;
+	case SEED_REDCABBAGE:
+		str = "적양배추";
+		break;
+	case SEED_CORN:
+		str = "옥수수";
+		break;
+	case SEED_ARTICHOKE:
+		str = "아티초크";
+		break;
+	case SEED_BOKCHOY:
+		str = "청경채";
+		break;
+	case SEED_CRANBERRY:
+		str = "크랜베리";
+		break;
+	case SEED_BLUEJAZZ:
+		str = "블루재즈";
+		break;
+	case SEED_SUMMERSPANGLE:
+		str = "여름별꽃";
+		break;
+	case SEED_FAIRYROSE:
+		str = "요정장미";
+		break;
+	case SEED_HOPS:
+		str = "홉";
+		break;
+	case SEED_AMARANTH:
+		str = "아마란스";
+		break;
+	case SEED_CATUS:
+		str = "선인장열매";
+		break;
+	}
+	for (auto iter : PLAYER->getInven())
+	{
+		if (iter.item_info == str)
+		{
+			iter.amount++;
+			break;
+		}
+		if (PLAYER->getInven().size() < INVENMAX - 1)
+		{
+			PLAYER->getInven().push_back(ITEMMANAGER->findItem(str));
+			break;
 		}
 	}
 }
@@ -913,7 +1253,7 @@ void inGameScene::setRandomObstacles()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED) { continue; }
+			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED || _tile[i][j].terrain != TR_SOIL) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
 				switch (RANDOM->range(6))
@@ -942,7 +1282,7 @@ void inGameScene::setRandomObstacles()
 					}
 					break;
 				case 1:
-					if (i + 1 < TILEY && j + 1 < TILEX)
+					if (i + 1 < TILEY && j + 1 < TILEX && RANDOM->range(20) == 0)
 					{
 						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE
 							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
@@ -985,7 +1325,7 @@ void inGameScene::setRandomObstacles()
 					}
 					break;
 				case 3:
-					if (i + 1 < TILEY && j + 1 < TILEX)
+					if (i + 1 < TILEY && j + 1 < TILEX && RANDOM->range(20) == 0)
 					{
 						if (_tile[i + 1][j].obj == OBJ_NONE && _tile[i][j + 1].obj == OBJ_NONE && _tile[i + 1][j + 1].obj == OBJ_NONE
 							&& _tile[i + 1][j].terrain != TR_HACKED && _tile[i][j + 1].terrain != TR_HACKED && _tile[i + 1][j + 1].terrain != TR_HACKED)
@@ -1032,12 +1372,11 @@ void inGameScene::setRandomObstacles()
 					}
 					break;
 				case 5:
-					if (i - 1 >= 0)
+					if (i - 1 >= 0 && _tile[i - 1][j].objOver != OVR_OVER)
 					{
 						switch (RANDOM->range(3))
 						{
 						case 0:
-							_tile[i - 1][j].objType = OTY_GRASS;
 							_tile[i - 1][j].objOver = OVR_OVER;
 							_tile[i - 1][j].ovlFrameX = 0;
 							_tile[i - 1][j].ovlFrameY = 3;
@@ -1048,7 +1387,6 @@ void inGameScene::setRandomObstacles()
 							_tile[i][j].objFrameY = 4;
 							break;
 						case 1:
-							_tile[i - 1][j].objType = OTY_GRASS;
 							_tile[i - 1][j].objOver = OVR_OVER;
 							_tile[i - 1][j].ovlFrameX = 1;
 							_tile[i - 1][j].ovlFrameY = 3;
@@ -1059,7 +1397,6 @@ void inGameScene::setRandomObstacles()
 							_tile[i][j].objFrameY = 4;
 							break;
 						case 2:
-							_tile[i - 1][j].objType = OTY_GRASS;
 							_tile[i - 1][j].objOver = OVR_OVER;
 							_tile[i - 1][j].ovlFrameX = 2;
 							_tile[i - 1][j].ovlFrameY = 3;

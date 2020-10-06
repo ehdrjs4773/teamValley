@@ -1395,15 +1395,9 @@ void maptoolScene::showSampleObjectTile()
 
 TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 {
-	//Ω√∏‡∆Æ
-	if (frameX == 1 && frameY == 0)
+	if ((frameX == 1 && frameY == 1) || (frameX == 31 && (frameY == 0 || frameY == 1)))
 	{
-		return TR_GROUND;
-	}
-	//∂•
-	if (frameX == 2 && frameY == 0)
-	{
-		return TR_GROUND;
+		return TR_SOIL;
 	}
 	//π∞
 	if ((frameX == 7 || frameX == 8 || frameX == 9 || frameX == 10) && frameY == 6)

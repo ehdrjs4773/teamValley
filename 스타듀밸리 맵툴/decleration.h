@@ -101,6 +101,8 @@ struct tagItem {
 	const char* item_info;
 	int buy_price;
 	int sell_price;
+	int waterAmount;
 	int indexX, indexY;
+	int amount;
 	bool isFrame;
 };

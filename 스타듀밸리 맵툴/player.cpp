@@ -21,6 +21,9 @@ HRESULT player::init()
 
 	isShowInventory = false;
 
+	_pDirection = DOWN;
+	_pState = STAND;
+
 	return S_OK;
 }
 

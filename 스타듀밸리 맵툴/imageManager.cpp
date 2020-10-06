@@ -253,6 +253,13 @@ void imageManager::frameRender(string strKey, HDC hdc, int destX, int destY, int
 	if (img) img->frameRender(hdc, destX, destY, currentFrameX, currentFrameY);
 }
 
+void imageManager::alphaFrameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
+{
+	//이미지 찾아서 그냥 이미지클래스의 함수를 실행한다
+	image* img = findImage(strKey);
+	if (img) img->alphaFrameRender(hdc, destX, destY, currentFrameX, currentFrameY, alpha);
+}
+
 //=============================================================
 //	## 루프렌더 ##
 //=============================================================

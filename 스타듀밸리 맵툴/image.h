@@ -87,7 +87,7 @@ public:
 	//«¡∑π¿”∑ª¥ı
 	void frameRender(HDC hdc, int destX, int destY);
 	void frameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY);
-
+	void alphaFrameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha);
 	//∑Á«¡∑ª¥ı
 	void loopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
 	void loopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY, BYTE alpha);
