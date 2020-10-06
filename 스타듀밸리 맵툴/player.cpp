@@ -39,7 +39,11 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 
+<<<<<<< HEAD
 	rc = RectMakeCenter(centerX, centerY, 48, 48);
+=======
+	rc = RectMakeCenter(centerX, centerY, 16, 32);
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 
 	if (INPUT->GetKeyDown('E'))
 	{
@@ -85,7 +89,6 @@ void  player::render()
 	//	break;
 	//}
 
-	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
 	switch (_pState)
 	{
@@ -122,6 +125,9 @@ void  player::render()
 			break;
 		}
 	}
+
+
+	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 
 void player::playerAnimation()

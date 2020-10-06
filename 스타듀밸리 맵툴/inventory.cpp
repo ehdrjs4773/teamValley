@@ -6,7 +6,13 @@ void inventory::init()
 
 	IMAGEMANAGER->addFrameImage("æææ—", "Images/BMP/æææ—æ∆¿Ã≈€.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("µµ±∏", "Images/BMP/µµ±∏.bmp", 360, 160, 9, 4);
+<<<<<<< HEAD
 	//IMAGEMANAGER->addFrameImage("¡÷¿¸¿⁄ πŸ", "Images/BMP/¡÷¿¸¿⁄ πŸ.bmp", 40, 10, 9, 4);
+=======
+	IMAGEMANAGER->addFrameImage("¡÷¿¸¿⁄ πŸ", "Images/BMP/¡÷¿¸¿⁄ πŸ.bmp", 40, 10, 9, 4);
+
+
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 	IMAGEMANAGER->addImage("ªÛ¡°¿Œ∫•≈‰∏Æ", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 
 	for (int i = 0; i < INVENMAX; i++)
@@ -17,6 +23,7 @@ void inventory::init()
 		_vItem.push_back(temp);
 	}
 
+<<<<<<< HEAD
 	_vItem[0].item_image = IMAGEMANAGER->findImage("æææ—");
 	_vItem[0].item_info = "∆ƒΩ∫¥’ æææ—";
 	_vItem[0].buy_price = 0;
@@ -81,6 +88,8 @@ void inventory::init()
 	_vItem[8].indexX = 5;
 	_vItem[8].indexY = 0;
 
+=======
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 	_vItem[0] = ITEMMANAGER->findItem("∆ƒΩ∫¥’ æææ—");
 	_vItem[1] = ITEMMANAGER->findItem("øœµŒƒ· æææ—");
 	_vItem[3] = ITEMMANAGER->findItem("»£πÃ");
@@ -89,6 +98,10 @@ void inventory::init()
 	_vItem[6] = ITEMMANAGER->findItem("¡÷¿¸¿⁄");
 	_vItem[7] = ITEMMANAGER->findItem("≥¨Ω√¥Î");
 	_vItem[8] = ITEMMANAGER->findItem("ƒÆ");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 
 	currentSlotNumber = 0;
 
