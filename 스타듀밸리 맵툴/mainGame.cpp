@@ -50,7 +50,7 @@ void mainGame::update()
 void mainGame::render()
 {
 	//흰색 빈 비트맵 (이것은 렌더에 그냥 두기)
-	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, BLACKNESS);
+	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 //=============================================================
 	
 	//글자색 배경 없애기

@@ -21,6 +21,9 @@ HRESULT player::init()
 
 	isShowInventory = false;
 
+	_pDirection = DOWN;
+	_pState = STAND;
+
 	return S_OK;
 }
 
@@ -38,7 +41,6 @@ void  player::update()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
 	if (INPUT->GetKeyDown('E'))
@@ -54,11 +56,8 @@ void  player::update()
 		{
 			_pState == DIGGROUND;
 		}
-	}
-
 	
-
-
+	}
 }
 
 void  player::render()

@@ -7,6 +7,7 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("galaxy_sword", "Images/sword/galaxy_sword.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("pencil", "Images/sword/pencil.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("¿­¸Å", "Images/BMP/¿­¸Å.bmp", 640, 120, 16, 3);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
 
 	addSeed();
@@ -88,6 +89,7 @@ void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
+	temp.amount = 1;
 	_vItem.push_back(temp);
 }
 
@@ -104,8 +106,13 @@ void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int 
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
+	temp.amount = 1;
 	temp.isFrame = _isFrame;
 	_vItem.push_back(temp);
+}
+
+void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
+{
 }
 
 void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
@@ -121,6 +128,7 @@ void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.seedKind = SEED_NONE;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
+	temp.waterAmount = 0;
 	temp.sell_price = _sellPrice;
 	_vItem.push_back(temp);
 }

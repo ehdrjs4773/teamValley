@@ -49,6 +49,7 @@ public:
 
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
+	vector<tagItem> getInven() { return _inventory->getInven(); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 
 	int getCurrentX() { return currentX; }

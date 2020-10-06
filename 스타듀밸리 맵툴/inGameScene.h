@@ -51,11 +51,15 @@ public:
 	void playerInteraction();
 	void hackGround();
 	void waterGround();
-	void spreadSeed();
+	void plantSeed();
 	void harvest();
 	void cutdownTree();
 	void breakStone();
 	void cutGrass();
+
+	void makeCropGrow();
+	bool checkFullyGrown(tagTile tile);
+	void getItem(SEED seedType);
 
 	void checkHacked();
 

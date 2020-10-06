@@ -44,7 +44,7 @@ void loadingScene::render()
 
 void loadingScene::loadingImage()
 {
-	//로딩이 너무 빠르게 진행되서 천천히 돌아가도록 테스트용으로 만들기
+	//농장 이미지
 	IMAGEMANAGER->addFrameImage("농장(봄)", "Images/맵툴/농장(봄).bmp", 384, 400, 24, 25);
 	IMAGEMANAGER->addFrameImage("농장(여름)", "Images/맵툴/농장(여름).bmp", 384, 400, 24, 25);
 	IMAGEMANAGER->addFrameImage("농장(가을)", "Images/맵툴/농장(가을).bmp", 384, 400, 24, 25);
@@ -70,6 +70,7 @@ void loadingScene::loadingImage()
 
 	IMAGEMANAGER->addFrameImage("농장장애물", "Images/BMP/farmObstacles.bmp", 96, 176, 6, 11);
 	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 256, 784, 16, 49);
+
 	//플레이어
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
 

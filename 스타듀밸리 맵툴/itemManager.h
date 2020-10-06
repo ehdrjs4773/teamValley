@@ -41,6 +41,17 @@ public:
 		int _sellPrice = 0,
 		bool _isFrame = true);
 
+	void addFruit(
+		const char* strKey,
+		ITEM _itemKind,
+		int _indexX,
+		int _indexY,
+		SEED _seedKind = SEED_NONE,
+		const char* _itemInfo = " ",
+		int _buyPrice = 0,
+		int _sellPrice = 0,
+		bool _isFrame = true);
+
 	void addTool(
 		const char* strKey,
 		ITEM _itemKind,
