@@ -41,7 +41,6 @@ public:
 	void InventroyRender(HDC hdc);
 
 	void changePlayerState();
-	void changePlayerDirection(DIRECTION dir);
 	
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }

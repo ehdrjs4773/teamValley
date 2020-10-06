@@ -26,9 +26,10 @@ void inGameScene::release()
 void inGameScene::update()
 {
 	
+	playerMove();
+
 	PLAYER->update();
 
-	playerMove();
 	playerInteraction();
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
@@ -75,8 +76,6 @@ void inGameScene::update()
 	{
 		makeCropGrow();
 	}
-
-	cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "\t" << _tile[MouseIndexY][MouseIndexX].isFullyGrown << endl;
 }
 
 void inGameScene::render()
@@ -218,9 +217,9 @@ void inGameScene::playerMove()
 					&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
 					&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
 			{
-				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
-				PLAYER->setState(RUN);
 				PLAYER->setDirection(RIGHT);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 			}
 		}
 	}
@@ -236,9 +235,10 @@ void inGameScene::playerMove()
 					&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
 					&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
 			{
-				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
-				PLAYER->setState(RUN);
+				
 				PLAYER->setDirection(LEFT);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 			}
 		}
 	}
@@ -254,9 +254,10 @@ void inGameScene::playerMove()
 					&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
 					&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
 			{
-				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
-				PLAYER->setState(RUN);
+				
 				PLAYER->setDirection(UP);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
 			}
 		}
 	}
@@ -272,9 +273,10 @@ void inGameScene::playerMove()
 					&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
 					&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
 			{
-				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-				PLAYER->setState(RUN);
+				
 				PLAYER->setDirection(DOWN);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
 			}
 		}
 	}
@@ -308,19 +310,19 @@ void inGameScene::playerInteraction()
 		{
 			if (MouseIndexY < currentIndexY)
 			{
-				PLAYER->changePlayerDirection(UP);
+				PLAYER->setDirection(UP);
 			}
 			if (MouseIndexY > currentIndexY)
 			{
-				PLAYER->changePlayerDirection(DOWN);
+				PLAYER->setDirection(DOWN);
 			}
 			if (MouseIndexX < currentIndexX)
 			{
-				PLAYER->changePlayerDirection(LEFT);
+				PLAYER->setDirection(LEFT);
 			}
 			if (MouseIndexX > currentIndexX)
 			{
-				PLAYER->changePlayerDirection(RIGHT);
+				PLAYER->setDirection(RIGHT);
 			}
 			//¹ç °¥±â
 			hackGround();

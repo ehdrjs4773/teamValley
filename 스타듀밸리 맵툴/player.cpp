@@ -74,11 +74,6 @@ void player::changePlayerState()
 	}
 }
 
-void player::changePlayerDirection(DIRECTION dir)
-{
-	_pDirection = dir;
-}
-
 void player::playerAnimation()
 {
 	count++;
@@ -92,46 +87,47 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % 10 == 0)
 			{
-				index++;
-				if (index > 4)
-				{
-					index = 0;
-				}
-			}
-			break;
-		case LEFT:
-			if (count % 5 == 0)
-			{
-				index++;
-				if (index > 4)
-				{
-					index = 0;
-				}
-			}
-			break;
-		case UP:
-			if (count % 5 == 0)
-			{
-				index++;
-				if (index > 6)
-				{
-					index = 0;
-				}
-			}
-			break;
-		case DOWN:
-			if (count % 5 == 0)
-			{
-				index++;
+				index += 1;
 				if (index > 5)
 				{
 					index = 0;
 				}
 			}
 			break;
+		case LEFT:
+			if (count % 10 == 0)
+			{
+				index += 1;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % 10 == 0)
+			{
+				index += 1;
+				if (index > 7)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % 10 == 0)
+			{
+				index += 1;
+				if (index > 6)
+				{
+					index = 0;
+				}				
+			}
+			break;
 		}
+		break;
 	case DIGGROUND:
 		switch (_pDirection)
 		{
