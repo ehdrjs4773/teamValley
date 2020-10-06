@@ -32,6 +32,9 @@ void inGameScene::update()
 
 	playerInteraction();
 
+	//아이템 바닥에 떨어지게 하는거
+	ejectItem();
+
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 
@@ -89,6 +92,11 @@ void inGameScene::render()
 	}
 
 	PLAYER->render();
+
+	for (int i = 0; i < _vItemOnField.size(); i++)
+	{
+		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
+	}
 
 	CAMERAMANAGER->render(getMemDC());
 	
@@ -443,7 +451,6 @@ void inGameScene::plantSeed()
 
 		_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
 		_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
-		_tile[MouseIndexY - 1][MouseIndexX].grownLevel = 0;
 
 		switch (PLAYER->getCurrentInven()->seedKind)
 		{
@@ -684,14 +691,16 @@ void inGameScene::harvest()
 		case TOOL_NONE:
 			if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 			{
-				getItem(_tile[MouseIndexY][MouseIndexX].seedType);
+				dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
 
 				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
+				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+
 				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
-				_tile[MouseIndexY - 1][MouseIndexX].seedType = SEED_NONE;
+				_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_NONE;
 			}
 			break;
 		case TOOL_HOE:
@@ -712,10 +721,6 @@ void inGameScene::harvest()
 			break;
 		default:
 			break;
-		}
-		if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
-		{
-
 		}
 }
 
@@ -896,7 +901,35 @@ bool inGameScene::checkFullyGrown(tagTile tile)
 	}
 }
 
-void inGameScene::getItem(SEED seedType)
+void inGameScene::getItem(tagItem item)
+{
+	bool isAdded = false;
+	for (auto iter : PLAYER->getInven())
+	{
+		if (iter.item_info == item.item_info)
+		{
+			iter.amount++;
+			isAdded = true;
+			break;
+		}
+		isAdded = false;
+	}
+	if (isAdded == false)
+	{
+		for (int i = 0; i < INVENMAX; i++)
+		{
+			if (PLAYER->getInven()[i].item_image == NULL)
+			{
+				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
+				cout << PLAYER->getInven(i)->item_info << endl;
+				break;
+			}
+		}
+	}
+	
+}
+
+void inGameScene::dropFruit(tagTile tile, SEED seedType)
 {
 	const char* str;
 	switch (seedType)
@@ -1015,17 +1048,64 @@ void inGameScene::getItem(SEED seedType)
 		str = "선인장열매";
 		break;
 	}
-	for (auto iter : PLAYER->getInven())
+	tagItemOnField temp;
+	temp.item = ITEMMANAGER->findItem(str);
+	temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
+	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
+	temp.origCenterX = temp.centerX;
+	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);
+	temp.origCenterY = temp.centerY;
+	temp.rc = RectMakeCenter(temp.centerX, temp.centerY, 16, 16);
+	temp.angle = RANDOM->range(M_PI / 4, M_PI * 3 / 4);
+	temp.speed = 3.5f;
+	temp.gravity = 0.0f;
+	temp.isOnGround = false;
+	_vItemOnField.push_back(temp);
+}
+
+void inGameScene::ejectItem()
+{
+	getItemRc = RectMakeCenter(PLAYER->getCenterX(), PLAYER->getCenterY(), 5, 5);
+	for (int i = 0; i < _vItemOnField.size(); i++)
 	{
-		if (iter.item_info == str)
+		if (!_vItemOnField[i].isOnGround)
 		{
-			iter.amount++;
-			break;
+			_vItemOnField[i].gravity += 0.15f;
+			_vItemOnField[i].centerX += cosf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
+			_vItemOnField[i].centerY += -sinf(_vItemOnField[i].angle) * _vItemOnField[i].speed + _vItemOnField[i].gravity;
+			_vItemOnField[i].rc = RectMakeCenter(_vItemOnField[i].centerX, _vItemOnField[i].centerY, 16, 16);
+			if (_vItemOnField[i].centerY > _vItemOnField[i].origCenterY)
+			{
+				_vItemOnField[i].isOnGround = true;
+			}
 		}
-		if (PLAYER->getInven().size() < INVENMAX - 1)
+		if (_vItemOnField[i].isOnGround)
 		{
-			PLAYER->getInven().push_back(ITEMMANAGER->findItem(str));
-			break;
+			if (getDistance(_vItemOnField[i].centerX, _vItemOnField[i].centerY, PLAYER->getCenterX(), PLAYER->getCenterY()) < 100)
+			{
+				if (_vItemOnField[i].angle < -atan2f(PLAYER->getCenterY() - _vItemOnField[i].centerY, PLAYER->getCenterX() - _vItemOnField[i].centerX) - 0.3f)
+				{
+					_vItemOnField[i].angle += 0.2f;
+				}
+				else if (_vItemOnField[i].angle > -atan2f(PLAYER->getCenterY() - _vItemOnField[i].centerY, PLAYER->getCenterX() - _vItemOnField[i].centerX) + 0.3f)
+				{
+					_vItemOnField[i].angle -= 0.2f;
+				}
+				else
+				{
+					_vItemOnField[i].angle = -atan2f(PLAYER->getCenterY() - _vItemOnField[i].centerY, PLAYER->getCenterX() - _vItemOnField[i].centerX);
+				}
+
+				_vItemOnField[i].centerX += cosf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
+				_vItemOnField[i].centerY += -sinf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
+				_vItemOnField[i].rc = RectMakeCenter(_vItemOnField[i].centerX, _vItemOnField[i].centerY, 16, 16);
+			}
+		}
+		
+		if (PtInRect(&getItemRc, PointMake(_vItemOnField[i].centerX, _vItemOnField[i].centerY)))
+		{
+			getItem(_vItemOnField[i].item);
+			_vItemOnField.erase(_vItemOnField.begin() + i);
 		}
 	}
 }

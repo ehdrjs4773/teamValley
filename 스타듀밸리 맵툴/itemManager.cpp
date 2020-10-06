@@ -8,9 +8,12 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("pencil", "Images/sword/pencil.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("열매", "Images/BMP/열매.bmp", 640, 120, 16, 3);
+	IMAGEMANAGER->addFrameImage("열매(땅)", "Images/BMP/열매(땅).bmp", 256, 48, 16, 3);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 
+
 	addSeed();
+	addFruit();
 
 	addWeapon();
 
@@ -56,6 +59,7 @@ void itemManager::addSeed()
 	addSeed("씨앗", ITEM_SEED, 1, 3, SEED_AMARANTH, "아마란스 씨앗");
 	addSeed("씨앗", ITEM_SEED, 2, 3, SEED_GRAPE, "포도 씨앗");
 	addSeed("씨앗", ITEM_SEED, 3, 3, SEED_HOPS, "홉 씨앗");
+	addSeed("열매", ITEM_SEED, 3, 1, SEED_COFFEEBEAN, "커피콩 씨앗");
 }
 
 void itemManager::addWeapon()
@@ -73,6 +77,47 @@ void itemManager::addTool()
 	addTool("도구", ITEM_TOOL, true, 3, 0, TOOL_KETTLE, "주전자");
 	addTool("도구", ITEM_TOOL, true, 4, 0, TOOL_FISHINGROD, "낚시대");
 	addTool("도구", ITEM_TOOL, true, 5, 0, TOOL_SWORD, "칼");
+}
+
+void itemManager::addFruit()
+{
+	addFruit("열매", ITEM_FRUIT, 0, 0, SEED_PARSNIP, "파스닙");
+	addFruit("열매", ITEM_FRUIT, 1, 0, SEED_CAULIFLOWER, "콜리플라워");
+	addFruit("열매", ITEM_FRUIT, 2, 0, SEED_GARLIC, "마늘");
+	addFruit("열매", ITEM_FRUIT, 3, 0, SEED_RHUBARB, "대황");
+	addFruit("열매", ITEM_FRUIT, 4, 0, SEED_TOMATO, "토마토");
+	addFruit("열매", ITEM_FRUIT, 5, 0, SEED_HOTPEPPER, "고추");
+	addFruit("열매", ITEM_FRUIT, 6, 0, SEED_RADISH, "무");
+	addFruit("열매", ITEM_FRUIT, 7, 0, SEED_STARFRUIT, "스타후르츠");
+	addFruit("열매", ITEM_FRUIT, 8, 0, SEED_EGGPLANT, "가지");
+	addFruit("열매", ITEM_FRUIT, 9, 0, SEED_PUMPKIN, "호박");
+	addFruit("열매", ITEM_FRUIT, 10, 0, SEED_YAM, "참마");
+	addFruit("열매", ITEM_FRUIT, 11, 0, SEED_BEET, "비트");
+	addFruit("열매", ITEM_FRUIT, 12, 0, SEED_ANCIENTFRUIT, "고대과일");
+	addFruit("열매", ITEM_FRUIT, 13, 0, SEED_TULIP, "튤립");
+	addFruit("열매", ITEM_FRUIT, 14, 0, SEED_POPPY, "양귀비");
+	addFruit("열매", ITEM_FRUIT, 15, 0, SEED_SUNFLOWER, "해바라기");
+	addFruit("열매", ITEM_FRUIT, 0, 1, SEED_SWEETGEMBERRY, "달콤보석베리");
+	addFruit("열매", ITEM_FRUIT, 1, 1, SEED_STRAWBERRY, "딸기");
+	addFruit("열매", ITEM_FRUIT, 2, 1, SEED_GRAPE, "포도");
+	addFruit("열매", ITEM_FRUIT, 3, 1, SEED_COFFEEBEAN, "커피콩");
+	addFruit("열매", ITEM_FRUIT, 4, 1, SEED_GREENBEAN, "완두콩");
+	addFruit("열매", ITEM_FRUIT, 5, 1, SEED_POTATO, "감자");
+	addFruit("열매", ITEM_FRUIT, 6, 1, SEED_KALE, "케일");
+	addFruit("열매", ITEM_FRUIT, 7, 1, SEED_MELON, "멜론");
+	addFruit("열매", ITEM_FRUIT, 8, 1, SEED_BLUEBERRY, "블루베리");
+	addFruit("열매", ITEM_FRUIT, 9, 1, SEED_WHEAT, "밀");
+	addFruit("열매", ITEM_FRUIT, 10, 1, SEED_REDCABBAGE, "적양배추");
+	addFruit("열매", ITEM_FRUIT, 11, 1, SEED_CORN, "옥수수");
+	addFruit("열매", ITEM_FRUIT, 12, 1, SEED_ARTICHOKE, "아티초크");
+	addFruit("열매", ITEM_FRUIT, 13, 1, SEED_BOKCHOY, "청경채");
+	addFruit("열매", ITEM_FRUIT, 14, 1, SEED_CRANBERRY, "크랜베리");
+	addFruit("열매", ITEM_FRUIT, 15, 1, SEED_BLUEJAZZ, "블루재즈");
+	addFruit("열매", ITEM_FRUIT, 0, 2, SEED_SUMMERSPANGLE, "여름별꽃");
+	addFruit("열매", ITEM_FRUIT, 1, 2, SEED_FAIRYROSE, "요정장미");
+	addFruit("열매", ITEM_FRUIT, 2, 2, SEED_HOPS, "홉");
+	addFruit("열매", ITEM_FRUIT, 3, 2, SEED_AMARANTH, "아마란스");
+	addFruit("열매", ITEM_FRUIT, 4, 2, SEED_CATUS, "선인장열매");
 }
 
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, RECT rc, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
@@ -113,6 +158,19 @@ void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int 
 
 void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
 {
+	tagItem temp;
+	temp.item_image = IMAGEMANAGER->findImage(strKey);
+	temp.item_kind = _itemKind;
+	temp.indexX = _indexX;
+	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
+	temp.seedKind = _seedKind;
+	temp.item_info = _itemInfo;
+	temp.buy_price = _buyPrice;
+	temp.sell_price = _sellPrice;
+	temp.amount = 1;
+	temp.isFrame = _isFrame;
+	_vItem.push_back(temp);
 }
 
 void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, const char * _itemInfo, int _buyPrice, int _sellPrice)

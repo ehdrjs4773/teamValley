@@ -12,10 +12,12 @@ private:
 public:
 	HRESULT init();
 	void release();
-	void addSeed();
 
+	void addSeed();
 	void addWeapon();
 	void addTool();
+	void addFruit();
+
 	//아이템 추가하는 함수
 	void addItem(
 		const char* strKey,

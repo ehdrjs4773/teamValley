@@ -38,6 +38,8 @@ public:
 			currentSlotNumber = a;
 		}
 	}
+
+	void setInvenItem(int i, tagItem item) { _vItem[i] = item; }
 	vector<tagItem> getInven() { return _vItem; }
 	tagItem* getInven(int a) { return &_vItem[a]; }
 };

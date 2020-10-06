@@ -52,7 +52,9 @@ public:
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
 	vector<tagItem> getInven() { return _inventory->getInven(); }
+	tagItem* getInven(int a) { return _inventory->getInven(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
+	void setInvenItem(int i, tagItem item) { _inventory->setInvenItem(i, item); }
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }

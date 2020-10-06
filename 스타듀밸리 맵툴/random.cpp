@@ -39,3 +39,9 @@ float random::range(float min, float max)
 	float rnd = ((float)rand() / (float)RAND_MAX);
 	return (rnd * (max - min)) + min;
 }
+
+float random::range(double min, double max)
+{
+	float rnd = ((float)rand() / (float)RAND_MAX);
+	return (float)(rnd * (max - min)) + min;
+}
