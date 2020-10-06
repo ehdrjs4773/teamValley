@@ -6,13 +6,7 @@ void inventory::init()
 
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
-<<<<<<< HEAD
 	//IMAGEMANAGER->addFrameImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, 9, 4);
-=======
-	IMAGEMANAGER->addFrameImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, 9, 4);
-
-
->>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 
 	for (int i = 0; i < INVENMAX; i++)
