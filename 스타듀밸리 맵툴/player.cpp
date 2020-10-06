@@ -53,20 +53,8 @@ void  player::update()
 	}
 }
 
-void player::InventroyRender(HDC hdc)
-{
-	if (isShowInventory)
-	{
-
-		_inventory->render(hdc);
-	}
-
-	else _inventory->quickSlot(hdc);
-}
-
 void  player::render()
 {
-
 	//switch (_pState)
 	//{
 	//case STATE::digGround:
@@ -126,7 +114,15 @@ void  player::render()
 		}
 	}
 
+}
 
+void player::InventroyRender(HDC hdc)
+{
+	if (isShowInventory)
+	{
+		_inventory->render(hdc);
+	}
+	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 

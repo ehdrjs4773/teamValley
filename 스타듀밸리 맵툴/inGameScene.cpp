@@ -53,18 +53,22 @@ void inGameScene::update()
 	if (INPUT->GetKeyDown(VK_F3))
 	{
 		changeSeason(SPRING);
+		changeGrass();
 	}
 	if (INPUT->GetKeyDown(VK_F4))
 	{
 		changeSeason(SUMMER);
+		changeGrass();
 	}
 	if (INPUT->GetKeyDown(VK_F5))
 	{
 		changeSeason(AUTUMN);
+		changeGrass();
 	}
 	if (INPUT->GetKeyDown(VK_F6))
 	{
 		changeSeason(WINTER);
+		changeGrass();
 	}
 }
 
@@ -143,17 +147,12 @@ void inGameScene::renderMap()
 				IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 
-				if (_tile[i][j].isWet)
-				{
-					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
-				}
-
 				//인게임 화면 오브젝트 그린다
 				if (_tile[i][j].obj != OBJ_NONE)
 				{
 					if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
-						|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE)
+						|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
+						|| _tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
 					{
 						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
@@ -169,11 +168,21 @@ void inGameScene::renderMap()
 							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 					}
 				}
+				if (_tile[i][j].isWet)
+				{
+					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
+				}
 				if (_tile[i][j].objOver != OVR_NONE)
 				{
 					if (_tile[i][j].objType == OTY_CROP)
 					{
 						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+					}
+					else if (_tile[i][j].objType == OTY_GRASS)
+					{
+						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
 					}
 					else
@@ -196,7 +205,7 @@ void inGameScene::playerMove()
 		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
 		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 		{
-			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE 
+			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].objType == OTY_GRASS
 				|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED && 
 					_tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN 
 					&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
@@ -907,7 +916,7 @@ void inGameScene::setRandomObstacles()
 			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
-				switch (RANDOM->range(4))
+				switch (RANDOM->range(6))
 				{
 				case 0:
 					_tile[i][j].obj = OBJ_DESTRUCTIBLE;
@@ -1003,10 +1012,114 @@ void inGameScene::setRandomObstacles()
 						}
 					}
 					break;
+				case 4:
+					_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+					_tile[i][j].objType = OTY_WEED;
+					switch (RANDOM->range(3))
+					{
+					case 0:
+						_tile[i][j].objFrameX = 4;
+						_tile[i][j].objFrameY = 1;
+						break;
+					case 1:
+						_tile[i][j].objFrameX = 5;
+						_tile[i][j].objFrameY = 1;
+						break;
+					case 2:
+						_tile[i][j].objFrameX = 5;
+						_tile[i][j].objFrameY = 2;
+						break;
+					}
+					break;
+				case 5:
+					if (i - 1 >= 0)
+					{
+						switch (RANDOM->range(3))
+						{
+						case 0:
+							_tile[i - 1][j].objType = OTY_GRASS;
+							_tile[i - 1][j].objOver = OVR_OVER;
+							_tile[i - 1][j].ovlFrameX = 0;
+							_tile[i - 1][j].ovlFrameY = 3;
+
+							_tile[i][j].objType = OTY_GRASS;
+							_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+							_tile[i][j].objFrameX = 0;
+							_tile[i][j].objFrameY = 4;
+							break;
+						case 1:
+							_tile[i - 1][j].objType = OTY_GRASS;
+							_tile[i - 1][j].objOver = OVR_OVER;
+							_tile[i - 1][j].ovlFrameX = 1;
+							_tile[i - 1][j].ovlFrameY = 3;
+
+							_tile[i][j].objType = OTY_GRASS;
+							_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+							_tile[i][j].objFrameX = 1;
+							_tile[i][j].objFrameY = 4;
+							break;
+						case 2:
+							_tile[i - 1][j].objType = OTY_GRASS;
+							_tile[i - 1][j].objOver = OVR_OVER;
+							_tile[i - 1][j].ovlFrameX = 2;
+							_tile[i - 1][j].ovlFrameY = 3;
+
+							_tile[i][j].objType = OTY_GRASS;
+							_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+							_tile[i][j].objFrameX = 2;
+							_tile[i][j].objFrameY = 4;
+							break;
+						}
+						break;
+					}
+					break;
 				}
 			}
 		}
 	}
+}
+
+void inGameScene::changeGrass()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			if (_tile[i][j].objType != OTY_GRASS) continue;
+			switch (_currentSeason)
+			{
+			case SPRING:
+				if (_tile[i][j].obj == OBJ_DESTRUCTIBLE)
+				{
+					_tile[i][j].objFrameY = 4;
+					_tile[i - 1][j].ovlFrameY = 3;
+				}
+				break;
+			case SUMMER:
+				if (_tile[i][j].obj == OBJ_DESTRUCTIBLE)
+				{
+					_tile[i][j].objFrameY = 6;
+					_tile[i - 1][j].ovlFrameY = 5;
+				}
+				break;
+			case AUTUMN:
+				if (_tile[i][j].obj == OBJ_DESTRUCTIBLE)
+				{
+					_tile[i][j].objFrameY = 8;
+					_tile[i - 1][j].ovlFrameY = 7;
+				}
+				break;
+			case WINTER:
+				if (_tile[i][j].obj == OBJ_DESTRUCTIBLE)
+				{
+					_tile[i][j].objFrameY = 10;
+					_tile[i - 1][j].ovlFrameY = 9;
+				}
+				break;
+			}
+		}
+	}
+	
 }
 
 void inGameScene::setCurrentSlotNumber(int mouseWheel)
