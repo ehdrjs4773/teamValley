@@ -49,22 +49,11 @@ void  player::update()
 		if (isShowInventory) isShowInventory = false;
 		else isShowInventory = true;
 	}
-
-	if (getCurrentInven()->toolKind == TOOL_HOE)
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			_pState == DIGGROUND;
-		}
-	
-	}
 }
 
 void  player::render()
 {
-
 	playerRender();
-
 }
 
 void player::InventroyRender(HDC hdc)
@@ -77,12 +66,28 @@ void player::InventroyRender(HDC hdc)
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 
+void player::changePlayerState()
+{
+	if (getCurrentInven()->toolKind == TOOL_HOE)
+	{
+		_pState = DIGGROUND;
+	}
+}
+
+void player::changePlayerDirection(DIRECTION dir)
+{
+	_pDirection = dir;
+}
+
 void player::playerAnimation()
 {
 	count++;
 
 	switch (_pState)
 	{
+	case STAND:
+		index = 0;
+		break;
 	case RUN:
 		switch (_pDirection)
 		{
@@ -90,7 +95,7 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 5)
+				if (index > 4)
 				{
 					index = 0;
 				}
@@ -100,7 +105,7 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 5)
+				if (index > 4)
 				{
 					index = 0;
 				}
@@ -110,7 +115,7 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 7)
+				if (index > 6)
 				{
 					index = 0;
 				}
@@ -120,16 +125,13 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 6)
+				if (index > 5)
 				{
 					index = 0;
 				}
 			}
 			break;
 		}
-	case STAND:
-
-
 	case DIGGROUND:
 		switch (_pDirection)
 		{
@@ -137,9 +139,9 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 5)
+				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -147,9 +149,9 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 5)
+				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -157,9 +159,9 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 7)
+				if (index > 3)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -167,9 +169,9 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 6)
+				if (index > 2)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -431,7 +433,6 @@ void player::playerRender()
 			break;
 		}
 		break;
-
 	case RUN:
 		switch (_pDirection)
 		{
@@ -449,25 +450,6 @@ void player::playerRender()
 			break;
 		}
 		break;
-
-	case CUTDOWNTREE:
-		switch (_pDirection)
-		{
-		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 5);
-			break;
-		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 6);
-			break;
-		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 7);
-			break;
-		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 4);
-			break;
-		}
-		break;
-
 	case DIGGROUND:
 		switch (_pDirection)
 		{
@@ -485,7 +467,23 @@ void player::playerRender()
 			break;
 		}
 		break;
-
+	case CUTDOWNTREE:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 5);
+			break;
+		case LEFT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 6);
+			break;
+		case UP:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 7);
+			break;
+		case DOWN:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 4);
+			break;
+		}
+		break;
 	case CUTGRASS:
 		switch (_pDirection)
 		{
@@ -500,42 +498,6 @@ void player::playerRender()
 			break;
 		case DOWN:
 			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 12);
-			break;
-		}
-		break;
-
-	case FILLWATER:
-		switch (_pDirection)
-		{
-		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 16);
-			break;
-		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 17);
-			break;
-		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 19);
-			break;
-		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 18);
-			break;
-		}
-		break;
-
-	case CARRY:
-		switch (_pDirection)
-		{
-		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 22);
-			break;
-		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 21);
-			break;
-		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 23);
-			break;
-		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 20);
 			break;
 		}
 		break;
@@ -556,6 +518,45 @@ void player::playerRender()
 			break;
 		}
 		break;
+	case SPRAYWATER:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 16);
+			break;
+		case LEFT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 17);
+			break;
+		case UP:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 19);
+			break;
+		case DOWN:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 18);
+			break;
+		}
+		break;
+	case FILLWATER:
+		break;
+	case ATTACK:
+		break;
+	case CARRY:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 22);
+			break;
+		case LEFT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 21);
+			break;
+		case UP:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 23);
+			break;
+		case DOWN:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 20);
+			break;
+		}
+		break;
+	
 	}
 
 

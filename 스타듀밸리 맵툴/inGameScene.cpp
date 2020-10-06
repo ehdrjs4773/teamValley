@@ -29,10 +29,10 @@ void inGameScene::update()
 	PLAYER->update();
 
 	playerMove();
+	playerInteraction();
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
-	playerInteraction();
 
 	setCurrentSlotNumber(_mouseWheel);
 
@@ -280,10 +280,10 @@ void inGameScene::playerMove()
 	}
 	if (!INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D') && !INPUT->GetKey('W'))
 	{
-		if(PLAYER->getState()==RUN)
+		if(PLAYER->getState() == RUN)
 		{ 
-		PLAYER->setIndex(0);
-		PLAYER->setState(STAND);
+			PLAYER->setIndex(0);
+			PLAYER->setState(STAND);
 		}
 	}
 }
@@ -306,6 +306,22 @@ void inGameScene::playerInteraction()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
+			if (MouseIndexY < currentIndexY)
+			{
+				PLAYER->changePlayerDirection(UP);
+			}
+			if (MouseIndexY > currentIndexY)
+			{
+				PLAYER->changePlayerDirection(DOWN);
+			}
+			if (MouseIndexX < currentIndexX)
+			{
+				PLAYER->changePlayerDirection(LEFT);
+			}
+			if (MouseIndexX > currentIndexX)
+			{
+				PLAYER->changePlayerDirection(RIGHT);
+			}
 			//밭 갈기
 			hackGround();
 
@@ -345,13 +361,13 @@ void inGameScene::playerInteraction()
 
 void inGameScene::hackGround()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE) // && _tile[MouseIndexY][MouseIndexX].terrain == TR_GROUND)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE)
 	{
+		PLAYER->changePlayerState();
 		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 	}
-
 }
 
 void inGameScene::cutdownTree()
