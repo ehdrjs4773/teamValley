@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tileNode.h"
 
+
 class inGameScene : public gameNode
 {
 private:
@@ -30,6 +31,7 @@ private:
 	bool isShowRect;
 
 
+
 public:
 
 	HRESULT init();
@@ -51,6 +53,9 @@ public:
 	void waterGround();
 	void spreadSeed();
 	void harvest();
+	void cutdownTree();
+	void breakStone();
+	void cutGrass();
 
 	void checkHacked();
 

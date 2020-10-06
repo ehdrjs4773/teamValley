@@ -57,9 +57,11 @@ public:
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
 	RECT getRc() { return rc; }
-	
+
+	STATE getState() { return _pState; }
 	void setState(STATE dir) { _pState = dir; }
 
 	void playerAnimation();
+	void playerRender();
 };
 

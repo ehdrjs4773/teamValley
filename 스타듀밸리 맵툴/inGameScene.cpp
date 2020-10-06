@@ -14,6 +14,7 @@ HRESULT inGameScene::init()
 	isShowRect = false;
 
 
+
 	return S_OK;
 }
 
@@ -273,8 +274,11 @@ void inGameScene::playerMove()
 	}
 	if (!INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D') && !INPUT->GetKey('W'))
 	{
+		if(PLAYER->getState()==RUN)
+		{ 
 		PLAYER->setIndex(0);
 		PLAYER->setState(STAND);
+		}
 	}
 }
  
@@ -304,6 +308,16 @@ void inGameScene::playerInteraction()
 			
 			//수확
 			harvest();
+
+			//나무베기
+			cutdownTree();
+
+			//돌, 광석 깨기
+			breakStone();
+
+			//풀 베기 
+			cutGrass();
+
 		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -329,6 +343,10 @@ void inGameScene::hackGround()
 		_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 	}
 
+}
+
+void inGameScene::cutdownTree()
+{
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
 	{
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_HARDTREE)
@@ -347,7 +365,10 @@ void inGameScene::hackGround()
 
 		}
 	}
+}
 
+void inGameScene::breakStone()
+{
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
 		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
@@ -365,36 +386,14 @@ void inGameScene::hackGround()
 
 		}
 	}
+}
 
+void inGameScene::cutGrass()
+{
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE && _tile[MouseIndexY][MouseIndexX].objType == OTY_GRASS)
 	{
 
 	}
-
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE)
-	{
-		if (_tile[MouseIndexY][MouseIndexX].terrain == TR_WATER)
-		{
-
-		}
-
-		if (_tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
-		{
-
-		}
-
-	}
-
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_FISHINGROD && _tile[MouseIndexY][MouseIndexX].terrain == TR_WATER)
-	{
-
-	}
-
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
-	{
-		//몬스터 공격
-	}
-
 }
 
 void inGameScene::waterGround()

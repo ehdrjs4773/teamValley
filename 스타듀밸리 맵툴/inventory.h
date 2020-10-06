@@ -40,5 +40,6 @@ public:
 	}
 	tagItem* getInven(int a) { return &_vItem[a]; }
 	vector<tagItem>* getInven() { return &_vItem; }
+
 };
 
