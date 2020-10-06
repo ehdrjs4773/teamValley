@@ -67,6 +67,24 @@ enum TOOL
 	TOOL_FISHINGROD //낚시대
 };
 
+<<<<<<< HEAD
+struct tagItem 
+{
+	RECT rc;
+	image *item_image;
+	ITEM item_kind;
+	TOOL toolKind;
+	SEED seedKind;
+	const char* item_info;
+	int buy_price;
+	int sell_price;
+	int indexX, indexY;
+	bool isFrame;
+
+};
+
+=======
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 //플레이어
 enum STATE
 {
@@ -87,6 +105,9 @@ enum DIRECTION
 	RIGHT,
 	LEFT,
 	UP,
+<<<<<<< HEAD
+	DOWN
+=======
 	DOWN,
 	IDLE
 };
@@ -105,4 +126,5 @@ struct tagItem {
 	int indexX, indexY;
 	int amount;
 	bool isFrame;
+>>>>>>> 50b40b29f98e29809cbc522513b87add145bbb1c
 };
