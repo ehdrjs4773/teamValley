@@ -12,10 +12,10 @@ HRESULT player::init()
 
 	boxIndex = 0;
 	boxCount = 0;
+	isOpenPlayerInvenCover = false;
 	
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
-	playerInven = RectMakeCenter(500, 550, 48, 32);
 
 	speed = 2.0f;
 
@@ -24,6 +24,12 @@ HRESULT player::init()
 
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
+
+	IMAGEMANAGER->addFrameImage("플레이어 개인상점", "Images/inventory/playerInven.bmp", 144, 29, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("플레이어 상점뚜껑", "Images/inventory/playerInvenCover.bmp", 624, 32, 13, 1, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("플레이어 창고", "Images/inventory/playerStorage.bmp",650, 430, true, RGB(255, 0, 255));
+	playerStorage = IMAGEMANAGER->findImage("플레이어 창고");
 
 	_inventory = new inventory;
 	_inventory->init();
@@ -42,7 +48,6 @@ void  player::release()
 
 void  player::update()
 {
-
 	playerAnimation();
 
 	currentX = centerX / 16;
@@ -60,31 +65,32 @@ void  player::update()
 		else isShowInventory = true;
 	}
 
-	if (PtInRect(&playerInven, _ptMouse))
-	{
-		playerInvenAnimation();
-		playerInvenCoverAnimation();
-	}
+
+	playerInvenCoverAnimation();
+
+
+	cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
+	
 }
 
-void  player::render()
+void player::render()
 {
 	playerRender();
-
-	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), playerInven.left, playerInven.top);
-	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(),500,500);
-
-	
 }
 
 void player::InventroyRender(HDC hdc)
 {
-	if (isShowInventory)
+	if(isShowInventory)
 	{
 		_inventory->render(hdc);
 	}
 	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
+
+	if (isOpenPlayerInvenCover)
+	{
+		playerStorage->render(hdc);
+	}
 }
 
 void player::hpBarRender(HDC hdc)
@@ -491,20 +497,37 @@ void player::playerInvenAnimation()
 
 void player::playerInvenCoverAnimation()
 {
-
-	boxCount++;
-	if(boxCount % 5==0)
+	if (isOpenPlayerInvenCover)
 	{
-		boxIndex++;
-		if (boxIndex > 12)
+		boxCount++;
+		if (boxCount % 5 == 0)
 		{
-			boxIndex = 0;
+			boxIndex++;
+			if (boxIndex > 12)
+			{
+				boxIndex = 12;
+			}
 		}
-		
+	}
+	else if(!isOpenPlayerInvenCover)
+	{
+		boxCount++;
+		if (boxCount % 5 == 0)
+		{
+			boxIndex--;
+			if (boxIndex < 0)
+			{
+				boxIndex = 0;
+			}
+		}
 	}
 }
 
-
+void player::drawPlayerInven(tagTile tile1, tagTile tile2)
+{
+	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), tile1.rc.left, tile1.rc.top, boxIndex, 0);
+	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), tile2.rc.left, tile2.rc.top, boxIndex, 0);
+}
 
 void player::playerRender()
 {
@@ -655,4 +678,13 @@ void player::playerRender()
 	}
 
 
+}
+
+void player::OpenPlayerInvenCover()
+{
+	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
+	{
+		if(isOpenPlayerInvenCover) isOpenPlayerInvenCover = false;
+		else isOpenPlayerInvenCover = true;
+	}
 }

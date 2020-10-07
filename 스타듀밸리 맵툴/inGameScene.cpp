@@ -100,6 +100,8 @@ void inGameScene::render()
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
 
+	PLAYER->drawPlayerInven(_tile[15][30],_tile[14][30]);
+
 	CAMERAMANAGER->render(getMemDC());
 	
 	PLAYER->InventroyRender(getMemDC());
@@ -312,6 +314,8 @@ void inGameScene::playerInteraction()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
+
+
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
 		if (MouseIndexY < currentIndexY)
@@ -347,6 +351,8 @@ void inGameScene::playerInteraction()
 
 		//¹°»Ñ¸®±â
 		waterGround();
+
+		PLAYER->OpenPlayerInvenCover();
 
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))

@@ -76,9 +76,7 @@ void loadingScene::loadingImage()
 
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("플레이어 개인상점","Images/inventory/playerInven.bmp", 144, 32, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("플레이어 상점뚜껑", "Images/inventory/playerInvenCover.bmp", 624, 32, 13, 1, true, RGB(255, 0, 255));
-
+	
 }
 
 void loadingScene::loadingSound()

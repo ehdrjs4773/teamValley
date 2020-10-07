@@ -8,6 +8,8 @@ class player : public singletonBase<player>
 private:
 	RECT rc;
 	RECT frontHpBar;
+	RECT playerInven;
+	
 	float centerX, centerY;
 	int currentX, currentY;
 	int MouseIndexX, MouseIndexY;
@@ -22,6 +24,7 @@ private:
 
 	int boxCount;
 	int boxIndex;
+	bool isOpenPlayerInvenCover;
 
 	bool isShowInventory;
 
@@ -38,6 +41,7 @@ private:
 	image* move;
 	image* state;
 	image* backHpBar;
+	image* playerStorage;
 
 	
 	image* _cutdownTree;
@@ -94,6 +98,9 @@ public:
 
 	void playerAnimation();
 	void playerRender();
-	void boxAnimation();
+	void playerInvenAnimation();
+	void playerInvenCoverAnimation();
+	void drawPlayerInven(tagTile tile1, tagTile tile2);
+	void OpenPlayerInvenCover();
 };
 
