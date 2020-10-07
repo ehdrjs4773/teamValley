@@ -66,6 +66,7 @@ public:
 	tagItem* getInven(int a) { return _inventory->getInven(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 	void setInvenItem(int i, tagItem item) { _inventory->setInvenItem(i, item); }
+	void setInvenItemAmount(int i, int amount) { _inventory->setInvenItemAmount(i, amount); }
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }

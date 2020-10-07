@@ -78,6 +78,13 @@ void inventory::quickSlot(HDC hdc)
 		if (_vItem[i].item_image != NULL)
 		{
 			_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
+			if (_vItem[i].amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vItem[i].amount);
+				textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));
+			}
+			
 		}
 
 		if (PtInRect(&_playerTool[i], _ptMouse))

@@ -438,7 +438,6 @@ void inGameScene::breakStone()
 
 void inGameScene::cutGrass()
 {
-
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE || PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
 	{
 		PLAYER->setState(CUTGRASS);
@@ -466,7 +465,6 @@ void inGameScene::cutGrass()
 				{
 					if (_tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
 					{
-						//dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
 						_tile[i][j].seedType = SEED_NONE;
@@ -765,27 +763,46 @@ void inGameScene::plantSeed()
 
 void inGameScene::harvest()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_NONE || PLAYER->getCurrentInven()->item_image == NULL)
+	if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 	{
-		if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
+		dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STARFRUIT
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_EGGPLANT
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ANCIENTFRUIT
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_SWEETGEMBERRY
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STRAWBERRY
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_COFFEEBEAN)	//여러번 수확할 수 있는 작물들
 		{
-			dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+			_tile[MouseIndexY][MouseIndexX].grownLevel = 5;
+			_tile[MouseIndexY][MouseIndexX].objFrameX = 7;
+			_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 7;
 		}
-		_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-		_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-		_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
-		_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+		else if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_GREENBEAN
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_BLUEBERRY
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CORN
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ARTICHOKE
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CRANBERRY
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOPS
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CATUS)	//여러번 수확할 수 있는 작물들
+		{
+			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+			_tile[MouseIndexY][MouseIndexX].grownLevel = 5;
+			_tile[MouseIndexY][MouseIndexX].objFrameX = 15;
+			_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 15;
+		}
+		else
+		{
+			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+			_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
+			_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
 
-		_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
-	}
-	else if (PLAYER->getCurrentInven()->toolKind != TOOL_KETTLE && PLAYER->getCurrentInven()->toolKind != TOOL_SICKLE)
-	{
-		_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-		_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-		_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
-		_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
-
-		_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
+			_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
+		}
 	}
 }
 
@@ -796,11 +813,36 @@ void inGameScene::makeCropGrow()
 		for (int j = 0; j < TILEX; j++)
 		{
 			if (_tile[i][j].obj != OBJ_SEED) continue;
-			if (_tile[i][j].isFullyGrown == false)
+			if (!_tile[i][j].isFullyGrown)
 			{
-				_tile[i][j].grownLevel += 1;
-				_tile[i][j].objFrameX += 1;
-				_tile[i - 1][j].ovlFrameX += 1;
+				if ((_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STARFRUIT
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_EGGPLANT
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ANCIENTFRUIT
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_SWEETGEMBERRY
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STRAWBERRY
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_COFFEEBEAN
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GREENBEAN
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_BLUEBERRY
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CORN
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ARTICHOKE
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CRANBERRY
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOPS
+					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CATUS)
+					&& (_tile[i][j].objFrameX == 7 || _tile[i][j].objFrameX == 15))
+				{
+					_tile[i][j].grownLevel += 1;
+					_tile[i][j].objFrameX -= 1;
+					_tile[i - 1][j].ovlFrameX -= 1;
+				}
+				else
+				{
+					_tile[i][j].grownLevel += 1;
+					_tile[i][j].objFrameX += 1;
+					_tile[i - 1][j].ovlFrameX += 1;
+				}
 
 				//다자랐는지 확인
 				_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
@@ -969,11 +1011,11 @@ bool inGameScene::checkFullyGrown(tagTile tile)
 void inGameScene::getItem(tagItem item)
 {
 	bool isAdded = false;
-	for (auto iter : (*PLAYER->getInven()))
+	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (iter.item_info == item.item_info)
+		if (PLAYER->getInven()->at(i).item_info == item.item_info)
 		{
-			iter.amount++;
+			PLAYER->setInvenItemAmount(i, PLAYER->getInven()->at(i).amount + 1);
 			isAdded = true;
 			break;
 		}
