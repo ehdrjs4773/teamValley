@@ -33,6 +33,7 @@ void  player::release()
 
 void  player::update()
 {
+
 	playerAnimation();
 
 	currentX = centerX / 16;

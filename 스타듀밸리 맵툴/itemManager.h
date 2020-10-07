@@ -25,7 +25,6 @@ public:
 		bool _isFrame,
 		int _indexX,
 		int _indexY,
-		RECT rc = RectMakeCenter(0, 0, 0, 0),
 		TOOL _toolKind = TOOL_NONE,
 		SEED _seedKind = SEED_NONE,
 		const char* _itemInfo = " ",

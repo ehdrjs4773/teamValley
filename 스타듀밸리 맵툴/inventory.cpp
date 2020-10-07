@@ -41,6 +41,10 @@ void inventory::release()
 
 void inventory::update()
 {
+	for (int i = 0; i < _vItem.size(); i++)
+	{
+		_vItem[i].rc = RectMake(270 + 59 * (i % 12), 400 + 55 * (i / 12), 55, 45);
+	}
 }
 
 

@@ -57,9 +57,14 @@ void shop::release()
 
 void shop::update()
 {
+	_inven->update();
 	sell();
 	buy();
 	shop_scroll();
+	if (INPUT->GetKeyDown(VK_TAB))
+	{
+		SCENEMANAGER->loadScene("인게임화면");
+	}
 
 }
 
@@ -177,15 +182,15 @@ void shop::sell()
 {
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				(_vInven)[i].buy_price = NULL;
-				(_vInven)[i].item_image = NULL;
-				(_vInven)[i].item_info = NULL;
-				(_vInven)[i].item_kind = ITEM_ENDITEM;
-				(_vInven)[i].sell_price = NULL;
+				(*_vInven)[i].buy_price = NULL;
+				(*_vInven)[i].item_image = NULL;
+				(*_vInven)[i].item_info = NULL;
+				(*_vInven)[i].item_kind = ITEM_ENDITEM;
+				(*_vInven)[i].sell_price = NULL;
 			}
 		}
 	}
@@ -210,22 +215,22 @@ void shop::buy()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
 		{	
-			if ((_vInven)[i].item_image == NULL)
+			if ((*_vInven)[i].item_image == NULL)
 			{
 				if (is_click)
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
-						(_vInven)[i].buy_price = _vItem[click_index].buy_price;
-						(_vInven)[i].item_image = _vItem[click_index].item_image;
-						(_vInven)[i].indexX = _vItem[click_index].indexX;
-						(_vInven)[i].indexY = _vItem[click_index].indexY;
-						(_vInven)[i].isFrame = _vItem[click_index].isFrame;
-						(_vInven)[i].item_info = _vItem[click_index].item_info;
-						(_vInven)[i].item_kind = _vItem[click_index].item_kind;
-						(_vInven)[i].sell_price = _vItem[click_index].sell_price;
+						(*_vInven)[i].buy_price = _vItem[click_index].buy_price;
+						(*_vInven)[i].item_image = _vItem[click_index].item_image;
+						(*_vInven)[i].indexX = _vItem[click_index].indexX;
+						(*_vInven)[i].indexY = _vItem[click_index].indexY;
+						(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
+						(*_vInven)[i].item_info = _vItem[click_index].item_info;
+						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
+						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
 						is_click = false;
 					}
 				}
@@ -285,8 +290,6 @@ void shop::shop_scroll()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				current_index--;
-				cout << current_index << endl;
-
 				if (current_index < 0) current_index = 0;
 			}
 		}
@@ -295,17 +298,14 @@ void shop::shop_scroll()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				cout << current_index << endl;
 				current_index++;
-				cout << current_index << endl;
-
 				if (current_index > _vItem.size() - _vslot.size()) current_index = _vItem.size() - _vslot.size();
 			}
 		}
 		rc_scroll.top = (up_BT.bottom + 10) + ((float)current_index / (float)(_vItem.size() - _vslot.size())) * (float)342;
 		rc_scroll.bottom = rc_scroll.top + 38;
 	}
-	if (_ptMouse.x >= rc_scroll.left && _ptMouse.x <= rc_scroll.right)
+	/*if (_ptMouse.x >= rc_scroll.left && _ptMouse.x <= rc_scroll.right)
 	{
 		if (_ptMouse.y < rc_scroll.top)
 		{
@@ -321,6 +321,6 @@ void shop::shop_scroll()
 				current_index++;
 			}
 		}
-	}
+	}*/
 }
 
