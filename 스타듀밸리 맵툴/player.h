@@ -7,14 +7,23 @@ class player : public singletonBase<player>
 {
 private:
 	RECT rc;
+	RECT frontHpBar;
 	float centerX, centerY;
 	int currentX, currentY;
 	int MouseIndexX, MouseIndexY;
 	float speed;
 	int count;
 	int index;
+	int playerHp;
+	int hpBarX;
+	int axDamage;
+	int pickaxDamage;
+	int hoeDamage;
 
 	bool isShowInventory;
+
+	HBRUSH brush;		
+	HBRUSH oBrush;
 
 	tagTile _tile[TILEY][TILEX];
 	OBJ_TYPE objType;
@@ -25,6 +34,8 @@ private:
 	
 	image* move;
 	image* state;
+	image* backHpBar;
+
 	
 	image* _cutdownTree;
 
@@ -39,7 +50,9 @@ public:
 	void update();
 	void render();
 	void InventroyRender(HDC hdc);
-	
+
+	void hpBarRender(HDC hdc);
+
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }
@@ -56,6 +69,14 @@ public:
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
+
+	
+	int getHpBarX() { return hpBarX; } // 피통렉트 탑 좌표
+	int getAxDamage() { return axDamage; }
+	int getPickaxDamage() { return pickaxDamage; }
+	int getHoeDamage() { return hoeDamage; }
+	RECT getHpBar() { return frontHpBar; } 
+	void setHpBar(RECT hpbar) { frontHpBar = hpbar; }
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }

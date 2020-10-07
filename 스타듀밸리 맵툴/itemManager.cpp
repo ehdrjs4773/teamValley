@@ -14,10 +14,9 @@ HRESULT itemManager::init()
 
 	addSeed();
 	addFruit();
-
 	addWeapon();
-
 	addTool();
+	addObject();
 
 	return S_OK;
 }
@@ -120,7 +119,13 @@ void itemManager::addFruit()
 	addFruit("열매", ITEM_FRUIT, 4, 2, SEED_CATUS, "선인장열매");
 }
 
-void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addObject()
+{
+	addObjectItem("열매", ITEM_DEBRIS, 5, 2, "돌");
+	addObjectItem("열매", ITEM_DEBRIS, 6, 2, "나무");
+}
+
+void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, RECT rc, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -128,6 +133,7 @@ void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.isFrame = _isFrame;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
+	temp.rc = rc;
 	temp.toolKind = _toolKind;
 	temp.seedKind = _seedKind;
 	temp.item_info = _itemInfo;
@@ -144,6 +150,7 @@ void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int 
 	temp.item_kind = _itemKind;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = TOOL_NONE;
 	temp.seedKind = _seedKind;
 	temp.item_info = _itemInfo;
@@ -161,7 +168,25 @@ void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int
 	temp.item_kind = _itemKind;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.seedKind = _seedKind;
+	temp.item_info = _itemInfo;
+	temp.buy_price = _buyPrice;
+	temp.sell_price = _sellPrice;
+	temp.amount = 1;
+	temp.isFrame = _isFrame;
+	_vItem.push_back(temp);
+}
+
+void itemManager::addObjectItem(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
+{
+	tagItem temp;
+	temp.item_image = IMAGEMANAGER->findImage(strKey);
+	temp.item_kind = _itemKind;
+	temp.indexX = _indexX;
+	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
+	temp.seedKind = SEED_NONE;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -178,6 +203,7 @@ void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.isFrame = _isFrame;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = _toolKind;
 	temp.seedKind = SEED_NONE;
 	temp.item_info = _itemInfo;
@@ -193,6 +219,7 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
 	temp.item_kind = _itemKind;
 	temp.isFrame = _isFrame;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;

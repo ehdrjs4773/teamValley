@@ -63,6 +63,7 @@ public:
 	bool checkFullyGrown(tagTile tile);
 	void getItem(tagItem item);
 	void dropFruit(tagTile tile, SEED seedType);
+	void dropItem(tagTile tile, const char* itemInfo);
 	void ejectItem();
 
 	void checkHacked();

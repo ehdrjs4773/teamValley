@@ -10,6 +10,7 @@ enum ITEM
 	ITEM_FORAGE,
 	ITEM_SEED,
 	ITEM_FRUIT,
+	ITEM_DEBRIS,
 	ITEM_ENDITEM
 };
 
@@ -59,7 +60,6 @@ enum TOOL
 {
 	TOOL_NONE,
 	TOOL_HOE, //È£¹Ì
-	TOOL_SHOVEL, //»ð
 	TOOL_AX,     //µµ³¢
 	TOOL_PICKAX, //°î±ªÀÌ
 	TOOL_SICKLE, //³´

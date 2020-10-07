@@ -7,14 +7,19 @@ HRESULT player::init()
 	count = 0;
 	centerX = WINSIZEX / 2;
 	centerY = WINSIZEY / 2;
+	playerHp = 276;
+	pickaxDamage,axDamage,hoeDamage = 2;
+
+	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
+	hpBarX = frontHpBar.top;
 
 	speed = 2.0f;
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지.bmp", 576, 1632, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
 
-	IMAGEMANAGER->addFrameImage("playerState", "Images/BMP/playerState.bmp", 3000, 4250, 12, 17, true, RGB(255, 0, 255));
-	state = IMAGEMANAGER->findImage("playerState");
+	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
+	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
 	_inventory = new inventory;
 	_inventory->init();
@@ -55,6 +60,11 @@ void  player::update()
 void  player::render()
 {
 	playerRender();
+
+	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), 3, 1);
+	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), 13, 1);
+
+	
 }
 
 void player::InventroyRender(HDC hdc)
@@ -65,6 +75,16 @@ void player::InventroyRender(HDC hdc)
 	}
 	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
+}
+
+void player::hpBarRender(HDC hdc)
+{
+	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
+	Rectangle(hdc, frontHpBar);
+	brush = CreateSolidBrush(RGB(playerHp-200, 220, 7));
+	FillRect(hdc, &frontHpBar, brush);
+	DeleteObject(brush);
+
 }
 
 void player::playerAnimation()
@@ -358,7 +378,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -368,7 +388,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -378,7 +398,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 2)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -388,7 +408,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 11)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
