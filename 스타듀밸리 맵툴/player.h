@@ -8,6 +8,8 @@ class player : public singletonBase<player>
 private:
 	RECT rc;
 	RECT frontHpBar;
+	RECT playerInven;
+	
 	float centerX, centerY;
 	int currentX, currentY;
 	int MouseIndexX, MouseIndexY;
@@ -19,6 +21,10 @@ private:
 	int axDamage;
 	int pickaxDamage;
 	int hoeDamage;
+
+	int boxCount;
+	int boxIndex;
+	bool isOpenPlayerInvenCover;
 
 	bool isShowInventory;
 
@@ -35,6 +41,7 @@ private:
 	image* move;
 	image* state;
 	image* backHpBar;
+	image* playerStorage;
 
 	
 	image* _cutdownTree;
@@ -71,13 +78,11 @@ public:
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
 
-	
-	int getHpBarX() { return hpBarX; } // 피통렉트 탑 좌표
+	int getHpBarX() { return frontHpBar.top; }
 	int getAxDamage() { return axDamage; }
 	int getPickaxDamage() { return pickaxDamage; }
 	int getHoeDamage() { return hoeDamage; }
-	RECT getHpBar() { return frontHpBar; } 
-	void setHpBar(RECT hpbar) { frontHpBar = hpbar; }
+	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
@@ -94,5 +99,9 @@ public:
 
 	void playerAnimation();
 	void playerRender();
+	void playerInvenAnimation();
+	void playerInvenCoverAnimation();
+	void drawPlayerInven(tagTile tile1, tagTile tile2);
+	void OpenPlayerInvenCover();
 };
 
