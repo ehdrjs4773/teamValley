@@ -332,9 +332,6 @@ void inGameScene::playerInteraction()
 		//밭 갈기
 		hackGround();
 
-		//수확
-		harvest();
-
 		//나무베기
 		cutdownTree();
 
@@ -397,16 +394,15 @@ void inGameScene::cutdownTree()
 			{
 
 			}
-
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 			{
 
 			}
-
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
 			{
-
-
+				dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 			}
 		}
 	}
@@ -417,19 +413,21 @@ void inGameScene::breakStone()
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
 		PLAYER->setState(BREAKSTONE);
-		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
+		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_LARGESTONE)
+			{
 
-		}
-
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_LARGESTONE)
-		{
-
-		}
-
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
-		{
-
+			}
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
+			{
+				dropItem(_tile[MouseIndexY][MouseIndexX], "돌");
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			}
 		}
 	}
 }
@@ -439,59 +437,53 @@ void inGameScene::cutGrass()
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE || PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
 	{
 		PLAYER->setState(CUTGRASS);
-		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
-			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
-				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
+		switch (PLAYER->getDirection())
 		{
-			switch (PLAYER->getDirection())
+		case RIGHT:
+			sickleHitBox = RectMakeCenter(PLAYER->getCenterX() + 8, PLAYER->getCenterY(), 32, 64);
+			break;
+		case LEFT:
+			sickleHitBox = RectMakeCenter(PLAYER->getCenterX() - 8, PLAYER->getCenterY(), 32, 64);
+			break;
+		case UP:
+			sickleHitBox = RectMakeCenter(PLAYER->getCenterX(), PLAYER->getCenterY() - 16, 64, 32);
+			break;
+		case DOWN:
+			sickleHitBox = RectMakeCenter(PLAYER->getCenterX(), PLAYER->getCenterY() + 16, 64, 32);
+			break;
+		}
+		for (int i = (float)((float)CAMERAMANAGER->getY() / 16); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40); i++)
+		{
+			for (int j = (float)((float)CAMERAMANAGER->getX() / 16); j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40); j++)
 			{
-			case RIGHT:
-				sickleHitBox = RectMakeCenter(PLAYER->getCenterX() + 8, PLAYER->getCenterY(), 32, 64);
-				break;
-			case LEFT:
-				sickleHitBox = RectMakeCenter(PLAYER->getCenterX() - 8, PLAYER->getCenterY(), 32, 64);
-				break;
-			case UP:
-				sickleHitBox = RectMakeCenter(PLAYER->getCenterX(), PLAYER->getCenterY() - 16, 64, 32);
-				break;
-			case DOWN:
-				sickleHitBox = RectMakeCenter(PLAYER->getCenterX(), PLAYER->getCenterY() + 16, 64, 32);
-				break;
-			}
-			for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
-			{
-				for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
+				RECT temp;
+				if (IntersectRect(&temp, &sickleHitBox, &_tile[i][j].rc))
 				{
-					RECT temp;
-					if (IntersectRect(&temp, &sickleHitBox, &_tile[i][j].rc))
+					if (_tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
 					{
-						if (_tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
-						{
-							//dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
-							_tile[i][j].obj = OBJ_NONE;
-							_tile[i][j].objType = OTY_NONE;
-							_tile[i][j].seedType = SEED_NONE;
-							_tile[i][j].grownLevel = 0;
-							_tile[i][j].isFullyGrown = false;
+						//dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+						_tile[i][j].obj = OBJ_NONE;
+						_tile[i][j].objType = OTY_NONE;
+						_tile[i][j].seedType = SEED_NONE;
+						_tile[i][j].grownLevel = 0;
+						_tile[i][j].isFullyGrown = false;
 
-							_tile[i - 1][j].objOver = OVR_NONE;
-						}
-						if (_tile[i][j].objType == OTY_CROP &&
-							(_tile[i][j].seedType == SEED_AMARANTH
-								|| _tile[i][j].seedType == SEED_WHEAT
-								|| _tile[i][j].seedType == SEED_KALE)
-							&& _tile[i][j].isFullyGrown == true)
-						{
-							dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
-							_tile[i][j].obj = OBJ_NONE;
-							_tile[i][j].objType = OTY_NONE;
-							_tile[i][j].seedType = SEED_NONE;
-							_tile[i][j].grownLevel = 0;
-							_tile[i][j].isFullyGrown = false;
+						_tile[i - 1][j].objOver = OVR_NONE;
+					}
+					if (_tile[i][j].objType == OTY_CROP &&
+						(_tile[i][j].seedType == SEED_AMARANTH
+							|| _tile[i][j].seedType == SEED_WHEAT
+							|| _tile[i][j].seedType == SEED_KALE)
+						&& _tile[i][j].isFullyGrown == true)
+					{
+						dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+						_tile[i][j].obj = OBJ_NONE;
+						_tile[i][j].objType = OTY_NONE;
+						_tile[i][j].seedType = SEED_NONE;
+						_tile[i][j].grownLevel = 0;
+						_tile[i][j].isFullyGrown = false;
 
-							_tile[i - 1][j].objOver = OVR_NONE;
-						}
+						_tile[i - 1][j].objOver = OVR_NONE;
 					}
 				}
 			}
@@ -767,7 +759,7 @@ void inGameScene::plantSeed()
 
 void inGameScene::harvest()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_NONE || PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE || PLAYER->getCurrentInven()->item_image == NULL)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_NONE || PLAYER->getCurrentInven()->item_image == NULL)
 	{
 		if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 		{
@@ -1117,6 +1109,23 @@ void inGameScene::dropFruit(tagTile tile, SEED seedType)
 	}
 	tagItemOnField temp;
 	temp.item = ITEMMANAGER->findItem(str);
+	temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
+	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
+	temp.origCenterX = temp.centerX;
+	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);
+	temp.origCenterY = temp.centerY;
+	temp.rc = RectMakeCenter(temp.centerX, temp.centerY, 16, 16);
+	temp.angle = RANDOM->range(M_PI / 4, M_PI * 3 / 4);
+	temp.speed = 3.5f;
+	temp.gravity = 0.0f;
+	temp.isOnGround = false;
+	_vItemOnField.push_back(temp);
+}
+
+void inGameScene::dropItem(tagTile tile, const char * itemInfo)
+{
+	tagItemOnField temp;
+	temp.item = ITEMMANAGER->findItem(itemInfo);
 	temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
