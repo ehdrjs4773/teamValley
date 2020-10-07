@@ -58,7 +58,6 @@ enum TOOL
 {
 	TOOL_NONE,
 	TOOL_HOE, //È£¹Ì
-	TOOL_SHOVEL, //»ð
 	TOOL_AX,     //µµ³¢
 	TOOL_PICKAX, //°î±ªÀÌ
 	TOOL_SICKLE, //³´

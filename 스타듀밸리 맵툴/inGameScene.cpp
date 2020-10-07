@@ -90,9 +90,11 @@ void inGameScene::render()
 
 	PLAYER->render();
 
+
 	CAMERAMANAGER->render(getMemDC());
 	
 	PLAYER->InventroyRender(getMemDC());
+	PLAYER->hpBarRender(getMemDC());
 }
 
 void inGameScene::load()
@@ -369,6 +371,8 @@ void inGameScene::hackGround()
 		_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 		_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
+		//PLAYER->getHpBar().top; -= PLAYER->getHoeDamage();
+
 	}
 }
 
@@ -376,6 +380,7 @@ void inGameScene::cutdownTree()
 {
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
 	{
+		PLAYER->changePlayerState();
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_HARDTREE)
 		{
 
@@ -398,6 +403,7 @@ void inGameScene::breakStone()
 {
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
+		PLAYER->changePlayerState();
 		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_SEED)
 		{
 
@@ -417,6 +423,7 @@ void inGameScene::breakStone()
 
 void inGameScene::cutGrass()
 {
+	PLAYER->changePlayerState();
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE && _tile[MouseIndexY][MouseIndexX].objType == OTY_GRASS)
 	{
 
@@ -425,6 +432,7 @@ void inGameScene::cutGrass()
 
 void inGameScene::waterGround()
 {
+	PLAYER->changePlayerState();
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
 		_tile[MouseIndexY][MouseIndexX].isWet = true;
@@ -695,8 +703,6 @@ void inGameScene::harvest()
 			}
 			break;
 		case TOOL_HOE:
-			break;
-		case TOOL_SHOVEL:
 			break;
 		case TOOL_AX:
 			break;
