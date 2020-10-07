@@ -969,7 +969,7 @@ bool inGameScene::checkFullyGrown(tagTile tile)
 void inGameScene::getItem(tagItem item)
 {
 	bool isAdded = false;
-	for (auto iter : PLAYER->getInven())
+	for (auto iter : (*PLAYER->getInven()))
 	{
 		if (iter.item_info == item.item_info)
 		{
@@ -983,7 +983,7 @@ void inGameScene::getItem(tagItem item)
 	{
 		for (int i = 0; i < INVENMAX; i++)
 		{
-			if (PLAYER->getInven()[i].item_image == NULL)
+			if ((*PLAYER->getInven())[i].item_image == NULL)
 			{
 				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
 				cout << PLAYER->getInven(i)->item_info << endl;
