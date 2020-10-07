@@ -12,10 +12,13 @@ private:
 public:
 	HRESULT init();
 	void release();
-	void addSeed();
 
+	void addSeed();
 	void addWeapon();
 	void addTool();
+	void addFruit();
+	void addObject();
+
 	//아이템 추가하는 함수
 	void addItem(
 		const char* strKey,
@@ -47,6 +50,16 @@ public:
 		int _indexX,
 		int _indexY,
 		SEED _seedKind = SEED_NONE,
+		const char* _itemInfo = " ",
+		int _buyPrice = 0,
+		int _sellPrice = 0,
+		bool _isFrame = true);
+
+	void addObjectItem(
+		const char* strKey,
+		ITEM _itemKind,
+		int _indexX,
+		int _indexY,
 		const char* _itemInfo = " ",
 		int _buyPrice = 0,
 		int _sellPrice = 0,

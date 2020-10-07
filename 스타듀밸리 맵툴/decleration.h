@@ -9,6 +9,8 @@ enum ITEM
 	ITEM_RESOURCE,
 	ITEM_FORAGE,
 	ITEM_SEED,
+	ITEM_FRUIT,
+	ITEM_DEBRIS,
 	ITEM_ENDITEM
 };
 
@@ -103,4 +105,15 @@ struct tagItem {
 	int indexX, indexY;
 	int amount;
 	bool isFrame;
+};
+
+struct tagItemOnField {
+	tagItem item;
+	RECT rc;
+	float origCenterX, origCenterY;
+	float centerX, centerY;
+	float gravity;
+	float speed;
+	float angle;
+	bool isOnGround;
 };

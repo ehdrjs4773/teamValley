@@ -19,6 +19,8 @@
 #include <tchar.h>
 // C++ 런타임 헤더 파일입니다.
 #include <iostream>
+#define _USE_MATH_DEFINES
+#include <math.h>
 using namespace std;
 
 // 자주사용하는 STL

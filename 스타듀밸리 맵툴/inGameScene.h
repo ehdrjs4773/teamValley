@@ -10,9 +10,11 @@ private:
 	tagTile _tile[TILEY][TILEX]; //인게임화면(왼쪽화면)에 사용되는 타일 총 400개
 
 	//땅에 떨어진 아이템용 벡터
-	vector<tagItem*> vItemOnField;
+	vector<tagItemOnField> _vItemOnField;
 
 	float playerCenterX, playerCenterY;
+	RECT getItemRc;
+	RECT sickleHitBox;
 
 	SEASON _currentSeason;
 
@@ -59,7 +61,10 @@ public:
 
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);
-	void getItem(SEED seedType);
+	void getItem(tagItem item);
+	void dropFruit(tagTile tile, SEED seedType);
+	void dropItem(tagTile tile, const char* itemInfo);
+	void ejectItem();
 
 	void checkHacked();
 

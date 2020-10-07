@@ -11,6 +11,7 @@ public:
 	int range(int min, int max);
 	float range(float num);
 	float range(float min, float max);
+	float range(double min, double max);
 
 	random() {}
 	~random() {}

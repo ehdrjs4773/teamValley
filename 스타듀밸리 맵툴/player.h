@@ -50,10 +50,9 @@ public:
 	void update();
 	void render();
 	void InventroyRender(HDC hdc);
+
 	void hpBarRender(HDC hdc);
 
-	void changePlayerState();
-	
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }
@@ -64,7 +63,9 @@ public:
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
 	vector<tagItem> getInven() { return _inventory->getInven(); }
+	tagItem* getInven(int a) { return _inventory->getInven(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
+	void setInvenItem(int i, tagItem item) { _inventory->setInvenItem(i, item); }
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
@@ -82,7 +83,13 @@ public:
 	RECT getRc() { return rc; }
 
 	STATE getState() { return _pState; }
-	void setState(STATE dir) { _pState = dir; }
+	void setState(STATE state) {
+		if (state != RUN)
+		{
+			index = 0;
+		}
+		_pState = state;
+	}
 
 	void playerAnimation();
 	void playerRender();

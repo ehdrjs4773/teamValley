@@ -86,39 +86,6 @@ void player::hpBarRender(HDC hdc)
 
 }
 
-void player::changePlayerState()
-{
-	if (getCurrentInven()->toolKind == TOOL_HOE)
-	{
-		_pState = DIGGROUND;
-	}
-
-	if (getCurrentInven()->toolKind == TOOL_AX)
-	{
-		_pState = CUTDOWNTREE;
-	}
-
-	if (getCurrentInven()->toolKind == TOOL_PICKAX)
-	{
-		_pState = BREAKSTONE;
-	}
-
-	if (getCurrentInven()->toolKind == TOOL_SICKLE)
-	{
-		_pState = CUTGRASS;
-	}
-
-	//if (getCurrentInven()->toolKind == TOOL_SWORD)
-	//{
-	//	_pState = ATTACK;
-	//}
-
-	if (getCurrentInven()->toolKind == TOOL_KETTLE)
-	{
-		_pState = SPRAYWATER;
-	}
-}
-
 void player::playerAnimation()
 {
 	count++;
@@ -356,8 +323,52 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-
 	case SPRAYWATER:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 11)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
+	case FILLWATER:
 		switch (_pDirection)
 		{
 		case RIGHT:
