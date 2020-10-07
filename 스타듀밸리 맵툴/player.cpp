@@ -66,14 +66,6 @@ void player::InventroyRender(HDC hdc)
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 }
 
-void player::changePlayerState()
-{
-	if (getCurrentInven()->toolKind == TOOL_HOE)
-	{
-		_pState = DIGGROUND;
-	}
-}
-
 void player::playerAnimation()
 {
 	count++;
@@ -183,7 +175,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -193,7 +185,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -203,7 +195,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 3)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -213,7 +205,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -229,7 +221,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -239,7 +231,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -249,7 +241,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -259,7 +251,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -275,7 +267,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -285,7 +277,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -295,7 +287,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 4)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -305,13 +297,57 @@ void player::playerAnimation()
 				index++;
 				if (index > 6)
 				{
-					_pState == STAND;
+					_pState = STAND;
 				}
 			}
 			break;
 		}
 		break;
-
+	case SPRAYWATER:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 11)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
 	case FILLWATER:
 		switch (_pDirection)
 		{
@@ -405,7 +441,6 @@ void player::playerAnimation()
 			break;*/
 	}
 }
-
 
 void player::playerRender()
 {

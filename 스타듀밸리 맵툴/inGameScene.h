@@ -14,6 +14,7 @@ private:
 
 	float playerCenterX, playerCenterY;
 	RECT getItemRc;
+	RECT sickleHitBox;
 
 	SEASON _currentSeason;
 

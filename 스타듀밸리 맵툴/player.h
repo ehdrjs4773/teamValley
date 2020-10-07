@@ -39,8 +39,6 @@ public:
 	void update();
 	void render();
 	void InventroyRender(HDC hdc);
-
-	void changePlayerState();
 	
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
@@ -64,7 +62,13 @@ public:
 	RECT getRc() { return rc; }
 
 	STATE getState() { return _pState; }
-	void setState(STATE dir) { _pState = dir; }
+	void setState(STATE state) {
+		if (state != RUN)
+		{
+			index = 0;
+		}
+		_pState = state;
+	}
 
 	void playerAnimation();
 	void playerRender();
