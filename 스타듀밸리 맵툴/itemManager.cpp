@@ -125,7 +125,7 @@ void itemManager::addObject()
 	addObjectItem("열매", ITEM_DEBRIS, 6, 2, "나무");
 }
 
-void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, RECT rc, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -133,7 +133,6 @@ void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.isFrame = _isFrame;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
-	temp.rc = rc;
 	temp.toolKind = _toolKind;
 	temp.seedKind = _seedKind;
 	temp.item_info = _itemInfo;
