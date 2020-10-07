@@ -376,7 +376,7 @@ void inGameScene::hackGround()
 			_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 			_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 			_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
-			//PLAYER->getHpBar().top; -= PLAYER->getHoeDamage();
+			PLAYER->setHpBarX(PLAYER->getHpBarX()+ PLAYER->getHoeDamage());
 
 		}
 	}

@@ -20,6 +20,9 @@ private:
 	int pickaxDamage;
 	int hoeDamage;
 
+	int boxCount;
+	int boxIndex;
+
 	bool isShowInventory;
 
 	HBRUSH brush;		
@@ -70,13 +73,11 @@ public:
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
 
-	
-	int getHpBarX() { return hpBarX; } // 피통렉트 탑 좌표
+	int getHpBarX() { return frontHpBar.top; }
 	int getAxDamage() { return axDamage; }
 	int getPickaxDamage() { return pickaxDamage; }
 	int getHoeDamage() { return hoeDamage; }
-	RECT getHpBar() { return frontHpBar; } 
-	void setHpBar(RECT hpbar) { frontHpBar = hpbar; }
+	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
@@ -93,5 +94,6 @@ public:
 
 	void playerAnimation();
 	void playerRender();
+	void boxAnimation();
 };
 

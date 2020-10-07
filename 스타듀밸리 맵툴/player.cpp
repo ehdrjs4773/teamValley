@@ -10,8 +10,12 @@ HRESULT player::init()
 	playerHp = 276;
 	pickaxDamage,axDamage,hoeDamage = 2;
 
+	boxIndex = 0;
+	boxCount = 0;
+	
+
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
-	hpBarX = frontHpBar.top;
+	playerInven = RectMakeCenter(500, 550, 48, 32);
 
 	speed = 2.0f;
 
@@ -54,14 +58,20 @@ void  player::update()
 		if (isShowInventory) isShowInventory = false;
 		else isShowInventory = true;
 	}
+
+	if (PtInRect(&playerInven, _ptMouse))
+	{
+		playerInvenAnimation();
+		playerInvenCoverAnimation();
+	}
 }
 
 void  player::render()
 {
 	playerRender();
 
-	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), 3, 1);
-	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), 13, 1);
+	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), playerInven.left, playerInven.top);
+	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(),500,500);
 
 	
 }
@@ -78,9 +88,11 @@ void player::InventroyRender(HDC hdc)
 
 void player::hpBarRender(HDC hdc)
 {
+	int a = 0 + (278 - playerHp);
+
 	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
 	Rectangle(hdc, frontHpBar);
-	brush = CreateSolidBrush(RGB(playerHp-200, 220, 7));
+	brush = CreateSolidBrush(RGB(a, 220, 7));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
 
@@ -461,6 +473,37 @@ void player::playerAnimation()
 			break;*/
 	}
 }
+
+void player::playerInvenAnimation()
+{
+	boxCount++;
+	if (boxCount % 8 == 0)
+	{
+		boxIndex++;
+		if (boxIndex > 2)
+		{
+			boxIndex = 0;
+		}
+
+	}
+}
+
+void player::playerInvenCoverAnimation()
+{
+
+	boxCount++;
+	if(boxCount % 5==0)
+	{
+		boxIndex++;
+		if (boxIndex > 12)
+		{
+			boxIndex = 0;
+		}
+		
+	}
+}
+
+
 
 void player::playerRender()
 {
