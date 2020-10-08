@@ -60,11 +60,19 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
-		_inventory->update();
-		if (isShowInventory) isShowInventory = false;
-		else isShowInventory = true;
+		
+		if (isShowInventory)
+		{
+			isShowInventory = false;
+			_inventory->setInvenToryMove(false);
+		}
+		else
+		{	
+			_inventory->setInvenToryMove(true);
+			isShowInventory = true;
+		}
 	}
-
+	_inventory->update();
 
 	playerInvenCoverAnimation();
 
