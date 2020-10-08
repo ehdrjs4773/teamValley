@@ -77,6 +77,19 @@ void loadingScene::loadingImage()
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));
 	
+	//가축
+	IMAGEMANAGER->addFrameImage("갈색닭", "Images/가축/갈색닭.bmp", 64, 96, 4, 6);
+	IMAGEMANAGER->addFrameImage("갈색병아리", "Images/가축/병아리(갈색).bmp", 64, 96, 4, 6);
+	IMAGEMANAGER->addFrameImage("흰닭", "Images/가축/흰닭.bmp", 64, 96, 4, 6);
+	IMAGEMANAGER->addFrameImage("노란병아리", "Images/가축/병아리(노랑).bmp", 64, 96, 4, 6);
+	IMAGEMANAGER->addFrameImage("오리", "Images/가축/오리.bmp", 64, 96, 4, 6);
+	IMAGEMANAGER->addFrameImage("어린젖소", "Images/가축/어린젖소.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("어린황소", "Images/가축/어린황소.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("젖소", "Images/가축/젖소.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("황소", "Images/가축/황소.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("어린양", "Images/가축/어린양.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("털깎인양", "Images/가축/털깎인양.bmp", 128, 192, 4, 6);
+	IMAGEMANAGER->addFrameImage("양", "Images/가축/양.bmp", 128, 192, 4, 6);
 }
 
 void loadingScene::loadingSound()

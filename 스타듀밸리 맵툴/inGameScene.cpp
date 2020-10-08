@@ -159,6 +159,7 @@ void inGameScene::changeSeason(SEASON season)
 
 void inGameScene::renderMap()
 {
+	//플레이어보다 밑에 그려지는 오브젝트 렌더
 	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < currentIndexY + 2; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
@@ -228,6 +229,8 @@ void inGameScene::renderMap()
 		}
 	}
 	PLAYER->render();
+
+	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
 	for (int i = currentIndexY + 2; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
@@ -402,8 +405,6 @@ void inGameScene::playerInteraction()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-
-
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
 		if (MouseIndexY < currentIndexY)
@@ -467,11 +468,13 @@ void inGameScene::hackGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-			_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
-			_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
-			_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
-			PLAYER->setHpBarX(PLAYER->getHpBarX()+ PLAYER->getHoeDamage());
-
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			{
+				_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
+				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getHoeDamage());
+			}
 		}
 	}
 }

@@ -86,12 +86,13 @@ void  player::update()
 	}
 
 	_inventory->update();
-
-
 	
+
+
 	playerInvenCoverAnimation();
 
-	stock->stockAnimation();
+	//가축 움직임
+	stock->update();
 
 	cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
 	
@@ -100,6 +101,8 @@ void  player::update()
 void player::render()
 {
 	playerRender();
+
+	stock->render();
 }
 
 void player::InventroyRender(HDC hdc)

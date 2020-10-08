@@ -9,6 +9,8 @@ private:
 	int count;
 
 public:
+	void update();
+	void render();
 	void addStock();
 	void addPlayerStock(STOCKTYPE stockType);
 	tagStock findStock(STOCKTYPE stockType);
@@ -16,6 +18,8 @@ public:
 	void stockAnimation();
 	void setStockDirection(int stockNumber, DIRECTION dir);
 	void stockMove();
+	void setStockState();
+	void setStockIndex(int i);
 
 	Stock();
 	~Stock();

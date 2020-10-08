@@ -106,11 +106,20 @@ enum TREETYPE
 //ฐกรเ
 enum STOCKTYPE
 {
-	STOCK_MILKCOW,
-	STOCK_OX,
+	STOCK_WHITECOW,
+	STOCK_BROWNCOW,
 	STOCK_SHEEP,
-	STOCK_CHICKEN,
+	STOCK_BRONCHICKEN,
+	STOCK_WHITECHICKEN,
 	STOCK_DUCK
+};
+
+enum STOCKSTATE
+{
+	SS_MOVE,
+	SS_STAND,
+	SS_EAT,
+	SS_HAPPY
 };
 
 struct tagItem {
@@ -152,10 +161,12 @@ struct tagTree {
 struct tagStock {
 	STOCKTYPE stockType;
 	DIRECTION direction;
+	STOCKSTATE state;
 	int speed;
 	int aniCount;
 	int indexX, indexY;
 	float centerX, centerY;
 	bool isFullyGrown;
+	bool isSheared;
 	bool isMove;
 };
