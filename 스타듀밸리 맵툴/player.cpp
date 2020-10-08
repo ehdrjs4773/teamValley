@@ -23,7 +23,7 @@ HRESULT player::init()
 
 	speed = 2.0f;
 
-	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지.bmp", 576, 1632, 12, 34, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지2.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
 
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
@@ -65,12 +65,28 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
-		_inventory->update();
-		if (isShowInventory) isShowInventory = false;
-		else isShowInventory = true;
+		
+		if (isShowInventory)
+		{
+			isShowInventory = false;
+			_inventory->setInvenToryMove(false);
+		}
+		else
+		{	
+			_inventory->setInvenToryMove(true);
+			isShowInventory = true;
+		}
 	}
 
+	if (isOpenPlayerInvenCover)
+	{
+		_inventory->update();
+	}
 
+	_inventory->update();
+
+
+	
 	playerInvenCoverAnimation();
 
 
@@ -94,7 +110,7 @@ void player::InventroyRender(HDC hdc)
 
 	if (isOpenPlayerInvenCover)
 	{
-		playerStorage->render(hdc);
+		_inventory->render(hdc);
 	}
 }
 
@@ -486,6 +502,12 @@ void player::playerAnimation()
 	}
 }
 
+void player::drawPlayerInven(tagTile tile1, tagTile tile2)
+{
+	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), tile1.rc.left, tile1.rc.top, boxIndex, 0);
+	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), tile2.rc.left, tile2.rc.top, boxIndex, 0);
+}
+
 void player::playerInvenAnimation()
 {
 	boxCount++;
@@ -514,7 +536,7 @@ void player::playerInvenCoverAnimation()
 			}
 		}
 	}
-	else if(!isOpenPlayerInvenCover)
+	else if (!isOpenPlayerInvenCover)
 	{
 		boxCount++;
 		if (boxCount % 5 == 0)
@@ -526,12 +548,6 @@ void player::playerInvenCoverAnimation()
 			}
 		}
 	}
-}
-
-void player::drawPlayerInven(tagTile tile1, tagTile tile2)
-{
-	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), tile1.rc.left, tile1.rc.top, boxIndex, 0);
-	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), tile2.rc.left, tile2.rc.top, boxIndex, 0);
 }
 
 void player::playerRender()

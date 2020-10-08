@@ -7,8 +7,11 @@ private:
 	image *inventory_img;
 	
 	vector<tagItem> _vItem;
+	tagItem _MouseItem;
 
 	RECT _playerInventory;
+	
+	BOOL _isInventoryMove; //인벤토리 키면 못움직이게 하는거.
 
 	RECT _playerTool[12];
 
@@ -43,5 +46,9 @@ public:
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	vector<tagItem>* getInven() { return &_vItem; }
 	tagItem* getInven(int a) { return &_vItem[a]; }
+
+	void setInvenToryMove(bool move) { _isInventoryMove = move; }
+	bool getInvenToryMove() { return _isInventoryMove; }
+
 };
 
