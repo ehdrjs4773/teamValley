@@ -92,6 +92,15 @@ enum DIRECTION
 	DOWN
 };
 
+//³ª¹«
+enum TREETYPE
+{
+	TREE_NONE,
+	TREE_OAK,
+	TREE_MAPLE,
+	TREE_PINE
+};
+
 struct tagItem {
 	RECT rc;
 	image* item_image;
@@ -116,4 +125,14 @@ struct tagItemOnField {
 	float speed;
 	float angle;
 	bool isOnGround;
+};
+
+struct tagTree {
+	image* treeImage;
+	TREETYPE treeType;
+	int bodyIndexMinX, bodyIndexMaxX;
+	int bodyIndexY;
+	int hp;
+	int grownLevel;
+	bool isFullyGrown;
 };
