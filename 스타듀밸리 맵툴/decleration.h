@@ -53,7 +53,10 @@ enum SEED
 	SEED_FAIRYROSE,
 	SEED_HOPS,
 	SEED_AMARANTH,
-	SEED_CATUS
+	SEED_CATUS,
+	SEED_PINETREE,
+	SEED_MAPLETREE,
+	SEED_OAKTREE
 };
 
 enum TOOL
@@ -85,7 +88,6 @@ enum STATE
 
 enum DIRECTION
 {
-
 	RIGHT,
 	LEFT,
 	UP,
@@ -99,6 +101,16 @@ enum TREETYPE
 	TREE_OAK,
 	TREE_MAPLE,
 	TREE_PINE
+};
+
+//∞°√‡
+enum STOCKTYPE
+{
+	STOCK_MILKCOW,
+	STOCK_OX,
+	STOCK_SHEEP,
+	STOCK_CHICKEN,
+	STOCK_DUCK
 };
 
 struct tagItem {
@@ -135,4 +147,15 @@ struct tagTree {
 	int hp;
 	int grownLevel;
 	bool isFullyGrown;
+};
+
+struct tagStock {
+	STOCKTYPE stockType;
+	DIRECTION direction;
+	int speed;
+	int aniCount;
+	int indexX, indexY;
+	float centerX, centerY;
+	bool isFullyGrown;
+	bool isMove;
 };

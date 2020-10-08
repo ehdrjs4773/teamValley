@@ -38,6 +38,8 @@ HRESULT player::init()
 	_inventory = new inventory;
 	_inventory->init();
 
+	stock = new Stock;
+
 	isShowInventory = false;
 
 	_pDirection = DOWN;
@@ -89,6 +91,7 @@ void  player::update()
 	
 	playerInvenCoverAnimation();
 
+	stock->stockAnimation();
 
 	cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
 	

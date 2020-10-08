@@ -528,19 +528,44 @@ void maptoolScene::setMap()
 				//현재버튼이 오브젝트냐?
 				if (_ctrlSelect == CTRL_OBJECT)
 				{
-					if (_currentTile.x == 10 && _currentTile.y == 19)
+					if (_currentTile.x == 11 && _currentTile.y == 24)
 					{
-						_tile[i + tileY + 5][j + tileX + 1].obj = OBJ_DESTRUCTIBLE;
-						_tile[i + tileY + 5][j + tileX + 1].objType = OTY_TREE;
-						_tile[i + tileY + 5][j + tileX + 1].tree.bodyIndexMaxX = 8;
-						_tile[i + tileY + 5][j + tileX + 1].tree.bodyIndexMinX = 8;
-						_tile[i + tileY + 5][j + tileX + 1].tree.bodyIndexY = 9;
-						_tile[i + tileY + 5][j + tileX + 1].tree.grownLevel = 5;
-						_tile[i + tileY + 5][j + tileX + 1].tree.hp = 5;
-						_tile[i + tileY + 5][j + tileX + 1].tree.isFullyGrown = true;
-						_tile[i + tileY + 5][j + tileX + 1].tree.treeImage = IMAGEMANAGER->findImage("나무");
-						_tile[i + tileY + 5][j + tileX + 1].tree.treeType = TREE_PINE;
-						
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 8;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 8;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_PINE;
+					}
+					else if (_currentTile.x == 8 && _currentTile.y == 24)
+					{
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 5;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 5;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_MAPLE;
+					}
+					else if (_currentTile.x == 5 && _currentTile.y == 24)
+					{
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 2;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 2;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_OAK;
 					}
 					else
 					{
@@ -1229,19 +1254,16 @@ void maptoolScene::showMapTile()
 				{
 					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-					if (_tile[i][j].objType == OTY_TREE)
+					if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
 					{
-						if (i - 5 > 0 && j - 1 > 0)
+						IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+						for (int y = 5; y > 0; y--)
 						{
-							_tile[i][j].tree.treeImage->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-								_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
-							for (int y = 5; y > 0; y--)
+							for (int x = 1; x > -2; x--)
 							{
-								for (int x = 1; x > -2; x--)
-								{
-									_tile[i][j].tree.treeImage->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-										_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
-								}
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
 							}
 						}
 					}

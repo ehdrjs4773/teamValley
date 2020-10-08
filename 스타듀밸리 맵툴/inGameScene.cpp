@@ -14,7 +14,6 @@ HRESULT inGameScene::init()
 	isShowRect = false;
 
 	checkPlayerTile();
-	
 
 	return S_OK;
 }
@@ -229,7 +228,7 @@ void inGameScene::renderMap()
 		}
 	}
 	PLAYER->render();
-	for (int i = currentIndexY + 2; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
+	for (int i = currentIndexY + 2; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
@@ -494,7 +493,25 @@ void inGameScene::cutdownTree()
 			}
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 			{
-
+				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE)
+				{
+					if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+					}
+					else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+					{
+						for (int i = 0; i < 5; i++)
+						{
+							dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+						}
+						_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+						_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+						tagTree temp;
+						memset(&temp, 0, sizeof(temp));
+						_tile[MouseIndexY][MouseIndexX].tree = temp;
+					}
+				}
 			}
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
 			{

@@ -66,7 +66,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("인벤토리_아이템", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
-	IMAGEMANAGER->addFrameImage("나무", "Images/BMP/나무2.bmp", 144, 640, 9, 40);
+	
 
 	IMAGEMANAGER->addFrameImage("농장장애물", "Images/BMP/farmObstacles.bmp", 96, 176, 6, 11);
 	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 256, 784, 16, 49);
