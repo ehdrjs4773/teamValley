@@ -9,6 +9,7 @@ void inventory::init()
 	IMAGEMANAGER->addImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 
+
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp;
@@ -27,6 +28,9 @@ void inventory::init()
 	_vItem[7] = ITEMMANAGER->findItem("낚시대");
 	_vItem[8] = ITEMMANAGER->findItem("칼");
 
+	_MouseItem.item_image = NULL;
+
+	_isInventoryMove = false;
 	currentSlotNumber = 0;
 
 	for (int i = 0; i < 12; i++)
@@ -41,10 +45,59 @@ void inventory::release()
 
 void inventory::update()
 {
+	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 	for (int i = 0; i < _vItem.size(); i++)
 	{
 		_vItem[i].rc = RectMake(270 + 59 * (i % 12), 400 + 55 * (i / 12), 55, 45);
 	}
+
+
+
+	for (int i = 0; i < _vItem.size(); i++)
+	{
+		if(PtInRect(&_vItem[i].rc, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (_vItem[i].item_image != NULL) // 아이템이 있으면
+				{
+					if (_MouseItem.item_image != NULL) // 마우스에 아이템이 있으면
+					{
+						tagItem exchangeItem; // 교환용 아이템
+						exchangeItem = _vItem[i];
+						_vItem[i] = _MouseItem;
+						_MouseItem = exchangeItem;
+					}	
+
+					else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
+					{
+						tagItem pushItem;
+						pushItem.item_image = NULL;
+						_MouseItem = _vItem[i];
+						_vItem[i] = pushItem;
+					}
+
+				} 
+
+				else if (_vItem[i].item_image == NULL)
+				{
+					if (_MouseItem.item_image != NULL)
+					{
+						tagItem clearItem;
+						clearItem.item_image = NULL;
+						_vItem[i] = _MouseItem;
+						_MouseItem = clearItem;
+					}
+				}
+
+
+			}
+
+		}
+	}
+
+	
+
 }
 
 
@@ -67,6 +120,9 @@ void inventory::render(HDC hdc)
 			}
 		}
 	}
+
+	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
+
 }
 
 void inventory::quickSlot(HDC hdc)

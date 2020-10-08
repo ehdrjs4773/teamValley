@@ -67,6 +67,7 @@ public:
 	float getCenterY() { return centerY; }
 	void setCenterY(float cY) { centerY = cY; }
 
+	bool getInventoryMove() { return _inventory->getInvenToryMove(); }
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
 	vector<tagItem>* getInven() { return _inventory->getInven(); }

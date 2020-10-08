@@ -217,90 +217,94 @@ void inGameScene::renderMap()
 
 void inGameScene::playerMove()
 {
-	checkPlayerTile();
-	if (INPUT->GetKey('D'))
+	if (!PLAYER->getInventoryMove())
 	{
-		rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
-		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
-		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
+		checkPlayerTile();
+		if (INPUT->GetKey('D'))
 		{
-			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].objType == OTY_GRASS
-				|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED && 
-					_tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN 
-					&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
-					&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
+			rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
+			rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+			if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 			{
-				PLAYER->setDirection(RIGHT);
-				PLAYER->setState(RUN);
-				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+				if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].objType == OTY_GRASS
+					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED &&
+						_tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN
+						&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
+						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
+				{
+					PLAYER->setDirection(RIGHT);
+					PLAYER->setState(RUN);
+					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+				}
+			}
+		}
+		if (INPUT->GetKey('A'))
+		{
+			leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
+			leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+			if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
+			{
+				if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].objType == OTY_GRASS
+					|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED &&
+						_tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
+						&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
+						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
+				{
+
+					PLAYER->setDirection(LEFT);
+					PLAYER->setState(RUN);
+					PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+				}
+			}
+		}
+		if (INPUT->GetKey('W'))
+		{
+			upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+			upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
+			if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
+			{
+				if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].objType == OTY_GRASS
+					|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED &&
+						_tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
+						&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
+						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
+				{
+
+					PLAYER->setDirection(UP);
+					PLAYER->setState(RUN);
+					PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				}
+			}
+		}
+		if (INPUT->GetKey('S'))
+		{
+			downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+			downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
+			if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
+			{
+				if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].objType == OTY_GRASS
+					|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED &&
+						_tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
+						&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
+						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
+				{
+
+					PLAYER->setDirection(DOWN);
+					PLAYER->setState(RUN);
+					PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+				}
+			}
+		}
+		if (!INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D') && !INPUT->GetKey('W'))
+		{
+			if (PLAYER->getState() == RUN)
+			{
+				PLAYER->setIndex(0);
+				PLAYER->setState(STAND);
 			}
 		}
 	}
-	if (INPUT->GetKey('A'))
-	{
-		leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
-		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
-		if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
-		{
-			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].objType == OTY_GRASS
-				|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED &&
-					_tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
-					&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
-					&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
-			{
-				
-				PLAYER->setDirection(LEFT);
-				PLAYER->setState(RUN);
-				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
-			}
-		}
-	}
-	if (INPUT->GetKey('W'))
-	{
-		upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
-		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
-		if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
-		{
-			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].objType == OTY_GRASS
-				|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED &&
-					_tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
-					&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
-					&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
-			{
-				
-				PLAYER->setDirection(UP);
-				PLAYER->setState(RUN);
-				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
-			}
-		}
-	}
-	if (INPUT->GetKey('S'))
-	{
-		downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
-		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
-		if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
-		{
-			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].objType == OTY_GRASS
-				|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED &&
-					_tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
-					&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
-					&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
-			{
-				
-				PLAYER->setDirection(DOWN);
-				PLAYER->setState(RUN);
-				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-			}
-		}
-	}
-	if (!INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D') && !INPUT->GetKey('W'))
-	{
-		if(PLAYER->getState() == RUN)
-		{ 
-			PLAYER->setIndex(0);
-			PLAYER->setState(STAND);
-		}
-	}
+	
 }
  
 void inGameScene::checkPlayerTile()
