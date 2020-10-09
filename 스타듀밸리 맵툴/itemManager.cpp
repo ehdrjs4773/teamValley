@@ -58,10 +58,11 @@ void itemManager::addSeed()
 	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 3, SEED_AMARANTH, "¾Æ¸¶¶õ½º ¾¾¾Ñ");
 	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 3, SEED_GRAPE, "Æ÷µµ ¾¾¾Ñ");
 	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 3, SEED_HOPS, "È© ¾¾¾Ñ");
+	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 4, SEED_RANDOM, "¾¾¾Ñ ¸ðÀ½");
 	addSeed("¿­¸Å", ITEM_SEED, 3, 1, SEED_COFFEEBEAN, "Ä¿ÇÇÄá ¾¾¾Ñ");
-	addSeed("³ª¹«", ITEM_SEED, 8, 8, SEED_PINETREE, "¼Ò³ª¹« ¾¾¾Ñ");
-	addSeed("³ª¹«", ITEM_SEED, 5, 8, SEED_MAPLETREE, "´ÜÇ³³ª¹« ¾¾¾Ñ");
-	addSeed("³ª¹«", ITEM_SEED, 2, 8, SEED_OAKTREE, "Âü³ª¹« ¾¾¾Ñ");
+	addSeed("¿­¸Å", ITEM_SEED, 7, 2, SEED_PINETREE, "¼Ò³ª¹« ¾¾¾Ñ");
+	addSeed("¿­¸Å", ITEM_SEED, 8, 2, SEED_MAPLETREE, "´ÜÇ³³ª¹« ¾¾¾Ñ");
+	addSeed("¿­¸Å", ITEM_SEED, 9, 2, SEED_OAKTREE, "Âü³ª¹« ¾¾¾Ñ");
 }
 
 void itemManager::addWeapon()
@@ -126,6 +127,7 @@ void itemManager::addObject()
 {
 	addObjectItem("¿­¸Å", ITEM_DEBRIS, 5, 2, "µ¹");
 	addObjectItem("¿­¸Å", ITEM_DEBRIS, 6, 2, "³ª¹«");
+	addObjectItem("¿­¸Å", ITEM_DEBRIS, 10, 2, "´Ü´ÜÇÑ³ª¹«");
 }
 
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
