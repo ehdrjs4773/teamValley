@@ -81,6 +81,7 @@ void inventory::update()
 
 				} 
 
+				
 				else if (_vItem[i].item_image == NULL)
 				{
 					if (_MouseItem.item_image != NULL)
@@ -105,6 +106,7 @@ void inventory::update()
 
 void inventory::render(HDC hdc)
 {
+	cout << _MouseItem.item_image << endl;
 	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
 	inventory_img->render(hdc, 250,375);
 

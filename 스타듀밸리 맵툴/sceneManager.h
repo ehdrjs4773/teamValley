@@ -33,6 +33,10 @@ public:
 	//¾Àº¯°æ
 	HRESULT loadScene(string sceneName);
 
+	mSceneList getSceneList() { return _mSceneList; }
+	gameNode* getCurrentScene() { return _currentScene; }
+
+
 	sceneManager() : _currentScene(NULL) {}
 	~sceneManager() {}
 };
