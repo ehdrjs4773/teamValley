@@ -21,7 +21,7 @@ HRESULT player::init()
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
-	speed = 2.0f;
+	speed = 1.5f;
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지2.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
@@ -39,12 +39,22 @@ HRESULT player::init()
 	_inventory->init();
 
 	stock = new Stock;
+	stock->init();
+	stock->addPlayerStock(STOCK_BROWNCOW);
+	stock->addPlayerStock(STOCK_WHITECOW);
+	stock->addPlayerStock(STOCK_BROWNCHICKEN);
+	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	isShowInventory = false;
 	isOpenPlayerStorageCover = false;
 
+	isFadeOut = false;
+	isFadeIn = true;
+	alpha = 255;
+
 	_pDirection = DOWN;
 	_pState = STAND;
+	currentMap = MAP_FARM;
 
 	return S_OK;
 }
@@ -60,7 +70,6 @@ void  player::update()
 
 	playerAnimation();
 
-
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
@@ -68,7 +77,6 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
-		
 		if (isShowInventory)
 		{
 			isShowInventory = false;
@@ -82,18 +90,13 @@ void  player::update()
 		}
 	}
 
-
 	_inventory->update();
 	
-
-
 	playerInvenCoverAnimation();
 
 	//가축 움직임
 	stock->update();
 
-	//cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
-	cout << _ptMouse.x << " " << _ptMouse.y << endl;
 }
 
 void player::render()
@@ -101,6 +104,7 @@ void player::render()
 	playerRender();
 
 	stock->render();
+	
 }
 
 void player::InventroyRender(HDC hdc)
@@ -527,7 +531,6 @@ void player::playerInvenAnimation()
 		{
 			boxIndex = 0;
 		}
-
 	}
 }
 
@@ -561,7 +564,6 @@ void player::playerInvenCoverAnimation()
 
 void player::playerRender()
 {
-
 	switch (_pState)
 	{
 	case STAND:
@@ -704,10 +706,7 @@ void player::playerRender()
 			break;
 		}
 		break;
-	
 	}
-
-
 }
 
 void player::openPlayerInvenCover()
@@ -716,8 +715,7 @@ void player::openPlayerInvenCover()
 
 	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
 	{
-		if(isOpenPlayerInvenCover) isOpenPlayerInvenCover = false;
-		else isOpenPlayerInvenCover = true;
+		isOpenPlayerInvenCover = false;
 	}
 }
 
@@ -729,5 +727,36 @@ void player::openPlayerStorageCover()
 		if (isOpenPlayerStorageCover) isOpenPlayerStorageCover = false;
 		else isOpenPlayerStorageCover = true;
 		//_inventory->_vItemUpdate();
+	}
+}
+
+void player::fade()
+{
+	if (isFadeIn)
+	{
+		alpha -= 3;
+		if (alpha < 0)
+		{
+			alpha = 0;
+			isFadeIn = false;
+		}
+	}
+	if (isFadeOut)
+	{
+		alpha += 3;
+		if (alpha > 255)
+		{
+			alpha = 255;
+			isFadeOut = false;
+			isFadeIn = true;
+		}
+	}
+}
+
+void player::renderFade(HDC hdc)
+{
+	if (isFadeIn || isFadeOut)
+	{
+		IMAGEMANAGER->alphaRender("페이드", hdc, alpha);
 	}
 }

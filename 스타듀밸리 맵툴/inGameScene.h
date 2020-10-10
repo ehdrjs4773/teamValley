@@ -33,8 +33,6 @@ private:
 
 	bool isShowRect;
 
-
-
 public:
 	inGameScene();
 	
@@ -49,8 +47,10 @@ public:
 	void changeSeason(SEASON season);
 
 	void renderMap();
+	void renderObjects(int i, int j);
 
 	void playerMove();
+	void portal();
 
 	void checkPlayerTile();
 	void playerInteraction();

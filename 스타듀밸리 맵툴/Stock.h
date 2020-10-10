@@ -9,6 +9,7 @@ private:
 	int count;
 
 public:
+	HRESULT init();
 	void update();
 	void render();
 	void addStock();
@@ -20,8 +21,5 @@ public:
 	void stockMove();
 	void setStockState();
 	void setStockIndex(int i);
-
-	Stock();
-	~Stock();
 };
 

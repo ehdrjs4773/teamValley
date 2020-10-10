@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "Stock.h"
 
+HRESULT Stock::init()
+{
+	addStock();
+	count = 0;
+	return S_OK;
+}
+
 void Stock::update()
 {
 	count++;
@@ -16,6 +23,8 @@ void Stock::update()
 	{
 		count = 0;
 	}
+
+	cout << _vPlayerStock[0].state << "\t" << _vPlayerStock[0].speed << "\t" << _vPlayerStock[0].indexX << "\t" << count << "\t" << _vPlayerStock[0].isMove << endl;
 }
 
 void Stock::render()
@@ -27,59 +36,59 @@ void Stock::render()
 		case STOCK_WHITECOW:
 			if (!iter.isFullyGrown)
 			{
-				IMAGEMANAGER->findImage("어린젖소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("어린젖소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("젖소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("젖소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			break;
 		case STOCK_BROWNCOW:
 			if (!iter.isFullyGrown)
 			{
-				IMAGEMANAGER->findImage("어린황소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("어린황소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("황소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("황소")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			break;
 		case STOCK_SHEEP:
 			if (!iter.isFullyGrown)
 			{
-				IMAGEMANAGER->findImage("어린양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("어린양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			else if (iter.isFullyGrown && iter.isSheared)
 			{
-				IMAGEMANAGER->findImage("털깎인양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("털깎인양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 16, iter.centerY - 16, iter.indexX, iter.indexY);
 			}
 			break;
-		case STOCK_BRONCHICKEN:
+		case STOCK_BROWNCHICKEN:
 			if (!iter.isFullyGrown)
 			{
-				IMAGEMANAGER->findImage("갈색병아리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("갈색병아리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 8, iter.centerY - 8, iter.indexX, iter.indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("갈색닭")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("갈색닭")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 8, iter.centerY - 8, iter.indexX, iter.indexY);
 			}
 			break;
 		case STOCK_WHITECHICKEN:
 			if (!iter.isFullyGrown)
 			{
-				IMAGEMANAGER->findImage("노란병아리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("노란병아리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 8, iter.centerY - 8, iter.indexX, iter.indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("흰닭")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("흰닭")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 8, iter.centerY - 8, iter.indexX, iter.indexY);
 			}
 			break;
 		case STOCK_DUCK:
-				IMAGEMANAGER->findImage("오리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
+				IMAGEMANAGER->findImage("오리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX - 8, iter.centerY - 8, iter.indexX, iter.indexY);
 			break;
 		}
 	}
@@ -93,7 +102,7 @@ void Stock::addStock()
 		temp.stockType = (STOCKTYPE)i;
 		temp.direction = DOWN;
 		temp.state = SS_STAND;
-		temp.speed = 0.4;
+		temp.speed = 0.4f;
 		temp.indexX = 0;
 		temp.indexY = 0;
 		temp.centerX = 0;
@@ -110,9 +119,10 @@ void Stock::addPlayerStock(STOCKTYPE stockType)
 {
 	tagStock temp;
 	temp = findStock(stockType);
-	temp.centerX = RANDOM->range(400, 800);
-	temp.centerY = RANDOM->range(150, 450);
-	stockList.push_back(temp);
+	temp.isFullyGrown = true;
+	temp.centerX = 800;
+	temp.centerY = 800;
+	_vPlayerStock.push_back(temp);
 }
 
 tagStock Stock::findStock(STOCKTYPE stockType)
@@ -134,7 +144,7 @@ void Stock::stockAnimation()
 		if (_vPlayerStock[i].state == SS_MOVE)
 		{
 			_vPlayerStock[i].aniCount++;
-			if (_vPlayerStock[i].aniCount % 10 == 0)
+			if (_vPlayerStock[i].aniCount % 20 == 0)
 			{
 				_vPlayerStock[i].indexX++;
 				if (_vPlayerStock[i].indexX > 3)
@@ -184,10 +194,14 @@ void Stock::stockAnimation()
 					}
 				}
 			}
+			else
+			{
+				_vPlayerStock[i].isMove = false;
+			}
 		}
 		else if (_vPlayerStock[i].state == SS_EAT)
 		{
-			if (_vPlayerStock[i].aniCount % 10 == 0)
+			/*if (_vPlayerStock[i].aniCount % 10 == 0)
 			{
 				if (_vPlayerStock[i].aniCount > 40)
 				{
@@ -198,7 +212,7 @@ void Stock::stockAnimation()
 						_vPlayerStock[i].aniCount = 0;
 					}
 				}
-				else
+				else if(_vPlayerStock[i].aniCount <= 40)
 				{
 					_vPlayerStock[i].indexX++;
 					if (_vPlayerStock[i].indexX > 3)
@@ -206,7 +220,8 @@ void Stock::stockAnimation()
 						_vPlayerStock[i].indexX = 2;
 					}
 				}
-			}
+			}*/
+			_vPlayerStock[i].isMove = false;
 		}
 		else if (_vPlayerStock[i].state == SS_HAPPY)
 		{
@@ -228,22 +243,34 @@ void Stock::setStockDirection(int stockNumber, DIRECTION dir)
 
 void Stock::stockMove()
 {
-	for (auto iter : _vPlayerStock)
+	for (int i = 0; i < _vPlayerStock.size(); i++)
 	{
-		if (!(iter.isMove && iter.state == SS_MOVE)) continue;
-		switch (iter.direction)
+		if (!_vPlayerStock[i].isMove || _vPlayerStock[i].state != SS_MOVE) continue;
+		switch (_vPlayerStock[i].direction)
 		{
 		case RIGHT:
-			iter.centerX += iter.speed;
+			if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), _vPlayerStock[i].centerX + 16, _vPlayerStock[i].centerY) != RGB(255, 0, 0))
+			{
+				_vPlayerStock[i].centerX += _vPlayerStock[i].speed;
+			}
 			break;
 		case LEFT:
-			iter.centerX -= iter.speed;
+			if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), _vPlayerStock[i].centerX - 16, _vPlayerStock[i].centerY) != RGB(255, 0, 0))
+			{
+				_vPlayerStock[i].centerX -= _vPlayerStock[i].speed;
+			}
 			break;
 		case UP:
-			iter.centerY -= iter.speed;
+			if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), _vPlayerStock[i].centerX, _vPlayerStock[i].centerY - 16) != RGB(255, 0, 0))
+			{
+				_vPlayerStock[i].centerY -= _vPlayerStock[i].speed;
+			}
 			break;
 		case DOWN:
-			iter.centerY += iter.speed;
+			if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), _vPlayerStock[i].centerX , _vPlayerStock[i].centerY + 16) != RGB(255, 0, 0))
+			{
+				_vPlayerStock[i].centerY += _vPlayerStock[i].speed;
+			}
 			break;
 		}
 	}
@@ -307,15 +334,4 @@ void Stock::setStockIndex(int i)
 		_vPlayerStock[i].indexY = 4;
 	}
 	_vPlayerStock[i].isMove = true;
-}
-
-Stock::Stock()
-{
-	addStock();
-	count = 0;
-}
-
-Stock::~Stock()
-{
-
 }

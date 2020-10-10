@@ -27,6 +27,13 @@ HRESULT inGameScene::init()
 		loadCount = 1;
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		_tile[0][i].portal = PT_HOUSE;
+		_tile[0][i + 7].portal = PT_BARN;
+		_tile[0][i + 14].portal = PT_CHICKENHOUSE;
+		_tile[0][i + 21].portal = PT_SHOP;
+	}
 
 	return S_OK;
 }
@@ -47,7 +54,6 @@ void inGameScene::update()
 	{
 		SCENEMANAGER->loadScene("상점씬");
 	}
-
 
 	PLAYER->update();
 
@@ -107,6 +113,11 @@ void inGameScene::update()
 	{
 		makeCropGrow();
 	}
+
+	PLAYER->openPlayerInvenCover();
+
+	PLAYER->fade();
+	portal();
 }
 
 void inGameScene::render()
@@ -119,19 +130,19 @@ void inGameScene::render()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc);
 	}
 
-	//PLAYER->render();
-
 	for (int i = 0; i < _vItemOnField.size(); i++)
 	{
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
 
-	PLAYER->drawPlayerInven(_tile[15][30],_tile[14][30]);
+	PLAYER->drawPlayerInven(_tile[15][30], _tile[14][30]);
 
 	CAMERAMANAGER->render(getMemDC());
-	
+
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
+
+	PLAYER->renderFade(getMemDC());
 }
 
 void inGameScene::load()
@@ -183,8 +194,8 @@ void inGameScene::changeSeason(SEASON season)
 
 void inGameScene::renderMap()
 {
-	//플레이어보다 밑에 그려지는 오브젝트 렌더
-	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < currentIndexY + 2; i++)
+	//타일 렌더
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
@@ -196,131 +207,86 @@ void inGameScene::renderMap()
 				{
 					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
-				}
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i][j].obj != OBJ_NONE)
-				{
-					if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
-						|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
-						|| _tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
-					{
-						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-					else if (_tile[i][j].objType == OTY_CROP)
-					{
-						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-					else if (_tile[i][j].objType == OTY_TREE)
-					{
-						IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, 
-							_tile[i][j].tree.bodyIndexMinX, _tile[i][j].tree.bodyIndexY);
-						for (int y = 5; y > 0; y--)
-						{
-							for (int x = 1; x > -2; x--)
-							{
-								IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-									_tile[i][j].tree.bodyIndexMinX - 1 - x, _tile[i][j].tree.bodyIndexY - 4 - y);
-							}
-						}
-					}
-					else
-					{
-						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-				}
-				if (_tile[i][j].objOver != OVR_NONE)
-				{
-					if (_tile[i][j].objType == OTY_CROP)
-					{
-						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
-					}
-					else if (_tile[i + 1][j].objType == OTY_GRASS && i + 1 < TILEY)
-					{
-						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
-					}
-					else
-					{
-						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
-					}
 				}
 			}
 		}
 	}
-	PLAYER->render();
-
-	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
-	for (int i = currentIndexY + 2; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
+	//플레이어보다 밑에 그려지는 오브젝트 렌더
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < currentIndexY; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
-			{
-				IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
-				if (_tile[i][j].isWet)
-				{
-					IMAGEMANAGER->frameRender(imageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i][j].wetFrameX, _tile[i][j].wetFrameY);
-				}
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i][j].obj != OBJ_NONE)
-				{
-					if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
-						|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
-						|| _tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
-					{
-						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-					else if (_tile[i][j].objType == OTY_CROP)
-					{
-						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-					else if (_tile[i][j].objType == OTY_TREE)
-					{
-						IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].tree.bodyIndexMinX, _tile[i][j].tree.bodyIndexY);
-						for (int y = 5; y > 0; y--)
-						{
-							for (int x = 1; x > -2; x--)
-							{
-								IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-									_tile[i][j].tree.bodyIndexMinX - 1 - x, _tile[i][j].tree.bodyIndexY - 4 - y);
-							}
-						}
-					}
-					else
-					{
-						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-					}
-				}
+			renderObjects(i, j);
+		}
+	}
 
-				if (_tile[i][j].objOver != OVR_NONE)
+	//플레이어 렌더
+	PLAYER->render();
+
+	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
+	for (int i = currentIndexY; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
+	{
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
+		{
+			renderObjects(i, j);
+		}
+	}
+}
+
+void inGameScene::renderObjects(int i, int j)
+{
+	if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
+	{
+		//인게임 화면 오브젝트 그린다
+		if (_tile[i][j].obj != OBJ_NONE)
+		{
+			if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
+				|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
+				|| _tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
+			{
+				IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+			}
+			else if (_tile[i][j].objType == OTY_CROP)
+			{
+				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+			}
+			else if (_tile[i][j].objType == OTY_TREE)
+			{
+				IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].tree.bodyIndexMinX, _tile[i][j].tree.bodyIndexY);
+				for (int y = 5; y > 0; y--)
 				{
-					if (_tile[i][j].objType == OTY_CROP)
+					for (int x = 1; x > -2; x--)
 					{
-						IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
-					}
-					else if (_tile[i + 1][j].objType == OTY_GRASS && i + 1 < TILEY)
-					{
-						IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
-					}
-					else
-					{
-						IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+						IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+							_tile[i][j].tree.bodyIndexMinX - 1 - x, _tile[i][j].tree.bodyIndexY - 4 - y);
 					}
 				}
+			}
+			else
+			{
+				IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+			}
+		}
+		if (_tile[i][j].objOver != OVR_NONE)
+		{
+			if (_tile[i][j].objType == OTY_CROP)
+			{
+				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+			}
+			else if (_tile[i + 1][j].objType == OTY_GRASS && i + 1 < TILEY)
+			{
+				IMAGEMANAGER->frameRender("농장장애물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
+			}
+			else
+			{
+				IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
 			}
 		}
 	}
@@ -417,6 +383,19 @@ void inGameScene::playerMove()
 	}
 	
 }
+
+void inGameScene::portal()
+{
+	if (_tile[currentIndexY][currentIndexX].portal == PT_BARN)
+	{
+		PLAYER->setFade("FadeOut", true);
+		if (PLAYER->getAlpha() >= 255)
+		{
+			PLAYER->setCurrentMap(MAP_BARN);
+			SCENEMANAGER->loadScene("건물안화면");
+		}
+	}
+}
  
 void inGameScene::checkPlayerTile()
 {
@@ -447,28 +426,29 @@ void inGameScene::playerInteraction()
 		{
 			PLAYER->setDirection(RIGHT);
 		}
-		//밭 갈기
-		hackGround();
+		if (PLAYER->getState() == RUN || PLAYER->getState() == STAND)
+		{
+			//밭 갈기
+			hackGround();
 
-		//나무베기
-		cutdownTree();
+			//나무베기
+			cutdownTree();
 
-		//돌, 광석 깨기
-		breakStone();
+			//돌, 광석 깨기
+			breakStone();
 
-		//풀 베기 
-		cutGrass();
+			//풀 베기 
+			cutGrass();
 
-		//씨 심기
-		plantSeed();
+			//씨 심기
+			plantSeed();
 
-		//물뿌리기
-		waterGround();
+			PLAYER->openPlayerInvenCover();
+			PLAYER->openPlayerStorageCover();
 
-		PLAYER->openPlayerInvenCover();
-		PLAYER->openPlayerStorageCover();
-		
-
+			//물뿌리기
+			waterGround();
+		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
@@ -518,7 +498,48 @@ void inGameScene::cutdownTree()
 		{
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_HARDTREE)
 			{
+				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE)
+				{
+					if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+					}
+					else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+					{
+						//단단한 나무가 어느 방향인지 찾는 부분
+						/*if (_tile[MouseIndexY + 1][MouseIndexX].objType == OTY_HARDTREE)
+						{
+							if (_tile[MouseIndexY + 1][MouseIndexX + 1].objType == OTY_HARDTREE)
+							{
+								
+							}
+							else if (_tile[MouseIndexY + 1][MouseIndexX - 1].objType == OTY_HARDTREE)
+							{
 
+							}
+						}
+						else if (_tile[MouseIndexY - 1][MouseIndexX].objType == OTY_HARDTREE)
+						{
+							if (_tile[MouseIndexY - 1][MouseIndexX + 1].objType == OTY_HARDTREE)
+							{
+
+							}
+							else if (_tile[MouseIndexY - 1][MouseIndexX - 1].objType == OTY_HARDTREE)
+							{
+
+							}
+						}*/
+						for (int i = 0; i < 4; i++)
+						{
+							dropItem(_tile[MouseIndexY][MouseIndexX], "단단한 나무");
+						}
+						_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+						_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+						tagTree temp;
+						memset(&temp, 0, sizeof(temp));
+						_tile[MouseIndexY][MouseIndexX].tree = temp;
+					}
+				}
 			}
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 			{

@@ -73,8 +73,6 @@ void inventory::update()
 
 	_vItem[i].rc = RectMake(265 + 55 * (i % 12), 125 + 55 * (i / 12), 50, 45); // 창고 인벤토리
 	
-
-
 	//if (_MouseStorageItem.item_image) _MouseStorageItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseStorageItem.item_image->getFrameWidth(), _MouseStorageItem.item_image->getFrameHeight());
 	for (int i = 0; i < _vStorageItem.size(); i++)
 	{
@@ -96,14 +94,7 @@ void inventory::update()
 						//storagePushItem = _vStorageItem[i];
 						//_vStorageItem[i] = _MouseItem;
 					}
-
-
-						
-
-
-
-
-				
+				}
 				else if (_vItem[i].item_image == NULL)
 				{
 					if (_MouseItem.item_image != NULL)
@@ -114,21 +105,11 @@ void inventory::update()
 						_MouseItem = clearItem;
 					}
 				}
-
-
-
-
-					
-				}
+			
 			}
 		}
 	}
 }
-
-
-
-
-
 
 void inventory::render(HDC hdc)
 {
