@@ -356,7 +356,9 @@ void inGameScene::playerInteraction()
 		//¹°»Ñ¸®±â
 		waterGround();
 
-		PLAYER->OpenPlayerInvenCover();
+		PLAYER->openPlayerInvenCover();
+		PLAYER->openPlayerStorageCover();
+		
 
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
