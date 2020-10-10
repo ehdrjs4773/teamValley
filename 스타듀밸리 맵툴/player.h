@@ -2,6 +2,7 @@
 #include "singletonBase.h"
 #include "tileNode.h"
 #include "inventory.h"
+#include "Stock.h"
 
 class player : public singletonBase<player>
 {
@@ -9,6 +10,8 @@ private:
 	RECT rc;
 	RECT frontHpBar;
 	RECT playerInven;
+
+	Stock* stock;
 	
 	float centerX, centerY;
 	int currentX, currentY;

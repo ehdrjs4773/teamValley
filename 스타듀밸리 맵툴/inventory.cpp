@@ -63,9 +63,13 @@ void inventory::release()
 
 void inventory::update()
 {
+	craftObject();
 
-
-
+	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
+	for (int i = 0; i < _vItem.size(); i++)
+	{
+		_vItem[i].rc = RectMake(270 + 59 * (i % 12), 400 + 55 * (i / 12), 55, 45);
+	}
 
 	//_vItem[i].rc = RectMake(265 + 55 * (i % 12), 125 + 55 * (i / 12), 50, 45); // 창고 인벤토리
 	
@@ -88,9 +92,10 @@ void inventory::update()
 					if (_MouseStorageItem.item_image != NULL)
 					{
 
-						tagItem storagePushItem;
-						storagePushItem = _vStorageItem[i];
-						_vStorageItem[i] = _MouseItem;
+						//tagItem storagePushItem;
+						//storagePushItem = _vStorageItem[i];
+						//_vStorageItem[i] = _MouseItem;
+					}
 
 
 						
@@ -98,9 +103,22 @@ void inventory::update()
 
 
 
-
-
+				
+				else if (_vItem[i].item_image == NULL)
+				{
+					if (_MouseItem.item_image != NULL)
+					{
+						tagItem clearItem;
+						clearItem.item_image = NULL;
+						_vItem[i] = _MouseItem;
+						_MouseItem = clearItem;
 					}
+				}
+
+
+
+
+					
 				}
 			}
 		}
@@ -115,12 +133,14 @@ void inventory::update()
 void inventory::render(HDC hdc)
 {
 
-
 	inventory2_img = IMAGEMANAGER->findImage("인벤토리 아이템창");
 	inventory2_img->render(hdc, 225, 30);
 
 	//renderSellingInventory(hdc);
 
+	cout << _MouseItem.item_image << endl;
+	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
+	inventory_img->render(hdc, 250,375);
 
 
 	for (int i = 0; i < _vItem.size(); i++)
@@ -158,8 +178,8 @@ void inventory::quickSlot(HDC hdc)
 			{
 				char str[64];
 				wsprintf(str, "%d", _vItem[i].amount);
-				textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));
-			}
+				
+				textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));			}
 			
 		}
 
@@ -321,3 +341,8 @@ void inventory::_vItemUpdate()
 
 
 }
+
+void inventory::craftObject()
+{
+}
+

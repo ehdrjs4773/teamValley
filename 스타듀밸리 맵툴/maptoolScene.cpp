@@ -8,6 +8,7 @@ HRESULT maptoolScene::init()
 {
 	//타일맵 이미지 초기화 -> 09.22 로딩 씬으로 넘어감
 	_isSave = false;
+
 	//맵툴세팅
 	sampleTileMaxFrameX = IMAGEMANAGER->findImage("농장(봄)")->getMaxFrameX() + 1;
 	sampleTileMaxFrameY = IMAGEMANAGER->findImage("농장(봄)")->getMaxFrameY() + 1;
@@ -459,6 +460,16 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].grownLevel = 0;
 			_tile[i][j].isWet = false;
 			_tile[i][j].isFullyGrown = false;
+
+			_tile[i][j].tree.treeImage = nullptr;
+			_tile[i][j].tree.treeType = TREE_NONE;
+			_tile[i][j].tree.bodyIndexMaxX = 0;
+			_tile[i][j].tree.bodyIndexMinX = 0;
+			_tile[i][j].tree.bodyIndexY = 0;
+			_tile[i][j].tree.grownLevel = 0;
+			_tile[i][j].tree.hp = 0;
+			_tile[i][j].tree.isFullyGrown = false;
+
 		}
 	}
 
@@ -517,19 +528,62 @@ void maptoolScene::setMap()
 				//현재버튼이 오브젝트냐?
 				if (_ctrlSelect == CTRL_OBJECT)
 				{
-					_tile[i + tileY][j + tileX].objOver = overlappedSelect(_currentTile.x, _currentTile.y);
+					if (_currentTile.x == 11 && _currentTile.y == 24)
+					{
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 8;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 8;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_PINE;
+					}
+					else if (_currentTile.x == 8 && _currentTile.y == 24)
+					{
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 5;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 5;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_MAPLE;
+					}
+					else if (_currentTile.x == 5 && _currentTile.y == 24)
+					{
+						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
+						_tile[i + tileY][j + tileX].objType = OTY_TREE;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 2;
+						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 2;
+						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.hp = 5;
+						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
+						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+						_tile[i + tileY][j + tileX].tree.treeType = TREE_OAK;
+					}
+					else
+					{
+						_tile[i + tileY][j + tileX].objOver = overlappedSelect(_currentTile.x, _currentTile.y);
 
-					if (_tile[i + tileY][j + tileX].objOver == OVR_OVER)
-					{
-						_tile[i + tileY][j + tileX].ovlFrameX = _currentTile.x;
-						_tile[i + tileY][j + tileX].ovlFrameY = _currentTile.y;
+						if (_tile[i + tileY][j + tileX].objOver == OVR_OVER)
+						{
+							_tile[i + tileY][j + tileX].ovlFrameX = _currentTile.x;
+							_tile[i + tileY][j + tileX].ovlFrameY = _currentTile.y;
+						}
+						else if (_tile[i + tileY][j + tileX].objOver == OVR_NONE)
+						{
+							_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
+							_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
+							_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
+						}
 					}
-					else if (_tile[i + tileY][j + tileX].objOver == OVR_NONE)
-					{
-						_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
-						_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
-						_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
-					}
+					
 				}
 				//현재버튼이 지우개냐?
 				if (_ctrlSelect == CTRL_ERASER)
@@ -1200,12 +1254,26 @@ void maptoolScene::showMapTile()
 				{
 					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
+					{
+						IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+						for (int y = 5; y > 0; y--)
+						{
+							for (int x = 1; x > -2; x--)
+							{
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+							}
+						}
+					}
 				}
 				if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
 				{
 					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
 				}
+
 				break;
 			case SUMMER:
 				IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,

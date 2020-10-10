@@ -53,7 +53,11 @@ enum SEED
 	SEED_FAIRYROSE,
 	SEED_HOPS,
 	SEED_AMARANTH,
-	SEED_CATUS
+	SEED_CATUS,
+	SEED_PINETREE,
+	SEED_MAPLETREE,
+	SEED_OAKTREE,
+	SEED_RANDOM
 };
 
 enum TOOL
@@ -85,11 +89,38 @@ enum STATE
 
 enum DIRECTION
 {
-
 	RIGHT,
 	LEFT,
 	UP,
 	DOWN
+};
+
+//나무
+enum TREETYPE
+{
+	TREE_NONE,
+	TREE_OAK,
+	TREE_MAPLE,
+	TREE_PINE
+};
+
+//가축
+enum STOCKTYPE
+{
+	STOCK_WHITECOW,
+	STOCK_BROWNCOW,
+	STOCK_SHEEP,
+	STOCK_BRONCHICKEN,
+	STOCK_WHITECHICKEN,
+	STOCK_DUCK
+};
+
+enum STOCKSTATE
+{
+	SS_MOVE,
+	SS_STAND,
+	SS_EAT,
+	SS_HAPPY
 };
 
 struct tagItem {
@@ -116,4 +147,27 @@ struct tagItemOnField {
 	float speed;
 	float angle;
 	bool isOnGround;
+};
+
+struct tagTree {
+	image* treeImage;
+	TREETYPE treeType;
+	int bodyIndexMinX, bodyIndexMaxX;
+	int bodyIndexY;
+	int hp;
+	int grownLevel;
+	bool isFullyGrown;
+};
+
+struct tagStock {
+	STOCKTYPE stockType;
+	DIRECTION direction;
+	STOCKSTATE state;
+	int speed;
+	int aniCount;
+	int indexX, indexY;
+	float centerX, centerY;
+	bool isFullyGrown;
+	bool isSheared;
+	bool isMove;
 };

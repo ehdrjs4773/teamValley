@@ -74,6 +74,7 @@ struct tagTile
 	OBJ_OVERLAPPED objOver;
 	SEED seedType;
 	RECT rc;
+	tagTree tree;
 
 	int terrainFrameX;
 	int terrainFrameY;

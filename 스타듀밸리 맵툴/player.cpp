@@ -7,6 +7,10 @@ HRESULT player::init()
 	count = 0;
 	centerX = WINSIZEX / 2;
 	centerY = WINSIZEY / 2;
+
+	currentX = centerX / 16;
+	currentY = (centerY + 8) / 16;
+
 	playerHp = 276;
 	pickaxDamage,axDamage,hoeDamage = 2;
 
@@ -34,6 +38,8 @@ HRESULT player::init()
 	_inventory = new inventory;
 	_inventory->init();
 
+	stock = new Stock;
+
 	isShowInventory = false;
 	isOpenPlayerStorageCover = false;
 
@@ -49,10 +55,11 @@ void  player::release()
 
 void  player::update()
 {
-	playerAnimation();
-
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
+
+	playerAnimation();
+
 
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
@@ -76,10 +83,14 @@ void  player::update()
 	}
 
 
+	_inventory->update();
+	
 
 
 	playerInvenCoverAnimation();
 
+	//가축 움직임
+	stock->update();
 
 	//cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
 	cout << _ptMouse.x << " " << _ptMouse.y << endl;
@@ -88,6 +99,8 @@ void  player::update()
 void player::render()
 {
 	playerRender();
+
+	stock->render();
 }
 
 void player::InventroyRender(HDC hdc)

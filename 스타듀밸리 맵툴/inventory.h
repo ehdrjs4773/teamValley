@@ -33,6 +33,7 @@ public:
 	void _vItemUpdate();
 	void renderSellingInventory(HDC hdc);
 	void renderStorageInventory(HDC hdc);
+	void craftObject();
 
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
@@ -55,6 +56,8 @@ public:
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	vector<tagItem>* getInven() { return &_vItem; }
 	tagItem* getInven(int a) { return &_vItem[a]; }
+	tagItem getMoveItem() { return _MouseItem; }
+	void setMouseItem(tagItem item) { _MouseItem = item; }
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }
 	bool getInvenToryMove() { return _isInventoryMove; }

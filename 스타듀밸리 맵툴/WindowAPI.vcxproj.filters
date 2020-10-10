@@ -76,6 +76,15 @@
     <Filter Include="GameFramework\매니져\아이템 매니저">
       <UniqueIdentifier>{1cadc123-772b-4d37-8d84-5882ce7c009d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="플레이어">
+      <UniqueIdentifier>{46ac683a-6f81-40cb-8483-5b40635077e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="플레이어\가축">
+      <UniqueIdentifier>{c6b2f0ac-b810-494d-b496-d451371e85f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="플레이어\인벤토리">
+      <UniqueIdentifier>{5473f3a4-a82c-4c96-87ac-3d900f998269}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -147,20 +156,23 @@
     <ClCompile Include="cameraManager.cpp">
       <Filter>GameFramework\매니져\카메라 매니저</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>MainGame</Filter>
-    </ClCompile>
     <ClCompile Include="shopScene.cpp">
       <Filter>상점</Filter>
     </ClCompile>
     <ClCompile Include="shop.cpp">
       <Filter>상점</Filter>
     </ClCompile>
-    <ClCompile Include="inventory.cpp">
-      <Filter>상점</Filter>
-    </ClCompile>
     <ClCompile Include="itemManager.cpp">
       <Filter>GameFramework\매니져\아이템 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="Stock.cpp">
+      <Filter>플레이어\가축</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>플레이어</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>플레이어\인벤토리</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -240,21 +252,24 @@
     <ClInclude Include="cameraManager.h">
       <Filter>GameFramework\매니져\카메라 매니저</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>MainGame</Filter>
-    </ClInclude>
     <ClInclude Include="shopScene.h">
       <Filter>상점</Filter>
     </ClInclude>
     <ClInclude Include="shop.h">
       <Filter>상점</Filter>
     </ClInclude>
-    <ClInclude Include="inventory.h">
-      <Filter>상점</Filter>
-    </ClInclude>
     <ClInclude Include="decleration.h" />
     <ClInclude Include="itemManager.h">
       <Filter>GameFramework\매니져\아이템 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="Stock.h">
+      <Filter>플레이어\가축</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>플레이어</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>플레이어\인벤토리</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
