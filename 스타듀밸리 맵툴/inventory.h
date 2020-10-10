@@ -24,7 +24,7 @@ public:
 	void update();
 	void render(HDC hdc);
 	void quickSlot(HDC hdc);
-
+	void craftObject();
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
 	{ 

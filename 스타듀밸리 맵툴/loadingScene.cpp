@@ -95,5 +95,6 @@ void loadingScene::loadingImage()
 
 void loadingScene::loadingSound()
 {
-
+	SOUNDMANAGER->addSound("¸ŞÀÎÀ½¾Ç", "Sounds/opening.mp3", true, true);
+	SOUNDMANAGER->addSound("³óÀå", "Sounds/farm.mp3", true, true);
 }

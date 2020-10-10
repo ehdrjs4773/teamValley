@@ -79,12 +79,6 @@ void  player::update()
 			isShowInventory = true;
 		}
 	}
-
-	if (isOpenPlayerInvenCover)
-	{
-		_inventory->update();
-	}
-
 	_inventory->update();
 	
 

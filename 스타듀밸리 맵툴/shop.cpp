@@ -66,6 +66,8 @@ void shop::update()
 		SCENEMANAGER->loadScene("인게임화면");
 	}
 
+
+
 }
 
 void shop::render()

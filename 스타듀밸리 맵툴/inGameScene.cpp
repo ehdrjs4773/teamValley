@@ -3,17 +3,30 @@
 
 TCHAR inGameScene::saveName[MAX_PATH];
 
+
+
+inGameScene::inGameScene()
+{
+	loadCount = 0;  //최초 로드시 초기화 방지 카운트
+}
+
 HRESULT inGameScene::init()
 {
-	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30*16, 15*16);
-	load();
-	setTileRect();
+	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
+	{
+		CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+		load();
+		setTileRect();
 
-	changeSeason(SPRING);
+		changeSeason(SPRING);
 
-	isShowRect = false;
+		SOUNDMANAGER->stop("메인음악");
+		isShowRect = false;
 
-	checkPlayerTile();
+		checkPlayerTile();
+		loadCount = 1;
+	}
+
 
 	return S_OK;
 }
@@ -25,6 +38,17 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	if (!SOUNDMANAGER->isPlaySound("농장"))
+	{
+		SOUNDMANAGER->play("농장", 0.05f);
+	}
+
+	if (INPUT->GetKeyDown('P'))
+	{
+		SCENEMANAGER->loadScene("상점씬");
+	}
+
+
 	PLAYER->update();
 
 	checkPlayerTile();

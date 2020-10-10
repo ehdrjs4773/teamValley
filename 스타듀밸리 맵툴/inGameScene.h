@@ -18,6 +18,7 @@ private:
 
 	SEASON _currentSeason;
 
+	int loadCount;
 	string imageName;
 	string objectImageName;
 
@@ -35,6 +36,8 @@ private:
 
 
 public:
+	inGameScene();
+	
 
 	HRESULT init();
 	void release();

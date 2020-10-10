@@ -8,6 +8,9 @@ HRESULT mainScene::init()
 	{
 		frameY[i] = 0;
 	}
+
+	SOUNDMANAGER->play("¸ŞÀÎÀ½¾Ç",0.3f);
+
 	return S_OK;
 }
 

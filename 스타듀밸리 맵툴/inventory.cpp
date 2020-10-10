@@ -45,6 +45,8 @@ void inventory::release()
 
 void inventory::update()
 {
+	craftObject();
+
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 	for (int i = 0; i < _vItem.size(); i++)
 	{
@@ -138,8 +140,8 @@ void inventory::quickSlot(HDC hdc)
 			{
 				char str[64];
 				wsprintf(str, "%d", _vItem[i].amount);
-				textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));
-			}
+				
+				textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));			}
 			
 		}
 
@@ -205,5 +207,9 @@ void inventory::quickSlot(HDC hdc)
 	FrameRect(hdc, temp, RGB(255, 0, 0));
 
 
+}
+
+void inventory::craftObject()
+{
 }
 
