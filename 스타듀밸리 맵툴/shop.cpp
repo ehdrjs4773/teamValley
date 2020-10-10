@@ -57,9 +57,9 @@ void shop::release()
 
 void shop::update()
 {
-	_inven->update();
 	sell();
 	buy();
+	_inven->update();
 	shop_scroll();
 	if (INPUT->GetKeyDown(VK_TAB))
 	{
@@ -90,13 +90,13 @@ void shop::render()
 	{
 		if (!_vslot[i].on_cursor)
 		{
-			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
-			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
+_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
 		else
 		{
-			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
-			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+		_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
+		_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
 	}
 
@@ -109,7 +109,7 @@ void shop::render()
 		}
 		else
 		{
-			_vItem[i+current_index].item_image->render(getMemDC(), _vslot[i].rc.left+16, _vslot[i].rc.top+13);
+			_vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 16, _vslot[i].rc.top + 13);
 		}
 
 		if (_vslot[i].on_cursor)
@@ -121,7 +121,7 @@ void shop::render()
 			Rectangle(getMemDC(), temp2);
 
 			SetTextColor(getMemDC(), RGB(0, 0, 0));
-			
+
 			char temp[256];
 
 			switch (_vItem[i + current_index].item_kind)
@@ -161,9 +161,9 @@ void shop::render()
 	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
 	//Rectangle(getMemDC(), up_BT);
 	//Rectangle(getMemDC(), down_BT);
-	scrollbar_img->render(getMemDC(),up_BT.left+15, up_BT.bottom+10);
+	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
 	//Rectangle(getMemDC(),rc_scroll);
-	scroll_img->render(getMemDC(),rc_scroll.left, rc_scroll.top);
+	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
 
 	if (is_click)
 	{
@@ -188,11 +188,16 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				(*_vInven)[i].buy_price = NULL;
-				(*_vInven)[i].item_image = NULL;
-				(*_vInven)[i].item_info = NULL;
-				(*_vInven)[i].item_kind = ITEM_ENDITEM;
-				(*_vInven)[i].sell_price = NULL;
+				if ((*_vInven)[i].item_kind != ITEM_ENDITEM)
+				{
+					(*_vInven)[i].buy_price = NULL;
+					(*_vInven)[i].item_image = NULL;
+					(*_vInven)[i].item_info = NULL;
+					(*_vInven)[i].item_kind = ITEM_ENDITEM;
+					(*_vInven)[i].sell_price = NULL;
+					break;
+				}
+
 			}
 		}
 	}
@@ -210,6 +215,7 @@ void shop::buy()
 			{
 				is_click = true;
 				click_index = i + current_index;
+				break;
 			}
 		}
 		else _vslot[i].on_cursor = false;
@@ -217,26 +223,28 @@ void shop::buy()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
+
 		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
 		{	
-			if ((*_vInven)[i].item_image == NULL)
-			{
 				if (is_click)
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
-						(*_vInven)[i].buy_price = _vItem[click_index].buy_price;
-						(*_vInven)[i].item_image = _vItem[click_index].item_image;
-						(*_vInven)[i].indexX = _vItem[click_index].indexX;
-						(*_vInven)[i].indexY = _vItem[click_index].indexY;
-						(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
-						(*_vInven)[i].item_info = _vItem[click_index].item_info;
-						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
-						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
+						if ((*_vInven)[i].item_image == NULL)
+						{
+							(*_vInven)[i] = _vItem[click_index];
+						}
+						else if((*_vInven)[i].item_image != NULL)
+						{
+							tagItem currentItem;
+							currentItem = (*_vInven)[i];
+							(*_vInven)[i] = _vItem[click_index];
+							_inven->setMouseItem(currentItem);
+						}
 						is_click = false;
+						break;
 					}
 				}
-			}
 			else
 			{
 				continue;
@@ -324,5 +332,8 @@ void shop::shop_scroll()
 			}
 		}
 	}*/
+
+
+
 }
 

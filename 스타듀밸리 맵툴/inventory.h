@@ -46,6 +46,8 @@ public:
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	vector<tagItem>* getInven() { return &_vItem; }
 	tagItem* getInven(int a) { return &_vItem[a]; }
+	tagItem getMoveItem() { return _MouseItem; }
+	void setMouseItem(tagItem item) { _MouseItem = item; }
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }
 	bool getInvenToryMove() { return _isInventoryMove; }
