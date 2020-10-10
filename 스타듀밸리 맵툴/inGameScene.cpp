@@ -387,11 +387,8 @@ void inGameScene::portal()
 {
 	if (_tile[currentIndexY][currentIndexX].portal == PT_BARN)
 	{
-		SCENEMANAGER->loadScene("건물안");
-		PLAYER->setCenterX(275.0f);
-		PLAYER->setCenterY(410.0f);
-		CAMERAMANAGER->init(600, 500, 600, 300);
-		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+		PLAYER->setCurrentMap(MAP_BARN);
+		SCENEMANAGER->loadScene("건물안화면");
 	}
 }
  
