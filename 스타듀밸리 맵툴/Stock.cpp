@@ -58,7 +58,7 @@ void Stock::render()
 				IMAGEMANAGER->findImage("양")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);
 			}
 			break;
-		case STOCK_BRONCHICKEN:
+		case STOCK_BROWNCHICKEN:
 			if (!iter.isFullyGrown)
 			{
 				IMAGEMANAGER->findImage("갈색병아리")->frameRender(CAMERAMANAGER->getMemDC(), iter.centerX, iter.centerY, iter.indexX, iter.indexY);

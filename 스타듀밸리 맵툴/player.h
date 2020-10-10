@@ -11,6 +11,8 @@ private:
 	RECT frontHpBar;
 	RECT playerInven;
 
+	MAP currentMap;
+
 	Stock* stock;
 	
 	float centerX, centerY;
@@ -45,15 +47,11 @@ private:
 	image* state;
 	image* backHpBar;
 	image* playerStorage;
-
-	
 	image* _cutdownTree;
 
 	inventory* _inventory;
 
 	
-	
-
 public:
 	HRESULT init();
 	void release();
@@ -69,6 +67,9 @@ public:
 	void setCenterX(float cX) { centerX = cX; }
 	float getCenterY() { return centerY; }
 	void setCenterY(float cY) { centerY = cY; }
+
+	MAP getCurrentMap() { return currentMap; }
+	void setCurrentMap(MAP map) { currentMap = map; }
 
 	bool getInventoryMove() { return _inventory->getInvenToryMove(); }
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }

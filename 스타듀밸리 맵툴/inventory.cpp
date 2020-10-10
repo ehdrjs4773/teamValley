@@ -53,8 +53,6 @@ void inventory::update()
 		_vItem[i].rc = RectMake(270 + 59 * (i % 12), 400 + 55 * (i / 12), 55, 45);
 	}
 
-
-
 	for (int i = 0; i < _vItem.size(); i++)
 	{
 		if(PtInRect(&_vItem[i].rc, _ptMouse))
@@ -80,7 +78,6 @@ void inventory::update()
 					}
 
 				} 
-
 				else if (_vItem[i].item_image == NULL)
 				{
 					if (_MouseItem.item_image != NULL)
@@ -91,15 +88,9 @@ void inventory::update()
 						_MouseItem = clearItem;
 					}
 				}
-
-
 			}
-
 		}
 	}
-
-	
-
 }
 
 

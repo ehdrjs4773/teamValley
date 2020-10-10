@@ -457,6 +457,7 @@ void maptoolScene::maptoolSetup()
 			_tile[i][j].objType = OTY_NONE;
 			_tile[i][j].objOver = OVR_NONE;
 			_tile[i][j].seedType = SEED_NONE;
+			_tile[i][j].portal = PT_NONE;
 			_tile[i][j].grownLevel = 0;
 			_tile[i][j].isWet = false;
 			_tile[i][j].isFullyGrown = false;
@@ -1256,14 +1257,17 @@ void maptoolScene::showMapTile()
 						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 					if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
 					{
-						IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
-						for (int y = 5; y > 0; y--)
+						if (i - 5 >= 0 && j - 1 >= 0)
 						{
-							for (int x = 1; x > -2; x--)
+							IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+							for (int y = 5; y > 0; y--)
 							{
-								IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-									_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+								for (int x = 1; x > -2; x--)
+								{
+									IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+										_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+								}
 							}
 						}
 					}

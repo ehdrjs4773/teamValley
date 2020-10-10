@@ -21,7 +21,7 @@ HRESULT player::init()
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
-	speed = 2.0f;
+	speed = 1.5f;
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지2.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
@@ -39,11 +39,16 @@ HRESULT player::init()
 	_inventory->init();
 
 	stock = new Stock;
+	stock->addPlayerStock(STOCK_BROWNCOW);
+	stock->addPlayerStock(STOCK_WHITECOW);
+	stock->addPlayerStock(STOCK_BROWNCHICKEN);
+	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	isShowInventory = false;
 
 	_pDirection = DOWN;
 	_pState = STAND;
+	currentMap = MAP_FARM;
 
 	return S_OK;
 }
@@ -87,8 +92,6 @@ void  player::update()
 
 	//가축 움직임
 	stock->update();
-
-	cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
 	
 }
 
@@ -518,7 +521,6 @@ void player::playerInvenAnimation()
 		{
 			boxIndex = 0;
 		}
-
 	}
 }
 
@@ -552,7 +554,6 @@ void player::playerInvenCoverAnimation()
 
 void player::playerRender()
 {
-
 	switch (_pState)
 	{
 	case STAND:
@@ -695,17 +696,17 @@ void player::playerRender()
 			break;
 		}
 		break;
-	
 	}
-
-
 }
 
 void player::OpenPlayerInvenCover()
 {
-	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
+	if (currentX >= 28 && currentX <= 34 && currentY >= 13 && currentY <= 18)
 	{
-		if(isOpenPlayerInvenCover) isOpenPlayerInvenCover = false;
-		else isOpenPlayerInvenCover = true;
+		isOpenPlayerInvenCover = true;
+	}
+	else
+	{
+		isOpenPlayerInvenCover = false;
 	}
 }

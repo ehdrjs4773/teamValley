@@ -65,6 +65,16 @@ enum OBJ_TYPE
 	OTY_MONSTER
 };
 
+enum PORTAL
+{
+	PT_NONE,
+	PT_HOUSE,
+	PT_CHICKENHOUSE,
+	PT_BARN,
+	PT_SHOP,
+	PT_DUNGEON
+};
+
 //타일구조체
 struct tagTile
 {
@@ -75,6 +85,7 @@ struct tagTile
 	SEED seedType;
 	RECT rc;
 	tagTree tree;
+	PORTAL portal;
 
 	int terrainFrameX;
 	int terrainFrameY;
