@@ -44,6 +44,9 @@ void loadingScene::render()
 
 void loadingScene::loadingImage()
 {
+	//페이드인/아웃용 이미지
+	IMAGEMANAGER->addImage("페이드", 1200, 600);
+
 	//농장 이미지
 	IMAGEMANAGER->addFrameImage("농장(봄)", "Images/맵툴/농장(봄).bmp", 384, 400, 24, 25);
 	IMAGEMANAGER->addFrameImage("농장(여름)", "Images/맵툴/농장(여름).bmp", 384, 400, 24, 25);
@@ -70,7 +73,8 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("농장장애물", "Images/BMP/farmObstacles.bmp", 96, 176, 6, 11);
 	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 256, 784, 16, 49);
 
-	IMAGEMANAGER->addImage("큰외양간", "Images/맵/대형외양간1.bmp", 600, 500);
+	IMAGEMANAGER->addImage("큰외양간", "Images/맵/대형외양간.bmp", 1600, 1600);
+	IMAGEMANAGER->addImage("큰외양간 충돌", "Images/맵/대형외양간 충돌.bmp", 1600, 1600);
 	IMAGEMANAGER->addImage("큰양계장", "Images/맵/대형양계장.bmp", 2560, 1440);
 	IMAGEMANAGER->addImage("소형집", "Images/맵/아침 소형 집.bmp", 2560, 1440);
 

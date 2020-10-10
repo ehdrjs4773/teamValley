@@ -55,76 +55,75 @@ void inGameScene::update()
 		SCENEMANAGER->loadScene("상점씬");
 	}
 
-		PLAYER->update();
+	PLAYER->update();
 
-		checkPlayerTile();
+	checkPlayerTile();
 
-		if (PLAYER->getState() == STAND || PLAYER->getState() == RUN)
+	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN)
+	{
+		playerMove();
+	}
+
+	playerInteraction();
+
+	//아이템 바닥에 떨어지게 하는거
+	ejectItem();
+
+	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+
+
+	setCurrentSlotNumber(_mouseWheel);
+
+	if (INPUT->GetKeyDown(VK_F1))
+	{
+		if (isShowRect)
 		{
-			playerMove();
+			isShowRect = false;
 		}
-
-		playerInteraction();
-
-		//아이템 바닥에 떨어지게 하는거
-		ejectItem();
-
-		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
-
-
-		setCurrentSlotNumber(_mouseWheel);
-
-		if (INPUT->GetKeyDown(VK_F1))
+		else
 		{
-			if (isShowRect)
-			{
-				isShowRect = false;
-			}
-			else
-			{
-				isShowRect = true;
-			}
+			isShowRect = true;
 		}
-		if (INPUT->GetKeyDown(VK_F2))
-		{
-			setRandomObstacles();
-		}
-		if (INPUT->GetKeyDown(VK_F3))
-		{
-			changeSeason(SPRING);
-			changeGrass();
-		}
-		if (INPUT->GetKeyDown(VK_F4))
-		{
-			changeSeason(SUMMER);
-			changeGrass();
-		}
-		if (INPUT->GetKeyDown(VK_F5))
-		{
-			changeSeason(AUTUMN);
-			changeGrass();
-		}
-		if (INPUT->GetKeyDown(VK_F6))
-		{
-			changeSeason(WINTER);
-			changeGrass();
-		}
-		if (INPUT->GetKeyDown(VK_F7))
-		{
-			makeCropGrow();
-		}
+	}
+	if (INPUT->GetKeyDown(VK_F2))
+	{
+		setRandomObstacles();
+	}
+	if (INPUT->GetKeyDown(VK_F3))
+	{
+		changeSeason(SPRING);
+		changeGrass();
+	}
+	if (INPUT->GetKeyDown(VK_F4))
+	{
+		changeSeason(SUMMER);
+		changeGrass();
+	}
+	if (INPUT->GetKeyDown(VK_F5))
+	{
+		changeSeason(AUTUMN);
+		changeGrass();
+	}
+	if (INPUT->GetKeyDown(VK_F6))
+	{
+		changeSeason(WINTER);
+		changeGrass();
+	}
+	if (INPUT->GetKeyDown(VK_F7))
+	{
+		makeCropGrow();
+	}
 
-		PLAYER->openPlayerInvenCover();
+	PLAYER->openPlayerInvenCover();
 
+	PLAYER->fade();
 	portal();
-
-	cout << (PORTAL)_tile[MouseIndexY][MouseIndexX].portal << endl;
 }
 
 void inGameScene::render()
 {
 	renderMap();
-	
+
 	if (isShowRect)
 	{
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
@@ -136,12 +135,14 @@ void inGameScene::render()
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
 
-	PLAYER->drawPlayerInven(_tile[15][30],_tile[14][30]);
+	PLAYER->drawPlayerInven(_tile[15][30], _tile[14][30]);
 
 	CAMERAMANAGER->render(getMemDC());
-	
+
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
+
+	PLAYER->renderFade(getMemDC());
 }
 
 void inGameScene::load()
@@ -387,8 +388,12 @@ void inGameScene::portal()
 {
 	if (_tile[currentIndexY][currentIndexX].portal == PT_BARN)
 	{
-		PLAYER->setCurrentMap(MAP_BARN);
-		SCENEMANAGER->loadScene("건물안화면");
+		PLAYER->setFade("FadeOut", true);
+		if (PLAYER->getAlpha() >= 255)
+		{
+			PLAYER->setCurrentMap(MAP_BARN);
+			SCENEMANAGER->loadScene("건물안화면");
+		}
 	}
 }
  

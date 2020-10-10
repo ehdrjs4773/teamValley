@@ -8,7 +8,6 @@ private:
 
 
 
-
 public:
 	HRESULT init();
 	void release();

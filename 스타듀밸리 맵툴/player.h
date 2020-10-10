@@ -34,6 +34,9 @@ private:
 	bool isShowInventory;
 
 	bool isOpenPlayerStorageCover;
+	
+	bool isFadeIn, isFadeOut;
+	int alpha;
 
 	HBRUSH brush;		
 	HBRUSH oBrush;
@@ -112,5 +115,32 @@ public:
 	void openPlayerInvenCover();
 	void openPlayerStorageCover();
 
+	bool getFade(const char* fade) 
+	{
+		if (fade == "FadeIn")
+		{
+			return isFadeIn;
+		}
+		else if (fade == "FadeOut")
+		{
+			return isFadeOut;
+		}
+	}
+	void setFade(const char* fade, bool isFade)
+	{
+		if (fade == "FadeIn")
+		{
+			isFadeIn = isFade;
+		}
+		else if (fade == "FadeOut")
+		{
+			isFadeOut = isFade;
+		}
+	}
+	int getAlpha() { return alpha; }
+	void setAlpha(int newAlpha) { alpha = newAlpha; }
+
+	void fade();
+	void renderFade(HDC hdc);
 };
 

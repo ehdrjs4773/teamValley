@@ -39,6 +39,7 @@ HRESULT player::init()
 	_inventory->init();
 
 	stock = new Stock;
+	stock->init();
 	stock->addPlayerStock(STOCK_BROWNCOW);
 	stock->addPlayerStock(STOCK_WHITECOW);
 	stock->addPlayerStock(STOCK_BROWNCHICKEN);
@@ -46,6 +47,10 @@ HRESULT player::init()
 
 	isShowInventory = false;
 	isOpenPlayerStorageCover = false;
+
+	isFadeOut = false;
+	isFadeIn = true;
+	alpha = 255;
 
 	_pDirection = DOWN;
 	_pState = STAND;
@@ -65,7 +70,6 @@ void  player::update()
 
 	playerAnimation();
 
-
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
@@ -73,7 +77,6 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
-		
 		if (isShowInventory)
 		{
 			isShowInventory = false;
@@ -87,18 +90,13 @@ void  player::update()
 		}
 	}
 
-
 	_inventory->update();
 	
-
-
 	playerInvenCoverAnimation();
 
 	//가축 움직임
 	stock->update();
 
-	//cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
-	cout << _ptMouse.x << " " << _ptMouse.y << endl;
 }
 
 void player::render()
@@ -106,6 +104,7 @@ void player::render()
 	playerRender();
 
 	stock->render();
+	
 }
 
 void player::InventroyRender(HDC hdc)
@@ -712,17 +711,9 @@ void player::playerRender()
 
 void player::openPlayerInvenCover()
 {
-<<<<<<< HEAD
-	if (currentX >= 28 && currentX <= 34 && currentY >= 13 && currentY <= 18)
-	{
-		isOpenPlayerInvenCover = true;
-	}
-	else
-=======
 	//플레이어 보유 아이템 판매상자
 
 	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
->>>>>>> dd194c8f728c26ecfa60caa8e671ae94fb4c3550
 	{
 		isOpenPlayerInvenCover = false;
 	}
@@ -736,5 +727,36 @@ void player::openPlayerStorageCover()
 		if (isOpenPlayerStorageCover) isOpenPlayerStorageCover = false;
 		else isOpenPlayerStorageCover = true;
 		//_inventory->_vItemUpdate();
+	}
+}
+
+void player::fade()
+{
+	if (isFadeIn)
+	{
+		alpha -= 3;
+		if (alpha < 0)
+		{
+			alpha = 0;
+			isFadeIn = false;
+		}
+	}
+	if (isFadeOut)
+	{
+		alpha += 3;
+		if (alpha > 255)
+		{
+			alpha = 255;
+			isFadeOut = false;
+			isFadeIn = true;
+		}
+	}
+}
+
+void player::renderFade(HDC hdc)
+{
+	if (isFadeIn || isFadeOut)
+	{
+		IMAGEMANAGER->alphaRender("페이드", hdc, alpha);
 	}
 }

@@ -33,8 +33,6 @@ private:
 
 	bool isShowRect;
 
-
-
 public:
 	inGameScene();
 	

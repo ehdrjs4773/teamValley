@@ -171,7 +171,7 @@ struct tagStock {
 	STOCKTYPE stockType;
 	DIRECTION direction;
 	STOCKSTATE state;
-	int speed;
+	float speed;
 	int aniCount;
 	int indexX, indexY;
 	float centerX, centerY;
