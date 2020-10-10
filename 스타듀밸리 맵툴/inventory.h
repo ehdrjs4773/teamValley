@@ -1,13 +1,19 @@
 #pragma once
 #define INVENMAX 36
+#define STORAGEMAX 36
 
 class inventory 
 {
 private:
 	image *inventory_img;
+	image *inventory2_img;
+	image *playerStorage_img;
 	
 	vector<tagItem> _vItem;
 	tagItem _MouseItem;
+
+	vector<tagItem> _vStorageItem;
+	tagItem _MouseStorageItem;
 
 	RECT _playerInventory;
 	
@@ -24,7 +30,11 @@ public:
 	void update();
 	void render(HDC hdc);
 	void quickSlot(HDC hdc);
+	void _vItemUpdate();
+	void renderSellingInventory(HDC hdc);
+	void renderStorageInventory(HDC hdc);
 	void craftObject();
+
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
 	{ 

@@ -45,6 +45,7 @@ HRESULT player::init()
 	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	isShowInventory = false;
+	isOpenPlayerStorageCover = false;
 
 	_pDirection = DOWN;
 	_pState = STAND;
@@ -77,6 +78,7 @@ void  player::update()
 		{
 			isShowInventory = false;
 			_inventory->setInvenToryMove(false);
+			_inventory->_vItemUpdate();
 		}
 		else
 		{	
@@ -84,6 +86,8 @@ void  player::update()
 			isShowInventory = true;
 		}
 	}
+
+
 	_inventory->update();
 	
 
@@ -92,7 +96,9 @@ void  player::update()
 
 	//가축 움직임
 	stock->update();
-	
+
+	//cout << MouseIndexX<<" "<< MouseIndexY <<" "<< isOpenPlayerInvenCover<< endl;
+	cout << _ptMouse.x << " " << _ptMouse.y << endl;
 }
 
 void player::render()
@@ -113,7 +119,12 @@ void player::InventroyRender(HDC hdc)
 
 	if (isOpenPlayerInvenCover)
 	{
-		_inventory->render(hdc);
+		_inventory->renderSellingInventory(hdc);
+	}
+
+	if (isOpenPlayerStorageCover)
+	{
+		_inventory->renderStorageInventory(hdc);
 	}
 }
 
@@ -699,14 +710,31 @@ void player::playerRender()
 	}
 }
 
-void player::OpenPlayerInvenCover()
+void player::openPlayerInvenCover()
 {
+<<<<<<< HEAD
 	if (currentX >= 28 && currentX <= 34 && currentY >= 13 && currentY <= 18)
 	{
 		isOpenPlayerInvenCover = true;
 	}
 	else
+=======
+	//플레이어 보유 아이템 판매상자
+
+	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
+>>>>>>> dd194c8f728c26ecfa60caa8e671ae94fb4c3550
 	{
 		isOpenPlayerInvenCover = false;
+	}
+}
+
+void player::openPlayerStorageCover()
+{
+	//플레이어 창고상자
+	if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
+	{
+		if (isOpenPlayerStorageCover) isOpenPlayerStorageCover = false;
+		else isOpenPlayerStorageCover = true;
+		//_inventory->_vItemUpdate();
 	}
 }

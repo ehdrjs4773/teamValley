@@ -114,7 +114,7 @@ void inGameScene::update()
 			makeCropGrow();
 		}
 
-		PLAYER->OpenPlayerInvenCover();
+		PLAYER->openPlayerInvenCover();
 
 	portal();
 
@@ -437,6 +437,9 @@ void inGameScene::playerInteraction()
 
 			//¾¾ ½É±â
 			plantSeed();
+
+			PLAYER->openPlayerInvenCover();
+			PLAYER->openPlayerStorageCover();
 
 			//¹°»Ñ¸®±â
 			waterGround();

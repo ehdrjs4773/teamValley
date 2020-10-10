@@ -33,6 +33,8 @@ private:
 
 	bool isShowInventory;
 
+	bool isOpenPlayerStorageCover;
+
 	HBRUSH brush;		
 	HBRUSH oBrush;
 
@@ -107,6 +109,8 @@ public:
 	void playerInvenAnimation();
 	void playerInvenCoverAnimation();
 	void drawPlayerInven(tagTile tile1, tagTile tile2);
-	void OpenPlayerInvenCover();
+	void openPlayerInvenCover();
+	void openPlayerStorageCover();
+
 };
 
