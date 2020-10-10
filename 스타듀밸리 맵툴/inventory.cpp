@@ -44,6 +44,8 @@ void inventory::init()
 	_vItem[6].waterAmount = 100;
 	_vItem[7] = ITEMMANAGER->findItem("낚시대");
 	_vItem[8] = ITEMMANAGER->findItem("칼");
+	_vItem[9] = ITEMMANAGER->findItem("나무울타리");
+	_vItem[10] = ITEMMANAGER->findItem("석재울타리");
 
 	_MouseItem.item_image = NULL;
 	_MouseStorageItem.item_image = NULL;
