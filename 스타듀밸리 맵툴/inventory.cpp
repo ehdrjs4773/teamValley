@@ -4,6 +4,7 @@
 void inventory::init()
 {
 
+	_isShopOpen = false;
 
 	for (int i = 0; i < INVENMAX; i++)
 	{

@@ -41,7 +41,6 @@ public:
 		
 	bool getClick() { return _isClicked; }
 	void move();
-	void clicked(bool click);
 	void animation();
 };
 

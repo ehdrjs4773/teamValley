@@ -7,7 +7,6 @@ HRESULT shop::init()
 	_inven->init();
 
 	_isShopOpen = true;
-	_inven->shopIsOpen(_isShopOpen);
 
 	is_click = false;
 	click_index = 0;

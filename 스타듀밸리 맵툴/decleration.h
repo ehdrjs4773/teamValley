@@ -181,3 +181,11 @@ struct tagStock {
 	bool isSheared;
 	bool isMove;
 };
+
+
+enum NPC_KIND {
+
+	ITEM_NPC = 1,
+	SKILL_NPC
+
+};

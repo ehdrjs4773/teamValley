@@ -27,6 +27,8 @@ private:
 	int MouseIndexX, MouseIndexY;
 	int currentSlotNumber;
 
+	bool _isShopOpen;
+
 public:
 	void init();
 	void release();
@@ -41,6 +43,8 @@ public:
 
 	bool isShowTemp;
 	bool isShowStorageTemp;
+
+	bool isShopOpen(bool isOpen) { _isShopOpen = isOpen; }
 
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
