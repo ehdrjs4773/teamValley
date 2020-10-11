@@ -474,7 +474,11 @@ void inGameScene::playerInteraction()
 
 		if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
 		{
-			PLAYER->openPlayerStorageCover(getMemDC());
+			if (!PLAYER->getIsShowInventory())
+			{
+
+				PLAYER->openPlayerStorageCover(getMemDC());
+			}
 		}
 
 		cout << MouseIndexX << MouseIndexY << endl;

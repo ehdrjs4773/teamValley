@@ -34,6 +34,7 @@ private:
 	bool isShowInventory;
 
 	bool isOpenPlayerStorageCover;
+
 	
 	bool isFadeIn, isFadeOut;
 	int alpha;
@@ -76,6 +77,7 @@ public:
 	MAP getCurrentMap() { return currentMap; }
 	void setCurrentMap(MAP map) { currentMap = map; }
 
+	inventory* getInventory() { return _inventory; }
 	bool getInventoryMove() { return _inventory->getInvenToryMove(); }
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
@@ -83,7 +85,13 @@ public:
 	tagItem* getInven(int a) { return _inventory->getInven(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 	void setInvenItem(int i, tagItem item) { _inventory->setInvenItem(i, item); }
-	void setInvenItemAmount(int i, int amount) { _inventory->setInvenItemAmount(i, amount); }
+	void setInvenItemAmount(int i, int amount) { _inventory->setInvenItemAmount(i, amount); }\
+
+	bool getIsShowInventory() { return isShowInventory; }
+	bool getIsOpenStorageCover() { return isOpenPlayerStorageCover; }
+	void setIsOpenStorageCover(bool SetIsOpenStorageCover) { isOpenPlayerStorageCover=SetIsOpenStorageCover; }
+
+
 
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
