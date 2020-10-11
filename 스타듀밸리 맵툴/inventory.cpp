@@ -113,7 +113,6 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
 				}
 			}
-
 		}
 	}
 	else if (_isPlayerPage)

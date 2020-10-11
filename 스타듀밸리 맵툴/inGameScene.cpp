@@ -33,7 +33,8 @@ HRESULT inGameScene::init()
 		}
 	}
 
-	
+	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+
 	return S_OK;
 }
 
