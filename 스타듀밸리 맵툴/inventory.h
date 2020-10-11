@@ -39,6 +39,9 @@ public:
 	void renderStorageInventory(HDC hdc);
 	void craftObject();
 
+	bool isShowTemp;
+	bool isShowStorageTemp;
+
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
 	{ 
@@ -65,6 +68,9 @@ public:
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }
 	bool getInvenToryMove() { return _isInventoryMove; }
+
+	bool getIsShowTemp() { return isShowTemp; }
+	void setIsShowTemp(bool setIsShowTemp) { isShowTemp = setIsShowTemp; }
 
 
 	//====인벤토리 위에 페이지 설정 ====//

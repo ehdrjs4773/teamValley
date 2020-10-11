@@ -32,7 +32,6 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("플레이어 개인상점", "Images/inventory/playerInven.bmp", 144, 29, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("플레이어 상점뚜껑", "Images/inventory/playerInvenCover.bmp", 624, 32, 13, 1, true, RGB(255, 0, 255));
 
-	IMAGEMANAGER->addImage("플레이어 창고", "Images/inventory/playerStorage.bmp",650, 430, true, RGB(255, 0, 255));
 	playerStorage = IMAGEMANAGER->findImage("플레이어 창고");
 
 	_inventory = new inventory;
@@ -75,17 +74,22 @@ void  player::update()
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
 
+
 	if (INPUT->GetKeyDown('E'))
 	{
-		if (isShowInventory)
+		if(!isOpenPlayerStorageCover)
 		{
-			isShowInventory = false;
-			_inventory->setInvenToryMove(false);
-		}
-		else
-		{	
-			_inventory->setInvenToryMove(true);
-			isShowInventory = true;
+			if (isShowInventory)
+			{
+				isShowInventory = false;
+				_inventory->setInvenToryMove(false);
+			}
+
+			else
+			{
+				_inventory->setInvenToryMove(true);
+				isShowInventory = true;
+			}
 		}
 	}
 
@@ -108,10 +112,13 @@ void player::render()
 
 void player::InventroyRender(HDC hdc)
 {
-	if(isShowInventory)
+
+	if (isShowInventory)
 	{
 		_inventory->render(hdc);
 	}
+	
+
 	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
@@ -124,6 +131,8 @@ void player::InventroyRender(HDC hdc)
 	{
 		_inventory->renderStorageInventory(hdc);
 	}
+	
+
 }
 
 void player::hpBarRender(HDC hdc)
@@ -722,10 +731,16 @@ void player::openPlayerStorageCover(HDC hdc)
 {
 	//플레이어 창고상자
 
-		if (isOpenPlayerStorageCover) isOpenPlayerStorageCover = false;
-		else isOpenPlayerStorageCover = true;
-		_inventory->invenToryRender(hdc);
-	
+	if (isOpenPlayerStorageCover)
+	{
+		_inventory->setIsShowTemp(false);
+		isOpenPlayerStorageCover = false;
+	}
+	else
+	{
+		_inventory->setIsShowTemp(true);
+		isOpenPlayerStorageCover = true;
+	}
 }
 
 void player::fade()

@@ -7,7 +7,7 @@ void inventory::init()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		tagItem temp; // E눌렀을때 나오는 인벤36칸
+		tagItem temp; // 플레이어 인벤
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
@@ -25,6 +25,8 @@ void inventory::init()
 	_isPlayerPage = false;
 	_isCraftPage = false;
 	_isInvenPage = true;
+	isShowTemp = false;
+	isShowStorageTemp = false;
 
 	_vItem[0] = ITEMMANAGER->findItem("파스닙 씨앗");
 	_vItem[1] = ITEMMANAGER->findItem("완두콩 씨앗");
@@ -60,20 +62,32 @@ void inventory::update()
 	_vItemUpdate();
 
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-	for (int i = 0; i < _vItem.size(); i++)
-	{
-		_vItem[i].rc = RectMake(263 + 55 * (i % 12), 125 + 55 * (i / 12), 55, 45);
+	
+	
+	if(isShowTemp)
+	{ 
+		for (int i = 0; i < _vItem.size(); i++) //창고를 클릭했을때 나오는 플레이어 인벤토리
+		{
+			_vItem[i].rc = RectMake(300 + 55 * (i % 12), 300 + 55 * (i / 12), 40, 40);
+		}
 	}
-
-	_vItem[i].rc = RectMake(265 + 55 * (i % 12), 125 + 55 * (i / 12), 50, 45); // 창고 인벤토리
+	else
+	{
+		for (int i = 0; i < _vItem.size(); i++) 
+		{
+			_vItem[i].rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 40, 40);
+		}
+	}
 	
 	//if (_MouseStorageItem.item_image) _MouseStorageItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseStorageItem.item_image->getFrameWidth(), _MouseStorageItem.item_image->getFrameHeight());
-	for (int i = 0; i < _vStorageItem.size(); i++)
+	
+	for (int i = 0; i < _vStorageItem.size(); i++) //창고 
 	{
-		_vStorageItem[i].rc = RectMake(300 + 55 * (i % 12), 70 + 55 * (i / 12), 50, 45);
+		_vStorageItem[i].rc = RectMake(315 + 52 * (i % 12), 65 + 50 * (i / 12), 40, 40);
 	}
 
-	
+	cout << _ptMouse.x << " " << _ptMouse.y << endl;
+
 }
 
 void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
@@ -211,12 +225,6 @@ void inventory::renderSellingInventory(HDC hdc)
 
 	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
 	inventory_img->render(hdc, 250, 375);
-
-
-
-
-
-
 }
 
 void inventory::renderStorageInventory(HDC hdc)
@@ -226,23 +234,19 @@ void inventory::renderStorageInventory(HDC hdc)
 	playerStorage_img = IMAGEMANAGER->findImage("플레이어 창고");
 	playerStorage_img->render(hdc, 225, 30);
 
-	for (int i = 0; i < STORAGEMAX; i++)
-	{
-		Rectangle(hdc, _vStorageItem[i].rc);
-	}
 
-	
+	//for (int i = 0; i < STORAGEMAX; i++)
+	//{
+	//	Rectangle(hdc, _vStorageItem[i].rc);
+	//}
+
 	//캐릭터의 창고에 있는 인벤36칸
 	for (int i = 0; i < INVENMAX; i++)
 	{
+		if (_vItem[i].item_image == NULL) continue;
+		_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left + 10, _vItem[i].rc.top + 2, _vItem[i].indexX, _vItem[i].indexY);
 		Rectangle(hdc, _vItem[i].rc);
 	}
-
-
-
-
-
-
 }
 
 void inventory::_vItemUpdate()
@@ -250,11 +254,7 @@ void inventory::_vItemUpdate()
 	if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-		for (int i = 0; i < _vItem.size(); i++)
-		{
-			_vItem[i].rc = RectMake(265 + 55 * (i % 12), 123 + 55 * (i / 12), 50, 45);
 
-		}
 
 		for (int i = 0; i < _vItem.size(); i++)
 		{
@@ -279,7 +279,6 @@ void inventory::_vItemUpdate()
 							_MouseItem = _vItem[i];
 							_vItem[i] = pushItem;
 						}
-
 					}
 
 					else if (_vItem[i].item_image == NULL)
@@ -292,10 +291,7 @@ void inventory::_vItemUpdate()
 							_MouseItem = clearItem;
 						}
 					}
-
-
 				}
-
 			}
 		}
 	}
@@ -336,5 +332,7 @@ void inventory::_vItemUpdate()
 
 void inventory::craftObject()
 {
+
+
 }
 
