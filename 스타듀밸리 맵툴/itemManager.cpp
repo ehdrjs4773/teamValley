@@ -11,6 +11,10 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("¿­¸Å(¶¥)", "Images/BMP/¿­¸Å(¶¥).bmp", 256, 48, 16, 3);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("³ª¹«", "Images/BMP/³ª¹«2.bmp", 144, 640, 9, 40);
+	IMAGEMANAGER->addFrameImage("³ª¹«Ææ½º", "Images/Ææ½º/³ª¹«Ææ½º.bmp", 48, 352, 3, 22);
+	IMAGEMANAGER->addFrameImage("µ¹Ææ½º", "Images/Ææ½º/µ¹Ææ½º.bmp", 48, 352, 3, 22);
+	IMAGEMANAGER->addFrameImage("Ææ½º", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ.bmp", 80, 40, 2, 1);
+	IMAGEMANAGER->addFrameImage("Ææ½º(¶¥)", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ(¶¥).bmp", 32, 32, 2, 1);
 
 	addSeed();
 	addFruit();
@@ -128,6 +132,8 @@ void itemManager::addObject()
 	addObjectItem("¿­¸Å", ITEM_DEBRIS, 5, 2, "µ¹");
 	addObjectItem("¿­¸Å", ITEM_DEBRIS, 6, 2, "³ª¹«");
 	addObjectItem("¿­¸Å", ITEM_DEBRIS, 10, 2, "´Ü´ÜÇÑ³ª¹«");
+	addObjectItem("Ææ½º", ITEM_WOODENFENCE, 0, 0, "³ª¹«¿ïÅ¸¸®");
+	addObjectItem("Ææ½º", ITEM_STONEFENCE, 1, 0, "¼®Àç¿ïÅ¸¸®");
 }
 
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)

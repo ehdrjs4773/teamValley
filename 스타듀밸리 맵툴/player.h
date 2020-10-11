@@ -113,7 +113,7 @@ public:
 	void playerInvenCoverAnimation();
 	void drawPlayerInven(tagTile tile1, tagTile tile2);
 	void openPlayerInvenCover();
-	void openPlayerStorageCover();
+	void openPlayerStorageCover(HDC hdc);
 
 	bool getFade(const char* fade) 
 	{

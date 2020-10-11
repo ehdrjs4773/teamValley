@@ -3,8 +3,6 @@
 
 TCHAR inGameScene::saveName[MAX_PATH];
 
-
-
 inGameScene::inGameScene()
 {
 	loadCount = 0;  //최초 로드시 초기화 방지 카운트
@@ -25,16 +23,17 @@ HRESULT inGameScene::init()
 
 		checkPlayerTile();
 		loadCount = 1;
+
+		for (int i = 0; i < 4; i++)
+		{
+			_tile[0][i].portal = PT_HOUSE;
+			_tile[0][i + 7].portal = PT_BARN;
+			_tile[0][i + 14].portal = PT_CHICKENHOUSE;
+			_tile[0][i + 21].portal = PT_SHOP;
+		}
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		_tile[0][i].portal = PT_HOUSE;
-		_tile[0][i + 7].portal = PT_BARN;
-		_tile[0][i + 14].portal = PT_CHICKENHOUSE;
-		_tile[0][i + 21].portal = PT_SHOP;
-	}
-
+	
 	return S_OK;
 }
 
@@ -252,6 +251,20 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 			}
+			else if (_tile[i][j].objType == OTY_WOODENFENCE )
+			{
+				IMAGEMANAGER->findImage("나무펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				IMAGEMANAGER->findImage("나무펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+			}
+			else if (_tile[i][j].objType == OTY_STONEFENCE)
+			{
+				IMAGEMANAGER->findImage("돌펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				IMAGEMANAGER->findImage("돌펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+			}
 			else if (_tile[i][j].objType == OTY_TREE)
 			{
 				IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -265,6 +278,7 @@ void inGameScene::renderObjects(int i, int j)
 					}
 				}
 			}
+			
 			else
 			{
 				IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -418,7 +432,7 @@ void inGameScene::playerInteraction()
 		{
 			PLAYER->setDirection(DOWN);
 		}
-		if (MouseIndexX < currentIndexX)
+		 if (MouseIndexX < currentIndexX)
 		{
 			PLAYER->setDirection(LEFT);
 		}
@@ -443,12 +457,22 @@ void inGameScene::playerInteraction()
 			//씨 심기
 			plantSeed();
 
+			//펜스 설치
+			setFence();
+
 			PLAYER->openPlayerInvenCover();
-			PLAYER->openPlayerStorageCover();
+	
 
 			//물뿌리기
 			waterGround();
 		}
+
+		if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
+		{
+			PLAYER->openPlayerStorageCover(getMemDC());
+		}
+
+		cout << MouseIndexX << MouseIndexY << endl;
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
@@ -461,7 +485,6 @@ void inGameScene::playerInteraction()
 			harvest();
 		}
 	}
-	checkHacked();
 }
 
 void inGameScene::hackGround()
@@ -480,6 +503,7 @@ void inGameScene::hackGround()
 				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getHoeDamage());
+				checkHacked();
 			}
 		}
 	}
@@ -577,7 +601,6 @@ void inGameScene::breakStone()
 {
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
-
 		PLAYER->setState(BREAKSTONE);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -591,6 +614,18 @@ void inGameScene::breakStone()
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
 			{
 				dropItem(_tile[MouseIndexY][MouseIndexX], "돌");
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			}
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_WOODENFENCE)
+			{
+				dropItem(_tile[MouseIndexY][MouseIndexX], "나무울타리");
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			}
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONEFENCE)
+			{
+				dropItem(_tile[MouseIndexY][MouseIndexX], "석재울타리");
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 			}
@@ -656,6 +691,35 @@ void inGameScene::cutGrass()
 	}
 }
 
+void inGameScene::setFence()
+{
+	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+		|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+			&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
+	{
+		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+		{
+			//펜스일때
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCE)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_WOODENFENCE;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+			}
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCE)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCE;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+			}
+		}
+	}
+	checkFence();
+}
+
 void inGameScene::waterGround()
 {
 
@@ -681,243 +745,246 @@ void inGameScene::plantSeed()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-			_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
-			_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
-			_tile[MouseIndexY][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
-			_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
-			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-
-			_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
-			_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
-
-			switch (PLAYER->getCurrentInven()->seedKind)
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
-			case SEED_NONE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
-				break;
-			case SEED_PARSNIP:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 0;
-				break;
-			case SEED_CAULIFLOWER:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 2;
-				break;
-			case SEED_GARLIC:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 4;
-				break;
-			case SEED_RHUBARB:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 6;
-				break;
-			case SEED_TOMATO:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 8;
-				break;
-			case SEED_HOTPEPPER:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 10;
-				break;
-			case SEED_RADISH:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 12;
-				break;
-			case SEED_STARFRUIT:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 14;
-				break;
-			case SEED_EGGPLANT:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 16;
-				break;
-			case SEED_PUMPKIN:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 18;
-				break;
-			case SEED_YAM:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 20;
-				break;
-			case SEED_BEET:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 23;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 22;
-				break;
-			case SEED_ANCIENTFRUIT:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 25;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 24;
-				break;
-			case SEED_TULIP:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 26;
-				break;
-			case SEED_POPPY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 28;
-				break;
-			case SEED_SUNFLOWER:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 30;
-				break;
-			case SEED_SWEETGEMBERRY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 33;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 32;
-				break;
-			case SEED_STRAWBERRY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 36;
-				break;
-			case SEED_GRAPE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 38;
-				break;
-			case SEED_COFFEEBEAN:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 40;
-				break;
-			case SEED_GREENBEAN:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 0;
-				break;
-			case SEED_POTATO:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 2;
-				break;
-			case SEED_KALE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 4;
-				break;
-			case SEED_MELON:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 6;
-				break;
-			case SEED_BLUEBERRY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 8;
-				break;
-			case SEED_WHEAT:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 10;
-				break;
-			case SEED_REDCABBAGE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 12;
-				break;
-			case SEED_CORN:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 14;
-				break;
-			case SEED_ARTICHOKE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 16;
-				break;
-			case SEED_BOKCHOY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 18;
-				break;
-			case SEED_CRANBERRY:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 20;
-				break;
-			case SEED_BLUEJAZZ:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 26;
-				break;
-			case SEED_SUMMERSPANGLE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 28;
-				break;
-			case SEED_FAIRYROSE:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 30;
-				break;
-			case SEED_HOPS:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 36;
-				break;
-			case SEED_AMARANTH:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 38;
-				break;
-			case SEED_CATUS:
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
-				_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 40;
-				break;
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_CROP;
+				_tile[MouseIndexY][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
+				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+
+				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
+				_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
+
+				switch (PLAYER->getCurrentInven()->seedKind)
+				{
+				case SEED_NONE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+					break;
+				case SEED_PARSNIP:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 0;
+					break;
+				case SEED_CAULIFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 2;
+					break;
+				case SEED_GARLIC:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 4;
+					break;
+				case SEED_RHUBARB:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 6;
+					break;
+				case SEED_TOMATO:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 8;
+					break;
+				case SEED_HOTPEPPER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 10;
+					break;
+				case SEED_RADISH:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 12;
+					break;
+				case SEED_STARFRUIT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 14;
+					break;
+				case SEED_EGGPLANT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 16;
+					break;
+				case SEED_PUMPKIN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 18;
+					break;
+				case SEED_YAM:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 20;
+					break;
+				case SEED_BEET:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 23;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 22;
+					break;
+				case SEED_ANCIENTFRUIT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 25;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 24;
+					break;
+				case SEED_TULIP:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 26;
+					break;
+				case SEED_POPPY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 28;
+					break;
+				case SEED_SUNFLOWER:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 30;
+					break;
+				case SEED_SWEETGEMBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 33;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 32;
+					break;
+				case SEED_STRAWBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 36;
+					break;
+				case SEED_GRAPE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 38;
+					break;
+				case SEED_COFFEEBEAN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 0;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 40;
+					break;
+				case SEED_GREENBEAN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 0;
+					break;
+				case SEED_POTATO:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 2;
+					break;
+				case SEED_KALE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 5;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 4;
+					break;
+				case SEED_MELON:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 7;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 6;
+					break;
+				case SEED_BLUEBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 9;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 8;
+					break;
+				case SEED_WHEAT:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 10;
+					break;
+				case SEED_REDCABBAGE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 13;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 12;
+					break;
+				case SEED_CORN:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 15;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 14;
+					break;
+				case SEED_ARTICHOKE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 17;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 16;
+					break;
+				case SEED_BOKCHOY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 19;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 18;
+					break;
+				case SEED_CRANBERRY:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 21;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 20;
+					break;
+				case SEED_BLUEJAZZ:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 27;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 26;
+					break;
+				case SEED_SUMMERSPANGLE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 29;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 28;
+					break;
+				case SEED_FAIRYROSE:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 31;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 30;
+					break;
+				case SEED_HOPS:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 37;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 36;
+					break;
+				case SEED_AMARANTH:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 39;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 38;
+					break;
+				case SEED_CATUS:
+					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 41;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 8;
+					_tile[MouseIndexY - 1][MouseIndexX].ovlFrameY = 40;
+					break;
+				}
 			}
 		}
 	}
@@ -1336,7 +1403,14 @@ void inGameScene::dropItem(tagTile tile, const char * itemInfo)
 {
 	tagItemOnField temp;
 	temp.item = ITEMMANAGER->findItem(itemInfo);
-	temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
+	if (temp.item.item_kind == ITEM_WOODENFENCE || temp.item.item_kind == ITEM_STONEFENCE)
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("펜스(땅)");
+	}
+	else
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
+	}
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
 	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);
@@ -1389,9 +1463,10 @@ void inGameScene::ejectItem()
 
 void inGameScene::checkHacked()
 {
-	for (int i = currentIndexY - 10; i < currentIndexY + 10; i++)
+	//화면 사이즈만큼만 체크
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
 	{
-		for (int j = currentIndexX - 20; j < currentIndexX + 20; j++)
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
 			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
 			{
@@ -1622,6 +1697,62 @@ void inGameScene::checkHacked()
 			}
 		}
 	}
+}
+
+void inGameScene::checkFence()
+{
+	//화면 사이즈만큼만 체크
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
+	{
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
+		{
+			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
+			{
+				if (_tile[i][j].objType != OTY_WOODENFENCE && _tile[i][j].objType != OTY_STONEFENCE) continue;
+				if (_tile[i][j].objType == _tile[i - 1][j].objType)	//위
+				{
+					_tile[i][j].objFrameX = 0;
+					_tile[i][j].objFrameY = 3;
+				}
+				if (_tile[i][j].objType == _tile[i][j - 1].objType)	//왼
+				{
+					_tile[i][j].objFrameX = 2;
+					_tile[i][j].objFrameY = 1;
+				}
+				if (_tile[i][j].objType == _tile[i][j + 1].objType)	//오
+				{
+					_tile[i][j].objFrameX = 0;
+					_tile[i][j].objFrameY = 1;
+				}
+				if (_tile[i][j].objType == _tile[i][j + 1].objType
+					&& _tile[i][j].objType == _tile[i][j - 1].objType)	//양쪽
+				{
+					_tile[i][j].objFrameX = 1;
+					_tile[i][j].objFrameY = 3;
+				}
+				if (_tile[i][j].objType == _tile[i][j - 1].objType
+					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//좌상
+				{
+					_tile[i][j].objFrameX = 2;
+					_tile[i][j].objFrameY = 5;
+				}
+				if (_tile[i][j].objType == _tile[i][j + 1].objType
+					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//우상
+				{
+					_tile[i][j].objFrameX = 0;
+					_tile[i][j].objFrameY = 5;
+				}
+				if (_tile[i][j].objType == _tile[i][j + 1].objType
+					&& _tile[i][j].objType == _tile[i][j - 1].objType	
+					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//위 + 양옆
+				{
+					_tile[i][j].objFrameX = 1;
+					_tile[i][j].objFrameY = 5;
+				}
+			}
+		}
+	}
+
 }
 
 void inGameScene::setRandomObstacles()

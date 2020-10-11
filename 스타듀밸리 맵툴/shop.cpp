@@ -73,7 +73,7 @@ void shop::update()
 void shop::render()
 {
 	//상점 인벤토리 출력
-	_inven->render(getMemDC());
+	_inven->invenToryRender(getMemDC());
 
 	//마우스 좌표 출력
 	char temp[256];

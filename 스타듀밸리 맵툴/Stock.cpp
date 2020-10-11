@@ -23,8 +23,6 @@ void Stock::update()
 	{
 		count = 0;
 	}
-
-	cout << _vPlayerStock[0].state << "\t" << _vPlayerStock[0].speed << "\t" << _vPlayerStock[0].indexX << "\t" << count << "\t" << _vPlayerStock[0].isMove << endl;
 }
 
 void Stock::render()

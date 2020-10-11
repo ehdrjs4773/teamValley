@@ -61,6 +61,7 @@ public:
 	void cutdownTree();
 	void breakStone();
 	void cutGrass();
+	void setFence();
 
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);
@@ -70,6 +71,7 @@ public:
 	void ejectItem();
 
 	void checkHacked();
+	void checkFence();
 
 	void setRandomObstacles();
 	void changeGrass();

@@ -81,7 +81,6 @@ void  player::update()
 		{
 			isShowInventory = false;
 			_inventory->setInvenToryMove(false);
-			_inventory->_vItemUpdate();
 		}
 		else
 		{	
@@ -719,15 +718,14 @@ void player::openPlayerInvenCover()
 	}
 }
 
-void player::openPlayerStorageCover()
+void player::openPlayerStorageCover(HDC hdc)
 {
 	//플레이어 창고상자
-	if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
-	{
+
 		if (isOpenPlayerStorageCover) isOpenPlayerStorageCover = false;
 		else isOpenPlayerStorageCover = true;
-		//_inventory->_vItemUpdate();
-	}
+		_inventory->invenToryRender(hdc);
+	
 }
 
 void player::fade()
