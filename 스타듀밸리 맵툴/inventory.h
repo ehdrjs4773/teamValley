@@ -37,9 +37,7 @@ public:
 	void invenToryRender(HDC hdc);
 	void quickSlot(HDC hdc);
 	void _vItemUpdate();
-	void renderSellingInventory(HDC hdc);
 	void renderStorageInventory(HDC hdc);
-	void craftObject();
 
 	bool isShowTemp;
 	bool isShowStorageTemp;
@@ -72,6 +70,7 @@ public:
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }
 	bool getInvenToryMove() { return _isInventoryMove; }
+
 
 	bool getIsShowTemp() { return isShowTemp; }
 	void setIsShowTemp(bool setIsShowTemp) { isShowTemp = setIsShowTemp; }
