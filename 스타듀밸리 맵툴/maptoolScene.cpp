@@ -536,7 +536,7 @@ void maptoolScene::setMap()
 						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 8;
 						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 8;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
 						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
@@ -549,7 +549,7 @@ void maptoolScene::setMap()
 						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 5;
 						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 5;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
 						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");
@@ -562,7 +562,7 @@ void maptoolScene::setMap()
 						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 2;
 						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 2;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 5;
+						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
 						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("나무");

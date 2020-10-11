@@ -48,6 +48,7 @@ public:
 
 	void renderMap();
 	void renderObjects(int i, int j);
+	void renderTree(int i, int j);
 
 	void playerMove();
 	void portal();
