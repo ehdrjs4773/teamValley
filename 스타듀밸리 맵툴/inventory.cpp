@@ -35,10 +35,11 @@ void inventory::init()
 	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
 	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
 	_vItem[6].waterAmount = 100;
-	_vItem[7] = ITEMMANAGER->findItem("³¬½Ã´ë");
-	_vItem[8] = ITEMMANAGER->findItem("Ä®");
-	_vItem[9] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
-	_vItem[10] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
+	_vItem[7] = ITEMMANAGER->findItem("Ä®");
+	_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
+	_vItem[9] = ITEMMANAGER->findItem("¼Ò³ª¹« ¾¾¾Ñ");
+	_vItem[10] = ITEMMANAGER->findItem("´ÜÇ³³ª¹« ¾¾¾Ñ");
+	_vItem[11] = ITEMMANAGER->findItem("Âü³ª¹« ¾¾¾Ñ");
 
 	_MouseItem.item_image = NULL;
 	_MouseStorageItem.item_image = NULL;

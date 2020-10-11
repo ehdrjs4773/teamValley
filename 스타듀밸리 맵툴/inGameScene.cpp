@@ -265,11 +265,10 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->findImage("돌펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 			}
-			else if (_tile[i][j].objType == OTY_TREE)
+			else if (_tile[i][j].objType == OTY_TREE || _tile[i][j].objType == OTY_TREETRUNK)
 			{
-				renderTree();
+				renderTree(i, j);
 			}
-			
 			else
 			{
 				IMAGEMANAGER->frameRender(objectImageName, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -299,16 +298,51 @@ void inGameScene::renderObjects(int i, int j)
 
 void inGameScene::renderTree(int i, int j)
 {
-	IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-		_tile[i][j].tree.bodyIndexMinX, _tile[i][j].tree.bodyIndexY);
-	for (int y = 5; y > 0; y--)
+	if (_tile[i][j].objType == OTY_TREE)
 	{
-		for (int x = 1; x > -2; x--)
+		if (_tile[i][j].grownLevel == 4)
 		{
-			IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-				_tile[i][j].tree.bodyIndexMinX - 1 - x, _tile[i][j].tree.bodyIndexY - 4 - y);
+			if (i - 5 >= 0 && j - 1 >= 0)
+			{
+				IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].tree.bodyIndexX, _tile[i][j].tree.bodyIndexY);
+
+				for (int y = 5; y > 0; y--)
+				{
+					for (int x = 1; x > -2; x--)
+					{
+						IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+							_tile[i][j].tree.bodyIndexX - 1 - x, _tile[i][j].tree.bodyIndexY - 4 - y);
+					}
+				}
+			}
+		}
+		if (_tile[i][j].grownLevel == 3)
+		{
+			if (i - 1 >= 0)
+			{
+				for (int t = 0; t < 2; t++)
+				{
+					IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - t][j].rc.left, _tile[i - t][j].rc.top,
+						_tile[i][j].tree.bodyIndexX, _tile[i][j].tree.bodyIndexY - t);
+				}
+			}
+		}
+		if (_tile[i][j].grownLevel >= 0 && _tile[i][j].grownLevel <= 2)
+		{
+			IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+				_tile[i][j].tree.bodyIndexX, _tile[i][j].tree.bodyIndexY);
 		}
 	}
+	else if (_tile[i][j].objType == OTY_TREETRUNK)
+	{
+		for (int t = 0; t < 2; t++)
+		{
+			IMAGEMANAGER->findImage("나무")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - t][j].rc.left, _tile[i - t][j].rc.top,
+				_tile[i][j].tree.bodyIndexX, _tile[i][j].tree.bodyIndexY - t);
+		}
+	}
+	
 }
 
 void inGameScene::playerMove()
@@ -530,6 +564,7 @@ void inGameScene::cutdownTree()
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 
 		{
+			//단단한 나무
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_HARDTREE)
 			{
 				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE)
@@ -575,9 +610,11 @@ void inGameScene::cutdownTree()
 					}
 				}
 			}
+			
+			//자를 수 있는 나무
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 			{
-				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE)
+				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
 				{
 					if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 					{
@@ -587,16 +624,67 @@ void inGameScene::cutdownTree()
 					{
 						for (int i = 0; i < 5; i++)
 						{
+							if (RANDOM->range(3) == 0)
+							{
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "소나무 씨앗");
+								}
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "단풍나무 씨앗");
+								}
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "참나무 씨앗");
+								}
+							}
 							dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
 						}
-						_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
-						_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-						tagTree temp;
-						memset(&temp, 0, sizeof(temp));
-						_tile[MouseIndexY][MouseIndexX].tree = temp;
+						_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
 					}
 				}
 			}
+
+			//나무 둥치
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
+			{
+				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+				{
+					_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+				}
+				else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+					}
+
+					_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+					_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+					tagTree temp;
+					memset(&temp, 0, sizeof(temp));
+					_tile[MouseIndexY][MouseIndexX].tree = temp;
+				}
+			}
+
+			//나뭇가지
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
 			{
 				dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
@@ -1013,27 +1101,32 @@ void inGameScene::plantSeed()
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_TREE;
-				_tile[MouseIndexY][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
-				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
-				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-
 				if (PLAYER->getCurrentInven()->seedKind == SEED_PINETREE)
 				{
-					_tile[MouseIndexY][MouseIndexX].objFrameX = 8;
-					_tile[MouseIndexY][MouseIndexX].objFrameY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.treeType = TREE_PINE;
 				}
 				if (PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE)
 				{
-					_tile[MouseIndexY][MouseIndexX].objFrameX = 5;
-					_tile[MouseIndexY][MouseIndexX].objFrameY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.treeType = TREE_MAPLE;
 				}
 				if (PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
 				{
-					_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
-					_tile[MouseIndexY][MouseIndexX].objFrameY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
+					_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 8;
+					_tile[MouseIndexY][MouseIndexX].tree.treeType = TREE_OAK;
 				}
+
+				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
+				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_TREE;
+				_tile[MouseIndexY][MouseIndexX].seedType = PLAYER->getCurrentInven()->seedKind;
+				_tile[MouseIndexY][MouseIndexX].tree.treeImage = IMAGEMANAGER->findImage("나무");
+				_tile[MouseIndexY][MouseIndexX].tree.hp = 5;
 			}
 		}
 	}
@@ -1090,7 +1183,7 @@ void inGameScene::makeCropGrow()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_SEED) continue;
+			if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) continue;
 			if (!_tile[i][j].isFullyGrown)
 			{
 				if ((_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
@@ -1114,6 +1207,78 @@ void inGameScene::makeCropGrow()
 					_tile[i][j].grownLevel += 1;
 					_tile[i][j].objFrameX -= 1;
 					_tile[i - 1][j].ovlFrameX -= 1;
+				}
+				else if (_tile[i][j].seedType == SEED_PINETREE)
+				{
+					_tile[i][j].grownLevel += 1;
+					if (_tile[i][j].grownLevel == 1)
+					{
+						_tile[i][j].tree.bodyIndexX = 6;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 2)
+					{
+						_tile[i][j].tree.bodyIndexX = 7;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 3)
+					{
+						_tile[i][j].tree.bodyIndexX = 6;
+						_tile[i][j].tree.bodyIndexY = 7;
+					}
+					else if (_tile[i][j].grownLevel == 4)
+					{
+						_tile[i][j].tree.bodyIndexX = 8;
+						_tile[i][j].tree.bodyIndexY = 9;
+					}
+				}
+				else if (_tile[i][j].seedType == SEED_MAPLETREE)
+				{
+					_tile[i][j].grownLevel += 1;
+					if (_tile[i][j].grownLevel == 1)
+					{
+						_tile[i][j].tree.bodyIndexX = 3;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 2)
+					{
+						_tile[i][j].tree.bodyIndexX = 4;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 3)
+					{
+						_tile[i][j].tree.bodyIndexX = 3;
+						_tile[i][j].tree.bodyIndexY = 7;
+					}
+					else if (_tile[i][j].grownLevel == 4)
+					{
+						_tile[i][j].tree.bodyIndexX = 5;
+						_tile[i][j].tree.bodyIndexY = 9;
+					}
+				}
+				else if (_tile[i][j].seedType == SEED_OAKTREE)
+				{
+					_tile[i][j].grownLevel += 1;
+					if (_tile[i][j].grownLevel == 1)
+					{
+						_tile[i][j].tree.bodyIndexX = 0;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 2)
+					{
+						_tile[i][j].tree.bodyIndexX = 1;
+						_tile[i][j].tree.bodyIndexY = 8;
+					}
+					else if (_tile[i][j].grownLevel == 3)
+					{
+						_tile[i][j].tree.bodyIndexX = 0;
+						_tile[i][j].tree.bodyIndexY = 7;
+					}
+					else if (_tile[i][j].grownLevel == 4)
+					{
+						_tile[i][j].tree.bodyIndexX = 2;
+						_tile[i][j].tree.bodyIndexY = 9;
+					}
 				}
 				else
 				{
@@ -1282,6 +1447,20 @@ bool inGameScene::checkFullyGrown(tagTile tile)
 	case SEED_CATUS:
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
+		break;
+	case SEED_PINETREE:
+		if (tile.grownLevel == 4) { return true; }
+		else { return false; }
+		break;
+	case SEED_MAPLETREE:
+		if (tile.grownLevel == 4) { return true; }
+		else { return false; }
+		break;
+	case SEED_OAKTREE:
+		if (tile.grownLevel == 4) { return true; }
+		else { return false; }
+		break;
+	default:
 		break;
 	}
 }

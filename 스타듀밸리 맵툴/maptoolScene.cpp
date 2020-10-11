@@ -464,12 +464,9 @@ void maptoolScene::maptoolSetup()
 
 			_tile[i][j].tree.treeImage = nullptr;
 			_tile[i][j].tree.treeType = TREE_NONE;
-			_tile[i][j].tree.bodyIndexMaxX = 0;
-			_tile[i][j].tree.bodyIndexMinX = 0;
+			_tile[i][j].tree.bodyIndexX = 0;
 			_tile[i][j].tree.bodyIndexY = 0;
-			_tile[i][j].tree.grownLevel = 0;
 			_tile[i][j].tree.hp = 0;
-			_tile[i][j].tree.isFullyGrown = false;
 
 		}
 	}
@@ -533,12 +530,12 @@ void maptoolScene::setMap()
 					{
 						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
 						_tile[i + tileY][j + tileX].objType = OTY_TREE;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 8;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 8;
+						_tile[i + tileY][j + tileX].grownLevel = 4;
+						_tile[i + tileY][j + tileX].isFullyGrown = true;
+
+						_tile[i + tileY][j + tileX].tree.bodyIndexX = 8;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
-						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("唱公");
 						_tile[i + tileY][j + tileX].tree.treeType = TREE_PINE;
 					}
@@ -546,12 +543,12 @@ void maptoolScene::setMap()
 					{
 						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
 						_tile[i + tileY][j + tileX].objType = OTY_TREE;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 5;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 5;
+						_tile[i + tileY][j + tileX].grownLevel = 4;
+						_tile[i + tileY][j + tileX].isFullyGrown = true;
+
+						_tile[i + tileY][j + tileX].tree.bodyIndexX = 5;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
-						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("唱公");
 						_tile[i + tileY][j + tileX].tree.treeType = TREE_MAPLE;
 					}
@@ -559,12 +556,12 @@ void maptoolScene::setMap()
 					{
 						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
 						_tile[i + tileY][j + tileX].objType = OTY_TREE;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMaxX = 2;
-						_tile[i + tileY][j + tileX].tree.bodyIndexMinX = 2;
+						_tile[i + tileY][j + tileX].grownLevel = 4;
+						_tile[i + tileY][j + tileX].isFullyGrown = true;
+
+						_tile[i + tileY][j + tileX].tree.bodyIndexX = 2;
 						_tile[i + tileY][j + tileX].tree.bodyIndexY = 9;
-						_tile[i + tileY][j + tileX].tree.grownLevel = 4;
 						_tile[i + tileY][j + tileX].tree.hp = 5;
-						_tile[i + tileY][j + tileX].tree.isFullyGrown = true;
 						_tile[i + tileY][j + tileX].tree.treeImage = IMAGEMANAGER->findImage("唱公");
 						_tile[i + tileY][j + tileX].tree.treeType = TREE_OAK;
 					}
@@ -1260,13 +1257,13 @@ void maptoolScene::showMapTile()
 						if (i - 5 >= 0 && j - 1 >= 0)
 						{
 							IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-								_tile[i + tileY][j + tileX].tree.bodyIndexMinX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+								_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
 							for (int y = 5; y > 0; y--)
 							{
 								for (int x = 1; x > -2; x--)
 								{
 									IMAGEMANAGER->findImage("唱公")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-										_tile[i + tileY][j + tileX].tree.bodyIndexMinX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+										_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
 								}
 							}
 						}

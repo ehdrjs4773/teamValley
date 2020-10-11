@@ -164,11 +164,9 @@ struct tagItemOnField {
 struct tagTree {
 	image* treeImage;
 	TREETYPE treeType;
-	int bodyIndexMinX, bodyIndexMaxX;
+	int bodyIndexX;
 	int bodyIndexY;
 	int hp;
-	int grownLevel;
-	bool isFullyGrown;
 };
 
 struct tagStock {
