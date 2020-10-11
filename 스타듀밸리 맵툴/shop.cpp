@@ -4,7 +4,7 @@
 HRESULT shop::init()
 {
 	_inven = new inventory;
-	_inven->init();
+	_inven = PLAYER->getPlayerInven();
 
 	_isShopOpen = true;
 
@@ -12,7 +12,6 @@ HRESULT shop::init()
 	click_index = 0;
 
 	_vItem = ITEMMANAGER->getItem();
-
 	_vInven = _inven->getInven();
 
 	_shop_image = IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
@@ -49,6 +48,13 @@ HRESULT shop::init()
 	{
 		_vItem[i].rc = RectMake(_vslot[i].rc.left + 16, _vslot[i].rc.top + 13, 55, 45);
 	}
+
+	//플레이어 인벤토리 렌더용 렉트 초기화
+	for (int i = 0; i < INVENMAX; i++)
+	{
+		playerItem[i] = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+	}
+
 	return S_OK;
 }
 
@@ -70,9 +76,15 @@ void shop::update()
 }
 
 void shop::render()
-{
-	//상점 인벤토리 출력
-	_inven->render(getMemDC());
+{//플레이어 인벤토리 출력
+	IMAGEMANAGER->findImage("상점인벤토리1")->render(getMemDC(), 265, 370);
+
+	for (int i = 0; i < _vInven->size(); i++)
+	{
+		if (_vInven->at(i).item_image == NULL) continue;
+		_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
+	}
+
 
 	//마우스 좌표 출력
 	char temp[256];
@@ -80,7 +92,7 @@ void shop::render()
 	TextOut(getMemDC(), 25, 125, temp, strlen(temp));
 	sprintf(temp, "y : %d", _ptMouse.y);
 	TextOut(getMemDC(), 25, 150, temp, strlen(temp));
-	
+
 	//상점 창 테두리 출력
 	_shop_image->render(getMemDC(), rc_shop.left, rc_shop.top);
 
@@ -108,7 +120,7 @@ void shop::render()
 		}
 		else
 		{
-			_vItem[i+current_index].item_image->render(getMemDC(), _vslot[i].rc.left+16, _vslot[i].rc.top+13);
+			_vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 16, _vslot[i].rc.top + 13);
 		}
 
 		if (_vslot[i].on_cursor)
@@ -120,7 +132,7 @@ void shop::render()
 			Rectangle(getMemDC(), temp2);
 
 			SetTextColor(getMemDC(), RGB(0, 0, 0));
-			
+
 			char temp[256];
 
 			switch (_vItem[i + current_index].item_kind)
@@ -160,9 +172,9 @@ void shop::render()
 	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
 	//Rectangle(getMemDC(), up_BT);
 	//Rectangle(getMemDC(), down_BT);
-	scrollbar_img->render(getMemDC(),up_BT.left+15, up_BT.bottom+10);
+	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
 	//Rectangle(getMemDC(),rc_scroll);
-	scroll_img->render(getMemDC(),rc_scroll.left, rc_scroll.top);
+	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
 
 	if (is_click)
 	{
@@ -175,8 +187,6 @@ void shop::render()
 			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
 		}
 	}
-
-
 }
 
 void shop::sell()
@@ -247,7 +257,6 @@ void shop::buy()
 
 void shop::shop_scroll()
 {
-
 	//스크롤 누르고 이동
 	if (PtInRect(&rc_scroll, _ptMouse))
 	{

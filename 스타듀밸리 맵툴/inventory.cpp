@@ -95,7 +95,6 @@ void inventory::update()
 
 void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 {
-
 	inventory2_img = IMAGEMANAGER->findImage("인벤토리 아이템창");
 	inventory2_img->render(hdc, 225, 30);
 
@@ -126,9 +125,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 
 	}
 
-
 	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
-
 
 }  // 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 
@@ -218,8 +215,6 @@ void inventory::quickSlot(HDC hdc)
 
 	RECT temp{ _playerTool[currentSlotNumber].left,_playerTool[currentSlotNumber].top,_playerTool[currentSlotNumber].right,_playerTool[currentSlotNumber].bottom };
 	FrameRect(hdc, temp, RGB(255, 0, 0));
-
-
 } 
 
 
@@ -353,4 +348,9 @@ void inventory::_vItemUpdate()
 
 
 
+}
+
+void inventory::shopInvenRender(HDC hdc)
+{
+	IMAGEMANAGER->findImage("상점인벤토리1")->render(hdc, 265, 370);
 }

@@ -39,6 +39,8 @@ public:
 	void _vItemUpdate();
 	void renderStorageInventory(HDC hdc);
 
+	void shopInvenRender(HDC hdc);
+
 	bool isShowTemp;
 	bool isShowStorageTemp;
 

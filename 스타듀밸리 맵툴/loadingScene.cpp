@@ -72,11 +72,15 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 40, true, RGB(255, 0, 255));
+
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("인벤토리 아이템창", "Images/inventory/inventory_item.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("플레이어 창고", "Images/inventory/playerStorage.bmp", 653, 430, true, RGB(255, 0, 255));
+
 	IMAGEMANAGER->addFrameImage("농장장애물", "Images/BMP/farmObstacles.bmp", 96, 176, 6, 11);
 	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 256, 784, 16, 49);
+
 	IMAGEMANAGER->addImage("큰외양간", "Images/맵/대형외양간.bmp", 1600, 1600);
 	IMAGEMANAGER->addImage("큰외양간 충돌", "Images/맵/대형외양간 충돌.bmp", 1600, 1600);
 	IMAGEMANAGER->addImage("큰양계장", "Images/맵/대형양계장.bmp", 2560, 1440);

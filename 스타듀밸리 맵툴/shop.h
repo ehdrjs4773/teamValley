@@ -15,6 +15,9 @@ class shop :
 {
 private:
 
+	//플레이어 인벤토리 렌더용 렉트
+	RECT playerItem[INVENMAX];
+
 	bool _isShopOpen;
 
 	inventory *_inven;
@@ -47,6 +50,7 @@ public:
 	void release();
 	void update();
 	void render();
+
 	//아이템 팔기 - 마우스 오른쪽 클릭
 	void sell();
 	
