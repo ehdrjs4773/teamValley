@@ -175,6 +175,7 @@
       <Filter>플레이어\인벤토리</Filter>
     </ClCompile>
     <ClCompile Include="inBuildingScene.cpp" />
+    <ClCompile Include="npc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -273,6 +274,7 @@
       <Filter>플레이어\인벤토리</Filter>
     </ClInclude>
     <ClInclude Include="inBuildingScene.h" />
+    <ClInclude Include="npc.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

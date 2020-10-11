@@ -10,9 +10,12 @@ inGameScene::inGameScene()
 
 HRESULT inGameScene::init()
 {
+
+	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+
 	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
 	{
-		CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+		
 		load();
 		setTileRect();
 

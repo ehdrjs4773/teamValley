@@ -83,12 +83,14 @@ void  player::update()
 			{
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
+				_inventory->setInvenPage(false);
 			}
 
 			else
 			{
 				_inventory->setInvenToryMove(true);
 				isShowInventory = true;
+				_inventory->setInvenPage(true);
 			}
 		}
 	}
@@ -122,10 +124,6 @@ void player::InventroyRender(HDC hdc)
 	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
-	if (isOpenPlayerInvenCover)
-	{
-		_inventory->renderSellingInventory(hdc);
-	}
 
 	if (isOpenPlayerStorageCover)
 	{
