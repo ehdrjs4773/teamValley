@@ -503,6 +503,7 @@ void inGameScene::hackGround()
 				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getHoeDamage());
+
 				checkHacked();
 			}
 		}
@@ -722,7 +723,6 @@ void inGameScene::setFence()
 
 void inGameScene::waterGround()
 {
-
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
 		PLAYER->setState(SPRAYWATER);
@@ -732,6 +732,7 @@ void inGameScene::waterGround()
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
 			_tile[MouseIndexY][MouseIndexX].isWet = true;
+			checkHacked();
 		}
 	}
 }
