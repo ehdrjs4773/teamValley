@@ -432,7 +432,7 @@ void inGameScene::playerInteraction()
 		{
 			PLAYER->setDirection(DOWN);
 		}
-		if (MouseIndexX < currentIndexX)
+		 if (MouseIndexX < currentIndexX)
 		{
 			PLAYER->setDirection(LEFT);
 		}
@@ -461,11 +461,18 @@ void inGameScene::playerInteraction()
 			setFence();
 
 			PLAYER->openPlayerInvenCover();
-			PLAYER->openPlayerStorageCover();
+	
 
 			//¹°»Ñ¸®±â
 			waterGround();
 		}
+
+		if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
+		{
+			PLAYER->openPlayerStorageCover(getMemDC());
+		}
+
+		cout << MouseIndexX << MouseIndexY << endl;
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{

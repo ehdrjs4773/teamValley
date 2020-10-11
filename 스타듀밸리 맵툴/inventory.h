@@ -18,6 +18,9 @@ private:
 	RECT _playerInventory;
 	
 	BOOL _isInventoryMove; //인벤토리 키면 못움직이게 하는거.
+	BOOL _isInvenPage;	   //누르면 인벤페이지
+	BOOL _isCraftPage;	   //누르면 제작페이지
+	BOOL _isPlayerPage;	   //누르면 플레이어페이지
 
 	RECT _playerTool[12];
 
@@ -29,6 +32,7 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
+	void invenToryRender(HDC hdc);
 	void quickSlot(HDC hdc);
 	void _vItemUpdate();
 	void renderSellingInventory(HDC hdc);
@@ -61,6 +65,17 @@ public:
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }
 	bool getInvenToryMove() { return _isInventoryMove; }
+
+
+	//====인벤토리 위에 페이지 설정 ====//
+	BOOL getPlayerPage() { return _isPlayerPage; }
+	void setPlayerPage(bool click) { _isPlayerPage = click; }
+	BOOL getCraftPage() { return _isCraftPage; }
+	void setCraftPage(bool click) { _isCraftPage = click; }
+	BOOL getInvenPage() { return _isInvenPage; }
+	void setInvenPage(bool click) { _isInvenPage = click; }
+	
+
 
 };
 

@@ -4,13 +4,6 @@
 void inventory::init()
 {
 
-	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
-	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
-	IMAGEMANAGER->addImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 10, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("인벤토리 아이템창", "Images/inventory/inventory_item.bmp", 750, 500, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("플레이어 창고", "Images/inventory/playerStorage.bmp", 900, 600, true, RGB(255, 0, 255));
-
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
@@ -18,11 +11,6 @@ void inventory::init()
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
-
-		tagItem tempStorage; // 플레이어 창고 눌렀을때 나오는 인벤36칸 
-		tempStorage.rc = RectMake(300 + 40 * (i % 12), 300 + 55 * (i / 12), 45, 45);
-		tempStorage.item_image = NULL;
-		_vItem.push_back(tempStorage);
 		
 	}
 
@@ -34,6 +22,9 @@ void inventory::init()
 		_vStorageItem.push_back(storageTemp);
 	}
 
+	_isPlayerPage = false;
+	_isCraftPage = false;
+	_isInvenPage = true;
 
 	_vItem[0] = ITEMMANAGER->findItem("파스닙 씨앗");
 	_vItem[1] = ITEMMANAGER->findItem("완두콩 씨앗");
@@ -66,11 +57,12 @@ void inventory::release()
 void inventory::update()
 {
 	craftObject();
+	_vItemUpdate();
 
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 	for (int i = 0; i < _vItem.size(); i++)
 	{
-		_vItem[i].rc = RectMake(270 + 59 * (i % 12), 400 + 55 * (i / 12), 55, 45);
+		_vItem[i].rc = RectMake(263 + 55 * (i % 12), 125 + 55 * (i / 12), 55, 45);
 	}
 
 	//_vItem[i].rc = RectMake(265 + 55 * (i % 12), 125 + 55 * (i / 12), 50, 45); // 창고 인벤토리
@@ -81,69 +73,52 @@ void inventory::update()
 		_vStorageItem[i].rc = RectMake(300 + 55 * (i % 12), 70 + 55 * (i / 12), 50, 45);
 	}
 
-	for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
-	{
-		if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				if (_vStorageItem[i].item_image != NULL)
-				{
-					if (_MouseStorageItem.item_image != NULL)
-					{
-
-						//tagItem storagePushItem;
-						//storagePushItem = _vStorageItem[i];
-						//_vStorageItem[i] = _MouseItem;
-					}
-				}
-				else if (_vItem[i].item_image == NULL)
-				{
-					if (_MouseItem.item_image != NULL)
-					{
-						tagItem clearItem;
-						clearItem.item_image = NULL;
-						_vItem[i] = _MouseItem;
-						_MouseItem = clearItem;
-					}
-				}
-			
-			}
-		}
-	}
+	
 }
 
-void inventory::render(HDC hdc)
+void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 {
 
 	inventory2_img = IMAGEMANAGER->findImage("인벤토리 아이템창");
 	inventory2_img->render(hdc, 225, 30);
 
-	//renderSellingInventory(hdc);
-
-	cout << _MouseItem.item_image << endl;
-	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
-	inventory_img->render(hdc, 250,375);
-
-
-	for (int i = 0; i < _vItem.size(); i++)
+	if (_isInvenPage)
 	{
-		if (_vItem[i].item_image != NULL)
+		for (int i = 0; i < _vItem.size(); i++)
 		{
-			if (_vItem[i].isFrame)
+			if (_vItem[i].item_image != NULL)
 			{
-				_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left + 10, _vItem[i].rc.top + 2, _vItem[i].indexX, _vItem[i].indexY);
+				if (_vItem[i].isFrame)
+				{
+					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left + 10, _vItem[i].rc.top + 2, _vItem[i].indexX, _vItem[i].indexY);
+				}
+				else
+				{
+					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+				}
 			}
-			else
-			{
-				_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
-			}
+
 		}
 	}
+	else if (_isPlayerPage)
+	{
+
+	}
+	else if (_isCraftPage)
+	{
+
+	}
+
 
 	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
 
 
+}  // 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
+
+void inventory::invenToryRender(HDC hdc) // 밑에 뜨게 하는 인벤토리 (위에꺼 배고 다른걸 다 이거로 처리하면 편하잖아-_ -);
+{
+	inventory_img = IMAGEMANAGER->findImage("상점인벤토리");
+	inventory_img->render(hdc, 250,375);
 }
 
 void inventory::quickSlot(HDC hdc)
@@ -272,39 +247,76 @@ void inventory::renderStorageInventory(HDC hdc)
 
 void inventory::_vItemUpdate()
 {
-
-	if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-	for (int i = 0; i < _vItem.size(); i++)
+	if (_isInvenPage)
 	{
-		_vItem[i].rc = RectMake(265 + 55 * (i % 12), 123 + 55 * (i / 12), 50, 45);
-	}
-
-	for (int i = 0; i < _vItem.size(); i++)
-	{
-		if (PtInRect(&_vItem[i].rc, _ptMouse))
+		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
+		for (int i = 0; i < _vItem.size(); i++)
 		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			_vItem[i].rc = RectMake(265 + 55 * (i % 12), 123 + 55 * (i / 12), 50, 45);
+
+		}
+
+		for (int i = 0; i < _vItem.size(); i++)
+		{
+			if (PtInRect(&_vItem[i].rc, _ptMouse))
 			{
-				if (_vItem[i].item_image != NULL) // 아이템이 있으면
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
-					if (_MouseItem.item_image != NULL) // 마우스에 아이템이 있으면
+					if (_vItem[i].item_image != NULL) // 아이템이 있으면
 					{
-						tagItem exchangeItem; // 교환용 아이템
-						exchangeItem = _vItem[i];
-						_vItem[i] = _MouseItem;
-						_MouseItem = exchangeItem;
+						if (_MouseItem.item_image != NULL) // 마우스에 아이템이 있으면
+						{
+							tagItem exchangeItem; // 교환용 아이템
+							exchangeItem = _vItem[i];
+							_vItem[i] = _MouseItem;
+							_MouseItem = exchangeItem;
+						}
+
+						else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
+						{
+							tagItem pushItem;
+							pushItem.item_image = NULL;
+							_MouseItem = _vItem[i];
+							_vItem[i] = pushItem;
+						}
+
 					}
 
-					else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
+					else if (_vItem[i].item_image == NULL)
 					{
-						tagItem pushItem;
-						pushItem.item_image = NULL;
-						_MouseItem = _vItem[i];
-						_vItem[i] = pushItem;
+						if (_MouseItem.item_image != NULL)
+						{
+							tagItem clearItem;
+							clearItem.item_image = NULL;
+							_vItem[i] = _MouseItem;
+							_MouseItem = clearItem;
+						}
 					}
+
 
 				}
 
+			}
+		}
+	}
+	
+
+	for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
+	{
+		if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (_vStorageItem[i].item_image != NULL)
+				{
+					if (_MouseStorageItem.item_image != NULL)
+					{
+	
+						tagItem storagePushItem;
+						storagePushItem = _vStorageItem[i];
+						_vStorageItem[i] = _MouseItem;
+					}
+				}
 				else if (_vItem[i].item_image == NULL)
 				{
 					if (_MouseItem.item_image != NULL)
@@ -315,13 +327,10 @@ void inventory::_vItemUpdate()
 						_MouseItem = clearItem;
 					}
 				}
-
-
+	
 			}
-
 		}
 	}
-
 
 }
 
