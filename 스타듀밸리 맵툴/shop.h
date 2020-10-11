@@ -15,6 +15,8 @@ class shop :
 {
 private:
 
+	bool _isShopOpen;
+
 	inventory *_inven;
 	bool is_click;
 	int click_index;
