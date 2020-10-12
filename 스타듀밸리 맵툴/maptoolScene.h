@@ -23,6 +23,7 @@ private:
 	RECT _rcAutumn;
 	RECT _rcWinter;
 	RECT _rcobjectDelete;
+	RECT _rcObject2;
 
 	RECT horScroll;
 	RECT vertScroll;
