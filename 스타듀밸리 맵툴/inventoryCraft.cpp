@@ -39,7 +39,7 @@ void inventoryCraft::update()
 					{
 						if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
 						{
-							if (_inven->getvInven()[i].amount == 10)
+							if (_inven->getvInven()[i].amount >= 10)
 							{
 								tagItem box;
 								box.item_image = IMAGEMANAGER->findImage("╬фюлеш");
