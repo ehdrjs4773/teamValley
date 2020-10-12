@@ -95,8 +95,6 @@ void inventory::update()
 		_vStorageItem[i].rc = RectMake(301 + 46 * (i % 12), 69 + 50 * (i / 12), 40, 40);
 	}
 
-	cout << _ptMouse.x << " " << _ptMouse.y << endl;
-
 }
 
 void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)

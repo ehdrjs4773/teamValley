@@ -23,6 +23,7 @@ private:
 	int random;
 
 	int _count;
+	int _ani_count;
 
 	bool _stop;
 

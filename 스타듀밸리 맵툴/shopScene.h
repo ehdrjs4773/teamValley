@@ -12,6 +12,7 @@ class shopScene : public gameNode
 	npc* _skillNpc;
 
 	bool _isClicked;
+
 public:
 	HRESULT init();
 	void release();
