@@ -37,7 +37,7 @@ void npc::release()
 void npc::update()
 {
 	_rc = RectMake(_pos.x, _pos.y, 16, 32);
-	move();
+	//move();
 }
 
 void npc::render()

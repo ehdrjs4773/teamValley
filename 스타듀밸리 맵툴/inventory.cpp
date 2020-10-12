@@ -66,7 +66,6 @@ void inventory::update()
 
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 	
-	
 	if(isShowTemp)
 	{ 
 		for (int i = 0; i < _vItem.size(); i++) //창고를 클릭했을때 나오는 플레이어 인벤토리
@@ -82,6 +81,14 @@ void inventory::update()
 		}
 	}
 	
+	if (_isShopOpen)
+	{
+		for (int i = 0; i < _vItem.size(); i++) // E누르면 나오는 인벤토리
+		{
+			_vItem[i].rc = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+		}
+	}
+
 	//if (_MouseStorageItem.item_image) _MouseStorageItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseStorageItem.item_image->getFrameWidth(), _MouseStorageItem.item_image->getFrameHeight());
 	
 	for (int i = 0; i < _vStorageItem.size(); i++) //창고 
@@ -126,7 +133,6 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	}
 
 	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
-
 }  // 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 
 void inventory::invenToryRender(HDC hdc) // 밑에 뜨게 하는 인벤토리 (위에꺼 배고 다른걸 다 이거로 처리하면 편하잖아-_ -);
@@ -229,7 +235,6 @@ void inventory::renderStorageInventory(HDC hdc)
 	for (int i = 0; i < STORAGEMAX; i++)
 	{
 		if (_vStorageItem[i].item_image == NULL)continue;
-		//Rectangle(hdc, _vStorageItem[i].rc);
 		_vStorageItem[i].item_image->frameRender(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top, _vStorageItem[i].indexX, _vStorageItem[i].indexY);
 	}
 
@@ -238,13 +243,16 @@ void inventory::renderStorageInventory(HDC hdc)
 	{
 		if (_vItem[i].item_image == NULL) continue;
 		_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
-		//Rectangle(hdc, _vItem[i].rc);
 	}
 }
 
 void inventory::_vItemUpdate()
 {
-	if (_isInvenPage)
+	if (_isShopOpen)
+	{
+		// 상점이 켜졌을 경우
+	}
+	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 
@@ -288,66 +296,63 @@ void inventory::_vItemUpdate()
 			}
 		}
 	}
-	else
-	{
-		for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
-		{
-			if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					if (_vStorageItem[i].item_image != NULL)
-					{
-						for (int j = 0; j < _vItem.size(); j++)
-						{
+	 else
+	 {
+		 for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
+		 {
+			 if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
+			 {
+				 if (INPUT->GetKeyDown(VK_LBUTTON))
+				 {
+					 if (_vStorageItem[i].item_image != NULL)
+					 {
+						 for (int j = 0; j < _vItem.size(); j++)
+						 {
 
-							if (_vItem[j].item_image == NULL)
-							{
-								_vItem[j] = _vStorageItem[i];
-								_vStorageItem[i] = _MouseItem;
-							}
-				
-
-						}
-					}
-				}
-			}
-		}
-		for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
-		{
-			if (PtInRect(&_vItem[i].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					if (_vItem[i].item_image != NULL)
-					{
-						for (int j = 0; j < _vStorageItem.size(); j++)
-						{
-
-							if (_vStorageItem[j].item_image == NULL)
-							{
-								_vStorageItem[j] = _vItem[i];
-								_vItem[i] = _MouseItem;
-							}
-
-						}
-					}
-				}
-			}
-		}
-
-		for (int i = 0; i < _vStorageItem.size(); i++)
-		{
-			if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
-			{
-				_vStorageItem[i - 1] = _vStorageItem[i];
-				_vStorageItem[i] = _MouseItem;
-			}
-		}
-	}
+							 if (_vItem[j].item_image == NULL)
+							 {
+								 _vItem[j] = _vStorageItem[i];
+								 _vStorageItem[i] = _MouseItem;
+							 }
 
 
+						 }
+					 }
+				 }
+			 }
+		 }
+		 for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
+		 {
+			 if (PtInRect(&_vItem[i].rc, _ptMouse))
+			 {
+				 if (INPUT->GetKeyDown(VK_LBUTTON))
+				 {
+					 if (_vItem[i].item_image != NULL)
+					 {
+						 for (int j = 0; j < _vStorageItem.size(); j++)
+						 {
 
+							 if (_vStorageItem[j].item_image == NULL)
+							 {
+								 _vStorageItem[j] = _vItem[i];
+								 _vItem[i] = _MouseItem;
+							 }
+
+						 }
+					 }
+				 }
+			 }
+		 }
+
+		 for (int i = 0; i < _vStorageItem.size(); i++)
+		 {
+			 if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
+			 {
+				 _vStorageItem[i - 1] = _vStorageItem[i];
+				 _vStorageItem[i] = _MouseItem;
+			 }
+		 }
+	 }
 }
 
 void inventory::shopInvenRender(HDC hdc)

@@ -45,6 +45,7 @@ HRESULT player::init()
 	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	isShowInventory = false;
+
 	isOpenPlayerStorageCover = false;
 
 	isFadeOut = false;

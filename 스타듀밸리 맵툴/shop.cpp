@@ -55,6 +55,8 @@ HRESULT shop::init()
 		playerItem[i] = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
 	}
 
+
+
 	return S_OK;
 }
 
@@ -138,7 +140,6 @@ void shop::render()
 			switch (_vItem[i + current_index].item_kind)
 			{
 			case ITEM_WEAPON:
-
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
@@ -170,10 +171,9 @@ void shop::render()
 	}
 	IMAGEMANAGER->findImage("업버튼")->render(getMemDC(), up_BT.left, up_BT.top);
 	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
-	//Rectangle(getMemDC(), up_BT);
-	//Rectangle(getMemDC(), down_BT);
+
 	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
-	//Rectangle(getMemDC(),rc_scroll);
+
 	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
 
 	if (is_click)
@@ -187,6 +187,7 @@ void shop::render()
 			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
 		}
 	}
+
 }
 
 void shop::sell()
@@ -226,7 +227,7 @@ void shop::buy()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&PLAYER->getInven()->at(i).rc, _ptMouse))
 		{	
 			if ((*_vInven)[i].item_image == NULL)
 			{
