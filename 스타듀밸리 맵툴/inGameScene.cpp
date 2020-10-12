@@ -536,9 +536,9 @@ void inGameScene::playerInteraction()
 				PLAYER->openPlayerStorageCover();
 			}
 		}
-
 		cout << MouseIndexX << MouseIndexY << endl;
 	}
+
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)

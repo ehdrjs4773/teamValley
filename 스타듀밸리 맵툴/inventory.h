@@ -41,7 +41,8 @@ public:
 	void quickSlot(HDC hdc);
 	void _vItemUpdate();
 	void renderStorageInventory(HDC hdc);
-
+	void inven_item_info(HDC hdc);
+	void quickinven_item_info(HDC hdc);
 	void shopInvenRender(HDC hdc);
 
 	bool isShowTemp;

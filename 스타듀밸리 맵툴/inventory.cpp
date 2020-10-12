@@ -93,6 +93,14 @@ void inventory::update()
 		}
 	}
 
+	if (_isShopOpen)
+	{	
+		for (int i = 0; i < _vItem.size(); i++) // E누르면 나오는 인벤토리
+		{
+			_vItem[i].rc = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+		}
+	}
+
 	//if (_MouseStorageItem.item_image) _MouseStorageItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseStorageItem.item_image->getFrameWidth(), _MouseStorageItem.item_image->getFrameHeight());
 	
 	for (int i = 0; i < _vStorageItem.size(); i++) //창고 
@@ -279,6 +287,133 @@ void inventory::renderStorageInventory(HDC hdc)
 	}
 }
 
+void inventory::inven_item_info(HDC hdc)
+{
+	for (int i = 0; i < INVENMAX; i++)
+	{
+		if (PtInRect(&_vItem[i].rc, _ptMouse))
+		{
+			if (_vItem[i].item_image != NULL)
+			{
+				char temp_info[2][256];
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
+				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
+				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+
+				SetTextColor(hdc, RGB(0, 0, 0));
+
+				memset(temp_info, 0, sizeof(temp_info));
+
+				switch (_vItem[i].item_kind)
+				{
+				case ITEM_WEAPON:
+					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
+					break;
+				case ITEM_TOOL:
+					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
+					break;
+				case ITEM_SEED:
+					sprintf(temp_info[0], "SEED", sizeof("SEED"));
+					break;
+				case ITEM_FRUIT:
+					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
+					break;
+				case ITEM_DEBRIS:
+					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
+
+					break;
+				case ITEM_WOODENFENCE:
+					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
+
+					break;
+				case ITEM_WOODENFENCEDOOR:
+					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
+
+					break;
+				case ITEM_STONEFENCE:
+					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
+
+					break;
+				case ITEM_STONEFENCEDOOR:
+					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+
+					break;
+				}
+				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
+
+
+				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+			}
+		}
+	}
+}
+
+void inventory::quickinven_item_info(HDC hdc)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		if (PtInRect(&_playerTool[i], _ptMouse))
+		{
+			if (_vItem[i].item_image != NULL)
+			{
+				char temp_info[2][256];
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 50);
+				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
+				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
+
+				SetTextColor(hdc, RGB(0, 0, 0));
+
+				memset(temp_info, 0, sizeof(temp_info));
+
+				switch (_vItem[i].item_kind)
+				{
+				case ITEM_WEAPON:
+					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
+					break;
+				case ITEM_TOOL:
+					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
+					break;
+				case ITEM_SEED:
+					sprintf(temp_info[0], "SEED", sizeof("SEED"));
+					break;
+				case ITEM_FRUIT:
+					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
+					break;
+				case ITEM_DEBRIS:
+					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
+
+					break;
+				case ITEM_WOODENFENCE:
+					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
+
+					break;
+				case ITEM_WOODENFENCEDOOR:
+					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
+
+					break;
+				case ITEM_STONEFENCE:
+					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
+
+					break;
+				case ITEM_STONEFENCEDOOR:
+					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+
+					break;
+				}
+				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
+
+
+				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+
+			}
+
+		}
+	}
+
+}
+
 void inventory::_vItemUpdate()
 {
 	if (PtInRect(&_isInvenRect, _ptMouse))
@@ -462,4 +597,5 @@ void inventory::_vItemUpdate()
 void inventory::shopInvenRender(HDC hdc)
 {
 	IMAGEMANAGER->findImage("상점인벤토리1")->render(hdc, 265, 370);
+	inven_item_info(hdc);
 }

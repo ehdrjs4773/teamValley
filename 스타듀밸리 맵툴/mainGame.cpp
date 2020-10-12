@@ -7,7 +7,13 @@
 HRESULT mainGame::init()
 {
 	gameNode::init();
-	
+	HFONT hFont;
+	HFONT oldFont;
+	AddFontResource("Fonts/DOSGothic.ttf");
+	hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET,
+		0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("DOSGothic"));
+	oldFont = (HFONT)SelectObject(getMemDC(), hFont);
+	//DeleteObject(oldFont);
 	/*앞으로 메인게임은 각각의 씬들만 관리를 한다*/
 	/*이곳에서 각각의 씬들을 추가하고 현재씬을 설정한다*/
 
@@ -21,13 +27,6 @@ HRESULT mainGame::init()
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
 
-	HFONT hFont;
-	HFONT oldFont;
-	AddFontResource("Fonts/DOSGothic.ttf");
-	hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET,
-		0, 0, 0, 0, TEXT("DOSGothic"));
-	oldFont = (HFONT)SelectObject(getMemDC(), hFont);
-	//DeleteObject(oldFont);
 	return S_OK;
 }
 

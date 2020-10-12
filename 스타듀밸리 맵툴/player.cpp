@@ -116,8 +116,12 @@ void player::InventroyRender(HDC hdc)
 	if (isShowInventory)
 	{
 		_inventory->render(hdc);
+		_inventory->inven_item_info(hdc);
 	}
-	else _inventory->quickSlot(hdc);
+	else {
+		_inventory->quickSlot(hdc);
+		_inventory->quickinven_item_info(hdc);
+	}
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
 	if (isOpenPlayerStorageCover)
