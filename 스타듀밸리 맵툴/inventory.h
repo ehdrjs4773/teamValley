@@ -1,14 +1,14 @@
 #pragma once
 #define INVENMAX 36
 #define STORAGEMAX 36
-
+#include "inventoryCraft.h"
 class inventory 
 {
 private:
 	image *inventory_img;
 	image *inventory2_img;
 	image *playerStorage_img;
-	
+	inventoryCraft* _inventoryCraft;
 	vector<tagItem> _vItem;
 	tagItem _MouseItem;
 
@@ -19,8 +19,11 @@ private:
 	
 	BOOL _isInventoryMove; //인벤토리 키면 못움직이게 하는거.
 	BOOL _isInvenPage;	   //누르면 인벤페이지
+	RECT _isInvenRect;	   //인벤 렉트
 	BOOL _isCraftPage;	   //누르면 제작페이지
+	RECT _isCraftRect;     //제작 렉트
 	BOOL _isPlayerPage;	   //누르면 플레이어페이지
+	RECT _isPlayerRect;    //스킬렉트
 
 	RECT _playerTool[12];
 
@@ -67,6 +70,8 @@ public:
 	void setInvenItem(int i, tagItem item) { _vItem[i] = item; }
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	vector<tagItem>* getInven() { return &_vItem; }
+	vector<tagItem> getvInven() { return _vItem; }
+
 	tagItem* getInven(int a) { return &_vItem[a]; }
 	tagItem getMoveItem() { return _MouseItem; }
 	void setMouseItem(tagItem item) { _MouseItem = item; }

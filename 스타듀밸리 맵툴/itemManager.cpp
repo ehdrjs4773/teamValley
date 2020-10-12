@@ -14,7 +14,7 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("≥™π´∆ÊΩ∫", "Images/∆ÊΩ∫/≥™π´∆ÊΩ∫.bmp", 48, 352, 3, 22);
 	IMAGEMANAGER->addFrameImage("µπ∆ÊΩ∫", "Images/∆ÊΩ∫/µπ∆ÊΩ∫.bmp", 48, 352, 3, 22);
 	IMAGEMANAGER->addFrameImage("∆ÊΩ∫", "Images/∆ÊΩ∫/∆ÊΩ∫æ∆¿Ã≈€.bmp", 80, 40, 2, 1);
-	IMAGEMANAGER->addFrameImage("∆ÊΩ∫(∂•)", "Images/∆ÊΩ∫/∆ÊΩ∫æ∆¿Ã≈€(∂•).bmp", 32, 32, 2, 1);
+	IMAGEMANAGER->addFrameImage("∆ÊΩ∫(∂•)", "Images/∆ÊΩ∫/∆ÊΩ∫æ∆¿Ã≈€(∂•).bmp", 32, 16, 2, 1);
 
 	addSeed();
 	addFruit();
