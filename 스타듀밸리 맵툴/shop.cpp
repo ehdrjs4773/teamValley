@@ -14,8 +14,6 @@ HRESULT shop::init()
 	_vItem = ITEMMANAGER->getItem();
 	_vInven = _inven->getInven();
 
-
-
 	current_index = 0;
 	down_BT = RectMake(1100, 500, 50, 50);
 	up_BT = RectMake(1100, 50, 50, 50);
@@ -74,22 +72,18 @@ void shop::update()
 	}
 	else _isClose = false;
 
-	if (INPUT->GetKeyDown(VK_TAB))
-	{
-		SCENEMANAGER->loadScene("인게임화면");
-	}
 }
 
 void shop::render()
 {//플레이어 인벤토리 출력
-	IMAGEMANAGER->findImage("상점인벤토리1")->render(getMemDC(), 265, 370);
+
+	PLAYER->getInventory()->shopInvenRender(getMemDC());
 
 	for (int i = 0; i < _vInven->size(); i++)
 	{
 		if (_vInven->at(i).item_image == NULL) continue;
 		_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
 	}
-
 
 	//마우스 좌표 출력
 	char temp[256];
@@ -105,16 +99,32 @@ void shop::render()
 	//상점 슬롯 출력
 	for (int i = 0; i < _vslot.size(); i++)
 	{
+		//아이템 이름, 돈 출력
+		RECT rc_name = RectMake(_vslot[i].rc.left + 90, _vslot[i].rc.top+25, 150, 50);
+		RECT rc_money = RectMake(_vslot[i].rc.left + 790, _vslot[i].rc.top+25, 150, 50);
+		char name[256];
+		char money[256];
+		memset(name, 0, sizeof(name));
+		memset(money, 0, sizeof(money));
+		sprintf(name, _vItem[i + current_index].item_info, sizeof(_vItem[i + current_index].item_info));
+		sprintf(money, "%d", _vItem[i + current_index].buy_price);
+		
+		SetTextColor(getMemDC(), RGB(0, 0, 0));
+
 		if (!_vslot[i].on_cursor)
-		{
+		{	
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+
 		}
 		else
 		{
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
+		DrawText(getMemDC(), name, strlen(name), &rc_name, NULL);
+		DrawText(getMemDC(), money, strlen(money), &rc_money, NULL);
+
 	}
 	IMAGEMANAGER->findImage("상점닫기")->render(getMemDC(), rc_exit.left, rc_exit.top);
 
@@ -184,6 +194,15 @@ void shop::render()
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
 				break;
+			case ITEM_WOODENFENCEDOOR:
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				break;
+			case ITEM_STONEFENCEDOOR:
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				break;
+
 			}
 
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);

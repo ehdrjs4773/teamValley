@@ -11,6 +11,8 @@ HRESULT shopScene::init()
 
 	_pos.x = 270;
 	_pos.y = 310;
+	PLAYER->setCenterX(_pos.x + 8);
+	PLAYER->setCenterY(_pos.y + 16);
 
 	_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
 
@@ -35,6 +37,7 @@ void shopScene::release()
 
 void shopScene::update()
 {
+
 	if (_isClicked)
 	{
 		_shop->update();
@@ -42,12 +45,18 @@ void shopScene::update()
 	}
 	else
 	{
+		if (INPUT->GetKeyDown(VK_TAB))
+		{
+			SCENEMANAGER->loadScene("인게임화면");
+			PLAYER->getPlayerInven()->isShopOpen(false);
+		}
+
 		PLAYER->update();
+		playerMove();
 
 		_itemNpc->update();
 
 		_skillNpc->update();
-
 		_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
 
 		temp.x = CAMERAMANAGER->getX() + (float)_ptMouse.x / (float)WINSIZEX * 480;
@@ -60,24 +69,7 @@ void shopScene::update()
 			}
 		}
 
-		CAMERAMANAGER->cameraMove(_pos.x, _pos.y);
-
-		if (INPUT->GetKey('A'))
-		{
-			_pos.x -= 1;
-		}
-		if (INPUT->GetKey('S'))
-		{
-			_pos.y += 1;
-		}
-		if (INPUT->GetKey('D'))
-		{
-			_pos.x += 1;
-		}
-		if (INPUT->GetKey('W'))
-		{
-			_pos.y -= 1;
-		}
+		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	}
 }
@@ -86,11 +78,11 @@ void shopScene::render()
 {
 	IMAGEMANAGER->render("상점실내", CAMERAMANAGER->getMemDC());
 
-	Rectangle(CAMERAMANAGER->getMemDC(), _rc_player);
-
 	_itemNpc->render();
 
 	_skillNpc->render();
+	
+	PLAYER->render();
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -98,4 +90,53 @@ void shopScene::render()
 	{
 		_shop->render();
 	}
+}
+
+void shopScene::playerMove()
+{
+		if (INPUT->GetKey('W'))
+		{
+			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY()) != RGB(255, 0, 0))
+			{
+				PLAYER->setDirection(UP);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+			}
+		}
+		if (INPUT->GetKey('S'))
+		{
+			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) != RGB(255, 0, 0))
+			{
+				PLAYER->setDirection(DOWN);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+			}
+			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) == RGB(0, 0, 255))
+			{
+				PLAYER->setFade("FadeOut", true);
+			}
+		}
+		if (INPUT->GetKey('A'))
+		{
+			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX() - 8, PLAYER->getCenterY() + 8) != RGB(255, 0, 0))
+			{
+				PLAYER->setDirection(LEFT);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+			}
+		}
+		if (INPUT->GetKey('D'))
+		{
+			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX() + 8, PLAYER->getCenterY() + 8) != RGB(255, 0, 0))
+			{
+				PLAYER->setDirection(RIGHT);
+				PLAYER->setState(RUN);
+				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+			}
+		}
+		if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))
+		{
+			PLAYER->setState(STAND);
+		}
+
 }
