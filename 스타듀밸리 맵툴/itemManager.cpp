@@ -134,6 +134,8 @@ void itemManager::addObject()
 	addObjectItem("열매", ITEM_DEBRIS, 10, 2, "단단한나무");
 	addObjectItem("펜스", ITEM_WOODENFENCE, 0, 0, "나무울타리");
 	addObjectItem("펜스", ITEM_STONEFENCE, 1, 0, "석재울타리");
+	addObjectItem("펜스", ITEM_WOODENFENCEDOOR, 0, 0, "나무울타리문");
+	addObjectItem("펜스", ITEM_STONEFENCEDOOR, 1, 0, "석재울타리문");
 }
 
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)

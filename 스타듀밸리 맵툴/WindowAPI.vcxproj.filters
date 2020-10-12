@@ -176,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="inBuildingScene.cpp" />
     <ClCompile Include="npc.cpp" />
+    <ClCompile Include="mineScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -275,6 +276,7 @@
     </ClInclude>
     <ClInclude Include="inBuildingScene.h" />
     <ClInclude Include="npc.h" />
+    <ClInclude Include="mineScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />
