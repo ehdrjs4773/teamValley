@@ -20,6 +20,14 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("건물안화면", new inBuildingScene);
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
+
+	HFONT hFont;
+	HFONT oldFont;
+	AddFontResource("Fonts/DOSGothic.ttf");
+	hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, HANGEUL_CHARSET,
+		0, 0, 0, 0, TEXT("DOSGothic"));
+	oldFont = (HFONT)SelectObject(getMemDC(), hFont);
+	//DeleteObject(oldFont);
 	return S_OK;
 }
 

@@ -72,9 +72,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addImage("주전자 바", "Images/BMP/주전자 바.bmp", 40, 40, true, RGB(255, 0, 255));
-
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("인벤토리 아이템창", "Images/inventory/inventory_item.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("플레이어 창고", "Images/inventory/playerStorage.bmp", 653, 430, true, RGB(255, 0, 255));
 
@@ -105,6 +103,18 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("어린양", "Images/가축/어린양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("털깎인양", "Images/가축/털깎인양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("양", "Images/가축/양.bmp", 128, 192, 4, 6);
+	
+	//상점
+	IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점닫기", "Images/shop/exit.bmp", 30, 33);
+	IMAGEMANAGER->addImage("상점슬롯", "Images/shop_itemslot.bmp", 875, 70, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점슬롯클릭", "Images/shop_itemslot_click.bmp", 875, 70, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("아이템정보", "Images/shop/item_info.bmp", 210, 145, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("업버튼", "Images/shop/up_BT.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("다운버튼", "Images/shop/down_BT.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp", 600, 360, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점실내뒷배경", "Images/shop/shopM.bmp", 600, 360, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()

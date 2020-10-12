@@ -6,19 +6,15 @@ HRESULT shop::init()
 	_inven = new inventory;
 	_inven = PLAYER->getPlayerInven();
 
-	_isShopOpen = true;
-
 	is_click = false;
 	click_index = 0;
+
+	_isClose = false;
 
 	_vItem = ITEMMANAGER->getItem();
 	_vInven = _inven->getInven();
 
-	_shop_image = IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("상점슬롯", "Images/shop_itemslot.bmp", 875, 70, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("상점슬롯클릭", "Images/shop_itemslot_click.bmp", 875, 70, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("업버튼", "Images/shop/up_BT.bmp", 50, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("다운버튼", "Images/shop/down_BT.bmp", 50, 50, true, RGB(255, 0, 255));
+
 
 	current_index = 0;
 	down_BT = RectMake(1100, 500, 50, 50);
@@ -30,7 +26,7 @@ HRESULT shop::init()
 	
 	//상점 사이즈
 	rc_shop = RectMake(100, 50, 900, 320);
-	
+	rc_exit = RectMake(980, 40, 30, 33);
 	//초기 슬롯
 
 	for (int i = 0; i < 4; i++)
@@ -60,7 +56,7 @@ HRESULT shop::init()
 
 void shop::release()
 {
-
+	SAFE_DELETE(_inven);
 }
 
 void shop::update()
@@ -69,6 +65,15 @@ void shop::update()
 	sell();
 	buy();
 	shop_scroll();
+	if (PtInRect(&rc_exit, _ptMouse))
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			_isClose = true;
+		}
+	}
+	else _isClose = false;
+
 	if (INPUT->GetKeyDown(VK_TAB))
 	{
 		SCENEMANAGER->loadScene("인게임화면");
@@ -94,6 +99,7 @@ void shop::render()
 	TextOut(getMemDC(), 25, 150, temp, strlen(temp));
 
 	//상점 창 테두리 출력
+	_shop_image = IMAGEMANAGER->findImage("상점");
 	_shop_image->render(getMemDC(), rc_shop.left, rc_shop.top);
 
 	//상점 슬롯 출력
@@ -110,6 +116,7 @@ void shop::render()
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
 	}
+	IMAGEMANAGER->findImage("상점닫기")->render(getMemDC(), rc_exit.left, rc_exit.top);
 
 	//아이템 이미지와 정보 출력
 	for (int i = 0; i < _vslot.size(); i++)
@@ -125,11 +132,9 @@ void shop::render()
 
 		if (_vslot[i].on_cursor)
 		{
-			RECT temp1 = RectMake(_ptMouse.x + 25, _ptMouse.y + 25, 200, 100);
+			RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 			RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
-
-			Rectangle(getMemDC(), temp1);
-			Rectangle(getMemDC(), temp2);
+			IMAGEMANAGER->findImage("아이템정보")->render(getMemDC(), _ptMouse.x + 25, _ptMouse.y + 25);
 
 			SetTextColor(getMemDC(), RGB(0, 0, 0));
 
@@ -138,7 +143,6 @@ void shop::render()
 			switch (_vItem[i + current_index].item_kind)
 			{
 			case ITEM_WEAPON:
-
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
@@ -161,6 +165,25 @@ void shop::render()
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "FORAGE", sizeof("FORAGE"));
 				break;
+			case ITEM_SEED:
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "SEED", sizeof("SEED"));
+			case 	ITEM_FRUIT:
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "FRUIT", sizeof("FRUIT"));
+				break;
+			case ITEM_DEBRIS :
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "DEBRIS", sizeof("DEBRIS"));
+				break;
+			case ITEM_WOODENFENCE :
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "WOODENFENCE", sizeof("WOODENFENCE"));
+				break;
+			case ITEM_STONEFENCE : 
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
+				break;
 			}
 
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
@@ -170,10 +193,9 @@ void shop::render()
 	}
 	IMAGEMANAGER->findImage("업버튼")->render(getMemDC(), up_BT.left, up_BT.top);
 	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
-	//Rectangle(getMemDC(), up_BT);
-	//Rectangle(getMemDC(), down_BT);
+
 	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
-	//Rectangle(getMemDC(),rc_scroll);
+
 	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
 
 	if (is_click)
@@ -187,6 +209,7 @@ void shop::render()
 			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
 		}
 	}
+
 }
 
 void shop::sell()
@@ -226,7 +249,7 @@ void shop::buy()
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
+		if (PtInRect(&PLAYER->getInven()->at(i).rc, _ptMouse))
 		{	
 			if ((*_vInven)[i].item_image == NULL)
 			{

@@ -45,6 +45,7 @@ HRESULT player::init()
 	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	isShowInventory = false;
+
 	isOpenPlayerStorageCover = false;
 
 	isFadeOut = false;
@@ -101,7 +102,6 @@ void  player::update()
 
 	//가축 움직임
 	stock->update();
-
 }
 
 void player::render()
@@ -109,28 +109,21 @@ void player::render()
 	playerRender();
 
 	stock->render();
-	
 }
 
 void player::InventroyRender(HDC hdc)
 {
-
 	if (isShowInventory)
 	{
 		_inventory->render(hdc);
 	}
-	
-
 	else _inventory->quickSlot(hdc);
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
-
 
 	if (isOpenPlayerStorageCover)
 	{
 		_inventory->renderStorageInventory(hdc);
 	}
-	
-
 }
 
 void player::hpBarRender(HDC hdc)
@@ -142,7 +135,6 @@ void player::hpBarRender(HDC hdc)
 	brush = CreateSolidBrush(RGB(a, 220, 7));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
-
 }
 
 void player::playerAnimation()
@@ -336,7 +328,6 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-
 	case BREAKSTONE:
 		switch (_pDirection)
 		{
@@ -472,52 +463,51 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-
-		/*case ATTACK:
-			switch (_pDirection)
+	/*case ATTACK:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % 5 == 0)
 			{
-			case RIGHT:
-				if (count % 5 == 0)
+				index++;
+				if (index > 5)
 				{
-					index++;
-					if (index > 5)
-					{
-						index = 0;
-					}
+					index = 0;
 				}
-				break;
-			case LEFT:
-				if (count % 5 == 0)
-				{
-					index++;
-					if (index > 5)
-					{
-						index = 0;
-					}
-				}
-				break;
-			case UP:
-				if (count % 5 == 0)
-				{
-					index++;
-					if (index > 7)
-					{
-						index = 0;
-					}
-				}
-				break;
-			case DOWN:
-				if (count % 5 == 0)
-				{
-					index++;
-					if (index > 6)
-					{
-						index = 0;
-					}
-				}
-				break;
 			}
-			break;*/
+			break;
+		case LEFT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 7)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 6)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;*/
 	}
 }
 
@@ -718,17 +708,15 @@ void player::playerRender()
 void player::openPlayerInvenCover()
 {
 	//플레이어 보유 아이템 판매상자
-
 	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
 	{
 		isOpenPlayerInvenCover = false;
 	}
 }
 
-void player::openPlayerStorageCover(HDC hdc)
+void player::openPlayerStorageCover()
 {
 	//플레이어 창고상자
-
 	if (isOpenPlayerStorageCover)
 	{
 		_inventory->setIsShowTemp(false);

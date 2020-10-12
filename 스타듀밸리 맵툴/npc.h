@@ -20,9 +20,12 @@ private:
 	int _frameX;
 	int _frameY;
 
-	bool _stop;
+	int random;
 
 	int _count;
+	int _ani_count;
+
+	bool _stop;
 
 public:
 
