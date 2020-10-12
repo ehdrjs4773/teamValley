@@ -9,45 +9,36 @@ HRESULT shopScene::init()
 
 	_isClicked = false;
 
-	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp", 800, 480, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp",600, 360,true,RGB(255,0,255));
 
-	_pos.x = 360;
-	_pos.y = 430;
+	_pos.x = 280;
+	_pos.y = 310;
 
 	_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
 
-	CAMERAMANAGER->init(800, 480, 400, 240);
+	CAMERAMANAGER->init(1600, 1600, 480, 230);
 
 	_itemNpc = new npc;
 	_itemNpc->init(ITEM_NPC);
-	_itemNpc->setPos(360, 300);
+	_itemNpc->setPos(240, 180);
 
 	_skillNpc = new npc;
 	_skillNpc->init(SKILL_NPC);
-	_skillNpc->setPos(260, 300);
+	_skillNpc->setPos(140, 180);
 
 	return S_OK;
 }
 
 void shopScene::release()
 {
-	//if (_shop != nullptr)
-	//{
-	//	//_shop->release();
-	//	SAFE_DELETE(_shop);
-	//}
-	//if (_itemNpc != nullptr)
-	//{
-	//	SAFE_DELETE(_itemNpc);
-	//}
-	//if (_skillNpc != nullptr)
-	//{
-	//	SAFE_DELETE(_skillNpc);
-	//}
+	//_shop->release();
 }
 
 void shopScene::update()
 {
+
+	PLAYER->update();
+
 	_shop->update();
 
 	_itemNpc->update();
@@ -56,8 +47,8 @@ void shopScene::update()
 
 	_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
 
-	temp.x = CAMERAMANAGER->getX() + (float)_ptMouse.x / (float)WINSIZEX * 400;
-	temp.y = CAMERAMANAGER->getY() + (float)_ptMouse.y / (float)WINSIZEY * (float)240;
+	temp.x = CAMERAMANAGER->getX() + (float)_ptMouse.x / (float)WINSIZEX * 480;
+	temp.y = CAMERAMANAGER->getY() + (float)_ptMouse.y / (float)WINSIZEY * (float)230;
 	if (PtInRect(&_itemNpc->getRC(), temp))
 	{
 		cout << "충돌" << endl;
@@ -90,6 +81,7 @@ void shopScene::update()
 	{
 		_pos.y -= 1;
 	}
+
 }
 
 void shopScene::render()
@@ -103,7 +95,6 @@ void shopScene::render()
 
 	_skillNpc->render();
 
-	//Rectangle(CAMERAMANAGER->getMemDC(), RectMake(temp.x, temp.y, 16, 32));
 	CAMERAMANAGER->render(getMemDC());
 
 	if (_isClicked)

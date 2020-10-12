@@ -35,7 +35,6 @@ private:
 
 	bool isOpenPlayerStorageCover;
 
-	
 	bool isFadeIn, isFadeOut;
 	int alpha;
 
