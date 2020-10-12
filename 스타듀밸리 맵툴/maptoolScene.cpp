@@ -156,6 +156,7 @@ void maptoolScene::update()
 		{
 			checkHacked(i, j);
 			checkFence(i, j);
+
 		}
 	}
 

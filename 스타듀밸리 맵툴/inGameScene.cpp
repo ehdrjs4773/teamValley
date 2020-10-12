@@ -30,9 +30,11 @@ HRESULT inGameScene::init()
 		for (int i = 0; i < 4; i++)
 		{
 			_tile[0][i].portal = PT_HOUSE;
-			_tile[0][i + 7].portal = PT_BARN;
+			_tile[26][i + 56].portal = PT_BARN;
 			_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 			_tile[0][i + 21].portal = PT_SHOP;
+
+	
 		}
 	}
 
@@ -469,6 +471,8 @@ void inGameScene::portal()
 			SCENEMANAGER->loadScene("건물안화면");
 		}
 	}
+
+	cout << currentIndexX<<" " <<currentIndexY << endl;
 }
  
 void inGameScene::checkPlayerTile()
