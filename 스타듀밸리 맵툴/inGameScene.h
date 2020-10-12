@@ -32,7 +32,7 @@ private:
 	int downIndexX, downIndexY;
 
 	bool isShowRect;
-
+	bool isShopOpen;
 public:
 	inGameScene();
 	
