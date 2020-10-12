@@ -251,14 +251,14 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->frameRender("ÀÛ¹°", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 			}
-			else if (_tile[i][j].objType == OTY_WOODENFENCE )
+			else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
 			{
 				IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 				IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 			}
-			else if (_tile[i][j].objType == OTY_STONEFENCE)
+			else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
 			{
 				IMAGEMANAGER->findImage("µ¹Ææ½º")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
@@ -829,6 +829,20 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCE;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+			}
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCEDOOR)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_WOODENFENCEDOOR;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+			}
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCEDOOR)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCEDOOR;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
 			}
 		}
 	}
@@ -1953,47 +1967,72 @@ void inGameScene::checkFence()
 		{
 			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
 			{
-				if (_tile[i][j].objType != OTY_WOODENFENCE && _tile[i][j].objType != OTY_STONEFENCE) continue;
-				if (_tile[i][j].objType == _tile[i - 1][j].objType)	//À§
+				if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_STONEFENCE)
 				{
-					_tile[i][j].objFrameX = 0;
-					_tile[i][j].objFrameY = 3;
+					if (_tile[i][j].objType == _tile[i - 1][j].objType)	//À§
+					{
+						_tile[i][j].objFrameX = 0;
+						_tile[i][j].objFrameY = 3;
+					}
+					if (_tile[i][j].objType == _tile[i][j - 1].objType)	//¿Ş
+					{
+						_tile[i][j].objFrameX = 2;
+						_tile[i][j].objFrameY = 1;
+					}
+					if (_tile[i][j].objType == _tile[i][j + 1].objType)	//¿À
+					{
+						_tile[i][j].objFrameX = 0;
+						_tile[i][j].objFrameY = 1;
+					}
+					if (_tile[i][j].objType == _tile[i][j + 1].objType
+						&& _tile[i][j].objType == _tile[i][j - 1].objType)	//¾çÂÊ
+					{
+						_tile[i][j].objFrameX = 1;
+						_tile[i][j].objFrameY = 3;
+					}
+					if (_tile[i][j].objType == _tile[i][j - 1].objType
+						&& _tile[i][j].objType == _tile[i - 1][j].objType)	//ÁÂ»ó
+					{
+						_tile[i][j].objFrameX = 2;
+						_tile[i][j].objFrameY = 5;
+					}
+					if (_tile[i][j].objType == _tile[i][j + 1].objType
+						&& _tile[i][j].objType == _tile[i - 1][j].objType)	//¿ì»ó
+					{
+						_tile[i][j].objFrameX = 0;
+						_tile[i][j].objFrameY = 5;
+					}
+					if (_tile[i][j].objType == _tile[i][j + 1].objType
+						&& _tile[i][j].objType == _tile[i][j - 1].objType
+						&& _tile[i][j].objType == _tile[i - 1][j].objType)	//À§ + ¾ç¿·
+					{
+						_tile[i][j].objFrameX = 1;
+						_tile[i][j].objFrameY = 5;
+					}
 				}
-				if (_tile[i][j].objType == _tile[i][j - 1].objType)	//¿Ş
-				{
-					_tile[i][j].objFrameX = 2;
-					_tile[i][j].objFrameY = 1;
-				}
-				if (_tile[i][j].objType == _tile[i][j + 1].objType)	//¿À
-				{
-					_tile[i][j].objFrameX = 0;
-					_tile[i][j].objFrameY = 1;
-				}
-				if (_tile[i][j].objType == _tile[i][j + 1].objType
-					&& _tile[i][j].objType == _tile[i][j - 1].objType)	//¾çÂÊ
-				{
-					_tile[i][j].objFrameX = 1;
-					_tile[i][j].objFrameY = 3;
-				}
-				if (_tile[i][j].objType == _tile[i][j - 1].objType
-					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//ÁÂ»ó
-				{
-					_tile[i][j].objFrameX = 2;
-					_tile[i][j].objFrameY = 5;
-				}
-				if (_tile[i][j].objType == _tile[i][j + 1].objType
-					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//¿ì»ó
-				{
-					_tile[i][j].objFrameX = 0;
-					_tile[i][j].objFrameY = 5;
-				}
-				if (_tile[i][j].objType == _tile[i][j + 1].objType
-					&& _tile[i][j].objType == _tile[i][j - 1].objType	
-					&& _tile[i][j].objType == _tile[i - 1][j].objType)	//À§ + ¾ç¿·
-				{
-					_tile[i][j].objFrameX = 1;
-					_tile[i][j].objFrameY = 5;
-				}
+				//if (_tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOR)
+				//{
+				//	if (_tile[i][j].objType == _tile[i][j + 1].objType) //¿À
+				//	{
+				//		_tile[i][j].objFrameX = 0;
+				//		_tile[i][j].objFrameY = 14;
+				//	}
+				//	if (_tile[i][j].objType == _tile[i][j - 1].objType) //¿Ş
+				//	{
+				//		_tile[i][j].objFrameX = 1;
+				//		_tile[i][j].objFrameY = 17;
+				//	}
+				//	if (_tile[i][j].objType == _tile[i - 1][j].objType) //À§
+				//	{
+				//		_tile[i][j].objFrameX = 0;
+				//		_tile[i][j].objFrameY = 11;
+				//	}
+				//	if (_tile[i][j].objType == _tile[i + 1][j].objType) //¾Æ·¡
+				//	{
+				//		_tile[i][j].objFrameX = 0;
+				//		_tile[i][j].objFrameY = 10;
+				//	}
+				//}
 			}
 		}
 	}
@@ -2006,7 +2045,7 @@ void inGameScene::setRandomObstacles()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED || _tile[i][j].terrain != TR_SOIL) { continue; }
+			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
 				switch (RANDOM->range(6))

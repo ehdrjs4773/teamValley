@@ -89,7 +89,8 @@ public:
 	void selectSeason();
 	void resetSampleTile();
 
-	void checkHacked();
+	void checkHacked(int i, int j);
+	void checkFence(int i, int j);
 
 	void showMapTile();
 	void showControlButton();

@@ -6,7 +6,6 @@ HRESULT inBuildingScene::init()
 	PLAYER->setCenterX(780.0f);
 	PLAYER->setCenterY(890.0f);
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
-	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	return S_OK;
 }
