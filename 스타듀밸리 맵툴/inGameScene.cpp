@@ -27,15 +27,14 @@ HRESULT inGameScene::init()
 		checkPlayerTile();
 		loadCount = 1;
 
-		for (int i = 0; i < 4; i++)
-		{
-			_tile[0][i].portal = PT_HOUSE;
-			_tile[26][i + 56].portal = PT_BARN;
-			_tile[0][i + 14].portal = PT_CHICKENHOUSE;
-			_tile[0][i + 21].portal = PT_SHOP;
+		
+			//_tile[0][i].portal = PT_HOUSE;
+			_tile[69][37].portal = PT_BARN;
+			//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
+			_tile[20][50].portal = PT_SHOP;
 
 	
-		}
+		
 	}
 
 	return S_OK;
@@ -52,12 +51,6 @@ void inGameScene::update()
 		SOUNDMANAGER->play("³óÀå", 0.05f);
 	}
 
-	if (INPUT->GetKeyDown('P'))
-	{
-		SCENEMANAGER->loadScene("»óÁ¡¾À");
-		isShopOpen = true;
-		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
-	}
 
 	PLAYER->update();
 
@@ -475,6 +468,16 @@ void inGameScene::portal()
 		{
 			PLAYER->setCurrentMap(MAP_BARN);
 			SCENEMANAGER->loadScene("°Ç¹°¾ÈÈ­¸é");
+		}
+	}
+	if (_tile[currentIndexY][currentIndexX].portal == PT_SHOP)
+	{
+		PLAYER->setFade("FadeOut", true);
+		if (PLAYER->getAlpha() >= 255)
+		{
+			isShopOpen = true;
+			PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
+			SCENEMANAGER->loadScene("»óÁ¡¾À");
 		}
 	}
 

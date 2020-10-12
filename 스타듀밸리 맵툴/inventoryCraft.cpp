@@ -43,6 +43,7 @@ void inventoryCraft::update()
 							{
 								tagItem box;
 								box.item_image = IMAGEMANAGER->findImage("아이템");
+								box.item_info = "상자";
 								box.indexX = 0;
 								box.indexY = 0;
 								box.item_kind = ITEM_BOX;
@@ -103,12 +104,12 @@ void inventoryCraft::render(HDC hdc)
 		//Rectangle(hdc, _vCraftItem[i].rc); 
 	}
 
-	if (INPUT->GetToggleKey(VK_F1))
-	{
-		for (int i = 0; i < _vCraftItem.size(); i++)
-		{
-			Rectangle(hdc, _vCraftItem[i].rc);
-		}
-	}
+	//if (INPUT->GetToggleKey(VK_F1))
+	//{
+	//	for (int i = 0; i < _vCraftItem.size(); i++)
+	//	{
+	//		Rectangle(hdc, _vCraftItem[i].rc);
+	//	}
+	//}
 	
 }

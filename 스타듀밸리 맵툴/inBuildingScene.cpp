@@ -26,8 +26,8 @@ void inBuildingScene::update()
 	{
 		if (PLAYER->getAlpha() >= 255)
 		{
-			PLAYER->setCenterX(96.0f);
-			PLAYER->setCenterY(20.0f);
+			PLAYER->setCenterX(592.0f);
+			PLAYER->setCenterY(1120.0f);
 			SCENEMANAGER->loadScene("인게임화면");
 		}
 	}

@@ -159,7 +159,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 			{
 				if (_vItem[i].isFrame)
 				{
-					Rectangle(hdc, _vItem[i].rc);
+					//Rectangle(hdc, _vItem[i].rc);
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
 				}
 				else
@@ -320,27 +320,21 @@ void inventory::inven_item_info(HDC hdc)
 					break;
 				case ITEM_DEBRIS:
 					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-
 					break;
 				case ITEM_WOODENFENCE:
 					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-
 					break;
 				case ITEM_WOODENFENCEDOOR:
 					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
-
 					break;
 				case ITEM_STONEFENCE:
 					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
-
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
-
 
 				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);

@@ -740,8 +740,8 @@ void player::fade()
 		alpha -= 3;
 		if (alpha < 0)
 		{
-			alpha = 0;
 			isFadeIn = false;
+			alpha = 0;
 		}
 	}
 	if (isFadeOut)
@@ -749,9 +749,9 @@ void player::fade()
 		alpha += 3;
 		if (alpha > 255)
 		{
-			alpha = 255;
 			isFadeOut = false;
 			isFadeIn = true;
+			alpha = 255;	
 		}
 	}
 }

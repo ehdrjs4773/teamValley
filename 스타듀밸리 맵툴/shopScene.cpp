@@ -45,10 +45,20 @@ void shopScene::update()
 	}
 	else
 	{
+		PLAYER->fade();
 		if (INPUT->GetKeyDown(VK_TAB))
 		{
-			SCENEMANAGER->loadScene("인게임화면");
-			PLAYER->getPlayerInven()->isShopOpen(false);
+			PLAYER->setFade("FadeOut", true);
+		}
+		if (PLAYER->getFade("FadeOut"))
+		{
+			if (PLAYER->getAlpha() >= 255)
+			{
+				PLAYER->setCenterX(800.0f);
+				PLAYER->setCenterY(336.0f);
+				PLAYER->getPlayerInven()->isShopOpen(false);
+				SCENEMANAGER->loadScene("인게임화면");
+			}
 		}
 
 		PLAYER->update();
