@@ -241,7 +241,12 @@ void inGameScene::renderObjects(int i, int j)
 		//인게임 화면 오브젝트 그린다
 		if (_tile[i][j].obj != OBJ_NONE)
 		{
-			if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
+			if (_tile[i][j].obj == OBJ_BUILDING)
+			{
+				IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+			}
+			else if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
 				|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
 				|| _tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
 			{
@@ -253,6 +258,7 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 			}
+			
 			else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
 			{
 				IMAGEMANAGER->findImage("나무펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,

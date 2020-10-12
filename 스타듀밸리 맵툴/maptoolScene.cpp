@@ -254,7 +254,6 @@ void maptoolScene::render()
 	}
 
 	//복사한 타일 크기만큼 따라다니는 빨간 렉트
-
 	if (_isDragSet && !_prevent_double)
 	{
 		for (int i = 0; i < DISPLAYX; i++)
@@ -326,6 +325,8 @@ void maptoolScene::setMap_Drag()
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = OBJ_BUILDING;
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = OVR_NONE;
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objType = OTY_NONE;
 								}
 							}
 						}
@@ -653,8 +654,25 @@ void maptoolScene::setMap()
 
 				if (_ctrlSelect == CTRL_OBJECTDELETE)
 				{
+					_tile[i + tileY][j + tileX].terrainFrameX = 0;
+					_tile[i + tileY][j + tileX].terrainFrameY = 6;
+					_tile[i + tileY][j + tileX].objFrameX = 0;
+					_tile[i + tileY][j + tileX].objFrameY = 0;
+					_tile[i + tileY][j + tileX].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 					_tile[i + tileY][j + tileX].obj = OBJ_NONE;
+					_tile[i + tileY][j + tileX].objType = OTY_NONE;
 					_tile[i + tileY][j + tileX].objOver = OVR_NONE;
+					_tile[i + tileY][j + tileX].seedType = SEED_NONE;
+					_tile[i + tileY][j + tileX].portal = PT_NONE;
+					_tile[i + tileY][j + tileX].grownLevel = 0;
+					_tile[i + tileY][j + tileX].isWet = false;
+					_tile[i + tileY][j + tileX].isFullyGrown = false;
+						  
+					_tile[i + tileY][j + tileX].tree.treeImage = nullptr;
+					_tile[i + tileY][j + tileX].tree.treeType = TREE_NONE;
+					_tile[i + tileY][j + tileX].tree.bodyIndexX = 0;
+					_tile[i + tileY][j + tileX].tree.bodyIndexY = 0;
+					_tile[i + tileY][j + tileX].tree.hp = 0;
 				}
 			}
 		}
