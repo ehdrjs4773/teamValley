@@ -187,5 +187,4 @@ enum NPC_KIND {
 
 	ITEM_NPC = 1,
 	SKILL_NPC
-
 };
