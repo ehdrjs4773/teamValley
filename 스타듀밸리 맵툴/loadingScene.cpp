@@ -84,6 +84,12 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("큰양계장", "Images/맵/대형양계장.bmp", 2560, 1440);
 	IMAGEMANAGER->addImage("소형집", "Images/맵/아침 소형 집.bmp", 2560, 1440);
 
+	IMAGEMANAGER->addImage("인벤토리", "Images/inventory/iteminventory.bmp", 750, 550, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("스킬", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("제작창", "Images/inventory/Craftinven.bmp", 750, 550, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아이템제작", "Images/inventory/CraftObject.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 240, 80, 6, 2, true, RGB(255, 0, 255));
+
 	//플레이어
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
 
