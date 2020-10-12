@@ -525,7 +525,7 @@ void inGameScene::playerInteraction()
 
 			PLAYER->openPlayerInvenCover();
 		}
-		if (MouseIndexX >= 25 && MouseIndexX <= 26 && MouseIndexY >= 18 && MouseIndexY <= 19)
+		if (MouseIndexX >= 12 && MouseIndexX <= 13 && MouseIndexY >= 11 && MouseIndexY <= 12)
 		{
 			if (!PLAYER->getIsShowInventory())
 			{
