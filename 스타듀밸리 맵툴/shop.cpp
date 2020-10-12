@@ -60,7 +60,7 @@ HRESULT shop::init()
 
 void shop::release()
 {
-
+	SAFE_DELETE(_inven);
 }
 
 void shop::update()

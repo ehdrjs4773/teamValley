@@ -48,9 +48,8 @@ void npc::render()
 
 void npc::move()
 {
-
 	_count++;
-	static int random = 0;
+	random = 0;
 	
 	if (_count % 41 == 0)
 	{
@@ -90,11 +89,8 @@ void npc::move()
 			_pos.x -= 1;
 			break;
 		}
-
 		animation();
 	}
-
-
 }
 
 void npc::animation()

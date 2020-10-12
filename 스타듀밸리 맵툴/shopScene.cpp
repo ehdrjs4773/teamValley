@@ -9,7 +9,7 @@ HRESULT shopScene::init()
 
 	_isClicked = false;
 
-	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp",800, 480,true,RGB(255,0,255));
+	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp", 800, 480, true, RGB(255, 0, 255));
 
 	_pos.x = 360;
 	_pos.y = 430;
@@ -31,7 +31,19 @@ HRESULT shopScene::init()
 
 void shopScene::release()
 {
-	//_shop->release();
+	//if (_shop != nullptr)
+	//{
+	//	//_shop->release();
+	//	SAFE_DELETE(_shop);
+	//}
+	//if (_itemNpc != nullptr)
+	//{
+	//	SAFE_DELETE(_itemNpc);
+	//}
+	//if (_skillNpc != nullptr)
+	//{
+	//	SAFE_DELETE(_skillNpc);
+	//}
 }
 
 void shopScene::update()
@@ -78,7 +90,6 @@ void shopScene::update()
 	{
 		_pos.y -= 1;
 	}
-
 }
 
 void shopScene::render()

@@ -61,7 +61,6 @@ void inventory::release()
 
 void inventory::update()
 {
-
 	_vItemUpdate();
 
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
