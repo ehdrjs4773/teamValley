@@ -29,7 +29,6 @@ void inventoryCraft::update()
 
 		// 렉트 초기화 및 이미지 초기화 ~
 
-
 		if(PtInRect(&_vCraftItem[i].rc, _ptMouse))
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -102,6 +101,14 @@ void inventoryCraft::render(HDC hdc)
 
 		}
 		//Rectangle(hdc, _vCraftItem[i].rc); 
+	}
+
+	if (INPUT->GetToggleKey(VK_F1))
+	{
+		for (int i = 0; i < _vCraftItem.size(); i++)
+		{
+			Rectangle(hdc, _vCraftItem[i].rc);
+		}
 	}
 	
 }
