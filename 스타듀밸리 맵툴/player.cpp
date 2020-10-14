@@ -44,17 +44,14 @@ HRESULT player::init()
 	stock->addPlayerStock(STOCK_BROWNCHICKEN);
 	stock->addPlayerStock(STOCK_WHITECHICKEN);
 
+	currentMap = MAP_FARM;
+
 	isShowInventory = false;
 
 	isOpenPlayerStorageCover = false;
 
-	isFadeOut = false;
-	isFadeIn = true;
-	alpha = 255;
-
 	_pDirection = DOWN;
 	_pState = STAND;
-	currentMap = MAP_FARM;
 
 	return S_OK;
 }
@@ -65,6 +62,14 @@ void  player::release()
 
 void  player::update()
 {
+	//플레이어 현재 맵 체크
+	setCurrentMap();
+	if (currentMap == MAP_BARN)
+	{
+		//가축 움직임
+		stock->update();
+	}
+
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
 
@@ -78,7 +83,7 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
-		if(!isOpenPlayerStorageCover)
+		if (!isOpenPlayerStorageCover)
 		{
 			if (isShowInventory)
 			{
@@ -97,18 +102,18 @@ void  player::update()
 	}
 
 	_inventory->update();
-	
-	playerInvenCoverAnimation();
 
-	//가축 움직임
-	stock->update();
+	playerInvenCoverAnimation();
 }
 
 void player::render()
 {
 	playerRender();
 
-	stock->render();
+	if (currentMap == MAP_BARN)
+	{
+		stock->render();
+	}
 }
 
 void player::InventroyRender(HDC hdc)
@@ -733,33 +738,18 @@ void player::openPlayerStorageCover()
 	}
 }
 
-void player::fade()
+void player::setCurrentMap()
 {
-	if (isFadeIn)
+	if (SWITCHMANAGER->getCurrentScene() == "상점씬")
 	{
-		alpha -= 3;
-		if (alpha < 0)
-		{
-			isFadeIn = false;
-			alpha = 0;
-		}
+		currentMap = MAP_SHOP;
 	}
-	if (isFadeOut)
+	else if (SWITCHMANAGER->getCurrentScene() == "인게임화면")
 	{
-		alpha += 3;
-		if (alpha > 255)
-		{
-			isFadeOut = false;
-			isFadeIn = true;
-			alpha = 255;	
-		}
+		currentMap = MAP_FARM;
 	}
-}
-
-void player::renderFade(HDC hdc)
-{
-	if (isFadeIn || isFadeOut)
+	else if (SWITCHMANAGER->getCurrentScene() == "건물안화면")
 	{
-		IMAGEMANAGER->alphaRender("페이드", hdc, alpha);
+		currentMap = MAP_BARN;
 	}
 }

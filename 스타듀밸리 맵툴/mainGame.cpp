@@ -45,8 +45,15 @@ void mainGame::update()
 {
 	gameNode::update();
 	
-	//씬매니져 업데이트
-	SCENEMANAGER->update();
+	if (!SWITCHMANAGER->getFade())
+	{
+		//씬매니져 업데이트
+		SCENEMANAGER->update();
+	}
+	else
+	{
+		SWITCHMANAGER->update();
+	}
 
 	//사운드매니져 업데이트 (이게 없으면 사운드매니져 제대로 동작하지 않는다!!!)
 	SOUNDMANAGER->update();
@@ -66,6 +73,10 @@ void mainGame::render()
 
 	//씬매니져 렌더
 	SCENEMANAGER->render();
+
+	//페이드 렌더
+	SWITCHMANAGER->render(getMemDC());
+
 	//타임매니져 렌더
 	TIME->render(getMemDC());
 	

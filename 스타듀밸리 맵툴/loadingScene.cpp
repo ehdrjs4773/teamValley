@@ -44,9 +44,6 @@ void loadingScene::render()
 
 void loadingScene::loadingImage()
 {
-	//페이드인/아웃용 이미지
-	IMAGEMANAGER->addImage("페이드", 1200, 600);
-
 	//농장 이미지
 	IMAGEMANAGER->addFrameImage("농장(봄)", "Images/맵툴/농장(봄).bmp", 384, 400, 24, 25);
 	IMAGEMANAGER->addFrameImage("농장(여름)", "Images/맵툴/농장(여름).bmp", 384, 400, 24, 25);

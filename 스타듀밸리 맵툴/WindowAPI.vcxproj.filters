@@ -85,6 +85,9 @@
     <Filter Include="플레이어\인벤토리">
       <UniqueIdentifier>{5473f3a4-a82c-4c96-87ac-3d900f998269}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFramework\매니져\화면전환매니저">
+      <UniqueIdentifier>{bcae3f65-f11d-4e75-9517-b9df23e7242e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -179,6 +182,9 @@
     <ClCompile Include="mineScene.cpp" />
     <ClCompile Include="inventoryCraft.cpp">
       <Filter>플레이어\인벤토리</Filter>
+    </ClCompile>
+    <ClCompile Include="switchSceneManager.cpp">
+      <Filter>GameFramework\매니져\화면전환매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +288,9 @@
     <ClInclude Include="mineScene.h" />
     <ClInclude Include="inventoryCraft.h">
       <Filter>플레이어\인벤토리</Filter>
+    </ClInclude>
+    <ClInclude Include="switchSceneManager.h">
+      <Filter>GameFramework\매니져\화면전환매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ inGameScene::inGameScene()
 HRESULT inGameScene::init()
 {
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	isShopOpen = false;
 
@@ -32,9 +33,6 @@ HRESULT inGameScene::init()
 			_tile[69][37].portal = PT_BARN;
 			//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 			_tile[20][50].portal = PT_SHOP;
-
-	
-		
 	}
 
 	return S_OK;
@@ -50,7 +48,6 @@ void inGameScene::update()
 	{
 		SOUNDMANAGER->play("³óÀå", 0.05f);
 	}
-
 
 	PLAYER->update();
 
@@ -110,9 +107,7 @@ void inGameScene::update()
 		makeCropGrow();
 	}
 
-	PLAYER->fade();
-
-	portal();
+	moveScene();
 }
 
 void inGameScene::render()
@@ -136,7 +131,6 @@ void inGameScene::render()
 
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
-	PLAYER->renderFade(getMemDC());
 }
 
 void inGameScene::load()
@@ -459,29 +453,20 @@ void inGameScene::playerMove()
 	
 }
 
-void inGameScene::portal()
+void inGameScene::moveScene()
 {
 	if (_tile[currentIndexY][currentIndexX].portal == PT_BARN)
 	{
-		PLAYER->setFade("FadeOut", true);
-		if (PLAYER->getAlpha() >= 255)
-		{
-			PLAYER->setCurrentMap(MAP_BARN);
-			SCENEMANAGER->loadScene("°Ç¹°¾ÈÈ­¸é");
-		}
+		SWITCHMANAGER->changeScene("°Ç¹°¾ÈÈ­¸é");
+		SWITCHMANAGER->startFade(780.0f, 890.0f);
 	}
-	if (_tile[currentIndexY][currentIndexX].portal == PT_SHOP)
+	else if (_tile[currentIndexY][currentIndexX].portal == PT_SHOP)
 	{
-		PLAYER->setFade("FadeOut", true);
-		if (PLAYER->getAlpha() >= 255)
-		{
-			isShopOpen = true;
-			PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
-			SCENEMANAGER->loadScene("»óÁ¡¾À");
-		}
+		isShopOpen = true;
+		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
+		SWITCHMANAGER->changeScene("»óÁ¡¾À");
+		SWITCHMANAGER->startFade(278.0f, 326.0f);
 	}
-
-	cout << currentIndexX<<" " <<currentIndexY << endl;
 }
  
 void inGameScene::checkPlayerTile()

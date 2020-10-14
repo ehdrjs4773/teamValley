@@ -46,6 +46,7 @@ using namespace MY_UTIL;
 #include "cameraManager.h"
 #include "player.h"
 #include "itemManager.h"
+#include "switchSceneManager.h"
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 
@@ -63,6 +64,7 @@ using namespace MY_UTIL;
 #define CAMERAMANAGER cameraManager::getSingleton()
 #define PLAYER player::getSingleton()
 #define ITEMMANAGER itemManager::getSingleton()
+#define SWITCHMANAGER switchSceneManager::getSingleton()
 
 //=============================================================
 //	## 디파인문 ## (윈도우창 초기화)

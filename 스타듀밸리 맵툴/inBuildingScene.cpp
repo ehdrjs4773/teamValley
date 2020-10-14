@@ -3,9 +3,10 @@
 
 HRESULT inBuildingScene::init()
 {
-	PLAYER->setCenterX(780.0f);
-	PLAYER->setCenterY(890.0f);
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
+	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+
+	this->update();
 
 	return S_OK;
 }
@@ -16,21 +17,10 @@ void inBuildingScene::release()
 
 void inBuildingScene::update()
 {
-	PLAYER->fade();
 	PLAYER->update();
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	playerMove();
 	PLAYER->playerAnimation();
-
-	if (PLAYER->getFade("FadeOut"))
-	{
-		if (PLAYER->getAlpha() >= 255)
-		{
-			PLAYER->setCenterX(592.0f);
-			PLAYER->setCenterY(1120.0f);
-			SCENEMANAGER->loadScene("인게임화면");
-		}
-	}
 }
 
 void inBuildingScene::render()
@@ -43,8 +33,6 @@ void inBuildingScene::render()
 
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
-
-	PLAYER->renderFade(getMemDC());
 }
 
 void inBuildingScene::playerMove()
@@ -68,7 +56,11 @@ void inBuildingScene::playerMove()
 		}
 		if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) == RGB(0, 0, 255))
 		{
-			PLAYER->setFade("FadeOut", true);
+			if (!SWITCHMANAGER->getFade())
+			{
+				SWITCHMANAGER->changeScene("인게임화면");
+				SWITCHMANAGER->startFade(592.0f, 1120.0f);
+			}
 		}
 	}
 	if (INPUT->GetKey('A'))

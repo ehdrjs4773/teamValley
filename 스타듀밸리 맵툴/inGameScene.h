@@ -51,7 +51,7 @@ public:
 	void renderTree(int i, int j);
 
 	void playerMove();
-	void portal();
+	void moveScene();
 
 	void checkPlayerTile();
 	void playerInteraction();

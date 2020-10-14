@@ -4,6 +4,9 @@ POINT temp;
 
 HRESULT shopScene::init()
 {
+	CAMERAMANAGER->init(1600, 1600, 480, 230);
+	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+
 	_shop = new shop;
 	_shop->init();
 
@@ -11,21 +14,20 @@ HRESULT shopScene::init()
 
 	_pos.x = 270;
 	_pos.y = 310;
-	PLAYER->setCenterX(_pos.x + 8);
-	PLAYER->setCenterY(_pos.y + 16);
 
 	_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
-
-	CAMERAMANAGER->init(1600, 1600, 480, 230);
 
 	_itemNpc = new npc;
 	_itemNpc->init(ITEM_NPC);
 	_itemNpc->setPos(270, 220);
+	_itemNpc->update();
+
 	//_itemNpc->setPos(310, 240);
 	
 	_skillNpc = new npc;
 	_skillNpc->init(SKILL_NPC);
 	_skillNpc->setPos(450, 240);
+	_skillNpc->update();
 
 	return S_OK;
 }
@@ -37,7 +39,15 @@ void shopScene::release()
 
 void shopScene::update()
 {
-
+	if (INPUT->GetKeyDown(VK_TAB))
+	{
+		if (!SWITCHMANAGER->getFade())
+		{
+			SWITCHMANAGER->changeScene("인게임화면");
+			SWITCHMANAGER->startFade(800.0f, 340.0f);
+		}
+	}
+	
 	if (_isClicked)
 	{
 		_shop->update();
@@ -45,22 +55,6 @@ void shopScene::update()
 	}
 	else
 	{
-		PLAYER->fade();
-		if (INPUT->GetKeyDown(VK_TAB))
-		{
-			PLAYER->setFade("FadeOut", true);
-		}
-		if (PLAYER->getFade("FadeOut"))
-		{
-			if (PLAYER->getAlpha() >= 255)
-			{
-				PLAYER->setCenterX(800.0f);
-				PLAYER->setCenterY(336.0f);
-				PLAYER->getPlayerInven()->isShopOpen(false);
-				SCENEMANAGER->loadScene("인게임화면");
-			}
-		}
-
 		PLAYER->update();
 		playerMove();
 
@@ -80,7 +74,6 @@ void shopScene::update()
 		}
 
 		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
-
 	}
 }
 
@@ -120,10 +113,6 @@ void shopScene::playerMove()
 				PLAYER->setDirection(DOWN);
 				PLAYER->setState(RUN);
 				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-			}
-			if (GetPixel(IMAGEMANAGER->findImage("상점실내뒷배경")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) == RGB(0, 0, 255))
-			{
-				PLAYER->setFade("FadeOut", true);
 			}
 		}
 		if (INPUT->GetKey('A'))

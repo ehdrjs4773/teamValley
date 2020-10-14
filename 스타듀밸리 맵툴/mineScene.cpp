@@ -17,7 +17,6 @@ void mineScene::release()
 
 void mineScene::update()
 {
-	PLAYER->fade();
 	PLAYER->update();
 	PLAYER->playerAnimation();
 }
@@ -30,7 +29,6 @@ void mineScene::render()
 
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
-	PLAYER->renderFade(getMemDC());
 }
 
 void mineScene::playerMove()
@@ -51,10 +49,6 @@ void mineScene::playerMove()
 			PLAYER->setDirection(DOWN);
 			PLAYER->setState(RUN);
 			PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
-		}
-		if (GetPixel(IMAGEMANAGER->findImage("큰외양간 충돌")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) == RGB(0, 0, 255))
-		{
-			PLAYER->setFade("FadeOut", true);
 		}
 	}
 	if (INPUT->GetKey('A'))
