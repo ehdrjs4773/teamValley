@@ -17,7 +17,6 @@ HRESULT player::init()
 	boxIndex = 0;
 	boxCount = 0;
 	isOpenPlayerInvenCover = false;
-	
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
@@ -79,7 +78,6 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
-
 
 	if (INPUT->GetKeyDown('E'))
 	{

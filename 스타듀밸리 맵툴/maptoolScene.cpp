@@ -1517,20 +1517,20 @@ void maptoolScene::showMapTile()
 
 void maptoolScene::showControlButton()
 {
-	Rectangle(getMemDC(), _rcSave);
+	//Rectangle(getMemDC(), _rcSave);
 	IMAGEMANAGER->findImage("세이브")->render(getMemDC(), _rcSave.left, _rcSave.top);
-	Rectangle(getMemDC(), _rcLoad);
+	//Rectangle(getMemDC(), _rcLoad);
 	IMAGEMANAGER->findImage("로드")->render(getMemDC(), _rcLoad.left, _rcLoad.top);
-	Rectangle(getMemDC(), _rcTerrain);
+	//Rectangle(getMemDC(), _rcTerrain);
 	IMAGEMANAGER->findImage("지형")->render(getMemDC(), _rcTerrain.left, _rcTerrain.top);
-	Rectangle(getMemDC(), _rcObject);
+	//Rectangle(getMemDC(), _rcObject);
 	IMAGEMANAGER->findImage("오브젝트")->render(getMemDC(), _rcObject.left, _rcObject.top);
-	Rectangle(getMemDC(), _rcEraser);
+	//Rectangle(getMemDC(), _rcEraser);
 	IMAGEMANAGER->findImage("지우개")->render(getMemDC(), _rcEraser.left, _rcEraser.top);
-	Rectangle(getMemDC(), _rcobjectDelete);
-
-	Rectangle(getMemDC(), _rcObject2);
-
+	//Rectangle(getMemDC(), _rcobjectDelete);
+	IMAGEMANAGER->findImage("오브젝트지우개")->render(getMemDC(), _rcobjectDelete.left, _rcobjectDelete.top);
+	//Rectangle(getMemDC(), _rcObject2);
+	IMAGEMANAGER->findImage("건물버튼")->render(getMemDC(), _rcObject2.left, _rcObject2.top);
 
 	if (isSelectSeason)
 	{

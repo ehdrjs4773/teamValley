@@ -48,6 +48,7 @@ void switchSceneManager::fade()
 			PLAYER->setCenterY(playerY);
 			SCENEMANAGER->loadScene(nextScene);
 			currentScene = nextScene;
+			PLAYER->setCurrentMap();
 			isFadeOut = false;
 			isFadeIn = true;
 		}
