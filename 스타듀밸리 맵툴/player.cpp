@@ -130,6 +130,8 @@ void player::InventroyRender(HDC hdc)
 	if (isOpenPlayerStorageCover)
 	{
 		_inventory->renderStorageInventory(hdc);
+		_inventory->storage_item_info(hdc);
+		_inventory->inven_item_info(hdc);
 	}
 }
 

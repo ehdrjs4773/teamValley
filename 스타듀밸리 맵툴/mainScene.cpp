@@ -25,7 +25,6 @@ void mainScene::update()
 	_mapRc = RectMake(610, 463, 173, 121);
 	_exitRc = RectMake(803, 463, 173, 121);
 
-
 		if (PtInRect(&_newRc, _ptMouse))
 		{
 			frameY[0] = 1;

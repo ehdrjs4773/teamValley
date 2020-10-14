@@ -24,7 +24,6 @@ private:
 	RECT _rcWinter;
 	RECT _rcobjectDelete;
 	RECT _rcObject2;
-	RECT _rcDungeonTerrain;
 
 	RECT horScroll;
 	RECT vertScroll;

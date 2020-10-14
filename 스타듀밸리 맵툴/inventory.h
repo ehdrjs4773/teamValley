@@ -43,6 +43,8 @@ public:
 	void renderStorageInventory(HDC hdc);
 	void inven_item_info(HDC hdc);
 	void quickinven_item_info(HDC hdc);
+	void storage_item_info(HDC hdc);
+
 	void shopInvenRender(HDC hdc);
 
 	bool isShowTemp;

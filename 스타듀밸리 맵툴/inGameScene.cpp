@@ -467,6 +467,14 @@ void inGameScene::moveScene()
 		SWITCHMANAGER->changeScene("»óÁ¡¾À");
 		SWITCHMANAGER->startFade(278.0f, 326.0f);
 	}
+	if (INPUT->GetKeyDown(VK_TAB))
+	{
+		isShopOpen = true;
+		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
+		SCENEMANAGER->loadScene("»óÁ¡¾À");
+		PLAYER->setCenterX(278.0f);
+		PLAYER->setCenterY(326.0f);
+	}
 }
  
 void inGameScene::checkPlayerTile()
