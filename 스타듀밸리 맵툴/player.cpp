@@ -63,11 +63,9 @@ void  player::update()
 {
 	//플레이어 현재 맵 체크
 	setCurrentMap();
-	if (currentMap == MAP_BARN)
-	{
-		//가축 움직임
-		stock->update();
-	}
+
+	//가축 움직임
+	stock->update();
 
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
