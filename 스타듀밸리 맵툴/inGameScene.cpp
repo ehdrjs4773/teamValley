@@ -474,6 +474,14 @@ void inGameScene::moveScene()
 	}
 
 	//cout << currentIndexX << " " << currentIndexY << endl;
+	if (INPUT->GetKeyDown(VK_TAB))
+	{
+		isShopOpen = true;
+		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
+		SCENEMANAGER->loadScene("»óÁ¡¾À");
+		PLAYER->setCenterX(278.0f);
+		PLAYER->setCenterY(326.0f);
+	}
 }
  
 void inGameScene::checkPlayerTile()

@@ -76,7 +76,6 @@ void shop::update()
 
 void shop::render()
 {//플레이어 인벤토리 출력
-
 	PLAYER->getInventory()->shopInvenRender(getMemDC());
 
 	for (int i = 0; i < _vInven->size(); i++)
@@ -84,14 +83,7 @@ void shop::render()
 		if (_vInven->at(i).item_image == NULL) continue;
 		_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
 	}
-
-	//마우스 좌표 출력
-	char temp[256];
-	sprintf(temp, "x : %d", _ptMouse.x);
-	TextOut(getMemDC(), 25, 125, temp, strlen(temp));
-	sprintf(temp, "y : %d", _ptMouse.y);
-	TextOut(getMemDC(), 25, 150, temp, strlen(temp));
-
+	PLAYER->getInventory()->inven_item_info(getMemDC());
 	//상점 창 테두리 출력
 	_shop_image = IMAGEMANAGER->findImage("상점");
 	_shop_image->render(getMemDC(), rc_shop.left, rc_shop.top);
@@ -128,7 +120,8 @@ void shop::render()
 	}
 	IMAGEMANAGER->findImage("상점닫기")->render(getMemDC(), rc_exit.left, rc_exit.top);
 
-	//아이템 이미지와 정보 출력
+	//아이템 이미지 출력
+
 	for (int i = 0; i < _vslot.size(); i++)
 	{
 		if (_vItem[i + current_index].isFrame)
@@ -139,7 +132,29 @@ void shop::render()
 		{
 			_vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 16, _vslot[i].rc.top + 13);
 		}
+	}
 
+	IMAGEMANAGER->findImage("업버튼")->render(getMemDC(), up_BT.left, up_BT.top);
+	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
+
+	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
+
+	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
+
+	if (is_click)
+	{
+		if (_vItem[click_index].isFrame)
+		{
+			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
+		}
+		else
+		{
+			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
+		}
+	}
+	//아이템 정보 출력
+	for (int i = 0; i < _vslot.size(); i++)
+	{
 		if (_vslot[i].on_cursor)
 		{
 			RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
@@ -182,15 +197,15 @@ void shop::render()
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "FRUIT", sizeof("FRUIT"));
 				break;
-			case ITEM_DEBRIS :
+			case ITEM_DEBRIS:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "DEBRIS", sizeof("DEBRIS"));
 				break;
-			case ITEM_WOODENFENCE :
+			case ITEM_WOODENFENCE:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "WOODENFENCE", sizeof("WOODENFENCE"));
 				break;
-			case ITEM_STONEFENCE : 
+			case ITEM_STONEFENCE:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
 				break;
@@ -204,28 +219,8 @@ void shop::render()
 				break;
 
 			}
-
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
-		}
-
-	}
-	IMAGEMANAGER->findImage("업버튼")->render(getMemDC(), up_BT.left, up_BT.top);
-	IMAGEMANAGER->findImage("다운버튼")->render(getMemDC(), down_BT.left, down_BT.top);
-
-	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
-
-	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
-
-	if (is_click)
-	{
-		if (_vItem[click_index].isFrame)
-		{
-			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
-		}
-		else
-		{
-			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
 		}
 	}
 

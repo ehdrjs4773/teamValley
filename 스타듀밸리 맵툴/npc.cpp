@@ -14,7 +14,6 @@ HRESULT npc::init(NPC_KIND kind)
 	_isClicked = false;
 
 	_rc = RectMake(_pos.x, _pos.y, 16, 32);
-
 	if (kind == ITEM_NPC)
 	{
 		IMAGEMANAGER->addFrameImage("아이템NPC", "Images/NPC/npc_item.bmp", 64, 128, 4, 4);
@@ -41,7 +40,13 @@ void npc::release()
 void npc::update()
 {
 	_rc = RectMake(_pos.x, _pos.y, 16, 32);
-	//move();
+	
+	//플레이어 엔피씨 충돌처리
+	RECT temp;
+	if (!IntersectRect(&temp, &_rc, &PLAYER->getRc()))
+	{
+	//	move();
+	}
 }
 
 void npc::render()

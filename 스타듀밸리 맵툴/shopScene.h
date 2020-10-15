@@ -8,8 +8,10 @@ class shopScene : public gameNode
 	POINT _pos;
 
 	npc* _itemNpc;
-
+	
 	npc* _skillNpc;
+	
+	npc* _npcPtr[2];
 
 	bool _isClicked;
 
