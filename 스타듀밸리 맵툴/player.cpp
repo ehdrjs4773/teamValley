@@ -52,6 +52,16 @@ HRESULT player::init()
 	_pDirection = DOWN;
 	_pState = STAND;
 
+	year = 1;
+	hour = 6;
+	minute = 0;
+	money = 500;
+	currentSeason = SPRING;
+	currentWeather = SUNNY;
+	date = 1;
+	day = MON;
+	arrowAngle = 18;
+
 	return S_OK;
 }
 
@@ -61,6 +71,30 @@ void  player::release()
 
 void  player::update()
 {
+
+	if (INPUT->GetKeyDown('E'))
+	{
+		if (!isOpenPlayerStorageCover)
+		{
+			if (isShowInventory)
+			{
+				isShowInventory = false;
+				_inventory->setInvenToryMove(false);
+				_inventory->setInvenPage(false);
+			}
+			else
+			{
+				_inventory->setInvenToryMove(true);
+				isShowInventory = true;
+				_inventory->setInvenPage(true);
+			}
+		}
+	}
+	if (INPUT->GetKeyDown('B'))
+	{
+		hour += 1;
+	}
+
 	//플레이어 현재 맵 체크
 	setCurrentMap();
 
@@ -76,30 +110,15 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 	rc = RectMakeCenter(centerX, centerY, 16, 32);
-
-	if (INPUT->GetKeyDown('E'))
-	{
-		if (!isOpenPlayerStorageCover)
-		{
-			if (isShowInventory)
-			{
-				isShowInventory = false;
-				_inventory->setInvenToryMove(false);
-				_inventory->setInvenPage(false);
-			}
-
-			else
-			{
-				_inventory->setInvenToryMove(true);
-				isShowInventory = true;
-				_inventory->setInvenPage(true);
-			}
-		}
-	}
-
 	_inventory->update();
-
 	playerInvenCoverAnimation();
+
+	countTime();
+
+	if (money < 0)
+	{
+		money = 0;
+	}
 }
 
 void player::render()
@@ -112,7 +131,16 @@ void player::render()
 	}
 }
 
-void player::InventroyRender(HDC hdc)
+void player::playerStatusRender(HDC hdc)
+{
+	InventoryRender(hdc);
+	hpBarRender(hdc);
+	clockRender(hdc);
+	moneyRender(hdc);
+	arrowRender(hdc);
+}
+
+void player::InventoryRender(HDC hdc)
 {
 	if (isShowInventory)
 	{
@@ -754,4 +782,115 @@ void player::setCurrentMap()
 	{
 		currentMap = MAP_HOUSE;
 	}
+}
+
+void player::countTime()
+{
+	timeCount++;
+	if (timeCount % 120 == 0)
+	{
+		minute++;
+		if (minute >= 60)
+		{
+			hour += 1;
+			minute = 0;
+		}
+	}
+	if (hour >= 24)
+	{
+		date += 1;
+		day = (DAYOFWEEK)(day + 1);
+		hour = 0;
+	}
+	if (date > 30)
+	{
+		currentSeason = (SEASON)(currentSeason + 1);
+		date = 1;
+	}
+	if (currentSeason > 3)
+	{
+		year += 1;
+		currentSeason = (SEASON)0;
+	}
+	if (day > 6)
+	{
+		day = (DAYOFWEEK)0;
+	}
+}
+
+void player::clockRender(HDC hdc)
+{
+	IMAGEMANAGER->render("시계", hdc, 980, 20);
+
+	char dayStr[64];	
+	char hourStr[64];
+	char minStr[64];
+	char yearStr[64];
+	char dateStr[64];
+
+	switch (day)
+	{
+	case MON:
+		sprintf(dayStr, "월");
+		break;
+	case TUE:
+		sprintf(dayStr, "화");
+		break;
+	case WED:
+		sprintf(dayStr, "수");
+		break;
+	case THU:
+		sprintf(dayStr, "목");
+		break;
+	case FRI:
+		sprintf(dayStr, "금");
+		break;
+	case SAT:
+		sprintf(dayStr, "토");
+		break;
+	case SUN:
+		sprintf(dayStr, "일");
+		break;
+	}
+	textOut(hdc, 1055, 98, dayStr, RGB(0, 0, 0));
+
+	sprintf(hourStr, "%d", hour);
+	sprintf(minStr, ": %d", minute);
+	textOut(hdc, 1090, 98, hourStr, RGB(0, 0, 0));
+	textOut(hdc, 1110, 98, minStr, RGB(0, 0, 0));
+
+	sprintf(yearStr, "%d년차", year);
+	sprintf(dateStr, "%d일", date);
+	textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
+	textOut(hdc, 1120, 34, dateStr, RGB(0, 0, 0));
+}
+
+void player::moneyRender(HDC hdc)
+{
+	int i = 0;
+	int a;
+	int b = money;
+	while (b > 0)
+	{
+		a = b % 10;
+		IMAGEMANAGER->frameRender("돈숫자", hdc, 1144 - (17 * i), 148, a, 0);
+
+		b -= a;
+		b /= 10;
+		i++;
+	}
+	if (money <= 0)
+	{
+		IMAGEMANAGER->frameRender("돈숫자", hdc, 1144, 148, 0, 0);
+	}
+}
+
+void player::arrowRender(HDC hdc)
+{
+	arrowAngle = 18 - (hour - 6);
+	if (arrowAngle < 0)
+	{
+		arrowAngle = 0;
+	}
+	IMAGEMANAGER->frameRender("시계바늘", hdc, 984, 14, arrowAngle, 0);
 }

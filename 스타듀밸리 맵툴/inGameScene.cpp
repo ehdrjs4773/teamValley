@@ -128,8 +128,7 @@ void inGameScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventroyRender(getMemDC());
-	PLAYER->hpBarRender(getMemDC());
+	PLAYER->playerStatusRender(getMemDC());
 }
 
 void inGameScene::load()

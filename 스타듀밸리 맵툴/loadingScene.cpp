@@ -128,6 +128,13 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점실내뒷배경", "Images/shop/shopM.bmp", 600, 360, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점테이블", "Images/shop/shop_table.bmp", 75, 46, true, RGB(255, 0, 255));
+
+	//시계
+	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
+	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 33, 138, 1, 6);
+	IMAGEMANAGER->addFrameImage("시계바늘", "Images/시계/시계바늘180도.bmp", 1330, 120, 19, 1);
+	IMAGEMANAGER->addFrameImage("돈숫자", "Images/시계/돈 숫자.bmp", 140, 20, 10, 1);
+	IMAGEMANAGER->addImage("시계", "Images/시계/시계.bmp", 200, 158);
 }
 
 void loadingScene::loadingSound()

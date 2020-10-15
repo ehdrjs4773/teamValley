@@ -139,6 +139,28 @@ enum MAP
 	MAP_SHOP
 };
 
+//³¯¾¾
+enum WEATHER
+{
+	SUNNY,
+	RAIN,
+	HEAVYRAIN,
+	WINDY,
+	SNOW
+};
+
+//¿äÀÏ
+enum DAYOFWEEK
+{
+	MON,
+	TUE,
+	WED,
+	THU,
+	FRI,
+	SAT,
+	SUN
+};
+
 struct tagItem {
 	RECT rc;
 	image* item_image;

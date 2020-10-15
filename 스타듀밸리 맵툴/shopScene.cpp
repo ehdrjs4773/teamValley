@@ -30,6 +30,7 @@ HRESULT shopScene::init()
 	_npcPtr[0] = _itemNpc;
 	_npcPtr[1] = _skillNpc;
 
+	this->update();
 	return S_OK;
 }
 
@@ -40,7 +41,6 @@ void shopScene::release()
 
 void shopScene::update()
 {
-
 	_itemNpc->update();
 	_skillNpc->update();
 
@@ -54,7 +54,6 @@ void shopScene::update()
 			PLAYER->getInventory()->isShopOpen(false);
 		}
 	}
-
 
 	if (_isClicked)
 	{
@@ -128,6 +127,8 @@ void shopScene::render()
 	{
 		_shop->render();
 	}
+
+	PLAYER->playerStatusRender(getMemDC());
 }
 
 void shopScene::playerMove()

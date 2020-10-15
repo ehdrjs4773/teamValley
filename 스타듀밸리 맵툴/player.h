@@ -14,8 +14,11 @@ private:
 	Stock* stock;
 	MAP currentMap;
 
-	int time;
-	int money;
+	int timeCount, hour, minute, date, money, year;
+	int arrowAngle;
+	DAYOFWEEK day;
+	SEASON currentSeason;
+	WEATHER currentWeather;
 
 	float centerX, centerY;
 	int currentX, currentY;
@@ -60,9 +63,13 @@ public:
 	void release();
 	void update();
 	void render();
-	void InventroyRender(HDC hdc);
 
+	void playerStatusRender(HDC hdc);
+	void InventoryRender(HDC hdc);
 	void hpBarRender(HDC hdc);
+	void clockRender(HDC hdc);
+	void moneyRender(HDC hdc);
+	void arrowRender(HDC hdc);
 
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
@@ -117,5 +124,15 @@ public:
 	void openPlayerStorageCover();
 
 	void setCurrentMap();
+
+	void countTime();
+	
+	SEASON getSeason() { return currentSeason; }
+	WEATHER getWeather() { return currentWeather; }
+	int getHour() { return hour; }
+	int getMinute() { return minute; }
+	int getMoney() { return money; }
+	int getDate() { return date; }
+	DAYOFWEEK getDay() { return day; }
 };
 

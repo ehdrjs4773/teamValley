@@ -20,7 +20,6 @@ void inBuildingScene::update()
 	PLAYER->update();
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	playerMove();
-	PLAYER->playerAnimation();
 }
 
 void inBuildingScene::render()
@@ -31,8 +30,7 @@ void inBuildingScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventroyRender(getMemDC());
-	PLAYER->hpBarRender(getMemDC());
+	PLAYER->playerStatusRender(getMemDC());
 }
 
 void inBuildingScene::playerMove()

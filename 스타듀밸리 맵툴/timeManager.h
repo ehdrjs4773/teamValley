@@ -28,6 +28,6 @@ public:
 	//한프레임당 경과시간 가져오기 (유니티엔진 Time.deltaTime)
 	float deltaTime(void) { return _deltaTime; }
 	//전체 경과시간 가져오기 (유니티엔진 Time.time)
-	float time(void) { return _time; }
+	float minute(void) { return _time; }
 
 };

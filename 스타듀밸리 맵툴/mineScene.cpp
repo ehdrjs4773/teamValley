@@ -27,7 +27,7 @@ void mineScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventroyRender(getMemDC());
+	PLAYER->InventoryRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
 }
 

@@ -49,7 +49,7 @@ void inHouseScene::render()
 	IMAGEMANAGER->render("플레이어 이불덮기", CAMERAMANAGER->getMemDC());
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventroyRender(getMemDC());
+	PLAYER->InventoryRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
 
 	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
