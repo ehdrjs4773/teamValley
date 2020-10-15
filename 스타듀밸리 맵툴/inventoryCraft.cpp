@@ -101,7 +101,7 @@ void inventoryCraft::render(HDC hdc)
 			_vCraftItem[i].item_image->frameRender(hdc, _vCraftItem[i].rc.left, _vCraftItem[i].rc.top, _vCraftItem[i].indexX, _vCraftItem[i].indexY);
 
 		}
-		//Rectangle(hdc, _vCraftItem[i].rc); 
+		Rectangle(hdc, _vCraftItem[i].rc); 
 	}
 
 	//if (INPUT->GetToggleKey(VK_F1))

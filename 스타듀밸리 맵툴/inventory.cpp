@@ -86,7 +86,7 @@ void inventory::update()
 	}
 	else if (_isCraftPage)
 	{
-		for (int i = 0; i < _vItem.size(); i++) // E누르면 나오는 인벤토리
+		for (int i = 0; i < _vItem.size(); i++) // E누르면 나오는 제작창
 		{
 			_inventoryCraft->update();
 			_vItem[i].rc = RectMake(270 + 55 * (i % 12), 405 + 65 * (i / 12), 40, 40);
@@ -134,7 +134,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left , _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
-					//Rectangle(hdc, _vItem[i].rc);
+					Rectangle(hdc, _vItem[i].rc);
 				}
 				else
 				{
