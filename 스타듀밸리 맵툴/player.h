@@ -14,6 +14,9 @@ private:
 	Stock* stock;
 	MAP currentMap;
 
+	int time;
+	int money;
+
 	float centerX, centerY;
 	int currentX, currentY;
 	int MouseIndexX, MouseIndexY;

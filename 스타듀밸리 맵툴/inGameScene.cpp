@@ -472,16 +472,6 @@ void inGameScene::moveScene()
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(762.0f, 900.0f);
 	}
-
-	//cout << currentIndexX << " " << currentIndexY << endl;
-	if (INPUT->GetKeyDown(VK_TAB))
-	{
-		isShopOpen = true;
-		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
-		SCENEMANAGER->loadScene("상점씬");
-		PLAYER->setCenterX(278.0f);
-		PLAYER->setCenterY(326.0f);
-	}
 }
  
 void inGameScene::checkPlayerTile()

@@ -10,6 +10,8 @@ private:
 	RECT yesBox;
 	RECT noBox;
 
+	int checkCount;
+
 	bool isShowSleepingOption;
 
 public:

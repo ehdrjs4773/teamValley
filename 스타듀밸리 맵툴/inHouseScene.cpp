@@ -10,6 +10,7 @@ HRESULT inHouseScene::init()
 	noBox = RectMakeCenter(WINSIZEX/2, WINSIZEY-180 , 910, 60);
 
 	isShowSleepingOption = false;
+	checkCount = 0;
 
 	this->update();
 
@@ -47,14 +48,11 @@ void inHouseScene::render()
 	PLAYER->InventroyRender(getMemDC());
 	PLAYER->hpBarRender(getMemDC());
 
-	if (PLAYER->getCenterX()>= 860.0f && PLAYER->getCenterX()<=875.0f&&PLAYER->getCenterY() >= 855.0f &&PLAYER->getCenterY()<=865.0f)
+	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
 	{
-		isShowSleepingOption = true;
-
 		if (isShowSleepingOption)
 		{
 			IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
-			isShowSleepingOption = false;
 
 			if (PtInRect(&noBox, _ptMouse))
 			{
@@ -66,24 +64,28 @@ void inHouseScene::render()
 					isShowSleepingOption = false;
 				}
 			}
-
 			if (PtInRect(&yesBox, _ptMouse))
 			{
 				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 			}
-
 		}
-
-
+		else if (!isShowSleepingOption)
+		{
+			if (checkCount == 0 || INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				isShowSleepingOption = true;
+			}
+		}
+		checkCount++;
+	}
+	else
+	{
+		checkCount = 0;
 	}
 
 	//Rectangle(getMemDC(), yesBox);
 	//Rectangle(getMemDC(), noBox);
-
-
-	
-	
 }
 
 void inHouseScene::playerMove()
@@ -110,7 +112,7 @@ void inHouseScene::playerMove()
 			if (!SWITCHMANAGER->getFade())
 			{
 				SWITCHMANAGER->changeScene("인게임화면");
-				SWITCHMANAGER->startFade(416.0f, 896.0f); // 플레이어가 인게임에서 호출될 장소 
+				SWITCHMANAGER->startFade(416.0f, 912.0f); // 플레이어가 인게임에서 호출될 장소 
 			}
 		}
 	}
@@ -131,8 +133,6 @@ void inHouseScene::playerMove()
 			PLAYER->setState(RUN);
 			PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 		}
-
-
 	}
 
 	if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))

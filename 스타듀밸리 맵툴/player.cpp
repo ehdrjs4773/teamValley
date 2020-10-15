@@ -750,4 +750,8 @@ void player::setCurrentMap()
 	{
 		currentMap = MAP_BARN;
 	}
+	else if (SWITCHMANAGER->getCurrentScene() == "집안화면")
+	{
+		currentMap = MAP_HOUSE;
+	}
 }

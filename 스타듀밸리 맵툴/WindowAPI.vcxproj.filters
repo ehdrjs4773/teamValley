@@ -88,6 +88,9 @@
     <Filter Include="GameFramework\매니져\화면전환매니저">
       <UniqueIdentifier>{bcae3f65-f11d-4e75-9517-b9df23e7242e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="집 씬">
+      <UniqueIdentifier>{ec1040a3-872c-489d-ae6a-e579633f8b5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -187,7 +190,7 @@
       <Filter>GameFramework\매니져\화면전환매니저</Filter>
     </ClCompile>
     <ClCompile Include="inHouseScene.cpp">
-      <Filter>플레이어</Filter>
+      <Filter>집 씬</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,7 +299,7 @@
     </ClInclude>
     <ClInclude Include="inBuildingScene.h" />
     <ClInclude Include="inHouseScene.h">
-      <Filter>플레이어</Filter>
+      <Filter>집 씬</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

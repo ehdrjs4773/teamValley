@@ -1,0 +1,13 @@
+diff a/스타듀밸리 맵툴/inGameScene.cpp b/스타듀밸리 맵툴/inGameScene.cpp	(rejected hunks)
+@@ -467,6 +467,11 @@
+ 		SWITCHMANAGER->changeScene("������");
+ 		SWITCHMANAGER->startFade(278.0f, 326.0f);
+ 	}
++	else if (_tile[currentIndexY][currentIndexX].portal == PT_HOUSE)
++	{
++		SWITCHMANAGER->changeScene("����ȭ��");
++		SWITCHMANAGER->startFade(762.0f, 900.0f);
++	}
+ 
+ 	//cout << currentIndexX << " " << currentIndexY << endl;
+ }
