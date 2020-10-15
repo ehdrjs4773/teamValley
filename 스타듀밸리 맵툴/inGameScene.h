@@ -63,6 +63,7 @@ public:
 	void breakStone();
 	void cutGrass();
 	void setFence();
+	void attack();
 
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);
