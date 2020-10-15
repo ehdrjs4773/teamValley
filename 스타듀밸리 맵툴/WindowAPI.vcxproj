@@ -158,6 +158,7 @@
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="inBuildingScene.h" />
     <ClInclude Include="inGameScene.h" />
+    <ClInclude Include="inHouseScene.h" />
     <ClInclude Include="iniData.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="inventory.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="inBuildingScene.cpp" />
     <ClCompile Include="inGameScene.cpp" />
+    <ClCompile Include="inHouseScene.cpp" />
     <ClCompile Include="iniData.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="inventory.cpp" />

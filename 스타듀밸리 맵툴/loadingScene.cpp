@@ -94,6 +94,10 @@ void loadingScene::loadingImage()
 
 	//플레이어
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/BMP/playerTemp.bmp", 2000, 1000, 8, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("아침 집", "Images/맵/아침 집.bmp", 1600, 1600);
+	IMAGEMANAGER->addImage("아침 집 충돌", "Images/맵/아침 집 충돌.bmp", 1600, 1600);
+	IMAGEMANAGER->addImage("플레이어 이불덮기", "Images/맵/플레이어 이불덮기.bmp", 1600, 1600);
+	IMAGEMANAGER->addImage("자는옵션", "Images/맵/자는옵션.bmp", 968, 274,true,RGB(255,0,255));
 
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));

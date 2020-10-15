@@ -4,7 +4,7 @@ POINT temp;
 
 HRESULT shopScene::init()
 {
-	CAMERAMANAGER->init(1600, 1600, 480, 230);
+	CAMERAMANAGER->init(1600, 1600, 480, 240);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	_shop = new shop;

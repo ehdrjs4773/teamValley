@@ -24,6 +24,7 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("상점씬", new shopScene);
 	SCENEMANAGER->addScene("스타트화면", new mainScene);
 	SCENEMANAGER->addScene("건물안화면", new inBuildingScene);
+	SCENEMANAGER->addScene("집안화면", new inHouseScene);
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
 

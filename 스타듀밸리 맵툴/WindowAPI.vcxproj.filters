@@ -186,6 +186,9 @@
     <ClCompile Include="switchSceneManager.cpp">
       <Filter>GameFramework\매니져\화면전환매니저</Filter>
     </ClCompile>
+    <ClCompile Include="inHouseScene.cpp">
+      <Filter>플레이어</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -283,7 +286,6 @@
     <ClInclude Include="inventory.h">
       <Filter>플레이어\인벤토리</Filter>
     </ClInclude>
-    <ClInclude Include="inBuildingScene.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="mineScene.h" />
     <ClInclude Include="inventoryCraft.h">
@@ -291,6 +293,10 @@
     </ClInclude>
     <ClInclude Include="switchSceneManager.h">
       <Filter>GameFramework\매니져\화면전환매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="inBuildingScene.h" />
+    <ClInclude Include="inHouseScene.h">
+      <Filter>플레이어</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
