@@ -8,6 +8,7 @@
 #include "inGameScene.h"
 #include "shopScene.h"
 #include "inBuildingScene.h"
+#include "inHouseScene.h"
 
 class mainGame : public gameNode
 {

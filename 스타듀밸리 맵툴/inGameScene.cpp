@@ -29,7 +29,7 @@ HRESULT inGameScene::init()
 		loadCount = 1;
 
 		
-			//_tile[0][i].portal = PT_HOUSE;
+			_tile[56][26].portal = PT_HOUSE;
 			_tile[69][37].portal = PT_BARN;
 			//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 			_tile[20][50].portal = PT_SHOP;
@@ -467,6 +467,13 @@ void inGameScene::moveScene()
 		SWITCHMANAGER->changeScene("상점씬");
 		SWITCHMANAGER->startFade(278.0f, 326.0f);
 	}
+	else if (_tile[currentIndexY][currentIndexX].portal == PT_HOUSE)
+	{
+		SWITCHMANAGER->changeScene("집안화면");
+		SWITCHMANAGER->startFade(762.0f, 900.0f);
+	}
+
+	//cout << currentIndexX << " " << currentIndexY << endl;
 }
  
 void inGameScene::checkPlayerTile()
