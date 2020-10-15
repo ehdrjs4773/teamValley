@@ -94,7 +94,7 @@ void inventory::update()
 
 	if (_isShopOpen)
 	{	
-		for (int i = 0; i < _vItem.size(); i++) // E누르면 나오는 인벤토리
+		for (int i = 0; i < _vItem.size(); i++) // 상점에서 나오는 인벤토리
 		{
 			_vItem[i].rc = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
 		}

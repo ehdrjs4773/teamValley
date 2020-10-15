@@ -51,6 +51,7 @@ void shopScene::update()
 		{
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(800.0f, 340.0f);
+			PLAYER->getInventory()->isShopOpen(false);
 		}
 	}
 

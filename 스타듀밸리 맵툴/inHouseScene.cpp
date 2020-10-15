@@ -13,7 +13,6 @@ HRESULT inHouseScene::init()
 	checkCount = 0;
 
 	this->update();
-
 	return S_OK;
 }
 
@@ -23,6 +22,15 @@ void inHouseScene::release()
 
 void inHouseScene::update()
 {
+	if (PLAYER->getCenterY() >= 888.0f)
+	{
+		if (!SWITCHMANAGER->getFade())
+		{
+			SWITCHMANAGER->changeScene("인게임화면");
+			SWITCHMANAGER->startFade(416.0f, 912.0f); // 플레이어가 인게임에서 호출될 장소 
+		}
+	}
+
 	PLAYER->update();
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	playerMove();
@@ -36,13 +44,9 @@ void inHouseScene::update()
 void inHouseScene::render()
 {
 	IMAGEMANAGER->render("아침 집", CAMERAMANAGER->getMemDC());
-
 	PLAYER->render();
 
-	CAMERAMANAGER->render(getMemDC());
-
 	IMAGEMANAGER->render("플레이어 이불덮기", CAMERAMANAGER->getMemDC());
-
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->InventroyRender(getMemDC());
@@ -68,6 +72,18 @@ void inHouseScene::render()
 			{
 				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
+
+				if (PtInRect(&yesBox, _ptMouse))
+				{
+					if (INPUT->GetKeyDown(VK_LBUTTON))
+					{
+						if (!SWITCHMANAGER->getFade())
+						{
+							SWITCHMANAGER->startFade(855.0f, 865.0f);
+						}
+						isShowSleepingOption = false;
+					}
+				}
 			}
 		}
 		else if (!isShowSleepingOption)
@@ -83,7 +99,6 @@ void inHouseScene::render()
 	{
 		checkCount = 0;
 	}
-
 	//Rectangle(getMemDC(), yesBox);
 	//Rectangle(getMemDC(), noBox);
 }
@@ -138,18 +153,6 @@ void inHouseScene::playerMove()
 	if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))
 	{
 		PLAYER->setState(STAND);
-	}
-
-	if (PtInRect(&yesBox, _ptMouse))
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			if (!SWITCHMANAGER->getFade())
-			{
-				SWITCHMANAGER->changeScene("집안화면");
-				SWITCHMANAGER->startFade(855.0f, 865.0f);
-			}
-		}
 	}
 
 }

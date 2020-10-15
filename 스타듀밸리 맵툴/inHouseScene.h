@@ -13,7 +13,6 @@ private:
 	int checkCount;
 
 	bool isShowSleepingOption;
-
 public:
 	HRESULT init();
 	void release();
