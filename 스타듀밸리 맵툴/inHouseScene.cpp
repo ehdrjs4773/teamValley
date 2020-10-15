@@ -60,6 +60,7 @@ void inHouseScene::render()
 
 			if (PtInRect(&noBox, _ptMouse))
 			{
+				IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
 				RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 
@@ -70,6 +71,7 @@ void inHouseScene::render()
 			}
 			if (PtInRect(&yesBox, _ptMouse))
 			{
+				IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
 				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 

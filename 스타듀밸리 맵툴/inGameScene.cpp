@@ -525,6 +525,9 @@ void inGameScene::playerInteraction()
 			//물뿌리기
 			waterGround();
 
+			//공격하기 (우선은 나무자름)
+			attack();
+
 			PLAYER->openPlayerInvenCover();
 		}
 		if (MouseIndexX >= 12 && MouseIndexX <= 13 && MouseIndexY >= 11 && MouseIndexY <= 12)
@@ -752,7 +755,7 @@ void inGameScene::breakStone()
 
 void inGameScene::cutGrass()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE || PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE)
 	{
 		PLAYER->setState(CUTGRASS);
 		switch (PLAYER->getDirection())
@@ -1206,6 +1209,99 @@ void inGameScene::harvest()
 			_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
 
 			_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
+		}
+	}
+}
+
+void inGameScene::attack()
+{
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
+	{
+		PLAYER->setState(ATTACK);
+		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
+		{
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
+			{
+				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
+				{
+					if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+					}
+					else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+					{
+						for (int i = 0; i < 5; i++)
+						{
+							if (RANDOM->range(3) == 0)
+							{
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "소나무 씨앗");
+								}
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "단풍나무 씨앗");
+								}
+								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+								{
+									dropItem(_tile[MouseIndexY][MouseIndexX], "참나무 씨앗");
+								}
+							}
+							dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+						}
+						_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+						{
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
+							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						}
+						_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
+					}
+				}
+			}
+
+			//나무 둥치
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
+			{
+				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+				{
+					_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+				}
+				else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+					}
+
+					_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+					_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+					tagTree temp;
+					memset(&temp, 0, sizeof(temp));
+					_tile[MouseIndexY][MouseIndexX].tree = temp;
+				}
+			}
+
+			//나뭇가지
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
+			{
+				dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			}
 		}
 	}
 }

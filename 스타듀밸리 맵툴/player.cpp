@@ -470,7 +470,7 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-	/*case ATTACK:
+	case ATTACK:
 		switch (_pDirection)
 		{
 		case RIGHT:
@@ -479,7 +479,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					index = 0;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -489,7 +489,7 @@ void player::playerAnimation()
 				index++;
 				if (index > 5)
 				{
-					index = 0;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -497,9 +497,9 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 7)
+				if (index > 2)
 				{
-					index = 0;
+					_pState = STAND;
 				}
 			}
 			break;
@@ -507,14 +507,14 @@ void player::playerAnimation()
 			if (count % 5 == 0)
 			{
 				index++;
-				if (index > 6)
+				if (index > 5)
 				{
-					index = 0;
+					_pState = STAND;
 				}
 			}
 			break;
 		}
-		break;*/
+		break;
 	}
 }
 
@@ -691,6 +691,21 @@ void player::playerRender()
 	case FILLWATER:
 		break;
 	case ATTACK:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 29);
+			break;
+		case LEFT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 30);
+			break;
+		case UP:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 31);
+			break;
+		case DOWN:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 28);
+			break;
+		}
 		break;
 	case CARRY:
 		switch (_pDirection)

@@ -30,6 +30,7 @@ void inventory::init()
 
 	_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
 	_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
+	_vItem[2] = ITEMMANAGER->findItem("³´");
 	_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
 	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
 	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
