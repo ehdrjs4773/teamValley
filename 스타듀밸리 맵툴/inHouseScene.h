@@ -11,7 +11,7 @@ private:
 	RECT noBox;
 
 	bool isShowSleepingOption;
-
+	bool isclosed;
 public:
 	HRESULT init();
 	void release();

@@ -28,7 +28,6 @@ HRESULT inGameScene::init()
 		checkPlayerTile();
 		loadCount = 1;
 
-		
 			_tile[56][26].portal = PT_HOUSE;
 			_tile[69][37].portal = PT_BARN;
 			//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
@@ -470,7 +469,7 @@ void inGameScene::moveScene()
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_HOUSE)
 	{
 		SWITCHMANAGER->changeScene("집안화면");
-		SWITCHMANAGER->startFade(762.0f, 900.0f);
+		SWITCHMANAGER->startFade(762.0f,887.0f);
 	}
 
 	//cout << currentIndexX << " " << currentIndexY << endl;
