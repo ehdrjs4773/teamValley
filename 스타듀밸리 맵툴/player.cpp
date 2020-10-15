@@ -813,8 +813,8 @@ void player::countTime()
 	}
 	if (hour >= 24)
 	{
-		date += 1;
-		day = (DAYOFWEEK)(day + 1);
+		//date += 1;
+		//day = (DAYOFWEEK)(day + 1);
 		hour = 0;
 	}
 	if (date > 30)
