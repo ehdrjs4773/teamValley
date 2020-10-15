@@ -93,6 +93,7 @@ void  player::update()
 	if (INPUT->GetKeyDown('B'))
 	{
 		hour += 1;
+		money -= 33;
 	}
 
 	//플레이어 현재 맵 체크
@@ -890,7 +891,6 @@ void player::moneyRender(HDC hdc)
 		a = b % 10;
 		IMAGEMANAGER->frameRender("돈숫자", hdc, 1144 - (17 * i), 148, a, 0);
 
-		b -= a;
 		b /= 10;
 		i++;
 	}
