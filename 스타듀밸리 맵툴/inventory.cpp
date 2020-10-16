@@ -591,7 +591,7 @@ void inventory::_vItemUpdate()
 {
 	if (!isShowTemp)
 	{
-		if (PtInRect(&_isInvenRect, _ptMouse))
+		if (PtInRect(&_isInvenRect, _ptMouse) && !_isShopOpen)
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
@@ -609,7 +609,7 @@ void inventory::_vItemUpdate()
 				_isPlayerPage = true;
 			}
 		}
-		else if (PtInRect(&_isCraftRect, _ptMouse))
+		else if (PtInRect(&_isCraftRect, _ptMouse) && !_isShopOpen)
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
@@ -640,10 +640,19 @@ void inventory::_vItemUpdate()
 					{
 						if (_MouseItem.item_image != NULL) // 마우스에 아이템이 있으면
 						{
-							tagItem exchangeItem; // 교환용 아이템
-							exchangeItem = _vItem[i];
-							_vItem[i] = _MouseItem;
-							_MouseItem = exchangeItem;
+							if (_MouseItem.item_info == _vItem[i].item_info)
+							{
+								_vItem[i].amount += _MouseItem.amount;
+								tagItem nullItem = { 0 };
+								_MouseItem = nullItem;
+							}
+							else
+							{
+								tagItem exchangeItem; // 교환용 아이템
+								exchangeItem = _vItem[i];
+								_vItem[i] = _MouseItem;
+								_MouseItem = exchangeItem;
+							}
 						}
 
 						else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면

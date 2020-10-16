@@ -30,6 +30,7 @@ HRESULT maptoolScene::init()
 	_currentTile.y = 6;
 
 	_currentSeason = SPRING;
+	_currentMine = MINE_NORMAL;
 
 	sampleTileX = 0;
 	sampleTileY = 0;
@@ -121,6 +122,19 @@ void maptoolScene::update()
 				_ctrlSelect = CTRL_ERASER;
 				isSelectSeason = false;
 			}
+			if (PtInRect(&_rcMineTerrain, _ptMouse))
+			{
+				_ctrlSelect = CTRL_MINETERRAIN;
+				_prevCtrl = _ctrlSelect;
+				resetSampleScrollBar();
+			}
+			if (PtInRect(&_rcMineObject, _ptMouse))
+			{
+				_ctrlSelect = CTRL_MINEOBJECT;
+				_prevCtrl = _ctrlSelect;
+				resetSampleScrollBar();
+			}
+			setMineMap();
 		}
 
 		//버튼 떼면 스크롤 락 false
@@ -156,13 +170,12 @@ void maptoolScene::update()
 		{
 			checkHacked(i, j);
 			checkFence(i, j);
-
 		}
 	}
 
-	for (int i = 0; i < SAMPLEDISPLAYY; i++)
+	for (int i = 0; i < sampleTileMaxFrameY; i++)
 	{
-		for (int j = 0; j < SAMPLEDISPLAYX; j++)
+		for (int j = 0; j < sampleTileMaxFrameX; j++)
 		{
 			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
 			{
@@ -180,6 +193,8 @@ void maptoolScene::render()
 	if (_ctrlSelect == CTRL_TERRAIN) { showSampleTerrainTile(); } //지형 타일 보여주는 함수
 	else if (_ctrlSelect == CTRL_OBJECT) { showSampleObjectTile(); }//오브젝트 타일 보여주는 함수
 	else if (_ctrlSelect == CTRL_OBJECT2) { showSampleObjectTile(); }
+	else if (_ctrlSelect == CTRL_MINETERRAIN) { showSampleTerrainTile(); }
+	else if (_ctrlSelect == CTRL_MINEOBJECT) { showSampleObjectTile(); }
 	
 	//지우개 누르면 그 전에 떠있던 샘플 그대로 떠있게 유지
 	else if (_ctrlSelect == CTRL_ERASER)
@@ -211,9 +226,9 @@ void maptoolScene::render()
 				FrameRect(getMemDC(), _tile[i][j].rc, RGB(255, 255, 0));
 			}
 		}
-		for (int i = 0; i < sampleTileMaxFrameY; i++)
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
 		{
-			for (int j = 0; j < sampleTileMaxFrameX; j++)
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
 			{
 				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
 				{
@@ -287,7 +302,6 @@ void maptoolScene::setMap_Drag()
 					{
 						for (int w = first_j; w <= last_j; w++)
 						{
-
 							if (_ctrlSelect == CTRL_TERRAIN) 
 							{
 								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
@@ -339,16 +353,29 @@ void maptoolScene::setMap_Drag()
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = OVR_NONE;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objType = OTY_NONE;
 									}
+									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].seedType = SEED_NONE;
 								}
+							}
+							else if (_ctrlSelect == CTRL_MINETERRAIN)
+							{
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrainFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].terrain = terrainSelect(q + sampleTileY, w + sampleTileX);
+							}
+							else if (_ctrlSelect == CTRL_MINEOBJECT)
+							{
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+								_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = objectSelect(q + sampleTileY, w + sampleTileX);
 							}
 						}
 					}
 				}
 				if (INPUT->GetKeyUp(VK_LBUTTON))
-					{
-						_prevent_double = false;
-						_isDragSet = false;
-					}
+				{
+					_prevent_double = false;
+					_isDragSet = false;
+				}
 			}
 		}
 	}
@@ -356,80 +383,161 @@ void maptoolScene::setMap_Drag()
 
 void maptoolScene::sample_Drag()
 {
-	for (int i = 0; i < SAMPLEDISPLAYY; i++)
+	if (_ctrlSelect == CTRL_MINEOBJECT || _ctrlSelect == CTRL_MINETERRAIN)
 	{
-		for (int j = 0; j < SAMPLEDISPLAYX; j++)
+		for (int i = 0; i < sampleTileMaxFrameY; i++)
 		{
-			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
+			for (int j = 0; j < sampleTileMaxFrameX; j++)
 			{
-				if (INPUT->GetKeyDown(VK_RBUTTON))
+				if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
 				{
-					_click = true;
-					first = _sampleTile[i][j].rc;
-					first_i = i;
-					first_j = j;
-					first_j = j;
-				}
-				if (INPUT->GetKey(VK_RBUTTON) && _click)
-				{
-					last = _sampleTile[i][j].rc;
-					last_i = i;
-					last_j = j;
-					if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+					if (INPUT->GetKeyDown(VK_RBUTTON))
 					{
-						_click = false;
-						_release = true;
-						_isDragSet = true;
+						_click = true;
+						first = _sampleTile[i][j].rc;
+						first_i = i;
+						first_j = j;
+						first_j = j;
+					}
+					if (INPUT->GetKey(VK_RBUTTON) && _click)
+					{
+						last = _sampleTile[i][j].rc;
+						last_i = i;
+						last_j = j;
+						if (_ptMouse.x >= _sampleTile[0][sampleTileMaxFrameX - 1].rc.right)
+						{
+							_click = false;
+							_release = true;
+							_isDragSet = true;
 
+						}
+						if (_ptMouse.y >= _sampleTile[sampleTileMaxFrameY - 1][0].rc.bottom)
+						{
+							_click = false;
+							_release = true;
+							_isDragSet = true;
+						}
 					}
-					if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
+					if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
 					{
+						last = _sampleTile[i][j].rc;
+						last_i = i;
+						last_j = j;
 						_click = false;
 						_release = true;
 						_isDragSet = true;
 					}
-				}
-				if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
-				{
-					last = _sampleTile[i][j].rc;
-					last_i = i;
-					last_j = j;
-					_click = false;
-					_release = true;
-					_isDragSet = true;
 				}
 			}
 		}
+		if (_click)
+		{
+			if (_ptMouse.x >= _sampleTile[0][sampleTileMaxFrameX - 1].rc.right)
+			{
+				_click = false;
+				_release = true;
+				_isDragSet = true;
+
+			}
+			if (_ptMouse.y >= _sampleTile[sampleTileMaxFrameY - 1][0].rc.bottom)
+			{
+				_click = false;
+				_release = true;
+				_isDragSet = true;
+			}
+		}
+
+		if (_release)
+		{
+			if (first_i > last_i)
+			{
+				swap(first_i, last_i);
+			}
+
+			if (first_j > last_j)
+			{
+				swap(first_j, last_j);
+			}
+			_release = false;
+		}
 	}
-	if (_click)
+	else
 	{
-		if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+		for (int i = 0; i < SAMPLEDISPLAYY; i++)
 		{
-			_click = false;
-			_release = true;
-			_isDragSet = true;
+			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+			{
+				if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
+				{
+					if (INPUT->GetKeyDown(VK_RBUTTON))
+					{
+						_click = true;
+						first = _sampleTile[i][j].rc;
+						first_i = i;
+						first_j = j;
+						first_j = j;
+					}
+					if (INPUT->GetKey(VK_RBUTTON) && _click)
+					{
+						last = _sampleTile[i][j].rc;
+						last_i = i;
+						last_j = j;
+						if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+						{
+							_click = false;
+							_release = true;
+							_isDragSet = true;
 
+						}
+						if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
+						{
+							_click = false;
+							_release = true;
+							_isDragSet = true;
+						}
+					}
+					if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
+					{
+						last = _sampleTile[i][j].rc;
+						last_i = i;
+						last_j = j;
+						_click = false;
+						_release = true;
+						_isDragSet = true;
+					}
+				}
+			}
 		}
-		if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
+		if (_click)
 		{
-			_click = false;
-			_release = true;
-			_isDragSet = true;
-		}
-	}
+			if (_ptMouse.x >= _sampleTile[0][SAMPLEDISPLAYX - 1].rc.right)
+			{
+				_click = false;
+				_release = true;
+				_isDragSet = true;
 
-	if (_release)
-	{
-		if (first_i > last_i)
-		{
-			swap(first_i, last_i);
+			}
+			if (_ptMouse.y >= _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom)
+			{
+				_click = false;
+				_release = true;
+				_isDragSet = true;
+			}
 		}
 
-		if (first_j > last_j)
+		if (_release)
 		{
-			swap(first_j, last_j);
+			if (first_i > last_i)
+			{
+				swap(first_i, last_i);
+			}
+
+			if (first_j > last_j)
+			{
+				swap(first_j, last_j);
+			}
+			_release = false;
 		}
-		_release = false;
 	}
 }
 
@@ -532,6 +640,13 @@ void maptoolScene::maptoolSetup()
 	_rcEraser = RectMake(660 + 200, 400 + 100, 100, 50);
 	_rcobjectDelete = RectMake(860, 400, 100, 50);
 	_rcObject2 = RectMake(970, 500, 100, 50);
+	_rcMineTerrain = RectMake(970, 400, 70, 50);
+	_rcMineObject = RectMake(1050, 400, 70, 50);
+
+	_rcMineNormal = RectMake(1010 - 100, 450, 50, 25);
+	_rcMineNormalDark = RectMake(1010 - 50, 450, 50, 25);
+	_rcMineFrost = RectMake(1010, 450, 50, 25);
+	_rcMineFrostDark = RectMake(1010 + 50, 450, 50, 25);
 
 	_rcSpring = RectMake(660 - 100, 450, 50, 30);
 	_rcSummer = RectMake(660 - 50, 450, 50, 30);
@@ -686,6 +801,18 @@ void maptoolScene::setMap()
 					_tile[i + tileY][j + tileX].tree.bodyIndexY = 0;
 					_tile[i + tileY][j + tileX].tree.hp = 0;
 				}
+				if (_ctrlSelect == CTRL_MINETERRAIN)
+				{
+					_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
+					_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
+					_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
+				}
+				if (_ctrlSelect == CTRL_MINEOBJECT)
+				{
+					_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
+					_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
+					_tile[i + tileY][j + tileX].obj = objectSelect(_currentTile.x, _currentTile.y);
+				}
 			}
 		}
 	}
@@ -697,9 +824,39 @@ void maptoolScene::setTerrainMap()
 	{
 		for (int j = 0; j < DISPLAYX; j++)
 		{
-			if (PtInRect(&_tile[i][j].rc, _ptMouse))
+			if (_ctrlSelect != CTRL_MINETERRAIN && _ctrlSelect != CTRL_MINEOBJECT)
 			{
-				if (_ctrlSelect == CTRL_TERRAIN || _ctrlSelect == CTRL_OBJECT || _ctrlSelect == CTRL_ERASER)
+				if (PtInRect(&_tile[i][j].rc, _ptMouse))
+				{
+					if (_ctrlSelect == CTRL_TERRAIN || _ctrlSelect == CTRL_OBJECT || _ctrlSelect == CTRL_ERASER)
+					{
+						if (INPUT->GetKeyDown(VK_RBUTTON))
+						{
+							_click = true;
+							first = _tile[i][j].rc;
+							first_i = i;
+							first_j = j;
+						}
+						if (INPUT->GetKey(VK_RBUTTON))
+						{
+							last = _tile[i][j].rc;
+							last_i = i;
+							last_j = j;
+						}
+						if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
+						{
+							last = _tile[i][j].rc;
+							last_i = i;
+							last_j = j;
+							_click = false;
+							_release = true;
+						}
+					}
+				}
+			}
+			else
+			{
+				if (PtInRect(&_tile[i][j].rc, _ptMouse))
 				{
 					if (INPUT->GetKeyDown(VK_RBUTTON))
 					{
@@ -707,13 +864,12 @@ void maptoolScene::setTerrainMap()
 						first = _tile[i][j].rc;
 						first_i = i;
 						first_j = j;
-
 					}
 					if (INPUT->GetKey(VK_RBUTTON))
 					{
 						last = _tile[i][j].rc;
 						last_i = i;
-						last_j = j;		
+						last_j = j;
 					}
 					if (INPUT->GetKeyUp(VK_RBUTTON) && _click)
 					{
@@ -743,14 +899,13 @@ void maptoolScene::setTerrainMap()
 		{
 			for (int j = first_j; j <= last_j; j++)
 			{
-
-				if (_ctrlSelect == CTRL_TERRAIN)
+				if (_ctrlSelect == CTRL_TERRAIN || _ctrlSelect == CTRL_MINETERRAIN)
 				{
 					_tile[i + tileY][j + tileX].terrainFrameX = _currentTile.x;
 					_tile[i + tileY][j + tileX].terrainFrameY = _currentTile.y;
 					_tile[i + tileY][j + tileX].terrain = terrainSelect(_currentTile.x, _currentTile.y);
 				}
-				else if (_ctrlSelect == CTRL_OBJECT)
+				else if (_ctrlSelect == CTRL_OBJECT || _ctrlSelect == CTRL_MINEOBJECT)
 				{
 					_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
 					_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
@@ -806,8 +961,16 @@ void maptoolScene::setScroll()
 void maptoolScene::resetSampleScrollBar()
 {
 	//샘플 스크롤 바 위치 초기화
-	sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
-	sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+	if (_ctrlSelect == CTRL_MINEOBJECT || _ctrlSelect == CTRL_MINETERRAIN)
+	{
+		sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[sampleTileMaxFrameY - 1][0].rc.bottom + 10, TILESIZE * sampleTileMaxFrameX / 2, 10);
+		sampleVertScroll = RectMake(_sampleTile[0][sampleTileMaxFrameX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * sampleTileMaxFrameY / 2);
+	}
+	else
+	{
+		sampleHorScroll = RectMake(_sampleTile[0][0].rc.left, _sampleTile[SAMPLEDISPLAYY - 1][0].rc.bottom + 10, TILESIZE * SAMPLEDISPLAYX / 2, 10);
+		sampleVertScroll = RectMake(_sampleTile[0][SAMPLEDISPLAYX - 1].rc.right + 10, _sampleTile[0][0].rc.top, 10, TILESIZE * SAMPLEDISPLAYY / 2);
+	}
 }
 
 void maptoolScene::lockScroll()
@@ -1077,6 +1240,19 @@ void maptoolScene::selectSeason()
 				sampleTileX = sampleTileY = 0;
 			}
 			break;
+		case CTRL_MINETERRAIN:
+			_currentSeason = SPRING;
+			sampleTileMaxFrameX = IMAGEMANAGER->findImage("광산 노말")->getMaxFrameX() + 1;
+			sampleTileMaxFrameY = IMAGEMANAGER->findImage("광산 노말")->getMaxFrameY() + 1;
+			resetSampleTile();
+			sampleTileX = sampleTileY = 0;
+			break;
+		case CTRL_MINEOBJECT:
+			_currentSeason = SPRING;
+			sampleTileMaxFrameX = IMAGEMANAGER->findImage("광산오브젝트 노말")->getMaxFrameX() + 1;
+			sampleTileMaxFrameY = IMAGEMANAGER->findImage("광산오브젝트 노말")->getMaxFrameY() + 1;
+			resetSampleTile();
+			sampleTileX = sampleTileY = 0;
 		}
 	}
 }
@@ -1404,124 +1580,299 @@ void maptoolScene::checkFence(int i, int j)
 void maptoolScene::showMapTile()
 {
 	//인게임 화면 지형을 그린다
-	for (int i = 0; i < DISPLAYY; i++)
+	if (_ctrlSelect != CTRL_MINETERRAIN && _ctrlSelect != CTRL_MINEOBJECT)
 	{
-		for (int j = 0; j < DISPLAYX; j++)
+		for (int i = 0; i < DISPLAYY; i++)
 		{
-			switch (_currentSeason)
+			for (int j = 0; j < DISPLAYX; j++)
 			{
-			case SPRING:
-				IMAGEMANAGER->frameRender("농장(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
-
-				if (_tile[i + tileY][j + tileX].isWet)
+				switch (_currentSeason)
 				{
+				case SPRING:
 					IMAGEMANAGER->frameRender("농장(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].wetFrameX, _tile[i + tileY][j + tileX].wetFrameY);
-				}
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
 
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
-				{
-					if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
+					if (_tile[i + tileY][j + tileX].isWet)
 					{
-						IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						IMAGEMANAGER->frameRender("농장(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].wetFrameX, _tile[i + tileY][j + tileX].wetFrameY);
 					}
-					else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+
+					//인게임 화면 오브젝트 그린다
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
 					{
-						IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-						IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
-					}
-					else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
-					{
-						IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-						IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-							_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
-					}
-					else
-					{
-						IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-							_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-					}
-					if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
-					{
-						if (i - 5 >= 0 && j - 1 >= 0)
+						if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
 						{
-							IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-								_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
-							for (int y = 5; y > 0; y--)
+							IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else
+						{
+							IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
+						{
+							if (i - 5 >= 0 && j - 1 >= 0)
 							{
-								for (int x = 1; x > -2; x--)
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+								for (int y = 5; y > 0; y--)
 								{
-									IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
-										_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+									for (int x = 1; x > -2; x--)
+									{
+										IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+											_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+									}
 								}
 							}
 						}
 					}
-				}
-				if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
-				{
-					IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
-				}
+					if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
+					{
+						IMAGEMANAGER->frameRender("농장오브젝트(봄)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
+					}
 
-				break;
-			case SUMMER:
-				IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+					break;
+				case SUMMER:
+					IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
 
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
-				if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
-				{
-					IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-				}
-				else
-				{
-					IMAGEMANAGER->frameRender("농장오브젝트(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-				}
-				break;
-			case AUTUMN:
-				IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+					if (_tile[i + tileY][j + tileX].isWet)
+					{
+						IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].wetFrameX, _tile[i + tileY][j + tileX].wetFrameY);
+					}
 
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
-				if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
-				{
-					IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-				}
-				else
-				{
-					IMAGEMANAGER->frameRender("농장오브젝트(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
-				}
-				break;
-			case WINTER:
-				IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+					//인게임 화면 오브젝트 그린다
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+					{
+						if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
+						{
+							IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else
+						{
+							IMAGEMANAGER->frameRender("농장오브젝트(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
+						{
+							if (i - 5 >= 0 && j - 1 >= 0)
+							{
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+								for (int y = 5; y > 0; y--)
+								{
+									for (int x = 1; x > -2; x--)
+									{
+										IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+											_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+									}
+								}
+							}
+						}
+					}
+					if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
+					{
+						IMAGEMANAGER->frameRender("농장오브젝트(여름)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
+					}
+					break;
+				case AUTUMN:
+					IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
 
-				//인게임 화면 오브젝트 그린다
-				if (_tile[i + tileY][j + tileX].obj == OBJ_NONE) continue;
-				if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
-				{
-					IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					if (_tile[i + tileY][j + tileX].isWet)
+					{
+						IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].wetFrameX, _tile[i + tileY][j + tileX].wetFrameY);
+					}
+
+					//인게임 화면 오브젝트 그린다
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+					{
+						if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
+						{
+							IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else
+						{
+							IMAGEMANAGER->frameRender("농장오브젝트(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
+						{
+							if (i - 5 >= 0 && j - 1 >= 0)
+							{
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+								for (int y = 5; y > 0; y--)
+								{
+									for (int x = 1; x > -2; x--)
+									{
+										IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+											_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+									}
+								}
+							}
+						}
+					}
+					if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
+					{
+						IMAGEMANAGER->frameRender("농장오브젝트(가을)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
+					}
+					break;
+				case WINTER:
+					IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+
+					if (_tile[i + tileY][j + tileX].isWet)
+					{
+						IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].wetFrameX, _tile[i + tileY][j + tileX].wetFrameY);
+					}
+
+					//인게임 화면 오브젝트 그린다
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+					{
+						if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
+						{
+							IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("나무펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+						{
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+							IMAGEMANAGER->findImage("돌펜스")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
+						}
+						else
+						{
+							IMAGEMANAGER->frameRender("농장오브젝트(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+								_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+						}
+						if (_tile[i + tileY][j + tileX].objType == OTY_TREE)
+						{
+							if (i - 5 >= 0 && j - 1 >= 0)
+							{
+								IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+									_tile[i + tileY][j + tileX].tree.bodyIndexX, _tile[i + tileY][j + tileX].tree.bodyIndexY);
+								for (int y = 5; y > 0; y--)
+								{
+									for (int x = 1; x > -2; x--)
+									{
+										IMAGEMANAGER->findImage("나무")->frameRender(getMemDC(), _tile[i - y][j - x].rc.left, _tile[i - y][j - x].rc.top,
+											_tile[i + tileY][j + tileX].tree.bodyIndexX - 1 - x, _tile[i + tileY][j + tileX].tree.bodyIndexY - 4 - y);
+									}
+								}
+							}
+						}
+					}
+					if (_tile[i + tileY][j + tileX].objOver != OVR_NONE)
+					{
+						IMAGEMANAGER->frameRender("농장오브젝트(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].ovlFrameX, _tile[i + tileY][j + tileX].ovlFrameY);
+					}
+					break;
 				}
-				else
+			}
+		}
+	}
+	else
+	{
+		char str[64];
+		char objstr[64];
+		switch (_currentMine)
+		{
+		case MINE_NORMAL:
+			sprintf(str, "광산 노말");
+			sprintf(objstr, "광산오브젝트 노말");
+			break;
+		case MINE_NORMALDARK:
+			sprintf(str, "광산 노말다크");
+			sprintf(objstr, "광산오브젝트 노말다크");
+			break;
+		case MINE_FROST:
+			sprintf(str, "광산 프로스트");
+			sprintf(objstr, "광산오브젝트 프로스트");
+			break;
+		case MINE_FROSTDARK:
+			sprintf(str, "광산 프로스트다크");
+			sprintf(objstr, "광산오브젝트 프로스트다크");
+			break;
+		}
+
+		for (int i = 0; i < DISPLAYY; i++)
+		{
+			for (int j = 0; j < DISPLAYX; j++)
+			{
+				if (i + tileY < 50 && j + tileX < 50)
 				{
-					IMAGEMANAGER->frameRender("농장오브젝트(겨울)", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					IMAGEMANAGER->frameRender(str, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+					{
+						IMAGEMANAGER->frameRender(objstr, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					}
 				}
-				break;
+				
 			}
 		}
 	}
@@ -1543,6 +1894,12 @@ void maptoolScene::showControlButton()
 	IMAGEMANAGER->findImage("오브젝트지우개")->render(getMemDC(), _rcobjectDelete.left, _rcobjectDelete.top);
 	//Rectangle(getMemDC(), _rcObject2);
 	IMAGEMANAGER->findImage("건물버튼")->render(getMemDC(), _rcObject2.left, _rcObject2.top);
+	Rectangle(getMemDC(), _rcMineTerrain);
+	Rectangle(getMemDC(), _rcMineObject);
+	Rectangle(getMemDC(), _rcMineNormal);
+	Rectangle(getMemDC(), _rcMineNormalDark);
+	Rectangle(getMemDC(), _rcMineFrost);
+	Rectangle(getMemDC(), _rcMineFrostDark);
 
 	if (isSelectSeason)
 	{
@@ -1567,60 +1924,93 @@ void maptoolScene::showScrollBar()
 
 void maptoolScene::showSampleTerrainTile()
 {
-	switch (_currentSeason)
+	if (_ctrlSelect == CTRL_TERRAIN)
 	{
-	case SPRING:
-		for (int i = 0; i < SAMPLEDISPLAYY; i++)
+		switch (_currentSeason)
 		{
-			for (int j = 0; j < SAMPLEDISPLAYX; j++)
+		case SPRING:
+			for (int i = 0; i < SAMPLEDISPLAYY; i++)
+			{
+				for (int j = 0; j < SAMPLEDISPLAYX; j++)
+				{
+					if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+					{
+						IMAGEMANAGER->frameRender("농장(봄)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+							_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+					}
+				}
+			}
+			break;
+		case SUMMER:
+			for (int i = 0; i < SAMPLEDISPLAYY; i++)
+			{
+				for (int j = 0; j < SAMPLEDISPLAYX; j++)
+				{
+					if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+					{
+						IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+							_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+					}
+				}
+			}
+			break;
+		case AUTUMN:
+			for (int i = 0; i < SAMPLEDISPLAYY; i++)
+			{
+				for (int j = 0; j < SAMPLEDISPLAYX; j++)
+				{
+					if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+					{
+						IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+							_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+					}
+				}
+			}
+			break;
+		case WINTER:
+			for (int i = 0; i < SAMPLEDISPLAYY; i++)
+			{
+				for (int j = 0; j < SAMPLEDISPLAYX; j++)
+				{
+					if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+					{
+						IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+							_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+					}
+				}
+			}
+			break;
+		}
+	}
+	else if (_ctrlSelect == CTRL_MINETERRAIN)
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			for (int j = 0; j < 16; j++)
 			{
 				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
 				{
-					IMAGEMANAGER->frameRender("농장(봄)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+					char str[64];
+					switch (_currentMine)
+					{
+					case MINE_NORMAL:
+						sprintf(str, "광산 노말");
+						break;
+					case MINE_NORMALDARK:
+						sprintf(str, "광산 노말다크");
+						break;
+					case MINE_FROST:
+						sprintf(str, "광산 프로스트");
+						break;
+					case MINE_FROSTDARK:
+						sprintf(str, "광산 프로스트다크");
+						break;
+					}
+					IMAGEMANAGER->frameRender(str, getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
 						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
 				}
 			}
 		}
-		break;
-	case SUMMER:
-		for (int i = 0; i < SAMPLEDISPLAYY; i++)
-		{
-			for (int j = 0; j < SAMPLEDISPLAYX; j++)
-			{
-				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
-				{
-					IMAGEMANAGER->frameRender("농장(여름)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
-						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
-				}
-			}
-		}
-		break;
-	case AUTUMN:
-		for (int i = 0; i < SAMPLEDISPLAYY; i++)
-		{
-			for (int j = 0; j < SAMPLEDISPLAYX; j++)
-			{
-				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
-				{
-					IMAGEMANAGER->frameRender("농장(가을)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
-						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
-				}
-			}
-		}
-		break;
-	case WINTER:
-		for (int i = 0; i < SAMPLEDISPLAYY; i++)
-		{
-			for (int j = 0; j < SAMPLEDISPLAYX; j++)
-			{
-				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
-				{
-					IMAGEMANAGER->frameRender("농장(겨울)", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
-						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
-				}
-			}
-		}
-		break;
 	}
 }
 	
@@ -1698,31 +2088,93 @@ void maptoolScene::showSampleObjectTile()
 			}
 		}
 	}
+	if (_ctrlSelect == CTRL_MINEOBJECT)
+	{
+		for (int i = 0; i < 18; i++)
+		{
+			for (int j = 0; j < 16; j++)
+			{
+				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				{
+					char str[64];
+					switch (_currentMine)
+					{
+					case MINE_NORMAL:
+						sprintf(str, "광산오브젝트 노말");
+						break;
+					case MINE_NORMALDARK:
+						sprintf(str, "광산오브젝트 노말다크");
+						break;
+					case MINE_FROST:
+						sprintf(str, "광산오브젝트 프로스트");
+						break;
+					case MINE_FROSTDARK:
+						sprintf(str, "광산오브젝트 프로스트다크");
+						break;
+					}
+					IMAGEMANAGER->frameRender(str, getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
+				}
+			}
+		}
+	}
+}
+
+void maptoolScene::setMineMap()
+{
+	if (PtInRect(&_rcMineNormal, _ptMouse))
+	{
+		_currentMine = MINE_NORMAL;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineNormalDark, _ptMouse))
+	{
+		_currentMine = MINE_NORMALDARK;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineFrost, _ptMouse))
+	{
+		_currentMine = MINE_FROST;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineFrostDark, _ptMouse))
+	{
+		_currentMine = MINE_FROSTDARK;
+		resetSampleScrollBar();
+	}
 }
 
 TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 {
-	if ((frameX == 1 && frameY == 1) || (frameX == 31 && (frameY == 0 || frameY == 1)))
+	if (_ctrlSelect != CTRL_MINETERRAIN)
 	{
-		return TR_SOIL;
+		if ((frameX == 1 && frameY == 1) || (frameX == 31 && (frameY == 0 || frameY == 1)))
+		{
+			return TR_SOIL;
+		}
+		//물
+		if ((frameX == 7 || frameX == 8 || frameX == 9 || frameX == 10) && frameY == 6)
+		{
+			return TR_WATER;
+		}
+		//경작지
+		if ((frameX == 20 && frameY == 12) || (frameX == 20 && frameY == 14))
+		{
+			return TR_HACKED;
+		}
+		//기타
+		return TR_GROUND;
 	}
-	//물
-	if ((frameX == 7 || frameX == 8 || frameX == 9 || frameX == 10) && frameY == 6)
+	else if (_ctrlSelect == CTRL_MINETERRAIN)
 	{
-		return TR_WATER;
+		return TR_GROUND;
 	}
-	//경작지
-	if ((frameX == 20 && frameY == 12) || (frameX == 20 && frameY == 14))
-	{
-		return TR_HACKED;
-	}
-	//기타
-	return TR_GROUND;
+	
 }
 
 OBJECT maptoolScene::objectSelect(int frameX, int frameY)
 {
-		return OBJ_INDESTRUCTIBLE;
+	return OBJ_INDESTRUCTIBLE;
 }
 
 OBJ_OVERLAPPED maptoolScene::overlappedSelect(int frameX, int frameY)

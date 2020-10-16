@@ -52,6 +52,14 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("농장오브젝트(여름)", "Images/맵툴/농장 오브젝트(여름).bmp", 1120, 400, 70, 25);
 	IMAGEMANAGER->addFrameImage("농장오브젝트(가을)", "Images/맵툴/농장 오브젝트(가을).bmp", 1120, 400, 70, 25);
 	IMAGEMANAGER->addFrameImage("농장오브젝트(겨울)", "Images/맵툴/농장 오브젝트(겨울).bmp", 1120, 400, 70, 25);
+	IMAGEMANAGER->addFrameImage("광산 노말", "Images/맵툴/mineTerrain_Normal.bmp", 160, 160, 10, 10);
+	IMAGEMANAGER->addFrameImage("광산 노말다크", "Images/맵툴/mineTerrain_NormalDark.bmp", 160, 160, 10, 10);
+	IMAGEMANAGER->addFrameImage("광산 프로스트", "Images/맵툴/mineTerrain_Frost.bmp", 160, 160, 10, 10);
+	IMAGEMANAGER->addFrameImage("광산 프로스트다크", "Images/맵툴/mineTerrain_FrostDark.bmp", 160, 160, 10, 10);
+	IMAGEMANAGER->addFrameImage("광산오브젝트 노말", "Images/맵툴/mineObject_Normal.bmp", 256, 288, 16, 18);
+	IMAGEMANAGER->addFrameImage("광산오브젝트 노말다크", "Images/맵툴/mineObject_NormalDark.bmp", 256, 288, 16, 18);
+	IMAGEMANAGER->addFrameImage("광산오브젝트 프로스트", "Images/맵툴/mineObject_Frost.bmp", 256, 288, 16, 18);
+	IMAGEMANAGER->addFrameImage("광산오브젝트 프로스트다크", "Images/맵툴/mineObject_FrostDark.bmp", 256, 288, 16, 18);
 	IMAGEMANAGER->addFrameImage("건물", "Images/맵툴/건물.bmp", 416, 416, 26, 26);
 	IMAGEMANAGER->addImage("배경", "Images/background.bmp", WINSIZEX, WINSIZEY);
 	IMAGEMANAGER->addImage("세이브", "Images/save.bmp", 100, 50, true, RGB(255, 0, 255));

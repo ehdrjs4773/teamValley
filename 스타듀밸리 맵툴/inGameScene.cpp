@@ -464,7 +464,6 @@ void inGameScene::moveScene()
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_SHOP)
 	{
 		isShopOpen = true;
-		PLAYER->getPlayerInven()->isShopOpen(isShopOpen);
 		SWITCHMANAGER->changeScene("»óÁ¡¾À");
 		SWITCHMANAGER->startFade(278.0f, 326.0f);
 	}

@@ -44,7 +44,6 @@ void shopScene::update()
 	_itemNpc->update();
 	_skillNpc->update();
 
-
 	//상점 나가기 포탈
 	if (PLAYER->getCenterY() >= 338)
 	{
@@ -52,7 +51,6 @@ void shopScene::update()
 		{
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(800.0f, 340.0f);
-			PLAYER->getInventory()->isShopOpen(false);
 		}
 	}
 
@@ -60,6 +58,7 @@ void shopScene::update()
 	{
 		_shop->update();
 		_isClicked = !_shop->shopClose();
+		PLAYER->getInventory()->isShopOpen(_isClicked);
 	}
 	else
 	{
@@ -133,6 +132,7 @@ void shopScene::render()
 	{
 		PLAYER->playerStatusRender(getMemDC());
 	}
+
 }
 
 void shopScene::playerMove()
