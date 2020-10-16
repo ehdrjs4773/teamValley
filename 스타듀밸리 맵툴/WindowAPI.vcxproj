@@ -175,7 +175,7 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
     <ClInclude Include="progressBar.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="random.h" />
     <ClInclude Include="resource.h" />
@@ -217,7 +217,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
     <ClCompile Include="progressBar.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="random.cpp" />
     <ClCompile Include="sceneManager.cpp" />
