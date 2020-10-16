@@ -57,6 +57,7 @@ public:
 	void playerInteraction();
 	void hackGround();
 	void waterGround();
+	void fillWater();
 	void plantSeed();
 	void harvest();
 	void cutdownTree();

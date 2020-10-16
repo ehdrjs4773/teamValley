@@ -28,9 +28,9 @@ private:
 	int index;
 	int playerHp;
 	int hpBarX;
-	int axDamage;
-	int pickaxDamage;
-	int hoeDamage;
+	int axDamage, pickaxDamage, hoeDamage;
+
+
 
 	int boxCount;
 	int boxIndex;
@@ -88,7 +88,7 @@ public:
 	tagItem* getInven(int a) { return _inventory->getInven(a); }
 	tagItem* getCurrentInven() { return _inventory->getInven(_inventory->getCurrentSlotNumber()); }
 	void setInvenItem(int i, tagItem item) { _inventory->setInvenItem(i, item); }
-	void setInvenItemAmount(int i, int amount) { _inventory->setInvenItemAmount(i, amount); }\
+	void setInvenItemAmount(int i, int amount) { _inventory->setInvenItemAmount(i, amount); }
 
 	bool getIsShowInventory() { return isShowInventory; }
 	bool getIsOpenStorageCover() { return isOpenPlayerStorageCover; }
@@ -102,6 +102,11 @@ public:
 	int getPickaxDamage() { return pickaxDamage; }
 	int getHoeDamage() { return hoeDamage; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
+
+	int getWaterAmount() { return _inventory->getWaterAmount(); }
+	void setWaterAmount(int waterAmount) { _inventory->setWaterAmount(waterAmount); }
+
+
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }

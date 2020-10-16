@@ -16,6 +16,10 @@ private:
 	tagItem _MouseStorageItem;
 
 	RECT _playerInventory;
+	RECT _kettleBar;
+
+	HBRUSH brush;
+	HBRUSH oBrush;
 	
 	BOOL _isInventoryMove; //인벤토리 키면 못움직이게 하는거.
 	BOOL _isInvenPage;	   //누르면 인벤페이지
@@ -29,6 +33,7 @@ private:
 
 	int MouseIndexX, MouseIndexY;
 	int currentSlotNumber;
+	int waterAmount;
 
 	bool _isShopOpen;
 
@@ -84,6 +89,9 @@ public:
 
 	bool getIsShowTemp() { return isShowTemp; }
 	void setIsShowTemp(bool setIsShowTemp) { isShowTemp = setIsShowTemp; }
+
+	int getWaterAmount() { return waterAmount; }
+	void setWaterAmount(int setWaterAmount) { waterAmount = setWaterAmount; }
 
 
 	//====인벤토리 위에 페이지 설정 ====//
