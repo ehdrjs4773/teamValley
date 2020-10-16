@@ -164,7 +164,9 @@ enum DAYOFWEEK
 //이펙트 종류
 enum EFFECT
 {
-	EFFECT_
+	EFT_PINETREECOL,
+	EFT_MAPLETREECOL,
+	EFT_OAKTREECOL
 };
 
 struct tagItem {
@@ -216,9 +218,13 @@ struct tagStock {
 
 struct tagEffect 
 {
+	image* image;
+	EFFECT effectType;
+	DIRECTION dir;
 	int count;
-	int index;
-
+	int indexX, indexY;
+	int maxIndex;
+	int centerX, centerY;
 };
 
 enum NPC_KIND {
