@@ -23,69 +23,58 @@ void inventoryCraft::update()
 	{
 		if (_vCraftItem[i].item_image == NULL)
 		{
-			_vCraftItem[i].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[i].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 		}
 		_vCraftItem[i].rc = RectMake(250 + i % 6 * 50, 130 + i / 6 * 40, 40, 40);
-
-		// 렉트 초기화 및 이미지 초기화 ~
-
-		if(PtInRect(&_vCraftItem[i].rc, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				if (i == 0 || i == 6) // 상자인경우
-				{
-					for (int i = 0; i < _inven->getvInven().size(); i++)
-					{
-						if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
-						{
-							if (_inven->getvInven()[i].amount >= 10)
-							{
-								tagItem box;
-								box.item_image = IMAGEMANAGER->findImage("아이템");
-								box.item_info = "상자";
-								box.indexX = 0;
-								box.indexY = 0;
-								box.item_kind = ITEM_BOX;
-								
-								_inven->setMouseItem(box);
-								_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount - 10);
-							}
-						}
-					}
-				}
-
-				else if (i == 1 || i == 7) // 뭐더라?
-				{
-
-				}
-
-				else if (i == 2 || i == 8) // 양봉장
-				{
-
-				}
-				else if (i == 3 || i == 9) //허수아비
-				{
-
-				}
-				else if (i == 4 || i == 10) //용광로
-				{
-
-				}
-				else if (i == 5 || i == 11)//발효통
-				{
-
-				}
-				
-			}
-
-		}
+	
 	}
 
-	
+	for (int i = 0; i < _inven->getvInven().size(); i++)
+	{
+		if (_inven->getvInven()[i].item_image != NULL)
+		{
+			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+			{
+				if (_inven->getvInven()[i].amount >= 10)
+				{
 
+					_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작");
+					_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작");
+					if (PtInRect(&_vCraftItem[0].rc, _ptMouse) || PtInRect(&_vCraftItem[6].rc, _ptMouse))
+					{
+						if (INPUT->GetKeyDown(VK_LBUTTON))
+						{
+							tagItem box;
+							box.item_image = IMAGEMANAGER->findImage("아이템");
+							box.item_info = "상자";
+							box.indexX = 0;
+							box.indexY = 0;
+							box.item_kind = ITEM_BOX;
+
+							_inven->setMouseItem(box);
+							_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount - 10);
+						}
+					}
+
+				}
+				else if (_inven->getvInven()[i].amount < 10)
+				{
+					if (_vCraftItem[0].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+						_vCraftItem[6].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+					{
+						_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+						_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+					}
+				}
+			}
+			else
+			{
+
+			}
+		}
+		
+	}
 }
-
 void inventoryCraft::release()
 {
 }
