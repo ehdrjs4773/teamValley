@@ -44,6 +44,7 @@ void shopScene::update()
 	_itemNpc->update();
 	_skillNpc->update();
 
+
 	//상점 나가기 포탈
 	if (PLAYER->getCenterY() >= 338)
 	{
@@ -123,12 +124,15 @@ void shopScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
+
 	if (_isClicked)
 	{
 		_shop->render();
 	}
-
-	PLAYER->playerStatusRender(getMemDC());
+	else
+	{
+		PLAYER->playerStatusRender(getMemDC());
+	}
 }
 
 void shopScene::playerMove()

@@ -132,6 +132,7 @@ public:
 	WEATHER getWeather() { return currentWeather; }
 	int getHour() { return hour; }
 	int getMinute() { return minute; }
+	void setMoney(int Item_money) { money = Item_money; }
 	int getMoney() { return money; }
 	int getDate() { return date; }
 	DAYOFWEEK getDay() { return day; }
