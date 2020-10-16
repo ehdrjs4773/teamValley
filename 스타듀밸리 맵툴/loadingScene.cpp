@@ -127,6 +127,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점실내", "Images/shop/shop.bmp", 600, 360, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점실내뒷배경", "Images/shop/shopM.bmp", 600, 360, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("돈통", "Images/shop/돈통.bmp", 185, 55, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점테이블", "Images/shop/shop_table.bmp", 75, 46, true, RGB(255, 0, 255));
 
 	//시계

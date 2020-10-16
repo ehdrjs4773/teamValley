@@ -92,14 +92,22 @@ void inventory::update()
 			_vItem[i].rc = RectMake(270 + 55 * (i % 12), 405 + 65 * (i / 12), 40, 40);
 		}
 	}
-
-	if (_isShopOpen)
-	{	
+	else if (_isShopOpen)
+	{
 		for (int i = 0; i < _vItem.size(); i++) // 상점에서 나오는 인벤토리
 		{
-			_vItem[i].rc = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+			_vItem[i].rc = RectMake(336 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
 		}
 	}
+	else
+	{
+		for (int i = 0; i < _vItem.size(); i++)
+		{
+			_vItem[i].rc = RectMake(0, 0, 0, 0);
+		}
+	}
+
+
 
 	//if (_MouseStorageItem.item_image) _MouseStorageItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseStorageItem.item_image->getFrameWidth(), _MouseStorageItem.item_image->getFrameHeight());
 	
@@ -134,11 +142,25 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left , _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+					if (_vItem[i].amount >= 0)
+					{
+						char str[64];
+						wsprintf(str, "%d", _vItem[i].amount);
+
+						textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					}
 					//Rectangle(hdc, _vItem[i].rc);
 				}
 				else
 				{
 					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+					if (_vItem[i].amount >= 0)
+					{
+						char str[64];
+						wsprintf(str, "%d", _vItem[i].amount);
+
+						textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					}
 				}
 			}
 		}
@@ -161,10 +183,24 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				{
 					//Rectangle(hdc, _vItem[i].rc);
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+					if (_vItem[i].amount >= 0)
+					{
+						char str[64];
+						wsprintf(str, "%d", _vItem[i].amount);
+
+						textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					}
 				}
 				else
 				{
 					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+					if (_vItem[i].amount >= 0)
+					{
+						char str[64];
+						wsprintf(str, "%d", _vItem[i].amount);
+
+						textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					}
 				}
 			}
 		}
@@ -650,5 +686,5 @@ void inventory::_vItemUpdate()
 
 void inventory::shopInvenRender(HDC hdc)
 {
-	IMAGEMANAGER->findImage("상점인벤토리1")->render(hdc, 265, 370);
+	IMAGEMANAGER->findImage("상점인벤토리1")->render(hdc, 305, 370);
 }
