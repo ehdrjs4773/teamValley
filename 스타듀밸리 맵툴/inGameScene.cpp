@@ -126,6 +126,9 @@ void inGameScene::render()
 
 	PLAYER->drawPlayerInven(_tile[15][30], _tile[14][30]);
 
+	//ÀÌÆåÆ® ·»´õ
+	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
+
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
@@ -536,7 +539,7 @@ void inGameScene::playerInteraction()
 				PLAYER->openPlayerStorageCover();
 			}
 		}
-		cout << MouseIndexX << MouseIndexY << endl;
+		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -667,18 +670,35 @@ void inGameScene::cutdownTree()
 						{
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+							EFFECTMANAGER->treeCol(
+								"¼Ò³ª¹«",
+								(_tile[MouseIndexY][MouseIndexX].rc.left + (_tile[MouseIndexY][MouseIndexX].rc.right - _tile[MouseIndexY][MouseIndexX].rc.left) / 2),
+								(_tile[MouseIndexY][MouseIndexX].rc.top + (_tile[MouseIndexY][MouseIndexX].rc.bottom - _tile[MouseIndexY][MouseIndexX].rc.top) / 2)
+							);
+
 						}
 						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
 						{
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+							EFFECTMANAGER->treeCol(
+								"´ÜÇ³³ª¹«",
+								(_tile[MouseIndexY][MouseIndexX].rc.left + (_tile[MouseIndexY][MouseIndexX].rc.right - _tile[MouseIndexY][MouseIndexX].rc.left) / 2),
+								(_tile[MouseIndexY][MouseIndexX].rc.top + (_tile[MouseIndexY][MouseIndexX].rc.bottom - _tile[MouseIndexY][MouseIndexX].rc.top) / 2)
+							);
 						}
 						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
 						{
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
 							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+							EFFECTMANAGER->treeCol(
+								"Âü³ª¹«",
+								(_tile[MouseIndexY][MouseIndexX].rc.left + (_tile[MouseIndexY][MouseIndexX].rc.right - _tile[MouseIndexY][MouseIndexX].rc.left) / 2),
+								(_tile[MouseIndexY][MouseIndexX].rc.top + (_tile[MouseIndexY][MouseIndexX].rc.bottom - _tile[MouseIndexY][MouseIndexX].rc.top) / 2)
+							);
 						}
 						_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
+				
 					}
 				}
 			}

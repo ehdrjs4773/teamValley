@@ -161,6 +161,14 @@ enum DAYOFWEEK
 	SUN
 };
 
+//이펙트 종류
+enum EFFECT
+{
+	EFT_PINETREECOL,
+	EFT_MAPLETREECOL,
+	EFT_OAKTREECOL
+};
+
 struct tagItem {
 	RECT rc;
 	image* item_image;
@@ -208,6 +216,16 @@ struct tagStock {
 	bool isMove;
 };
 
+struct tagEffect 
+{
+	image* image;
+	EFFECT effectType;
+	DIRECTION dir;
+	int count;
+	int indexX, indexY;
+	int maxIndex;
+	int centerX, centerY;
+};
 
 enum NPC_KIND {
 

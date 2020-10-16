@@ -134,7 +134,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left , _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
-					Rectangle(hdc, _vItem[i].rc);
+					//Rectangle(hdc, _vItem[i].rc);
 				}
 				else
 				{
@@ -466,33 +466,37 @@ void inventory::storage_item_info(HDC hdc)
 
 void inventory::_vItemUpdate()
 {
-	if (PtInRect(&_isInvenRect, _ptMouse))
+	if (!isShowTemp)
 	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
+		if (PtInRect(&_isInvenRect, _ptMouse))
 		{
-			if (_isInvenPage) _isInvenPage = false;
-			if (_isCraftPage) _isCraftPage = false;
-			_isInvenPage = true;
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (_isInvenPage) _isInvenPage = false;
+				if (_isCraftPage) _isCraftPage = false;
+				_isInvenPage = true;
+			}
+		}
+		else if (PtInRect(&_isPlayerRect, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (_isInvenPage) _isInvenPage = false;
+				if (_isCraftPage) _isCraftPage = false;
+				_isPlayerPage = true;
+			}
+		}
+		else if (PtInRect(&_isCraftRect, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (_isInvenPage) _isInvenPage = false;
+				if (_isPlayerPage) _isPlayerPage = false;
+				_isCraftPage = true;
+			}
 		}
 	}
-	else if (PtInRect(&_isPlayerRect, _ptMouse))
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			if (_isInvenPage) _isInvenPage = false;
-			if (_isCraftPage) _isCraftPage = false;
-			_isPlayerPage = true;
-		}
-	}
-	else if (PtInRect(&_isCraftRect, _ptMouse))
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			if (_isInvenPage) _isInvenPage = false;
-			if (_isPlayerPage) _isPlayerPage = false;
-			_isCraftPage = true;
-		}
-	}
+	
 
 	if (_isShopOpen)
 	{

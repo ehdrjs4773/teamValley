@@ -61,6 +61,7 @@ HRESULT player::init()
 	date = 1;
 	day = MON;
 	arrowAngle = 18;
+	blinkCount = 0;
 
 	return S_OK;
 }
@@ -94,6 +95,8 @@ void  player::update()
 	{
 		hour += 1;
 		money -= 33;
+		currentSeason = (SEASON)(currentSeason + 1);
+		currentWeather = (WEATHER)(currentWeather + 1);
 	}
 
 	//플레이어 현재 맵 체크
@@ -114,12 +117,11 @@ void  player::update()
 	_inventory->update();
 	playerInvenCoverAnimation();
 
-	countTime();
-
-	if (money < 0)
+	if (!isShowInventory)
 	{
-		money = 0;
+		countTime();
 	}
+
 }
 
 void player::render()
@@ -139,6 +141,7 @@ void player::playerStatusRender(HDC hdc)
 	clockRender(hdc);
 	moneyRender(hdc);
 	arrowRender(hdc);
+	weatherRender(hdc);
 }
 
 void player::InventoryRender(HDC hdc)
@@ -815,7 +818,7 @@ void player::countTime()
 	if (hour >= 24)
 	{
 		//date += 1;
-		//day = (DAYOFWEEK)(day + 1);
+		day = (DAYOFWEEK)(day + 1);
 		hour = 0;
 	}
 	if (date > 30)
@@ -872,10 +875,28 @@ void player::clockRender(HDC hdc)
 
 	sprintf(hourStr, "%d", hour);
 	sprintf(minStr, ": %d", minute);
-	textOut(hdc, 1090, 98, hourStr, RGB(0, 0, 0));
-	textOut(hdc, 1110, 98, minStr, RGB(0, 0, 0));
+	if (!isShowInventory)
+	{
+		textOut(hdc, 1090, 98, hourStr, RGB(0, 0, 0));
+		textOut(hdc, 1110, 98, minStr, RGB(0, 0, 0));
+		blinkCount = 0;
+	}
+	else if (isShowInventory)
+	{
+		blinkCount++;
+		if ((blinkCount / 40) % 2 == 0)
+		{
+			textOut(hdc, 1090, 98, hourStr, RGB(120, 120, 120));
+			textOut(hdc, 1110, 98, minStr, RGB(120, 120, 120));
+		}
+		else
+		{
+			textOut(hdc, 1090, 98, hourStr, RGB(0, 0, 0));
+			textOut(hdc, 1110, 98, minStr, RGB(0, 0, 0));
+		}
+	}
 
-	sprintf(yearStr, "%d년차", year);
+	sprintf(yearStr, "%d년", year);
 	sprintf(dateStr, "%d일", date);
 	textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
 	textOut(hdc, 1120, 34, dateStr, RGB(0, 0, 0));
@@ -898,14 +919,30 @@ void player::moneyRender(HDC hdc)
 	{
 		IMAGEMANAGER->frameRender("돈숫자", hdc, 1144, 148, 0, 0);
 	}
+
+	//돈 0보다 작으면 0으로 고정
+	if (money < 0)
+	{
+		money = 0;
+	}
 }
 
 void player::arrowRender(HDC hdc)
 {
-	arrowAngle = 18 - (hour - 6);
-	if (arrowAngle < 0)
+	if (hour < 6)
 	{
 		arrowAngle = 0;
 	}
+	else
+	{
+		arrowAngle = 18 - (hour - 6);
+	}
+
 	IMAGEMANAGER->frameRender("시계바늘", hdc, 984, 14, arrowAngle, 0);
+}
+
+void player::weatherRender(HDC hdc)
+{
+	IMAGEMANAGER->frameRender("날씨", hdc, 1061, 64, 0, currentSeason);
+	IMAGEMANAGER->frameRender("계절", hdc, 1127, 64, 0, currentWeather);
 }

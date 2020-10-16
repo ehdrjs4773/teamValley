@@ -14,7 +14,7 @@ private:
 	Stock* stock;
 	MAP currentMap;
 
-	int timeCount, hour, minute, date, money, year;
+	int timeCount, hour, minute, date, money, year, blinkCount;
 	int arrowAngle;
 	DAYOFWEEK day;
 	SEASON currentSeason;
@@ -70,6 +70,7 @@ public:
 	void clockRender(HDC hdc);
 	void moneyRender(HDC hdc);
 	void arrowRender(HDC hdc);
+	void weatherRender(HDC hdc);
 
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
