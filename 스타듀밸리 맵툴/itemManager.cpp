@@ -15,7 +15,9 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("µ¹Ææ½º", "Images/Ææ½º/µ¹Ææ½º.bmp", 48, 352, 3, 22);
 	IMAGEMANAGER->addFrameImage("Ææ½º", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ.bmp", 80, 40, 2, 1);
 	IMAGEMANAGER->addFrameImage("Ææ½º(¶¥)", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ(¶¥).bmp", 32, 16, 2, 1);
+	IMAGEMANAGER->addImage("½ºÅ³ºÏ", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
 
+	addSkill();
 	addSeed();
 	addFruit();
 	addWeapon();
@@ -137,6 +139,16 @@ void itemManager::addObject()
 	addObjectItem("Ææ½º", ITEM_STONEFENCE, 1, 0, "¼®Àç¿ïÅ¸¸®", 1000, 500);
 	addObjectItem("Ææ½º", ITEM_WOODENFENCEDOOR, 0, 0, "³ª¹«¿ïÅ¸¸®¹®", 1000, 500);
 	addObjectItem("Ææ½º", ITEM_STONEFENCEDOOR, 1, 0, "¼®Àç¿ïÅ¸¸®¹®", 1000, 500);
+}
+
+void itemManager::addSkill()
+{
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "EXPLOSION", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "SPIKES", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "FIRE", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "SHIELD", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "BLACKHOLE", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "FIRE_BALL", 1000, 500);
 }
 
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)

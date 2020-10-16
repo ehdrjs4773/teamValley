@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "shop.h"
 
-HRESULT shop::init()
+HRESULT shop::init(NPC_KIND npckind)
 {
+	_npcKind = npckind;
+
 	buyFail = false;
 	buy_count = 0;
 
@@ -15,6 +17,28 @@ HRESULT shop::init()
 	_isClose = false;
 
 	_vItem = ITEMMANAGER->getItem();
+
+	for (int i = 0; i < _vItem.size(); i)
+	{
+		if (_npcKind == ITEM_NPC)
+		{
+			if (_vItem[i].item_kind == ITEM_SKILL)
+			{
+				_vItem.erase(_vItem.begin() + i);
+			}
+			else i++;
+		}
+		else
+		{
+			if (_vItem[i].item_kind != ITEM_SKILL)
+			{
+				_vItem.erase(_vItem.begin() + i);
+			}
+			else i++;
+
+		}
+	}
+
 	_vInven = _inven->getInven();
 
 	money = 0;
@@ -44,7 +68,7 @@ HRESULT shop::init()
 	//아이템 초기화
 	//tagItem 
 	for (int i = 0; i < _vslot.size(); i++)
-	{
+	{	
 		_vItem[i].rc = RectMake(_vslot[i].rc.left + 16, _vslot[i].rc.top + 13, 55, 45);
 	}
 
@@ -82,8 +106,6 @@ void shop::update()
 		}
 		else _isClose = false;
 	}
-	
-	
 }
 
 void shop::render()
@@ -100,7 +122,6 @@ void shop::render()
 			{
 				char str[64];
 				wsprintf(str, "%d", _vInven->at(i).amount);
-
 				textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
 			}
 		}
@@ -285,6 +306,9 @@ void shop::render()
 			case ITEM_STONEFENCEDOOR:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+			case ITEM_SKILL:
+				memset(temp, 0, sizeof(temp));
+				sprintf(temp, "SKILL", sizeof("SKILL"));
 				break;
 
 			}
@@ -295,12 +319,20 @@ void shop::render()
 
 	if (is_click)
 	{
-		if (buy_count > 0)
+		if (_vItem[click_index].isFrame)
 		{
 			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
 			char str[64];
 			wsprintf(str, "%d", buy_count);
 			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+		}
+		else
+		{
+			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
+			char str[64];
+			wsprintf(str, "%d", buy_count);
+			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+
 		}
 	}
 }

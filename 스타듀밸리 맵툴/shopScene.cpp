@@ -7,10 +7,14 @@ HRESULT shopScene::init()
 	CAMERAMANAGER->init(1600, 1600, 480, 240);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
-	_shop = new shop;
-	_shop->init();
+	_itemShop = new shop;
+	_itemShop->init(ITEM_NPC);
 
-	_isClicked = false;
+	_skillShop = new shop;
+	_skillShop->init(SKILL_NPC);
+
+	_isSkillClicked = false;
+	_isShopClicked = false;
 
 	_pos.x = 270;
 	_pos.y = 310;
@@ -54,11 +58,17 @@ void shopScene::update()
 		}
 	}
 
-	if (_isClicked)
+	if (_isShopClicked)
 	{
-		_shop->update();
-		_isClicked = !_shop->shopClose();
-		PLAYER->getInventory()->isShopOpen(_isClicked);
+		_itemShop->update();
+		_isShopClicked = !_itemShop->shopClose();
+		PLAYER->getInventory()->isShopOpen(_isShopClicked);
+	}
+	else if (_isSkillClicked)
+	{
+		_skillShop->update();
+		_isSkillClicked = !_skillShop->shopClose();
+		PLAYER->getInventory()->isShopOpen(_isSkillClicked);
 	}
 	else
 	{
@@ -79,10 +89,16 @@ void shopScene::update()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				_isClicked = true;
+				_isShopClicked = true;
 			}
 		}
-
+		if (PtInRect(&_skillNpc->getRC(), temp))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isSkillClicked = true;
+			}
+		}
 		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	}
 }
@@ -124,9 +140,13 @@ void shopScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 
-	if (_isClicked)
+	if (_isShopClicked)
 	{
-		_shop->render();
+		_itemShop->render();
+	}
+	else if (_isSkillClicked)
+	{
+		_skillShop->render();
 	}
 	else
 	{

@@ -264,7 +264,15 @@ void inventory::quickSlot(HDC hdc)
 		{
 			if (_vItem[i].item_image != NULL)
 			{
-				_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
+				if (_vItem[i].isFrame)
+				{
+					_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
+				}
+				else
+				{
+					_vItem[i].item_image->render(hdc, _playerTool[i].left, _playerTool[i].top);
+				}
+
 				if (_vItem[i].amount >= 0)
 				{
 					char str[64];
@@ -349,14 +357,56 @@ void inventory::renderStorageInventory(HDC hdc)
 	for (int i = 0; i < STORAGEMAX; i++)
 	{
 		if (_vStorageItem[i].item_image == NULL)continue;
-		_vStorageItem[i].item_image->frameRender(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top, _vStorageItem[i].indexX, _vStorageItem[i].indexY);
+		if (_vStorageItem[i].isFrame)
+		{
+			_vStorageItem[i].item_image->frameRender(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top, _vStorageItem[i].indexX, _vStorageItem[i].indexY);
+			if (_vStorageItem[i].amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vStorageItem[i].amount);
+
+				textOut(hdc, _vStorageItem[i].rc.left + 30, _vStorageItem[i].rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
+		else
+		{
+			_vStorageItem[i].item_image->render(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top);
+			if (_vStorageItem[i].amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vStorageItem[i].amount);
+
+				textOut(hdc, _vStorageItem[i].rc.left + 30, _vStorageItem[i].rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
 	}
 
 	//캐릭터의 창고에 있는 인벤36칸
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image == NULL) continue;
-		_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+		if (_vItem[i].isFrame)
+		{
+			_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+			if (_vItem[i].amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vItem[i].amount);
+
+				textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
+		else
+		{
+			_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
+			if (_vItem[i].amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vItem[i].amount);
+
+				textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
 	}
 	
 }
@@ -406,6 +456,8 @@ void inventory::inven_item_info(HDC hdc)
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				case ITEM_SKILL:
+					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -466,6 +518,8 @@ void inventory::quickinven_item_info(HDC hdc)
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				case ITEM_SKILL:
+					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
 
 					break;
 				}
@@ -527,6 +581,8 @@ void inventory::storage_item_info(HDC hdc)
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				case ITEM_SKILL:
+					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
 					break;
 				}
 				sprintf(temp_info[1], _vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));

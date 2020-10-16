@@ -3,7 +3,9 @@
 #include "npc.h"
 class shopScene : public gameNode
 {
-	shop* _shop;
+	shop* _itemShop;
+	shop* _skillShop;
+
 	RECT _rc_player;
 	POINT _pos;
 
@@ -13,7 +15,8 @@ class shopScene : public gameNode
 	
 	npc* _npcPtr[2];
 
-	bool _isClicked;
+	bool _isShopClicked;
+	bool _isSkillClicked;
 
 public:
 	HRESULT init();

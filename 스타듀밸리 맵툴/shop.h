@@ -14,6 +14,7 @@ class shop :
 	public gameNode
 {
 private:
+	NPC_KIND _npcKind;
 
 	bool buyFail;
 	int buy_count;
@@ -50,7 +51,7 @@ private:
 
 public:
 
-	HRESULT init();
+	HRESULT init(NPC_KIND npckind);
 	void release();
 	void update();
 	void render();
