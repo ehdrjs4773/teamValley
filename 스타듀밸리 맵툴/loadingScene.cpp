@@ -131,7 +131,7 @@ void loadingScene::loadingImage()
 
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
-	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 33, 138, 1, 6);
+	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 34, 138, 1, 6);
 	IMAGEMANAGER->addFrameImage("시계바늘", "Images/시계/시계바늘180도.bmp", 1330, 120, 19, 1);
 	IMAGEMANAGER->addFrameImage("돈숫자", "Images/시계/돈 숫자.bmp", 140, 20, 10, 1);
 	IMAGEMANAGER->addImage("시계", "Images/시계/시계.bmp", 200, 158);

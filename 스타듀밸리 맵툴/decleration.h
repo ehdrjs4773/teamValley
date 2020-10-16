@@ -161,6 +161,12 @@ enum DAYOFWEEK
 	SUN
 };
 
+//이펙트 종류
+enum EFFECT
+{
+	EFFECT_
+};
+
 struct tagItem {
 	RECT rc;
 	image* item_image;
@@ -208,6 +214,12 @@ struct tagStock {
 	bool isMove;
 };
 
+struct tagEffect 
+{
+	int count;
+	int index;
+
+};
 
 enum NPC_KIND {
 

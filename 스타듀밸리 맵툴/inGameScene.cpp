@@ -536,7 +536,7 @@ void inGameScene::playerInteraction()
 				PLAYER->openPlayerStorageCover();
 			}
 		}
-		cout << MouseIndexX << MouseIndexY << endl;
+		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))

@@ -134,7 +134,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left , _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
-					Rectangle(hdc, _vItem[i].rc);
+					//Rectangle(hdc, _vItem[i].rc);
 				}
 				else
 				{
