@@ -91,6 +91,15 @@
     <Filter Include="집 씬">
       <UniqueIdentifier>{ec1040a3-872c-489d-ae6a-e579633f8b5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameFramework\매니져\이펙트매니저">
+      <UniqueIdentifier>{38e0deb3-e0a2-4759-911c-e9e0f1ed4552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="인빌딩씬">
+      <UniqueIdentifier>{0d0b3040-2972-483f-b49d-dcc9fed7ebbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="광산씬">
+      <UniqueIdentifier>{6b7d0356-62b3-4ca8-9129-3d1902f9e3c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -180,9 +189,7 @@
     <ClCompile Include="inventory.cpp">
       <Filter>플레이어\인벤토리</Filter>
     </ClCompile>
-    <ClCompile Include="inBuildingScene.cpp" />
     <ClCompile Include="npc.cpp" />
-    <ClCompile Include="mineScene.cpp" />
     <ClCompile Include="inventoryCraft.cpp">
       <Filter>플레이어\인벤토리</Filter>
     </ClCompile>
@@ -191,6 +198,15 @@
     </ClCompile>
     <ClCompile Include="inHouseScene.cpp">
       <Filter>집 씬</Filter>
+    </ClCompile>
+    <ClCompile Include="effectManager.cpp">
+      <Filter>GameFramework\매니져\이펙트매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="inBuildingScene.cpp">
+      <Filter>인빌딩씬</Filter>
+    </ClCompile>
+    <ClCompile Include="mineScene.cpp">
+      <Filter>광산씬</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,16 +306,23 @@
       <Filter>플레이어\인벤토리</Filter>
     </ClInclude>
     <ClInclude Include="npc.h" />
-    <ClInclude Include="mineScene.h" />
     <ClInclude Include="inventoryCraft.h">
       <Filter>플레이어\인벤토리</Filter>
     </ClInclude>
     <ClInclude Include="switchSceneManager.h">
       <Filter>GameFramework\매니져\화면전환매니저</Filter>
     </ClInclude>
-    <ClInclude Include="inBuildingScene.h" />
     <ClInclude Include="inHouseScene.h">
       <Filter>집 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="effectManager.h">
+      <Filter>GameFramework\매니져\이펙트매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="inBuildingScene.h">
+      <Filter>인빌딩씬</Filter>
+    </ClInclude>
+    <ClInclude Include="mineScene.h">
+      <Filter>광산씬</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

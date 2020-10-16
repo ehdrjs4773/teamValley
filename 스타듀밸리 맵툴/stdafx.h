@@ -27,6 +27,7 @@ using namespace std;
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 
 //=============================================================
 //	## 내가 만든 헤더파일을 이곳에 추가한다 ##
@@ -47,6 +48,7 @@ using namespace MY_UTIL;
 #include "player.h"
 #include "itemManager.h"
 #include "switchSceneManager.h"
+#include "effectManager.h"
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 
@@ -65,6 +67,7 @@ using namespace MY_UTIL;
 #define PLAYER player::getSingleton()
 #define ITEMMANAGER itemManager::getSingleton()
 #define SWITCHMANAGER switchSceneManager::getSingleton()
+#define EFFECTMANAGER effectManager::getSingleton()
 
 //=============================================================
 //	## 디파인문 ## (윈도우창 초기화)

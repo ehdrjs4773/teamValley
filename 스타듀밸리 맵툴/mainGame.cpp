@@ -56,6 +56,8 @@ void mainGame::update()
 		SWITCHMANAGER->update();
 	}
 
+	EFFECTMANAGER->update();
+
 	//사운드매니져 업데이트 (이게 없으면 사운드매니져 제대로 동작하지 않는다!!!)
 	SOUNDMANAGER->update();
 }

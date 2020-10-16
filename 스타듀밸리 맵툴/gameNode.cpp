@@ -19,6 +19,7 @@ HRESULT gameNode::init()
 	ITEMMANAGER->init();
 	PLAYER->init();
 	SWITCHMANAGER->init();
+	EFFECTMANAGER->init();
 
 	return S_OK;
 }
@@ -61,6 +62,8 @@ void gameNode::release()
 	ITEMMANAGER->releaseSingleton();
 
 	SWITCHMANAGER->releaseSingleton();
+
+	EFFECTMANAGER->releaseSingleton();
 
 	//HDC «ÿ¡¶
 	ReleaseDC(_hWnd, _hdc);
