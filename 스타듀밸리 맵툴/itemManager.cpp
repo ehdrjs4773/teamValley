@@ -89,7 +89,6 @@ void itemManager::addTool()
 
 void itemManager::addFruit()
 {
-
 	addFruit("열매", ITEM_FRUIT, 0, 0, SEED_PARSNIP, "파스닙", 300, 150);
 	addFruit("열매", ITEM_FRUIT, 1, 0, SEED_CAULIFLOWER, "콜리플라워", 300, 150);
 	addFruit("열매", ITEM_FRUIT, 2, 0, SEED_GARLIC, "마늘", 300, 150);

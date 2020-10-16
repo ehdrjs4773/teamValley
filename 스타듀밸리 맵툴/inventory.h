@@ -51,7 +51,7 @@ public:
 	bool isShowStorageTemp;
 
 	void isShopOpen(bool isOpen) { _isShopOpen = isOpen; }
-
+	bool getshopOpen() { return _isShopOpen; }
 	int getCurrentSlotNumber() { return currentSlotNumber; }
 	void setCurrentSlotNumber(int a)
 	{ 

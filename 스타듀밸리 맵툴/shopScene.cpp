@@ -51,7 +51,6 @@ void shopScene::update()
 		{
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(800.0f, 340.0f);
-			PLAYER->getInventory()->isShopOpen(false);
 		}
 	}
 
@@ -59,6 +58,7 @@ void shopScene::update()
 	{
 		_shop->update();
 		_isClicked = !_shop->shopClose();
+		PLAYER->getInventory()->isShopOpen(_isClicked);
 	}
 	else
 	{
@@ -123,12 +123,16 @@ void shopScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
+
 	if (_isClicked)
 	{
 		_shop->render();
 	}
+	else
+	{
+		PLAYER->playerStatusRender(getMemDC());
+	}
 
-	PLAYER->playerStatusRender(getMemDC());
 }
 
 void shopScene::playerMove()

@@ -3,6 +3,9 @@
 
 HRESULT shop::init()
 {
+	buyFail = false;
+	buy_count = 0;
+
 	_inven = new inventory;
 	_inven = PLAYER->getPlayerInven();
 
@@ -13,6 +16,8 @@ HRESULT shop::init()
 
 	_vItem = ITEMMANAGER->getItem();
 	_vInven = _inven->getInven();
+
+	money = 0;
 
 	current_index = 0;
 	down_BT = RectMake(1100, 500, 50, 50);
@@ -46,7 +51,7 @@ HRESULT shop::init()
 	//플레이어 인벤토리 렌더용 렉트 초기화
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		playerItem[i] = RectMake(296 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+		playerItem[i] = RectMake(336 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
 	}
 
 	return S_OK;
@@ -60,18 +65,25 @@ void shop::release()
 void shop::update()
 {
 	_inven->update();
+
 	sell();
 	buy();
 	shop_scroll();
-	if (PtInRect(&rc_exit, _ptMouse))
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			_isClose = true;
-		}
-	}
-	else _isClose = false;
 
+	if (!is_click)
+	{
+		if (PtInRect(&rc_exit, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isClose = true;
+				is_click = false;
+			}
+		}
+		else _isClose = false;
+	}
+	
+	
 }
 
 void shop::render()
@@ -81,12 +93,80 @@ void shop::render()
 	for (int i = 0; i < _vInven->size(); i++)
 	{
 		if (_vInven->at(i).item_image == NULL) continue;
-		_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
+		if (_vInven->at(i).isFrame)
+		{
+			_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
+			if (_vInven->at(i).amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vInven->at(i).amount);
+
+				textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
+		else
+		{
+			_vInven->at(i).item_image->render(getMemDC(), playerItem[i].left, playerItem[i].top);
+			if (_vInven->at(i).amount >= 0)
+			{
+				char str[64];
+				wsprintf(str, "%d", _vInven->at(i).amount);
+
+				textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+			}
+		}
+	
 	}
 	PLAYER->getInventory()->inven_item_info(getMemDC());
 	//상점 창 테두리 출력
 	_shop_image = IMAGEMANAGER->findImage("상점");
 	_shop_image->render(getMemDC(), rc_shop.left, rc_shop.top);
+	image* money_pocket = IMAGEMANAGER->findImage("돈통");
+	if (buyFail == false)
+	{
+	money_pocket->render(getMemDC(), 100, 348);
+	int count = 0;
+	int print_money = 0;
+	if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 365, 0, print_money);
+	else
+	{
+		money = PLAYER->getMoney();
+		while (money)
+		{
+			print_money = money % 10;
+			IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 365, print_money, 0);
+			money = money / 10;
+			count++;
+		}
+	}
+	}
+	else
+	{	
+		int moving=4;
+		int shake = 10;
+		int count = 0;
+		int print_money = 0;
+		while (moving)
+		{
+			money_pocket->render(getMemDC(), 100+shake, 348);
+			if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 365, 0, print_money);
+			else
+			{
+				money = PLAYER->getMoney();
+				while (money)
+				{
+					print_money = money % 10;
+					IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 365, print_money, 0);
+					money = money / 10;
+					count++;
+				}
+			}
+			shake = shake * -1;
+			moving--;
+		}
+		buyFail = false;
+	}
+
 
 	//상점 슬롯 출력
 	for (int i = 0; i < _vslot.size(); i++)
@@ -141,17 +221,6 @@ void shop::render()
 
 	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
 
-	if (is_click)
-	{
-		if (_vItem[click_index].isFrame)
-		{
-			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
-		}
-		else
-		{
-			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
-		}
-	}
 	//아이템 정보 출력
 	for (int i = 0; i < _vslot.size(); i++)
 	{
@@ -224,6 +293,16 @@ void shop::render()
 		}
 	}
 
+	if (is_click)
+	{
+		if (buy_count > 0)
+		{
+			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
+			char str[64];
+			wsprintf(str, "%d", buy_count);
+			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+		}
+	}
 }
 
 void shop::sell()
@@ -234,11 +313,15 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				(*_vInven)[i].buy_price = NULL;
+				if ((*_vInven)[i].item_image == NULL) continue;
+				PLAYER->setMoney(PLAYER->getMoney() + _vInven->at(i).sell_price);
 				(*_vInven)[i].item_image = NULL;
 				(*_vInven)[i].item_info = NULL;
 				(*_vInven)[i].item_kind = ITEM_ENDITEM;
 				(*_vInven)[i].sell_price = NULL;
+				(*_vInven)[i].buy_price = NULL;
+				(*_vInven)[i].amount -= 1;
+				if ((*_vInven)[i].amount <= 0) (*_vInven)[i].amount = 0;
 			}
 		}
 	}
@@ -254,9 +337,25 @@ void shop::buy()
 			_vslot[i].on_cursor = true;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				is_click = true;
-				click_index = i + current_index;
+				if (is_click && (i + current_index != click_index)) continue;
+				else
+				{
+					click_index = i + current_index;
+					if (_vItem[click_index].buy_price > PLAYER->getMoney())
+					{
+						buyFail = true;
+						if (is_click == true) continue;
+						is_click = false;
+					}
+					else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
+					{
+						PLAYER->setMoney(PLAYER->getMoney() - _vItem[click_index].buy_price);
+						buy_count++;
+						is_click = true;
+					}
+				}
 			}
+			
 		}
 		else _vslot[i].on_cursor = false;
 	}
@@ -279,7 +378,23 @@ void shop::buy()
 						(*_vInven)[i].item_info = _vItem[click_index].item_info;
 						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
 						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
+						(*_vInven)[i].amount = buy_count;
+
 						is_click = false;
+						buy_count = 0;
+					}
+				}
+			}
+			else if((*_vInven)[i].item_info == _vItem[click_index].item_info)
+			{
+				if (is_click)
+				{
+					if (INPUT->GetKeyDown(VK_LBUTTON))
+					{
+						(*_vInven)[i].amount += buy_count;
+
+						is_click = false;
+						buy_count = 0;
 					}
 				}
 			}

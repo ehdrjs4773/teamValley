@@ -12,7 +12,6 @@ public:
 	tagItem _CraftItem;
 	vector<tagItem> _vCraftItem;
 
-
 public :
 	void init();
 	void update();
