@@ -30,6 +30,7 @@ HRESULT maptoolScene::init()
 	_currentTile.y = 6;
 
 	_currentSeason = SPRING;
+	_currentMine = MINE_NORMAL;
 
 	sampleTileX = 0;
 	sampleTileY = 0;
@@ -133,6 +134,7 @@ void maptoolScene::update()
 				_prevCtrl = _ctrlSelect;
 				resetSampleScrollBar();
 			}
+			setMineMap();
 		}
 
 		//버튼 떼면 스크롤 락 false
@@ -628,6 +630,11 @@ void maptoolScene::maptoolSetup()
 	_rcObject2 = RectMake(970, 500, 100, 50);
 	_rcMineTerrain = RectMake(970, 400, 70, 50);
 	_rcMineObject = RectMake(1050, 400, 70, 50);
+
+	_rcMineNormal = RectMake(1010 - 100, 450, 50, 25);
+	_rcMineNormalDark = RectMake(1010 - 50, 450, 50, 25);
+	_rcMineFrost = RectMake(1010, 450, 50, 25);
+	_rcMineFrostDark = RectMake(1010 + 50, 450, 50, 25);
 
 	_rcSpring = RectMake(660 - 100, 450, 50, 30);
 	_rcSummer = RectMake(660 - 50, 450, 50, 30);
@@ -1561,11 +1568,11 @@ void maptoolScene::checkFence(int i, int j)
 void maptoolScene::showMapTile()
 {
 	//인게임 화면 지형을 그린다
-	for (int i = 0; i < DISPLAYY; i++)
+	if (_ctrlSelect != CTRL_MINETERRAIN && _ctrlSelect != CTRL_MINEOBJECT)
 	{
-		for (int j = 0; j < DISPLAYX; j++)
+		for (int i = 0; i < DISPLAYY; i++)
 		{
-			if (_ctrlSelect != CTRL_MINETERRAIN && _ctrlSelect != CTRL_MINEOBJECT)
+			for (int j = 0; j < DISPLAYX; j++)
 			{
 				switch (_currentSeason)
 				{
@@ -1812,18 +1819,50 @@ void maptoolScene::showMapTile()
 					break;
 				}
 			}
-			else
-			{
-				IMAGEMANAGER->frameRender("광산 노말", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+		}
+	}
+	else
+	{
+		char str[64];
+		char objstr[64];
+		switch (_currentMine)
+		{
+		case MINE_NORMAL:
+			sprintf(str, "광산 노말");
+			sprintf(objstr, "광산오브젝트 노말");
+			break;
+		case MINE_NORMALDARK:
+			sprintf(str, "광산 노말다크");
+			sprintf(objstr, "광산오브젝트 노말다크");
+			break;
+		case MINE_FROST:
+			sprintf(str, "광산 프로스트");
+			sprintf(objstr, "광산오브젝트 프로스트");
+			break;
+		case MINE_FROSTDARK:
+			sprintf(str, "광산 프로스트다크");
+			sprintf(objstr, "광산오브젝트 프로스트다크");
+			break;
+		}
 
-				if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+		for (int i = 0; i < DISPLAYY; i++)
+		{
+			for (int j = 0; j < DISPLAYX; j++)
+			{
+				if (i + tileY < 50 && j + tileX < 50)
 				{
-					IMAGEMANAGER->frameRender("광산오브젝트 노말", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					IMAGEMANAGER->frameRender(str, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
+
+					if (_tile[i + tileY][j + tileX].obj != OBJ_NONE)
+					{
+						IMAGEMANAGER->frameRender(objstr, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+							_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+					}
 				}
+				
 			}
-		}	
+		}
 	}
 }
 
@@ -1845,6 +1884,10 @@ void maptoolScene::showControlButton()
 	IMAGEMANAGER->findImage("건물버튼")->render(getMemDC(), _rcObject2.left, _rcObject2.top);
 	Rectangle(getMemDC(), _rcMineTerrain);
 	Rectangle(getMemDC(), _rcMineObject);
+	Rectangle(getMemDC(), _rcMineNormal);
+	Rectangle(getMemDC(), _rcMineNormalDark);
+	Rectangle(getMemDC(), _rcMineFrost);
+	Rectangle(getMemDC(), _rcMineFrostDark);
 
 	if (isSelectSeason)
 	{
@@ -1935,7 +1978,23 @@ void maptoolScene::showSampleTerrainTile()
 			{
 				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
 				{
-					IMAGEMANAGER->frameRender("광산 노말", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+					char str[64];
+					switch (_currentMine)
+					{
+					case MINE_NORMAL:
+						sprintf(str, "광산 노말");
+						break;
+					case MINE_NORMALDARK:
+						sprintf(str, "광산 노말다크");
+						break;
+					case MINE_FROST:
+						sprintf(str, "광산 프로스트");
+						break;
+					case MINE_FROSTDARK:
+						sprintf(str, "광산 프로스트다크");
+						break;
+					}
+					IMAGEMANAGER->frameRender(str, getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
 						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
 				}
 			}
@@ -2025,11 +2084,51 @@ void maptoolScene::showSampleObjectTile()
 			{
 				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
 				{
-					IMAGEMANAGER->frameRender("광산오브젝트 노말", getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
+					char str[64];
+					switch (_currentMine)
+					{
+					case MINE_NORMAL:
+						sprintf(str, "광산오브젝트 노말");
+						break;
+					case MINE_NORMALDARK:
+						sprintf(str, "광산오브젝트 노말다크");
+						break;
+					case MINE_FROST:
+						sprintf(str, "광산오브젝트 프로스트");
+						break;
+					case MINE_FROSTDARK:
+						sprintf(str, "광산오브젝트 프로스트다크");
+						break;
+					}
+					IMAGEMANAGER->frameRender(str, getMemDC(), _sampleTile[i][j].rc.left, _sampleTile[i][j].rc.top,
 						_sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX, _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY);
 				}
 			}
 		}
+	}
+}
+
+void maptoolScene::setMineMap()
+{
+	if (PtInRect(&_rcMineNormal, _ptMouse))
+	{
+		_currentMine = MINE_NORMAL;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineNormalDark, _ptMouse))
+	{
+		_currentMine = MINE_NORMALDARK;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineFrost, _ptMouse))
+	{
+		_currentMine = MINE_FROST;
+		resetSampleScrollBar();
+	}
+	if (PtInRect(&_rcMineFrostDark, _ptMouse))
+	{
+		_currentMine = MINE_FROSTDARK;
+		resetSampleScrollBar();
 	}
 }
 

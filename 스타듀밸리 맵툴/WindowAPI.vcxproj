@@ -174,7 +174,9 @@
     <ClInclude Include="npc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
-    <ClInclude Include="progressBar.h" />
+    <ClInclude Include="progressBar.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sceneManager.h" />
@@ -214,7 +216,9 @@
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />
-    <ClCompile Include="progressBar.cpp" />
+    <ClCompile Include="progressBar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="random.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="shop.cpp" />
