@@ -35,7 +35,6 @@ void inventory::init()
 	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
 	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
 	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
-	_vItem[6].waterAmount = 100;
 	_vItem[7] = ITEMMANAGER->findItem("Ä®");
 	_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
 	_vItem[9] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
@@ -49,6 +48,8 @@ void inventory::init()
 
 	_isInventoryMove = false;
 	currentSlotNumber = 0;
+
+	waterAmount = 34; 
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -73,6 +74,10 @@ void inventory::update()
 		for (int i = 0; i < _vItem.size(); i++) //Ã¢°í¸¦ Å¬¸¯ÇßÀ»¶§ ³ª¿À´Â ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸®
 		{
 			_vItem[i].rc = RectMake(301 + 46 * (i % 12), 297 + 50 * (i / 12), 40, 40);
+			if (_vItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_vItem[i].rc.left + 3, _vItem[i].rc.bottom - 7, waterAmount, 4);
+			}
 		}
 
 		for (int i = 0; i < _vStorageItem.size(); i++) //Ã¢°í 
@@ -85,6 +90,10 @@ void inventory::update()
 		for (int i = 0; i < _vItem.size(); i++) // E´©¸£¸é ³ª¿À´Â ÀÎº¥Åä¸®
 		{
 			_vItem[i].rc = RectMake(270 + 55 * (i % 12), 135 + 65 * (i / 12), 40, 40);
+			if (_vItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_vItem[i].rc.left + 3, _vItem[i].rc.bottom - 7, waterAmount, 4);
+			}
 		}
 	}
 	else if (_isCraftPage)
@@ -92,6 +101,10 @@ void inventory::update()
 		for (int i = 0; i < _vItem.size(); i++) // E´©¸£¸é ³ª¿À´Â Á¦ÀÛÃ¢
 		{
 			_vItem[i].rc = RectMake(270 + 55 * (i % 12), 405 + 65 * (i / 12), 40, 40);
+			if (_vItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_vItem[i].rc.left + 3, _vItem[i].rc.bottom - 7, waterAmount, 4);
+			}
 		}
 	}
 	else if (_isShopOpen)
@@ -99,6 +112,10 @@ void inventory::update()
 		for (int i = 0; i < _vItem.size(); i++) // »óÁ¡¿¡¼­ ³ª¿À´Â ÀÎº¥Åä¸®
 		{
 			_vItem[i].rc = RectMake(336 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+			if (_vItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_vItem[i].rc.left + 3, _vItem[i].rc.bottom - 7, waterAmount, 4);
+			}
 		}
 	}
 	else
@@ -143,6 +160,12 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left , _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+
+					brush = CreateSolidBrush(RGB(40, 140, 230));
+					FillRect(hdc, &_kettleBar, brush);
+					DeleteObject(brush);
+
+
 					if (_vItem[i].amount >= 0)
 					{
 						char str[64];
@@ -184,6 +207,11 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 				{
 					//Rectangle(hdc, _vItem[i].rc);
 					_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+
+					brush = CreateSolidBrush(RGB(40, 140, 230));
+					FillRect(hdc, &_kettleBar, brush);
+					DeleteObject(brush);
+
 					if (_vItem[i].amount >= 0)
 					{
 						char str[64];
@@ -245,6 +273,13 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 	}
 
 	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
+
+
+
+
+
+
+
 }  // ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º¸Ã¢ (ÀÌ»óÇÏ°Ô ¼öÁ¤ÇÏÁö¸¶)
 
 void inventory::invenToryRender(HDC hdc) // ¹Ø¿¡ ¶ß°Ô ÇÏ´Â ÀÎº¥Åä¸® (À§¿¡²¨ ¹è°í ´Ù¸¥°É ´Ù ÀÌ°Å·Î Ã³¸®ÇÏ¸é ÆíÇÏÀÝ¾Æ-_ -);
@@ -265,6 +300,15 @@ void inventory::quickSlot(HDC hdc)
 			if (_vItem[i].item_image != NULL)
 			{
 				_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
+				if (_vItem[i].toolKind == TOOL_KETTLE)
+				{
+					_kettleBar = RectMake(_playerTool[i].left + 3, _playerTool[i].bottom - 7, waterAmount, 4);
+
+					brush = CreateSolidBrush(RGB(40, 140, 230));
+					FillRect(hdc, &_kettleBar, brush);
+					DeleteObject(brush);
+
+				}
 				if (_vItem[i].amount >= 0)
 				{
 					char str[64];
@@ -357,6 +401,11 @@ void inventory::renderStorageInventory(HDC hdc)
 	{
 		if (_vItem[i].item_image == NULL) continue;
 		_vItem[i].item_image->frameRender(hdc, _vItem[i].rc.left, _vItem[i].rc.top, _vItem[i].indexX, _vItem[i].indexY);
+
+		brush = CreateSolidBrush(RGB(40, 140, 230));
+		FillRect(hdc, &_kettleBar, brush);
+		DeleteObject(brush);
+
 	}
 	
 }

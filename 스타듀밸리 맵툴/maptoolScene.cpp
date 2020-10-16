@@ -322,11 +322,23 @@ void maptoolScene::setMap_Drag()
 								}
 								else if (overlappedSelect(w + sampleTileX, q + sampleTileY) == OVR_NONE)
 								{
+									if (_sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX >= 18 && _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX <= 21 &&
+										_sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY >= 5 && _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY <= 9)
+									{
+										_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
+										_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
+										_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = OBJ_BUILDING;
+										_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = OVR_NONE;
+										_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objType = OTY_WELL;
+									}
+									else
+									{ 
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameX = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameX;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objFrameY = _sampleTile[q + sampleTileY][w + sampleTileX].terrainFrameY;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].obj = OBJ_BUILDING;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objOver = OVR_NONE;
 									_tile[i + tileY + (q - first_i)][j + tileX + (w - first_j)].objType = OTY_NONE;
+									}
 								}
 							}
 						}

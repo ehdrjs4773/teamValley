@@ -527,6 +527,9 @@ void inGameScene::playerInteraction()
 			//물뿌리기
 			waterGround();
 
+			//물채우기
+			fillWater();
+
 			//공격하기 (우선은 나무자름)
 			attack();
 
@@ -885,6 +888,24 @@ void inGameScene::waterGround()
 		{
 			_tile[MouseIndexY][MouseIndexX].isWet = true;
 			checkHacked();
+			PLAYER->setWaterAmount(PLAYER->getWaterAmount()-2);
+		}
+	}
+}
+
+void inGameScene::fillWater()
+{
+	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].objType==OTY_WELL)
+	{
+		
+		PLAYER->setState(FILLWATER);
+		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
+				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
+		{
+			PLAYER->setWaterAmount(34);
+			
 		}
 	}
 }
@@ -1638,7 +1659,6 @@ void inGameScene::getItem(tagItem item)
 			}
 		}
 	}
-	
 }
 
 void inGameScene::dropFruit(tagTile tile, SEED seedType)
