@@ -65,18 +65,25 @@ void shop::release()
 void shop::update()
 {
 	_inven->update();
+
 	sell();
 	buy();
 	shop_scroll();
-	if (PtInRect(&rc_exit, _ptMouse))
-	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
-		{
-			_isClose = true;
-		}
-	}
-	else _isClose = false;
 
+	if (!is_click)
+	{
+		if (PtInRect(&rc_exit, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isClose = true;
+				is_click = false;
+			}
+		}
+		else _isClose = false;
+	}
+	
+	
 }
 
 void shop::render()
@@ -130,7 +137,6 @@ void shop::render()
 			IMAGEMANAGER->findImage("µ·¼ýÀÚ")->frameRender(getMemDC(), 250 - (17 * count), 365, print_money, 0);
 			money = money / 10;
 			count++;
-			cout << "money : " << money << "\t print money : " << print_money << "\t count : " << count << "\n";
 		}
 	}
 	}
@@ -289,29 +295,14 @@ void shop::render()
 
 	if (is_click)
 	{
-		if (_vItem[click_index].isFrame)
+		if (buy_count > 0)
 		{
 			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
-			if (buy_count > 0)
-			{
-				char str[64];
-				wsprintf(str, "%d", buy_count);
-				textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
-			}
-		}
-		else
-		{
-			/*_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
-			if (buy_count > 0)
-			{
-				char str[64];
-				wsprintf(str, "%d", buy_count);
-				textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
-			}*/	
+			char str[64];
+			wsprintf(str, "%d", buy_count);
+			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
 		}
 	}
-	
-
 }
 
 void shop::sell()
@@ -353,7 +344,7 @@ void shop::buy()
 					if (_vItem[click_index].buy_price > PLAYER->getMoney())
 					{
 						buyFail = true;
-						if (is_click = true) continue;
+						if (is_click == true) continue;
 						is_click = false;
 					}
 					else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
@@ -394,7 +385,7 @@ void shop::buy()
 					}
 				}
 			}
-			else if((*_vInven)[i].item_image == _vItem[click_index].item_image)
+			else if((*_vInven)[i].item_info == _vItem[click_index].item_info)
 			{
 				if (is_click)
 				{
