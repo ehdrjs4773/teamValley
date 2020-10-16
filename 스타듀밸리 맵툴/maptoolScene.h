@@ -24,6 +24,9 @@ private:
 	RECT _rcWinter;
 	RECT _rcobjectDelete;
 	RECT _rcObject2;
+	RECT _rcMineTerrain;
+	RECT _rcMineObject;
+	RECT _rc5050;
 
 	RECT horScroll;
 	RECT vertScroll;
