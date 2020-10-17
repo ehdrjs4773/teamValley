@@ -19,6 +19,7 @@ private:
 	DAYOFWEEK day;
 	SEASON currentSeason;
 	WEATHER currentWeather;
+	float darkAlpha;
 
 	float centerX, centerY;
 	int currentX, currentY;
@@ -29,8 +30,6 @@ private:
 	int playerHp;
 	int hpBarX;
 	int axDamage, pickaxDamage, hoeDamage;
-
-
 
 	int boxCount;
 	int boxIndex;
@@ -132,6 +131,8 @@ public:
 	void setCurrentMap();
 
 	void countTime();
+	void resetClock();
+	void getDark();
 	
 	SEASON getSeason() { return currentSeason; }
 	WEATHER getWeather() { return currentWeather; }

@@ -5,6 +5,7 @@
 class mineScene : public gameNode
 {
 private:
+	tagTile _tile[TILEY][TILEX];
 	int currentFloor;
 
 
@@ -15,7 +16,6 @@ public:
 	void render();
 
 	void playerMove();
-
-
+	void setRandomObstacles();
 };
 

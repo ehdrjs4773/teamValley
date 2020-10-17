@@ -49,8 +49,7 @@ void inHouseScene::render()
 	IMAGEMANAGER->render("플레이어 이불덮기", CAMERAMANAGER->getMemDC());
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventoryRender(getMemDC());
-	PLAYER->hpBarRender(getMemDC());
+	PLAYER->playerStatusRender(getMemDC());
 
 	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
 	{
@@ -83,6 +82,7 @@ void inHouseScene::render()
 						{
 							SWITCHMANAGER->startFade(855.0f, 865.0f);
 						}
+						PLAYER->resetClock();
 						isShowSleepingOption = false;
 					}
 				}

@@ -173,17 +173,17 @@ void maptoolScene::update()
 		}
 	}
 
-	for (int i = 0; i < sampleTileMaxFrameY; i++)
-	{
-		for (int j = 0; j < sampleTileMaxFrameX; j++)
-		{
-			if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
-			{
-				std::cout << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY 
-					<< "\t" << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX << std::endl;
-			}
-		}
-	}
+	//for (int i = 0; i < sampleTileMaxFrameY; i++)
+	//{
+	//	for (int j = 0; j < sampleTileMaxFrameX; j++)
+	//	{
+	//		if (PtInRect(&_sampleTile[i][j].rc, _ptMouse))
+	//		{
+	//			std::cout << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameY 
+	//				<< "\t" << _sampleTile[i + sampleTileY][j + sampleTileX].terrainFrameX << std::endl;
+	//		}
+	//	}
+	//}
 }
 
 void maptoolScene::render()

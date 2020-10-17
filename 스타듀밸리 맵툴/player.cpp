@@ -62,6 +62,7 @@ HRESULT player::init()
 	day = MON;
 	arrowAngle = 18;
 	blinkCount = 0;
+	darkAlpha = .0f;
 
 	return S_OK;
 }
@@ -98,6 +99,11 @@ void  player::update()
 		currentSeason = (SEASON)(currentSeason + 1);
 		currentWeather = (WEATHER)(currentWeather + 1);
 	}
+	if (INPUT->GetKey('N'))
+	{
+		darkAlpha += 0.47222;
+		cout << darkAlpha << endl;
+	}
 
 	//플레이어 현재 맵 체크
 	setCurrentMap();
@@ -121,7 +127,6 @@ void  player::update()
 	{
 		countTime();
 	}
-
 }
 
 void player::render()
@@ -801,6 +806,10 @@ void player::setCurrentMap()
 	{
 		currentMap = MAP_HOUSE;
 	}
+	else if (SWITCHMANAGER->getCurrentScene() == "광산화면")
+	{
+		currentMap = MAP_MINE;
+	}
 }
 
 void player::countTime()
@@ -809,6 +818,18 @@ void player::countTime()
 	if (timeCount % 120 == 0)
 	{
 		minute++;
+		if (hour > 17 || hour < 4)
+		{
+			darkAlpha += 0.47222;
+			if (darkAlpha > 180)
+			{
+				darkAlpha = 180;
+			}
+		}
+		else
+		{
+			darkAlpha = 0;
+		}
 		if (minute >= 60)
 		{
 			hour += 1;
@@ -835,6 +856,16 @@ void player::countTime()
 	{
 		day = (DAYOFWEEK)0;
 	}
+}
+
+void player::resetClock()
+{
+	date++;
+	hour < 24 ? day = (DAYOFWEEK)(day + 1) : day = day;
+	hour = 6;
+	minute = 0;
+	currentWeather = (WEATHER)RANDOM->range(5);
+	darkAlpha = .0f;
 }
 
 void player::clockRender(HDC hdc)
@@ -929,14 +960,15 @@ void player::moneyRender(HDC hdc)
 
 void player::arrowRender(HDC hdc)
 {
-	if (hour < 6)
+	hour < 6 ? arrowAngle = 0 : arrowAngle = 18 - (hour - 6);
+	/*if (hour < 6)
 	{
 		arrowAngle = 0;
 	}
 	else
 	{
 		arrowAngle = 18 - (hour - 6);
-	}
+	}*/
 
 	IMAGEMANAGER->frameRender("시계바늘", hdc, 984, 14, arrowAngle, 0);
 }
@@ -945,4 +977,9 @@ void player::weatherRender(HDC hdc)
 {
 	IMAGEMANAGER->frameRender("날씨", hdc, 1061, 64, 0, currentSeason);
 	IMAGEMANAGER->frameRender("계절", hdc, 1127, 64, 0, currentWeather);
+
+	if (currentMap != MAP_MINE)
+	{
+		IMAGEMANAGER->alphaRender("페이드", hdc, 0, 0, darkAlpha);
+	}
 }

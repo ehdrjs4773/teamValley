@@ -27,8 +27,8 @@ void mineScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
-	PLAYER->InventoryRender(getMemDC());
-	PLAYER->hpBarRender(getMemDC());
+
+	PLAYER->playerStatusRender(getMemDC());
 }
 
 void mineScene::playerMove()
@@ -72,5 +72,60 @@ void mineScene::playerMove()
 	if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))
 	{
 		PLAYER->setState(STAND);
+	}
+}
+
+void mineScene::setRandomObstacles()
+{
+	for (int i = 0; i < 50; i++)
+	{
+		for (int j = 0; j < 50; j++)
+		{
+			if (_tile[i][j].obj != OBJ_NONE) { continue; }
+			if (RANDOM->range(20) == 0)
+			{
+				switch (RANDOM->range(6))
+				{
+				case 0:
+					_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+					_tile[i][j].objType = OTY_STONE;
+					switch (RANDOM->range(4))
+					{
+					case 0:
+						_tile[i][j].objFrameX = 2;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 1:
+						_tile[i][j].objFrameX = 3;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 2:
+						_tile[i][j].objFrameX = 4;
+						_tile[i][j].objFrameY = 0;
+						break;
+					case 3:
+						_tile[i][j].objFrameX = 5;
+						_tile[i][j].objFrameY = 0;
+						break;
+					}
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					
+					break;
+				case 5:
+
+					break;
+				}
+			}
+		}
 	}
 }
