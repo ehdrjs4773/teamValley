@@ -11,6 +11,8 @@ HRESULT player::init()
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
 
+	playerHoldItem = RectMakeCenter(centerX - 8, centerY - 48, 16, 16);
+
 	playerHp = 276;
 	pickaxDamage,axDamage,hoeDamage = 2;
 
@@ -83,6 +85,7 @@ void  player::update()
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);
+
 			}
 			else
 			{
@@ -119,14 +122,20 @@ void  player::update()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	rc = RectMakeCenter(centerX, centerY, 16, 32);
+	
+
+
+	//rc = RectMakeCenter(centerX, centerY, 16, 32);
 	_inventory->update();
 	playerInvenCoverAnimation();
 
 	if (!isShowInventory)
 	{
 		countTime();
+		
 	}
+
+
 }
 
 void player::render()
@@ -137,7 +146,26 @@ void player::render()
 	{
 		stock->render();
 	}
+
+
 }
+
+void player::playerCarryItem(HDC hdc)
+{
+	if (!isShowInventory && !isOpenPlayerStorageCover)
+	{
+		playerHoldItem = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 45, 40, 40);
+
+		if (getCurrentInven()->item_kind == ITEM_SEED && getCurrentInven()->seedKind != SEED_RANDOM)
+		{
+			getCurrentInven()->item_image->frameRender(hdc, playerHoldItem.left, playerHoldItem.top, getCurrentInven()->indexX, getCurrentInven()->indexY);
+
+		}
+	}
+	
+	//Rectangle(hdc, playerHoldItem);
+}
+
 
 void player::playerStatusRender(HDC hdc)
 {
@@ -552,7 +580,56 @@ void player::playerAnimation()
 			break;
 		}
 		break;
+	case CARRY:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 4)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % 5 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;
+	case CARRYSTAND:
+		index = 0;
+		break;
 	}
+
 }
 
 void player::drawPlayerInven(tagTile tile1, tagTile tile2)
@@ -761,6 +838,23 @@ void player::playerRender()
 			break;
 		}
 		break;
+	case CARRYSTAND:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 22);
+			break;
+		case LEFT:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 21);
+			break;
+		case UP:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 23);
+			break;
+		case DOWN:
+			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 20);
+			break;
+		}
+
 	}
 }
 

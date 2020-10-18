@@ -10,6 +10,7 @@ private:
 	RECT rc;
 	RECT frontHpBar;
 	RECT playerInven;
+	RECT playerHoldItem;
 
 	Stock* stock;
 	MAP currentMap;
@@ -113,7 +114,7 @@ public:
 
 	STATE getState() { return _pState; }
 	void setState(STATE state) {
-		if (state != RUN)
+		if (state != RUN && state!=CARRY)
 		{
 			index = 0;
 		}
@@ -127,6 +128,7 @@ public:
 	void drawPlayerInven(tagTile tile1, tagTile tile2);
 	void openPlayerInvenCover();
 	void openPlayerStorageCover();
+	void playerCarryItem(HDC hdc);
 
 	void setCurrentMap();
 

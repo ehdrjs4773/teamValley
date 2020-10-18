@@ -52,7 +52,7 @@ void inGameScene::update()
 
 	checkPlayerTile();
 
-	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN)
+	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN||PLAYER->getState()==CARRY||PLAYER->getState()==CARRYSTAND)
 	{
 		playerMove();
 	}
@@ -132,6 +132,11 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+
+
+	PLAYER->playerCarryItem(getMemDC());
+	
+
 }
 
 void inGameScene::load()
@@ -374,13 +379,21 @@ void inGameScene::playerMove()
 			if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 			{
 				if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].objType == OTY_GRASS
-					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED &&
-						_tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN
+					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED
+						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
 				{
 					PLAYER->setDirection(RIGHT);
-					PLAYER->setState(RUN);
+
+					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+					{
+						PLAYER->setState(CARRY);
+					}
+					else
+					{
+						PLAYER->setState(RUN);
+					}
 					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 				}
 			}
@@ -392,14 +405,21 @@ void inGameScene::playerMove()
 			if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 			{
 				if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].objType == OTY_GRASS
-					|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED &&
-						_tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
+					|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED
+						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
 				{
-
 					PLAYER->setDirection(LEFT);
-					PLAYER->setState(RUN);
+
+					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+					{
+						PLAYER->setState(CARRY);
+					}
+					else
+					{
+						PLAYER->setState(RUN);
+					}
 					PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 				}
 			}
@@ -411,14 +431,21 @@ void inGameScene::playerMove()
 			if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 			{
 				if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].objType == OTY_GRASS
-					|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED &&
-						_tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
+					|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED
+						&& _tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
 						&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
 						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
 				{
-
 					PLAYER->setDirection(UP);
-					PLAYER->setState(RUN);
+
+					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+					{
+						PLAYER->setState(CARRY);
+					}
+					else
+					{
+						PLAYER->setState(RUN);
+					}
 					PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
 				}
 			}
@@ -430,14 +457,21 @@ void inGameScene::playerMove()
 			if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 			{
 				if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].objType == OTY_GRASS
-					|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED &&
-						_tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
+					|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED
+						&& _tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
 						&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
 						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
 				{
-
 					PLAYER->setDirection(DOWN);
-					PLAYER->setState(RUN);
+
+					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+					{
+						PLAYER->setState(CARRY);
+					}
+					else
+					{
+						PLAYER->setState(RUN);
+					}
 					PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
 				}
 			}
@@ -448,6 +482,12 @@ void inGameScene::playerMove()
 			{
 				PLAYER->setIndex(0);
 				PLAYER->setState(STAND);
+			}
+			else if (PLAYER->getState() == CARRY)
+			{
+				PLAYER->setIndex(0);
+				PLAYER->setState(CARRYSTAND);
+
 			}
 		}
 	}
@@ -503,7 +543,7 @@ void inGameScene::playerInteraction()
 		{
 			PLAYER->setDirection(RIGHT);
 		}
-		if (PLAYER->getState() == RUN || PLAYER->getState() == STAND)
+		if (PLAYER->getState() == RUN || PLAYER->getState() == STAND || PLAYER->getState()==CARRYSTAND)
 		{
 			//밭 갈기
 			hackGround();
@@ -915,6 +955,9 @@ void inGameScene::plantSeed()
 	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED && !(PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
 		&& _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
+		
+		PLAYER->setState(CARRYSTAND);
+	
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
