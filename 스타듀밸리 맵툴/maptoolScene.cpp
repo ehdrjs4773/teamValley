@@ -1896,10 +1896,16 @@ void maptoolScene::showControlButton()
 	IMAGEMANAGER->findImage("건물버튼")->render(getMemDC(), _rcObject2.left, _rcObject2.top);
 	Rectangle(getMemDC(), _rcMineTerrain);
 	Rectangle(getMemDC(), _rcMineObject);
-	Rectangle(getMemDC(), _rcMineNormal);
-	Rectangle(getMemDC(), _rcMineNormalDark);
-	Rectangle(getMemDC(), _rcMineFrost);
-	Rectangle(getMemDC(), _rcMineFrostDark);
+	IMAGEMANAGER->findImage("광산지형버튼")->render(getMemDC(), _rcMineTerrain.left, _rcMineTerrain.top);
+	IMAGEMANAGER->findImage("광산오브젝트버튼")->render(getMemDC(), _rcMineObject.left, _rcMineObject.top);
+	//Rectangle(getMemDC(), _rcMineNormal);
+	//Rectangle(getMemDC(), _rcMineNormalDark);
+	//Rectangle(getMemDC(), _rcMineFrost);
+	//Rectangle(getMemDC(), _rcMineFrostDark);
+	IMAGEMANAGER->findImage("노말버튼")->render(getMemDC(), _rcMineNormal.left, _rcMineNormal.top);
+	IMAGEMANAGER->findImage("노말다크버튼")->render(getMemDC(), _rcMineNormalDark.left, _rcMineNormalDark.top);
+	IMAGEMANAGER->findImage("프로스트버튼")->render(getMemDC(), _rcMineFrost.left, _rcMineFrost.top);
+	IMAGEMANAGER->findImage("프로스트다크버튼")->render(getMemDC(), _rcMineFrostDark.left, _rcMineFrostDark.top);
 
 	if (isSelectSeason)
 	{

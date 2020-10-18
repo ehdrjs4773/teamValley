@@ -74,6 +74,12 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("여름", "Images/summer.bmp", 50, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("가을", "Images/fall.bmp", 50, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("겨울", "Images/winter.bmp", 50, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("노말버튼", "Images/노말.bmp", 50, 25);
+	IMAGEMANAGER->addImage("노말다크버튼", "Images/노말다크.bmp", 50, 25);
+	IMAGEMANAGER->addImage("프로스트버튼", "Images/프로스트.bmp", 50, 25);
+	IMAGEMANAGER->addImage("프로스트다크버튼", "Images/프로스트다크.bmp", 50, 25);
+	IMAGEMANAGER->addImage("광산지형버튼", "Images/광산지형.bmp", 100, 50);
+	IMAGEMANAGER->addImage("광산오브젝트버튼", "Images/광산오브젝트.bmp", 100, 50);
 
 	IMAGEMANAGER->addImage("인벤토리_아이템", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
