@@ -945,7 +945,10 @@ void inGameScene::waterGround()
 		{
 			_tile[MouseIndexY][MouseIndexX].isWet = true;
 			checkHacked();
+			if(PLAYER->getWaterAmount()>=0)
+			{ 
 			PLAYER->setWaterAmount(PLAYER->getWaterAmount()-2);
+			}
 		}
 	}
 }

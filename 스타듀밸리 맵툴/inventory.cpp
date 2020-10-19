@@ -83,6 +83,10 @@ void inventory::update()
 		for (int i = 0; i < _vStorageItem.size(); i++) //Ã¢°í 
 		{
 			_vStorageItem[i].rc = RectMake(301 + 46 * (i % 12), 69 + 50 * (i / 12), 40, 40);
+			if (_vStorageItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_vStorageItem[i].rc.left + 3, _vStorageItem[i].rc.bottom - 7, waterAmount, 4);
+			}
 		}
 	}
 	else if (_isInvenPage)
