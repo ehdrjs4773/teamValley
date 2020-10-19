@@ -451,6 +451,15 @@ void inventory::renderStorageInventory(HDC hdc)
 				}
 			}
 		}
+		if (_vStorageItem[i].toolKind == TOOL_KETTLE)
+		{
+			_kettleBar = RectMake(_vStorageItem[i].rc.left + 3, _vStorageItem[i].rc.bottom - 7, waterAmount, 4);
+
+			brush = CreateSolidBrush(RGB(40, 140, 230));
+			FillRect(hdc, &_kettleBar, brush);
+			DeleteObject(brush);
+
+		}
 	}
 
 	//캐릭터의 창고에 있는 인벤36칸
