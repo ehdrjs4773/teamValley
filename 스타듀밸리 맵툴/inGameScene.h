@@ -80,7 +80,7 @@ public:
 	void changeGrass();
 
 	void setCurrentSlotNumber(int mouseWheel);
-
+	TERRAIN terrainSelect(int frameX, int frameY);
 	static INT_PTR CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };
 

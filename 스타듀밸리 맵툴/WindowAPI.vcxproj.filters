@@ -225,9 +225,6 @@
     <ClInclude Include="singletonBase.h">
       <Filter>GameFramework\매니져</Filter>
     </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>GameFramework\매니져</Filter>
-    </ClInclude>
     <ClInclude Include="random.h">
       <Filter>GameFramework\유틸</Filter>
     </ClInclude>
@@ -323,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="mineScene.h">
       <Filter>광산씬</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>GameFramework\유틸</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
