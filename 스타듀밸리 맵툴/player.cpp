@@ -30,8 +30,6 @@ HRESULT player::init()
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
-
-
 	playerStorage = IMAGEMANAGER->findImage("플레이어 창고");
 
 	_inventory = new inventory;
@@ -964,6 +962,32 @@ void player::resetClock()
 	minute = 0;
 	currentWeather = (WEATHER)RANDOM->range(5);
 	darkAlpha = .0f;
+}
+
+player player::getPlayerData()
+{
+	player p;
+	p.rc = rc;
+	p.frontHpBar = frontHpBar;
+	p.playerInven = playerInven;
+	p.playerHoldItem = playerHoldItem;
+	p.stock = stock;
+	p.currentMap = currentMap;
+	p.date = date;
+	p.money = money;
+	p.year = year;
+	p.day = day;
+	p.currentSeason = currentSeason;
+	p.currentWeather = currentWeather;
+	p.darkAlpha = darkAlpha;
+	p._inventory = _inventory;
+
+
+	return p;
+}
+
+void player::setPlayerData()
+{
 }
 
 void player::clockRender(HDC hdc)

@@ -150,6 +150,9 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("시계바늘", "Images/시계/시계바늘180도.bmp", 1330, 120, 19, 1);
 	IMAGEMANAGER->addFrameImage("돈숫자", "Images/시계/돈 숫자.bmp", 140, 20, 10, 1);
 	IMAGEMANAGER->addImage("시계", "Images/시계/시계.bmp", 200, 158);
+
+	//마우스 커서
+	IMAGEMANAGER->addFrameImage("커서", "Images/마우스커서.bmp", 144, 96, 3, 2);
 }
 
 void loadingScene::loadingSound()

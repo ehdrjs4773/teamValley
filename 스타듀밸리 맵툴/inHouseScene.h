@@ -13,6 +13,9 @@ private:
 	int checkCount;
 
 	bool isShowSleepingOption;
+
+	TCHAR saveName[MAX_PATH];
+
 public:
 	HRESULT init();
 	void release();
@@ -21,6 +24,9 @@ public:
 
 	void playerMove();
 
+
+	void savePlayer();
+	void load();
 
 };
 

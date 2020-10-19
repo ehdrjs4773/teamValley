@@ -10,11 +10,15 @@ private :
 	RECT _mapRc;
 	RECT _exitRc;
 	int frameY[4]; 
+	TCHAR saveName[MAX_PATH];
 
 public :
 	HRESULT init();
 	void release();
 	void update();
 	void render();
+
+	void load();
+
 };
 

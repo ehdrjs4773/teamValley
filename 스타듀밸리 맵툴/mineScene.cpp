@@ -21,10 +21,17 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	if (INPUT->GetKeyDown(VK_F2))
+	{
+		setRandomObstacles();
+	}
+
 	checkCurrentTile();
+	ejectItem();
 
 	PLAYER->update();
 	PLAYER->playerAnimation();
+	playerMove();
 }
 
 void mineScene::render()
@@ -78,6 +85,10 @@ void mineScene::renderObject(int i, int j)
 	if (currentFloor > 5 && currentFloor <= 10) { str = "광산오브젝트 노말다크"; }
 	if (currentFloor > 10 && currentFloor <= 15) { str = "광산오브젝트 프로스트"; }
 	if (currentFloor > 15 && currentFloor <= 20) { str = "광산오브젝트 프로스트다크"; }
+	if (_tile[i][j].objType == OTY_ORE)
+	{
+		str = "광물";
+	}
 	IMAGEMANAGER->frameRender(str, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, _tile[i][j].objFrameY);
 }
 
@@ -190,10 +201,10 @@ void mineScene::setRandomObstacles()
 	{
 		for (int j = 0; j < 50; j++)
 		{
-			if (_tile[i][j].obj != OBJ_NONE) { continue; }
+			if (_tile[i][j].obj != OBJ_NONE || (i == PLAYER->getCurrentY() && j == PLAYER->getCurrentX())) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
-				switch (RANDOM->range(3))
+				switch (RANDOM->range(5))
 				{
 				case 0:
 					setStone(i, j);
@@ -202,7 +213,13 @@ void mineScene::setRandomObstacles()
 					setStone(i, j);
 					break;
 				case 2:
+					setStone(i, j);
+					break;
+				case 3:
 					setWeed(i, j);
+					break;
+				case 4:
+					setOre(i, j);
 					break;
 				}
 			}
@@ -268,6 +285,49 @@ void mineScene::setWeed(int i, int j)
 	}
 }
 
+void mineScene::setOre(int i, int j)
+{
+	_tile[i][j].obj = OBJ_DESTRUCTIBLE;
+	_tile[i][j].objType = OTY_ORE;
+	if (currentFloor > 0 && currentFloor <= 3)
+	{
+		_tile[i][j].objFrameX = 6;
+		_tile[i][j].objFrameY = 0;
+	}
+	if (currentFloor > 3 && currentFloor <= 6)
+	{
+		switch (RANDOM->range(2))
+		{
+		case 0:
+			_tile[i][j].objFrameX = 6;
+			_tile[i][j].objFrameY = 0;
+			break;
+		case 1:
+			_tile[i][j].objFrameX = 7;
+			_tile[i][j].objFrameY = 0;
+			break;
+		}
+	}
+	if (currentFloor > 6 && currentFloor <= 10)
+	{
+		switch (RANDOM->range(3))
+		{
+		case 0:
+			_tile[i][j].objFrameX = 6;
+			_tile[i][j].objFrameY = 0;
+			break;
+		case 1:
+			_tile[i][j].objFrameX = 7;
+			_tile[i][j].objFrameY = 0;
+			break;
+		case 2:
+			_tile[i][j].objFrameX = 8;
+			_tile[i][j].objFrameY = 0;
+			break;
+		}
+	}
+}
+
 void mineScene::playerInteraction()
 {
 	if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -311,9 +371,35 @@ void mineScene::breakStone()
 		{
 			if (_tile[mouseIndexY][mouseIndexX].objType == OTY_STONE)
 			{
-				dropItem(_tile[mouseIndexY][mouseIndexX], "돌");
+				const char* str = {};
+				int number = 0;
+				RANDOM->range(3) == 0 ? str = "석탄" : str = "돌";
+				RANDOM->range(2) == 0 ? number = 3 : RANDOM->range(2) == 0 ? number = 2 : number = 4;
+
+				for (int i = 0; i < number; i++)
+				{
+					dropItem(_tile[mouseIndexY][mouseIndexX], str);
+				}
 				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
 				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
+			}
+			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
+			{
+				const char* str = {};
+				int number = 0;
+
+				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 6) { str = "구리조각"; }
+				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 7) { str = "철조각"; }
+				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 8) { str = "금조각"; }
+				
+				RANDOM->range(2) == 0 ? number = 3 : RANDOM->range(2) == 0 ? number = 2 : number = 4;
+					
+				for (int i = 0; i < number; i++)
+				{
+					dropItem(_tile[mouseIndexY][mouseIndexX], str);
+				}
+				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
+				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;	
 			}
 		}
 	}

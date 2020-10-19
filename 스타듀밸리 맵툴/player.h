@@ -43,9 +43,6 @@ private:
 	HBRUSH brush;		
 	HBRUSH oBrush;
 
-	tagTile _tile[TILEY][TILEX];
-	OBJ_TYPE objType;
-
 	STATE _pState;
 	DIRECTION _pDirection;
 	TOOL _pTool;
@@ -124,7 +121,6 @@ public:
 	void playerRender();
 	void playerInvenAnimation();
 	void playerInvenCoverAnimation();
-	void drawPlayerInven(tagTile tile1, tagTile tile2);
 	void openPlayerInvenCover();
 	void openPlayerStorageCover();
 	void playerCarryItem(HDC hdc);
@@ -133,7 +129,6 @@ public:
 
 	void countTime();
 	void resetClock();
-	void getDark();
 	
 	SEASON getSeason() { return currentSeason; }
 	WEATHER getWeather() { return currentWeather; }
@@ -143,5 +138,8 @@ public:
 	int getMoney() { return money; }
 	int getDate() { return date; }
 	DAYOFWEEK getDay() { return day; }
+
+	player getPlayerData();
+	void setPlayerData();
 };
 

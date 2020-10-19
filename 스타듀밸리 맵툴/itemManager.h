@@ -18,6 +18,7 @@ public:
 	void addFruit();
 	void addObject();
 	void addSkill();
+	void addOre();
 
 	//아이템 추가하는 함수
 	void addItem(
@@ -79,6 +80,16 @@ public:
 		const char* strKey,
 		ITEM _itemKind,
 		bool _isFrame,
+		const char* _itemInfo = " ",
+		int _buyPrice = 0,
+		int _sellPrice = 0);
+
+	void addOre(
+		const char* strKey,
+		ITEM _itemKind,
+		bool _isFrame,
+		int _indexX,
+		int _indexY,
 		const char* _itemInfo = " ",
 		int _buyPrice = 0,
 		int _sellPrice = 0);

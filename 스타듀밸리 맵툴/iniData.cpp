@@ -23,6 +23,24 @@ void iniData::addData(const char * section, const char * key, const char * value
 	_vIniData.push_back(data);
 }
 
+void iniData::saveINI()
+{
+	char str[256];
+	char dir[256];
+	ZeroMemory(str, sizeof(str));
+	ZeroMemory(dir, sizeof(dir));
+	//char test[256] = { 0 }; //이렇게 초기화 하는 방법도 있음
+	sprintf(str, "\save/playerData.ini");
+	GetCurrentDirectory(256, dir);
+	//D:\플밍 22기\20200908_0_INI데이터\WindowAPI
+	strcat(dir, str); //문자열 연결 D:\플밍 22기\20200908_0_INI데이터\WindowAPI\fileName.ini
+
+	for (int i = 0; i < _vIniData.size(); i++)
+	{
+		WritePrivateProfileString(_vIniData[i].section, _vIniData[i].key, _vIniData[i].value, dir);
+	}
+}
+
 //데이터 세이브하기
 void iniData::saveINI(const char * fileName)
 {
@@ -31,7 +49,7 @@ void iniData::saveINI(const char * fileName)
 	ZeroMemory(str, sizeof(str));
 	ZeroMemory(dir, sizeof(dir));
 	//char test[256] = { 0 }; //이렇게 초기화 하는 방법도 있음
-	sprintf(str, "\\%s.ini", fileName);
+	sprintf(str, "\\s.ini", fileName);
 	GetCurrentDirectory(256, dir);
 	//D:\플밍 22기\20200908_0_INI데이터\WindowAPI
 	strcat(dir, str); //문자열 연결 D:\플밍 22기\20200908_0_INI데이터\WindowAPI\fileName.ini
