@@ -118,22 +118,28 @@ void shop::render()
 		if (_vInven->at(i).isFrame)
 		{
 			_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
-			if (_vInven->at(i).amount >= 0)
+			if (_vInven->at(i).item_kind != ITEM_TOOL)
 			{
-				char str[64];
-				wsprintf(str, "%d", _vInven->at(i).amount);
-				textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+				if (_vInven->at(i).amount >= 0)
+				{
+					char str[64];
+					wsprintf(str, "%d", _vInven->at(i).amount);
+					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+				}
 			}
 		}
 		else
 		{
 			_vInven->at(i).item_image->render(getMemDC(), playerItem[i].left, playerItem[i].top);
-			if (_vInven->at(i).amount >= 0)
+			if (_vInven->at(i).item_kind != ITEM_TOOL)
 			{
-				char str[64];
-				wsprintf(str, "%d", _vInven->at(i).amount);
+				if (_vInven->at(i).amount >= 0)
+				{
+					char str[64];
+					wsprintf(str, "%d", _vInven->at(i).amount);
 
-				textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+				}
 			}
 		}
 	
