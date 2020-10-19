@@ -154,12 +154,21 @@ void player::playerCarryItem(HDC hdc)
 {
 	if (!isShowInventory && !isOpenPlayerStorageCover)
 	{
-		playerHoldItem = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 45, 40, 40);
+		playerHoldItem = RectMakeCenter(centerX, centerY - 18, 16, 16);
 
 		if (getCurrentInven()->item_kind == ITEM_SEED && getCurrentInven()->seedKind != SEED_RANDOM)
 		{
-			getCurrentInven()->item_image->frameRender(hdc, playerHoldItem.left, playerHoldItem.top, getCurrentInven()->indexX, getCurrentInven()->indexY);
-
+			if (getCurrentInven()->seedKind == SEED_PINETREE || getCurrentInven()->seedKind == SEED_MAPLETREE || getCurrentInven()->seedKind == SEED_OAKTREE)
+			{
+				IMAGEMANAGER->findImage("¿­¸Å(¶¥)")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+					getCurrentInven()->indexX, getCurrentInven()->indexY);
+			}
+			else
+			{
+				IMAGEMANAGER->findImage("¾¾¾Ñhold")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+					getCurrentInven()->indexX, getCurrentInven()->indexY);
+			}
+			
 		}
 	}
 	

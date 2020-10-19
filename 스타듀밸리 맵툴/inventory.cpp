@@ -289,12 +289,6 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 
 	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
 
-
-
-
-
-
-
 }  // 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 
 void inventory::invenToryRender(HDC hdc) // 밑에 뜨게 하는 인벤토리 (위에꺼 배고 다른걸 다 이거로 처리하면 편하잖아-_ -);
