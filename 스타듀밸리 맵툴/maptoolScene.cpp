@@ -2154,7 +2154,10 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 {
 	if (_ctrlSelect != CTRL_MINETERRAIN)
 	{
-		if ((frameX == 1 && frameY == 1) || (frameX == 31 && (frameY == 0 || frameY == 1)))
+		if ((frameX == 1 && frameY == 1) || (frameX == 31 && (frameY == 0 || frameY == 1))
+			|| ((frameX == 1 || 2) && frameY == 3) || (frameX == 3 && frameY == 0)
+			|| (frameX == 5 && frameY == 0) || (frameX == 7 && frameY == 1)
+			|| (frameX == 6 && frameY == 2))
 		{
 			return TR_SOIL;
 		}
@@ -2175,7 +2178,6 @@ TERRAIN maptoolScene::terrainSelect(int frameX, int frameY)
 	{
 		return TR_GROUND;
 	}
-	
 }
 
 OBJECT maptoolScene::objectSelect(int frameX, int frameY)

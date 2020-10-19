@@ -34,6 +34,14 @@ HRESULT inGameScene::init()
 			_tile[20][50].portal = PT_SHOP;
 	}
 
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+		}
+	}
+
 	return S_OK;
 }
 
@@ -621,7 +629,7 @@ void inGameScene::hackGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE && _tile[MouseIndexY][MouseIndexX].terrain == TR_SOIL)
 			{
 				_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
@@ -2471,6 +2479,30 @@ void inGameScene::setCurrentSlotNumber(int mouseWheel)
 		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
 		_mouseWheel = 0;
 	}
+}
+
+TERRAIN inGameScene::terrainSelect(int frameX, int frameY)
+{
+	if ((frameX == 1 && frameY == 1) || (frameX == 7 && frameY == 0)
+		|| ((frameX == 1 || frameX == 2) && frameY == 3) || (frameX == 3 && frameY == 0)
+		|| (frameX == 5 && frameY == 0) || (frameX == 7 && frameY == 1)
+		|| (frameX == 6 && frameY == 2) || (frameX == 1 && frameY == 1)
+		|| (frameX == 0 && (frameY >= 15 && frameY <= 17)))
+	{
+		return TR_SOIL;
+	}
+	//물
+	if ((frameX == 7 || frameX == 8 || frameX == 9 || frameX == 10) && frameY == 6)
+	{
+		return TR_WATER;
+	}
+	//경작지
+	if ((frameX == 20 && frameY == 12) || (frameX == 20 && frameY == 14))
+	{
+		return TR_HACKED;
+	}
+	//기타
+	return TR_GROUND;
 }
 
 INT_PTR inGameScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
