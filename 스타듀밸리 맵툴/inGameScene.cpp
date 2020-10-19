@@ -1705,7 +1705,7 @@ void inGameScene::getItem(tagItem item)
 
 void inGameScene::dropFruit(tagTile tile, SEED seedType)
 {
-	const char* str;
+	const char* str = nullptr;
 	switch (seedType)
 	{
 	case SEED_NONE:

@@ -3,7 +3,7 @@
 // 들어 있는 포함 파일입니다.
 //
 #pragma once
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <SDKDDKVer.h>
 
 //디버깅용 (주석치면 콘솔창이 사라진다)
