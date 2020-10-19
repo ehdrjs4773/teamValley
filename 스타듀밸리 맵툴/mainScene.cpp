@@ -40,7 +40,8 @@ void mainScene::update()
 			frameY[1] = 1;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				SCENEMANAGER->loadScene("인게임화면");
+				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->startFade(855.0f, 865.0f);
 			}
 		}
 		else frameY[1] = 0;
@@ -65,6 +66,7 @@ void mainScene::update()
 		}
 		else frameY[3] = 0;
 	
+		SWITCHMANAGER->fade();
 }
 
 void mainScene::render()
@@ -90,4 +92,14 @@ void mainScene::render()
 		Rectangle(getMemDC(), _exitRc);
 		
 	}
+}
+
+void mainScene::load()
+{
+	HANDLE file;
+	DWORD read;
+	sprintf(saveName, "save/playerData.data");
+	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, saveName, sizeof(saveName), &read, NULL);
+	CloseHandle(file);
 }

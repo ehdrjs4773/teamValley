@@ -28,10 +28,10 @@ HRESULT inGameScene::init()
 		checkPlayerTile();
 		loadCount = 1;
 
-			_tile[56][26].portal = PT_HOUSE;
-			_tile[69][37].portal = PT_BARN;
-			//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
-			_tile[20][50].portal = PT_SHOP;
+		_tile[56][26].portal = PT_HOUSE;
+		_tile[69][37].portal = PT_BARN;
+		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
+		_tile[20][50].portal = PT_SHOP;
 	}
 
 	for (int i = 0; i < TILEY; i++)
@@ -140,15 +140,18 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+
+	
 }
 
 void inGameScene::load()
 {
-	DialogBox(_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), _hWnd, inGameScene::DlgProc);
+	//DialogBox(_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), _hWnd, inGameScene::DlgProc);
 
 	HANDLE file;
 	DWORD read;
 
+	sprintf(saveName, "save/save.map");
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
@@ -2249,7 +2252,8 @@ void inGameScene::setRandomObstacles()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED) { continue; }
+			if (_tile[i][j].obj != OBJ_NONE || _tile[i][j].terrain == TR_HACKED
+				|| (i == PLAYER->getCurrentY() && j == PLAYER->getCurrentX())) { continue; }
 			if (RANDOM->range(20) == 0)
 			{
 				switch (RANDOM->range(6))
@@ -2510,7 +2514,7 @@ INT_PTR inGameScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			EndDialog(hWnd, IDOK);
 			return TRUE;
 		}
-		return FALSE;
+		return TRUE;
 	}
 	return FALSE;
 }

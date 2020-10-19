@@ -17,6 +17,8 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("Ææ½º", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ.bmp", 80, 40, 2, 1);
 	IMAGEMANAGER->addFrameImage("Ææ½º(¶¥)", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ(¶¥).bmp", 32, 16, 2, 1);
 	IMAGEMANAGER->addImage("½ºÅ³ºÏ", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("±¤¹°", "Images/BMP/±¤¹°.bmp", 256, 80, 16, 5);
+	IMAGEMANAGER->addFrameImage("±¤¹°¾ÆÀÌÅÛ", "Images/BMP/±¤¹°¾ÆÀÌÅÛ.bmp", 640, 200, 16, 5);
 
 	addSkill();
 	addSeed();
@@ -152,6 +154,14 @@ void itemManager::addSkill()
 	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "FIRE_BALL", 1000, 500);
 }
 
+void itemManager::addOre()
+{
+	addOre("±¤¹°", ITEM_ORE, true, 6, 3, "±¸¸®Á¶°¢");
+	addOre("±¤¹°", ITEM_ORE, true, 8, 3, "Ã¶Á¶°¢");
+	addOre("±¤¹°", ITEM_ORE, true, 10, 3, "¼®Åº");
+	addOre("±¤¹°", ITEM_ORE, true, 12, 3, "±ÝÁ¶°¢");
+}
+
 void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
@@ -249,6 +259,23 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
+	_vItem.push_back(temp);
+}
+
+void itemManager::addOre(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, const char * _itemInfo, int _buyPrice, int _sellPrice)
+{
+	tagItem temp;
+	temp.item_image = IMAGEMANAGER->findImage(strKey);
+	temp.item_kind = ITEM_ORE;
+	temp.indexX = _indexX;
+	temp.indexY = _indexY;
+	temp.rc = RectMakeCenter(0, 0, 0, 0);
+	temp.seedKind = SEED_NONE;
+	temp.item_info = _itemInfo;
+	temp.buy_price = _buyPrice;
+	temp.sell_price = _sellPrice;
+	temp.amount = 1;
+	temp.isFrame = _isFrame;
 	_vItem.push_back(temp);
 }
 

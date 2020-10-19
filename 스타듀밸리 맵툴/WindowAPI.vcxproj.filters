@@ -328,4 +328,7 @@
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\icon.ico" />
+  </ItemGroup>
 </Project>

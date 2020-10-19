@@ -41,6 +41,7 @@ public:
 	void setRandomObstacles();
 	void setStone(int i, int j);
 	void setWeed(int i, int j);
+	void setOre(int i, int j);
 	void getItem(tagItem item);
 	void ejectItem();
 	void dropItem(tagTile tile, const char* itemInfo);

@@ -25,6 +25,7 @@ public:
 	//데이터 추가하기
 	void addData(const char* section, const char* key, const char* value);
 	//데이터 세이브하기
+	void saveINI();
 	void saveINI(const char* fileName);
 
 	//문자로 값을 로드하기(파일이름, 섹션, 키)

@@ -13,6 +13,7 @@ HRESULT inHouseScene::init()
 	checkCount = 0;
 
 	this->update();
+
 	return S_OK;
 }
 
@@ -78,6 +79,7 @@ void inHouseScene::render()
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
+						savePlayer();
 						if (!SWITCHMANAGER->getFade())
 						{
 							SWITCHMANAGER->startFade(855.0f, 865.0f);
@@ -158,3 +160,19 @@ void inHouseScene::playerMove()
 	}
 
 }
+
+void inHouseScene::savePlayer()
+{
+}
+
+void inHouseScene::load()
+{
+	HANDLE file;
+	DWORD read;
+	sprintf(saveName, "save/playerData.data");
+	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, PLAYER, sizeof(PLAYER), &read, NULL);
+	CloseHandle(file);
+}
+
+
