@@ -14,7 +14,7 @@ HRESULT player::init()
 	playerHoldItem = RectMakeCenter(centerX - 8, centerY - 48, 16, 16);
 
 	playerHp = 276;
-	pickaxDamage,axDamage,hoeDamage = 2;
+	Damage= 2;
 
 	boxIndex = 0;
 	boxCount = 0;
