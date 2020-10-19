@@ -30,7 +30,7 @@ private:
 	int index;
 	int playerHp;
 	int hpBarX;
-	int axDamage, pickaxDamage, hoeDamage;
+	int Damage;
 
 	int boxCount;
 	int boxIndex;
@@ -98,9 +98,8 @@ public:
 	int getCurrentY() { return currentY; }
 
 	int getHpBarX() { return frontHpBar.top; }
-	int getAxDamage() { return axDamage; }
-	int getPickaxDamage() { return pickaxDamage; }
-	int getHoeDamage() { return hoeDamage; }
+	int getDamage() { return Damage; }
+
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }
