@@ -30,8 +30,7 @@ HRESULT player::init()
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
-	IMAGEMANAGER->addFrameImage("플레이어 개인상점", "Images/inventory/playerInven.bmp", 144, 29, 3, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("플레이어 상점뚜껑", "Images/inventory/playerInvenCover.bmp", 624, 32, 13, 1, true, RGB(255, 0, 255));
+
 
 	playerStorage = IMAGEMANAGER->findImage("플레이어 창고");
 
@@ -641,11 +640,7 @@ void player::playerAnimation()
 
 }
 
-void player::drawPlayerInven(tagTile tile1, tagTile tile2)
-{
-	IMAGEMANAGER->frameRender("플레이어 개인상점", CAMERAMANAGER->getMemDC(), tile1.rc.left, tile1.rc.top, boxIndex, 0);
-	IMAGEMANAGER->frameRender("플레이어 상점뚜껑", CAMERAMANAGER->getMemDC(), tile2.rc.left, tile2.rc.top, boxIndex, 0);
-}
+
 
 void player::playerInvenAnimation()
 {

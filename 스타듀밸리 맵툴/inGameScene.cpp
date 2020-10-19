@@ -124,7 +124,7 @@ void inGameScene::render()
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
 
-	PLAYER->drawPlayerInven(_tile[15][30], _tile[14][30]);
+
 
 	//ÀÌÆåÆ® ·»´õ
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
