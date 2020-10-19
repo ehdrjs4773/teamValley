@@ -102,3 +102,58 @@ void inventoryCraft::render(HDC hdc)
 	//}
 	
 }
+
+void inventoryCraft::craftInven_item_info(HDC hdc)
+{
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			if (PtInRect(&_vCraftItem[i].rc, _ptMouse)|| PtInRect(&_vCraftItem[j].rc, _ptMouse))
+			{
+				if (_vCraftItem[i].item_image != NULL && _vCraftItem[j].item_image != NULL)
+				{
+					char temp_info[2][256];
+					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
+					RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
+					IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+
+					SetTextColor(hdc, RGB(0, 0, 0));
+
+					memset(temp_info, 0, sizeof(temp_info));
+
+
+					if (PtInRect(&_vCraftItem[0].rc, _ptMouse) || PtInRect(&_vCraftItem[6].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "보관함", sizeof("보관함"));
+					}
+					else if (PtInRect(&_vCraftItem[1].rc, _ptMouse) || PtInRect(&_vCraftItem[7].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "먹이통", sizeof("먹이통"));
+					}
+					else if (PtInRect(&_vCraftItem[2].rc, _ptMouse) || PtInRect(&_vCraftItem[8].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "양봉장", sizeof("양봉장"));
+					}
+					else if (PtInRect(&_vCraftItem[3].rc, _ptMouse) || PtInRect(&_vCraftItem[9].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "허수아비", sizeof("허수아비"));
+					}
+					else if (PtInRect(&_vCraftItem[4].rc, _ptMouse) || PtInRect(&_vCraftItem[10].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "용광로", sizeof("용광로"));
+					}
+					else if (PtInRect(&_vCraftItem[5].rc, _ptMouse) || PtInRect(&_vCraftItem[11].rc, _ptMouse))
+					{
+						sprintf(temp_info[0], "절임통", sizeof("절임통"));
+					}
+
+					sprintf(temp_info[1], _vCraftItem[i].item_info, sizeof(_vCraftItem[i].item_info));
+
+					DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+					DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+				}
+			}
+		}
+	}
+}

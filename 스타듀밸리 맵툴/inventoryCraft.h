@@ -17,6 +17,7 @@ public :
 	void update();
 	void release();
 	void render(HDC hdc);
+	void craftInven_item_info(HDC hdc);
 
 
 	void setInventoryAddress(inventory* inven) { _inven = inven; }

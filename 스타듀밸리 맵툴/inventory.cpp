@@ -623,7 +623,6 @@ void inventory::quickinven_item_info(HDC hdc)
 
 		}
 	}
-
 }
 
 void inventory::storage_item_info(HDC hdc)

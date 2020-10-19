@@ -252,6 +252,7 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	_vItem.push_back(temp);
 }
 
+
 tagItem itemManager::findItem(const char * strKey)
 {
 	for (auto iter : _vItem)
