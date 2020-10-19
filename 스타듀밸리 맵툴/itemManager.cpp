@@ -7,6 +7,7 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("galaxy_sword", "Images/sword/galaxy_sword.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("pencil", "Images/sword/pencil.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addFrameImage("¾¾¾Ñhold", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛHold.bmp", 144, 64, 9, 4);
 	IMAGEMANAGER->addFrameImage("¿­¸Å", "Images/BMP/¿­¸Å.bmp", 640, 120, 16, 3);
 	IMAGEMANAGER->addFrameImage("¿­¸Å(¶¥)", "Images/BMP/¿­¸Å(¶¥).bmp", 256, 48, 16, 3);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);

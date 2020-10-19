@@ -132,11 +132,6 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
-
-
-	PLAYER->playerCarryItem(getMemDC());
-	
-
 }
 
 void inGameScene::load()
@@ -216,6 +211,7 @@ void inGameScene::renderMap()
 
 	//플레이어 렌더
 	PLAYER->render();
+	PLAYER->playerCarryItem(CAMERAMANAGER->getMemDC());
 
 	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
 	for (int i = currentIndexY; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
