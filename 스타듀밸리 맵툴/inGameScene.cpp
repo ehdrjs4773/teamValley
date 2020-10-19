@@ -525,6 +525,24 @@ void inGameScene::playerInteraction()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
+	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+	{
+		if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
+		{
+			PLAYER->setState(CARRYSTAND);
+		}
+	}
+	else
+	{
+		if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
+		{
+			if (PLAYER->getState() == STAND || PLAYER->getState() == CARRYSTAND)
+			{
+				PLAYER->setState(STAND);
+			}
+		}
+	}
+
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
 		if (MouseIndexY < currentIndexY)

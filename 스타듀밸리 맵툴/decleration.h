@@ -93,7 +93,7 @@ enum STATE
 	CARRY,
 	CARRYSTAND,
 	INVEN,
-	FARM
+	FARM,
 };
 
 enum DIRECTION
