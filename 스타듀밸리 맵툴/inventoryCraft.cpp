@@ -78,70 +78,77 @@ void inventoryCraft::update()
 				}
 			}
 
-			if (_isWood == NULL)
+			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS)
 			{
-				if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+				if (_isWood == NULL)
 				{
-					_isWood = i;
+					if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+					{
+						_isWood = i;
+
+					}
 
 				}
-
-			}
-			else
-			{
-				if (_inven->getvInven()[_isWood].amount <= 0)
+				else
 				{
-					_isWood = NULL;
-				}
-			}
-
-			if (_isRock == NULL)
-			{
-				if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 5 && _inven->getvInven()[i].indexY == 2)
-				{
-					_isRock = i;
-
+					if (_inven->getvInven()[_isWood].amount <= 0)
+					{
+						_isWood = NULL;
+					}
 				}
 
+				if (_isRock == NULL)
+				{
+					if (_inven->getvInven()[i].indexX == 5 && _inven->getvInven()[i].indexY == 2)
+					{
+						_isRock = i;
 
-			}
-			else
-			{
-				if (_inven->getvInven()[_isRock].amount <= 0)
-				{
-					_isRock = NULL;
-				}
-			}
-			if (_isCopper == NULL)
-			{
-				if (_inven->getvInven()[i].item_kind == ITEM_ORE && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 3)
-				{
-					_isCopper = i;
-				}
-			}
-			else
-			{
-				if (_inven->getvInven()[_isCopper].amount <= 0)
-				{
-					_isCopper = NULL;
-				}
+					}
 
-			}
-			if (_isIron == NULL)
-			{
-				if (_inven->getvInven()[i].item_kind == ITEM_ORE && _inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
-				{
-					_isIron = i;
 
 				}
-			}
-			else
-			{
-				if (_inven->getvInven()[_isIron].amount <= 0)
+				else
 				{
-					_isIron = NULL;
+					if (_inven->getvInven()[_isRock].amount <= 0)
+					{
+						_isRock = NULL;
+					}
 				}
 			}
+			else if (_inven->getvInven()[i].item_kind == ITEM_ORE)
+			{
+				if (_isCopper == NULL)
+				{
+					if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 3)
+					{
+						_isCopper = i;
+					}
+				}
+				else
+				{
+					if (_inven->getvInven()[_isCopper].amount <= 0)
+					{
+						_isCopper = NULL;
+					}
+
+				}
+				if (_isIron == NULL)
+				{
+					if (_inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
+					{
+						_isIron = i;
+
+					}
+				}
+				else
+				{
+					if (_inven->getvInven()[_isIron].amount <= 0)
+					{
+						_isIron = NULL;
+					}
+				}
+			}
+			
 		}
 
 		
