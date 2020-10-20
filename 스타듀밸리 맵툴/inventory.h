@@ -77,7 +77,6 @@ public:
 	void setInvenItem(int i, tagItem item) { _vItem[i] = item; }
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	void setInvenResetImage(int i) { _vItem[i].item_image = nullptr; }
-	void setInvenImage(int i, string imageName);
 	vector<tagItem>* getInven() { return &_vItem; }
 	vector<tagItem> getvInven() { return _vItem; }
 	void setvInven(int i, tagSaveItem item);

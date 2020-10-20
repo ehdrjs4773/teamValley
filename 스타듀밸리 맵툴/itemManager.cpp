@@ -76,9 +76,9 @@ void itemManager::addSeed()
 
 void itemManager::addWeapon()
 {
-	addWeapon("rusty_sword", ITEM_WEAPON, false, "³ì½¼ ¼Òµå", 500, 250);
-	addWeapon("galaxy_sword", ITEM_WEAPON, false, "°¶·°½Ã ¼Òµå",1000,500);
-	addWeapon("pencil", ITEM_WEAPON, false, "¿¬ÇÊ",100,50);
+	addWeapon("rusty_sword", ITEM_WEAPON, WEAPON_RUSTYSWORD, false, "³ì½¼ ¼Òµå", 500, 250);
+	addWeapon("galaxy_sword", ITEM_WEAPON, WEAPON_GALAXYSWORD, false, "°¶·°½Ã ¼Òµå",1000,500);
+	addWeapon("pencil", ITEM_WEAPON, WEAPON_PENCIL, false, "¿¬ÇÊ",100,50);
 }
 
 void itemManager::addTool()
@@ -146,12 +146,12 @@ void itemManager::addObject()
 
 void itemManager::addSkill()
 {
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "EXPLOSION", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "SPIKES", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "FIRE", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "SHIELD", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "BLACKHOLE", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, false, "FIRE_BALL", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_EXPLOSION, false, "EXPLOSION", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_SPIKES, false, "SPIKES", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_FIRE, false, "FIRE", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_SHIELD, false, "SHIELD", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_BLACKHOLE, false, "BLACKHOLE", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_FIREBALL, false, "FIRE_BALL", 1000, 500);
 }
 
 void itemManager::addOre()
@@ -162,7 +162,7 @@ void itemManager::addOre()
 	addOre("±¤¹°", ITEM_ORE, true, 12, 3, "±ÝÁ¶°¢");
 }
 
-void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addItem(const char* strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char* _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -179,7 +179,7 @@ void itemManager::addItem(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	_vItem.push_back(temp);
 }
 
-void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
+void itemManager::addSeed(const char* strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char* _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -198,7 +198,7 @@ void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int 
 	_vItem.push_back(temp);
 }
 
-void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
+void itemManager::addFruit(const char* strKey, ITEM _itemKind, int _indexX, int _indexY, SEED _seedKind, const char* _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -216,7 +216,7 @@ void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int
 	_vItem.push_back(temp);
 }
 
-void itemManager::addObjectItem(const char * strKey, ITEM _itemKind, int _indexX, int _indexY, const char * _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
+void itemManager::addObjectItem(const char* strKey, ITEM _itemKind, int _indexX, int _indexY, const char* _itemInfo, int _buyPrice, int _sellPrice, bool _isFrame)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -234,7 +234,7 @@ void itemManager::addObjectItem(const char * strKey, ITEM _itemKind, int _indexX
 	_vItem.push_back(temp);
 }
 
-void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addTool(const char* strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, const char* _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -253,11 +253,12 @@ void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	_vItem.push_back(temp);
 }
 
-void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addWeapon(const char* strKey, ITEM _itemKind, WEAPON _weaponKind, bool _isFrame, const char* _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
 	temp.item_kind = _itemKind;
+	temp.weaponKind = _weaponKind;
 	temp.isFrame = _isFrame;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.itemName = _itemInfo;
@@ -267,7 +268,7 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	_vItem.push_back(temp);
 }
 
-void itemManager::addOre(const char * strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, const char * _itemInfo, int _buyPrice, int _sellPrice)
+void itemManager::addOre(const char* strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, const char* _itemInfo, int _buyPrice, int _sellPrice)
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
@@ -294,4 +295,67 @@ tagItem itemManager::findItem(string strKey)
 			return iter;
 		}
 	}
+}
+
+const char * itemManager::findItem(ITEM itemKind, SEED seedKind)
+{
+	if (itemKind == ITEM_SEED)
+	{
+		for (auto iter : _vItem)
+		{
+			if (iter.seedKind == seedKind && iter.item_kind == ITEM_SEED)
+			{
+				return iter.item_info;
+			}
+		}
+		return nullptr;
+	}
+	else if (itemKind == ITEM_FRUIT)
+	{
+		for (auto iter : _vItem)
+		{
+			if (iter.seedKind == seedKind && iter.item_kind == ITEM_FRUIT)
+			{
+				return iter.item_info;
+			}
+		}
+		return nullptr;
+	}	
+}
+
+const char * itemManager::findItem(ITEM itemKind, int indexX)
+{
+	if (itemKind == ITEM_ORE)
+	{
+		if (indexX == 6) { return "±¸¸®Á¶°¢"; }
+		if (indexX == 8) { return "Ã¶Á¶°¢"; }
+		if (indexX == 10) { return "¼®Åº"; }
+		if (indexX == 12) { return "±ÝÁ¶°¢"; }
+	}
+	else if (itemKind == ITEM_DEBRIS)
+	{
+		if (indexX == 5) { return "µ¹"; }
+		if (indexX == 6) { return "³ª¹«"; }
+		if (indexX == 10) { return "´Ü´ÜÇÑ³ª¹«"; }
+	}
+}
+
+const char * itemManager::findItem(ITEM itemKind)
+{
+	if (itemKind == ITEM_WOODENFENCE) { return "³ª¹«¿ïÅ¸¸®"; }
+	if (itemKind == ITEM_WOODENFENCEDOOR) { return "³ª¹«¿ïÅ¸¸®¹®"; }
+	if (itemKind == ITEM_STONEFENCE) { return "¼®Àç¿ïÅ¸¸®"; }
+	if (itemKind == ITEM_STONEFENCEDOOR) { return "¼®Àç¿ïÅ¸¸®¹®"; }
+}
+
+const char * itemManager::findItem(TOOL toolKind)
+{
+	for (auto iter : _vItem)
+	{
+		if (iter.toolKind == toolKind)
+		{
+			return iter.item_info;
+		}
+	}
+	return nullptr;
 }

@@ -50,7 +50,7 @@ public:
 		int _indexX,
 		int _indexY,
 		SEED _seedKind = SEED_NONE,
-		const char* _itemInfo = " ",
+		const char* _itemInfo = " " ,
 		int _buyPrice = 0,
 		int _sellPrice = 0,
 		bool _isFrame = true);
@@ -60,7 +60,7 @@ public:
 		ITEM _itemKind,
 		int _indexX,
 		int _indexY,
-		const char* _itemInfo = " ",
+		const char* _itemInfo,
 		int _buyPrice = 0,
 		int _sellPrice = 0,
 		bool _isFrame = true);
@@ -72,15 +72,16 @@ public:
 		int _indexX,
 		int _indexY,
 		TOOL _toolKind,
-		const char* _itemInfo = " ",
+		const char* _itemInfo,
 		int _buyPrice = 0,
 		int _sellPrice = 0);
 
 	void addWeapon(
 		const char* strKey,
 		ITEM _itemKind,
+		WEAPON _weaponKind,
 		bool _isFrame,
-		const char* _itemInfo = " ",
+		const char* _itemInfo,
 		int _buyPrice = 0,
 		int _sellPrice = 0);
 
@@ -90,12 +91,16 @@ public:
 		bool _isFrame,
 		int _indexX,
 		int _indexY,
-		const char* _itemInfo = " ",
+		const char* _itemInfo,
 		int _buyPrice = 0,
 		int _sellPrice = 0);
 
 	vector<tagItem> getItem() { return _vItem; }
 	tagItem findItem(string strKey);
+	const char* findItem(ITEM itemKind, SEED seedKind);
+	const char* findItem(ITEM itemKind, int indexX);
+	const char* findItem(ITEM itemKind);
+	const char* findItem(TOOL toolKind);
 	
 };
 

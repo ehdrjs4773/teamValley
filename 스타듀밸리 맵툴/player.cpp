@@ -972,25 +972,24 @@ void player::loadPlayerData()
 void player::loadInven()
 {
 	//인벤 불러오기
-	HANDLE file;
-	DWORD read;
+	HANDLE file1;
+	DWORD read1;
 	tagSaveItem LoadItem[36];
-	TCHAR saveName[MAX_PATH] = {};
-	sprintf(saveName, "save/playerInven.data");
-	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	ReadFile(file, LoadItem, sizeof(LoadItem), &read, NULL);
-	CloseHandle(file);
+	TCHAR saveName3[MAX_PATH] = {};
+	sprintf(saveName3, "save/playerInven.data");
+	file1 = CreateFile(saveName3, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file1, LoadItem, sizeof(LoadItem), &read1, NULL);
+	CloseHandle(file1);
 	
-	for (int i = 0; i <36; i++)
+	for (int i = 0; i < 36; i++)
 	{
 		_inventory->setvInven(i, LoadItem[i]);
-		_inventory->setInvenImage(i, LoadItem[i].itemName);
 	}
 }
 
 void player::loadStock()
-{//가축 불러오기
-
+{
+	//가축 불러오기
 	HANDLE file;
 	DWORD read;
 	tagStock tempStock[5];
@@ -1030,24 +1029,40 @@ void player::savePlayerInven()
 
 	memset(tempItem, 0, sizeof(tempItem));
 
-	for (int i = 0; i < _inventory->getvInven().size(); i++)
+	for (int i = 0; i < 36; i++)
 	{
-		if (tempItem[i].itemName == "") {
-			memset(&tempItem[i], 0, sizeof(tempItem));
-			continue;
+		if (temp[i].itemName == "")
+		{
+			tempItem[i].amount = 0;
+			tempItem[i].buy_price = 0;
+			tempItem[i].indexX = 0;
+			tempItem[i].indexY = 0;
+			tempItem[i].isFrame = false;
+			//tempItem[i].itemName = "";
+			tempItem[i].item_kind = (ITEM)0;
+			tempItem[i].rc = RectMake(0,0,0,0);
+			tempItem[i].seedKind = (SEED)0;
+			tempItem[i].sell_price = 0;
+			tempItem[i].toolKind = (TOOL)0;
+			tempItem[i].waterAmount = 0;
 		}
-		tempItem[i].amount = temp[i].amount;
-		tempItem[i].buy_price = temp[i].buy_price;
-		tempItem[i].indexX = temp[i].indexX;
-		tempItem[i].indexY = temp[i].indexY;
-		tempItem[i].isFrame = temp[i].isFrame;
-		tempItem[i].itemName = temp[i].itemName;
-		tempItem[i].item_kind = temp[i].item_kind;
-		tempItem[i].rc = temp[i].rc;
-		tempItem[i].seedKind = temp[i].seedKind;
-		tempItem[i].sell_price = temp[i].sell_price;
-		tempItem[i].toolKind = temp[i].toolKind;
-		tempItem[i].waterAmount = temp[i].waterAmount;
+		else
+		{
+			tempItem[i].amount = temp[i].amount;
+			tempItem[i].buy_price = temp[i].buy_price;
+			tempItem[i].indexX = temp[i].indexX;
+			tempItem[i].indexY = temp[i].indexY;
+			tempItem[i].isFrame = temp[i].isFrame;
+			//tempItem[i].itemName = temp[i].itemName;
+			tempItem[i].item_kind = temp[i].item_kind;
+			tempItem[i].rc = temp[i].rc;
+			tempItem[i].seedKind = temp[i].seedKind;
+			tempItem[i].sell_price = temp[i].sell_price;
+			tempItem[i].toolKind = temp[i].toolKind;
+			tempItem[i].waterAmount = temp[i].waterAmount;
+		}
+
+		cout << temp[i].itemName << endl;
 	}
 
 	HANDLE file;

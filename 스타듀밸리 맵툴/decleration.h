@@ -3,6 +3,7 @@
 //æ∆¿Ã≈€
 enum ITEM
 {
+	ITEM_NONE,
 	ITEM_WEAPON,
 	ITEM_TOOL,
 	ITEM_BIGCRAFTABLE,
@@ -19,6 +20,20 @@ enum ITEM
 	ITEM_SKILL,
 	ITEM_ORE,
 	ITEM_ENDITEM
+};
+
+enum WEAPON
+{
+	WEAPON_NONE,
+	WEAPON_RUSTYSWORD,
+	WEAPON_GALAXYSWORD,
+	WEAPON_PENCIL,
+	WEAPON_EXPLOSION,
+	WEAPON_SPIKES,
+	WEAPON_FIRE,
+	WEAPON_SHIELD,
+	WEAPON_BLACKHOLE,
+	WEAPON_FIREBALL
 };
 
 enum SEED
@@ -190,6 +205,7 @@ struct tagItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
+	WEAPON weaponKind = WEAPON_NONE;
 	string itemName;
 	const char* item_info;
 	int buy_price;
