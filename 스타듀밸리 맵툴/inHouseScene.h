@@ -24,10 +24,7 @@ public:
 
 	void playerMove();
 
-
 	void savePlayer();
-	void load();
-
 };
 
 

@@ -163,16 +163,9 @@ void inHouseScene::playerMove()
 
 void inHouseScene::savePlayer()
 {
-}
-
-void inHouseScene::load()
-{
-	HANDLE file;
-	DWORD read;
-	sprintf(saveName, "save/playerData.data");
-	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	ReadFile(file, PLAYER, sizeof(PLAYER), &read, NULL);
-	CloseHandle(file);
+	PLAYER->savePlayerInven();
+	PLAYER->savePlayerStock();
+	PLAYER->savePlayerData();
 }
 
 

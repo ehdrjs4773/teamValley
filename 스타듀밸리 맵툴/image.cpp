@@ -465,7 +465,6 @@ void image::frameRender(HDC hdc, int destX, int destY)
 
 void image::frameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY)
 {
-	
 	//이미지 예외처리
 	_imageInfo->currentFrameX = currentFrameX;
 	_imageInfo->currentFrameY = currentFrameY;

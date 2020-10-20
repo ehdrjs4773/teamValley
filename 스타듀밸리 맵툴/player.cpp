@@ -37,10 +37,10 @@ HRESULT player::init()
 
 	stock = new Stock;
 	stock->init();
-	stock->addPlayerStock(STOCK_BROWNCOW);
-	stock->addPlayerStock(STOCK_WHITECOW);
-	stock->addPlayerStock(STOCK_BROWNCHICKEN);
-	stock->addPlayerStock(STOCK_WHITECHICKEN);
+	//stock->addPlayerStock(STOCK_BROWNCOW);
+	//stock->addPlayerStock(STOCK_WHITECOW);
+	//stock->addPlayerStock(STOCK_BROWNCHICKEN);
+	//stock->addPlayerStock(STOCK_WHITECHICKEN);
 
 	currentMap = MAP_FARM;
 
@@ -119,9 +119,6 @@ void  player::update()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	
-
-
 	//rc = RectMakeCenter(centerX, centerY, 16, 32);
 	_inventory->update();
 	playerInvenCoverAnimation();
@@ -131,8 +128,6 @@ void  player::update()
 		countTime();
 		
 	}
-
-
 }
 
 void player::render()
@@ -143,8 +138,6 @@ void player::render()
 	{
 		stock->render();
 	}
-
-
 }
 
 void player::playerCarryItem(HDC hdc)
@@ -171,7 +164,6 @@ void player::playerCarryItem(HDC hdc)
 	
 	//Rectangle(hdc, playerHoldItem);
 }
-
 
 void player::playerStatusRender(HDC hdc)
 {
@@ -638,8 +630,6 @@ void player::playerAnimation()
 
 }
 
-
-
 void player::playerInvenAnimation()
 {
 	boxCount++;
@@ -964,30 +954,131 @@ void player::resetClock()
 	darkAlpha = .0f;
 }
 
-player player::getPlayerData()
+void player::loadPlayerData()
 {
-	player p;
-	p.rc = rc;
-	p.frontHpBar = frontHpBar;
-	p.playerInven = playerInven;
-	p.playerHoldItem = playerHoldItem;
-	p.stock = stock;
-	p.currentMap = currentMap;
-	p.date = date;
-	p.money = money;
-	p.year = year;
-	p.day = day;
-	p.currentSeason = currentSeason;
-	p.currentWeather = currentWeather;
-	p.darkAlpha = darkAlpha;
-	p._inventory = _inventory;
-
-
-	return p;
+	//플레이어 데이터 불러오기
+	date = INIDATA->loadDataInteger("save/playerData", "PLAYER", "date");
+	year = INIDATA->loadDataInteger("save/playerData", "PLAYER", "year");
+	day = (DAYOFWEEK)INIDATA->loadDataInteger("save/playerData", "PLAYER", "day");
+	darkAlpha = INIDATA->loadDataInteger("save/playerData", "PLAYER", "darkAlpha");
+	currentSeason = (SEASON)INIDATA->loadDataInteger("save/playerData", "PLAYER", "currentSeason");
+	currentWeather = (WEATHER)INIDATA->loadDataInteger("save/playerData", "PLAYER", "currentWeather");
+	money = INIDATA->loadDataInteger("save/playerData", "PLAYER", "money");
+	
+	loadInven();
+	loadStock();
 }
 
-void player::setPlayerData()
+void player::loadInven()
 {
+	//인벤 불러오기
+	HANDLE file;
+	DWORD read;
+	tagSaveItem LoadItem[36];
+	TCHAR saveName[MAX_PATH] = {};
+	sprintf(saveName, "save/playerInven.data");
+	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, LoadItem, sizeof(LoadItem), &read, NULL);
+	CloseHandle(file);
+	
+	for (int i = 0; i <36; i++)
+	{
+		_inventory->setvInven(i, LoadItem[i]);
+		_inventory->setInvenImage(i, LoadItem[i].itemName);
+	}
+}
+
+void player::loadStock()
+{//가축 불러오기
+
+	HANDLE file;
+	DWORD read;
+	tagStock tempStock[5];
+	TCHAR saveName2[MAX_PATH] = {};
+	sprintf(saveName2, "save/playerStock.data");
+	file = CreateFile(saveName2, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, tempStock, sizeof(tempStock), &read, NULL);
+	CloseHandle(file);
+
+	stock->getStock().clear();
+
+	for (int i = 0; i < 4; i++)
+	{
+		//if (tempStock[i].speed == 0) break;
+		stock->setStock(tempStock[i]);
+	}
+}
+
+void player::savePlayerData()
+{
+	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
+	INIDATA->addData("PLAYER", "date", itoa(date, dateStr, 10));
+	INIDATA->addData("PLAYER", "year", itoa(year, yearStr, 10));
+	INIDATA->addData("PLAYER", "day", itoa(day, dayStr, 10));
+	INIDATA->addData("PLAYER", "darkAlpha", itoa(darkAlpha, darkStr, 10));
+	INIDATA->addData("PLAYER", "currentSeason", itoa((int)currentSeason, seasonStr, 10));
+	INIDATA->addData("PLAYER", "currentWeather", itoa((int)currentWeather, weatherStr, 10));
+	INIDATA->addData("PLAYER", "money", itoa(money, moneyStr, 10));
+	INIDATA->saveINI();
+}
+
+void player::savePlayerInven()
+{
+	vector<tagItem> temp;
+	temp = _inventory->getvInven();
+	tagSaveItem tempItem[36];
+
+	memset(tempItem, 0, sizeof(tempItem));
+
+	for (int i = 0; i < _inventory->getvInven().size(); i++)
+	{
+		if (tempItem[i].itemName == "") {
+			memset(&tempItem[i], 0, sizeof(tempItem));
+			continue;
+		}
+		tempItem[i].amount = temp[i].amount;
+		tempItem[i].buy_price = temp[i].buy_price;
+		tempItem[i].indexX = temp[i].indexX;
+		tempItem[i].indexY = temp[i].indexY;
+		tempItem[i].isFrame = temp[i].isFrame;
+		tempItem[i].itemName = temp[i].itemName;
+		tempItem[i].item_kind = temp[i].item_kind;
+		tempItem[i].rc = temp[i].rc;
+		tempItem[i].seedKind = temp[i].seedKind;
+		tempItem[i].sell_price = temp[i].sell_price;
+		tempItem[i].toolKind = temp[i].toolKind;
+		tempItem[i].waterAmount = temp[i].waterAmount;
+	}
+
+	HANDLE file;
+	DWORD write;
+	TCHAR saveName[MAX_PATH] = {};
+	sprintf(saveName, "save/playerInven.data");
+	file = CreateFile(saveName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(file, tempItem, sizeof(tempItem), &write, NULL);
+	CloseHandle(file);
+}
+
+void player::savePlayerStock()
+{
+	vector<tagStock> temp;
+	temp = stock->getStock();
+
+	tagStock tempStock[5];
+	memset(tempStock, 0, sizeof(tempStock));
+
+	for (int i = 0; i < stock->getStock().size(); i++)
+	{
+		tempStock[i] = temp[i];
+	}
+
+	HANDLE file;
+	DWORD write;
+	TCHAR saveName[MAX_PATH] = {};
+	sprintf(saveName, "save/playerStock.data");
+	file = CreateFile(saveName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(file, tempStock, sizeof(tempStock), &write, NULL);
+	CloseHandle(file);
 }
 
 void player::clockRender(HDC hdc)

@@ -30,7 +30,7 @@ void iniData::saveINI()
 	ZeroMemory(str, sizeof(str));
 	ZeroMemory(dir, sizeof(dir));
 	//char test[256] = { 0 }; //이렇게 초기화 하는 방법도 있음
-	sprintf(str, "\save/playerData.ini");
+	sprintf(str, "\\save/playerData.ini");
 	GetCurrentDirectory(256, dir);
 	//D:\플밍 22기\20200908_0_INI데이터\WindowAPI
 	strcat(dir, str); //문자열 연결 D:\플밍 22기\20200908_0_INI데이터\WindowAPI\fileName.ini
@@ -68,7 +68,7 @@ char * iniData::loadDataString(const char * fileName, const char * section, cons
 	ZeroMemory(str, sizeof(str));
 	ZeroMemory(dir, sizeof(dir));
 	//char test[256] = { 0 }; //이렇게 초기화 하는 방법도 있음
-	sprintf(str, "\\%s.ini", fileName);
+	sprintf(str, "\\save/playerData.ini");
 	GetCurrentDirectory(256, dir);
 	//D:\플밍 22기\20200908_0_INI데이터\WindowAPI
 	strcat(dir, str); //문자열 연결 D:\플밍 22기\20200908_0_INI데이터\WindowAPI\fileName.ini
@@ -88,7 +88,7 @@ int iniData::loadDataInteger(const char * fileName, const char * section, const 
 	ZeroMemory(str, sizeof(str));
 	ZeroMemory(dir, sizeof(dir));
 	//char test[256] = { 0 }; //이렇게 초기화 하는 방법도 있음
-	sprintf(str, "\\%s.ini", fileName);
+	sprintf(str, "\\save/playerData.ini");
 	GetCurrentDirectory(256, dir);
 	//D:\플밍 22기\20200908_0_INI데이터\WindowAPI
 	strcat(dir, str); //문자열 연결 D:\플밍 22기\20200908_0_INI데이터\WindowAPI\fileName.ini

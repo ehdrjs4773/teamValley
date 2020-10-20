@@ -18,7 +18,5 @@ public :
 	void update();
 	void render();
 
-	void load();
-
 };
 

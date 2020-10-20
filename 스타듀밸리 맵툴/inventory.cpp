@@ -130,10 +130,6 @@ void inventory::update()
 		}
 	}
 
-
-
-
-
 	for (int i = 0; i < _vItem.size(); i++)
 	{
 		if (_vItem[i].amount == 0)
@@ -144,7 +140,9 @@ void inventory::update()
 		}
 	}
 
-	
+
+	//if(_vItem[i].item_image == NULL) setInvenImage(i, _vItem[i].itemName);
+
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 	
 }
@@ -409,7 +407,6 @@ void inventory::quickSlot(HDC hdc)
 		FrameRect(hdc, temp, RGB(255, 0, 0));
 	}
 } 
-
 
 void inventory::renderStorageInventory(HDC hdc) 
 {
@@ -838,4 +835,28 @@ void inventory::_vItemUpdate()
 void inventory::shopInvenRender(HDC hdc)
 {
 	IMAGEMANAGER->findImage("상점인벤토리1")->render(hdc, 305, 370);
+}
+
+void inventory::setInvenImage(int i, string imageName)
+{
+	_vItem[i].item_image = ITEMMANAGER->findItem(imageName).item_image;
+	_vItem[i].item_info = ITEMMANAGER->findItem(imageName).item_info;
+}
+
+void inventory::setvInven(int i, tagSaveItem item)
+{
+	_vItem[i].amount = item.amount;
+	_vItem[i].buy_price = item.buy_price;
+	_vItem[i].indexX = item.indexX;
+	_vItem[i].indexY = item.indexY;
+	_vItem[i].isFrame = item.isFrame;
+	_vItem[i].itemName = item.itemName;
+	_vItem[i].item_kind = item.item_kind;
+	_vItem[i].rc = item.rc;
+	_vItem[i].seedKind = item.seedKind;
+	_vItem[i].sell_price = item.sell_price;
+	_vItem[i].toolKind = item.toolKind;
+	_vItem[i].waterAmount = item.waterAmount;
+	_vItem[i].item_image = ITEMMANAGER->findItem(item.itemName).item_image;
+	_vItem[i].item_info = ITEMMANAGER->findItem(item.itemName).item_info;
 }

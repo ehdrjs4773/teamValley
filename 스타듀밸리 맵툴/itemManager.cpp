@@ -189,6 +189,7 @@ void itemManager::addSeed(const char * strKey, ITEM _itemKind, int _indexX, int 
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = TOOL_NONE;
 	temp.seedKind = _seedKind;
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -206,6 +207,7 @@ void itemManager::addFruit(const char * strKey, ITEM _itemKind, int _indexX, int
 	temp.indexY = _indexY;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.seedKind = _seedKind;
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -223,6 +225,7 @@ void itemManager::addObjectItem(const char * strKey, ITEM _itemKind, int _indexX
 	temp.indexY = _indexY;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.seedKind = SEED_NONE;
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -242,6 +245,7 @@ void itemManager::addTool(const char * strKey, ITEM _itemKind, bool _isFrame, in
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = _toolKind;
 	temp.seedKind = SEED_NONE;
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.waterAmount = 0;
@@ -256,6 +260,7 @@ void itemManager::addWeapon(const char * strKey, ITEM _itemKind, bool _isFrame, 
 	temp.item_kind = _itemKind;
 	temp.isFrame = _isFrame;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -271,6 +276,7 @@ void itemManager::addOre(const char * strKey, ITEM _itemKind, bool _isFrame, int
 	temp.indexY = _indexY;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.seedKind = SEED_NONE;
+	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -279,11 +285,11 @@ void itemManager::addOre(const char * strKey, ITEM _itemKind, bool _isFrame, int
 	_vItem.push_back(temp);
 }
 
-tagItem itemManager::findItem(const char * strKey)
+tagItem itemManager::findItem(string strKey)
 {
 	for (auto iter : _vItem)
 	{
-		if (iter.item_info == strKey)
+		if (iter.itemName == strKey)
 		{
 			return iter;
 		}

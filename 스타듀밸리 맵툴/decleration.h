@@ -190,6 +190,7 @@ struct tagItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
+	string itemName;
 	const char* item_info;
 	int buy_price;
 	int sell_price;
@@ -229,6 +230,21 @@ struct tagStock {
 	bool isFullyGrown;
 	bool isSheared;
 	bool isMove;
+};
+
+struct tagSaveItem {
+	RECT rc;
+	ITEM item_kind;
+	TOOL toolKind;
+	SEED seedKind;
+	string itemName;
+
+	int buy_price;
+	int sell_price;
+	int waterAmount;
+	int indexX, indexY;
+	int amount;
+	bool isFrame;
 };
 
 struct tagEffect 

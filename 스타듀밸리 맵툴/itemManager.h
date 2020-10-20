@@ -95,7 +95,7 @@ public:
 		int _sellPrice = 0);
 
 	vector<tagItem> getItem() { return _vItem; }
-	tagItem findItem(const char* strKey);
+	tagItem findItem(string strKey);
 	
 };
 

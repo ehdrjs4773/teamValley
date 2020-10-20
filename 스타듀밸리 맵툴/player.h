@@ -140,7 +140,11 @@ public:
 	int getDate() { return date; }
 	DAYOFWEEK getDay() { return day; }
 
-	player getPlayerData();
-	void setPlayerData();
+	void loadPlayerData();
+	void loadInven();
+	void loadStock();
+	void savePlayerData();
+	void savePlayerInven();
+	void savePlayerStock();
 };
 
