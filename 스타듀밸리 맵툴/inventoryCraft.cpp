@@ -77,11 +77,73 @@ void inventoryCraft::update()
 					}
 				}
 			}
-			else
+
+			if (_isWood == NULL)
 			{
+				if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+				{
+					_isWood = i;
+
+				}
 
 			}
+			else
+			{
+				if (_inven->getvInven()[_isWood].amount <= 0)
+				{
+					_isWood = NULL;
+				}
+			}
+
+			if (_isRock == NULL)
+			{
+				if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 5 && _inven->getvInven()[i].indexY == 2)
+				{
+					_isRock = i;
+
+				}
+
+
+			}
+			else
+			{
+				if (_inven->getvInven()[_isRock].amount <= 0)
+				{
+					_isRock = NULL;
+				}
+			}
+			if (_isCopper == NULL)
+			{
+				if (_inven->getvInven()[i].item_kind == ITEM_ORE && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 3)
+				{
+					_isCopper = i;
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isCopper].amount <= 0)
+				{
+					_isCopper = NULL;
+				}
+
+			}
+			if (_isIron == NULL)
+			{
+				if (_inven->getvInven()[i].item_kind == ITEM_ORE && _inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
+				{
+					_isIron = i;
+
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isIron].amount <= 0)
+				{
+					_isIron = NULL;
+				}
+			}
 		}
+
 		
 	}
 }
@@ -115,41 +177,6 @@ void inventoryCraft::render(HDC hdc)
 
 void inventoryCraft::craftInven_item_info(HDC hdc)
 {
-	for (int j = 0; j < _inven->getvInven().size(); j++) //나무
-	{
-		if (_inven->getvInven()[j].item_kind == ITEM_DEBRIS && _inven->getvInven()[j].indexX == 6 && _inven->getvInven()[j].indexY == 2)
-		{
-			_isWood = j;
-			break;
-		}
-	}
-
-	for (int k = 0; k < _inven->getvInven().size(); k++) //돌
-	{
-		if (_inven->getvInven()[k].item_kind == ITEM_DEBRIS && _inven->getvInven()[k].indexX == 5 && _inven->getvInven()[k].indexY == 2)
-		{
-			_isRock = k;
-			break;
-		}
-	}
-
-	for (int l = 0; l < _inven->getvInven().size(); l++) //철
-	{
-		if (_inven->getvInven()[l].item_kind == ITEM_ORE && _inven->getvInven()[l].indexX == 8 && _inven->getvInven()[l].indexY == 3)
-		{
-			_isIron = l;
-			break;
-		}
-	}
-
-	for (int m = 0; m < _inven->getvInven().size(); m++) //구리
-	{
-		if (_inven->getvInven()[m].item_kind == ITEM_ORE && _inven->getvInven()[m].indexX == 6 && _inven->getvInven()[m].indexY == 3)
-		{
-			_isCopper = m;
-			break;
-		}
-	}
 
 	for (int i = 0; i < _vCraftItem.size(); i++)
 	{
@@ -382,6 +409,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
 					}
 				}
+				SetTextColor(hdc, RGB(255, 255, 255));
 				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
 			}
 		}
