@@ -603,8 +603,27 @@ void inventory::inven_item_info(HDC hdc)
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
+					break;
+				case ITEM_BOX:
+					sprintf(temp_info[0], "BOX", sizeof("BOX"));
+					break;
+				case ITEM_FEEDBUCKET:
+					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
+					break;
+				case ITEM_BEEFARM:
+					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
+					break;
+				case ITEM_SCARECROW:
+					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
+					break;
+				case ITEM_BLASTFURNACE:
+					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
+					break;
+				case ITEM_PICKLEDBARREL:
+					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -649,24 +668,39 @@ void inventory::quickinven_item_info(HDC hdc)
 					break;
 				case ITEM_DEBRIS:
 					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-
 					break;
 				case ITEM_WOODENFENCE:
 					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-
 					break;
 				case ITEM_WOODENFENCEDOOR:
 					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
-
 					break;
 				case ITEM_STONEFENCE:
 					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
+					break;
+				case ITEM_BOX:
+					sprintf(temp_info[0], "BOX", sizeof("BOX"));
+					break;
+				case ITEM_FEEDBUCKET:
+					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
+					break;
+				case ITEM_BEEFARM:
+					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
+					break;
+				case ITEM_SCARECROW:
+					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
+					break;
+				case ITEM_BLASTFURNACE:
+					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
+					break;
+				case ITEM_PICKLEDBARREL:
+					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -726,8 +760,27 @@ void inventory::storage_item_info(HDC hdc)
 					break;
 				case ITEM_STONEFENCEDOOR:
 					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
+					break;
+				case ITEM_BOX:
+					sprintf(temp_info[0], "BOX", sizeof("BOX"));
+					break;
+				case ITEM_FEEDBUCKET:
+					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
+					break;
+				case ITEM_BEEFARM:
+					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
+					break;
+				case ITEM_SCARECROW:
+					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
+					break;
+				case ITEM_BLASTFURNACE:
+					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
+					break;
+				case ITEM_PICKLEDBARREL:
+					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
 					break;
 				}
 				sprintf(temp_info[1],0,(string)_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));

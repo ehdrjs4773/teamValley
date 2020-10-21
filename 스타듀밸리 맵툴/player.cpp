@@ -134,6 +134,8 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 	//rc = RectMakeCenter(centerX, centerY, 16, 32);
+
+
 	_inventory->update();
 
 	if (!isShowInventory)
@@ -170,6 +172,48 @@ void player::playerCarryItem(HDC hdc)
 				IMAGEMANAGER->findImage("씨앗hold")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
+		}
+		else if (getCurrentInven()->item_kind == ITEM_BOX)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top-16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY+1);
+		}
+		else if (getCurrentInven()->item_kind == ITEM_FEEDBUCKET)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
+		}
+		else if (getCurrentInven()->item_kind == ITEM_BEEFARM)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
+		}
+		else if (getCurrentInven()->item_kind == ITEM_SCARECROW)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
+		}
+		else if (getCurrentInven()->item_kind == ITEM_BLASTFURNACE)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
+		}
+		else if (getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+		{
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				getCurrentInven()->indexX, getCurrentInven()->indexY);
+			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
 		}
 	}
 	
