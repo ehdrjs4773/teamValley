@@ -81,7 +81,6 @@ void  player::update()
 			isSkill = true;
 		}
 	}
-
 	if (INPUT->GetKeyDown('E'))
 	{
 		if(!isShowInventory) SOUNDMANAGER->play("menuopen");
@@ -94,11 +93,9 @@ void  player::update()
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);
-
 			}
 			else
 			{
-
 				_inventory->setInvenToryMove(true);
 				isShowInventory = true;
 				_inventory->setInvenPage(true);
@@ -142,7 +139,6 @@ void  player::update()
 	if (!isShowInventory)
 	{
 		countTime();
-		
 	}
 }
 
@@ -174,7 +170,6 @@ void player::playerCarryItem(HDC hdc)
 				IMAGEMANAGER->findImage("¾¾¾Ñhold")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
-			
 		}
 	}
 	

@@ -311,7 +311,7 @@ tagItem itemManager::findItem(const char* strKey)
 {
 	for (auto iter : _vItem)
 	{
-		if (iter.itemName == strKey)
+		if (iter.item_info == strKey)
 		{
 			return iter;
 		}

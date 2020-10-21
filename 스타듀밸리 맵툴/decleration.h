@@ -228,7 +228,7 @@ struct tagItem {
 	TOOL toolKind;
 	SEED seedKind;
 	WEAPON weaponKind = WEAPON_NONE;
-	string itemName;
+	const char* itemName;
 	const char* item_info;
 	int buy_price;
 	int sell_price;

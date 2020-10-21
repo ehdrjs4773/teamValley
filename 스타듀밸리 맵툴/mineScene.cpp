@@ -58,6 +58,7 @@ void mineScene::update()
 	checkCurrentTile(); 
 	PLAYER->update();
 	PLAYER->playerAnimation();
+	playerInteraction();
 
 	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN || PLAYER->getState() == CARRY || PLAYER->getState() == CARRYSTAND)
 	{
@@ -144,8 +145,11 @@ void mineScene::renderObject(int i, int j)
 		IMAGEMANAGER->frameRender("±¤¹°", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 			_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 	}
-	IMAGEMANAGER->frameRender(objStr, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-		_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+	else
+	{
+		IMAGEMANAGER->frameRender(objStr, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+			_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+	}
 }
 
 void mineScene::playerMove()
@@ -585,10 +589,9 @@ void mineScene::getItem(tagItem item)
 	{
 		for (int i = 0; i < INVENMAX; i++)
 		{
-			if ((*PLAYER->getInven())[i].item_image == NULL)
+			if (PLAYER->getInven()->at(i).item_image == NULL)
 			{
 				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
-				cout << PLAYER->getInven(i)->item_info << endl;
 				break;
 			}
 		}
@@ -636,8 +639,22 @@ void mineScene::ejectItem()
 void mineScene::dropItem(tagTile tile, const char * itemInfo)
 {
 	tagItemOnField temp;
-	temp.item = ITEMMANAGER->findItem(itemInfo);
-	temp.item.item_image = IMAGEMANAGER->findImage("¿­¸Å(¶¥)");
+	ZeroMemory(&temp, sizeof(temp));
+	ZeroMemory(&temp.item, sizeof(temp.item));
+	temp.item.item_info = ITEMMANAGER->findItem(itemInfo).item_info;
+	temp.item.itemName = ITEMMANAGER->findItem(itemInfo).itemName;
+	temp.item.amount = ITEMMANAGER->findItem(itemInfo).amount;
+	temp.item.buy_price = ITEMMANAGER->findItem(itemInfo).buy_price;
+	temp.item.indexX = ITEMMANAGER->findItem(itemInfo).indexX;
+	temp.item.indexY = ITEMMANAGER->findItem(itemInfo).indexY;
+	temp.item.isFrame = ITEMMANAGER->findItem(itemInfo).isFrame;
+	temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
+	temp.item.item_kind = ITEMMANAGER->findItem(itemInfo).item_kind;
+	temp.item.seedKind = ITEMMANAGER->findItem(itemInfo).seedKind;
+	temp.item.sell_price = ITEMMANAGER->findItem(itemInfo).sell_price;
+	temp.item.toolKind = ITEMMANAGER->findItem(itemInfo).toolKind;
+	temp.item.waterAmount = ITEMMANAGER->findItem(itemInfo).waterAmount;
+	temp.item.weaponKind = ITEMMANAGER->findItem(itemInfo).weaponKind;
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
 	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);
