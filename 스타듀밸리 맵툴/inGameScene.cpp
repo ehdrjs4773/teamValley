@@ -58,13 +58,6 @@ void inGameScene::update()
 
 	PLAYER->update();
 
-	if (PLAYER->getisSkill())
-	{
-		PLAYER->skillUpdate();
-
-		PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
-	}
-
 	checkPlayerTile();
 
 	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN||PLAYER->getState()==CARRY||PLAYER->getState()==CARRYSTAND)
@@ -79,9 +72,7 @@ void inGameScene::update()
 
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
-
 	setCurrentSlotNumber(_mouseWheel);
-
 
 	if (INPUT->GetKeyDown(VK_F1))
 	{
@@ -142,42 +133,15 @@ void inGameScene::render()
 	}
 
 
-	for (int i = 0; i < TILEY; i++)
-	{
-		for (int j = 0; j < TILEX; j++)
-		{
-			if (PLAYER->getskillclick())
-			{
-				RECT temp;
-				float pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x / WINSIZEX * 480);
-				float pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y / WINSIZEY * 230);
-				POINT pos = { pointX,pointY };
 
-				if (PtInRect(&_tile[i][j].rc, pos))
-				{
-					for (int k = -1; k <= 1; k++)
-					{
-						for (int l = -1; l <= 1; l++)
-						{
-							FrameRect(CAMERAMANAGER->getMemDC(), _tile[i - k][j - l].rc, RGB(255, 0, 0));
-						}
-					}
-				}
-			}
-		}
-	}
 	//ÀÌÆåÆ® ·»´õ
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 
 	CAMERAMANAGER->render(getMemDC());
 
-	if (PLAYER->getisSkill())
-	{
-		PLAYER->skill_AniRender(getMemDC());
-	}
-
 	PLAYER->playerStatusRender(getMemDC());
 
+	
 }
 
 void inGameScene::load()

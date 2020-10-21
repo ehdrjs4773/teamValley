@@ -7,7 +7,7 @@ class itemManager :
 {
 private:
 	vector<tagItem> _vItem;
-	 
+
 public:
 	HRESULT init();
 	void release();
