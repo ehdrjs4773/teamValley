@@ -31,6 +31,7 @@ void monster::release()
 
 void monster::update()
 {
+	this->rc = RectMakeCenter(centerX, centerY, 16, 16);
 }
 
 void monster::render()

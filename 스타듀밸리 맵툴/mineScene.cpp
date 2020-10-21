@@ -18,6 +18,12 @@ HRESULT mineScene::init()
 
 	isShowRect = false;
 
+	for (int i = 0; i < 3; i++)
+	{
+		setRandomObstacles();
+	}
+
+	vMonster.push_back(monsterList[0]);
 
 	this->update();
 
@@ -89,6 +95,7 @@ void mineScene::renderMap()
 	}
 
 	PLAYER->render();
+	monsterRender();
 
 	for (int i = PLAYER->getCurrentY(); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
@@ -391,14 +398,16 @@ void mineScene::playerInteraction()
 			//풀 베기 
 			cutGrass();
 
-			//층 내려가기
-			useLadder();
-
-			//마을로 돌아가기
-			useElevator();
-
 			cout << _tile[mouseIndexY][mouseIndexX].objType << endl;
 		}
+	}
+	if (INPUT->GetKeyDown(VK_RBUTTON))
+	{
+		//층 내려가기
+		useLadder();
+
+		//마을로 돌아가기
+		useElevator();
 	}
 }
 
@@ -526,6 +535,14 @@ void mineScene::useElevator()
 			SWITCHMANAGER->startFade(288.0f, 64.0f);
 		}
 	}
+}
+
+void mineScene::monsterMove()
+{
+}
+
+void mineScene::monsterRender()
+{
 }
 
 void mineScene::loadMap()

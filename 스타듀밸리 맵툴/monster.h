@@ -38,6 +38,7 @@ public:
 class monster : gameNode
 {
 private:
+	RECT rc;
 	MONTYPE monsterType;
 	MONSTATE state;
 	int currentTileX, currentTileY;
@@ -78,7 +79,6 @@ public:
 	//생성자
 	monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int _dmg, float _speed);
 	~monster() {};
-
 
 	/*중요함수*/
 		//길찾기 함수

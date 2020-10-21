@@ -52,6 +52,9 @@ public:
 	void useLadder();
 	void useElevator();
 
+	void monsterMove();
+	void monsterRender();
+
 	void renderMap();
 	void renderTerrain();
 	void renderObject(int i, int j);
