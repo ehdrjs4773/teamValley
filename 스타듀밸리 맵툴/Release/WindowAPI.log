@@ -1,43 +1,37 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  inGameScene.cpp
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(92): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(149): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(165): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(165): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(162): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(246): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(248): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(263): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(265): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(278): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(496): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(497): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(525): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(526): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(554): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(555): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(583): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(584): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(680): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(681): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1053): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1056): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1059): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1062): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1065): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1067): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2170): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2194): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2204): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2205): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2212): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2228): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2232): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2481): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2483): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mineScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(12): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(119): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(121): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(136): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(156): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(158): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(192): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(193): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(217): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(218): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(242): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(243): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(267): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(268): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(309): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(310): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(536): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(539): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(542): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(545): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(548): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(550): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(663): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(664): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(671): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(687): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(691): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(727): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  2 of 1891 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1891 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     3 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.

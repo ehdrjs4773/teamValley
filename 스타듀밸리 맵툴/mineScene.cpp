@@ -317,6 +317,7 @@ void mineScene::setRandomObstacles()
 		for (int j = 0; j < 50; j++)
 		{
 			if (_tile[i][j].obj != OBJ_NONE || (i == PLAYER->getCurrentY() && j == PLAYER->getCurrentX())) { continue; }
+			if (i >= 8 && i <= 12 && j >= 22 && j <= 26) continue;
 			if (RANDOM->range(20) == 0)
 			{
 				switch (RANDOM->range(5))
