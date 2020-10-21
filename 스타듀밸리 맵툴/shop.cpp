@@ -319,7 +319,7 @@ void shop::render()
 
 			}
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
-			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
+			//DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
 		}
 	}
 
