@@ -28,6 +28,7 @@ private:
 	RECT _isCraftRect;     //제작 렉트
 	BOOL _isPlayerPage;	   //누르면 플레이어페이지
 	RECT _isPlayerRect;    //스킬렉트
+	RECT _quickSlotRect;   //퀵슬롯 이미지렉트
 
 	RECT _playerTool[12];
 
@@ -84,6 +85,9 @@ public:
 
 	tagItem* getInven(int a) { return &_vItem[a]; }
 	tagItem getMoveItem() { return _MouseItem; }
+	RECT getPlayerTool(int i ) { return _playerTool[i]; }
+	RECT getqucikRect() { return _quickSlotRect; }
+	
 	void setMouseItem(tagItem item) { _MouseItem = item; }
 
 	void setInvenToryMove(bool move) { _isInventoryMove = move; }

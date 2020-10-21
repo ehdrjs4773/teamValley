@@ -8,9 +8,10 @@ void inventoryCraft::init()
 	{
 		for (int j = 0; j < 6; j++)
 		{
-			_CraftItem.item_image = IMAGEMANAGER->findImage("아이템제작");
+			_CraftItem.item_image = IMAGEMANAGER->findImage("아이템제작알파");
 			_CraftItem.indexX = j;
 			_CraftItem.indexY = i;
+			_CraftItem.rc = RectMake(250 + j % 6 * 50, 130 + i / 6 * 40, 40, 40);
 			_vCraftItem.push_back(_CraftItem);
 		}
 	}
@@ -28,16 +29,25 @@ void inventoryCraft::init()
 
 void inventoryCraft::update()
 {
-
-	for (int i = 0; i < _vCraftItem.size(); i++)
+	if (initCount == 0)
 	{
-		if (_vCraftItem[i].item_image == NULL)
+		for (int i = 0; i < _vCraftItem.size(); i++)
 		{
-			_vCraftItem[i].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			if (_vCraftItem[i].item_image == NULL)
+			{
+				_vCraftItem[i].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+			else
+			{
+
+			}
+			_vCraftItem[i].rc = RectMake(250 + i % 6 * 50, 130 + i / 6 * 40, 40, 40);
+
 		}
-		_vCraftItem[i].rc = RectMake(250 + i % 6 * 50, 130 + i / 6 * 40, 40, 40);
-	
+		initCount = 1;
 	}
+
+	cout << initCount << endl;
 
 	for (int i = 0; i < _inven->getvInven().size(); i++)
 	{
@@ -45,6 +55,7 @@ void inventoryCraft::update()
 		{
 			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
 			{
+				_isWood = i;
 				if (_inven->getvInven()[i].amount >= 10)
 				{
 
@@ -60,6 +71,8 @@ void inventoryCraft::update()
 							box.indexX = 0;
 							box.indexY = 0;
 							box.item_kind = ITEM_BOX;
+							box.isFrame = true;
+							box.amount = 1;
 
 							_inven->setMouseItem(box);
 							_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount - 10);
@@ -75,27 +88,13 @@ void inventoryCraft::update()
 						_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 						_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 					}
+					_isWood = NULL;
 				}
 			}
 
 			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS)
 			{
-				if (_isWood == NULL)
-				{
-					if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
-					{
-						_isWood = i;
-
-					}
-
-				}
-				else
-				{
-					if (_inven->getvInven()[_isWood].amount <= 0)
-					{
-						_isWood = NULL;
-					}
-				}
+				
 
 				if (_isRock == NULL)
 				{
@@ -416,7 +415,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
 					}
 				}
-				SetTextColor(hdc, RGB(255, 255, 255));
+				SetTextColor(hdc, RGB(0, 0, 0));
 				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
 			}
 		}
