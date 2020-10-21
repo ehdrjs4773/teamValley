@@ -385,8 +385,12 @@ void inGameScene::playerMove()
 		checkPlayerTile();
 		if (INPUT->GetKey('D'))
 		{
+	
+
+
 			rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
 			rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+			
 			if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
 			{
 				if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE || _tile[rightIndexY][rightIndexX].objType == OTY_GRASS
@@ -395,6 +399,8 @@ void inGameScene::playerMove()
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
 				{
+				
+
 					PLAYER->setDirection(RIGHT);
 
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
@@ -413,6 +419,7 @@ void inGameScene::playerMove()
 		{
 			leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
 			leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		
 			if (leftIndexX >= 0 && leftIndexY >= 0 && leftIndexY < TILEY)
 			{
 				if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE || _tile[leftIndexY][leftIndexX].objType == OTY_GRASS
@@ -421,6 +428,7 @@ void inGameScene::playerMove()
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
 				{
+					
 					PLAYER->setDirection(LEFT);
 
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
@@ -439,6 +447,7 @@ void inGameScene::playerMove()
 		{
 			upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
 			upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
+		
 			if (upIndexX >= 0 && upIndexX < TILEX && upIndexY >= 0)
 			{
 				if (_tile[upIndexY][upIndexX].obj == OBJ_NONE || _tile[upIndexY][upIndexX].objType == OTY_GRASS
@@ -447,6 +456,7 @@ void inGameScene::playerMove()
 						&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
 						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
 				{
+				
 					PLAYER->setDirection(UP);
 
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
@@ -465,6 +475,7 @@ void inGameScene::playerMove()
 		{
 			downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
 			downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
+			
 			if (downIndexX >= 0 && downIndexX < TILEX && downIndexY < TILEY)
 			{
 				if (_tile[downIndexY][downIndexX].obj == OBJ_NONE || _tile[downIndexY][downIndexX].objType == OTY_GRASS
@@ -473,6 +484,7 @@ void inGameScene::playerMove()
 						&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
 						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
 				{
+					
 					PLAYER->setDirection(DOWN);
 
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
@@ -588,21 +600,25 @@ void inGameScene::playerInteraction()
 				//밭 갈기
 				if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE)
 				{
+					
 					hackGround();
 				}
 				//나무베기
 				if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
 				{
+				
 					cutdownTree();
 				}
 				//돌, 광석 깨기
 				if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 				{
+					
 					breakStone();
 				}
 				//풀 베기 
 				if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE)
 				{
+					
 					cutGrass();
 				}
 				//씨 심기
@@ -618,13 +634,14 @@ void inGameScene::playerInteraction()
 					|| PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCEDOOR
 					|| PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCEDOOR)
 				{
-
+					
 					setFence();
 				}
 
 				//물뿌리기
 				if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 				{
+					
 					waterGround();
 				}
 				//물채우기
@@ -682,6 +699,7 @@ void inGameScene::hackGround()
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE && _tile[MouseIndexY][MouseIndexX].terrain == TR_SOIL)
 			{
+				SOUNDMANAGER->play("HOE");
 				_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
@@ -750,6 +768,7 @@ void inGameScene::cutdownTree()
 			//}
 			
 			//자를 수 있는 나무
+			SOUNDMANAGER->play("나무찍기");
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 			{
 				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
@@ -761,6 +780,7 @@ void inGameScene::cutdownTree()
 					}
 					else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
 					{
+						SOUNDMANAGER->play("removeTree");
 						for (int i = 0; i < 5; i++)
 						{
 							if (RANDOM->range(3) == 0)
@@ -862,6 +882,7 @@ void inGameScene::breakStone()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
+			SOUNDMANAGER->play("removeRock");
 			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_LARGESTONE)
 			{
 
@@ -894,6 +915,7 @@ void inGameScene::breakStone()
 void inGameScene::cutGrass()
 {
 
+		SOUNDMANAGER->play("removeGrass");
 		PLAYER->setState(CUTGRASS);
 		switch (PLAYER->getDirection())
 		{
@@ -1004,8 +1026,10 @@ void inGameScene::waterGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
+			
 			if(PLAYER->getWaterAmount()>=2)
 			{
+				SOUNDMANAGER->play("water");
 				PLAYER->setWaterAmount(PLAYER->getWaterAmount() - 2);
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getDamage());
 
@@ -1378,6 +1402,7 @@ void inGameScene::harvest()
 void inGameScene::attack()
 {
 
+	SOUNDMANAGER->play("sowrd");
 		PLAYER->setState(ATTACK);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
