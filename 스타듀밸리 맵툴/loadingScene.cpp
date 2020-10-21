@@ -100,7 +100,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("소형집", "Images/맵/아침 소형 집.bmp", 2560, 1440);
 
 	IMAGEMANAGER->addImage("인벤토리", "Images/inventory/iteminventory.bmp", 750, 550, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("스킬", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("스킬창", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("제작창", "Images/inventory/Craftinven.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작", "Images/inventory/CraftObject.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 240, 80, 6, 2, true, RGB(255, 0, 255));
@@ -153,6 +153,11 @@ void loadingScene::loadingImage()
 
 	//마우스 커서
 	IMAGEMANAGER->addFrameImage("커서", "Images/마우스커서.bmp", 144, 96, 3, 2);
+
+	//스킬
+	IMAGEMANAGER->addFrameImage("스킬", "Images/skill/skill_sprite.bmp", 500, 345, 9, 6);
+	IMAGEMANAGER->addFrameImage("스킬이미지", "Images/skill/skill_image.bmp", 345, 54, 6, 1);
+
 }
 
 void loadingScene::loadingSound()

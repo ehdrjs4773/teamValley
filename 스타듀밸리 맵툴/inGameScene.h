@@ -33,7 +33,6 @@ private:
 
 	bool isShowRect;
 	bool isShopOpen;
-
 public:
 	inGameScene();
 	

@@ -31,9 +31,9 @@ private:
 	RECT _quickSlotRect;   //Äü½½·Ô ÀÌ¹ÌÁö·ºÆ®
 
 	RECT _playerTool[12];
-
 	int MouseIndexX, MouseIndexY;
 	int currentSlotNumber;
+	int currentSkillNumber;
 	int waterAmount;
 
 	bool _isShopOpen;
@@ -45,6 +45,8 @@ public:
 	void render(HDC hdc);
 	void invenToryRender(HDC hdc);
 	void quickSlot(HDC hdc);
+	void quickSkillSlot(HDC hdc);
+
 	void _vItemUpdate();
 	void renderStorageInventory(HDC hdc);
 	void inven_item_info(HDC hdc);
@@ -59,6 +61,7 @@ public:
 	void isShopOpen(bool isOpen) { _isShopOpen = isOpen; }
 	bool getshopOpen() { return _isShopOpen; }
 	int getCurrentSlotNumber() { return currentSlotNumber; }
+	int getCurrentSKillNumber() { return currentSkillNumber; }
 	void setCurrentSlotNumber(int a)
 	{ 
 		if (a < 0)
