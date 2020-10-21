@@ -7,6 +7,8 @@ HRESULT player::init()
 	count = 0;
 	centerX = WINSIZEX / 2;
 	centerY = WINSIZEY / 2;
+	
+	isSkill = false;
 
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
@@ -37,6 +39,9 @@ HRESULT player::init()
 
 	stock = new Stock;
 	stock->init();
+
+	_skill = new skill();
+	_skill->init();
 	//stock->addPlayerStock(STOCK_BROWNCOW);
 	//stock->addPlayerStock(STOCK_WHITECOW);
 	//stock->addPlayerStock(STOCK_BROWNCHICKEN);
@@ -72,6 +77,15 @@ void  player::release()
 
 void  player::update()
 {
+
+	if (INPUT->GetKeyDown(VK_TAB))
+	{
+		if (isSkill) isSkill = false;
+		else {
+			_inventory->setCurrentSlotNumber(0);
+			isSkill = true;
+		}
+	}
 
 	if (INPUT->GetKeyDown('E'))
 	{
@@ -183,8 +197,15 @@ void player::InventoryRender(HDC hdc)
 		_inventory->inven_item_info(hdc);
 	}
 	else {
-		_inventory->quickSlot(hdc);
-		_inventory->quickinven_item_info(hdc);
+		if (!isSkill)
+		{
+			_inventory->quickSlot(hdc);
+			_inventory->quickinven_item_info(hdc);
+		}
+		else
+		{
+			_inventory->quickSkillSlot(hdc);
+		}
 	}
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 

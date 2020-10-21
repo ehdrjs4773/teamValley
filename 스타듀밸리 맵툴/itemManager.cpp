@@ -151,7 +151,7 @@ void itemManager::addSkill()
 	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_FIRE, false, "FIRE", 1000, 500);
 	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_SHIELD, false, "SHIELD", 1000, 500);
 	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_BLACKHOLE, false, "BLACKHOLE", 1000, 500);
-	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_FIREBALL, false, "FIRE_BALL", 1000, 500);
+	addWeapon("½ºÅ³ºÏ", ITEM_SKILL, WEAPON_FIREBALL, false, "FIREBALL", 1000, 500);
 }
 
 void itemManager::addOre()
