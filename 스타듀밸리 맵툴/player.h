@@ -8,6 +8,9 @@
 class player : public singletonBase<player>
 {
 private:
+	//인게임 맵 저장용 타일
+	tagTile _tile[TILEY][TILEX];
+
 	RECT rc;
 	RECT frontHpBar;
 	RECT playerInven;
@@ -35,9 +38,6 @@ private:
 	int hpBarX;
 	int Damage;
 
-	int boxCount;
-	int boxIndex;
-	bool isOpenPlayerInvenCover;
 
 	bool isShowInventory;
 
@@ -58,12 +58,16 @@ private:
 
 	inventory* _inventory;
 
+	bool isSprinkled;
+
 public:
 	HRESULT init();
 	void release();
 	void update();
 	void render();
 
+	bool getIsSprinkled() { return isSprinkled; }
+	void setIsSprinkled(bool isSprink) { isSprinkled = isSprink; }
 	void playerStatusRender(HDC hdc);
 	void InventoryRender(HDC hdc);
 	void hpBarRender(HDC hdc);
@@ -133,9 +137,6 @@ public:
 
 	void playerAnimation();
 	void playerRender();
-	void playerInvenAnimation();
-	void playerInvenCoverAnimation();
-	void openPlayerInvenCover();
 	void openPlayerStorageCover();
 	void playerCarryItem(HDC hdc);
 
@@ -156,8 +157,11 @@ public:
 	void loadPlayerData();
 	void loadInven();
 	void loadStock();
+	void loadMap();
 	void savePlayerData();
 	void savePlayerInven();
 	void savePlayerStock();
+	void saveMap();
+	void saveTile(int i, int j, tagTile tile);
 };
 

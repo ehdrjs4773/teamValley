@@ -79,6 +79,7 @@ void inHouseScene::render()
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
+						PLAYER->setIsSprinkled(false);
 						savePlayer();
 						if (!SWITCHMANAGER->getFade())
 						{
@@ -166,6 +167,7 @@ void inHouseScene::savePlayer()
 	PLAYER->savePlayerInven();
 	PLAYER->savePlayerStock();
 	PLAYER->savePlayerData();
+	PLAYER->saveMap();
 }
 
 

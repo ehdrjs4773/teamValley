@@ -171,6 +171,7 @@
     <ClInclude Include="mainScene.h" />
     <ClInclude Include="maptoolScene.h" />
     <ClInclude Include="mineScene.h" />
+    <ClInclude Include="monster.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerData.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="maptoolScene.cpp" />
     <ClCompile Include="mineScene.cpp" />
+    <ClCompile Include="monster.cpp" />
     <ClCompile Include="npc.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerData.cpp" />

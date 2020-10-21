@@ -19,6 +19,8 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("스킬북", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("광물", "Images/BMP/광물.bmp", 256, 80, 16, 5);
 	IMAGEMANAGER->addFrameImage("광물아이템", "Images/BMP/광물아이템.bmp", 640, 200, 16, 5);
+	IMAGEMANAGER->addFrameImage("스프링클러", "Images/BMP/스프링클러.bmp", 16, 48, 1, 3);
+	IMAGEMANAGER->addFrameImage("스프링클러아이템", "Images/BMP/스프링클러아이템.bmp", 40, 120, 1, 3);
 
 	addSkill();
 	addSeed();
@@ -26,6 +28,10 @@ HRESULT itemManager::init()
 	addWeapon();
 	addTool();
 	addObject();
+
+	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 0, "기본스프링클러");
+	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 1, "강화스프링클러");
+	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 2, "고급스프링클러");
 
 	return S_OK;
 }
@@ -286,7 +292,22 @@ void itemManager::addOre(const char* strKey, ITEM _itemKind, bool _isFrame, int 
 	_vItem.push_back(temp);
 }
 
-tagItem itemManager::findItem(string strKey)
+void itemManager::addSprinkler(const char * strKey, ITEM _ITEMKIND, bool _isFrame, int _indexX, int _indexY, const char * _itemInfo, int _buyPrice, int _sellPrice)
+{
+	tagItem temp;
+	temp.item_image = IMAGEMANAGER->findImage(strKey);
+	temp.item_kind = ITEM_SPRINKLER;
+	temp.isFrame = _isFrame;
+	temp.indexX = _indexX;
+	temp.indexY = _indexY;
+	temp.item_info = _itemInfo;
+	temp.itemName = _itemInfo;
+	temp.buy_price = _buyPrice;
+	temp.sell_price = _sellPrice;
+	_vItem.push_back(temp);
+}
+
+tagItem itemManager::findItem(const char* strKey)
 {
 	for (auto iter : _vItem)
 	{
