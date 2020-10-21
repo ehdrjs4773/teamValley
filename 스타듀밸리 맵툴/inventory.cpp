@@ -12,6 +12,7 @@ void inventory::init()
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
+		cout << &_vItem[i] << endl;
 	}
 
 	for (int i = 0; i < STORAGEMAX; i++)
@@ -68,7 +69,7 @@ void inventory::update()
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
 	_vItemUpdate();
-
+	
 	if (isShowTemp)
 	{
 		for (int i = 0; i < _vItem.size(); i++) //창고를 클릭했을때 나오는 플레이어 인벤토리
@@ -168,7 +169,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 					DeleteObject(brush);
 
 
-					if (_vItem[i].item_kind != ITEM_TOOL)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX)
 					{
 
 						if (_vItem[i].amount >= 0)
@@ -233,7 +234,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				else
 				{
 					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
-					if (_vItem[i].item_kind != ITEM_TOOL)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX)
 					{
 						if (_vItem[i].amount >= 0)
 						{
@@ -300,7 +301,8 @@ void inventory::quickSlot(HDC hdc)
 	// 캐릭터 밑에 항상 떠있는 퀵슬롯
 	if (_isInvenPage || !isShowTemp)
 	{
-		IMAGEMANAGER->render("플레이어 퀵슬롯", hdc, WINSIZEX / 2 - 282, 520);
+		_quickSlotRect = RectMake(WINSIZEX / 2 - 282, 520, IMAGEMANAGER->findImage("플레이어 퀵슬롯")->getWidth(), IMAGEMANAGER->findImage("플레이어 퀵슬롯")->getHeight());
+		IMAGEMANAGER->render("플레이어 퀵슬롯", hdc, _quickSlotRect.left, _quickSlotRect.top);
 
 		for (int i = 0; i < 12; i++)
 		{
@@ -841,6 +843,8 @@ void inventory::shopInvenRender(HDC hdc)
 
 void inventory::setvInven(int i, tagSaveItem item)
 {
+
+
 	_vItem[i].amount = item.amount;
 	_vItem[i].buy_price = item.buy_price;
 	_vItem[i].indexX = item.indexX;

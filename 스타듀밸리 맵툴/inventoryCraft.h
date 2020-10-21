@@ -12,6 +12,8 @@ public:
 	tagItem _CraftItem;
 	vector<tagItem> _vCraftItem;
 
+	int initCount = 0;
+
 	int _isWood;
 	int _isRock;
 	int _isIron;

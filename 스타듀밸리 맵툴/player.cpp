@@ -16,9 +16,6 @@ HRESULT player::init()
 	playerHp = 276;
 	Damage= 2;
 
-	boxIndex = 0;
-	boxCount = 0;
-	isOpenPlayerInvenCover = false;
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
@@ -121,7 +118,6 @@ void  player::update()
 
 	//rc = RectMakeCenter(centerX, centerY, 16, 32);
 	_inventory->update();
-	playerInvenCoverAnimation();
 
 	if (!isShowInventory)
 	{
@@ -630,46 +626,6 @@ void player::playerAnimation()
 
 }
 
-void player::playerInvenAnimation()
-{
-	boxCount++;
-	if (boxCount % 8 == 0)
-	{
-		boxIndex++;
-		if (boxIndex > 2)
-		{
-			boxIndex = 0;
-		}
-	}
-}
-
-void player::playerInvenCoverAnimation()
-{
-	if (isOpenPlayerInvenCover)
-	{
-		boxCount++;
-		if (boxCount % 5 == 0)
-		{
-			boxIndex++;
-			if (boxIndex > 12)
-			{
-				boxIndex = 12;
-			}
-		}
-	}
-	else if (!isOpenPlayerInvenCover)
-	{
-		boxCount++;
-		if (boxCount % 5 == 0)
-		{
-			boxIndex--;
-			if (boxIndex < 0)
-			{
-				boxIndex = 0;
-			}
-		}
-	}
-}
 
 void player::playerRender()
 {
@@ -850,14 +806,7 @@ void player::playerRender()
 	}
 }
 
-void player::openPlayerInvenCover()
-{
-	//플레이어 보유 아이템 판매상자
-	if(MouseIndexX >=30 && MouseIndexX <=32 && MouseIndexY>=15 && MouseIndexY<=16)
-	{
-		isOpenPlayerInvenCover = false;
-	}
-}
+
 
 void player::openPlayerStorageCover()
 {
@@ -974,13 +923,16 @@ void player::loadInven()
 	//인벤 불러오기
 	HANDLE file1;
 	DWORD read1;
-	tagSaveItem LoadItem[36];
+	tagSaveItem LoadItem[36] = {};
+	
+
 	TCHAR saveName3[MAX_PATH] = {};
 	sprintf(saveName3, "save/playerInven.data");
 	file1 = CreateFile(saveName3, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	ReadFile(file1, LoadItem, sizeof(LoadItem), &read1, NULL);
+	ReadFile(file1, LoadItem, sizeof(LoadItem)+sizeof(tagSaveItem), &read1, NULL);
 	CloseHandle(file1);
-	
+
+
 	for (int i = 0; i < 36; i++)
 	{
 		_inventory->setvInven(i, LoadItem[i]);
@@ -1011,13 +963,13 @@ void player::loadStock()
 void player::savePlayerData()
 {
 	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
-	INIDATA->addData("PLAYER", "date", itoa(date, dateStr, 10));
-	INIDATA->addData("PLAYER", "year", itoa(year, yearStr, 10));
-	INIDATA->addData("PLAYER", "day", itoa(day, dayStr, 10));
-	INIDATA->addData("PLAYER", "darkAlpha", itoa(darkAlpha, darkStr, 10));
-	INIDATA->addData("PLAYER", "currentSeason", itoa((int)currentSeason, seasonStr, 10));
-	INIDATA->addData("PLAYER", "currentWeather", itoa((int)currentWeather, weatherStr, 10));
-	INIDATA->addData("PLAYER", "money", itoa(money, moneyStr, 10));
+	INIDATA->addData("PLAYER", "date", _itoa(date, dateStr, 10));
+	INIDATA->addData("PLAYER", "year", _itoa(year, yearStr, 10));
+	INIDATA->addData("PLAYER", "day", _itoa(day, dayStr, 10));
+	INIDATA->addData("PLAYER", "darkAlpha", _itoa(darkAlpha, darkStr, 10));
+	INIDATA->addData("PLAYER", "currentSeason", _itoa((int)currentSeason, seasonStr, 10));
+	INIDATA->addData("PLAYER", "currentWeather", _itoa((int)currentWeather, weatherStr, 10));
+	INIDATA->addData("PLAYER", "money", _itoa(money, moneyStr, 10));
 	INIDATA->saveINI();
 }
 
@@ -1038,7 +990,7 @@ void player::savePlayerInven()
 			tempItem[i].indexX = 0;
 			tempItem[i].indexY = 0;
 			tempItem[i].isFrame = false;
-			//tempItem[i].itemName = "";
+			tempItem[i].itemName = "";
 			tempItem[i].item_kind = (ITEM)0;
 			tempItem[i].rc = RectMake(0,0,0,0);
 			tempItem[i].seedKind = (SEED)0;
@@ -1053,7 +1005,7 @@ void player::savePlayerInven()
 			tempItem[i].indexX = temp[i].indexX;
 			tempItem[i].indexY = temp[i].indexY;
 			tempItem[i].isFrame = temp[i].isFrame;
-			//tempItem[i].itemName = temp[i].itemName;
+			tempItem[i].itemName = temp[i].itemName;
 			tempItem[i].item_kind = temp[i].item_kind;
 			tempItem[i].rc = temp[i].rc;
 			tempItem[i].seedKind = temp[i].seedKind;

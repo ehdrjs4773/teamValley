@@ -32,9 +32,6 @@ private:
 	int hpBarX;
 	int Damage;
 
-	int boxCount;
-	int boxIndex;
-	bool isOpenPlayerInvenCover;
 
 	bool isShowInventory;
 
@@ -119,9 +116,6 @@ public:
 
 	void playerAnimation();
 	void playerRender();
-	void playerInvenAnimation();
-	void playerInvenCoverAnimation();
-	void openPlayerInvenCover();
 	void openPlayerStorageCover();
 	void playerCarryItem(HDC hdc);
 

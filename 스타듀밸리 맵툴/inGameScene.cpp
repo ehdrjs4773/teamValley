@@ -549,65 +549,98 @@ void inGameScene::playerInteraction()
 			}
 		}
 	}
-
-	if (INPUT->GetKeyDown(VK_LBUTTON))
+	
+	if (!PtInRect(&PLAYER->getInventory()->getqucikRect(), _ptMouse))
 	{
-		if (MouseIndexY < currentIndexY)
+
+		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
-			PLAYER->setDirection(UP);
-		}
-		if (MouseIndexY > currentIndexY)
-		{
-			PLAYER->setDirection(DOWN);
-		}
-		 if (MouseIndexX < currentIndexX)
-		{
-			PLAYER->setDirection(LEFT);
-		}
-		if (MouseIndexX > currentIndexX)
-		{
-			PLAYER->setDirection(RIGHT);
-		}
-		if (PLAYER->getState() == RUN || PLAYER->getState() == STAND || PLAYER->getState()==CARRYSTAND)
-		{
-			//밭 갈기
-			hackGround();
-
-			//나무베기
-			cutdownTree();
-
-			//돌, 광석 깨기
-			breakStone();
-
-			//풀 베기 
-			cutGrass();
-
-			//씨 심기
-			plantSeed();
-
-			//펜스 설치
-			setFence();
-
-			//물뿌리기
-			waterGround();
-
-			//물채우기
-			fillWater();
-
-			//공격하기 (우선은 나무자름)
-			attack();
-
-			PLAYER->openPlayerInvenCover();
-		}
-		if (MouseIndexX == 35 &&  MouseIndexY == 53 || MouseIndexY == 54)
-		{
-			if (!PLAYER->getIsShowInventory())
+			if (MouseIndexY < currentIndexY)
 			{
-				PLAYER->openPlayerStorageCover();
+				PLAYER->setDirection(UP);
 			}
+			if (MouseIndexY > currentIndexY)
+			{
+				PLAYER->setDirection(DOWN);
+			}
+			if (MouseIndexX < currentIndexX)
+			{
+				PLAYER->setDirection(LEFT);
+			}
+			if (MouseIndexX > currentIndexX)
+			{
+				PLAYER->setDirection(RIGHT);
+			}
+			if (PLAYER->getState() == RUN || PLAYER->getState() == STAND || PLAYER->getState() == CARRYSTAND)
+			{
+				//밭 갈기
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE)
+				{
+					hackGround();
+				}
+				//나무베기
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
+				{
+					cutdownTree();
+				}
+				//돌, 광석 깨기
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
+				{
+					breakStone();
+				}
+				//풀 베기 
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE)
+				{
+					cutGrass();
+				}
+				//씨 심기
+
+				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
+				{
+					plantSeed();
+
+				}
+
+				//펜스 설치
+				if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCE || PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCE
+					|| PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCEDOOR
+					|| PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCEDOOR)
+				{
+
+					setFence();
+				}
+
+				//물뿌리기
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+				{
+					waterGround();
+				}
+				//물채우기
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].objType == OTY_WELL)
+				{
+
+					fillWater();
+				}
+				//공격하기 (우선은 나무자름)
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
+				{
+					attack();
+				}
+
+			}
+			if (MouseIndexX == 35 && MouseIndexY == 53 || MouseIndexY == 54)
+			{
+				if (!PLAYER->getIsShowInventory())
+				{
+					PLAYER->openPlayerStorageCover();
+				}
+			}
+
 		}
-		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
+
 	}
+
+	
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
@@ -624,8 +657,7 @@ void inGameScene::playerInteraction()
 
 void inGameScene::hackGround()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_HOE)
-	{
+	
 		PLAYER->setState(DIGGROUND);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -642,13 +674,12 @@ void inGameScene::hackGround()
 				checkHacked();
 			}
 		}
-	}
+
 }
 
 void inGameScene::cutdownTree()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_AX)
-	{
+
 		PLAYER->setState(CUTDOWNTREE);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -803,13 +834,12 @@ void inGameScene::cutdownTree()
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getDamage());
 			}
 		}
-	}
+
 }
 
 void inGameScene::breakStone()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
-	{
+
 		PLAYER->setState(BREAKSTONE);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -842,13 +872,12 @@ void inGameScene::breakStone()
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getDamage());
 			}
 		}
-	}
+	
 }
 
 void inGameScene::cutGrass()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE)
-	{
+
 		PLAYER->setState(CUTGRASS);
 		switch (PLAYER->getDirection())
 		{
@@ -902,7 +931,7 @@ void inGameScene::cutGrass()
 				}
 			}
 		}
-	}
+	
 }
 
 void inGameScene::setFence()
@@ -929,6 +958,8 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
 			}
+
+
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCEDOOR)
 			{
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
@@ -950,8 +981,7 @@ void inGameScene::setFence()
 
 void inGameScene::waterGround()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
-	{
+
 		PLAYER->setState(SPRAYWATER);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -969,14 +999,12 @@ void inGameScene::waterGround()
 				checkHacked();
 			}
 		}
-	}
+
 }
 
 void inGameScene::fillWater()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].objType==OTY_WELL)
-	{
-		
+
 		PLAYER->setState(FILLWATER);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -986,13 +1014,12 @@ void inGameScene::fillWater()
 			PLAYER->setWaterAmount(34);
 
 		}
-	}
 }
 
 void inGameScene::plantSeed()
 {
 	//작물 심기
-	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED && !(PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
+	if (!(PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
 		&& _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
 		
@@ -1248,8 +1275,7 @@ void inGameScene::plantSeed()
 	}
 
 	//나무 심기
-	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED 
-		&& (PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
+	if ((PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
 			&& _tile[MouseIndexY][MouseIndexX].terrain != TR_HACKED)
 	{
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
@@ -1337,8 +1363,7 @@ void inGameScene::harvest()
 
 void inGameScene::attack()
 {
-	if (PLAYER->getCurrentInven()->toolKind == TOOL_SWORD)
-	{
+
 		PLAYER->setState(ATTACK);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -1425,7 +1450,6 @@ void inGameScene::attack()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 			}
 		}
-	}
 }
 
 void inGameScene::makeCropGrow()
