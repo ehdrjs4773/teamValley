@@ -107,7 +107,10 @@ void  player::update()
 	setCurrentMap();
 
 	//가축 움직임
-	stock->update();
+	if (currentMap == MAP_BARN)
+	{
+		stock->update();
+	}
 
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
@@ -627,7 +630,6 @@ void player::playerAnimation()
 
 }
 
-
 void player::playerRender()
 {
 	switch (_pState)
@@ -807,8 +809,6 @@ void player::playerRender()
 	}
 }
 
-
-
 void player::openPlayerStorageCover()
 {
 	//플레이어 창고상자
@@ -917,7 +917,6 @@ void player::loadPlayerData()
 	
 	loadInven();
 	loadStock();
-	loadMap();
 }
 
 void player::loadInven()
@@ -960,10 +959,6 @@ void player::loadStock()
 		//if (tempStock[i].speed == 0) break;
 		stock->setStock(tempStock[i]);
 	}
-}
-
-void player::loadMap()
-{
 }
 
 void player::savePlayerData()

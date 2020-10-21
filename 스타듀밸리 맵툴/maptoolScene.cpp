@@ -946,6 +946,22 @@ void maptoolScene::load()
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
+
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int  j = 0; j < TILEX; j++)
+		{
+			if (j < DISPLAYX && i < DISPLAYY)
+			{
+				_tile[i][j].rc = RectMake(50 + j * TILESIZE, 50 + i * TILESIZE, TILESIZE, TILESIZE);
+			}
+			else
+			{
+				_tile[i][j].rc = RectMake(-50, -50, 0, 0);
+			}
+		}
+	}
+	
 }
 
 void maptoolScene::setScroll()
@@ -1857,11 +1873,11 @@ void maptoolScene::showMapTile()
 			break;
 		}
 
-		for (int i = 0; i < DISPLAYY; i++)
+		for (int i = 0; i < TILEY; i++)
 		{
-			for (int j = 0; j < DISPLAYX; j++)
+			for (int j = 0; j < TILEX; j++)
 			{
-				if (i + tileY < 50 && j + tileX < 50)
+				if (i + tileY < TILEY && j + tileX < TILEX)
 				{
 					IMAGEMANAGER->frameRender(str, getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						_tile[i + tileY][j + tileX].terrainFrameX, _tile[i + tileY][j + tileX].terrainFrameY);
@@ -1872,7 +1888,6 @@ void maptoolScene::showMapTile()
 							_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 					}
 				}
-				
 			}
 		}
 	}
@@ -2100,7 +2115,7 @@ void maptoolScene::showSampleObjectTile()
 		{
 			for (int j = 0; j < 16; j++)
 			{
-				if (j < sampleTileMaxFrameX && i < sampleTileMaxFrameY)
+				if (j < 16 && i < 18)
 				{
 					char str[64];
 					switch (_currentMine)

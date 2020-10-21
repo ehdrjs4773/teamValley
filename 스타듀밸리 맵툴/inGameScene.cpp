@@ -32,6 +32,7 @@ HRESULT inGameScene::init()
 		_tile[69][37].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[20][50].portal = PT_SHOP;
+		_tile[3][18].portal = PT_MINE;
 
 		isSprinkled = false;
 
@@ -531,6 +532,11 @@ void inGameScene::moveScene()
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(762.0f,887.0f);
 	}
+	else if (_tile[currentIndexY][currentIndexX].portal == PT_MINE)
+	{
+		SWITCHMANAGER->changeScene("광산화면");
+		SWITCHMANAGER->startFade(464.0f, 240.0f);
+	}
 }
  
 void inGameScene::checkPlayerTile()
@@ -641,17 +647,18 @@ void inGameScene::playerInteraction()
 			}
 			//스프링클러 설치
 			setSprinkler();
-		}
-		if (MouseIndexX == 35 &&  MouseIndexY == 53 || MouseIndexY == 54)
-		{
-			if (!PLAYER->getIsShowInventory())
+
+			if (MouseIndexX == 35 && MouseIndexY == 53 || MouseIndexY == 54)
 			{
 				if (!PLAYER->getIsShowInventory())
 				{
-					PLAYER->openPlayerStorageCover();
+					if (!PLAYER->getIsShowInventory())
+					{
+						PLAYER->openPlayerStorageCover();
+					}
 				}
-			}
 
+			}
 		}
 		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
 	}

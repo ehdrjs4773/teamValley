@@ -6,12 +6,21 @@ HRESULT mineScene::init()
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
-	PLAYER->setCenterX(80.0f);
-	PLAYER->setCenterY(80.0f);
-
 	currentFloor = 1;
 
+	loadMap();
 	checkCurrentTile();
+
+	//미리 슬라임, 버그, 서펜트 3종류 프리셋 만들어놓음
+	setMonsterList();
+
+	//새 몬스터 생성시 위의 프리셋을 vMonster 벡터에 넣어버리면 됨
+
+	isShowRect = false;
+
+
+	this->update();
+
 	return S_OK;
 }
 
@@ -21,17 +30,37 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
+	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
+
+	if (INPUT->GetKeyDown(VK_F1))
+	{
+		if (isShowRect)
+		{
+			isShowRect = false;
+		}
+		else
+		{
+			isShowRect = true;
+		}
+	}
 	if (INPUT->GetKeyDown(VK_F2))
 	{
 		setRandomObstacles();
 	}
 
-	checkCurrentTile();
-	ejectItem();
-
+	checkCurrentTile(); 
 	PLAYER->update();
 	PLAYER->playerAnimation();
-	playerMove();
+
+	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN || PLAYER->getState() == CARRY || PLAYER->getState() == CARRYSTAND)
+	{
+		this->playerMove();
+		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+	}
+	this->ejectItem();
+
+	
 }
 
 void mineScene::render()
@@ -45,12 +74,17 @@ void mineScene::render()
 
 void mineScene::renderMap()
 {
+	renderTerrain();
+
 	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < PLAYER->getCurrentY(); i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderTerrain(i, j);
 			renderObject(i, j);
+			if (isShowRect)
+			{
+				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+			}
 		}
 	}
 
@@ -60,47 +94,62 @@ void mineScene::renderMap()
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderTerrain(i, j);
 			renderObject(i, j);
+			if (isShowRect)
+			{
+				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+			
+			}
 		}
 	}
-
+	if (isShowRect)
+	{
+		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
+		Rectangle(CAMERAMANAGER->getMemDC(), _tile[mouseIndexY][mouseIndexX].rc);
+	}
 	PLAYER->playerStatusRender(getMemDC());
 }
 
-void mineScene::renderTerrain(int i, int j)
+void mineScene::renderTerrain()
 {
-	string str;
-	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; }
-	if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; }
-	if (currentFloor > 10 && currentFloor <= 15) { str = "광산 프로스트"; }
-	if (currentFloor > 15 && currentFloor <= 20) { str = "광산 프로스트다크"; }
-	IMAGEMANAGER->frameRender(str, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
+	{
+		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
+		{
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
+			{
+				if (_tile[i][j].terrain == TR_GROUND)
+				{
+					IMAGEMANAGER->frameRender(str, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+				}
+			}
+		}
+	}
 }
 
 void mineScene::renderObject(int i, int j)
 {
-	string str;
-	if (currentFloor > 0 && currentFloor <= 5) { str = "광산오브젝트 노말"; }
-	if (currentFloor > 5 && currentFloor <= 10) { str = "광산오브젝트 노말다크"; }
-	if (currentFloor > 10 && currentFloor <= 15) { str = "광산오브젝트 프로스트"; }
-	if (currentFloor > 15 && currentFloor <= 20) { str = "광산오브젝트 프로스트다크"; }
+	if (_tile[i][j].obj == OBJ_NONE) return;
+	
 	if (_tile[i][j].objType == OTY_ORE)
 	{
-		str = "광물";
+		IMAGEMANAGER->frameRender("광물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+			_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 	}
-	IMAGEMANAGER->frameRender(str, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, _tile[i][j].objFrameY);
+	IMAGEMANAGER->frameRender(objStr, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+		_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 }
 
 void mineScene::playerMove()
 {
 	if (INPUT->GetKey('W'))
 	{
-		rightIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
-		rightIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
-		if (rightIndexX < TILEX && rightIndexY >= 0 && rightIndexY < TILEY)
+		upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		upIndexY = (float)((float)PLAYER->getCenterY() - 8) / 16;
+		if (upIndexX < TILEX && upIndexY >= 0 && upIndexY < TILEY)
 		{
-			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE)
+			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
 			{
 				PLAYER->setDirection(UP);
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
@@ -117,8 +166,8 @@ void mineScene::playerMove()
 	}
 	if (INPUT->GetKey('S'))
 	{
-		downIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
-		downIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
+		downIndexX = (float)((float)PLAYER->getCenterX()) / 16;
+		downIndexY = (float)((float)PLAYER->getCenterY() + 16) / 16;
 		if (downIndexX < TILEX && downIndexY >= 0 && downIndexY < TILEY)
 		{
 			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE)
@@ -132,13 +181,13 @@ void mineScene::playerMove()
 				{
 					PLAYER->setState(RUN);
 				}
-				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
 			}
 		}
 	}
 	if (INPUT->GetKey('A'))
 	{
-		leftIndexX = (float)((float)PLAYER->getCenterX() + 8) / 16;
+		leftIndexX = (float)((float)PLAYER->getCenterX() - 8) / 16;
 		leftIndexY = (float)((float)PLAYER->getCenterY() + 8) / 16;
 		if (leftIndexX < TILEX && leftIndexY >= 0 && leftIndexY < TILEY)
 		{
@@ -153,7 +202,7 @@ void mineScene::playerMove()
 				{
 					PLAYER->setState(RUN);
 				}
-				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 			}
 		}
 	}
@@ -174,7 +223,7 @@ void mineScene::playerMove()
 				{
 					PLAYER->setState(RUN);
 				}
-				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 			}
 		}
 	}
@@ -186,11 +235,9 @@ void mineScene::playerMove()
 
 void mineScene::checkCurrentTile()
 {
-	if (currentIndexX != PLAYER->getCurrentX() || currentIndexY != PLAYER->getCurrentY())
-	{
-		currentIndexX = PLAYER->getCurrentX();
-		currentIndexY = PLAYER->getCurrentY();
-	}
+	currentIndexX = PLAYER->getCurrentX();
+	currentIndexY = PLAYER->getCurrentY();
+
 	mouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	mouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 }
@@ -231,7 +278,7 @@ void mineScene::setStone(int i, int j)
 {
 	_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 	_tile[i][j].objType = OTY_STONE;
-	switch (RANDOM->range(7))
+	switch (RANDOM->range(4))
 	{
 	case 0:
 		_tile[i][j].objFrameX = 5;
@@ -248,18 +295,6 @@ void mineScene::setStone(int i, int j)
 	case 3:
 		_tile[i][j].objFrameX = 11;
 		_tile[i][j].objFrameY = 9;
-		break;
-	case 4:
-		_tile[i][j].objFrameX = 5;
-		_tile[i][j].objFrameY = 10;
-		break;
-	case 5:
-		_tile[i][j].objFrameX = 7;
-		_tile[i][j].objFrameY = 10;
-		break;
-	case 6:
-		_tile[i][j].objFrameX = 9;
-		_tile[i][j].objFrameY = 10;
 		break;
 	}
 }
@@ -355,6 +390,14 @@ void mineScene::playerInteraction()
 
 			//풀 베기 
 			cutGrass();
+
+			//층 내려가기
+			useLadder();
+
+			//마을로 돌아가기
+			useElevator();
+
+			cout << _tile[mouseIndexY][mouseIndexX].objType << endl;
 		}
 	}
 }
@@ -380,8 +423,14 @@ void mineScene::breakStone()
 				{
 					dropItem(_tile[mouseIndexY][mouseIndexX], str);
 				}
-				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
-				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
+				RANDOM->range(9) == 0 ?
+					_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE,
+					_tile[mouseIndexY][mouseIndexX].objType = OTY_MINELADDER,
+					_tile[mouseIndexY][mouseIndexX].objFrameX = 6,
+					_tile[mouseIndexY][mouseIndexX].objFrameY = 12
+					:
+					_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE,
+					_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
@@ -401,6 +450,7 @@ void mineScene::breakStone()
 				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
 				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;	
 			}
+			
 		}
 	}
 }
@@ -444,6 +494,59 @@ void mineScene::cutGrass()
 					}
 				}
 			}
+		}
+	}
+}
+
+void mineScene::useLadder()
+{
+	if (((mouseIndexX == currentIndexX + 1 || mouseIndexX == currentIndexX - 1) && mouseIndexY == currentIndexY)
+		|| (mouseIndexX == currentIndexX && (mouseIndexY == currentIndexY + 1 || mouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+		|| ((mouseIndexX == currentIndexX - 1 || mouseIndexX == currentIndexX + 1)
+			&& (mouseIndexY == currentIndexY - 1 || mouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
+	{
+		if (_tile[mouseIndexY][mouseIndexX].objType == OTY_MINELADDER)
+		{
+			currentFloor++;
+			loadMap();
+		}
+	}
+}
+
+void mineScene::useElevator()
+{
+	if (((mouseIndexX == currentIndexX + 1 || mouseIndexX == currentIndexX - 1) && mouseIndexY == currentIndexY)
+		|| (mouseIndexX == currentIndexX && (mouseIndexY == currentIndexY + 1 || mouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+		|| ((mouseIndexX == currentIndexX - 1 || mouseIndexX == currentIndexX + 1)
+			&& (mouseIndexY == currentIndexY - 1 || mouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
+	{
+		if (_tile[mouseIndexY][mouseIndexX].objFrameX == 0 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
+		{
+			SWITCHMANAGER->changeScene("인게임화면");
+			SWITCHMANAGER->startFade(288.0f, 64.0f);
+		}
+	}
+}
+
+void mineScene::loadMap()
+{
+	HANDLE file;
+	DWORD read;
+	sprintf(saveName, "save/dungeon%d.map", currentFloor);
+	cout << saveName << endl;
+	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
+	CloseHandle(file);
+	setTileRect();
+}
+
+void mineScene::setTileRect()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			_tile[i][j].rc = RectMake(j * TILESIZE, i * TILESIZE, TILESIZE, TILESIZE);
 		}
 	}
 }
@@ -529,4 +632,17 @@ void mineScene::dropItem(tagTile tile, const char * itemInfo)
 	temp.isOnGround = false;
 	_vItemOnField.push_back(temp);
 }
+
+void mineScene::setMonsterList()
+{
+	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 10, 5, 4);
+	vMonster.push_back(presetSlime);
+
+	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 5, 5, 4);
+	vMonster.push_back(presetBug);
+
+	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, 4);
+	vMonster.push_back(presetSerpent);
+}
+
 

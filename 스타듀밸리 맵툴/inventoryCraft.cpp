@@ -29,6 +29,74 @@ void inventoryCraft::init()
 
 void inventoryCraft::update()
 {
+	for (int i = 0; i < _inven->getvInven().size(); i++)
+	{
+		if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS)
+		{
+			if (_isWood == NULL)
+			{
+				if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+				{
+					_isWood = i;
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isWood].amount <= 0)
+				{
+					_isWood = NULL;
+				}
+			}
+			if (_isRock == NULL)
+			{
+				if (_inven->getvInven()[i].indexX == 5 && _inven->getvInven()[i].indexY == 2)
+				{
+					_isRock = i;
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isRock].amount <= 0)
+				{
+					_isRock = NULL;
+				}
+			}
+		}
+		else if (_inven->getvInven()[i].item_kind == ITEM_ORE)
+		{
+			if (_isCopper == NULL)
+			{
+				if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 3)
+				{
+					_isCopper = i;
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isCopper].amount <= 0)
+				{
+					_isCopper = NULL;
+				}
+
+			}
+			if (_isIron == NULL)
+			{
+				if (_inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
+				{
+					_isIron = i;
+
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isIron].amount <= 0)
+				{
+					_isIron = NULL;
+				}
+			}
+		}
+	}
+
 	if (initCount == 0)
 	{
 		for (int i = 0; i < _vCraftItem.size(); i++)
@@ -49,110 +117,43 @@ void inventoryCraft::update()
 
 	cout << initCount << endl;
 
-	for (int i = 0; i < _inven->getvInven().size(); i++)
+	if (_inven->getvInven()[_isWood].item_image != NULL)
 	{
-		if (_inven->getvInven()[i].item_image != NULL)
+		if (_inven->getvInven()[_isWood].amount >= 10)
 		{
-			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS && _inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 2)
+			_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작");
+			if (PtInRect(&_vCraftItem[0].rc, _ptMouse) || PtInRect(&_vCraftItem[6].rc, _ptMouse))
 			{
-				_isWood = i;
-				if (_inven->getvInven()[i].amount >= 10)
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					tagItem box;
+					box.item_image = IMAGEMANAGER->findImage("아이템");
+					box.item_info = "상자";
+					box.indexX = 0;
+					box.indexY = 0;
+					box.item_kind = ITEM_BOX;
+					box.isFrame = true;
+					box.amount = 1;
 
-					_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작");
-					_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작");
-					if (PtInRect(&_vCraftItem[0].rc, _ptMouse) || PtInRect(&_vCraftItem[6].rc, _ptMouse))
-					{
-						if (INPUT->GetKeyDown(VK_LBUTTON))
-						{
-							tagItem box;
-							box.item_image = IMAGEMANAGER->findImage("아이템");
-							box.item_info = "상자";
-							box.indexX = 0;
-							box.indexY = 0;
-							box.item_kind = ITEM_BOX;
-							box.isFrame = true;
-							box.amount = 1;
-
-							_inven->setMouseItem(box);
-							_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount - 10);
-						}
-					}
-
-				}
-				else if (_inven->getvInven()[i].amount < 10)
-				{
-					if (_vCraftItem[0].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
-						_vCraftItem[6].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-					{
-						_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-						_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-					}
-					_isWood = NULL;
+					_inven->setMouseItem(box);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 10);
 				}
 			}
-
-			if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS)
-			{
-				
-
-				if (_isRock == NULL)
-				{
-					if (_inven->getvInven()[i].indexX == 5 && _inven->getvInven()[i].indexY == 2)
-					{
-						_isRock = i;
-
-					}
-
-
-				}
-				else
-				{
-					if (_inven->getvInven()[_isRock].amount <= 0)
-					{
-						_isRock = NULL;
-					}
-				}
-			}
-			else if (_inven->getvInven()[i].item_kind == ITEM_ORE)
-			{
-				if (_isCopper == NULL)
-				{
-					if (_inven->getvInven()[i].indexX == 6 && _inven->getvInven()[i].indexY == 3)
-					{
-						_isCopper = i;
-					}
-				}
-				else
-				{
-					if (_inven->getvInven()[_isCopper].amount <= 0)
-					{
-						_isCopper = NULL;
-					}
-
-				}
-				if (_isIron == NULL)
-				{
-					if (_inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
-					{
-						_isIron = i;
-
-					}
-				}
-				else
-				{
-					if (_inven->getvInven()[_isIron].amount <= 0)
-					{
-						_isIron = NULL;
-					}
-				}
-			}
-			
 		}
-
-		
+		else if (_inven->getvInven()[_isWood].amount < 10)
+		{
+			if (_vCraftItem[0].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[6].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+			_isWood = NULL;
+		}
 	}
 }
+
 void inventoryCraft::release()
 {
 }

@@ -1,10 +1,13 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
+#include "monster.h"
 
 class mineScene : public gameNode
 {
 private:
+	TCHAR saveName[MAX_PATH];
+
 	//땅에 떨어진 아이템용 벡터
 	vector<tagItemOnField> _vItemOnField;
 	RECT getItemRc;
@@ -21,11 +24,24 @@ private:
 	int upIndexX, upIndexY;
 	int downIndexX, downIndexY;
 
+	//단순 몬스터 리스트
+	vector<monster*> monsterList;
+	//필드 위 몬스터 벡터
+	vector<monster*> vMonster;
+
+	string str;
+	string objStr;
+
+	bool isShowRect;
+
 public:
 	HRESULT init();
 	void release();
 	void update();
 	void render();
+
+	void loadMap();
+	void setTileRect();
 
 	void playerMove();
 	void checkCurrentTile();
@@ -33,9 +49,11 @@ public:
 	void playerInteraction();
 	void breakStone();
 	void cutGrass();
+	void useLadder();
+	void useElevator();
 
 	void renderMap();
-	void renderTerrain(int i, int j);
+	void renderTerrain();
 	void renderObject(int i, int j);
 
 	void setRandomObstacles();
@@ -46,5 +64,7 @@ public:
 	void ejectItem();
 	void dropItem(tagTile tile, const char* itemInfo);
 	
+	void setMonsterList();
+
 };
 

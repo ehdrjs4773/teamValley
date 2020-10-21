@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 
+#define MINEMAX 50
+
 //노드상태
 enum NODESTATE
 {
@@ -36,13 +38,17 @@ public:
 class monster : gameNode
 {
 private:
+	MONTYPE monsterType;
+	MONSTATE state;
 	int currentTileX, currentTileY;
 	int moveCount;
 	int hp, dmg;
 	float centerX, centerY;
 	float speed;
 	float angle;
-	image* image;
+
+	int aniCount;
+	int aniIndexX, aniIndexY;
 
 
 	//에이스타
@@ -61,11 +67,17 @@ private:
 public:
 	HRESULT init();
 	void release();
+
 	void update();
 	void render();
-
 	void astarInit();
+	void startSearchPlayer(int playerCurrentX, int playerCurrentY);
 	void searchPlayer(int playerCurrentX, int playerCurrentY);
+	void setWallNode(int i, int j, OBJECT obj);
+
+	//생성자
+	monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int _dmg, float _speed);
+	~monster() {};
 
 
 	/*중요함수*/

@@ -200,6 +200,22 @@ enum SKILL
 	SKILL_END
 };
 
+//∏ÛΩ∫≈Õ
+enum MONTYPE
+{
+	MTYPE_NONE,
+	MTYPE_SLIME,
+	MTYPE_BUG,
+	MTYPE_SERPENT
+};
+
+enum MONSTATE
+{
+	MSTATE_IDLE,
+	MSTATE_MOVE,
+	MSTATE_ATTACK
+};
+
 struct tagItem {
 	RECT rc;
 	image* item_image;
