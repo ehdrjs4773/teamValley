@@ -149,9 +149,198 @@ void inventoryCraft::update()
 				_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 				_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 			}
-			_isWood = NULL;
 		}
 	}
+
+	if (_inven->getvInven()[_isWood].item_image != NULL)
+	{
+		if (_inven->getvInven()[_isWood].amount >= 15)
+		{
+			_vCraftItem[1].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[7].item_image = IMAGEMANAGER->findImage("아이템제작");
+			if (PtInRect(&_vCraftItem[1].rc, _ptMouse) || PtInRect(&_vCraftItem[7].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					tagItem feedbucket;
+					feedbucket.item_image = IMAGEMANAGER->findImage("아이템");
+					feedbucket.item_info = "먹이통";
+					feedbucket.indexX = 1;
+					feedbucket.indexY = 0;
+					feedbucket.item_kind = ITEM_FEEDBUCKET;
+					feedbucket.isFrame = true;
+					feedbucket.amount = 1;
+
+					_inven->setMouseItem(feedbucket);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
+				}
+			}
+		}
+		else if (_inven->getvInven()[_isWood].amount < 15)
+		{
+			if (_vCraftItem[1].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[7].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[1].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[7].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+		}
+	}
+
+	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isIron].item_image != NULL)
+	{
+		if (_inven->getvInven()[_isWood].amount >= 20 && _inven->getvInven()[_isIron].amount >= 10)
+		{
+			_vCraftItem[2].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[8].item_image = IMAGEMANAGER->findImage("아이템제작");
+
+			if (PtInRect(&_vCraftItem[2].rc, _ptMouse) || PtInRect(&_vCraftItem[8].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					tagItem beefarm;
+					beefarm.item_image = IMAGEMANAGER->findImage("아이템");
+					beefarm.item_info = "먹이통";
+					beefarm.indexX = 2;
+					beefarm.indexY = 0;
+					beefarm.item_kind = ITEM_BEEFARM;
+					beefarm.isFrame = true;
+					beefarm.amount = 1;
+
+					_inven->setMouseItem(beefarm);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 20);
+					_inven->setInvenItemAmount(_isIron, _inven->getvInven()[_isIron].amount - 10);
+
+				}
+			}
+		}
+		else if (_inven->getvInven()[_isWood].amount < 20 || _inven->getvInven()[_isIron].amount < 10)
+		{
+			if (_vCraftItem[2].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[8].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[2].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[8].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+		}
+	}
+
+	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isRock].item_image != NULL)
+	{
+		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isRock].amount >= 5)
+		{
+			_vCraftItem[3].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[9].item_image = IMAGEMANAGER->findImage("아이템제작");
+
+			if (PtInRect(&_vCraftItem[3].rc, _ptMouse) || PtInRect(&_vCraftItem[9].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					tagItem scarecrow;
+					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
+					scarecrow.item_info = "허수아비";
+					scarecrow.indexX = 3;
+					scarecrow.indexY = 0;
+					scarecrow.item_kind = ITEM_SCARECROW;
+					scarecrow.isFrame = true;
+					scarecrow.amount = 1;
+
+					_inven->setMouseItem(scarecrow);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
+					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 5);
+
+				}
+			}
+		}
+		else if (_inven->getvInven()[_isWood].amount < 15 || _inven->getvInven()[_isRock].amount < 5)
+		{
+			if (_vCraftItem[3].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[9].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[3].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[9].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+		}
+	}
+
+	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isCopper].item_image != NULL)
+	{
+		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isCopper].amount >= 20)
+		{
+			_vCraftItem[4].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[10].item_image = IMAGEMANAGER->findImage("아이템제작");
+
+			if (PtInRect(&_vCraftItem[4].rc, _ptMouse) || PtInRect(&_vCraftItem[10].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					tagItem blastfurnace;
+					blastfurnace.item_image = IMAGEMANAGER->findImage("아이템");
+					blastfurnace.item_info = "용광로";
+					blastfurnace.indexX = 4;
+					blastfurnace.indexY = 0;
+					blastfurnace.item_kind = ITEM_BLASTFURNACE;
+					blastfurnace.isFrame = true;
+					blastfurnace.amount = 1;
+
+					_inven->setMouseItem(blastfurnace);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
+					_inven->setInvenItemAmount(_isCopper, _inven->getvInven()[_isCopper].amount - 20);
+
+				}
+			}
+		}
+		else if (_inven->getvInven()[_isWood].amount < 15 || _inven->getvInven()[_isCopper].amount < 20)
+		{
+			if (_vCraftItem[4].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[10].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[4].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[10].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+		}
+	}
+
+	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isRock].item_image != NULL)
+	{
+		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isRock].amount >= 20)
+		{
+			_vCraftItem[5].item_image = IMAGEMANAGER->findImage("아이템제작");
+			_vCraftItem[11].item_image = IMAGEMANAGER->findImage("아이템제작");
+
+			if (PtInRect(&_vCraftItem[5].rc, _ptMouse) || PtInRect(&_vCraftItem[11].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					tagItem pickledbarrel;
+					pickledbarrel.item_image = IMAGEMANAGER->findImage("아이템");
+					pickledbarrel.item_info = "절임통";
+					pickledbarrel.indexX = 5;
+					pickledbarrel.indexY = 0;
+					pickledbarrel.item_kind = ITEM_PICKLEDBARREL;
+					pickledbarrel.isFrame = true;
+					pickledbarrel.amount = 1;
+
+					_inven->setMouseItem(pickledbarrel);
+					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
+					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 20);
+
+				}
+			}
+		}
+		else if (_inven->getvInven()[_isWood].amount < 15 || _inven->getvInven()[_isRock].amount < 20)
+		{
+			if (_vCraftItem[5].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+				_vCraftItem[11].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			{
+				_vCraftItem[5].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+				_vCraftItem[11].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+			}
+		}
+	}
+
+
+
 }
 
 void inventoryCraft::release()
