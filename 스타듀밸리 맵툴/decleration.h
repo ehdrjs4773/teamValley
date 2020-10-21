@@ -280,19 +280,6 @@ struct tagEffect
 	int centerX, centerY;
 };
 
-struct tagSkill
-{
-	image* image;
-	RECT rc;
-	SKILL skillKind;
-	POINT pos;
-	const char * skill_info;
-	int indexX, indexY;
-	int maxindex;
-	bool isActive;
-};
-
-
 enum NPC_KIND {
 
 	ITEM_NPC = 1,
