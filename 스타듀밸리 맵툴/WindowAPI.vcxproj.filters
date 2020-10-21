@@ -208,6 +208,7 @@
     <ClCompile Include="mineScene.cpp">
       <Filter>광산씬</Filter>
     </ClCompile>
+    <ClCompile Include="monster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -324,6 +325,7 @@
     <ClInclude Include="input.h">
       <Filter>GameFramework\유틸</Filter>
     </ClInclude>
+    <ClInclude Include="monster.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

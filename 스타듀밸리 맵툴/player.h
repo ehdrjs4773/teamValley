@@ -3,6 +3,7 @@
 #include "tileNode.h"
 #include "inventory.h"
 #include "Stock.h"
+#include "skill.h"
 
 class player : public singletonBase<player>
 {
@@ -14,6 +15,8 @@ private:
 	RECT frontHpBar;
 	RECT playerInven;
 	RECT playerHoldItem;
+	skill* _skill;
+	bool isSkill;
 
 	Stock* stock;
 	MAP currentMap;
@@ -73,6 +76,18 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
+	void skill_AniRender(HDC hdc) { _skill->animationRender(hdc); }
+	void skill_slot(HDC hdc) { _skill->render(hdc); }
+	void skillUpdate() { _skill->update(); }
+	
+	skill* getskill() { return _skill; }
+	vector<tagSkill> getvSkill() { return _skill->getvSkill(); }
+	float getskillX() { return _skill->getPointX(); }
+	float getskillY() { return _skill->getPointY(); }
+	RECT getskillRc() { return _skill->getRect(); }
+	bool getskillActive() { return _skill->isActive(); }
+	bool getskillclick() { return _skill->isClick(); }
+	bool getisSkill() { return isSkill; }
 	void setIndex(int inx) { index = inx; }
 	float getSpeed() { return speed; }
 	float getCenterX() { return centerX; }
@@ -83,6 +98,7 @@ public:
 	inventory* getInventory() { return _inventory; }
 	bool getInventoryMove() { return _inventory->getInvenToryMove(); }
 	int getCurrentSlotNumber() { return _inventory->getCurrentSlotNumber(); }
+	int getCurrentSkillNumber() { return _inventory->getCurrentSKillNumber(); }
 	void setCurrentSlotNumber(int a) { _inventory->setCurrentSlotNumber(a); }
 	vector<tagItem>* getInven() { return _inventory->getInven(); }
 	inventory* getPlayerInven() { return _inventory; }
@@ -105,8 +121,6 @@ public:
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }
 	void setWaterAmount(int waterAmount) { _inventory->setWaterAmount(waterAmount); }
-
-
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }
