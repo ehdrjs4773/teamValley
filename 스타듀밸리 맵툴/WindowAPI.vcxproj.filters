@@ -100,6 +100,9 @@
     <Filter Include="로딩 씬\메인 씬">
       <UniqueIdentifier>{87ef43df-c57a-4e43-a3a2-0adb83382829}</UniqueIdentifier>
     </Filter>
+    <Filter Include="플레이어\스킬">
+      <UniqueIdentifier>{480a6be4-ac05-4d44-8673-b94aa052b1c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -207,6 +210,10 @@
     </ClCompile>
     <ClCompile Include="mineScene.cpp">
       <Filter>광산씬</Filter>
+    </ClCompile>
+    <ClCompile Include="monster.cpp" />
+    <ClCompile Include="skill.cpp">
+      <Filter>플레이어\스킬</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +330,10 @@
     </ClInclude>
     <ClInclude Include="input.h">
       <Filter>GameFramework\유틸</Filter>
+    </ClInclude>
+    <ClInclude Include="monster.h" />
+    <ClInclude Include="skill.h">
+      <Filter>플레이어\스킬</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

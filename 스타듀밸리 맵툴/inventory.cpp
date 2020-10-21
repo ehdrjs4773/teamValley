@@ -5,6 +5,7 @@ void inventory::init()
 {
 
 	_isShopOpen = false;
+	currentSkillNumber = 0;
 
 	for (int i = 0; i < INVENMAX; i++)
 	{
@@ -29,18 +30,18 @@ void inventory::init()
 	isShowTemp = false;
 	isShowStorageTemp = false;
 
-	//_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
-	//_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
-	//_vItem[2] = ITEMMANAGER->findItem("³´");
-	//_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
-	//_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
-	//_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
-	//_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
-	//_vItem[7] = ITEMMANAGER->findItem("Ä®");
-	//_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
-	//_vItem[9] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
-	//_vItem[10] = ITEMMANAGER->findItem("¼Ò³ª¹« ¾¾¾Ñ");
-	//_vItem[11] = ITEMMANAGER->findItem("Âü³ª¹« ¾¾¾Ñ");
+	_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
+	_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
+	_vItem[2] = ITEMMANAGER->findItem("³´");
+	_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
+	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
+	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
+	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
+	_vItem[7] = ITEMMANAGER->findItem("Ä®");
+	_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
+	_vItem[9] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
+	_vItem[10] = ITEMMANAGER->findItem("¼Ò³ª¹« ¾¾¾Ñ");
+	_vItem[11] = ITEMMANAGER->findItem("Âü³ª¹« ¾¾¾Ñ");
 
 	_inventoryCraft = new inventoryCraft;
 	_inventoryCraft->init();
@@ -413,6 +414,55 @@ void inventory::quickSlot(HDC hdc)
 		FrameRect(hdc, temp, RGB(255, 0, 0));
 	}
 } 
+
+void inventory::quickSkillSlot(HDC hdc)
+{
+	if (_isInvenPage || !isShowTemp)
+	{
+		IMAGEMANAGER->render("ÇÃ·¹ÀÌ¾î Äü½½·Ô", hdc, WINSIZEX / 2 - 282, 520);
+
+		PLAYER->skill_slot(hdc);
+
+		for (int i = 0; i < 6; i++)
+		{
+
+			if (PtInRect(&_playerTool[i], _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					currentSkillNumber = i;
+				}
+			}
+		}
+
+		if (INPUT->GetKeyDown('1'))
+		{
+			currentSkillNumber = 0;
+		}
+		if (INPUT->GetKeyDown('2'))
+		{
+			currentSkillNumber = 1;
+		}
+		if (INPUT->GetKeyDown('3'))
+		{
+			currentSkillNumber = 2;
+		}
+		if (INPUT->GetKeyDown('4'))
+		{
+			currentSkillNumber = 3;
+		}
+		if (INPUT->GetKeyDown('5'))
+		{
+			currentSkillNumber = 4;
+		}
+		if (INPUT->GetKeyDown('6'))
+		{
+			currentSkillNumber = 5;
+		}
+		RECT temp{ _playerTool[currentSkillNumber].left,_playerTool[currentSkillNumber].top,_playerTool[currentSkillNumber].right,_playerTool[currentSkillNumber].bottom };
+		FrameRect(hdc, temp, RGB(255, 0, 0));
+	}
+}
 
 void inventory::renderStorageInventory(HDC hdc) 
 {
