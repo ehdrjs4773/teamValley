@@ -697,6 +697,7 @@ void inventory::_vItemUpdate()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				SOUNDMANAGER->play("select");
 				if (_isInvenPage) _isInvenPage = false;
 				if (_isCraftPage) _isCraftPage = false;
 				_isInvenPage = true;
@@ -706,6 +707,7 @@ void inventory::_vItemUpdate()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				SOUNDMANAGER->play("select");
 				if (_isInvenPage) _isInvenPage = false;
 				if (_isCraftPage) _isCraftPage = false;
 				_isPlayerPage = true;
@@ -715,6 +717,7 @@ void inventory::_vItemUpdate()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				SOUNDMANAGER->play("select");
 				if (_isInvenPage) _isInvenPage = false;
 				if (_isPlayerPage) _isPlayerPage = false;
 				_isCraftPage = true;

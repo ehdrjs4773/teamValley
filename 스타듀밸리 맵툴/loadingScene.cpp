@@ -159,4 +159,17 @@ void loadingScene::loadingSound()
 {
 	SOUNDMANAGER->addSound("¸ÞÀÎÀ½¾Ç", "Sounds/opening.mp3", true, true);
 	SOUNDMANAGER->addSound("³óÀå", "Sounds/farm.mp3", true, true);
+	SOUNDMANAGER->addSound("³ª¹«Âï±â", "Sounds/breakTree.mp3", false, false);
+	SOUNDMANAGER->addSound("HOE", "Sounds/hoe.mp3", false, false);
+	SOUNDMANAGER->addSound("select", "Sounds/menu_select.mp3", false, false);
+	SOUNDMANAGER->addSound("menuclose", "Sounds/menuclose.mp3", false, false);
+	SOUNDMANAGER->addSound("menuopen", "Sounds/menuopen.mp3", false, false);
+	SOUNDMANAGER->addSound("movegrass", "Sounds/movegrass.mp3", false, false);
+	SOUNDMANAGER->addSound("moverock", "Sounds/moverock.mp3", false, false);
+	SOUNDMANAGER->addSound("movesoil", "Sounds/move_soil.mp3", false, false);
+	SOUNDMANAGER->addSound("removeGrass", "Sounds/removeGrass.mp3", false, false);
+	SOUNDMANAGER->addSound("removeRock", "Sounds/removeRock.mp3", false, false);
+	SOUNDMANAGER->addSound("removeTree", "Sounds/removeTree.mp3", false, false);
+	SOUNDMANAGER->addSound("sowrd", "Sounds/scythe.mp3", false, false);
+	SOUNDMANAGER->addSound("water", "Sounds/watering.mp3", false, false);
 }

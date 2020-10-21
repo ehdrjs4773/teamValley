@@ -72,6 +72,9 @@ void  player::update()
 
 	if (INPUT->GetKeyDown('E'))
 	{
+		if(!isShowInventory) SOUNDMANAGER->play("menuopen");
+		else SOUNDMANAGER->play("menuclose");
+
 		if (!isOpenPlayerStorageCover)
 		{
 			if (isShowInventory)
@@ -83,6 +86,7 @@ void  player::update()
 			}
 			else
 			{
+
 				_inventory->setInvenToryMove(true);
 				isShowInventory = true;
 				_inventory->setInvenPage(true);
