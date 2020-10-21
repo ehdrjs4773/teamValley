@@ -105,6 +105,7 @@ void  player::update()
 		cout << darkAlpha << endl;
 	}
 
+
 	//플레이어 현재 맵 체크
 	setCurrentMap();
 
@@ -967,6 +968,7 @@ void player::loadPlayerData()
 	
 	loadInven();
 	loadStock();
+	loadMap();
 }
 
 void player::loadInven()
@@ -1008,16 +1010,20 @@ void player::loadStock()
 	}
 }
 
+void player::loadMap()
+{
+}
+
 void player::savePlayerData()
 {
 	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
-	INIDATA->addData("PLAYER", "date", itoa(date, dateStr, 10));
-	INIDATA->addData("PLAYER", "year", itoa(year, yearStr, 10));
-	INIDATA->addData("PLAYER", "day", itoa(day, dayStr, 10));
-	INIDATA->addData("PLAYER", "darkAlpha", itoa(darkAlpha, darkStr, 10));
-	INIDATA->addData("PLAYER", "currentSeason", itoa((int)currentSeason, seasonStr, 10));
-	INIDATA->addData("PLAYER", "currentWeather", itoa((int)currentWeather, weatherStr, 10));
-	INIDATA->addData("PLAYER", "money", itoa(money, moneyStr, 10));
+	INIDATA->addData("PLAYER", "date", _itoa(date, dateStr, 10));
+	INIDATA->addData("PLAYER", "year", _itoa(year, yearStr, 10));
+	INIDATA->addData("PLAYER", "day", _itoa(day, dayStr, 10));
+	INIDATA->addData("PLAYER", "darkAlpha", _itoa(darkAlpha, darkStr, 10));
+	INIDATA->addData("PLAYER", "currentSeason", _itoa((int)currentSeason, seasonStr, 10));
+	INIDATA->addData("PLAYER", "currentWeather", _itoa((int)currentWeather, weatherStr, 10));
+	INIDATA->addData("PLAYER", "money", _itoa(money, moneyStr, 10));
 	INIDATA->saveINI();
 }
 
@@ -1094,6 +1100,21 @@ void player::savePlayerStock()
 	file = CreateFile(saveName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, tempStock, sizeof(tempStock), &write, NULL);
 	CloseHandle(file);
+}
+
+void player::saveMap()
+{
+	HANDLE file;
+	DWORD write;
+	TCHAR saveMapName[MAX_PATH] = "save/save.map";
+	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
+	CloseHandle(file);
+}
+
+void player::saveTile(int i, int j, tagTile tile)
+{
+	_tile[i][j] = tile;
 }
 
 void player::clockRender(HDC hdc)

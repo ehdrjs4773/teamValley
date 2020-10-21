@@ -33,6 +33,7 @@ private:
 
 	bool isShowRect;
 	bool isShopOpen;
+	bool isSprinkled;
 
 public:
 	inGameScene();
@@ -66,6 +67,8 @@ public:
 	void cutGrass();
 	void setFence();
 	void attack();
+	void setSprinkler();
+	void sprinklerWork();
 
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);

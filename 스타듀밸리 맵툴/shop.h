@@ -2,7 +2,6 @@
 #include "gameNode.h"
 #include "inventory.h"
 
-
 struct SLOT {
 
 	RECT rc;

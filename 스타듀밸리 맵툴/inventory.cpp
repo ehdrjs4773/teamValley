@@ -64,6 +64,10 @@ void inventory::release()
 
 void inventory::update()
 {
+	if (INPUT->GetKeyDown(VK_F8))
+	{
+		_vItem[4] = ITEMMANAGER->findItem("기본스프링클러");
+	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
@@ -936,6 +940,23 @@ void inventory::setvInven(int i, tagSaveItem item)
 		case WEAPON_FIREBALL:
 			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
 			_vItem[i].item_info = "FIRE_BALL";
+			break;
+		}
+		_vItem[i].itemName = _vItem[i].item_info;
+	}
+	else if (_vItem[i].item_kind == ITEM_SPRINKLER)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+		switch (_vItem[i].indexY)
+		{
+		case 0:
+			_vItem[i].item_info = "기본스프링클러";
+			break;
+		case 1:
+			_vItem[i].item_info = "강화스프링클러";
+			break;
+		case 2:
+			_vItem[i].item_info = "고급스프링클러";
 			break;
 		}
 		_vItem[i].itemName = _vItem[i].item_info;

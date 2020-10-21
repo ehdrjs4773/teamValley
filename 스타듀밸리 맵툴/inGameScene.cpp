@@ -32,13 +32,15 @@ HRESULT inGameScene::init()
 		_tile[69][37].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[20][50].portal = PT_SHOP;
-	}
 
-	for (int i = 0; i < TILEY; i++)
-	{
-		for (int j = 0; j < TILEX; j++)
+		isSprinkled = false;
+
+		for (int i = 0; i < TILEY; i++)
 		{
-			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+			for (int j = 0; j < TILEX; j++)
+			{
+				_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+			}
 		}
 	}
 
@@ -51,6 +53,8 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	isSprinkled = PLAYER->getIsSprinkled();
+	sprinklerWork();
 	if (!SOUNDMANAGER->isPlaySound("농장"))
 	{
 		SOUNDMANAGER->play("농장", 0.05f);
@@ -132,16 +136,12 @@ void inGameScene::render()
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
 
-
-
 	//이펙트 렌더
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
-
-	
 }
 
 void inGameScene::load()
@@ -258,7 +258,11 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 			}
-			
+			else if (_tile[i][j].objType == OTY_SPRINKLER)
+			{
+				IMAGEMANAGER->frameRender("스프링클러", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+			}
 			else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
 			{
 				IMAGEMANAGER->findImage("나무펜스")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -516,6 +520,14 @@ void inGameScene::moveScene()
 	}
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_HOUSE)
 	{
+		//집으로 넘어갈때 타일 정보 넘겨줌
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				PLAYER->saveTile(i, j, _tile[i][j]);
+			}
+		}
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(762.0f,887.0f);
 	}
@@ -597,6 +609,9 @@ void inGameScene::playerInteraction()
 			//공격하기 (우선은 나무자름)
 			attack();
 
+			//스프링클러 설치
+			setSprinkler();
+
 			PLAYER->openPlayerInvenCover();
 		}
 		if (MouseIndexX == 35 &&  MouseIndexY == 53 || MouseIndexY == 54)
@@ -606,7 +621,11 @@ void inGameScene::playerInteraction()
 				PLAYER->openPlayerStorageCover();
 			}
 		}
-		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
+		//cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
+		cout << boolalpha << _tile[MouseIndexY][MouseIndexX].isWet << "\t"
+			<< (OBJ_TYPE)_tile[MouseIndexY][MouseIndexX].objType << "\t"
+			<< (TERRAIN)_tile[MouseIndexY][MouseIndexX].terrain << "\t"
+			<< (OBJECT)_tile[MouseIndexY][MouseIndexX].obj << endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -958,8 +977,6 @@ void inGameScene::waterGround()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
-
-
 			if(PLAYER->getWaterAmount()>=2)
 			{
 				PLAYER->setWaterAmount(PLAYER->getWaterAmount() - 2);
@@ -1425,6 +1442,56 @@ void inGameScene::attack()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 			}
 		}
+	}
+}
+
+void inGameScene::setSprinkler()
+{
+	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+		|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+			&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
+	{
+		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE && _tile[MouseIndexY][MouseIndexX].terrain == TR_SOIL)
+		{
+			//스프링클러
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_SPRINKLER)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_SPRINKLER;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = PLAYER->getCurrentInven()->indexX;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = PLAYER->getCurrentInven()->indexY;
+			}
+		}
+	}
+}
+
+void inGameScene::sprinklerWork()
+{
+	if (!isSprinkled)
+	{
+		cout << "work" << endl;
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				if (_tile[i][j].objType == OTY_SPRINKLER)
+				{
+					if (_tile[i - 1][j - 1].terrain == TR_HACKED) { _tile[i - 1][j - 1].isWet = true; }
+					if (_tile[i - 1][j].terrain == TR_HACKED) { _tile[i - 1][j].isWet = true; }
+					if (_tile[i - 1][j + 1].terrain == TR_HACKED) { _tile[i - 1][j + 1].isWet = true; }
+					if (_tile[i][j - 1].terrain == TR_HACKED) { _tile[i][j - 1].isWet = true; }
+					if (_tile[i][j + 1].terrain == TR_HACKED) { _tile[i][j + 1].isWet = true; }
+					if (_tile[i + 1][j - 1].terrain == TR_HACKED) { _tile[i + 1][j - 1].isWet = true; }
+					if (_tile[i + 1][j].terrain == TR_HACKED) { _tile[i + 1][j].isWet = true; }
+					if (_tile[i + 1][j + 1].terrain == TR_HACKED) { _tile[i + 1][j + 1].isWet = true; }
+				}
+				checkHacked();
+			}
+		}
+		PLAYER->setIsSprinkled(true);
+		isSprinkled = true;
+		cout << "end" << endl;
 	}
 }
 
@@ -1942,9 +2009,9 @@ void inGameScene::ejectItem()
 void inGameScene::checkHacked()
 {
 	//화면 사이즈만큼만 체크
-	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 1; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
+		for (int j = 0; j < 100; j++)
 		{
 			if (i - 1 >= 0 && i + 1 <= TILEY - 1 && j - 1 >= 0 && j + 1 <= TILEX - 1)
 			{
@@ -2501,7 +2568,15 @@ TERRAIN inGameScene::terrainSelect(int frameX, int frameY)
 		return TR_WATER;
 	}
 	//경작지
-	if ((frameX == 20 && frameY == 12) || (frameX == 20 && frameY == 14))
+	if ((frameX == 20 && frameY == 12) || (frameX == 20 && frameY == 14)
+		|| (frameX == 21 && frameY == 13) || (frameX == 20 && frameY == 13)
+		|| (frameX == 22 && frameY == 13) || (frameX == 22 && frameY == 12)
+		|| (frameX == 21 && frameY == 20) || (frameX == 20 && frameY == 20)
+		|| (frameX == 22 && frameY == 21) || (frameX == 20 && frameY == 21)
+		|| (frameX == 22 && frameY == 16) || (frameX == 20 && frameY == 16)
+		|| (frameX == 22 && frameY == 17) || (frameX == 20 && frameY == 17)
+		|| (frameX == 21 && frameY == 21) || (frameX == 21 && frameY == 16)
+		|| (frameX == 21 && frameY == 17))
 	{
 		return TR_HACKED;
 	}

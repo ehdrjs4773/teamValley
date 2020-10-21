@@ -95,8 +95,18 @@ public:
 		int _buyPrice = 0,
 		int _sellPrice = 0);
 
+	void addSprinkler(
+		const char* strKey,
+		ITEM _ITEMKIND,
+		bool _isFrame,
+		int _indexX,
+		int _indexY,
+		const char* _itemInfo,
+		int _buyPrice = 0,
+		int _sellPrice = 0);
+
 	vector<tagItem> getItem() { return _vItem; }
-	tagItem findItem(string strKey);
+	tagItem findItem(const char* strKey);
 	const char* findItem(ITEM itemKind, SEED seedKind);
 	const char* findItem(ITEM itemKind, int indexX);
 	const char* findItem(ITEM itemKind);
