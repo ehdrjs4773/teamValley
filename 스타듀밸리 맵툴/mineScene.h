@@ -14,6 +14,7 @@ private:
 	RECT sickleHitBox;
 
 	tagTile _tile[TILEY][TILEX];
+
 	int currentFloor;
 
 	int currentIndexX, currentIndexY;
@@ -33,8 +34,11 @@ private:
 	string objStr;
 
 	bool isShowRect;
+	bool isLoad;
 
 public:
+	mineScene();
+
 	HRESULT init();
 	void release();
 	void update();

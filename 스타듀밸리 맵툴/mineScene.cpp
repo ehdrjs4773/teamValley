@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "mineScene.h"
 
+mineScene::mineScene()
+{
+	currentFloor = 1;  //최초 로드시 초기화 방지 카운트
+}
+
 HRESULT mineScene::init()
 {
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
-
-	currentFloor = 1;
 
 	loadMap();
 	checkCurrentTile();
@@ -23,7 +26,9 @@ HRESULT mineScene::init()
 		setRandomObstacles();
 	}
 
-	vMonster.push_back(monsterList[0]);
+	_vItemOnField.clear();
+
+	//vMonster.push_back(monsterList[0]);
 
 	SOUNDMANAGER->stop("농장");
 	SOUNDMANAGER->stop("springDay");
@@ -514,7 +519,6 @@ void mineScene::breakStone()
 				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
 				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;	
 			}
-			
 		}
 	}
 }
@@ -574,6 +578,8 @@ void mineScene::useLadder()
 		{
 			currentFloor++;
 			loadMap();
+			SWITCHMANAGER->changeScene("광산화면");
+			SWITCHMANAGER->startFade(390.0f, 166.0f);
 		}
 	}
 }

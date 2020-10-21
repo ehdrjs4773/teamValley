@@ -174,7 +174,7 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("removeTree", "Sounds/removeTree.mp3", false, false);
 	SOUNDMANAGER->addSound("scythe", "Sounds/scythe.mp3", false, false);
 	SOUNDMANAGER->addSound("water", "Sounds/watering.mp3", false, false);
-	SOUNDMANAGER->addSound("seed", "Sounds/seed.mp3", false, false);
+	SOUNDMANAGER->addSound("seed", "Sounds/seeds.mp3", false, false);
 	SOUNDMANAGER->addSound("doorOpen", "Sounds/doorOpen.mp3", false, false);
 	SOUNDMANAGER->addSound("harvest", "Sounds/pickUpItem.mp3", false, false);
 	SOUNDMANAGER->addSound("getItem", "Sounds/coin.mp3", false, false);

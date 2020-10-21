@@ -22,7 +22,9 @@ HRESULT inGameScene::init()
 
 		changeSeason(SPRING);
 
-		SOUNDMANAGER->stop("메인음악");
+		SOUNDMANAGER->stop("메인음악"); 
+		SOUNDMANAGER->stop("bugCave");
+
 		isShowRect = false;
 
 		checkPlayerTile();
@@ -44,7 +46,7 @@ HRESULT inGameScene::init()
 			}
 		}
 	}
-	SOUNDMANAGER->stop("bugCave");
+	
 	return S_OK;
 }
 
@@ -258,7 +260,7 @@ void inGameScene::renderMap()
 		}
 	}
 	//플레이어보다 밑에 그려지는 오브젝트 렌더
-	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < currentIndexY; i++)
+	for (int i = (float)((float)CAMERAMANAGER->getY() / 16) - 1; i < currentIndexY + 1; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
@@ -271,7 +273,7 @@ void inGameScene::renderMap()
 	PLAYER->playerCarryItem(CAMERAMANAGER->getMemDC());
 
 	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
-	for (int i = currentIndexY; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
+	for (int i = currentIndexY + 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
@@ -361,8 +363,6 @@ void inGameScene::renderObjects(int i, int j)
 						5, 0);
 				}
 			}
-
-
 			else if (_tile[i][j].objType == OTY_TREE || _tile[i][j].objType == OTY_TREETRUNK)
 			{
 				renderTree(i, j);
@@ -375,7 +375,7 @@ void inGameScene::renderObjects(int i, int j)
 		}
 		if (_tile[i][j].objOver != OVR_NONE)
 		{
-			if (_tile[i][j].objType == OTY_CROP)
+			if (_tile[i + 1][j].objType == OTY_CROP)
 			{
 				IMAGEMANAGER->frameRender("작물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].ovlFrameX, _tile[i][j].ovlFrameY);
@@ -476,7 +476,7 @@ void inGameScene::playerMove()
 			}
 			if (!SOUNDMANAGER->isPlaySound("movegrass"))
 			{
-				SOUNDMANAGER->play("movegrass", 0.2f);
+				SOUNDMANAGER->play("movegrass", 0.3f);
 			}
 		}
 		else if (_tile[currentIndexY][currentIndexX].terrain == TR_SOIL)
@@ -487,7 +487,7 @@ void inGameScene::playerMove()
 			}
 			if (!SOUNDMANAGER->isPlaySound("movesoil"))
 			{
-				SOUNDMANAGER->play("movesoil", 0.2f);
+				SOUNDMANAGER->play("movesoil", 0.3f);
 			}
 		}
 		checkPlayerTile();
@@ -824,7 +824,6 @@ void inGameScene::playerInteraction()
 
 void inGameScene::hackGround()
 {
-	SOUNDMANAGER->play("HOE", 0.2f);
 	PLAYER->setState(DIGGROUND);
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -833,6 +832,7 @@ void inGameScene::hackGround()
 	{
 		if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE && _tile[MouseIndexY][MouseIndexX].terrain == TR_SOIL)
 		{
+			SOUNDMANAGER->play("HOE", 0.2f);
 			_tile[MouseIndexY][MouseIndexX].terrain = TR_HACKED;
 			_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 			_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
@@ -845,7 +845,6 @@ void inGameScene::hackGround()
 
 void inGameScene::cutdownTree()
 {
-	SOUNDMANAGER->play("나무찍기", 0.2f);
 	PLAYER->setState(CUTDOWNTREE);
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -904,6 +903,7 @@ void inGameScene::cutdownTree()
 		{
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
 			{
+				SOUNDMANAGER->play("나무찍기", 0.2f);
 				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 				{
 					_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
@@ -972,6 +972,7 @@ void inGameScene::cutdownTree()
 		//나무 둥치
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
 		{
+			SOUNDMANAGER->play("나무찍기", 0.2f);
 			if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 			{
 				_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
@@ -995,6 +996,7 @@ void inGameScene::cutdownTree()
 		//나뭇가지
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
 		{
+			SOUNDMANAGER->play("나무찍기", 0.2f);
 			dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
@@ -1005,7 +1007,6 @@ void inGameScene::cutdownTree()
 
 void inGameScene::breakStone()
 {
-	SOUNDMANAGER->play("removeRock", 0.2f);
 	PLAYER->setState(BREAKSTONE);
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -1018,6 +1019,7 @@ void inGameScene::breakStone()
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
 		{
+			SOUNDMANAGER->play("removeRock", 0.2f);
 			dropItem(_tile[MouseIndexY][MouseIndexX], "돌");
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
@@ -1025,6 +1027,7 @@ void inGameScene::breakStone()
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_WOODENFENCE)
 		{
+			SOUNDMANAGER->play("removeRock", 0.2f);
 			dropItem(_tile[MouseIndexY][MouseIndexX], "나무울타리");
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
@@ -1032,6 +1035,7 @@ void inGameScene::breakStone()
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONEFENCE)
 		{
+			SOUNDMANAGER->play("removeRock", 0.2f);
 			dropItem(_tile[MouseIndexY][MouseIndexX], "석재울타리");
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
@@ -1042,7 +1046,6 @@ void inGameScene::breakStone()
 
 void inGameScene::cutGrass()
 {
-	SOUNDMANAGER->play("removeGrass", 0.2f);
 		PLAYER->setState(CUTGRASS);
 		switch (PLAYER->getDirection())
 		{
@@ -1068,6 +1071,7 @@ void inGameScene::cutGrass()
 				{
 					if (_tile[i][j].objType == OTY_GRASS || _tile[i][j].objType == OTY_WEED)
 					{
+						SOUNDMANAGER->play("removeGrass", 0.2f);
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
 						_tile[i][j].seedType = SEED_NONE;
@@ -1084,6 +1088,7 @@ void inGameScene::cutGrass()
 							|| _tile[i][j].seedType == SEED_KALE)
 						&& _tile[i][j].isFullyGrown == true)
 					{
+						SOUNDMANAGER->play("removeGrass", 0.2f);
 						dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
@@ -1204,7 +1209,6 @@ void inGameScene::setEquipment()
 
 void inGameScene::waterGround()
 {
-	SOUNDMANAGER->play("water", 0.2f);
 	PLAYER->setState(SPRAYWATER);
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -1213,6 +1217,7 @@ void inGameScene::waterGround()
 	{
 		if (PLAYER->getWaterAmount() >= 2)
 		{
+			SOUNDMANAGER->play("water", 0.2f);
 			PLAYER->setWaterAmount(PLAYER->getWaterAmount() - 2);
 			PLAYER->setHpBarX(PLAYER->getHpBarX() + PLAYER->getDamage());
 
@@ -1224,33 +1229,30 @@ void inGameScene::waterGround()
 
 void inGameScene::fillWater()
 {
-	SOUNDMANAGER->play("water", 0.2f);
 	PLAYER->setState(FILLWATER);
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
 		|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 			&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 	{
+		SOUNDMANAGER->play("water", 0.2f);
 		PLAYER->setWaterAmount(34);
-
 	}
 }
 
 void inGameScene::plantSeed()
 {
-	SOUNDMANAGER->play("seed", 0.2f);
 	//작물 심기
 	if (!(PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
 		&& _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 	{
-		
 		PLAYER->setState(CARRYSTAND);
-	
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
+			SOUNDMANAGER->play("seed", 0.2f);
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
@@ -1260,7 +1262,6 @@ void inGameScene::plantSeed()
 				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
 
 				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_OVER;
-				_tile[MouseIndexY - 1][MouseIndexX].objType = OTY_CROP;
 
 				switch (PLAYER->getCurrentInven()->seedKind)
 				{
@@ -1504,6 +1505,7 @@ void inGameScene::plantSeed()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
+			SOUNDMANAGER->play("seed", 0.2f);
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
 				if (PLAYER->getCurrentInven()->seedKind == SEED_PINETREE)
@@ -1539,9 +1541,9 @@ void inGameScene::plantSeed()
 
 void inGameScene::harvest()
 {
-	SOUNDMANAGER->play("harvest", 0.2f);
 	if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 	{
+		SOUNDMANAGER->play("harvest", 0.2f);
 		dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
 		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
@@ -1585,64 +1587,15 @@ void inGameScene::harvest()
 
 void inGameScene::attack()
 {
-		PLAYER->setState(ATTACK);
-		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
-			|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
-			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
-				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
+	PLAYER->setState(ATTACK);
+	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+		|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
+			&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
+	{
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
 		{
-			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREE)
-			{
-				if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
-				{
-					if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
-					{
-						_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
-					}
-					else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
-					{
-						for (int i = 0; i < 5; i++)
-						{
-							if (RANDOM->range(3) == 0)
-							{
-								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
-								{
-									dropItem(_tile[MouseIndexY][MouseIndexX], "소나무 씨앗");
-								}
-								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
-								{
-									dropItem(_tile[MouseIndexY][MouseIndexX], "단풍나무 씨앗");
-								}
-								if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
-								{
-									dropItem(_tile[MouseIndexY][MouseIndexX], "참나무 씨앗");
-								}
-							}
-							dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
-						}
-						_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
-						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
-						{
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
-						}
-						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
-						{
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
-						}
-						if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
-						{
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
-							_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
-						}
-						_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
-					}
-				}
-			}
-
-			//나무 둥치
-			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
+			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_DESTRUCTIBLE && _tile[MouseIndexY][MouseIndexX].isFullyGrown)
 			{
 				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 				{
@@ -1650,27 +1603,76 @@ void inGameScene::attack()
 				}
 				else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
 				{
-					for (int i = 0; i < 3; i++)
+					for (int i = 0; i < 5; i++)
 					{
+						if (RANDOM->range(3) == 0)
+						{
+							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+							{
+								dropItem(_tile[MouseIndexY][MouseIndexX], "소나무 씨앗");
+							}
+							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+							{
+								dropItem(_tile[MouseIndexY][MouseIndexX], "단풍나무 씨앗");
+							}
+							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+							{
+								dropItem(_tile[MouseIndexY][MouseIndexX], "참나무 씨앗");
+							}
+						}
 						dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
 					}
-
-					_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
-					_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-					tagTree temp;
-					memset(&temp, 0, sizeof(temp));
-					_tile[MouseIndexY][MouseIndexX].tree = temp;
+					_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
+					if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 8;
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+					}
+					if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 5;
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+					}
+					if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
+					{
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
+						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+					}
+					_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
 				}
 			}
+		}
 
-			//나뭇가지
-			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
+		//나무 둥치
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
+		{
+			if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 			{
-				dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
+			}
+			else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+				}
+
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				tagTree temp;
+				memset(&temp, 0, sizeof(temp));
+				_tile[MouseIndexY][MouseIndexX].tree = temp;
 			}
 		}
+
+		//나뭇가지
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
+		{
+			dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
+			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+		}
+	}
 }
 
 void inGameScene::setSprinkler()
