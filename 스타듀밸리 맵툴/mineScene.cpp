@@ -653,13 +653,13 @@ void mineScene::dropItem(tagTile tile, const char * itemInfo)
 void mineScene::setMonsterList()
 {
 	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 10, 5, 4);
-	vMonster.push_back(presetSlime);
+	monsterList.push_back(presetSlime);
 
 	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 5, 5, 4);
-	vMonster.push_back(presetBug);
+	monsterList.push_back(presetBug);
 
 	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, 4);
-	vMonster.push_back(presetSerpent);
+	monsterList.push_back(presetSerpent);
 }
 
 
