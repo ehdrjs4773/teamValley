@@ -12,8 +12,9 @@ HRESULT inHouseScene::init()
 	isShowSleepingOption = false;
 	checkCount = 0;
 
-	this->update();
+	SOUNDMANAGER->stop("메인음악");
 
+	this->update();
 	return S_OK;
 }
 
@@ -23,10 +24,15 @@ void inHouseScene::release()
 
 void inHouseScene::update()
 {
+	if (!SOUNDMANAGER->isPlaySound("springDay"))
+	{
+		SOUNDMANAGER->play("springDay", 0.2f);
+	}
 	if (PLAYER->getCenterY() >= 888.0f)
 	{
 		if (!SWITCHMANAGER->getFade())
 		{
+			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(416.0f, 912.0f); // 플레이어가 인게임에서 호출될 장소 
 		}
@@ -114,6 +120,10 @@ void inHouseScene::playerMove()
 	{
 		if (GetPixel(IMAGEMANAGER->findImage("아침 집 충돌")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY()) != RGB(255, 0, 0))
 		{
+			if (!SOUNDMANAGER->isPlaySound("movewood"))
+			{
+				SOUNDMANAGER->play("movewood", 0.2f);
+			}
 			PLAYER->setDirection(UP);
 			PLAYER->setState(RUN);
 			PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
@@ -123,6 +133,10 @@ void inHouseScene::playerMove()
 	{
 		if (GetPixel(IMAGEMANAGER->findImage("아침 집 충돌")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY() + 16) != RGB(255, 0, 0))
 		{
+			if (!SOUNDMANAGER->isPlaySound("movewood"))
+			{
+				SOUNDMANAGER->play("movewood", 0.2f);
+			}
 			PLAYER->setDirection(DOWN);
 			PLAYER->setState(RUN);
 			PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
@@ -140,6 +154,10 @@ void inHouseScene::playerMove()
 	{
 		if (GetPixel(IMAGEMANAGER->findImage("아침 집 충돌")->getMemDC(), PLAYER->getCenterX() - 8, PLAYER->getCenterY() + 8) != RGB(255, 0, 0))
 		{
+			if (!SOUNDMANAGER->isPlaySound("movewood"))
+			{
+				SOUNDMANAGER->play("movewood", 0.2f);
+			}
 			PLAYER->setDirection(LEFT);
 			PLAYER->setState(RUN);
 			PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
@@ -149,6 +167,10 @@ void inHouseScene::playerMove()
 	{
 		if (GetPixel(IMAGEMANAGER->findImage("아침 집 충돌")->getMemDC(), PLAYER->getCenterX() + 8, PLAYER->getCenterY() + 8) != RGB(255, 0, 0))
 		{
+			if (!SOUNDMANAGER->isPlaySound("movewood"))
+			{
+				SOUNDMANAGER->play("movewood", 0.2f);
+			}
 			PLAYER->setDirection(RIGHT);
 			PLAYER->setState(RUN);
 			PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());

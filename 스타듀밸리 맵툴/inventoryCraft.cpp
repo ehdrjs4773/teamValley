@@ -23,8 +23,6 @@ void inventoryCraft::init()
 
 	_isTemp3 = false;
 	_isTemp4 = false;
-
-
 }
 
 void inventoryCraft::update()
@@ -184,7 +182,6 @@ void inventoryCraft::render(HDC hdc)
 
 void inventoryCraft::craftInven_item_info(HDC hdc)
 {
-
 	for (int i = 0; i < _vCraftItem.size(); i++)
 	{
 		if (PtInRect(&_vCraftItem[i].rc, _ptMouse))

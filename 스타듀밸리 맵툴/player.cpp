@@ -1032,8 +1032,6 @@ void player::savePlayerInven()
 			tempItem[i].toolKind = temp[i].toolKind;
 			tempItem[i].waterAmount = temp[i].waterAmount;
 		}
-
-		cout << temp[i].itemName << endl;
 	}
 
 	HANDLE file;

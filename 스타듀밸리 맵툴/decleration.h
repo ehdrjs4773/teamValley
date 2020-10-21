@@ -275,7 +275,7 @@ struct tagSaveItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
-	string itemName;
+	const char* itemName;
 
 	int buy_price;
 	int sell_price;

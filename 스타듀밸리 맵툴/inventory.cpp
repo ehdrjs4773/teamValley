@@ -30,18 +30,18 @@ void inventory::init()
 	isShowTemp = false;
 	isShowStorageTemp = false;
 
-	_vItem[0] = ITEMMANAGER->findItem("∆ƒΩ∫¥’ æææ—");
-	_vItem[1] = ITEMMANAGER->findItem("øœµŒƒ· æææ—");
-	_vItem[2] = ITEMMANAGER->findItem("≥¥");
-	_vItem[3] = ITEMMANAGER->findItem("»£πÃ");
-	_vItem[4] = ITEMMANAGER->findItem("∞Ó±™¿Ã");
-	_vItem[5] = ITEMMANAGER->findItem("µµ≥¢");
-	_vItem[6] = ITEMMANAGER->findItem("¡÷¿¸¿⁄");
-	_vItem[7] = ITEMMANAGER->findItem("ƒÆ");
-	_vItem[8] = ITEMMANAGER->findItem("≥™π´øÔ≈∏∏Æ");
-	_vItem[9] = ITEMMANAGER->findItem("ºÆ¿ÁøÔ≈∏∏Æ");
-	_vItem[10] = ITEMMANAGER->findItem("º“≥™π´ æææ—");
-	_vItem[11] = ITEMMANAGER->findItem("¬¸≥™π´ æææ—");
+	//_vItem[0] = ITEMMANAGER->findItem("∆ƒΩ∫¥’ æææ—");
+	//_vItem[1] = ITEMMANAGER->findItem("øœµŒƒ· æææ—");
+	//_vItem[2] = ITEMMANAGER->findItem("≥¥");
+	//_vItem[3] = ITEMMANAGER->findItem("»£πÃ");
+	//_vItem[4] = ITEMMANAGER->findItem("∞Ó±™¿Ã");
+	//_vItem[5] = ITEMMANAGER->findItem("µµ≥¢");
+	//_vItem[6] = ITEMMANAGER->findItem("¡÷¿¸¿⁄");
+	//_vItem[7] = ITEMMANAGER->findItem("ƒÆ");
+	//_vItem[8] = ITEMMANAGER->findItem("≥™π´øÔ≈∏∏Æ");
+	//_vItem[9] = ITEMMANAGER->findItem("ºÆ¿ÁøÔ≈∏∏Æ");
+	//_vItem[10] = ITEMMANAGER->findItem("º“≥™π´ æææ—");
+	//_vItem[11] = ITEMMANAGER->findItem("¬¸≥™π´ æææ—");
 
 	_inventoryCraft = new inventoryCraft;
 	_inventoryCraft->init();
@@ -898,10 +898,17 @@ void inventory::shopInvenRender(HDC hdc)
 	IMAGEMANAGER->findImage("ªÛ¡°¿Œ∫•≈‰∏Æ1")->render(hdc, 305, 370);
 }
 
+void inventory::setInvenItem(int i, tagItem item)
+{
+	_vItem[i] = item;
+	if (item.item_info == "±∏∏Æ¡∂∞¢" || item.item_info == "√∂¡∂∞¢" || item.item_info == "±›¡∂∞¢" || item.item_info == "ºÆ≈∫")
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("±§π∞æ∆¿Ã≈€");
+	}
+}
+
 void inventory::setvInven(int i, tagSaveItem item)
 {
-
-
 	_vItem[i].amount = item.amount;
 	_vItem[i].buy_price = item.buy_price;
 	_vItem[i].indexX = item.indexX;

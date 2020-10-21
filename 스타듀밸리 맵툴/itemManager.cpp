@@ -28,7 +28,7 @@ HRESULT itemManager::init()
 	addWeapon();
 	addTool();
 	addObject();
-
+	addOre();
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 0, "기본스프링클러");
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 1, "강화스프링클러");
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER, true, 0, 2, "고급스프링클러");
@@ -312,6 +312,17 @@ tagItem itemManager::findItem(const char* strKey)
 	for (auto iter : _vItem)
 	{
 		if (iter.item_info == strKey)
+		{
+			return iter;
+		}
+	}
+}
+
+tagItem itemManager::findItemByKind(ITEM itemKind, int indexX)
+{
+	for (auto iter : _vItem)
+	{
+		if (iter.item_kind == itemKind && iter.indexX == indexX)
 		{
 			return iter;
 		}

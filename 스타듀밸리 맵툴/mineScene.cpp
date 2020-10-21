@@ -25,6 +25,9 @@ HRESULT mineScene::init()
 
 	vMonster.push_back(monsterList[0]);
 
+	SOUNDMANAGER->stop("³óÀå");
+	SOUNDMANAGER->stop("springDay");
+
 	this->update();
 
 	return S_OK;
@@ -36,6 +39,10 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	if (!SOUNDMANAGER->isPlaySound("bugCave"))
+	{
+		SOUNDMANAGER->play("bugCave", 0.05f);
+	}
 	if (currentFloor > 0 && currentFloor <= 5) { str = "±¤»ê ³ë¸»"; objStr = "±¤»ê¿ÀºêÁ§Æ® ³ë¸»"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "±¤»ê ³ë¸»´ÙÅ©"; objStr = "±¤»ê¿ÀºêÁ§Æ® ³ë¸»´ÙÅ©"; }
 
@@ -60,6 +67,8 @@ void mineScene::update()
 	PLAYER->playerAnimation();
 	playerInteraction();
 
+	setCurrentSlotNumber(_mouseWheel);
+
 	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN || PLAYER->getState() == CARRY || PLAYER->getState() == CARRYSTAND)
 	{
 		this->playerMove();
@@ -67,16 +76,35 @@ void mineScene::update()
 	}
 	this->ejectItem();
 
-	
+	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
 }
 
 void mineScene::render()
 {
 	renderMap();
 
+	for (int i = 0; i < _vItemOnField.size(); i++)
+	{
+		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
+	}
+
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+}
+
+void mineScene::setCurrentSlotNumber(int mouseWheel)
+{
+	if (mouseWheel > 0)
+	{
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
+		_mouseWheel = 0;
+	}
+	else if (mouseWheel < 0)
+	{
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
+		_mouseWheel = 0;
+	}
 }
 
 void mineScene::renderMap()
@@ -162,6 +190,10 @@ void mineScene::playerMove()
 		{
 			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
 			{
+				if (!SOUNDMANAGER->isPlaySound("movesoil"))
+				{
+					SOUNDMANAGER->play("movesoil", 0.2f);
+				}
 				PLAYER->setDirection(UP);
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 				{
@@ -183,6 +215,10 @@ void mineScene::playerMove()
 		{
 			if (_tile[downIndexY][downIndexX].obj == OBJ_NONE)
 			{
+				if (!SOUNDMANAGER->isPlaySound("movesoil"))
+				{
+					SOUNDMANAGER->play("movesoil", 0.2f);
+				}
 				PLAYER->setDirection(DOWN);
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 				{
@@ -204,6 +240,10 @@ void mineScene::playerMove()
 		{
 			if (_tile[leftIndexY][leftIndexX].obj == OBJ_NONE)
 			{
+				if (!SOUNDMANAGER->isPlaySound("movesoil"))
+				{
+					SOUNDMANAGER->play("movesoil", 0.2f);
+				}
 				PLAYER->setDirection(LEFT);
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 				{
@@ -225,6 +265,10 @@ void mineScene::playerMove()
 		{
 			if (_tile[rightIndexY][rightIndexX].obj == OBJ_NONE)
 			{
+				if (!SOUNDMANAGER->isPlaySound("movesoil"))
+				{
+					SOUNDMANAGER->play("movesoil", 0.2f);
+				}
 				PLAYER->setDirection(RIGHT);
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 				{
@@ -241,6 +285,14 @@ void mineScene::playerMove()
 	if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))
 	{
 		PLAYER->setState(STAND);
+		if (SOUNDMANAGER->isPlaySound("movesoil"))
+		{
+			SOUNDMANAGER->stop("movesoil");
+		}
+		if (SOUNDMANAGER->isPlaySound("movegrass"))
+		{
+			SOUNDMANAGER->stop("movegrass");
+		}
 	}
 }
 
@@ -401,8 +453,6 @@ void mineScene::playerInteraction()
 
 			//Ç® º£±â 
 			cutGrass();
-
-			cout << _tile[mouseIndexY][mouseIndexX].objType << endl;
 		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -419,6 +469,7 @@ void mineScene::breakStone()
 {
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_PICKAX)
 	{
+		SOUNDMANAGER->play("removeRock", 0.2f);
 		PLAYER->setState(BREAKSTONE);
 		if (((mouseIndexX == currentIndexX + 1 || mouseIndexX == currentIndexX - 1) && mouseIndexY == currentIndexY)
 			|| (mouseIndexX == currentIndexX && (mouseIndexY == currentIndexY + 1 || mouseIndexY == currentIndexY - 1)) //»óÇÏÁÂ¿ì 4Å¸ÀÏÀÏ¶§
@@ -436,7 +487,7 @@ void mineScene::breakStone()
 				{
 					dropItem(_tile[mouseIndexY][mouseIndexX], str);
 				}
-				RANDOM->range(9) == 0 ?
+				RANDOM->range(20) == 0 ?
 					_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE,
 					_tile[mouseIndexY][mouseIndexX].objType = OTY_MINELADDER,
 					_tile[mouseIndexY][mouseIndexX].objFrameX = 6,
@@ -472,6 +523,7 @@ void mineScene::cutGrass()
 {
 	if (PLAYER->getCurrentInven()->toolKind == TOOL_SICKLE)
 	{
+		SOUNDMANAGER->play("removeGrass", 0.2f);
 		PLAYER->setState(CUTGRASS);
 		switch (PLAYER->getDirection())
 		{
@@ -574,6 +626,7 @@ void mineScene::setTileRect()
 
 void mineScene::getItem(tagItem item)
 {
+	SOUNDMANAGER->play("getItem", 0.2f);
 	bool isAdded = false;
 	for (int i = 0; i < INVENMAX; i++)
 	{
@@ -639,22 +692,27 @@ void mineScene::ejectItem()
 void mineScene::dropItem(tagTile tile, const char * itemInfo)
 {
 	tagItemOnField temp;
-	ZeroMemory(&temp, sizeof(temp));
-	ZeroMemory(&temp.item, sizeof(temp.item));
-	temp.item.item_info = ITEMMANAGER->findItem(itemInfo).item_info;
-	temp.item.itemName = ITEMMANAGER->findItem(itemInfo).itemName;
-	temp.item.amount = ITEMMANAGER->findItem(itemInfo).amount;
-	temp.item.buy_price = ITEMMANAGER->findItem(itemInfo).buy_price;
-	temp.item.indexX = ITEMMANAGER->findItem(itemInfo).indexX;
-	temp.item.indexY = ITEMMANAGER->findItem(itemInfo).indexY;
-	temp.item.isFrame = ITEMMANAGER->findItem(itemInfo).isFrame;
-	temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
-	temp.item.item_kind = ITEMMANAGER->findItem(itemInfo).item_kind;
-	temp.item.seedKind = ITEMMANAGER->findItem(itemInfo).seedKind;
-	temp.item.sell_price = ITEMMANAGER->findItem(itemInfo).sell_price;
-	temp.item.toolKind = ITEMMANAGER->findItem(itemInfo).toolKind;
-	temp.item.waterAmount = ITEMMANAGER->findItem(itemInfo).waterAmount;
-	temp.item.weaponKind = ITEMMANAGER->findItem(itemInfo).weaponKind;
+	temp.item = ITEMMANAGER->findItem(itemInfo);
+	if (itemInfo == "¼®Åº")
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
+	}
+	else if(itemInfo == "±¸¸®Á¶°¢")
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
+	}
+	else if (itemInfo == "Ã¶Á¶°¢")
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
+	}
+	else if (itemInfo == "±ÝÁ¶°¢")
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
+	}
+	else if (itemInfo == "µ¹")
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("¿­¸Å(¶¥)");
+	}
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
 	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);

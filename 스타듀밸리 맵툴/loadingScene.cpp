@@ -164,12 +164,19 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("select", "Sounds/menu_select.mp3", false, false);
 	SOUNDMANAGER->addSound("menuclose", "Sounds/menuclose.mp3", false, false);
 	SOUNDMANAGER->addSound("menuopen", "Sounds/menuopen.mp3", false, false);
-	SOUNDMANAGER->addSound("movegrass", "Sounds/movegrass.mp3", false, false);
-	SOUNDMANAGER->addSound("moverock", "Sounds/moverock.mp3", false, false);
+	SOUNDMANAGER->addSound("movegrass", "Sounds/move_grass.mp3", false, false);
+	SOUNDMANAGER->addSound("moverock", "Sounds/move_rock.mp3", false, false);
 	SOUNDMANAGER->addSound("movesoil", "Sounds/move_soil.mp3", false, false);
+	SOUNDMANAGER->addSound("movewood", "Sounds/woodyStep.mp3", false, false);
 	SOUNDMANAGER->addSound("removeGrass", "Sounds/removeGrass.mp3", false, false);
 	SOUNDMANAGER->addSound("removeRock", "Sounds/removeRock.mp3", false, false);
 	SOUNDMANAGER->addSound("removeTree", "Sounds/removeTree.mp3", false, false);
-	SOUNDMANAGER->addSound("sowrd", "Sounds/scythe.mp3", false, false);
+	SOUNDMANAGER->addSound("scythe", "Sounds/scythe.mp3", false, false);
 	SOUNDMANAGER->addSound("water", "Sounds/watering.mp3", false, false);
+	SOUNDMANAGER->addSound("seed", "Sounds/seed.mp3", false, false);
+	SOUNDMANAGER->addSound("doorOpen", "Sounds/doorOpen.mp3", false, false);
+	SOUNDMANAGER->addSound("harvest", "Sounds/pickUpItem.mp3", false, false);
+	SOUNDMANAGER->addSound("getItem", "Sounds/coin.mp3", false, false);
+	SOUNDMANAGER->addSound("springDay", "Sounds/spring_day.mp3", false, false);
+	SOUNDMANAGER->addSound("bugCave", "Sounds/bug_cave.mp3", false, false);
 }

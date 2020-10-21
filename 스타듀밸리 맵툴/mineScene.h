@@ -39,6 +39,7 @@ public:
 	void release();
 	void update();
 	void render();
+	void setCurrentSlotNumber(int mouseWheel);
 
 	void loadMap();
 	void setTileRect();

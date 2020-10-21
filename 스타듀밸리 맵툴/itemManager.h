@@ -107,6 +107,7 @@ public:
 
 	vector<tagItem> getItem() { return _vItem; }
 	tagItem findItem(const char* strKey);
+	tagItem findItemByKind(ITEM itemKind, int indexX);
 	const char* findItem(ITEM itemKind, SEED seedKind);
 	const char* findItem(ITEM itemKind, int indexX);
 	const char* findItem(ITEM itemKind);

@@ -23,19 +23,24 @@ void effectManager::update()
 		for (int i = 0; i < vEffect.size(); i++)
 		{
 			vEffect[i].count++;
-			if (vEffect[i].count % 5 == 0)
+			if (vEffect[i].effectType == EFT_PINETREECOL
+				|| vEffect[i].effectType == EFT_MAPLETREECOL
+				|| vEffect[i].effectType == EFT_OAKTREECOL)
 			{
-				if (vEffect[i].dir == LEFT)
+				if (vEffect[i].count % 10 == 0)
 				{
-					vEffect[i].indexX--;
-				}
-				else if (vEffect[i].dir == RIGHT)
-				{
-					vEffect[i].indexX++;
-				}
-				if (vEffect[i].indexX < 0 || vEffect[i].indexX > vEffect[i].maxIndex)
-				{
-					vEffect.erase(vEffect.begin() + i);
+					if (vEffect[i].dir == LEFT)
+					{
+						vEffect[i].indexX--;
+					}
+					else if (vEffect[i].dir == RIGHT)
+					{
+						vEffect[i].indexX++;
+					}
+					if (vEffect[i].indexX < 0 || vEffect[i].indexX > vEffect[i].maxIndex)
+					{
+						vEffect.erase(vEffect.begin() + i);
+					}
 				}
 			}
 		}
