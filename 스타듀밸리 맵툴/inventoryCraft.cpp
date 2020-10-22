@@ -455,7 +455,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[2], ": Ã¶ Á¶°¢ 10°³", sizeof(": Ã¶ Á¶°¢ 10°³"));
 
 					IMAGEMANAGER->frameRender("¿­¸Å", hdc, temp2.left - 5, temp2.top - 5, 6, 2);
-					IMAGEMANAGER->frameRender("±¤¹°2", hdc, temp2.left +35, temp2.top - 5, 8, 3);
+					IMAGEMANAGER->frameRender("±¤¹°¾ÆÀÌÅÛ", hdc, temp2.left +35, temp2.top - 5, 8, 3);
 				
 					if (_isWood != NULL || _isIron !=NULL)
 					{
@@ -534,7 +534,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[1], ": ±¸¸®±¤¼® 15°³", sizeof(": ±¸¸®±¤¼® 15°³"));
 					sprintf(temp_info[2], ": µ¹ 20°³", sizeof(": µ¹ 20°³"));
 
-					IMAGEMANAGER->frameRender("±¤¹°2", hdc, temp2.left + 5, temp2.top + 35, 6, 3);
+					IMAGEMANAGER->frameRender("±¤¹°¾ÆÀÌÅÛ", hdc, temp2.left + 5, temp2.top + 35, 6, 3);
 					IMAGEMANAGER->frameRender("¿­¸Å", hdc, temp2.left + 5, temp2.top - 5, 5, 2);
 
 					if (_isCopper != NULL || _isRock != NULL)

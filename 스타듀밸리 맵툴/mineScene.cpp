@@ -43,13 +43,14 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
+	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
+
 	if (!SOUNDMANAGER->isPlaySound("bugCave"))
 	{
 		SOUNDMANAGER->play("bugCave", 0.05f);
 	}
-	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
-	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
-
+	
 	if (INPUT->GetKeyDown(VK_F1))
 	{
 		if (isShowRect)
@@ -66,6 +67,12 @@ void mineScene::update()
 		setRandomObstacles();
 	}
 
+	if (INPUT->GetKeyDown(VK_F3))
+	{
+		currentFloor++;
+		loadMap();
+	}
+
 	checkCurrentTile(); 
 	PLAYER->update();
 	PLAYER->playerAnimation();
@@ -80,7 +87,7 @@ void mineScene::update()
 	}
 	this->ejectItem();
 
-	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
+	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << "\t" << currentFloor << endl;
 }
 
 void mineScene::render()
@@ -119,26 +126,32 @@ void mineScene::renderMap()
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderObject(i, j);
-			if (isShowRect)
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
-				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+				renderObject(i, j);
+				if (isShowRect)
+				{
+					FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+				}
+
 			}
 		}
 	}
 
 	PLAYER->render();
-	monsterRender();
 
 	for (int i = PLAYER->getCurrentY(); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderObject(i, j);
-			if (isShowRect)
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
-				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
-			
+				renderObject(i, j);
+				if (isShowRect)
+				{
+					FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+
+				}
 			}
 		}
 	}
@@ -147,6 +160,9 @@ void mineScene::renderMap()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[mouseIndexY][mouseIndexX].rc);
 	}
+
+	renderMonster();
+
 	PLAYER->playerStatusRender(getMemDC());
 }
 
@@ -182,6 +198,10 @@ void mineScene::renderObject(int i, int j)
 		IMAGEMANAGER->frameRender(objStr, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 			_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 	}
+}
+
+void mineScene::renderMonster()
+{
 }
 
 void mineScene::playerMove()
@@ -586,7 +606,7 @@ void mineScene::useLadder()
 		if (_tile[mouseIndexY][mouseIndexX].objType == OTY_MINELADDER)
 		{
 			currentFloor++;
-			this->init();
+			loadMap();
 			float tempX, tempY;
 			switch (currentFloor)
 			{
@@ -626,10 +646,6 @@ void mineScene::useElevator()
 }
 
 void mineScene::monsterMove()
-{
-}
-
-void mineScene::monsterRender()
 {
 }
 
@@ -767,6 +783,10 @@ void mineScene::setMonsterList()
 
 	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, 4);
 	monsterList.push_back(presetSerpent);
+}
+
+void mineScene::spawnMonster()
+{
 }
 
 

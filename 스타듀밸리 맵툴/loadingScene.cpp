@@ -156,7 +156,10 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("커서", "Images/마우스커서.bmp", 144, 96, 3, 2);
 
 	//몬스터
-	//IMAGEMANAGER->addFrameImage("슬라임", "Images/greenSlime.bmp", )
+	IMAGEMANAGER->addFrameImage("슬라임", "Images/monster/greenSlime.bmp", 64, 48, 4, 3);
+	IMAGEMANAGER->addFrameImage("벌레", "Images/monster/bug.bmp", 64, 80, 4, 5);
+	IMAGEMANAGER->addFrameImage("바위게", "Images/monster/Rock Crab.bmp", 64, 120, 4, 5);
+	IMAGEMANAGER->addFrameImage("도마뱀", "Images/monster/Serpent.bmp", 288, 64, 9, 2);
 }
 
 void loadingScene::loadingSound()
