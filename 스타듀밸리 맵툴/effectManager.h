@@ -22,6 +22,7 @@ public:
 		EFFECT effectType);
 
 	tagEffect findEffect(string effectName);
+	vector<tagEffect>& getvEffect() { return vEffect; }
 	void treeCol(string effectName, int centerX, int centerY);
 	void skillCol(string effectName, int centerX, int centerY);
 

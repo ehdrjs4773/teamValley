@@ -9,6 +9,7 @@ HRESULT effectManager::init()
 	addEffect("나무쓰러짐", "소나무", EFT_PINETREECOL);
 	addEffect("나무쓰러짐", "단풍나무", EFT_MAPLETREECOL);
 	addEffect("나무쓰러짐", "참나무", EFT_OAKTREECOL);
+
 	addEffect("스킬", "익스플로전", EFT_SKILL_EXPLOSION);
 	addEffect("스킬", "스파이크", EFT_SKILL_SPIKES);
 	addEffect("스킬", "파이어", EFT_SKILL_FIRE);
@@ -91,7 +92,6 @@ void effectManager::update()
 					}
 				}
 			}
-		
 		}
 	}
 }
@@ -116,7 +116,7 @@ void effectManager::render(HDC hdc)
 			}
 			else if (vEffect[i].effectType == EFT_SKILL_FIRE_BALL)
 			{
-				Rectangle(hdc, vEffect[i].rc);
+				//Rectangle(hdc, vEffect[i].rc);
 				vEffect[i].image->rotateFrameRender(
 					hdc,
 					vEffect[i].centerX+20,
@@ -127,7 +127,7 @@ void effectManager::render(HDC hdc)
 			}
 			else if (vEffect[i].effectType == EFT_SKILL_SHIELD)
 			{
-				Rectangle(hdc, vEffect[i].rc);
+				//Rectangle(hdc, vEffect[i].rc);
 				vEffect[i].image->frameRender(
 					hdc,
 					PLAYER->getCenterX()-30,
@@ -137,7 +137,7 @@ void effectManager::render(HDC hdc)
 			}
 			else
 			{
-				Rectangle(hdc, vEffect[i].rc);
+				//Rectangle(hdc, vEffect[i].rc);
 				vEffect[i].image->frameRender(
 					hdc,
 					vEffect[i].centerX-30,
@@ -224,14 +224,18 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	if (temp.effectType == EFT_SKILL_EXPLOSION)
 	{
 		temp.indexY = 0;
+		temp.skillDamage = 2;
 	}
 	if (temp.effectType == EFT_SKILL_SPIKES)
 	{
 		temp.indexY = 1;
+		temp.skillDamage = 1;
 	}
 	if (temp.effectType == EFT_SKILL_FIRE)
 	{
 		temp.indexY = 2;
+		temp.skillDamage = 1;
+
 	}
 	if (temp.effectType == EFT_SKILL_SHIELD)
 	{
@@ -240,10 +244,13 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	if (temp.effectType == EFT_SKILL_BLACKHOLE)
 	{
 		temp.indexY = 4;
+		temp.skillDamage = 4;
+
 	}
 	if (temp.effectType == EFT_SKILL_FIRE_BALL)
 	{
 		temp.indexY = 5;
+		temp.skillDamage =1;
 	}
 	vEffect.emplace_back(temp);
 }
