@@ -569,8 +569,11 @@ void mineScene::breakStone()
 		{
 			if (_tile[mouseIndexY][mouseIndexX].objType == OTY_STONE)
 			{
-
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+				if (PLAYER->getEnergy() > 0)
+				{
+					PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+					PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				}
 
 				const char* str = {};
 				int number = 0;
@@ -600,7 +603,12 @@ void mineScene::breakStone()
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+				if (PLAYER->getEnergy() > 0)
+				{
+					PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+					PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				}
+
 				hpCount[mouseIndexY][mouseIndexX]--;
 				if (hpCount[mouseIndexY][mouseIndexX] <= 0)
 				{
@@ -659,7 +667,11 @@ void mineScene::cutGrass()
 				{
 					if (_tile[i][j].objType == OTY_WEED)
 					{
-						PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+						if (PLAYER->getEnergy() > 0)
+						{
+							PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+							PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+						}
 
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
