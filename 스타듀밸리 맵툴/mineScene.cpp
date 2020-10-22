@@ -78,6 +78,15 @@ void mineScene::update()
 		}
 	}
 
+	//몬스터 죽음
+	for (int i = 0; i < vMonster.size(); i++)
+	{
+		if (vMonster[i]->getisDead())
+		{
+			vMonster.erase(vMonster.begin() + i);
+		}
+	}
+
 
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
@@ -560,6 +569,9 @@ void mineScene::breakStone()
 		{
 			if (_tile[mouseIndexY][mouseIndexX].objType == OTY_STONE)
 			{
+
+				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+
 				const char* str = {};
 				int number = 0;
 
@@ -588,6 +600,7 @@ void mineScene::breakStone()
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
+				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
 				hpCount[mouseIndexY][mouseIndexX]--;
 				if (hpCount[mouseIndexY][mouseIndexX] <= 0)
 				{
@@ -646,6 +659,8 @@ void mineScene::cutGrass()
 				{
 					if (_tile[i][j].objType == OTY_WEED)
 					{
+						PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
 						_tile[i][j].seedType = SEED_NONE;

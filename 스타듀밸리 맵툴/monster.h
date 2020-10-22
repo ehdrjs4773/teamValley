@@ -72,8 +72,8 @@ private:
 	bool isLocked;
 	
 	bool getdamage;
-	
 	int DamageDelay;
+	bool isDead;
 
 	int aniCount;
 	int aniIndexX, aniIndexY;
@@ -120,6 +120,7 @@ public:
 	void setHp(float _hp) { currentHp = _hp; }
 	void setDamage(bool _bool) { getdamage = _bool; }
 	bool getDamage() { return getdamage; }
+	bool getisDead() { return isDead; }
 	void hpBarRender();
 
 	/*중요함수*/
