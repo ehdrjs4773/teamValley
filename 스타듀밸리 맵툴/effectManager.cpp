@@ -235,7 +235,6 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	{
 		temp.indexY = 2;
 		temp.skillDamage = 1;
-
 	}
 	if (temp.effectType == EFT_SKILL_SHIELD)
 	{
@@ -251,6 +250,8 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	{
 		temp.indexY = 5;
 		temp.skillDamage =1;
+		temp.centerX = PLAYER->getCenterX() + cosf(temp.angle) * 50 - 20;
+		temp.centerY = PLAYER->getCenterY() + -sinf(temp.angle) * 50 - 20;
 	}
 	vEffect.emplace_back(temp);
 }
