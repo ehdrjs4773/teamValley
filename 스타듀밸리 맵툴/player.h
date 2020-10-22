@@ -167,12 +167,13 @@ public:
 
 	void loadPlayerData();
 	void loadInven();
+	void loadBoxInven();
 	void loadStock();
-	void loadMap();
 	void savePlayerData();
 	void savePlayerInven();
 	void savePlayerStock();
 	void saveMap();
+	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
 };
 

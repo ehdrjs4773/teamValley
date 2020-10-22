@@ -190,6 +190,7 @@ void inHouseScene::savePlayer()
 	PLAYER->savePlayerStock();
 	PLAYER->savePlayerData();
 	PLAYER->saveMap();
+	PLAYER->saveBox();
 }
 
 
