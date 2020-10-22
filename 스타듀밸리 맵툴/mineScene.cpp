@@ -1003,7 +1003,7 @@ void mineScene::spawnMonster()
 				temp->setCenterX((float)idxX * 16.0f - 8.0f);
 				temp->setCenterY((float)idxY * 16.0f - 8.0f);
 				temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
-				temp->setSpeed(0.8f);
+				temp->setSpeed(2.0f);
 				vMonster.push_back(temp);
 			}
 			else
