@@ -15,7 +15,8 @@ HRESULT player::init()
 
 	playerHoldItem = RectMakeCenter(centerX - 8, centerY - 48, 16, 16);
 
-	playerHp = 276;
+	playerHp = 138;
+	playerEnergy = 138;
 	Damage= 2;
 
 	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, 138);
@@ -267,7 +268,7 @@ void player::InventoryRender(HDC hdc)
 		_inventory->inven_item_info(hdc);
 	}
 	else {
-		if (!isSkill)
+		if (!isSkill && !isOpenPlayerStorageCover)
 		{
 			_inventory->quickSlot(hdc);
 			_inventory->quickinven_item_info(hdc);

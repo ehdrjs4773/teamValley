@@ -85,7 +85,7 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
-	//void skill_AniRender(HDC hdc) { _skill->animationRender(hdc); }
+
 	void skill_slot(HDC hdc) { _skill->render(hdc); }
 	void skillUpdate() { _skill->update(); }
 
@@ -129,11 +129,15 @@ public:
 
 	int getEnergyBarX() { return frontEnergyBar.top; }
 	int getHpBarX() { return frontHpBar.top; }
+	int getHp() { return playerHp; }
+	int getEnergy() { return playerEnergy; }
 	int getHpBarBot() { return frontHpBar.bottom; }
 	int getDamage() { return Damage; }
 
 	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
+	void setHp(int PlayerHp) { playerHp = PlayerHp; }
+	void setEnergy(int PlayerEnergy) { playerEnergy = PlayerEnergy; }
 	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
 	void resetHpBar() { frontHpBar = RectMakeCenter(1200 - 95, 600 - 88, 20, 138); }
 	void resetEnergyBar() { frontEnergyBar = RectMakeCenter(1200 - 55, 600 - 88, 20, 138); }

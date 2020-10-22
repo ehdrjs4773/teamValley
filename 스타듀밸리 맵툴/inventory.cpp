@@ -839,6 +839,21 @@ void inventory::_vItemUpdate()
 	{
 		// 상점이 켜졌을 경우
 	}
+
+	if (!_isInvenPage && !isShowTemp)
+	{
+		if (_MouseItem.item_image != NULL)
+		{
+			for (int i = 0; i < _vItem.size(); i++)
+			{
+				if (_vItem[i].item_image == NULL)
+				{
+					_vItem[i] = _MouseItem;
+					_MouseItem = {};
+				}
+			}
+		}
+	}
 	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
@@ -892,64 +907,64 @@ void inventory::_vItemUpdate()
 			}
 		}
 	}
-	 else if(isShowTemp)
+	else if(isShowTemp)
+	{
+	 for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
 	 {
-		 for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
+		 if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
 		 {
-			 if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
+			 if (INPUT->GetKeyDown(VK_LBUTTON))
 			 {
-				 if (INPUT->GetKeyDown(VK_LBUTTON))
+				 if (_vStorageItem[i].item_image != NULL)
 				 {
-					 if (_vStorageItem[i].item_image != NULL)
+					 for (int j = 0; j < _vItem.size(); j++)
 					 {
-						 for (int j = 0; j < _vItem.size(); j++)
+
+						 if (_vItem[j].item_image == NULL)
 						 {
-
-							 if (_vItem[j].item_image == NULL)
-							 {
-								 _vItem[j] = _vStorageItem[i];
-								 _vStorageItem[i] = _MouseItem;
-							 }
-
-
+							 _vItem[j] = _vStorageItem[i];
+							 _vStorageItem[i] = _MouseItem;
 						 }
+
+
 					 }
 				 }
-			 }
-		 }
-		 for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
-		 {
-			 if (PtInRect(&_vItem[i].rc, _ptMouse))
-			 {
-				 if (INPUT->GetKeyDown(VK_LBUTTON))
-				 {
-					 if (_vItem[i].item_image != NULL)
-					 {
-						 for (int j = 0; j < _vStorageItem.size(); j++)
-						 {
-
-							 if (_vStorageItem[j].item_image == NULL)
-							 {
-								 _vStorageItem[j] = _vItem[i];
-								 _vStorageItem[j].item_info = _vItem[i].item_info;
-								 _vItem[i] = _MouseItem;
-							 }
-
-						 }
-					 }
-				 }
-			 }
-		 }
-
-		 for (int i = 0; i < _vStorageItem.size(); i++)
-		 {
-			 if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
-			 {
-				 _vStorageItem[i - 1] = _vStorageItem[i];
-				 _vStorageItem[i] = _MouseItem;
 			 }
 		 }
 	 }
+	 for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
+	 {
+		 if (PtInRect(&_vItem[i].rc, _ptMouse))
+		 {
+			 if (INPUT->GetKeyDown(VK_LBUTTON))
+			 {
+				 if (_vItem[i].item_image != NULL)
+				 {
+					 for (int j = 0; j < _vStorageItem.size(); j++)
+					 {
+
+						 if (_vStorageItem[j].item_image == NULL)
+						 {
+							 _vStorageItem[j] = _vItem[i];
+							 _vStorageItem[j].item_info = _vItem[i].item_info;
+							 _vItem[i] = _MouseItem;
+						 }
+
+					 }
+				 }
+			 }
+		 }
+	 }
+
+	 for (int i = 0; i < _vStorageItem.size(); i++)
+	 {
+		 if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
+		 {
+			 _vStorageItem[i - 1] = _vStorageItem[i];
+			 _vStorageItem[i] = _MouseItem;
+		 }
+	 }
+	}
 
 }
 
