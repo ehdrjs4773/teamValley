@@ -3,7 +3,6 @@
 
 void skill::init()
 {
-	IMAGEMANAGER->addFrameImage("스킬", "Images/skill/skill_sprite.bmp", 500, 345, 9, 6);
 	IMAGEMANAGER->addFrameImage("스킬이미지", "Images/skill/skill_image.bmp", 240, 40, 6, 1);
 	skill_state = SKILL_END;
 	frameX = frameY = 0;
@@ -17,7 +16,6 @@ void skill::init()
 	addSkill("스킬이미지", "익스플로전", SKILL_EXPLOSION, 8, false);
 	addSkill("스킬이미지", "스파이크", SKILL_SPIKES, 8, false,1);
 	addSkill("스킬이미지", "파이어", SKILL_FIRE, 8, false,2);
-
 	addSkill("스킬이미지", "쉴드", SKILL_SHIELD, 7, false,3);
 	addSkill("스킬이미지", "블랙홀", SKILL_BLACKHOLE, 7, false,4);
 	addSkill("스킬이미지", "파이어볼", SKILL_FIRE_BALL, 7, false,5);
@@ -32,9 +30,9 @@ void skill::render(HDC hdc)
 {
 	for (int i = 0; i < _vSkill.size(); i++)
 	{
-		//Rectangle(hdc, _skillSlot[i]);
 		_vSkill[i].image->frameRender(hdc, _skillSlot[i].left, _skillSlot[i].top, _vSkill[i].indexX, 0);
 	}
+
 }
 
 void skill::animationRender(HDC hdc)
@@ -44,8 +42,6 @@ void skill::animationRender(HDC hdc)
 		if (skill_state == _vSkill[i].skillKind && _isActive)
 		{
 			_skillRc = RectMakeCenter(pointX, pointY, 40, 40);
-			//Rectangle(CAMERAMANAGER->getMemDC(), _skillRc);
-			IMAGEMANAGER->findImage("스킬")->frameRender(CAMERAMANAGER->getMemDC(), pointX - 30, pointY - 30, frameX, _vSkill[i].indexX);
 		}
 	}
 	CAMERAMANAGER->render(hdc);
@@ -63,6 +59,11 @@ void skill::update()
 				{
 					_isClick = true;
 					skill_state = _vSkill[i].skillKind;
+					if (skill_state == SKILL_SHIELD)
+					{
+						EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
+					}
+					_save_i = i;
 					cout << "skill " << i << "is activated !" << "\n";
 				}
 			}
@@ -71,6 +72,10 @@ void skill::update()
 		if (_num >= 0)
 		{
 			skill_state = _vSkill[_num].skillKind;
+		//	if (skill_state == SKILL_SHIELD)
+		//	{
+		//		EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
+		//	}
 		}
 
 	}
@@ -81,9 +86,30 @@ void skill::update()
 		{
 			_isActive = true;
 			_isClick = false;
-			frameX = 0;
 			pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x/WINSIZEX *480);
-			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y/WINSIZEY *230);
+			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y/WINSIZEY *230)+60;
+			switch (skill_state)
+			{
+			case SKILL_EXPLOSION:
+				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
+				break;
+			case SKILL_SPIKES:
+				EFFECTMANAGER->skillCol("스파이크", pointX, pointY);
+
+				break;
+			case SKILL_FIRE:
+				EFFECTMANAGER->skillCol("파이어", pointX, pointY);
+
+				break;
+			case SKILL_BLACKHOLE:
+				EFFECTMANAGER->skillCol("블랙홀", pointX, pointY);
+
+				break;
+			case SKILL_FIRE_BALL:
+				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
+				break;
+
+			}
 		}
 	}
 
@@ -100,41 +126,6 @@ void skill::update()
 				_isClick = true;
 			}
 		}
-	}
-	
-
-	//skillAnimation();
-}
-
-void skill::skillAnimation()
-{
-	_count++;
-
-	switch (skill_state)
-	{
-	case SKILL_EXPLOSION:
-
-		break;
-//	case SKILL_SPIKES:
-//		frameX++;
-//		if (frameX > 8) frameX = 0;
-//		break;
-//	case SKILL_FIRE:
-//		frameX++;
-//		if (frameX > 8) frameX = 0;
-//		break;
-//	case SKILL_SHIELD:
-//		frameX++;
-//		if (frameX > 7) frameX = 0;
-//		break;
-//	case SKILL_BLACKHOLE:
-//		frameX++;
-//		if (frameX > 7) frameX = 0;
-//		break;
-//	case SKILL_FIRE_BALL:
-//		frameX++;
-//		if (frameX > 7) frameX = 0;
-//		break;
 	}
 }
 

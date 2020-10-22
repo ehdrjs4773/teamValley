@@ -16,6 +16,7 @@ private:
 	RECT getItemRc;
 	RECT sickleHitBox;
 
+
 	SEASON _currentSeason;
 
 	int loadCount;

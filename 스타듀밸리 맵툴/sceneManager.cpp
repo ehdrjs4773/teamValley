@@ -70,7 +70,7 @@ gameNode * sceneManager::addScene(string sceneName, gameNode * scene)
 HRESULT sceneManager::loadScene(string sceneName)
 {
 	miSceneList find = _mSceneList.find(sceneName);
-
+	_currentSineName = sceneName;
 	//못찾았다면 E_FAIL
 	if (find == _mSceneList.end()) return E_FAIL;
 

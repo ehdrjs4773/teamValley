@@ -23,6 +23,7 @@ public:
 
 	tagEffect findEffect(string effectName);
 	void treeCol(string effectName, int centerX, int centerY);
+	void skillCol(string effectName, int centerX, int centerY);
 
 
 };

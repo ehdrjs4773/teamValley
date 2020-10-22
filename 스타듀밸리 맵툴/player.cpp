@@ -18,8 +18,9 @@ HRESULT player::init()
 	playerHp = 276;
 	Damage= 2;
 
-	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, 138);
+
 
 	speed = 1.5f;
 
@@ -29,6 +30,7 @@ HRESULT player::init()
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
+	IMAGEMANAGER->addImage("backEnergyBar", "Images/BMP/backEnergyBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	playerStorage = IMAGEMANAGER->findImage("플레이어 창고");
 
 	_inventory = new inventory;
@@ -143,6 +145,7 @@ void  player::update()
 	{
 		countTime();
 	}
+	_inventory->getInventoryCraft()->materialUpdate();
 }
 
 void player::render()
@@ -153,6 +156,7 @@ void player::render()
 	{
 		stock->render();
 	}
+
 }
 
 void player::playerCarryItem(HDC hdc)
@@ -224,11 +228,18 @@ void player::playerCarryItem(HDC hdc)
 void player::playerStatusRender(HDC hdc)
 {
 	InventoryRender(hdc);
-	energyBarRender(hdc);
+	hpBarRender(hdc);
 	clockRender(hdc);
 	moneyRender(hdc);
 	arrowRender(hdc);
 	weatherRender(hdc);
+
+	
+	if (SCENEMANAGER->getCurrentSceneName() == "광산화면")
+	{
+		energyBarRender(hdc);
+	}
+	
 }
 
 void player::InventoryRender(HDC hdc)
@@ -261,24 +272,26 @@ void player::InventoryRender(HDC hdc)
 
 void player::energyBarRender(HDC hdc)
 {
+	//int a = 0 + (278 - playerHp);
 
-	int b = 0 + (278 - playerEnergy);
-
-	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
+	IMAGEMANAGER->render("backEnergyBar", hdc, WINSIZEX - 115, WINSIZEY - 200);
 	Rectangle(hdc, frontEnergyBar);
-	brush = CreateSolidBrush(RGB(b, 220, 7));
+	brush = CreateSolidBrush(RGB(255, 244, 6));
 	FillRect(hdc, &frontEnergyBar, brush);
 	DeleteObject(brush);
+
 
 }
 
 void player::hpBarRender(HDC hdc)
 {
-	//int a = 0 + (278 - playerHp);
+
+
+	int b = 0 + (278 - playerHp);
 
 	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
 	Rectangle(hdc, frontHpBar);
-	brush = CreateSolidBrush(RGB(255, 0, 0));
+	brush = CreateSolidBrush(RGB(b, 220, 7));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
 

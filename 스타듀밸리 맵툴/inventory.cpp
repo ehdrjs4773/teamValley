@@ -204,7 +204,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	}
 	else if (_isPlayerPage)
 	{
-		IMAGEMANAGER->render("스킬", hdc, 225, 40);
+		IMAGEMANAGER->render("스킬창", hdc, 225, 40);
 	}
 	else if (_isCraftPage)
 	{
@@ -624,6 +624,8 @@ void inventory::inven_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -701,6 +703,8 @@ void inventory::quickinven_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -781,6 +785,8 @@ void inventory::storage_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1],0,(string)_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));

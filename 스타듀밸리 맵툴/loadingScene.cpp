@@ -100,12 +100,13 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("소형집", "Images/맵/아침 소형 집.bmp", 2560, 1440);
 
 	IMAGEMANAGER->addImage("인벤토리", "Images/inventory/iteminventory.bmp", 750, 550, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("스킬", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("스킬창", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("제작창", "Images/inventory/Craftinven.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작", "Images/inventory/CraftObject.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작스몰", "Images/inventory/CraftObjectSmall.bmp", 96,80, 6, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 240, 80, 6, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작알파", "Images/inventory/CraftObjectAlpha.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("제작중인 아이템", "Images/inventory/goodsInProgress.bmp", 32, 32, true, RGB(255, 0, 255));
 
 	//플레이어
 	IMAGEMANAGER->addImage("아침 집", "Images/맵/아침 집.bmp", 1600, 1600);
@@ -156,7 +157,10 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("커서", "Images/마우스커서.bmp", 144, 96, 3, 2);
 
 	//몬스터
-	//IMAGEMANAGER->addFrameImage("슬라임", "Images/greenSlime.bmp", )
+	IMAGEMANAGER->addFrameImage("슬라임", "Images/monster/greenSlime.bmp", 64, 48, 4, 3);
+	IMAGEMANAGER->addFrameImage("벌레", "Images/monster/bug.bmp", 64, 80, 4, 5);
+	IMAGEMANAGER->addFrameImage("바위게", "Images/monster/Rock Crab.bmp", 64, 120, 4, 5);
+	IMAGEMANAGER->addFrameImage("도마뱀", "Images/monster/Serpent.bmp", 288, 64, 9, 2);
 }
 
 void loadingScene::loadingSound()

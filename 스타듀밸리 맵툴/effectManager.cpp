@@ -4,10 +4,17 @@
 HRESULT effectManager::init()
 {
 	IMAGEMANAGER->addFrameImage("나무쓰러짐", "Images/BMP/treeCollapse.bmp", 3116, 336, 19, 3);
-	
+	IMAGEMANAGER->addFrameImage("스킬", "Images/skill/skill_sprite.bmp", 500, 345, 9, 6);
+
 	addEffect("나무쓰러짐", "소나무", EFT_PINETREECOL);
 	addEffect("나무쓰러짐", "단풍나무", EFT_MAPLETREECOL);
 	addEffect("나무쓰러짐", "참나무", EFT_OAKTREECOL);
+	addEffect("스킬", "익스플로전", EFT_SKILL_EXPLOSION);
+	addEffect("스킬", "스파이크", EFT_SKILL_SPIKES);
+	addEffect("스킬", "파이어", EFT_SKILL_FIRE);
+	addEffect("스킬", "쉴드", EFT_SKILL_SHIELD);
+	addEffect("스킬", "블랙홀", EFT_SKILL_BLACKHOLE);
+	addEffect("스킬", "파이어볼", EFT_SKILL_FIRE_BALL);
 	
 	return S_OK;
 }
@@ -27,7 +34,7 @@ void effectManager::update()
 				|| vEffect[i].effectType == EFT_MAPLETREECOL
 				|| vEffect[i].effectType == EFT_OAKTREECOL)
 			{
-				if (vEffect[i].count % 10 == 0)
+				if (vEffect[i].count % 5 == 0)
 				{
 					if (vEffect[i].dir == LEFT)
 					{
@@ -43,6 +50,19 @@ void effectManager::update()
 					}
 				}
 			}
+			else
+			{
+				if (vEffect[i].count % 5 == 0)
+				{
+					vEffect[i].indexX++;
+
+					if (vEffect[i].indexX > vEffect[i].maxIndex)
+					{
+						vEffect.erase(vEffect.begin() + i);
+					}
+				}
+			}
+		
 		}
 	}
 }
@@ -55,7 +75,14 @@ void effectManager::render(HDC hdc)
 		{
 			if (vEffect[i].effectType == EFT_PINETREECOL
 				|| vEffect[i].effectType == EFT_MAPLETREECOL
-				|| vEffect[i].effectType == EFT_OAKTREECOL)
+				|| vEffect[i].effectType == EFT_OAKTREECOL
+				|| vEffect[i].effectType == EFT_SKILL_EXPLOSION
+				|| vEffect[i].effectType == EFT_SKILL_SPIKES
+				|| vEffect[i].effectType == EFT_SKILL_FIRE
+				|| vEffect[i].effectType == EFT_SKILL_SHIELD
+				|| vEffect[i].effectType == EFT_SKILL_BLACKHOLE
+				|| vEffect[i].effectType == EFT_SKILL_FIRE_BALL
+				)
 			{
 				vEffect[i].image->frameRender(
 					hdc,
@@ -73,12 +100,18 @@ void effectManager::addEffect(string imageName, string effectName, EFFECT effect
 	tagEffect temp;
 	temp.image = IMAGEMANAGER->findImage(imageName);
 	temp.effectType = effectType;
-	temp.maxIndex = IMAGEMANAGER->findImage(imageName)->getMaxFrameX();
 	if (effectType == EFT_PINETREECOL 
 		|| effectType == EFT_MAPLETREECOL
 		|| effectType == EFT_OAKTREECOL)
 	{
 		temp.indexX = 9;
+		temp.maxIndex = IMAGEMANAGER->findImage(imageName)->getMaxFrameX();
+
+	}
+	else
+	{
+		temp.indexX = 0;
+		temp.maxIndex = 8;
 	}
 	temp.centerX = 0;
 	temp.centerY = 0;
@@ -121,6 +154,40 @@ void effectManager::treeCol(string effectName, int centerX, int centerY)
 	if (temp.effectType == EFT_OAKTREECOL)
 	{		
 		temp.indexY = 2;
+	}
+	vEffect.emplace_back(temp);
+}
+
+void effectManager::skillCol(string effectName, int centerX, int centerY)
+{
+	tagEffect temp;
+	temp = this->findEffect(effectName);
+	temp.centerX = centerX;
+	temp.centerY = centerY;
+
+	if (temp.effectType == EFT_SKILL_EXPLOSION)
+	{
+		temp.indexY = 0;
+	}
+	if (temp.effectType == EFT_SKILL_SPIKES)
+	{
+		temp.indexY = 1;
+	}
+	if (temp.effectType == EFT_SKILL_FIRE)
+	{
+		temp.indexY = 2;
+	}
+	if (temp.effectType == EFT_SKILL_SHIELD)
+	{
+		temp.indexY = 3;
+	}
+	if (temp.effectType == EFT_SKILL_BLACKHOLE)
+	{
+		temp.indexY = 4;
+	}
+	if (temp.effectType == EFT_SKILL_FIRE_BALL)
+	{
+		temp.indexY = 5;
 	}
 	vEffect.emplace_back(temp);
 }

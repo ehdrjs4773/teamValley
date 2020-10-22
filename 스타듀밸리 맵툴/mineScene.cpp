@@ -43,13 +43,14 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
+	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
+
 	if (!SOUNDMANAGER->isPlaySound("bugCave"))
 	{
 		SOUNDMANAGER->play("bugCave", 0.05f);
 	}
-	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
-	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
-
+	
 	if (INPUT->GetKeyDown(VK_F1))
 	{
 		if (isShowRect)
@@ -66,6 +67,12 @@ void mineScene::update()
 		setRandomObstacles();
 	}
 
+	if (INPUT->GetKeyDown(VK_F3))
+	{
+		currentFloor++;
+		loadMap();
+	}
+
 	checkCurrentTile(); 
 	PLAYER->update();
 	PLAYER->playerAnimation();
@@ -80,7 +87,7 @@ void mineScene::update()
 	}
 	this->ejectItem();
 
-	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
+	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << "\t" << currentFloor << endl;
 }
 
 void mineScene::render()
@@ -119,7 +126,7 @@ void mineScene::renderMap()
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			if (i >= 0 && i < TILEY&&j >= 0 && j < TILEX)
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
 				renderObject(i, j);
 				if (isShowRect)
@@ -131,13 +138,12 @@ void mineScene::renderMap()
 	}
 
 	PLAYER->render();
-	monsterRender();
 
 	for (int i = PLAYER->getCurrentY(); i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			if (i >= 0 && i < TILEY&&j >= 0 && j < TILEX)
+			if (i >= 0 && i < TILEY && j >= 0 && j < TILEX)
 			{
 				renderObject(i, j);
 				if (isShowRect)
@@ -153,7 +159,11 @@ void mineScene::renderMap()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[mouseIndexY][mouseIndexX].rc);
 	}
+
+	renderMonster();
+
 	PLAYER->playerStatusRender(getMemDC());
+
 }
 
 void mineScene::renderTerrain()
@@ -188,6 +198,10 @@ void mineScene::renderObject(int i, int j)
 		IMAGEMANAGER->frameRender(objStr, CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 			_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 	}
+}
+
+void mineScene::renderMonster()
+{
 }
 
 void mineScene::playerMove()
@@ -469,11 +483,12 @@ void mineScene::playerInteraction()
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
-		//층 내려가기
+		//층 이동하기
 		useLadder();
 
 		//마을로 돌아가기
 		useElevator();
+
 	}
 }
 
@@ -632,13 +647,16 @@ void mineScene::useLadder()
 				tempX = 500.0f;
 				tempY = 65.0f;
 				break;
-
-
 			default:
 				break;
 			}
 			SWITCHMANAGER->changeScene("광산화면");
 			SWITCHMANAGER->startFade(tempX, tempY);
+		}
+		else if (_tile[mouseIndexY][mouseIndexX].objFrameX==3 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
+		{
+			SWITCHMANAGER->changeScene("인게임화면");
+			SWITCHMANAGER->startFade(288.0f, 64.0f);
 		}
 	}
 }
@@ -659,10 +677,6 @@ void mineScene::useElevator()
 }
 
 void mineScene::monsterMove()
-{
-}
-
-void mineScene::monsterRender()
 {
 }
 
@@ -800,6 +814,10 @@ void mineScene::setMonsterList()
 
 	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, 4);
 	monsterList.push_back(presetSerpent);
+}
+
+void mineScene::spawnMonster()
+{
 }
 
 
