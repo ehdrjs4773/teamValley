@@ -156,7 +156,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("커서", "Images/마우스커서.bmp", 144, 96, 3, 2);
 
 	//몬스터
-	IMAGEMANAGER->addFrameImage("슬라임", "Images/greenSlime.bmp", )
+	//IMAGEMANAGER->addFrameImage("슬라임", "Images/greenSlime.bmp", )
 }
 
 void loadingScene::loadingSound()

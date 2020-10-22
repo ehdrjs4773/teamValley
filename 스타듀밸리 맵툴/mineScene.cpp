@@ -80,7 +80,7 @@ void mineScene::update()
 	}
 	this->ejectItem();
 
-	//cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
+	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
 }
 
 void mineScene::render()
@@ -189,7 +189,7 @@ void mineScene::playerMove()
 	if (INPUT->GetKey('W'))
 	{
 		upIndexX = (float)((float)PLAYER->getCenterX()) / 16;
-		upIndexY = (float)((float)PLAYER->getCenterY() - 8) / 16;
+		upIndexY = (float)((float)PLAYER->getCenterY()) / 16;
 		if (upIndexX < TILEX && upIndexY >= 0 && upIndexY < TILEY)
 		{
 			if (_tile[upIndexY][upIndexX].obj == OBJ_NONE)
@@ -468,8 +468,6 @@ void mineScene::playerInteraction()
 
 		//마을로 돌아가기
 		useElevator();
-
-		cout << _tile[mouseIndexY][mouseIndexX].objType << "\t" << currentFloor << endl;
 	}
 }
 
@@ -589,8 +587,25 @@ void mineScene::useLadder()
 		{
 			currentFloor++;
 			this->init();
+			float tempX, tempY;
+			switch (currentFloor)
+			{
+			case 0:
+				break;
+			case 1: 
+				break;
+			case 2:
+				tempX = 390.0f;
+				tempY = 240.0f;
+				break;
+			case 3:
+
+
+			default:
+				break;
+			}
 			SWITCHMANAGER->changeScene("광산화면");
-			SWITCHMANAGER->startFade(390.0f, 240.0f);
+			SWITCHMANAGER->startFade(tempX, tempY);
 		}
 	}
 }
