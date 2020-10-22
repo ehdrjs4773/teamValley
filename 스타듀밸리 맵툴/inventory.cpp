@@ -68,7 +68,7 @@ void inventory::update()
 {
 	if (INPUT->GetKeyDown(VK_F8))
 	{
-		_vItem[4] = ITEMMANAGER->findItem("기본스프링클러");
+		_vItem[20] = ITEMMANAGER->findItem("기본스프링클러");
 	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
@@ -356,6 +356,7 @@ void inventory::quickSlot(HDC hdc)
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					SOUNDMANAGER->play("toolSwap", 0.2f);
 					currentSlotNumber = i;
 				}
 			}
@@ -363,50 +364,62 @@ void inventory::quickSlot(HDC hdc)
 
 		if (INPUT->GetKeyDown('1'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 0;
 		}
 		if (INPUT->GetKeyDown('2'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 1;
 		}
 		if (INPUT->GetKeyDown('3'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 2;
 		}
 		if (INPUT->GetKeyDown('4'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 3;
 		}
 		if (INPUT->GetKeyDown('5'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 4;
 		}
 		if (INPUT->GetKeyDown('6'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 5;
 		}
 		if (INPUT->GetKeyDown('7'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 6;
 		}
 		if (INPUT->GetKeyDown('8'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 7;
 		}
 		if (INPUT->GetKeyDown('9'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 8;
 		}
 		if (INPUT->GetKeyDown('0'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 9;
 		}
 		if (INPUT->GetKeyDown(VK_OEM_MINUS))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 10;
 		}
 		if (INPUT->GetKeyDown(VK_OEM_PLUS))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSlotNumber = 11;
 		}
 
@@ -430,6 +443,7 @@ void inventory::quickSkillSlot(HDC hdc)
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					SOUNDMANAGER->play("toolSwap", 0.2f);
 					currentSkillNumber = i;
 				}
 			}
@@ -437,26 +451,32 @@ void inventory::quickSkillSlot(HDC hdc)
 
 		if (INPUT->GetKeyDown('1'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 0;
 		}
 		if (INPUT->GetKeyDown('2'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 1;
 		}
 		if (INPUT->GetKeyDown('3'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 2;
 		}
 		if (INPUT->GetKeyDown('4'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 3;
 		}
 		if (INPUT->GetKeyDown('5'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 4;
 		}
 		if (INPUT->GetKeyDown('6'))
 		{
+			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 5;
 		}
 		RECT temp{ _playerTool[currentSkillNumber].left,_playerTool[currentSkillNumber].top,_playerTool[currentSkillNumber].right,_playerTool[currentSkillNumber].bottom };
@@ -857,7 +877,6 @@ void inventory::_vItemUpdate()
 	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-
 
 		for (int i = 0; i < _vItem.size(); i++)
 		{

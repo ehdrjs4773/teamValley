@@ -168,6 +168,7 @@ void loadingScene::loadingSound()
 {
 	SOUNDMANAGER->addSound("¸ÞÀÎÀ½¾Ç", "Sounds/opening.mp3", true, true);
 	SOUNDMANAGER->addSound("³óÀå", "Sounds/farm.mp3", true, true);
+	SOUNDMANAGER->addSound("town", "Sounds/town.mp3", true, true);
 	SOUNDMANAGER->addSound("³ª¹«Âï±â", "Sounds/breakTree.mp3", false, false);
 	SOUNDMANAGER->addSound("HOE", "Sounds/hoe.mp3", false, false);
 	SOUNDMANAGER->addSound("select", "Sounds/menu_select.mp3", false, false);
@@ -187,5 +188,19 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("harvest", "Sounds/pickUpItem.mp3", false, false);
 	SOUNDMANAGER->addSound("getItem", "Sounds/coin.mp3", false, false);
 	SOUNDMANAGER->addSound("springDay", "Sounds/spring_day.mp3", false, false);
+	SOUNDMANAGER->addSound("night", "Sounds/night.mp3", false, false);
 	SOUNDMANAGER->addSound("bugCave", "Sounds/bug_cave.mp3", false, false);
+	SOUNDMANAGER->addSound("slime", "Sounds/slime.mp3", false, false);
+	SOUNDMANAGER->addSound("monsterDead", "Sounds/monsterdead.mp3", false, false);
+	SOUNDMANAGER->addSound("explosion", "Sounds/explosion.mp3", false, false);
+	SOUNDMANAGER->addSound("fireball", "Sounds/fireball.mp3", false, false);
+	SOUNDMANAGER->addSound("fireSpell", "Sounds/fireSpell.mp3", false, false);
+	SOUNDMANAGER->addSound("blackHole", "Sounds/blackHole.mp3", false, false);
+	SOUNDMANAGER->addSound("shield", "Sounds/shield.mp3", false, false);
+	SOUNDMANAGER->addSound("stairDown", "Sounds/stairsdown.mp3", false, false);
+	SOUNDMANAGER->addSound("purchase", "Sounds/purchase.mp3", false, false);
+	SOUNDMANAGER->addSound("death", "Sounds/death.mp3", false, false);
+	SOUNDMANAGER->addSound("toolSwap", "Sounds/toolSwap.mp3", false, false);
+	SOUNDMANAGER->addSound("spike", "Sounds/spike.mp3", false, false);
+	SOUNDMANAGER->addSound("hitPlayer", "Sounds/hitPlayer.mp3", false, false);
 }

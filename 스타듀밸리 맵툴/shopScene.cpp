@@ -45,6 +45,11 @@ void shopScene::release()
 
 void shopScene::update()
 {
+	if (!SOUNDMANAGER->isPlaySound("town"))
+	{
+		SOUNDMANAGER->play("town", 0.05f);
+	}
+
 	_itemNpc->update();
 	_skillNpc->update();
 
@@ -53,6 +58,7 @@ void shopScene::update()
 	{
 		if (!SWITCHMANAGER->getFade())
 		{
+			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(800.0f, 340.0f);
 		}
@@ -139,7 +145,6 @@ void shopScene::render()
 
 	CAMERAMANAGER->render(getMemDC());
 
-
 	if (_isShopClicked)
 	{
 		_itemShop->render();
@@ -152,7 +157,6 @@ void shopScene::render()
 	{
 		PLAYER->playerStatusRender(getMemDC());
 	}
-
 }
 
 void shopScene::playerMove()
@@ -172,6 +176,10 @@ void shopScene::playerMove()
 				}
 				if (!iscoli)
 				{
+					if (!SOUNDMANAGER->isPlaySound("movewood"))
+					{
+						SOUNDMANAGER->play("movewood", 0.2f);
+					}
 					PLAYER->setDirection(UP);
 					PLAYER->setState(RUN);
 					PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
@@ -193,6 +201,10 @@ void shopScene::playerMove()
 				}
 				if (!iscoli)
 				{
+					if (!SOUNDMANAGER->isPlaySound("movewood"))
+					{
+						SOUNDMANAGER->play("movewood", 0.2f);
+					}
 					PLAYER->setDirection(DOWN);
 					PLAYER->setState(RUN);
 					PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
@@ -215,6 +227,10 @@ void shopScene::playerMove()
 				}
 				if (!iscoli)
 				{
+					if (!SOUNDMANAGER->isPlaySound("movewood"))
+					{
+						SOUNDMANAGER->play("movewood", 0.2f);
+					}
 					PLAYER->setDirection(LEFT);
 					PLAYER->setState(RUN);
 					PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
@@ -236,6 +252,10 @@ void shopScene::playerMove()
 				}
 				if (!iscoli)
 				{
+					if (!SOUNDMANAGER->isPlaySound("movewood"))
+					{
+						SOUNDMANAGER->play("movewood", 0.2f);
+					}
 					PLAYER->setDirection(RIGHT);
 					PLAYER->setState(RUN);
 					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
@@ -244,6 +264,10 @@ void shopScene::playerMove()
 		}
 		if (!(INPUT->GetKey('W')) && !(INPUT->GetKey('S')) && !(INPUT->GetKey('A')) && !(INPUT->GetKey('D')))
 		{
+			if (SOUNDMANAGER->isPlaySound("movewood"))
+			{
+				SOUNDMANAGER->stop("movewood");
+			}
 			PLAYER->setState(STAND);
 		}
 }

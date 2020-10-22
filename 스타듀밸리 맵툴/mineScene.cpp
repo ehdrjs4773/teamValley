@@ -57,7 +57,6 @@ void mineScene::release()
 
 void mineScene::update()
 {
-
 	//몬스터 스킬 충돌
 	if (!EFFECTMANAGER->getvEffect().empty())
 	{
@@ -83,6 +82,7 @@ void mineScene::update()
 	{
 		if (vMonster[i]->getisDead())
 		{
+			SOUNDMANAGER->play("monsterdead", 0.2f);
 			vMonster.erase(vMonster.begin() + i);
 		}
 	}
@@ -171,11 +171,13 @@ void mineScene::setCurrentSlotNumber(int mouseWheel)
 {
 	if (mouseWheel > 0)
 	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
 		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
 		_mouseWheel = 0;
 	}
 	else if (mouseWheel < 0)
 	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
 		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
 		_mouseWheel = 0;
 	}
@@ -221,9 +223,7 @@ void mineScene::renderMap()
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[currentIndexY][currentIndexX].rc);
 		Rectangle(CAMERAMANAGER->getMemDC(), _tile[mouseIndexY][mouseIndexX].rc);
 	}
-
 	PLAYER->playerStatusRender(getMemDC());
-
 }
 
 void mineScene::renderTerrain()
@@ -693,6 +693,7 @@ void mineScene::useLadder()
 	{
 		if (_tile[mouseIndexY][mouseIndexX].objType == OTY_MINELADDER)
 		{
+			SOUNDMANAGER->play("stairDown", 0.2f);
 			currentFloor++;
 			this->init();
 			float tempX, tempY;
@@ -742,6 +743,7 @@ void mineScene::useLadder()
 		}
 		else if (_tile[mouseIndexY][mouseIndexX].objFrameX==3 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
 		{
+			SOUNDMANAGER->play("stairDown", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(288.0f, 64.0f);
 		}
@@ -1017,7 +1019,7 @@ void mineScene::playerMonsterCollision()
 		{
 			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
 			{
-				//죽는 사운드 추가
+				SOUNDMANAGER->play("death", 0.2f);
 				PLAYER->setIsSprinkled(false);
 				savePlayer();
 				PLAYER->resetClock();
@@ -1026,6 +1028,7 @@ void mineScene::playerMonsterCollision()
 			}
 			else
 			{
+				SOUNDMANAGER->play("hitPlayer", 0.3f);
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + iter->getDmg() * 2);
 				PLAYER->setIsHit(true);
 			}

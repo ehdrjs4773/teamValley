@@ -24,6 +24,7 @@ HRESULT inGameScene::init()
 
 		SOUNDMANAGER->stop("메인음악"); 
 		SOUNDMANAGER->stop("bugCave");
+		SOUNDMANAGER->stop("town");
 
 		isShowRect = false;
 
@@ -47,6 +48,18 @@ HRESULT inGameScene::init()
 		}
 	}
 
+	if (SOUNDMANAGER->isPlaySound("메인음악"))
+	{
+		SOUNDMANAGER->stop("메인음악");
+	}
+	if (SOUNDMANAGER->isPlaySound("bugCave"))
+	{
+		SOUNDMANAGER->stop("bugCave");
+	}
+	if (SOUNDMANAGER->isPlaySound("town"))
+	{
+		SOUNDMANAGER->stop("town");
+	}
 	load();
 
 	return S_OK;
@@ -64,9 +77,13 @@ void inGameScene::update()
 	{
 		SOUNDMANAGER->play("농장", 0.05f);
 	}
-	if (!SOUNDMANAGER->isPlaySound("springDay"))
+	if (!SOUNDMANAGER->isPlaySound("springDay") && PLAYER->getHour() < 13)
 	{
-		SOUNDMANAGER->play("springDay", 0.2f);
+		SOUNDMANAGER->play("springDay", 0.3f);
+	}
+	if (!SOUNDMANAGER->isPlaySound("night") && (PLAYER->getHour() > 21 || PLAYER->getHour() < 5))
+	{
+		SOUNDMANAGER->play("night", 0.3f);
 	}
 
 	PLAYER->update();
@@ -1140,6 +1157,7 @@ void inGameScene::setFence()
 			//펜스일때
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCE)
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_WOODENFENCE;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
@@ -1147,6 +1165,7 @@ void inGameScene::setFence()
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCE)
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCE;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
@@ -1185,6 +1204,7 @@ void inGameScene::setEquipment()
 			//제작아이템일때
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX) //상자일때
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_BOX;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
@@ -1192,6 +1212,7 @@ void inGameScene::setEquipment()
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET) //먹이통일때
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_FEEDBUCKET;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 1;
@@ -1199,6 +1220,7 @@ void inGameScene::setEquipment()
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW) //허수아비일때
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 3;
@@ -1213,6 +1235,7 @@ void inGameScene::setEquipment()
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM) //양봉장일때 
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_BEEFARM;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
@@ -1220,6 +1243,7 @@ void inGameScene::setEquipment()
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL) //절임통일때 
 			{
+				SOUNDMANAGER->play("movewood", 0.4f);
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_PICKLEDBARREL;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 5;
@@ -2846,11 +2870,13 @@ void inGameScene::setCurrentSlotNumber(int mouseWheel)
 {
 	if (mouseWheel > 0)
 	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
 		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
 		_mouseWheel = 0;
 	}
 	else if (mouseWheel < 0)
 	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
 		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
 		_mouseWheel = 0;
 	}

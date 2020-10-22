@@ -32,6 +32,13 @@ void monster::move()
 {
 	if (monsterType != MTYPE_SERPENT)
 	{
+		if (monsterType == MTYPE_SLIME)
+		{
+			if (!SOUNDMANAGER->isPlaySound("slime"))
+			{
+				SOUNDMANAGER->play("slime", 0.2f);
+			}
+		}
 		if (_finalList.size() > 0)
 		{
 			float destX = _finalList[0]->rc.left + (_finalList[0]->rc.right - _finalList[0]->rc.left) / 2;
@@ -256,12 +263,12 @@ void monster::render()
 		}
 	}
 
-	//FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
-	//FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
-	//for (int i = 0; i < _finalList.size(); i++)
-	//{
-	//	FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
-	//}
+	FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
+	FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
+	for (int i = 0; i < _finalList.size(); i++)
+	{
+		FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
+	}
 	
 	hpBarRender();
 

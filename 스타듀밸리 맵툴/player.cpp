@@ -58,7 +58,7 @@ HRESULT player::init()
 	year = 1;
 	hour = 6;
 	minute = 0;
-	money = 500;
+	money = 5000;
 	currentSeason = SPRING;
 	currentWeather = SUNNY;
 	date = 1;
@@ -1366,6 +1366,7 @@ void player::saveMap()
 							_tile[i][j].grownLevel += 1;
 							_tile[i][j].objFrameX -= 1;
 							_tile[i - 1][j].ovlFrameX -= 1;
+							_tile[i][j].isWet = false;
 						}
 					}
 				}
@@ -1384,6 +1385,7 @@ void player::saveMap()
 							_tile[i][j].grownLevel += 1;
 							_tile[i][j].objFrameX -= 1;
 							_tile[i - 1][j].ovlFrameX -= 1;
+							_tile[i][j].isWet = false;
 						}
 					}
 				}
@@ -1466,6 +1468,7 @@ void player::saveMap()
 						_tile[i][j].grownLevel += 1;
 						_tile[i][j].objFrameX += 1;
 						_tile[i - 1][j].ovlFrameX += 1;
+						_tile[i][j].isWet = false;
 					}
 				}
 

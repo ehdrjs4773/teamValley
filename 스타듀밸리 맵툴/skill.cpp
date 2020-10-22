@@ -74,6 +74,10 @@ void skill::skillSelect()
 					{
 						_isShield = true;
 						_count = 0;
+						if (!SOUNDMANAGER->isPlaySound("shield"))
+						{
+							SOUNDMANAGER->play("shield", 0.2f);
+						}
 						EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
 					}
 				}
@@ -93,6 +97,10 @@ void skill::skillSelect()
 			if (!_isShield)
 			{
 				_isShield = true;
+				if (!SOUNDMANAGER->isPlaySound("shield"))
+				{
+					SOUNDMANAGER->play("shield", 0.2f);
+				}
 				EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
 			}
 		}
@@ -111,22 +119,23 @@ void skill::skillActive()
 			switch (skill_state)
 			{
 			case SKILL_EXPLOSION:
-
+				SOUNDMANAGER->play("explosion", 0.2f);
 				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
 				break;
 			case SKILL_SPIKES:
+				SOUNDMANAGER->play("spike", 0.2f);
 				EFFECTMANAGER->skillCol("스파이크", pointX, pointY);
-
 				break;
 			case SKILL_FIRE:
+				SOUNDMANAGER->play("fireSpell", 0.2f);
 				EFFECTMANAGER->skillCol("파이어", pointX, pointY);
-
 				break;
 			case SKILL_BLACKHOLE:
+				SOUNDMANAGER->play("blackHole", 0.2f);
 				EFFECTMANAGER->skillCol("블랙홀", pointX, pointY);
-
 				break;
 			case SKILL_FIRE_BALL:
+				SOUNDMANAGER->play("fireball", 0.2f);
 				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
 				break;
 			}

@@ -351,6 +351,10 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
+				if (!SOUNDMANAGER->isPlaySound("purchase"))
+				{
+					SOUNDMANAGER->play("purchase", 0.2f);
+				}
 				if ((*_vInven)[i].item_image == NULL) continue;
 				PLAYER->setMoney(PLAYER->getMoney() + _vInven->at(i).sell_price);
 				(*_vInven)[i].item_image = NULL;
@@ -375,6 +379,10 @@ void shop::buy()
 			_vslot[i].on_cursor = true;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				if (!SOUNDMANAGER->isPlaySound("purchase"))
+				{
+					SOUNDMANAGER->play("purchase", 0.2f);
+				}
 				if (is_click && (i + current_index != click_index)) continue;
 				else
 				{
