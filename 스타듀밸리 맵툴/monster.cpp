@@ -98,7 +98,7 @@ void monster::animation()
 		case MTYPE_ROCKCRAB:
 			if (aniIndexX > 3)
 			{
-				aniIndexX = 0;
+				aniIndexX = 1;
 				isMove = false;
 			}
 			break;

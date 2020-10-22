@@ -1,38 +1,539 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  stdafx.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.h(61): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.h(62): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  bullet.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(51): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(66): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(83): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(150): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(164): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(180): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(195): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(253): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(267): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\bullet.cpp(281): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  camera.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\camera.cpp(71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cameraManager.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(56): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(57): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(62): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(66): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\cameramanager.cpp(78): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  effectManager.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(67): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(81): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(103): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(133): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(144): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(143): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(190): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(191): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(219): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(220): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(222): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  gameNode.cpp
+  image.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(716): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(717): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(754): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(755): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(802): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(810): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(811): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(830): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(829): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(853): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(861): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(862): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(885): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\image.cpp(884): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  imageManager.cpp
+  inBuildingScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(21): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(53): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(63): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(74): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inbuildingscene.cpp(87): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  inGameScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(105): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(166): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(231): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(233): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(248): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(250): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(263): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(481): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(482): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(510): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(511): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(539): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(540): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(568): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(569): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(673): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(674): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1091): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1094): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1097): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1103): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(1105): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2224): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2248): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2258): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2259): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2266): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2282): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2286): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2308): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2308): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2305): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2578): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2580): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  inHouseScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(45): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(124): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(137): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(147): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(158): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(171): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iniData.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inidata.cpp(38): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inidata.cpp(52): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inidata.cpp(52): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inidata.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inidata.cpp(102): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  input.cpp
+  inventory.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(80): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(89): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(100): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(111): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(122): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(133): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(164): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(215): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(601): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(601): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(604): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(604): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(607): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(607): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(610): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(610): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(613): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(613): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(616): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(616): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(619): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(619): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(622): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(622): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(625): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(625): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(628): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(628): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(631): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(631): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(634): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(634): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(637): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(637): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(640): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(640): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(643): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(643): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(646): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(646): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(648): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(648): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(680): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(680): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(683): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(683): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(686): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(686): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(689): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(689): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(692): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(692): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(695): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(695): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(698): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(698): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(701): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(701): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(704): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(704): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(707): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(707): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(710): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(710): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(713): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(713): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(716): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(716): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(719): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(719): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(722): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(722): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(725): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(725): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(727): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(727): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(762): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(762): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(765): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(765): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(768): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(768): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(771): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(771): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(774): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(774): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(777): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(777): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(780): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(780): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(783): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(783): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(786): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(786): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(789): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(789): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(792): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(792): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(795): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(795): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(798): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(798): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(801): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(801): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(804): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(804): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(807): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(807): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(809): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(809): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(867): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(881): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(931): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(939): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(954): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(962): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventory.cpp(978): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  inventoryCraft.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(120): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(377): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(407): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(437): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(461): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(484): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(507): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(507): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(508): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(508): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(533): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(533): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(534): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(534): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(557): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(557): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(558): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(558): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(559): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(559): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(598): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(598): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(599): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(599): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(600): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(600): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(638): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(638): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(639): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(639): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(640): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(640): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(679): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(679): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(680): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(680): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(681): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(681): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  itemManager.cpp
+  loading.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(41): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(42): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(77): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(78): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(163): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(163): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(170): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(195): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(209): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(224): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\loading.cpp(224): warning C4244: '인수': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  loadingScene.cpp
+  mainGame.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(117): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mainScene.cpp
+  maptoolScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\maptoolscene.cpp(1087): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\maptoolscene.cpp(1088): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\maptoolscene.cpp(1092): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\maptoolscene.cpp(1096): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  컴파일하고 있습니다...
   mineScene.cpp
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(12): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(119): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(121): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(136): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(156): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(158): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(192): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(193): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(217): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(218): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(242): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(243): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(117): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(63): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(81): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(132): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(146): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(190): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(192): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(208): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(231): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(233): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(267): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(268): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(309): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(310): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(536): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(539): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(542): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(545): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(548): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(550): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(663): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(664): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(671): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(687): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(691): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(727): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(292): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(293): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(317): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(318): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(342): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(343): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(384): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(385): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(641): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(644): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(647): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(650): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(653): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(655): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(820): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(821): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(828): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(844): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(848): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(884): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(925): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(924): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\minescene.cpp(924): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
+  monster.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(117): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(8): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(9): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(13): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(15): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(44): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(45): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(222): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(223): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(227): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(260): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(268): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(280): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(283): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(286): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(370): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(371): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(372): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(411): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(420): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(474): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.cpp(485): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  npc.cpp
+  player.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(13): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(14): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(16): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(121): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(135): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(136): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(138): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(142): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(143): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(186): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(744): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(747): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(750): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(753): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(761): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(764): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(767): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(770): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(778): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(781): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(784): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(787): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(795): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(798): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(801): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(804): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(812): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(815): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(818): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(821): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(829): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(832): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(835): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(838): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(846): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(849): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(852): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(855): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(865): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(868): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(871): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(874): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(882): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(885): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(888): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(891): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(899): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(902): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(905): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(908): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(962): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1187): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1262): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1258): warning C4101: 'mapStr' :참조되지 않은 지역 변수입니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1328): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1626): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  playerData.cpp
+  progressBar.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(15): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(16): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(19): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\progressbar.cpp(40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  random.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\random.cpp(46): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  sceneManager.cpp
+  shop.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(70): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(199): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(232): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(252): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(268): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(268): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(273): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(273): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(278): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(278): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(283): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(283): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(287): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(287): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(291): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(291): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(294): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(294): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(298): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(298): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(302): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(302): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(306): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(306): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(310): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(310): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(314): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(314): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(317): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(317): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(375): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(477): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(486): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(510): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shop.cpp(513): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  shopScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(8): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(91): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(92): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(108): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(166): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(172): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(191): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(197): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(217): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(223): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(242): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\shopscene.cpp(248): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  skill.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(32): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(63): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(81): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(104): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(123): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(127): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(131): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(135): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\skill.cpp(139): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  soundManager.cpp
+  Stock.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(57): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(75): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(81): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(85): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(89): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(244): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(250): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(256): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(262): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(268): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\stock.cpp(279): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  switchSceneManager.cpp
+  timeManager.cpp
+  util.cpp
+  winMain.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\monster.h(117): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  3 of 1891 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\player.cpp(1179): warning C4715: 'player::checkFullyGrown': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\maptoolscene.cpp(2196): warning C4715: 'maptoolScene::terrainSelect': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\itemmanager.cpp(381): warning C4715: 'itemManager::findItem': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\itemmanager.cpp(373): warning C4715: 'itemManager::findItem': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\ingamescene.cpp(2068): warning C4715: 'inGameScene::checkFullyGrown': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\itemmanager.cpp(356): warning C4715: 'itemManager::findItem': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\itemmanager.cpp(319): warning C4715: 'itemManager::findItem': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\effectmanager.cpp(184): warning C4715: 'effectManager::findEffect': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  All 2021 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\jayki\OneDrive\바탕 화면\StardewValley - 모작\스타듀밸리 맵툴\Release\Stardew Valley.exe
