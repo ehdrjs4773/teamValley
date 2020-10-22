@@ -921,6 +921,7 @@ void player::openPlayerStorageCover()
 	{
 		_inventory->setIsShowTemp(true);
 		isOpenPlayerStorageCover = true;
+		_inventory->setInvenToryMove(true);
 	}
 }
 
@@ -934,6 +935,7 @@ void player::closePlayerStorageCover()
 			{
 				_inventory->setIsShowTemp(false);
 				isOpenPlayerStorageCover = false;
+				_inventory->setInvenToryMove(false);
 			}
 		}
 	}
