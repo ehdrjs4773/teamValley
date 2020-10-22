@@ -4,6 +4,10 @@
 mineScene::mineScene()
 {
 	currentFloor = 1;  //최초 로드시 초기화 방지 카운트
+
+	//미리 슬라임, 버그, 서펜트 3종류 프리셋 만들어놓음
+	//새 몬스터 생성시 위의 프리셋을 vMonster 벡터에 넣어버리면 됨
+	setMonsterList();
 }
 
 HRESULT mineScene::init()
@@ -13,11 +17,6 @@ HRESULT mineScene::init()
 
 	loadMap();
 	checkCurrentTile();
-
-	//미리 슬라임, 버그, 서펜트 3종류 프리셋 만들어놓음
-	setMonsterList();
-
-	//새 몬스터 생성시 위의 프리셋을 vMonster 벡터에 넣어버리면 됨
 
 	isShowRect = false;
 
@@ -32,7 +31,7 @@ HRESULT mineScene::init()
 
 	SOUNDMANAGER->stop("농장");
 	SOUNDMANAGER->stop("springDay");
-
+	
 	this->update();
 
 	return S_OK;
@@ -81,7 +80,7 @@ void mineScene::update()
 	}
 	this->ejectItem();
 
-	cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
+	//cout << PLAYER->getCenterX() << "\t" << PLAYER->getCenterY() << endl;
 }
 
 void mineScene::render()
@@ -393,6 +392,7 @@ void mineScene::setOre(int i, int j)
 {
 	_tile[i][j].obj = OBJ_DESTRUCTIBLE;
 	_tile[i][j].objType = OTY_ORE;
+	hpCount[i][j] = 2;
 	if (currentFloor > 0 && currentFloor <= 3)
 	{
 		_tile[i][j].objFrameX = 6;
@@ -468,6 +468,8 @@ void mineScene::playerInteraction()
 
 		//마을로 돌아가기
 		useElevator();
+
+		cout << _tile[mouseIndexY][mouseIndexX].objType << "\t" << currentFloor << endl;
 	}
 }
 
@@ -486,39 +488,47 @@ void mineScene::breakStone()
 			{
 				const char* str = {};
 				int number = 0;
-				RANDOM->range(3) == 0 ? str = "석탄" : str = "돌";
-				RANDOM->range(2) == 0 ? number = 3 : RANDOM->range(2) == 0 ? number = 2 : number = 4;
 
+				number = RANDOM->range(4);
 				for (int i = 0; i < number; i++)
 				{
+					RANDOM->range(1, 5) == 0 ? str = "석탄" : str = "돌";
 					dropItem(_tile[mouseIndexY][mouseIndexX], str);
 				}
-				RANDOM->range(20) == 0 ?
-					_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE,
-					_tile[mouseIndexY][mouseIndexX].objType = OTY_MINELADDER,
-					_tile[mouseIndexY][mouseIndexX].objFrameX = 6,
-					_tile[mouseIndexY][mouseIndexX].objFrameY = 12
-					:
-					_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE,
-					_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
+				if (RANDOM->range(20) == 0)
+				{
+					_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE;
+						_tile[mouseIndexY][mouseIndexX].objType = OTY_MINELADDER;
+						_tile[mouseIndexY][mouseIndexX].objFrameX = 6;
+						_tile[mouseIndexY][mouseIndexX].objFrameY = 12;
+				}
+				else
+				{
+					_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
+						_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
+				}
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
-				const char* str = {};
-				int number = 0;
-
-				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 6) { str = "구리조각"; }
-				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 7) { str = "철조각"; }
-				if (_tile[mouseIndexY][mouseIndexX].objFrameX == 8) { str = "금조각"; }
-				
-				RANDOM->range(2) == 0 ? number = 3 : RANDOM->range(2) == 0 ? number = 2 : number = 4;
-					
-				for (int i = 0; i < number; i++)
+				hpCount[mouseIndexY][mouseIndexX]--;
+				if (hpCount[mouseIndexY][mouseIndexX] <= 0)
 				{
-					dropItem(_tile[mouseIndexY][mouseIndexX], str);
+					const char* str = {};
+					int number = 0;
+				
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 6) { str = "구리조각"; }
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 7) { str = "철조각"; }
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 8) { str = "금조각"; }
+				
+					number = RANDOM->range(1, 4);
+				
+					for (int i = 0; i < number; i++)
+					{
+						dropItem(_tile[mouseIndexY][mouseIndexX], str);
+					}
+					_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
+					_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
 				}
-				_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
-				_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;	
 			}
 		}
 	}
@@ -578,9 +588,9 @@ void mineScene::useLadder()
 		if (_tile[mouseIndexY][mouseIndexX].objType == OTY_MINELADDER)
 		{
 			currentFloor++;
-			loadMap();
+			this->init();
 			SWITCHMANAGER->changeScene("광산화면");
-			SWITCHMANAGER->startFade(390.0f, 166.0f);
+			SWITCHMANAGER->startFade(390.0f, 240.0f);
 		}
 	}
 }

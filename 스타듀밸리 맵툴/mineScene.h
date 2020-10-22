@@ -14,6 +14,7 @@ private:
 	RECT sickleHitBox;
 
 	tagTile _tile[TILEY][TILEX];
+	int hpCount[TILEY][TILEX] = {};
 
 	int currentFloor;
 
