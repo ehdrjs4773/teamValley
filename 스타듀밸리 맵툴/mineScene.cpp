@@ -119,10 +119,13 @@ void mineScene::renderMap()
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderObject(i, j);
-			if (isShowRect)
+			if (i >= 0 && i < TILEY&&j >= 0 && j < TILEX)
 			{
-				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+				renderObject(i, j);
+				if (isShowRect)
+				{
+					FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+				}
 			}
 		}
 	}
@@ -134,11 +137,14 @@ void mineScene::renderMap()
 	{
 		for (int j = (float)((float)CAMERAMANAGER->getX() / 16) - 1; j < (float)((float)CAMERAMANAGER->getX() / 16) + (float)(WINSIZEX / 40) + 1; j++)
 		{
-			renderObject(i, j);
-			if (isShowRect)
+			if (i >= 0 && i < TILEY&&j >= 0 && j < TILEX)
 			{
-				FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
-			
+				renderObject(i, j);
+				if (isShowRect)
+				{
+					FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
+
+				}
 			}
 		}
 	}
@@ -595,10 +601,37 @@ void mineScene::useLadder()
 			case 1: 
 				break;
 			case 2:
-				tempX = 390.0f;
-				tempY = 240.0f;
+				tempX = 435.0f;
+				tempY = 222.0f;
 				break;
 			case 3:
+				tempX = 520.0f;
+				tempY = 255.0f;
+				break;
+			case 4:
+				tempX = 440.0f;
+				tempY = 295.0f;
+				break;
+			case 5:
+				tempX = 535.0f;
+				tempY = 190.0f;
+				break;
+			case 6:
+				tempX = 635.0f;
+				tempY = 120.0f;
+				break;
+			case 7:
+				tempX = 505.0f;
+				tempY = 110.0f;
+				break;
+			case 8:
+				tempX = 490.0f;
+				tempY = 105.0f;
+				break;
+			case 9:
+				tempX = 500.0f;
+				tempY = 65.0f;
+				break;
 
 
 			default:

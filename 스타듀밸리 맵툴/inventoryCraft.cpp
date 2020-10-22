@@ -398,7 +398,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 
 				if (PtInRect(&_vCraftItem[0].rc, _ptMouse) || PtInRect(&_vCraftItem[6].rc, _ptMouse)) //보관함 렉트에 닿으면
 				{
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left-5 , temp2.top-5 , 6, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left+5 , temp2.top-5 , 6, 2);
 
 					sprintf(temp_info[0], "보관함", sizeof("보관함"));
 					sprintf(temp_info[1], ": 나무 10개", sizeof(": 나무 10개"));
@@ -424,7 +424,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 				}
 				else if (PtInRect(&_vCraftItem[1].rc, _ptMouse) || PtInRect(&_vCraftItem[7].rc, _ptMouse)) //먹이통 렉트에 닿으면 
 				{
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left - 5, temp2.top - 5, 6, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 6, 2);
 
 					sprintf(temp_info[0], "먹이통", sizeof("먹이통"));
 					sprintf(temp_info[1], ": 나무 15개", sizeof(": 나무 15개"));
@@ -454,8 +454,8 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[1], ": 나무 20개", sizeof(": 나무 20개"));
 					sprintf(temp_info[2], ": 철 조각 10개", sizeof(": 철 조각 10개"));
 
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left - 5, temp2.top - 5, 6, 2);
-					IMAGEMANAGER->frameRender("광물2", hdc, temp2.left +35, temp2.top - 5, 8, 3);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 6, 2);
+					IMAGEMANAGER->frameRender("광물아이템", hdc, temp2.left +5, temp2.top + 30, 8, 3);
 				
 					if (_isWood != NULL || _isIron !=NULL)
 					{
@@ -495,7 +495,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[2], ": 돌 5개", sizeof(": 돌 5개"));
 
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left +5, temp2.top - 5, 6, 2);
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 35, 5, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 5, 2);
 
 					if (_isWood != NULL || _isRock != NULL)
 					{
@@ -531,11 +531,12 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 				else if (PtInRect(&_vCraftItem[4].rc, _ptMouse) || PtInRect(&_vCraftItem[10].rc, _ptMouse)) //용광로 렉트에 닿으면 
 				{
 					sprintf(temp_info[0], "용광로", sizeof("용광로"));
-					sprintf(temp_info[1], ": 구리광석 15개", sizeof(": 구리광석 15개"));
+					sprintf(temp_info[1], ": 구리조각 15개", sizeof(": 구리조각 15개"));
 					sprintf(temp_info[2], ": 돌 20개", sizeof(": 돌 20개"));
 
-					IMAGEMANAGER->frameRender("광물2", hdc, temp2.left + 5, temp2.top + 35, 6, 3);
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 5, 2);
+					IMAGEMANAGER->frameRender("광물아이템", hdc, temp2.left + 5, temp2.top - 5, 6, 3);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 5, 2);
+
 
 					if (_isCopper != NULL || _isRock != NULL)
 					{
@@ -575,7 +576,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[2], ": 돌 20개", sizeof(": 돌 20개"));
 
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 6, 2);
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 35, 5, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 5, 2);
 
 					if (_isWood != NULL || _isRock != NULL)
 					{
