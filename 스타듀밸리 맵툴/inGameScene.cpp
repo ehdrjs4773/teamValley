@@ -46,7 +46,9 @@ HRESULT inGameScene::init()
 			}
 		}
 	}
-	
+
+	load();
+
 	return S_OK;
 }
 
@@ -128,6 +130,10 @@ void inGameScene::update()
 	}
 
 	moveScene();
+
+	cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "   "
+		<< boolalpha << _tile[MouseIndexY][MouseIndexX].isFullyGrown << "   "
+		<< _tile[MouseIndexY][MouseIndexX].objFrameX << endl;
 }
 
 void inGameScene::render()
@@ -161,7 +167,6 @@ void inGameScene::load()
 
 	HANDLE file;
 	DWORD read;
-
 	sprintf(saveName, "save/save.map");
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
@@ -788,8 +793,6 @@ void inGameScene::playerInteraction()
 	
 		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
 	}
-
-	
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
@@ -1717,22 +1720,22 @@ void inGameScene::makeCropGrow()
 			if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) continue;
 			if (!_tile[i][j].isFullyGrown)
 			{
-				if ((_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STARFRUIT
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_EGGPLANT
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ANCIENTFRUIT
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_SWEETGEMBERRY
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STRAWBERRY
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_COFFEEBEAN
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GREENBEAN
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_BLUEBERRY
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CORN
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ARTICHOKE
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CRANBERRY
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOPS
-					|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CATUS)
+				if ((_tile[i][j].seedType == SEED_TOMATO
+					|| _tile[i][j].seedType == SEED_HOTPEPPER
+					|| _tile[i][j].seedType == SEED_STARFRUIT
+					|| _tile[i][j].seedType == SEED_EGGPLANT
+					|| _tile[i][j].seedType == SEED_ANCIENTFRUIT
+					|| _tile[i][j].seedType == SEED_SWEETGEMBERRY
+					|| _tile[i][j].seedType == SEED_STRAWBERRY
+					|| _tile[i][j].seedType == SEED_GRAPE
+					|| _tile[i][j].seedType == SEED_COFFEEBEAN
+					|| _tile[i][j].seedType == SEED_GREENBEAN
+					|| _tile[i][j].seedType == SEED_BLUEBERRY
+					|| _tile[i][j].seedType == SEED_CORN
+					|| _tile[i][j].seedType == SEED_ARTICHOKE
+					|| _tile[i][j].seedType == SEED_CRANBERRY
+					|| _tile[i][j].seedType == SEED_HOPS
+					|| _tile[i][j].seedType == SEED_CATUS)
 					&& (_tile[i][j].objFrameX == 7 || _tile[i][j].objFrameX == 15))
 				{
 					_tile[i][j].grownLevel += 1;

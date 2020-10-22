@@ -137,13 +137,6 @@ void mineScene::update()
 	{
 		iter->update();
 	}
-
-	for (int i = 0; i < vMonster.size(); i++)
-	{
-		cout << i << "   " << vMonster[i]->getSpeed() << endl;
-	}
-	/*cout << vMonster.size() << "\t"<< boolalpha <<vMonster[0]->getIsFind() 
-		<<"\t"<< PLAYER->getCurrentX() << "\t" << PLAYER->getCurrentY() << endl;*/
 }
 
 void mineScene::render()
@@ -543,7 +536,6 @@ void mineScene::playerInteraction()
 			//Ç® º£±â 
 			cutGrass();
 		}
-		cout << _tile[mouseIndexY][mouseIndexX].obj << endl;
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
@@ -905,7 +897,7 @@ void mineScene::setMonsterList()
 
 	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 8, 5, .4f);
 	presetRockCrab->init();
-	monsterList.push_back(presetBug);
+	monsterList.push_back(presetRockCrab);
 
 	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, .4f);
 	presetSerpent->init();
@@ -919,6 +911,8 @@ void mineScene::spawnMonster()
 	while (vMonster.size() < monsterCount)
 	{
 		int rand = RANDOM->range(10);
+		cout << rand << endl;
+		
 		if (rand >= 0 && rand < 4)
 		{
 		ONE:
@@ -939,7 +933,7 @@ void mineScene::spawnMonster()
 				goto ONE;
 			}
 		}
-		else if (rand >= 4 && rand < 6)
+		else if (rand >= 4 && rand < 7)
 		{
 		TWO:
 			idxX = RANDOM->range(0, 50);
@@ -959,7 +953,7 @@ void mineScene::spawnMonster()
 				goto TWO;
 			}
 		}
-		else if (rand >= 6 && rand < 9)
+		else if (rand >= 7 && rand < 10)
 		{
 		THREE:
 			idxX = RANDOM->range(0, 50);
@@ -979,7 +973,7 @@ void mineScene::spawnMonster()
 				goto THREE;
 			}
 		}
-		else if (rand == 9)
+		else
 		{
 		FOUR:
 			idxX = RANDOM->range(0, 50);
@@ -1022,7 +1016,6 @@ void mineScene::playerMonsterCollision()
 			{
 				PLAYER->setHpBarX(PLAYER->getHpBarX() + iter->getDmg() * 2);
 				PLAYER->setIsHit(true);
-				cout << PLAYER->getHpBarBot() << endl;
 			}
 		}
 	}

@@ -165,6 +165,8 @@ public:
 
 	void countTime();
 	void resetClock();
+
+	bool checkFullyGrown(tagTile tile);
 	
 	SEASON getSeason() { return currentSeason; }
 	WEATHER getWeather() { return currentWeather; }

@@ -43,25 +43,22 @@ void monster::move()
 	}
 	else
 	{
-		float destX = _finalList[0]->rc.left + (_finalList[0]->rc.right - _finalList[0]->rc.left) / 2;
-		float destY = _finalList[0]->rc.top + (_finalList[0]->rc.bottom - _finalList[0]->rc.top) / 2;
+		float destX = PLAYER->getCenterX();
+		float destY = PLAYER->getCenterY();
 		float tempAngle = getAngle(centerX, centerY, destX, destY);
-		if (angle < tempAngle)
+		if (angle < tempAngle + 0.1f)
 		{
-			if (angle > 2*M_PI)
-			{
-				angle = 0.0f;
-			}
 			angle += 0.05f;
+		}
+		else if (angle > tempAngle + 0.1f)
+		{
+			angle -= 0.5f;
 		}
 		else
 		{
-			if (angle < 2*M_PI)
-			{
-				angle = 0.0f;
-			}
-			angle -= 0.5f;
+			angle = tempAngle;
 		}
+		
 		centerX += cosf(angle) * speed;
 		centerY -= sinf(angle) * speed;
 	}
@@ -102,7 +99,6 @@ void monster::animation()
 			if (aniIndexX > 8)
 			{
 				aniIndexX = 0;
-				isMove = false;
 			}
 			break;
 		}
@@ -226,7 +222,6 @@ void monster::update()
 	_startNode = _totalNode[currentTileX][currentTileY];
 	_endNode = _totalNode[PLAYER->getCurrentX()][PLAYER->getCurrentY()];
 
-	
 	//거리가 7타일 이하가 되면 길찾기
 	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
 	if (distance < 158.0f && !isMove && !isLocked)
@@ -263,10 +258,10 @@ void monster::render()
 
 	//FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
 	//FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
-	for (int i = 0; i < _finalList.size(); i++)
-	{
-		FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
-	}
+	//for (int i = 0; i < _finalList.size(); i++)
+	//{
+	//	FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
+	//}
 	
 	hpBarRender();
 
@@ -290,9 +285,6 @@ void monster::render()
 	default:
 		break;
 	}
-
-	//cout << _finalList.size() << "   " << _closeList.size() << "    " << _openList.size() << endl;
-	//cout << _startNode->rc.left << "    " << _endNode->rc.left << endl;
 }
 
 void monster::astarInit()
