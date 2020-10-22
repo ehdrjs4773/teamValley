@@ -103,10 +103,8 @@ void skill::skillActive()
 {
 	if(_isClick == true)
 	{
-
 		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
-
 			_isClick = false;
 			pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x / WINSIZEX * 480);
 			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y / WINSIZEY * 230);

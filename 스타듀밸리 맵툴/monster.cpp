@@ -11,6 +11,7 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 	currentTileY = 0;
 	moveCount = 0;
 	hp = _hp;
+	currentHp = hp;
 	dmg = _dmg;
 	speed = _speed;
 	angle = .0f;
@@ -158,6 +159,19 @@ void monster::release()
 
 void monster::update()
 {
+
+	if (currentHp < 0) currentHp = 0;
+
+	if (getdamage)
+	{
+		DamageDelay++;
+
+		if (DamageDelay % 40 == 0)
+		{
+			getdamage = false;
+		}
+	}
+
 	currentTileX = centerX / 16;
 	currentTileY = centerY / 16;
 
@@ -209,6 +223,8 @@ void monster::render()
 		FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
 	}
 	
+	hpBarRender();
+
 	switch (monsterType)
 	{
 	case MTYPE_NONE:
@@ -302,6 +318,17 @@ void monster::setWallNode(int i, int j, OBJECT obj)
 		if (_totalNode[i][j]->nodeState == NODE_END) return;
 		_totalNode[i][j]->nodeState = NODE_EMPTY;
 	}
+}
+
+void monster::hpBarRender()
+{	
+	int b = 255 - (currentHp / hp) * 255;
+	hpBar = RectMake(centerX - 7, centerY - 10, (currentHp / hp) * 14, 3);
+	IMAGEMANAGER->findImage("몬스터hp바")->render(CAMERAMANAGER->getMemDC(), centerX-8,centerY-10);
+	Rectangle(CAMERAMANAGER->getMemDC(), hpBar);
+	HBRUSH brush = CreateSolidBrush(RGB(b, 220, 7));
+	FillRect(CAMERAMANAGER->getMemDC(), &hpBar, brush);
+	DeleteObject(brush);
 }
 
 void monster::pathFinding()

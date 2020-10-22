@@ -58,13 +58,22 @@ private:
 	DIRECTION dir;
 	int currentTileX, currentTileY;
 	int moveCount;
-	int hp, dmg;
+	
+	RECT hpBar;
+
+	float hp, dmg;
+	float currentHp;
+
 	float centerX, centerY;
 	float speed;
 	float angle;
 
 	bool isMove;
 	bool isLocked;
+	
+	bool getdamage;
+	
+	int DamageDelay;
 
 	int aniCount;
 	int aniIndexX, aniIndexY;
@@ -106,6 +115,12 @@ public:
 	void setSpeed(float spd) { speed = spd; }
 	float getSpeed() { return speed; }
 	int getDmg() { return dmg; }
+
+	float getHp() { return currentHp; }
+	void setHp(float _hp) { currentHp = _hp; }
+	void setDamage(bool _bool) { getdamage = _bool; }
+	bool getDamage() { return getdamage; }
+	void hpBarRender();
 
 	/*중요함수*/
 		//길찾기 함수

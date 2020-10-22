@@ -161,6 +161,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("벌레", "Images/monster/bug.bmp", 64, 80, 4, 5);
 	IMAGEMANAGER->addFrameImage("바위게", "Images/monster/Rock Crab.bmp", 64, 120, 4, 5);
 	IMAGEMANAGER->addFrameImage("도마뱀", "Images/monster/Serpent.bmp", 288, 64, 9, 2);
+	IMAGEMANAGER->addImage("몬스터hp바", "Images/monster/monHpbar.bmp", 16, 4);
 }
 
 void loadingScene::loadingSound()
