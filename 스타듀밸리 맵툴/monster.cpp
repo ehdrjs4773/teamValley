@@ -26,11 +26,30 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 
 void monster::move()
 {
-	if (_finalList.size() > 0)
+	if (monsterType != MTYPE_SERPENT)
+	{
+		if (_finalList.size() > 0)
+		{
+			float destX = _finalList[0]->rc.left + (_finalList[0]->rc.right - _finalList[0]->rc.left) / 2;
+			float destY = _finalList[0]->rc.top + (_finalList[0]->rc.bottom - _finalList[0]->rc.top) / 2;
+			angle = getAngle(centerX, centerY, destX, destY);
+			centerX += cosf(angle) * speed;
+			centerY -= sinf(angle) * speed;
+		}
+	}
+	else
 	{
 		float destX = _finalList[0]->rc.left + (_finalList[0]->rc.right - _finalList[0]->rc.left) / 2;
 		float destY = _finalList[0]->rc.top + (_finalList[0]->rc.bottom - _finalList[0]->rc.top) / 2;
-		angle = getAngle(centerX, centerY, destX, destY);
+		float tempAngle = getAngle(centerX, centerY, destX, destY);
+		if (angle < tempAngle)
+		{
+			angle += 0.05f;
+		}
+		else
+		{
+			angle -= 0.5f;
+		}
 		centerX += cosf(angle) * speed;
 		centerY -= sinf(angle) * speed;
 	}
@@ -81,30 +100,36 @@ void monster::animation()
 
 void monster::checkAttack()
 {
-	if (!_finalList.size() && _isFind)
+	if (monsterType != MTYPE_SERPENT)
 	{
-		attackDestX = PLAYER->getCenterX();
-		attackDestY = PLAYER->getCenterY() + 8.0f;
-		lockedAngle = getAngle(centerX, centerY, attackDestX, attackDestY);
-		isMove = false;
-		isLocked = true;
+		if (!_finalList.size() && _isFind)
+		{
+			attackDestX = PLAYER->getCenterX();
+			attackDestY = PLAYER->getCenterY() + 8.0f;
+			lockedAngle = getAngle(centerX, centerY, attackDestX, attackDestY);
+			isMove = false;
+			isLocked = true;
+		}
 	}
 }
 
 void monster::attack()
 {
-	if (isLocked)
+	if (monsterType != MTYPE_SERPENT)
 	{
-		attackCount++;
-		if (attackCount > 60)
+		if (isLocked)
 		{
-			centerX += cosf(lockedAngle) * 3.0f;
-			centerY -= sinf(lockedAngle) * 3.0f;
-		}
-		if (attackCount > 80)
-		{
-			isLocked = false;
-			attackCount = 0;
+			attackCount++;
+			if (attackCount > 60)
+			{
+				centerX += cosf(lockedAngle) * 3.0f;
+				centerY -= sinf(lockedAngle) * 3.0f;
+			}
+			if (attackCount > 80)
+			{
+				isLocked = false;
+				attackCount = 0;
+			}
 		}
 	}
 }
@@ -159,7 +184,6 @@ void monster::release()
 
 void monster::update()
 {
-
 	if (currentHp < 0) currentHp = 0;
 
 	if (getdamage)
@@ -182,6 +206,7 @@ void monster::update()
 	_startNode = _totalNode[currentTileX][currentTileY];
 	_endNode = _totalNode[PLAYER->getCurrentX()][PLAYER->getCurrentY()];
 
+	
 	//거리가 7타일 이하가 되면 길찾기
 	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
 	if (distance < 158.0f && !isMove && !isLocked)
