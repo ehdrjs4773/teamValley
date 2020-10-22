@@ -97,11 +97,11 @@
     <Filter Include="광산씬">
       <UniqueIdentifier>{6b7d0356-62b3-4ca8-9129-3d1902f9e3c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="로딩 씬\메인 씬">
-      <UniqueIdentifier>{87ef43df-c57a-4e43-a3a2-0adb83382829}</UniqueIdentifier>
-    </Filter>
     <Filter Include="플레이어\스킬">
       <UniqueIdentifier>{480a6be4-ac05-4d44-8673-b94aa052b1c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="메인 씬">
+      <UniqueIdentifier>{87ef43df-c57a-4e43-a3a2-0adb83382829}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,7 @@
       <Filter>GameFramework\매니져\세이브 매니저\ini데이터 매니저</Filter>
     </ClCompile>
     <ClCompile Include="mainScene.cpp">
-      <Filter>로딩 씬\메인 씬</Filter>
+      <Filter>메인 씬</Filter>
     </ClCompile>
     <ClCompile Include="maptoolScene.cpp">
       <Filter>맵툴 씬</Filter>
@@ -276,7 +276,7 @@
       <Filter>GameFramework\매니져\세이브 매니저\ini데이터 매니저</Filter>
     </ClInclude>
     <ClInclude Include="mainScene.h">
-      <Filter>로딩 씬\메인 씬</Filter>
+      <Filter>메인 씬</Filter>
     </ClInclude>
     <ClInclude Include="maptoolScene.h">
       <Filter>맵툴 씬</Filter>

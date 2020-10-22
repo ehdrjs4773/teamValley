@@ -26,6 +26,7 @@ public:
 
 	string getCurrentScene() { return currentScene; }
 	bool getFade() { return isFading; }
+	bool getFadeOut() { return isFadeOut; }
 	void startFade(float _playerX, float _playerY);
 	void changeScene(string sceneName);
 };
