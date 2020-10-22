@@ -25,7 +25,7 @@ private:
 public:
 	void init();
 	void render(HDC hdc);
-	//void animationRender(HDC hdc);
+
 	void update();
 
 	vector<tagSkill> getvSkill() { return _vSkill; }

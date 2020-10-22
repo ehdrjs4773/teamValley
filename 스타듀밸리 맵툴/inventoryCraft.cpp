@@ -376,8 +376,7 @@ void inventoryCraft::blastFurnace()
 
 			for (int i = 0; i < _inven->getvInven().size(); i++)
 			{
-		
-				if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템"))
+				if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템") && _inven->getvInven()[i].item_info=="구리주괴")
 				{
 					_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount +1);
 					break;
@@ -412,7 +411,7 @@ void inventoryCraft::blastFurnace()
 					_inven->setInvenItem(i, ironIngot);
 					break;
 				}
-				else if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템"))
+				else if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템") && _inven->getvInven()[i].item_info == "철주괴")
 				{
 					_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount + 1);
 					break;
@@ -421,9 +420,9 @@ void inventoryCraft::blastFurnace()
 		}
 	}
 
-	if (PLAYER->getCurrentSlotNumber() == _isGold) //철조각이 5개 이상일 때 
+	if (PLAYER->getCurrentSlotNumber() == _isGold) //금조각이 5개 이상일 때 
 	{
-		if (_inven->getvInven()[_isGold].amount >= 5) //금조각이 5개 이상일 때 
+		if (_inven->getvInven()[_isGold].amount >= 5) 
 		{
 			tagItem goldIngot;
 			goldIngot.item_image = IMAGEMANAGER->findImage("광물아이템");
@@ -432,17 +431,17 @@ void inventoryCraft::blastFurnace()
 			goldIngot.indexY = 4;
 			goldIngot.isFrame = true;
 			goldIngot.amount = 1;
-
+			
 			_inven->setInvenItemAmount(_isGold, _inven->getvInven()[_isGold].amount - 5);
 
 			for (int i = 0; i < _inven->getvInven().size(); i++)
 			{
 				if (_inven->getvInven()[i].item_image == NULL)
 				{
-					_inven->getvInven()[i] = goldIngot;
+					_inven->setInvenItem(i, goldIngot);
 					break;
 				}
-				else if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템"))
+				else if (_inven->getvInven()[i].item_image == IMAGEMANAGER->findImage("광물아이템") && _inven->getvInven()[i].item_info == "금주괴")
 				{
 					_inven->setInvenItemAmount(i, _inven->getvInven()[i].amount + 1);
 					break;
@@ -450,8 +449,6 @@ void inventoryCraft::blastFurnace()
 			}
 		}
 	}
-
-
 }
 
 void inventoryCraft::release()
