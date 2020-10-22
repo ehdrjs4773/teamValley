@@ -18,8 +18,9 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 	aniIndexY = 0;
 	aniCount = 0;
 	dir = NONE;
+	lockedAngle = 0.0f;
 	isMove = false;
-	isAttack = false;
+	isLocked = false;
 }
 
 void monster::move()
@@ -74,6 +75,36 @@ void monster::animation()
 			break;
 		}
 
+	}
+}
+
+void monster::checkAttack()
+{
+	if (!_finalList.size() && _isFind)
+	{
+		attackDestX = PLAYER->getCenterX();
+		attackDestY = PLAYER->getCenterY() + 8.0f;
+		lockedAngle = getAngle(centerX, centerY, attackDestX, attackDestY);
+		isMove = false;
+		isLocked = true;
+	}
+}
+
+void monster::attack()
+{
+	if (isLocked)
+	{
+		attackCount++;
+		if (attackCount > 60)
+		{
+			centerX += cosf(lockedAngle) * 3.0f;
+			centerY -= sinf(lockedAngle) * 3.0f;
+		}
+		if (attackCount > 80)
+		{
+			isLocked = false;
+			attackCount = 0;
+		}
 	}
 }
 
@@ -132,21 +163,31 @@ void monster::update()
 
 	checkDir();
 
-	this->rc = RectMakeCenter(centerX, centerY, 16, 16);
+	this->rc = RectMakeCenter(centerX, centerY, 10, 10);
 
 	_startNode = _totalNode[currentTileX][currentTileY];
 	_endNode = _totalNode[PLAYER->getCurrentX()][PLAYER->getCurrentY()];
 
 	//거리가 7타일 이하가 되면 길찾기
 	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
-	if (distance < 158.0f)
+	if (distance < 158.0f && !isMove && !isLocked)
 	{
 		this->pathFinding();
 	}
-	if (isMove || isAttack)
+	if (isMove && !isLocked)
 	{
 		this->move();
 		this->animation();
+	}
+	
+	if (isLocked)
+	{
+		attack();
+		this->animation();
+	}
+	else
+	{
+		checkAttack();
 	}
 }
 

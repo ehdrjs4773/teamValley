@@ -35,12 +35,6 @@ HRESULT mineScene::init()
 	
 	spawnMonster();
 
-	//monsterList[0]->setCenterX((float)25 * 16.0f - 8.0f);
-	//monsterList[0]->setCenterY((float)25 * 16.0f - 8.0f);
-	//monsterList[0]->setRc((float)25 * 16.0f - 8.0f, (float)25 * 16.0f - 8.0f);
-	//vMonster.push_back(monsterList[0]);
-	//vMonster[0]->init();
-
 	for (int t = 0; t < MINEMAX; t++)
 	{
 		for (int j = 0; j < MINEMAX; j++)
@@ -97,7 +91,7 @@ void mineScene::update()
 
 	PLAYER->playerAnimation();
 	
-	
+	playerMonsterCollision();
 
 	setCurrentSlotNumber(_mouseWheel);
 
@@ -957,6 +951,29 @@ void mineScene::spawnMonster()
 			else
 			{
 				goto FOUR;
+			}
+		}
+	}
+}
+
+void mineScene::playerMonsterCollision()
+{
+	for (auto iter : vMonster)
+	{
+		RECT temp;
+		if (IntersectRect(&temp, &PLAYER->getRc(), &iter->getRc()) && !PLAYER->getIsHit())
+		{
+			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
+			{
+				//죽는 사운드 추가
+				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->startFade(838.0f, 864.0f);
+			}
+			else
+			{
+				PLAYER->setHpBarX(PLAYER->getHpBarX() + iter->getDmg() * 2);
+				PLAYER->setIsHit(true);
+				cout << PLAYER->getHpBarBot() << endl;
 			}
 		}
 	}

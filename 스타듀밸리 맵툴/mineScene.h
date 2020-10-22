@@ -78,5 +78,6 @@ public:
 
 	void setMonsterList();
 	void spawnMonster();
+	void playerMonsterCollision();
 };
 

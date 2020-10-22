@@ -64,15 +64,16 @@ private:
 	float angle;
 
 	bool isMove;
-	bool isAttack;
+	bool isLocked;
 
 	int aniCount;
 	int aniIndexX, aniIndexY;
 
 	float distance;
 
+	int attackCount = 0;
 	float attackDestX, attackDestY;
-	bool isLocked;
+	float lockedAngle;
 
 public:
 	HRESULT init();
@@ -92,6 +93,8 @@ public:
 
 	void move();
 	void animation();
+	void checkAttack();
+	void attack();
 
 	void checkDir();
 
@@ -102,6 +105,7 @@ public:
 	bool getIsFind() { return _isFind; }
 	void setSpeed(float spd) { speed = spd; }
 	float getSpeed() { return speed; }
+	int getDmg() { return dmg; }
 
 	/*중요함수*/
 		//길찾기 함수
