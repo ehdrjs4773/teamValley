@@ -998,6 +998,7 @@ void player::loadPlayerData()
 	
 	loadInven();
 	loadStock();
+	loadBoxInven();
 }
 
 void player::loadInven()
@@ -1017,6 +1018,28 @@ void player::loadInven()
 	{
 		_inventory->setvInven(i, LoadItem[i]);
 	}
+}
+
+void player::loadBoxInven()
+{
+	//박스 불러오기
+	HANDLE file1;
+	DWORD read1;
+	tagItem LoadItem[36] = {};
+
+
+	TCHAR saveName3[MAX_PATH] = {};
+	sprintf(saveName3, "save/playerBoxInven.data");
+	file1 = CreateFile(saveName3, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	ReadFile(file1, LoadItem, sizeof(LoadItem) + sizeof(tagSaveItem), &read1, NULL);
+	CloseHandle(file1);
+
+
+	for (int i = 0; i < 36; i++)
+	{
+		_inventory->setvBoxInven(i, LoadItem[i]);
+	}
+
 }
 
 void player::loadStock()
@@ -1133,6 +1156,26 @@ void player::saveMap()
 	TCHAR saveMapName[MAX_PATH] = "save/save.map";
 	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
+	CloseHandle(file);
+}
+
+void player::saveBox()
+{
+	vector<tagItem> temp;
+	temp = _inventory->getVBoxInven();
+	tagItem tempItem[36];
+	memset(tempItem, 0, sizeof(tempItem));
+
+	for (int i = 0; i < 36; i++)
+	{
+		tempItem[i] = temp[i];
+	}
+	HANDLE file;
+	DWORD write;
+	TCHAR saveName[MAX_PATH] = {};
+	sprintf(saveName, "save/playerBoxInven.data");
+	file = CreateFile(saveName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(file, tempItem, sizeof(tempItem), &write, NULL);
 	CloseHandle(file);
 }
 

@@ -44,6 +44,7 @@ public:
 	void release();
 	void update();
 	void render();
+
 	void setCurrentSlotNumber(int mouseWheel);
 
 	void loadMap();
@@ -56,14 +57,12 @@ public:
 	void breakStone();
 	void cutGrass();
 	void useLadder();
-	void useElevator();
-
-	void monsterMove();
-	void monsterRender();
+	void useElevator(); 
 
 	void renderMap();
 	void renderTerrain();
 	void renderObject(int i, int j);
+	void renderMonster();
 
 	void setRandomObstacles();
 	void setStone(int i, int j);
@@ -77,6 +76,8 @@ public:
 	void skillSelect();
 
 	void setMonsterList();
+	void spawnMonster();
+	void monsterMove();
 
 };
 
