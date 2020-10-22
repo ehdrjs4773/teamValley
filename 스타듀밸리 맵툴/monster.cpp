@@ -48,10 +48,18 @@ void monster::move()
 		float tempAngle = getAngle(centerX, centerY, destX, destY);
 		if (angle < tempAngle)
 		{
+			if (angle > 2*M_PI)
+			{
+				angle = 0.0f;
+			}
 			angle += 0.05f;
 		}
 		else
 		{
+			if (angle < 2*M_PI)
+			{
+				angle = 0.0f;
+			}
 			angle -= 0.5f;
 		}
 		centerX += cosf(angle) * speed;
@@ -276,7 +284,8 @@ void monster::render()
 		IMAGEMANAGER->findImage("¹ÙÀ§°Ô")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
 		break;
 	case MTYPE_SERPENT:
-		IMAGEMANAGER->findImage("µµ¸¶¹ì")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
+		IMAGEMANAGER->findImage("µµ¸¶¹ì")->rotateFrameRender
+		(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY, angle);
 		break;
 	default:
 		break;

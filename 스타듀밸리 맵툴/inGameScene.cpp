@@ -627,6 +627,14 @@ void inGameScene::moveScene()
 	}
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_MINE)
 	{
+		//집으로 넘어갈때 타일 정보 넘겨줌
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				PLAYER->saveTile(i, j, _tile[i][j]);
+			}
+		}
 		SWITCHMANAGER->changeScene("광산화면");
 		SWITCHMANAGER->startFade(390.0f, 166.0f);
 	}
