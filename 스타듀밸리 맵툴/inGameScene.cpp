@@ -754,21 +754,27 @@ void inGameScene::playerInteraction()
 
 			setSprinkler();	
 
-			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BOX)
+			if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
+				|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
+				|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
+					&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 			{
-				if (!PLAYER->getIsShowInventory())
+				if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BOX)
 				{
 					if (!PLAYER->getIsShowInventory())
 					{
-						PLAYER->openPlayerStorageCover();
+						if (!PLAYER->getIsShowInventory())
+						{
+							PLAYER->openPlayerStorageCover();
+						}
 					}
+
 				}
+				else if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BLASTFURNACE)
+				{
 
-			}
-			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BLASTFURNACE)
-			{
-
-				PLAYER->getInventory()->getInventoryCraft()->blastFurnace();
+					PLAYER->getInventory()->getInventoryCraft()->blastFurnace();
+				}
 			}
 		}
 	
