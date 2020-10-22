@@ -17,6 +17,7 @@ private:
 
 	RECT _playerInventory;
 	RECT _kettleBar;
+	RECT _closeButton;
 
 	HBRUSH brush;
 	HBRUSH oBrush;
@@ -38,6 +39,7 @@ private:
 	int waterAmount;
 
 	bool _isShopOpen;
+	bool _isShowCloseButton;
 
 public:
 	void init();
@@ -104,6 +106,8 @@ public:
 
 	bool getIsShowTemp() { return isShowTemp; }
 	void setIsShowTemp(bool setIsShowTemp) { isShowTemp = setIsShowTemp; }
+
+	RECT getCloseButton() { return _closeButton; }
 
 	int getWaterAmount() { return waterAmount; }
 	void setWaterAmount(int setWaterAmount) { waterAmount = setWaterAmount; }

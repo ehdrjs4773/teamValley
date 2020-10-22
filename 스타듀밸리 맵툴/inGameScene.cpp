@@ -792,13 +792,13 @@ void inGameScene::playerInteraction()
 			{
 				if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BOX)
 				{
-					if (!PLAYER->getIsShowInventory())
-					{
+					//if (!PLAYER->getIsShowInventory())
+					//{
 						if (!PLAYER->getIsShowInventory())
 						{
 							PLAYER->openPlayerStorageCover();
 						}
-					}
+					//}
 
 				}
 				else if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BLASTFURNACE)

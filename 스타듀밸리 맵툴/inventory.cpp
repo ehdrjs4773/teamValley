@@ -7,7 +7,9 @@ void inventory::init()
 	_isShopOpen = false;
 	currentSkillNumber = 0;
 
-	for (int i = 0; i < INVENMAX; i++)
+
+	
+		for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp; // ÇÃ·¹ÀÌ¾î ÀÎº¥
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
@@ -29,6 +31,7 @@ void inventory::init()
 	_isInvenPage = false;
 	isShowTemp = false;
 	isShowStorageTemp = false;
+	_isShowCloseButton = false;
 
 	//_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
 	//_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
@@ -94,6 +97,8 @@ void inventory::update()
 				_kettleBar = RectMake(_vStorageItem[i].rc.left + 3, _vStorageItem[i].rc.bottom - 7, waterAmount, 4);
 			}
 		}
+
+		_closeButton = RectMake(_vStorageItem[11].rc.right + 30, _vStorageItem[11].rc.top, 44, 44); //Ã¢°í ´Ý±â¹öÆ°
 	}
 	else if (_isInvenPage)
 	{
@@ -487,9 +492,10 @@ void inventory::quickSkillSlot(HDC hdc)
 void inventory::renderStorageInventory(HDC hdc) 
 {
 	//Ä³¸¯ÅÍÀÇ Ã¢°í 36Ä­ 
+
 	playerStorage_img = IMAGEMANAGER->findImage("ÇÃ·¹ÀÌ¾î Ã¢°í");
 	playerStorage_img->render(hdc, 225, 30);
-
+	IMAGEMANAGER->render("Ã¢°í´Ý±â¹öÆ°", hdc, _closeButton.left, _closeButton.top);
 
 	for (int i = 0; i < STORAGEMAX; i++)
 	{
@@ -570,10 +576,6 @@ void inventory::renderStorageInventory(HDC hdc)
 		brush = CreateSolidBrush(RGB(40, 140, 230));
 		FillRect(hdc, &_kettleBar, brush);
 		DeleteObject(brush);
-
-
-	
-
 	}
 	
 }

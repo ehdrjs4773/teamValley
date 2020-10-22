@@ -152,6 +152,8 @@ void  player::update()
 		countTime();
 	}
 	_inventory->getInventoryCraft()->materialUpdate();
+
+	closePlayerStorageCover();
 }
 
 void player::render()
@@ -915,15 +917,25 @@ void player::playerRender()
 void player::openPlayerStorageCover()
 {
 	//플레이어 창고상자
-	if (isOpenPlayerStorageCover)
-	{
-		_inventory->setIsShowTemp(false);
-		isOpenPlayerStorageCover = false;
-	}
-	else
+	if(!isOpenPlayerStorageCover)
 	{
 		_inventory->setIsShowTemp(true);
 		isOpenPlayerStorageCover = true;
+	}
+}
+
+void player::closePlayerStorageCover()
+{
+	if(PtInRect(&_inventory->getCloseButton(),_ptMouse))
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			if (isOpenPlayerStorageCover)
+			{
+				_inventory->setIsShowTemp(false);
+				isOpenPlayerStorageCover = false;
+			}
+		}
 	}
 }
 

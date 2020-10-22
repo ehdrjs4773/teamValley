@@ -163,6 +163,7 @@ public:
 	void playerAnimation();
 	void playerRender();
 	void openPlayerStorageCover();
+	void closePlayerStorageCover();
 	void playerCarryItem(HDC hdc);
 
 	void setCurrentMap();
