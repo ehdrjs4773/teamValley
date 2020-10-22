@@ -69,7 +69,7 @@ private:
 	float angle;
 
 	bool isMove;
-	bool isAttack;
+	bool isLocked;
 	
 	bool getdamage;
 	int DamageDelay;
@@ -80,8 +80,9 @@ private:
 
 	float distance;
 
+	int attackCount = 0;
 	float attackDestX, attackDestY;
-	bool isLocked;
+	float lockedAngle;
 
 public:
 	HRESULT init();
@@ -101,6 +102,8 @@ public:
 
 	void move();
 	void animation();
+	void checkAttack();
+	void attack();
 
 	void checkDir();
 
@@ -111,6 +114,7 @@ public:
 	bool getIsFind() { return _isFind; }
 	void setSpeed(float spd) { speed = spd; }
 	float getSpeed() { return speed; }
+	int getDmg() { return dmg; }
 
 	float getHp() { return currentHp; }
 	void setHp(float _hp) { currentHp = _hp; }
