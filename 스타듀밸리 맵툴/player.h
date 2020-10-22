@@ -83,7 +83,7 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
-	void skill_AniRender(HDC hdc) { _skill->animationRender(hdc); }
+	//void skill_AniRender(HDC hdc) { _skill->animationRender(hdc); }
 	void skill_slot(HDC hdc) { _skill->render(hdc); }
 	void skillUpdate() { _skill->update(); }
 
@@ -168,12 +168,13 @@ public:
 
 	void loadPlayerData();
 	void loadInven();
+	void loadBoxInven();
 	void loadStock();
-	void loadMap();
 	void savePlayerData();
 	void savePlayerInven();
 	void savePlayerStock();
 	void saveMap();
+	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
 };
 

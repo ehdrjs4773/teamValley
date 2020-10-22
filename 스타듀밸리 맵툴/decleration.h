@@ -124,7 +124,8 @@ enum DIRECTION
 	RIGHT,
 	LEFT,
 	UP,
-	DOWN
+	DOWN,
+	NONE
 };
 
 //³ª¹«
@@ -218,6 +219,7 @@ enum MONTYPE
 	MTYPE_NONE,
 	MTYPE_SLIME,
 	MTYPE_BUG,
+	MTYPE_ROCKCRAB,
 	MTYPE_SERPENT
 };
 
@@ -297,10 +299,12 @@ struct tagEffect
 	image* image;
 	EFFECT effectType;
 	DIRECTION dir;
+	RECT rc;
 	int count;
 	int indexX, indexY;
 	int maxIndex;
-	int centerX, centerY;
+	float centerX, centerY;
+	float angle;
 };
 
 struct tagSkill

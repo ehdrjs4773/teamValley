@@ -789,7 +789,7 @@ void inventory::storage_item_info(HDC hdc)
 					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
-				sprintf(temp_info[1],0,(string)_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));
+				sprintf(temp_info[1],_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));
 
 				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
@@ -931,6 +931,7 @@ void inventory::_vItemUpdate()
 							 if (_vStorageItem[j].item_image == NULL)
 							 {
 								 _vStorageItem[j] = _vItem[i];
+								 _vStorageItem[j].item_info = _vItem[i].item_info;
 								 _vItem[i] = _MouseItem;
 							 }
 
@@ -1083,5 +1084,125 @@ void inventory::setvInven(int i, tagSaveItem item)
 			break;
 		}
 		_vItem[i].itemName = _vItem[i].item_info;
+	}
+}
+
+void inventory::setvBoxInven(int i, tagItem item)
+{
+	_vStorageItem[i].amount = item.amount;
+	_vStorageItem[i].buy_price = item.buy_price;
+	_vStorageItem[i].indexX = item.indexX;
+	_vStorageItem[i].indexY = item.indexY;
+	_vStorageItem[i].isFrame = item.isFrame;
+	_vStorageItem[i].item_kind = item.item_kind;
+	_vStorageItem[i].rc = item.rc;
+	_vStorageItem[i].seedKind = item.seedKind;
+	_vStorageItem[i].sell_price = item.sell_price;
+	_vStorageItem[i].toolKind = item.toolKind;
+	_vStorageItem[i].waterAmount = item.waterAmount;
+
+
+	if (_vStorageItem[i].item_kind == ITEM_TOOL)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("µµ±¸");
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].toolKind);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_SEED)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("¾¾¾Ñ");
+		if (_vStorageItem[i].seedKind == SEED_COFFEEBEAN || _vStorageItem[i].seedKind == SEED_PINETREE || _vStorageItem[i].seedKind == SEED_MAPLETREE || _vStorageItem[i].seedKind == SEED_OAKTREE)
+		{
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("¿­¸Å");
+		}
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].seedKind);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_FRUIT)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("¿­¸Å");
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].seedKind);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_ORE)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°");
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].indexX);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_DEBRIS)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("¿­¸Å");
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].indexX);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_WOODENFENCE || _vStorageItem[i].item_kind == ITEM_STONEFENCE
+		|| _vStorageItem[i].item_kind == ITEM_WOODENFENCEDOOR || _vStorageItem[i].item_kind == ITEM_STONEFENCEDOOR)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("Ææ½º");
+		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind);
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_SKILL || _vStorageItem[i].item_kind == ITEM_WEAPON)
+	{
+		switch (_vStorageItem[i].weaponKind)
+		{
+		case WEAPON_NONE:
+			break;
+		case WEAPON_RUSTYSWORD:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("rusty_sword");
+			_vStorageItem[i].item_info = "³ì½¼ ¼Òµå";
+			break;
+		case WEAPON_GALAXYSWORD:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("galaxy_sword");
+			_vStorageItem[i].item_info = "°¶·°½Ã ¼Òµå";
+			break;
+		case WEAPON_PENCIL:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("pencil");
+			_vStorageItem[i].item_info = "¿¬ÇÊ";
+			break;
+		case WEAPON_EXPLOSION:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "EXPLOSION";
+			break;
+		case WEAPON_SPIKES:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "SPIKES";
+			break;
+		case WEAPON_FIRE:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "FIRE";
+			break;
+		case WEAPON_SHIELD:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "SHIELD";
+			break;
+		case WEAPON_BLACKHOLE:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "BLACKHOLE";
+			break;
+		case WEAPON_FIREBALL:
+			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÅ³ºÏ");
+			_vStorageItem[i].item_info = "FIRE_BALL";
+			break;
+		}
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_SPRINKLER)
+	{
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("½ºÇÁ¸µÅ¬·¯");
+		switch (_vStorageItem[i].indexY)
+		{
+		case 0:
+			_vStorageItem[i].item_info = "±âº»½ºÇÁ¸µÅ¬·¯";
+			break;
+		case 1:
+			_vStorageItem[i].item_info = "°­È­½ºÇÁ¸µÅ¬·¯";
+			break;
+		case 2:
+			_vStorageItem[i].item_info = "°í±Þ½ºÇÁ¸µÅ¬·¯";
+			break;
+		}
+		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
 	}
 }

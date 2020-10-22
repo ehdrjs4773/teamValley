@@ -38,20 +38,6 @@ public:
 class monster : gameNode
 {
 private:
-	RECT rc;
-	MONTYPE monsterType;
-	MONSTATE state;
-	int currentTileX, currentTileY;
-	int moveCount;
-	int hp, dmg;
-	float centerX, centerY;
-	float speed;
-	float angle;
-
-	int aniCount;
-	int aniIndexX, aniIndexY;
-
-
 	//에이스타
 	node* _totalNode[50][50];		//전체노드 25개(보드판 역할)
 	node* _startNode;					//시작노드
@@ -62,8 +48,31 @@ private:
 	vector<node*> _closeList;			//길을 찾은 노드들을 담아둘 벡터
 	vector<node*> _finalList;			//클로즈리스트에 담겨있는 노드들을 리버스시켜서 담아둘 벡터
 
+	
 	int _count;							//시작노드, 종료노드를 한번씩만 선택하기 위한 변수
 	bool _isFind;						//길 찾았냐?
+
+	RECT rc;
+	MONTYPE monsterType;
+	MONSTATE state;
+	DIRECTION dir;
+	int currentTileX, currentTileY;
+	int moveCount;
+	int hp, dmg;
+	float centerX, centerY;
+	float speed;
+	float angle;
+
+	bool isMove;
+	bool isAttack;
+
+	int aniCount;
+	int aniIndexX, aniIndexY;
+
+	float distance;
+
+	float attackDestX, attackDestY;
+	bool isLocked;
 
 public:
 	HRESULT init();
@@ -77,8 +86,22 @@ public:
 	void setWallNode(int i, int j, OBJECT obj);
 
 	//생성자
+	monster() {};
 	monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int _dmg, float _speed);
 	~monster() {};
+
+	void move();
+	void animation();
+
+	void checkDir();
+
+	void setCenterX(float cX) { centerX = cX; }
+	void setCenterY(float cY) { centerY = cY; }
+	RECT getRc() { return rc; }
+	void setRc(float x, float y) { rc = RectMakeCenter(x, y, 16, 16); }
+	bool getIsFind() { return _isFind; }
+	void setSpeed(float spd) { speed = spd; }
+	float getSpeed() { return speed; }
 
 	/*중요함수*/
 		//길찾기 함수

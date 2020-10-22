@@ -50,7 +50,36 @@ void effectManager::update()
 					}
 				}
 			}
-			else
+			else if (vEffect[i].effectType == EFT_SKILL_FIRE_BALL)
+			{
+				if (vEffect[i].count % 5 == 0)
+				{
+					vEffect[i].indexX++;
+
+					if (vEffect[i].indexX > vEffect[i].maxIndex)
+					{
+						vEffect.erase(vEffect.begin() + i);
+					}
+				}
+				vEffect[i].centerX += cosf(vEffect[i].angle) * 1.0f;
+				vEffect[i].centerY += -sinf(vEffect[i].angle) * 1.0f;
+				vEffect[i].rc = RectMake(vEffect[i].centerX, vEffect[i].centerY, 40, 40);
+			}
+			else if(vEffect[i].effectType == EFT_SKILL_SHIELD)
+			{
+				if (vEffect[i].count % 5 == 0)
+				{
+					vEffect[i].indexX++;
+
+					if (vEffect[i].indexX > vEffect[i].maxIndex)
+					{
+						vEffect.erase(vEffect.begin() + i);
+					}
+				}
+				vEffect[i].rc = RectMake(PLAYER->getCenterX()-20,
+					PLAYER->getCenterY()-20, 40, 40);
+			}
+			else 
 			{
 				if (vEffect[i].count % 5 == 0)
 				{
@@ -76,18 +105,43 @@ void effectManager::render(HDC hdc)
 			if (vEffect[i].effectType == EFT_PINETREECOL
 				|| vEffect[i].effectType == EFT_MAPLETREECOL
 				|| vEffect[i].effectType == EFT_OAKTREECOL
-				|| vEffect[i].effectType == EFT_SKILL_EXPLOSION
-				|| vEffect[i].effectType == EFT_SKILL_SPIKES
-				|| vEffect[i].effectType == EFT_SKILL_FIRE
-				|| vEffect[i].effectType == EFT_SKILL_SHIELD
-				|| vEffect[i].effectType == EFT_SKILL_BLACKHOLE
-				|| vEffect[i].effectType == EFT_SKILL_FIRE_BALL
 				)
 			{
 				vEffect[i].image->frameRender(
 					hdc,
 					vEffect[i].centerX - (vEffect[i].image->getFrameWidth() / 2),
 					vEffect[i].centerY - 88,
+					vEffect[i].indexX,
+					vEffect[i].indexY);
+			}
+			else if (vEffect[i].effectType == EFT_SKILL_FIRE_BALL)
+			{
+				Rectangle(hdc, vEffect[i].rc);
+				vEffect[i].image->rotateFrameRender(
+					hdc,
+					vEffect[i].centerX+20,
+					vEffect[i].centerY+20,
+					vEffect[i].indexX,
+					vEffect[i].indexY,
+					vEffect[i].angle);
+			}
+			else if (vEffect[i].effectType == EFT_SKILL_SHIELD)
+			{
+				Rectangle(hdc, vEffect[i].rc);
+				vEffect[i].image->frameRender(
+					hdc,
+					PLAYER->getCenterX()-30,
+					PLAYER->getCenterY()-30,
+					vEffect[i].indexX,
+					vEffect[i].indexY);
+			}
+			else
+			{
+				Rectangle(hdc, vEffect[i].rc);
+				vEffect[i].image->frameRender(
+					hdc,
+					vEffect[i].centerX-30,
+					vEffect[i].centerY-30,
 					vEffect[i].indexX,
 					vEffect[i].indexY);
 			}
@@ -164,6 +218,8 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	temp = this->findEffect(effectName);
 	temp.centerX = centerX;
 	temp.centerY = centerY;
+	temp.rc = RectMakeCenter(centerX, centerY, 40, 40);
+	temp.angle = getAngle(PLAYER->getCenterX(), PLAYER->getCenterY(), centerX, centerY);
 
 	if (temp.effectType == EFT_SKILL_EXPLOSION)
 	{

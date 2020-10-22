@@ -79,6 +79,9 @@ public:
 	void dropItem(tagTile tile, const char* itemInfo);
 	void ejectItem();
 
+	void skillClick();
+	void skillSelect();
+
 	void checkHacked();
 	void checkFence();
 

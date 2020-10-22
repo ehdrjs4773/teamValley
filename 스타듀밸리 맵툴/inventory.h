@@ -86,7 +86,9 @@ public:
 	void setInvenResetImage(int i) { _vItem[i].item_image = nullptr; }
 	vector<tagItem>* getInven() { return &_vItem; }
 	vector<tagItem> getvInven() { return _vItem; }
+	vector<tagItem> getVBoxInven() { return _vStorageItem; }
 	void setvInven(int i, tagSaveItem item);
+	void setvBoxInven(int i, tagItem item);
 	void setInven(vector<tagItem> temp) { _vItem = temp; }
 
 	tagItem* getInven(int a) { return &_vItem[a]; }
