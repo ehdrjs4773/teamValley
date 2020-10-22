@@ -63,6 +63,28 @@ void mineScene::release()
 
 void mineScene::update()
 {
+
+	//몬스터 스킬 충돌
+	if (!EFFECTMANAGER->getvEffect().empty())
+	{
+		for (int i = 0; i < EFFECTMANAGER->getvEffect().size(); i++)
+		{
+			for (auto iter : vMonster)
+			{
+				RECT temp;
+				if (IntersectRect(&temp, &iter->getRc(), &EFFECTMANAGER->getvEffect()[i].rc))
+				{
+					if (!(iter->getDamage()))
+					{
+						iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
+						iter->setDamage(true);
+					}
+				}
+			}
+		}
+	}
+
+
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
 

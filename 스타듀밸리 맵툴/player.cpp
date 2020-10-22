@@ -74,7 +74,7 @@ void  player::release()
 
 void  player::update()
 {
-	if (!isShowInventory)
+	if (!isShowInventory && !isOpenPlayerStorageCover)
 	{
 		if (INPUT->GetKeyDown(VK_TAB))
 		{
@@ -265,9 +265,7 @@ void player::InventoryRender(HDC hdc)
 
 void player::energyBarRender(HDC hdc)
 {
-
 	int b = 0 + (278 - playerEnergy);
-
 	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
 	Rectangle(hdc, frontEnergyBar);
 	brush = CreateSolidBrush(RGB(b, 220, 7));
