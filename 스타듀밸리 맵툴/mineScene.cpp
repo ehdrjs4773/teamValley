@@ -57,6 +57,9 @@ void mineScene::release()
 
 void mineScene::update()
 {
+	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
+	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
+
 	//몬스터 스킬 충돌
 	if (!EFFECTMANAGER->getvEffect().empty())
 	{
@@ -152,7 +155,10 @@ void mineScene::render()
 		iter->render();
 	}
 
+	FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
+
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
+
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());

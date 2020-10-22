@@ -39,6 +39,8 @@ private:
 	bool isLoad;
 	int monsterCount;
 
+	int MouseIndexX, MouseIndexY;
+
 public:
 	mineScene();
 

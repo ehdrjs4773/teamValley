@@ -115,6 +115,7 @@ void inHouseScene::render()
 	}
 	//Rectangle(getMemDC(), yesBox);
 	//Rectangle(getMemDC(), noBox);
+
 }
 
 void inHouseScene::playerMove()

@@ -172,6 +172,8 @@ void inGameScene::render()
 
 	//ÀÌÆåÆ® ·»´õ
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
+	
+	FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
 
 	CAMERAMANAGER->render(getMemDC());
 
