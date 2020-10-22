@@ -21,6 +21,7 @@ private:
 	int currentIndexX, currentIndexY;
 	int mouseIndexX, mouseIndexY;
 
+	int count = 0;
 	int leftIndexX, leftIndexY;
 	int rightIndexX, rightIndexY;
 	int upIndexX, upIndexY;
@@ -36,6 +37,7 @@ private:
 
 	bool isShowRect;
 	bool isLoad;
+	int monsterCount;
 
 public:
 	mineScene();
@@ -62,7 +64,6 @@ public:
 	void renderMap();
 	void renderTerrain();
 	void renderObject(int i, int j);
-	void renderMonster();
 
 	void setRandomObstacles();
 	void setStone(int i, int j);
@@ -74,7 +75,5 @@ public:
 	
 	void setMonsterList();
 	void spawnMonster();
-	void monsterMove();
-
 };
 

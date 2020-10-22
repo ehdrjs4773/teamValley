@@ -17,6 +17,102 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 	aniIndexX = 0;
 	aniIndexY = 0;
 	aniCount = 0;
+	dir = NONE;
+	isMove = false;
+	isAttack = false;
+}
+
+void monster::move()
+{
+	if (_finalList.size() > 0)
+	{
+		float destX = _finalList[0]->rc.left + (_finalList[0]->rc.right - _finalList[0]->rc.left) / 2;
+		float destY = _finalList[0]->rc.top + (_finalList[0]->rc.bottom - _finalList[0]->rc.top) / 2;
+		angle = getAngle(centerX, centerY, destX, destY);
+		centerX += cosf(angle) * speed;
+		centerY -= sinf(angle) * speed;
+	}
+}
+
+void monster::animation()
+{
+	aniCount++;
+	if (aniCount % 5 == 0)
+	{
+		aniIndexX++;
+		switch (monsterType)
+		{
+		case MTYPE_NONE:
+			break;
+		case MTYPE_SLIME:
+			if (aniIndexX > 7)
+			{
+				aniIndexX = 0;
+				isMove = false;
+			}
+			break;
+		case MTYPE_BUG:
+			if (aniIndexX > 3)
+			{
+				aniIndexX = 0;
+				isMove = false;
+			}
+			break;
+		case MTYPE_ROCKCRAB:
+			if (aniIndexX > 3)
+			{
+				aniIndexX = 0;
+				isMove = false;
+			}
+			break;
+		case MTYPE_SERPENT:
+			if (aniIndexX > 8)
+			{
+				aniIndexX = 0;
+				isMove = false;
+			}
+			break;
+		}
+
+	}
+}
+
+void monster::checkDir()
+{
+	if (monsterType == MTYPE_BUG)
+	{
+		if (angle >= M_PI / 4 && angle < 3 * (M_PI / 4))
+		{
+			dir = UP;
+		}
+		else if (angle >= 3 * (M_PI / 4) && angle < 5 * (M_PI / 4))
+		{
+			dir = LEFT;
+		}
+		else if (angle >= 5 * (M_PI / 4) && angle < 7 * (M_PI / 4))
+		{
+			dir = DOWN;
+		}
+		else if (angle >= 7 * (M_PI / 4) || angle < M_PI / 4)
+		{
+			dir = RIGHT;
+		}
+		switch (dir)
+		{
+		case RIGHT:
+			aniIndexY = 1;
+			break;
+		case LEFT:
+			aniIndexY = 3;
+			break;
+		case UP:
+			aniIndexY = 2;
+			break;
+		case DOWN:
+			aniIndexY = 0;
+			break;
+		}
+	}
 }
 
 HRESULT monster::init()
@@ -31,11 +127,69 @@ void monster::release()
 
 void monster::update()
 {
+	currentTileX = centerX / 16;
+	currentTileY = centerY / 16;
+
+	checkDir();
+
 	this->rc = RectMakeCenter(centerX, centerY, 16, 16);
+
+	_startNode = _totalNode[currentTileX][currentTileY];
+	_endNode = _totalNode[PLAYER->getCurrentX()][PLAYER->getCurrentY()];
+
+	//거리가 7타일 이하가 되면 길찾기
+	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
+	if (distance < 158.0f)
+	{
+		this->pathFinding();
+	}
+	if (isMove || isAttack)
+	{
+		this->move();
+		this->animation();
+	}
 }
 
 void monster::render()
 {
+	//길찾았을때 보여주기
+	if (_isFind)
+	{
+		for (int i = 0; i < _finalList.size(); i++)
+		{
+			setNodeColor(_finalList[i], RGB(255, 255, 0));
+		}
+	}
+
+	//FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
+	//FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
+	for (int i = 0; i < _finalList.size(); i++)
+	{
+		FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
+	}
+	
+	switch (monsterType)
+	{
+	case MTYPE_NONE:
+		break;
+	case MTYPE_SLIME:
+		IMAGEMANAGER->findImage("슬라임")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
+		break;
+	case MTYPE_BUG:
+		IMAGEMANAGER->findImage("벌레")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
+		break;
+	case MTYPE_ROCKCRAB:
+		IMAGEMANAGER->findImage("바위게")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
+		break;
+	case MTYPE_SERPENT:
+		IMAGEMANAGER->findImage("도마뱀")->frameRender(CAMERAMANAGER->getMemDC(), centerX - 8, centerY - 8, aniIndexX, aniIndexY);
+		break;
+	default:
+		break;
+	}
+
+	//cout << _finalList.size() << "   " << _closeList.size() << "    " << _openList.size() << endl;
+	//cout << _startNode->rc.left << "    " << _endNode->rc.left << endl;
 }
 
 void monster::astarInit()
@@ -70,11 +224,14 @@ void monster::astarInit()
 void monster::startSearchPlayer(int playerCurrentX, int playerCurrentY)
 {
 	if (_startNode && _endNode) return;
+
 	_totalNode[currentTileY][currentTileX]->nodeState = NODE_START;
 	_startNode = _totalNode[currentTileY][currentTileX];
+	cout << "setStartNode" << endl;
 
 	_totalNode[playerCurrentY][playerCurrentX]->nodeState = NODE_END;
 	_endNode = _totalNode[playerCurrentY][playerCurrentX];
+	cout << "setEndNode" << endl;
 }
 
 void monster::searchPlayer(int playerCurrentX, int playerCurrentY)
@@ -92,19 +249,29 @@ void monster::searchPlayer(int playerCurrentX, int playerCurrentY)
 
 void monster::setWallNode(int i, int j, OBJECT obj)
 {
-	if (obj == OBJ_NONE)
+	if (obj != OBJ_NONE)
 	{
 		if (_totalNode[i][j]->nodeState == NODE_START) return;
 		if (_totalNode[i][j]->nodeState == NODE_END) return;
 		_totalNode[i][j]->nodeState = NODE_WALL;
 	}
+	else
+	{
+		if (_totalNode[i][j]->nodeState == NODE_START) return;
+		if (_totalNode[i][j]->nodeState == NODE_END) return;
+		_totalNode[i][j]->nodeState = NODE_EMPTY;
+	}
 }
 
 void monster::pathFinding()
 {
+	_openList.clear();
+	_closeList.clear();
+	_finalList.clear();
+
 	//종료노드가 없는 경우 길찾기 못함
 	if (!_endNode) return;
-
+	cout << "startFind" << endl;
 	//길찾기를 해보자
 	//검색을 하려면 무조건 오픈리스트에 담는다
 	//F와 H값 가장 작은 놈을 찾아서 그놈을 현재노드로 변경한다
@@ -164,6 +331,7 @@ void monster::pathFinding()
 			}
 
 			_isFind = true;
+			isMove = true;
 			//종료하고 빠져 나온다
 			return;
 		}
