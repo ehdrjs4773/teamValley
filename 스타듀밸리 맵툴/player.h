@@ -58,6 +58,7 @@ private:
 	image* move;
 	image* state;
 	image* backHpBar;
+	image* backEnergyBar;
 	image* playerStorage;
 	image* _cutdownTree;
 

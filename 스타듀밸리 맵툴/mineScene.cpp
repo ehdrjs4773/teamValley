@@ -191,7 +191,6 @@ void mineScene::renderMap()
 				{
 					FrameRect(CAMERAMANAGER->getMemDC(), _tile[i][j].rc, RGB(255, 0, 0));
 				}
-
 			}
 		}
 	}
@@ -219,6 +218,7 @@ void mineScene::renderMap()
 	}
 
 	PLAYER->playerStatusRender(getMemDC());
+
 }
 
 void mineScene::renderTerrain()
@@ -535,11 +535,12 @@ void mineScene::playerInteraction()
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
-		//층 내려가기
+		//층 이동하기
 		useLadder();
 
 		//마을로 돌아가기
 		useElevator();
+
 	}
 }
 
@@ -680,17 +681,47 @@ void mineScene::useLadder()
 			case 1: 
 				break;
 			case 2:
-				tempX = 390.0f;
-				tempY = 240.0f;
+				tempX = 435.0f;
+				tempY = 222.0f;
 				break;
 			case 3:
-
-
+				tempX = 520.0f;
+				tempY = 255.0f;
+				break;
+			case 4:
+				tempX = 440.0f;
+				tempY = 295.0f;
+				break;
+			case 5:
+				tempX = 535.0f;
+				tempY = 190.0f;
+				break;
+			case 6:
+				tempX = 635.0f;
+				tempY = 120.0f;
+				break;
+			case 7:
+				tempX = 505.0f;
+				tempY = 110.0f;
+				break;
+			case 8:
+				tempX = 490.0f;
+				tempY = 105.0f;
+				break;
+			case 9:
+				tempX = 500.0f;
+				tempY = 65.0f;
+				break;
 			default:
 				break;
 			}
 			SWITCHMANAGER->changeScene("광산화면");
 			SWITCHMANAGER->startFade(tempX, tempY);
+		}
+		else if (_tile[mouseIndexY][mouseIndexX].objFrameX==3 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
+		{
+			SWITCHMANAGER->changeScene("인게임화면");
+			SWITCHMANAGER->startFade(288.0f, 64.0f);
 		}
 	}
 }

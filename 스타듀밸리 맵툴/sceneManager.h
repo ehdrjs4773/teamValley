@@ -21,7 +21,7 @@ private:
 	//map<string, gameNode*> _mSceneList;			//각각의 씬(화면)들을 담아둘 맵
 	mSceneList _mSceneList;			//각각의 씬(화면)들을 담아둘 맵
 	gameNode* _currentScene;		//현재씬
-
+	string _currentSineName;
 public:
 	HRESULT init();
 	void release();
@@ -35,6 +35,7 @@ public:
 
 	mSceneList getSceneList() { return _mSceneList; }
 	gameNode* getCurrentScene() { return _currentScene; }
+	string getCurrentSceneName() { return _currentSineName;}
 
 
 	sceneManager() : _currentScene(NULL) {}

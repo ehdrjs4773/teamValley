@@ -79,6 +79,8 @@ public:
 		}
 	}
 
+	
+
 	void setInvenItem(int i, tagItem item);
 	void setInvenItemAmount(int i, int amount) { _vItem[i].amount = amount; }
 	void setInvenResetImage(int i) { _vItem[i].item_image = nullptr; }
@@ -105,6 +107,8 @@ public:
 
 	int getWaterAmount() { return waterAmount; }
 	void setWaterAmount(int setWaterAmount) { waterAmount = setWaterAmount; }
+
+	inventoryCraft* getInventoryCraft() { return _inventoryCraft; }
 
 
 	//====인벤토리 위에 페이지 설정 ====//

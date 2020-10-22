@@ -80,6 +80,9 @@ private:
 
 	float distance;
 
+	float attackDestX, attackDestY;
+	bool isLocked;
+
 public:
 	HRESULT init();
 	void release();

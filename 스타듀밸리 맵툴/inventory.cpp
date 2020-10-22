@@ -624,6 +624,8 @@ void inventory::inven_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -701,6 +703,8 @@ void inventory::quickinven_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
@@ -781,6 +785,8 @@ void inventory::storage_item_info(HDC hdc)
 					break;
 				case ITEM_PICKLEDBARREL:
 					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
+				case ITEM_ORE:
+					sprintf(temp_info[0], "ORE", sizeof("ORE"));
 					break;
 				}
 				sprintf(temp_info[1],_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));
@@ -1000,7 +1006,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	}
 	else if (_vItem[i].item_kind == ITEM_ORE)
 	{
-		_vItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°");
+		_vItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
 		_vItem[i].item_info = ITEMMANAGER->findItem(_vItem[i].item_kind, _vItem[i].indexX);
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
@@ -1120,7 +1126,7 @@ void inventory::setvBoxInven(int i, tagItem item)
 	}
 	else if (_vStorageItem[i].item_kind == ITEM_ORE)
 	{
-		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°");
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
 		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].indexX);
 		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
 	}
