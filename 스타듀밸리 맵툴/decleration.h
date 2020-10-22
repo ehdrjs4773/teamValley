@@ -299,10 +299,12 @@ struct tagEffect
 	image* image;
 	EFFECT effectType;
 	DIRECTION dir;
+	RECT rc;
 	int count;
 	int indexX, indexY;
 	int maxIndex;
-	int centerX, centerY;
+	float centerX, centerY;
+	float angle;
 };
 
 struct tagSkill
