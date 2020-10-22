@@ -75,8 +75,15 @@ void mineScene::update()
 
 	checkCurrentTile(); 
 	PLAYER->update();
+	if (PLAYER->getisSkill())
+	{
+		skillSelect();
+	}
+	else playerInteraction();
+
 	PLAYER->playerAnimation();
-	playerInteraction();
+	
+	
 
 	setCurrentSlotNumber(_mouseWheel);
 
@@ -98,6 +105,8 @@ void mineScene::render()
 	{
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
+
+	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -771,6 +780,16 @@ void mineScene::dropItem(tagTile tile, const char * itemInfo)
 	temp.gravity = 0.0f;
 	temp.isOnGround = false;
 	_vItemOnField.push_back(temp);
+}
+
+void mineScene::skillClick()
+{
+}
+
+void mineScene::skillSelect()
+{
+	PLAYER->skillUpdate();
+	PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
 }
 
 void mineScene::setMonsterList()
