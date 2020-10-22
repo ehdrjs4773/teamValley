@@ -267,7 +267,7 @@ void player::InventoryRender(HDC hdc)
 		_inventory->inven_item_info(hdc);
 	}
 	else {
-		if (!isSkill)
+		if (!isSkill && !isOpenPlayerStorageCover)
 		{
 			_inventory->quickSlot(hdc);
 			_inventory->quickinven_item_info(hdc);
