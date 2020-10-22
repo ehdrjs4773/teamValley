@@ -12,6 +12,7 @@ private:
 	tagTile _tile[TILEY][TILEX];
 
 	RECT rc;
+	RECT frontEnergyBar;
 	RECT frontHpBar;
 	RECT playerInven;
 	RECT playerHoldItem;
@@ -35,9 +36,12 @@ private:
 	float speed;
 	int count;
 	int index;
+	int playerEnergy;
+	int energyBarX;
 	int playerHp;
 	int hpBarX;
 	int Damage;
+
 
 
 	bool isShowInventory;
@@ -71,6 +75,7 @@ public:
 	void setIsSprinkled(bool isSprink) { isSprinkled = isSprink; }
 	void playerStatusRender(HDC hdc);
 	void InventoryRender(HDC hdc);
+	void energyBarRender(HDC hdc);
 	void hpBarRender(HDC hdc);
 	void clockRender(HDC hdc);
 	void moneyRender(HDC hdc);
@@ -116,9 +121,11 @@ public:
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
 
+	int getEnergyBarX() { return frontEnergyBar.top; }
 	int getHpBarX() { return frontHpBar.top; }
 	int getDamage() { return Damage; }
 
+	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }

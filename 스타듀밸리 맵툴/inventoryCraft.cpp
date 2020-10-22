@@ -115,6 +115,7 @@ void inventoryCraft::update()
 
 	cout << initCount << endl;
 
+	//상자 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 10)
@@ -150,6 +151,7 @@ void inventoryCraft::update()
 		}
 	}
 
+	//먹이통 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 15)
@@ -185,6 +187,7 @@ void inventoryCraft::update()
 		}
 	}
 
+	//양봉장 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isIron].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 20 && _inven->getvInven()[_isIron].amount >= 10)
@@ -198,7 +201,7 @@ void inventoryCraft::update()
 				{
 					tagItem beefarm;
 					beefarm.item_image = IMAGEMANAGER->findImage("아이템");
-					beefarm.item_info = "먹이통";
+					beefarm.item_info = "양봉장";
 					beefarm.indexX = 2;
 					beefarm.indexY = 0;
 					beefarm.item_kind = ITEM_BEEFARM;
@@ -223,6 +226,7 @@ void inventoryCraft::update()
 		}
 	}
 
+	//허수아비 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isRock].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isRock].amount >= 5)
@@ -261,6 +265,7 @@ void inventoryCraft::update()
 		}
 	}
 
+	//용광로 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isCopper].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isCopper].amount >= 20)
@@ -299,6 +304,7 @@ void inventoryCraft::update()
 		}
 	}
 
+	//절임통 만들기 
 	if (_inven->getvInven()[_isWood].item_image != NULL && _inven->getvInven()[_isRock].item_image != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 15 && _inven->getvInven()[_isRock].amount >= 20)
@@ -449,7 +455,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[2], ": 철 조각 10개", sizeof(": 철 조각 10개"));
 
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left - 5, temp2.top - 5, 6, 2);
-					IMAGEMANAGER->frameRender("광물", hdc, temp2.left - 5, temp2.top - 5, 8, 3);
+					IMAGEMANAGER->frameRender("광물2", hdc, temp2.left +35, temp2.top - 5, 8, 3);
 				
 					if (_isWood != NULL || _isIron !=NULL)
 					{
@@ -528,7 +534,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 					sprintf(temp_info[1], ": 구리광석 15개", sizeof(": 구리광석 15개"));
 					sprintf(temp_info[2], ": 돌 20개", sizeof(": 돌 20개"));
 
-					IMAGEMANAGER->frameRender("광물", hdc, temp2.left + 5, temp2.top + 35, 6, 3);
+					IMAGEMANAGER->frameRender("광물2", hdc, temp2.left + 5, temp2.top + 35, 6, 3);
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 5, 2);
 
 					if (_isCopper != NULL || _isRock != NULL)
