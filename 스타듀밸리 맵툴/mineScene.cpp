@@ -84,6 +84,15 @@ void mineScene::update()
 		}
 	}
 
+	//몬스터 죽음
+	for (int i = 0; i < vMonster.size(); i++)
+	{
+		if (vMonster[i]->getisDead())
+		{
+			vMonster.erase(vMonster.begin() + i);
+		}
+	}
+
 
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }

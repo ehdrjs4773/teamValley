@@ -21,6 +21,7 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 	dir = NONE;
 	isMove = false;
 	isAttack = false;
+	isDead = false;
 }
 
 void monster::move()
@@ -128,14 +129,22 @@ void monster::release()
 
 void monster::update()
 {
+	//HP 0 이하로 안떨어지게
+	if (currentHp <= 0)
+	{
+		currentHp = 0;
 
-	if (currentHp < 0) currentHp = 0;
+		isDead = true;
+		isMove = false;
 
+	}
+
+	//데미지 받으면 다음 데미지 받을떄까지 딜레이
 	if (getdamage)
 	{
 		DamageDelay++;
 
-		if (DamageDelay % 40 == 0)
+		if (DamageDelay % 50 == 0)
 		{
 			getdamage = false;
 		}
