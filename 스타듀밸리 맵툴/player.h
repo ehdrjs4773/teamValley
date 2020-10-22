@@ -65,6 +65,8 @@ private:
 	inventory* _inventory;
 
 	bool isSprinkled;
+	bool isHit;
+	int hitCount = 0;
 
 public:
 	HRESULT init();
@@ -119,15 +121,22 @@ public:
 	bool getIsOpenStorageCover() { return isOpenPlayerStorageCover; }
 	void setIsOpenStorageCover(bool SetIsOpenStorageCover) { isOpenPlayerStorageCover=SetIsOpenStorageCover; }
 
+	bool getIsHit() { return isHit; }
+	void setIsHit(bool hit) { isHit = hit; }
+
 	int getCurrentX() { return currentX; }
 	int getCurrentY() { return currentY; }
 
 	int getEnergyBarX() { return frontEnergyBar.top; }
 	int getHpBarX() { return frontHpBar.top; }
+	int getHpBarBot() { return frontHpBar.bottom; }
 	int getDamage() { return Damage; }
 
 	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
+	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
+	void resetHpBar() { frontHpBar = RectMakeCenter(1200 - 95, 600 - 88, 20, 138); }
+	void resetEnergyBar() { frontEnergyBar = RectMakeCenter(1200 - 55, 600 - 88, 20, 138); }
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }
 	void setWaterAmount(int waterAmount) { _inventory->setWaterAmount(waterAmount); }

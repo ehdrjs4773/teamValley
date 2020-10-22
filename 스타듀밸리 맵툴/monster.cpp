@@ -19,8 +19,13 @@ monster::monster(MONTYPE _monsterType, int _centerX, int _centerY, int _hp, int 
 	aniIndexY = 0;
 	aniCount = 0;
 	dir = NONE;
+	lockedAngle = 0.0f;
+
 	isMove = false;
-	isAttack = false;
+
+	isDead = false;
+
+	isLocked = false;
 }
 
 void monster::move()
@@ -78,6 +83,36 @@ void monster::animation()
 	}
 }
 
+void monster::checkAttack()
+{
+	if (!_finalList.size() && _isFind)
+	{
+		attackDestX = PLAYER->getCenterX();
+		attackDestY = PLAYER->getCenterY() + 8.0f;
+		lockedAngle = getAngle(centerX, centerY, attackDestX, attackDestY);
+		isMove = false;
+		isLocked = true;
+	}
+}
+
+void monster::attack()
+{
+	if (isLocked)
+	{
+		attackCount++;
+		if (attackCount > 60)
+		{
+			centerX += cosf(lockedAngle) * 3.0f;
+			centerY -= sinf(lockedAngle) * 3.0f;
+		}
+		if (attackCount > 80)
+		{
+			isLocked = false;
+			attackCount = 0;
+		}
+	}
+}
+
 void monster::checkDir()
 {
 	if (monsterType == MTYPE_BUG)
@@ -128,14 +163,22 @@ void monster::release()
 
 void monster::update()
 {
+	//HP 0 이하로 안떨어지게
+	if (currentHp <= 0)
+	{
+		currentHp = 0;
 
-	if (currentHp < 0) currentHp = 0;
+		isDead = true;
+		isMove = false;
 
+	}
+
+	//데미지 받으면 다음 데미지 받을떄까지 딜레이
 	if (getdamage)
 	{
 		DamageDelay++;
 
-		if (DamageDelay % 40 == 0)
+		if (DamageDelay % 50 == 0)
 		{
 			getdamage = false;
 		}
@@ -146,21 +189,31 @@ void monster::update()
 
 	checkDir();
 
-	this->rc = RectMakeCenter(centerX, centerY, 16, 16);
+	this->rc = RectMakeCenter(centerX, centerY, 10, 10);
 
 	_startNode = _totalNode[currentTileX][currentTileY];
 	_endNode = _totalNode[PLAYER->getCurrentX()][PLAYER->getCurrentY()];
 
 	//거리가 7타일 이하가 되면 길찾기
 	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
-	if (distance < 158.0f)
+	if (distance < 158.0f && !isMove && !isLocked)
 	{
 		this->pathFinding();
 	}
-	if (isMove || isAttack)
+	if (isMove && !isLocked)
 	{
 		this->move();
 		this->animation();
+	}
+	
+	if (isLocked)
+	{
+		attack();
+		this->animation();
+	}
+	else
+	{
+		checkAttack();
 	}
 }
 

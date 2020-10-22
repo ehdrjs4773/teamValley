@@ -18,9 +18,8 @@ HRESULT player::init()
 	playerHp = 276;
 	Damage= 2;
 
-	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
-	frontEnergyBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, 138);
-
+	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, 138);
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
 	speed = 1.5f;
 
@@ -49,8 +48,8 @@ HRESULT player::init()
 	currentMap = MAP_FARM;
 
 	isShowInventory = false;
-
 	isOpenPlayerStorageCover = false;
+	isHit = false;
 
 	_pDirection = DOWN;
 	_pState = STAND;
@@ -135,6 +134,8 @@ void  player::update()
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
 
+	rc = RectMakeCenter(centerX, centerY + 8.0f, 16, 16);
+
 	playerAnimation();
 
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
@@ -154,13 +155,27 @@ void  player::update()
 
 void player::render()
 {
-	playerRender();
-
+	if (isHit)
+	{
+		hitCount++;
+		if (hitCount % 5 == 0)
+		{
+			playerRender();
+		}
+		if (hitCount > 60)
+		{
+			isHit = false;
+			hitCount = 0;
+		}
+	}
+	else
+	{
+		playerRender();
+	}
 	if (currentMap == MAP_BARN)
 	{
 		stock->render();
 	}
-
 }
 
 void player::playerCarryItem(HDC hdc)
@@ -232,18 +247,16 @@ void player::playerCarryItem(HDC hdc)
 void player::playerStatusRender(HDC hdc)
 {
 	InventoryRender(hdc);
-	hpBarRender(hdc);
+	energyBarRender(hdc);
 	clockRender(hdc);
 	moneyRender(hdc);
 	arrowRender(hdc);
 	weatherRender(hdc);
 
-	
 	if (SCENEMANAGER->getCurrentSceneName() == "±¤»êÈ­¸é")
 	{
-		energyBarRender(hdc);
+		hpBarRender(hdc);
 	}
-	
 }
 
 void player::InventoryRender(HDC hdc)
@@ -276,29 +289,24 @@ void player::InventoryRender(HDC hdc)
 
 void player::energyBarRender(HDC hdc)
 {
-	//int a = 0 + (278 - playerHp);
+	int b = 0 + (278 - playerHp);
 
-	IMAGEMANAGER->render("backEnergyBar", hdc, WINSIZEX - 115, WINSIZEY - 200);
+	IMAGEMANAGER->render("backEnergyBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
 	Rectangle(hdc, frontEnergyBar);
-	brush = CreateSolidBrush(RGB(255, 244, 6));
+	brush = CreateSolidBrush(RGB(b, 220, 7));
 	FillRect(hdc, &frontEnergyBar, brush);
 	DeleteObject(brush);
-
-
 }
 
 void player::hpBarRender(HDC hdc)
 {
+	//int a = 0 + (278 - playerHp);
 
-
-	int b = 0 + (278 - playerHp);
-
-	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
+	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 115, WINSIZEY - 200);
 	Rectangle(hdc, frontHpBar);
-	brush = CreateSolidBrush(RGB(b, 220, 7));
+	brush = CreateSolidBrush(RGB(255, 30, 6));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
-
 }
 
 void player::playerAnimation()

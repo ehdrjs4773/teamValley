@@ -12,6 +12,9 @@ HRESULT inHouseScene::init()
 	isShowSleepingOption = false;
 	checkCount = 0;
 
+	PLAYER->resetHpBar();
+	PLAYER->resetEnergyBar();
+
 	SOUNDMANAGER->stop("¸ŞÀÎÀ½¾Ç");
 
 	this->update();

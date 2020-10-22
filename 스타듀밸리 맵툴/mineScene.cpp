@@ -35,12 +35,6 @@ HRESULT mineScene::init()
 	
 	spawnMonster();
 
-	//monsterList[0]->setCenterX((float)25 * 16.0f - 8.0f);
-	//monsterList[0]->setCenterY((float)25 * 16.0f - 8.0f);
-	//monsterList[0]->setRc((float)25 * 16.0f - 8.0f, (float)25 * 16.0f - 8.0f);
-	//vMonster.push_back(monsterList[0]);
-	//vMonster[0]->init();
-
 	for (int t = 0; t < MINEMAX; t++)
 	{
 		for (int j = 0; j < MINEMAX; j++)
@@ -84,6 +78,15 @@ void mineScene::update()
 		}
 	}
 
+	//몬스터 죽음
+	for (int i = 0; i < vMonster.size(); i++)
+	{
+		if (vMonster[i]->getisDead())
+		{
+			vMonster.erase(vMonster.begin() + i);
+		}
+	}
+
 
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
@@ -119,7 +122,7 @@ void mineScene::update()
 
 	PLAYER->playerAnimation();
 	
-	
+	playerMonsterCollision();
 
 	setCurrentSlotNumber(_mouseWheel);
 
@@ -160,6 +163,15 @@ void mineScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+}
+
+void mineScene::savePlayer()
+{
+	PLAYER->savePlayerInven();
+	PLAYER->savePlayerStock();
+	PLAYER->savePlayerData();
+	PLAYER->saveMap();
+	PLAYER->saveBox();
 }
 
 void mineScene::setCurrentSlotNumber(int mouseWheel)
@@ -979,6 +991,32 @@ void mineScene::spawnMonster()
 			else
 			{
 				goto FOUR;
+			}
+		}
+	}
+}
+
+void mineScene::playerMonsterCollision()
+{
+	for (auto iter : vMonster)
+	{
+		RECT temp;
+		if (IntersectRect(&temp, &PLAYER->getRc(), &iter->getRc()) && !PLAYER->getIsHit())
+		{
+			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
+			{
+				//죽는 사운드 추가
+				PLAYER->setIsSprinkled(false);
+				savePlayer();
+				PLAYER->resetClock();
+				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->startFade(838.0f, 864.0f);
+			}
+			else
+			{
+				PLAYER->setHpBarX(PLAYER->getHpBarX() + iter->getDmg() * 2);
+				PLAYER->setIsHit(true);
+				cout << PLAYER->getHpBarBot() << endl;
 			}
 		}
 	}
