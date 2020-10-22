@@ -69,7 +69,6 @@ void inGameScene::update()
 
 	PLAYER->update();
 
-
 	if (PLAYER->getisSkill())
 	{
 		PLAYER->skillUpdate();

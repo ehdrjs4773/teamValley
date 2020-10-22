@@ -204,7 +204,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	}
 	else if (_isPlayerPage)
 	{
-		IMAGEMANAGER->render("스킬", hdc, 225, 40);
+		IMAGEMANAGER->render("스킬창", hdc, 225, 40);
 	}
 	else if (_isCraftPage)
 	{

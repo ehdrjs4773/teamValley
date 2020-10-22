@@ -10,6 +10,7 @@ private:
 	bool _isClick;
 
 	int _num;
+	int _save_i;
 
 	SKILL skill_state;
 	RECT _skillRc;

@@ -192,7 +192,13 @@ enum EFFECT
 {
 	EFT_PINETREECOL,
 	EFT_MAPLETREECOL,
-	EFT_OAKTREECOL
+	EFT_OAKTREECOL,
+	EFT_SKILL_EXPLOSION,
+	EFT_SKILL_SPIKES,
+	EFT_SKILL_FIRE,
+	EFT_SKILL_SHIELD,
+	EFT_SKILL_BLACKHOLE,
+	EFT_SKILL_FIRE_BALL
 };
 
 enum SKILL
@@ -229,7 +235,7 @@ struct tagItem {
 	TOOL toolKind;
 	SEED seedKind;
 	WEAPON weaponKind = WEAPON_NONE;
-	const char* itemName;
+	string itemName;
 	const char* item_info;
 	int buy_price;
 	int sell_price;
@@ -276,7 +282,7 @@ struct tagSaveItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
-	const char* itemName;
+	string itemName;
 
 	int buy_price;
 	int sell_price;
