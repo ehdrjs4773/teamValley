@@ -109,7 +109,6 @@ void monster::animation()
 			}
 			break;
 		}
-
 	}
 }
 
