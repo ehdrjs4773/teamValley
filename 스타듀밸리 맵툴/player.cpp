@@ -74,14 +74,18 @@ void  player::release()
 
 void  player::update()
 {
-	if (INPUT->GetKeyDown(VK_TAB))
+	if (!isShowInventory)
 	{
-		if (isSkill) isSkill = false;
-		else {
-			_inventory->setCurrentSlotNumber(0);
-			isSkill = true;
+		if (INPUT->GetKeyDown(VK_TAB))
+		{
+			if (isSkill) isSkill = false;
+			else {
+				_inventory->setCurrentSlotNumber(0);
+				isSkill = true;
+			}
 		}
 	}
+	
 	if (INPUT->GetKeyDown('E'))
 	{
 		if(!isShowInventory) SOUNDMANAGER->play("menuopen");
@@ -1003,13 +1007,11 @@ void player::loadInven()
 	DWORD read1;
 	tagSaveItem LoadItem[36] = {};
 	
-
 	TCHAR saveName3[MAX_PATH] = {};
 	sprintf(saveName3, "save/playerInven.data");
 	file1 = CreateFile(saveName3, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file1, LoadItem, sizeof(LoadItem)+sizeof(tagSaveItem), &read1, NULL);
 	CloseHandle(file1);
-
 
 	for (int i = 0; i < 36; i++)
 	{

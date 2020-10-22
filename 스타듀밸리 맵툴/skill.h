@@ -8,6 +8,8 @@ private:
 	float pointY;
 	bool _isActive;
 	bool _isClick;
+	
+	bool _isShield;
 
 	int _num;
 	int _save_i;
@@ -23,10 +25,13 @@ private:
 public:
 	void init();
 	void render(HDC hdc);
-	void animationRender(HDC hdc);
+	//void animationRender(HDC hdc);
 	void update();
 
 	vector<tagSkill> getvSkill() { return _vSkill; }
+
+	void skillSelect();
+	void skillActive();
 
 	float getPointX() { return pointX; }
 	float getPointY() { return pointY; }
@@ -34,7 +39,6 @@ public:
 	void setSkill(int num) { _num = num; }
 	bool isActive() { return _isActive; }
 	bool isClick() { return _isClick; }
-	void skillAnimation();
 	void addSkill(const char* _key,
 		const char* _skill_info,
 		SKILL _skillkind,

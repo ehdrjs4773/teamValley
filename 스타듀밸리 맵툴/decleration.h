@@ -235,7 +235,7 @@ struct tagItem {
 	TOOL toolKind;
 	SEED seedKind;
 	WEAPON weaponKind = WEAPON_NONE;
-	string itemName;
+	const char* itemName;
 	const char* item_info;
 	int buy_price;
 	int sell_price;
@@ -282,7 +282,7 @@ struct tagSaveItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
-	string itemName;
+	const char* itemName;
 
 	int buy_price;
 	int sell_price;
@@ -297,10 +297,12 @@ struct tagEffect
 	image* image;
 	EFFECT effectType;
 	DIRECTION dir;
+	RECT rc;
 	int count;
 	int indexX, indexY;
 	int maxIndex;
-	int centerX, centerY;
+	float centerX, centerY;
+	float angle;
 };
 
 struct tagSkill

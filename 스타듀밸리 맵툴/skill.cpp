@@ -9,6 +9,7 @@ void skill::init()
 
 	_num = -1;
 	_count = 0;
+	_isShield = false;
 
 	_isActive = false;
 	_isClick = false;
@@ -35,62 +36,82 @@ void skill::render(HDC hdc)
 
 }
 
-void skill::animationRender(HDC hdc)
-{
-	for (int i = 0; i < _vSkill.size(); i++)
-	{
-		if (skill_state == _vSkill[i].skillKind && _isActive)
-		{
-			_skillRc = RectMakeCenter(pointX, pointY, 40, 40);
-		}
-	}
-	CAMERAMANAGER->render(hdc);
-}
-
 void skill::update()
 {
-	if (_isActive == false)
+	
+	if (!PLAYER->getIsShowInventory())
 	{
-		for (int i = 0; i < _vSkill.size(); i++)
-		{
-			if (PtInRect(&_skillSlot[i], _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					_isClick = true;
-					skill_state = _vSkill[i].skillKind;
-					if (skill_state == SKILL_SHIELD)
-					{
-						EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
-					}
-					_save_i = i;
-					cout << "skill " << i << "is activated !" << "\n";
-				}
-			}
-		}
+	skillSelect();
 
-		if (_num >= 0)
-		{
-			skill_state = _vSkill[_num].skillKind;
-		//	if (skill_state == SKILL_SHIELD)
-		//	{
-		//		EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
-		//	}
-		}
+	skillActive();
 
 	}
-	
-	if (skill_state != SKILL_END)
+
+	//EFFECTMANAGER->skillCol("익스플로전", PLAYER->getCenterX(), PLAYER->getCenterY());
+}
+
+void skill::skillSelect()
+{
+	if (_isShield)
+	{
+		_count++;
+		if (_count % 180 == 0)
+		{
+			_isShield = false;
+		}
+	}
+	for (int i = 0; i < _vSkill.size(); i++)
+	{
+		if (PtInRect(&_skillSlot[i], _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isClick = true;
+				skill_state = _vSkill[i].skillKind;
+				if (skill_state == SKILL_SHIELD)
+				{
+					if (!_isShield)
+					{
+						_isShield = true;
+						_count = 0;
+						EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
+					}
+				}
+				_save_i = i;
+				cout << "skill " << i << "is activated !" << "\n";
+			}
+		}
+	}
+	if (_num >= 0)
+	{
+		_isClick = true;
+
+		skill_state = _vSkill[_num].skillKind;
+
+		if (skill_state == SKILL_SHIELD)
+		{
+			if (!_isShield)
+			{
+				_isShield = true;
+				EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
+			}
+		}
+	}
+}
+
+void skill::skillActive()
+{
+	if(_isClick == true)
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
-			_isActive = true;
 			_isClick = false;
-			pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x/WINSIZEX *480);
-			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y/WINSIZEY *230)+60;
+			pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x / WINSIZEX * 480);
+			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y / WINSIZEY * 230);
 			switch (skill_state)
 			{
 			case SKILL_EXPLOSION:
+
 				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
 				break;
 			case SKILL_SPIKES:
@@ -108,22 +129,6 @@ void skill::update()
 			case SKILL_FIRE_BALL:
 				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
 				break;
-
-			}
-		}
-	}
-
-	if (_isActive)
-	{
-		_count++;
-		if (_count % 5 == 0)
-		{
-			frameX++;
-			if (frameX > 8)
-			{
-				frameX = 0;
-				_isActive = false;
-				_isClick = true;
 			}
 		}
 	}

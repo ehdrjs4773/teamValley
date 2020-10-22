@@ -42,7 +42,7 @@ public:
 //=============================================================
 	void render(string strKey, HDC hdc, int destX = 0, int destY = 0);
 	void render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight);
-
+	
 //=============================================================
 //	## 알파렌더 ##
 //=============================================================
@@ -55,7 +55,6 @@ public:
 //=============================================================
 	void frameRender(string strKey, HDC hdc, int destX, int destY);
 	void frameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY);
-	void alphaFrameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha);
 
 //=============================================================
 //	## 루프렌더 ##
@@ -63,7 +62,20 @@ public:
 	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
 	void loopAlphaRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY, BYTE alpha);
 
+//=============================================================
+//	## 스케일렌더 ## (이미지 크기)
+//=============================================================
+	void scaleRender(string strKey, HDC hdc, int destX, int destY, float scale = 1.0f);
+	void scaleFrameRender(string strKey, HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, float scale = 1.0f);
+
+//=============================================================
+//	## 로테이트렌더 ## (이미지 회전)
+//=============================================================
+	void rotateRender(string strKey, HDC hdc, float destX, float destY, float angle);
+	void rotateFrameRender(string strKey, HDC hdc, float destX, float destY, int currentFrameX, int currentFrameY, float angle);
+
 
 	imageManager() {}
 	~imageManager() {}
 };
+

@@ -73,6 +73,9 @@ public:
 	void ejectItem();
 	void dropItem(tagTile tile, const char* itemInfo);
 	
+	void skillClick();
+	void skillSelect();
+
 	void setMonsterList();
 
 };

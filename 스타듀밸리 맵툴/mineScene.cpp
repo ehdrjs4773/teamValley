@@ -50,6 +50,7 @@ void mineScene::update()
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
 
+
 	if (INPUT->GetKeyDown(VK_F1))
 	{
 		if (isShowRect)
@@ -67,9 +68,15 @@ void mineScene::update()
 	}
 
 	checkCurrentTile(); 
+
 	PLAYER->update();
 	PLAYER->playerAnimation();
-	playerInteraction();
+	
+	if (PLAYER->getisSkill())
+	{
+		skillSelect();
+	}
+	else playerInteraction();
 
 	setCurrentSlotNumber(_mouseWheel);
 
@@ -91,6 +98,10 @@ void mineScene::render()
 	{
 		_vItemOnField[i].item.item_image->frameRender(CAMERAMANAGER->getMemDC(), _vItemOnField[i].rc.left, _vItemOnField[i].rc.top, _vItemOnField[i].item.indexX, _vItemOnField[i].item.indexY);
 	}
+
+	//skillClick();
+
+	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -755,6 +766,47 @@ void mineScene::dropItem(tagTile tile, const char * itemInfo)
 	temp.gravity = 0.0f;
 	temp.isOnGround = false;
 	_vItemOnField.push_back(temp);
+}
+
+void mineScene::skillClick()
+{
+	cout << "Skill slot " << PLAYER->getisSkill() << "\t" <<  "isClick " << PLAYER->getskillclick() << endl;
+	if (PLAYER->getisSkill())
+	{
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				if (PLAYER->getskillclick())
+				{
+					RECT temp;
+					float pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x / WINSIZEX * 480);
+					float pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y / WINSIZEY * 230);
+					POINT pos = { pointX,pointY };
+
+					if (PtInRect(&_tile[i][j].rc, pos))
+					{
+						for (int k = -1; k <= 1; k++)
+						{
+							for (int l = -1; l <= 1; l++)
+							{
+								FrameRect(CAMERAMANAGER->getMemDC(), _tile[i - k][j - l].rc, RGB(255, 0, 0));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void mineScene::skillSelect()
+{
+
+	PLAYER->skillUpdate();
+
+	PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
+
 }
 
 void mineScene::setMonsterList()
