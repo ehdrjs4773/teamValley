@@ -18,6 +18,7 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("펜스(땅)", "Images/펜스/펜스아이템(땅).bmp", 32, 16, 2, 1);
 	IMAGEMANAGER->addImage("스킬북", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("광물", "Images/BMP/광물.bmp", 256, 80, 16, 5);
+	IMAGEMANAGER->addFrameImage("광물2", "Images/BMP/광물.bmp", 640, 200, 16, 5);
 	IMAGEMANAGER->addFrameImage("광물아이템", "Images/BMP/광물아이템.bmp", 640, 200, 16, 5);
 	IMAGEMANAGER->addFrameImage("스프링클러", "Images/BMP/스프링클러.bmp", 16, 48, 1, 3);
 	IMAGEMANAGER->addFrameImage("스프링클러아이템", "Images/BMP/스프링클러아이템.bmp", 40, 120, 1, 3);

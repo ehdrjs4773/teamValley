@@ -18,6 +18,7 @@ HRESULT player::init()
 	playerHp = 276;
 	Damage= 2;
 
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 	frontHpBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
 
 	speed = 1.5f;
@@ -223,7 +224,7 @@ void player::playerCarryItem(HDC hdc)
 void player::playerStatusRender(HDC hdc)
 {
 	InventoryRender(hdc);
-	hpBarRender(hdc);
+	energyBarRender(hdc);
 	clockRender(hdc);
 	moneyRender(hdc);
 	arrowRender(hdc);
@@ -258,15 +259,29 @@ void player::InventoryRender(HDC hdc)
 	}
 }
 
+void player::energyBarRender(HDC hdc)
+{
+
+	int b = 0 + (278 - playerEnergy);
+
+	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
+	Rectangle(hdc, frontEnergyBar);
+	brush = CreateSolidBrush(RGB(b, 220, 7));
+	FillRect(hdc, &frontEnergyBar, brush);
+	DeleteObject(brush);
+
+}
+
 void player::hpBarRender(HDC hdc)
 {
-	int a = 0 + (278 - playerHp);
+	//int a = 0 + (278 - playerHp);
 
 	IMAGEMANAGER->render("backHpBar", hdc, WINSIZEX - 75, WINSIZEY - 200);
 	Rectangle(hdc, frontHpBar);
-	brush = CreateSolidBrush(RGB(a, 220, 7));
+	brush = CreateSolidBrush(RGB(255, 0, 0));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
+
 }
 
 void player::playerAnimation()

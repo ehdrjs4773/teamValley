@@ -22,13 +22,6 @@ public:
 	bool _isTemp3;
 	bool _isTemp4;
 
-	bool _isWoodOk;
-	bool _isRockOk;
-	bool _isIronOk;
-	bool _isCopperOk;
-
-
-
 public :
 	void init();
 	void update();
