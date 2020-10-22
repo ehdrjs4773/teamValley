@@ -47,6 +47,8 @@ public:
 	void update();
 	void render();
 
+	void savePlayer();
+
 	void setCurrentSlotNumber(int mouseWheel);
 
 	void loadMap();

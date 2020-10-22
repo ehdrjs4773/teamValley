@@ -134,6 +134,15 @@ void mineScene::render()
 	PLAYER->playerStatusRender(getMemDC());
 }
 
+void mineScene::savePlayer()
+{
+	PLAYER->savePlayerInven();
+	PLAYER->savePlayerStock();
+	PLAYER->savePlayerData();
+	PLAYER->saveMap();
+	PLAYER->saveBox();
+}
+
 void mineScene::setCurrentSlotNumber(int mouseWheel)
 {
 	if (mouseWheel > 0)
@@ -966,6 +975,9 @@ void mineScene::playerMonsterCollision()
 			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
 			{
 				//죽는 사운드 추가
+				PLAYER->setIsSprinkled(false);
+				savePlayer();
+				PLAYER->resetClock();
 				SWITCHMANAGER->changeScene("집안화면");
 				SWITCHMANAGER->startFade(838.0f, 864.0f);
 			}
