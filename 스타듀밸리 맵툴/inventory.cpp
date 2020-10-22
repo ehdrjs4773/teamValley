@@ -1006,7 +1006,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	}
 	else if (_vItem[i].item_kind == ITEM_ORE)
 	{
-		_vItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°");
+		_vItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
 		_vItem[i].item_info = ITEMMANAGER->findItem(_vItem[i].item_kind, _vItem[i].indexX);
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
@@ -1126,7 +1126,7 @@ void inventory::setvBoxInven(int i, tagItem item)
 	}
 	else if (_vStorageItem[i].item_kind == ITEM_ORE)
 	{
-		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°");
+		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
 		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].indexX);
 		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
 	}
