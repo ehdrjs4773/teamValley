@@ -91,6 +91,7 @@ public:
 
 	skill* getskill() { return _skill; }
 	vector<tagSkill> getvSkill() { return _skill->getvSkill(); }
+	vector<tagSkill>& getvCurrentSkill() { return _skill->getvCurrentSkill(); }
 	float getskillX() { return _skill->getPointX(); }
 	float getskillY() { return _skill->getPointY(); }
 	RECT getskillRc() { return _skill->getRect(); }

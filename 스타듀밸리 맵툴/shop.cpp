@@ -205,7 +205,7 @@ void shop::render()
 		char money[256];
 		memset(name, 0, sizeof(name));
 		memset(money, 0, sizeof(money));
-		//sprintf(name, _vItem[i + current_index].item_info, sizeof(_vItem[i + current_index].item_info));
+		sprintf(name, _vItem[i + current_index].item_info, sizeof(_vItem[i + current_index].item_info));
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
 		
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
@@ -319,7 +319,7 @@ void shop::render()
 
 			}
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
-			//DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
+			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
 		}
 	}
 
