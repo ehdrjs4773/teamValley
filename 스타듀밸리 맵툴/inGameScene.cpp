@@ -1081,7 +1081,7 @@ void inGameScene::breakStone()
 				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
 			}
 		}
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP)
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 		{
 			if (PLAYER->getEnergy() > 0)
 			{
@@ -1090,9 +1090,12 @@ void inGameScene::breakStone()
 				_tile[MouseIndexY][MouseIndexX].terrain = TR_SOIL;
 				_tile[MouseIndexY][MouseIndexX].isWet = false;
 				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 1;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 1;
 				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
 				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
 				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				checkHacked();
 			}
 		}
 	}

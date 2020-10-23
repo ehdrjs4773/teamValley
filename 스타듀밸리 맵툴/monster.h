@@ -83,6 +83,7 @@ private:
 	int attackCount = 0;
 	float attackDestX, attackDestY;
 	float lockedAngle;
+	bool isShowRect = false;
 
 public:
 	HRESULT init();

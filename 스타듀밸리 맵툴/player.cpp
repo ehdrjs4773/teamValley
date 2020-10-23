@@ -1282,6 +1282,11 @@ void player::savePlayerData()
 
 void player::savePlayerInven()
 {
+
+	resetHpBar();
+	resetEnergyBar();
+
+
 	vector<tagItem> temp;
 	temp = _inventory->getvInven();
 	tagSaveItem tempItem[36];
@@ -1492,6 +1497,9 @@ void player::saveMap()
 	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
+
+
+
 }
 
 void player::saveBox()
