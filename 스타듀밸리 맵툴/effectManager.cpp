@@ -35,7 +35,7 @@ void effectManager::update()
 				|| vEffect[i].effectType == EFT_MAPLETREECOL
 				|| vEffect[i].effectType == EFT_OAKTREECOL)
 			{
-				if (vEffect[i].count % 5 == 0)
+				if (vEffect[i].count % 10 == 0)
 				{
 					if (vEffect[i].dir == LEFT)
 					{
