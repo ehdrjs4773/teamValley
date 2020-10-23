@@ -173,7 +173,7 @@ void inGameScene::render()
 	//이펙트 렌더
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 	
-	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
+	FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -258,6 +258,7 @@ void inGameScene::renderMap()
 	//플레이어 렌더
 	PLAYER->render();
 	PLAYER->playerCarryItem(CAMERAMANAGER->getMemDC());
+
 
 	//플레이어보다 위에 덮어씌워지는 오브젝트 렌더
 	for (int i = currentIndexY + 1; i < (float)((float)CAMERAMANAGER->getY() / 16) + (float)(WINSIZEY / 40) + 7; i++)
@@ -1081,6 +1082,20 @@ void inGameScene::breakStone()
 				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
 			}
 		}
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP)
+		{
+			if (PLAYER->getEnergy() > 0)
+			{
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+				_tile[MouseIndexY][MouseIndexX].terrain = TR_SOIL;
+				_tile[MouseIndexY][MouseIndexX].isWet = false;
+				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
+				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+			}
+		}
 	}
 }
 
@@ -1309,6 +1324,8 @@ void inGameScene::plantSeed()
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1)))
 		{
 			SOUNDMANAGER->play("seed", 0.2f);
+			PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+				PLAYER->getCurrentInven()->amount - 1);
 			if (_tile[MouseIndexY][MouseIndexX].obj == OBJ_NONE)
 			{
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_SEED;
@@ -1609,14 +1626,8 @@ void inGameScene::harvest()
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_SWEETGEMBERRY
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_STRAWBERRY
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
-			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_COFFEEBEAN)	//여러번 수확할 수 있는 작물들
-		{
-			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-			_tile[MouseIndexY][MouseIndexX].grownLevel = 5;
-			_tile[MouseIndexY][MouseIndexX].objFrameX = 7;
-			_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 7;
-		}
-		else if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_GREENBEAN
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_COFFEEBEAN
+			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GREENBEAN
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_BLUEBERRY
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CORN
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_ARTICHOKE
@@ -1625,9 +1636,9 @@ void inGameScene::harvest()
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_CATUS)	//여러번 수확할 수 있는 작물들
 		{
 			_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
-			_tile[MouseIndexY][MouseIndexX].grownLevel = 5;
-			_tile[MouseIndexY][MouseIndexX].objFrameX = 15;
-			_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX = 15;
+			_tile[MouseIndexY][MouseIndexX].grownLevel -= 1;
+			_tile[MouseIndexY][MouseIndexX].objFrameX += 1;
+			_tile[MouseIndexY - 1][MouseIndexX].ovlFrameX += 1;
 		}
 		else
 		{
@@ -1638,6 +1649,7 @@ void inGameScene::harvest()
 
 			_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
 		}
+		checkFullyGrown(_tile[MouseIndexY][MouseIndexX]);
 	}
 }
 
@@ -2090,7 +2102,7 @@ void inGameScene::getItem(tagItem item)
 			if ((*PLAYER->getInven())[i].item_image == NULL)
 			{
 				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
-				cout << PLAYER->getInven(i)->item_info << endl;
+				//cout << PLAYER->getInven(i)->item_info << endl;
 				break;
 			}
 		}

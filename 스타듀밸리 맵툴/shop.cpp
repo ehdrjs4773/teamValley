@@ -423,6 +423,10 @@ void shop::buy()
 						(*_vInven)[i].isFrame = _vItem[click_index].isFrame;
 						(*_vInven)[i].item_info = _vItem[click_index].item_info;
 						(*_vInven)[i].item_kind = _vItem[click_index].item_kind;
+						(*_vInven)[i].seedKind = _vItem[click_index].seedKind;
+						(*_vInven)[i].itemName = _vItem[click_index].itemName;
+						(*_vInven)[i].toolKind = _vItem[click_index].toolKind;
+						(*_vInven)[i].weaponKind = _vItem[click_index].weaponKind;
 						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
 						(*_vInven)[i].amount = buy_count;
 

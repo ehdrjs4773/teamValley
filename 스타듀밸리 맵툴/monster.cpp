@@ -230,10 +230,15 @@ void monster::update()
 
 	//거리가 7타일 이하가 되면 길찾기
 	distance = sqrt(pow(PLAYER->getCenterX() - centerX, 2) + pow(PLAYER->getCenterY() - centerY, 2));
-	if (distance < 158.0f && !isMove && !isLocked)
+	if (distance < 112.0f && !isMove && !isLocked)
 	{
 		this->pathFinding();
 	}
+	else if (distance > 112.0f && !isMove && !isLocked)
+	{
+		aniIndexX = 0;
+	}
+	
 	if (isMove && !isLocked)
 	{
 		this->move();
