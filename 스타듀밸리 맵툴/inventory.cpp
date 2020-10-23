@@ -441,7 +441,7 @@ void inventory::quickSkillSlot(HDC hdc)
 
 		PLAYER->skill_slot(hdc);
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < PLAYER->getvCurrentSkill().size(); i++)
 		{
 
 			if (PtInRect(&_playerTool[i], _ptMouse))
@@ -484,6 +484,7 @@ void inventory::quickSkillSlot(HDC hdc)
 			SOUNDMANAGER->play("toolSwap", 0.2f);
 			currentSkillNumber = 5;
 		}
+		if (currentSkillNumber > PLAYER->getvCurrentSkill().size()-1) currentSkillNumber = PLAYER->getvCurrentSkill().size()-1;
 		RECT temp{ _playerTool[currentSkillNumber].left,_playerTool[currentSkillNumber].top,_playerTool[currentSkillNumber].right,_playerTool[currentSkillNumber].bottom };
 		FrameRect(hdc, temp, RGB(255, 0, 0));
 	}
@@ -925,6 +926,35 @@ void inventory::_vItemUpdate()
 						}
 					}
 				}
+
+				if (_vItem[i].item_kind == ITEM_SKILL)
+				{
+					if (INPUT->GetKeyDown(VK_RBUTTON))
+					{
+						int skillcheck = 0;
+						for (int k = 0; k < PLAYER->getvCurrentSkill().size(); k++)
+						{
+							if (_vItem[i].item_info == PLAYER->getvCurrentSkill()[k].skill_info)
+							{
+								skillcheck++;
+							}
+						}
+						if (skillcheck == 0)
+						{
+							for (int k = 0; k < PLAYER->getvSkill().size(); k++)
+							{
+								if (PLAYER->getvSkill()[k].skill_info == _vItem[i].item_info)
+								{
+									PLAYER->getvCurrentSkill().push_back(PLAYER->getvSkill()[k]); \
+										tagItem temp;
+										temp.item_image = NULL;
+										_vItem[i] = temp;
+								}
+							}
+						}
+					}
+				}
+
 			}
 		}
 	}

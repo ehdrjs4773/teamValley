@@ -19,7 +19,7 @@ private:
 	RECT _skillSlot[12];
 
 	vector<tagSkill> _vSkill;
-	vector<tagSkill> _vActiveSkill;
+	vector<tagSkill> _vCurrentSkill;
 	int _count;
 
 public:
@@ -32,6 +32,7 @@ public:
 
 	void skillSelect();
 	void skillActive();
+	vector<tagSkill>& getvCurrentSkill() { return _vCurrentSkill; }
 
 	float getPointX() { return pointX; }
 	float getPointY() { return pointY; }
