@@ -770,9 +770,8 @@ void inGameScene::playerInteraction()
 					waterGround();
 				}
 				//물채우기
-				if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].objType == OTY_WELL)
+				if (PLAYER->getCurrentInven()->toolKind == TOOL_KETTLE && _tile[MouseIndexY][MouseIndexX].objType == 17)
 				{
-
 					fillWater();
 				}
 				//공격하기 (우선은 나무자름)
@@ -1285,7 +1284,7 @@ void inGameScene::waterGround()
 
 void inGameScene::fillWater()
 {
-	PLAYER->setState(FILLWATER);
+
 	if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 		|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
 		|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1) //대각선 4 타일일때
