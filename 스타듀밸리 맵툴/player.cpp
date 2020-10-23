@@ -1363,7 +1363,7 @@ void player::saveMap()
 			
 			if (!_tile[i][j].isFullyGrown)
 			{
-				if (_tile[i][j].seedType == SEED_TOMATO
+				if ((_tile[i][j].seedType == SEED_TOMATO
 					|| _tile[i][j].seedType == SEED_HOTPEPPER
 					|| _tile[i][j].seedType == SEED_STARFRUIT
 					|| _tile[i][j].seedType == SEED_EGGPLANT
@@ -1372,35 +1372,29 @@ void player::saveMap()
 					|| _tile[i][j].seedType == SEED_STRAWBERRY
 					|| _tile[i][j].seedType == SEED_GRAPE
 					|| _tile[i][j].seedType == SEED_COFFEEBEAN)
+					&& _tile[i][j].objFrameX == 7)
 				{
-					if (_tile[i][j].objFrameX == 7)
+					if (_tile[i][j].isWet)
 					{
-						if (_tile[i][j].isWet)
-						{
-							_tile[i][j].grownLevel += 1;
-							_tile[i][j].objFrameX -= 1;
-							_tile[i - 1][j].ovlFrameX -= 1;
-							_tile[i][j].isWet = false;
-						}
+						_tile[i][j].grownLevel += 1;
+						_tile[i][j].objFrameX -= 1;
+						_tile[i - 1][j].ovlFrameX -= 1;
 					}
 				}
-				else if (_tile[i][j].seedType == SEED_GREENBEAN
+				else if ((_tile[i][j].seedType == SEED_GREENBEAN
 					|| _tile[i][j].seedType == SEED_BLUEBERRY
 					|| _tile[i][j].seedType == SEED_CORN
 					|| _tile[i][j].seedType == SEED_ARTICHOKE
 					|| _tile[i][j].seedType == SEED_CRANBERRY
 					|| _tile[i][j].seedType == SEED_HOPS
 					|| _tile[i][j].seedType == SEED_CATUS)
+					&& _tile[i][j].objFrameX == 15)
 				{
-					if (_tile[i][j].objFrameX == 15)
+					if (_tile[i][j].isWet)
 					{
-						if (_tile[i][j].isWet)
-						{
-							_tile[i][j].grownLevel += 1;
-							_tile[i][j].objFrameX -= 1;
-							_tile[i - 1][j].ovlFrameX -= 1;
-							_tile[i][j].isWet = false;
-						}
+						_tile[i][j].grownLevel += 1;
+						_tile[i][j].objFrameX -= 1;
+						_tile[i - 1][j].ovlFrameX -= 1;
 					}
 				}
 				else if (_tile[i][j].seedType == SEED_PINETREE)
@@ -1482,9 +1476,9 @@ void player::saveMap()
 						_tile[i][j].grownLevel += 1;
 						_tile[i][j].objFrameX += 1;
 						_tile[i - 1][j].ovlFrameX += 1;
-						_tile[i][j].isWet = false;
 					}
 				}
+				_tile[i][j].isWet = false;
 
 				//다자랐는지 확인
 				_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
