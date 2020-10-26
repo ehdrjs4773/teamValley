@@ -58,7 +58,7 @@ HRESULT player::init()
 	year = 1;
 	hour = 6;
 	minute = 0;
-	money = 5000;
+	money = 100000;
 	currentSeason = SPRING;
 	currentWeather = SUNNY;
 	date = 1;

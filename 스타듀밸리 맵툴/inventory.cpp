@@ -35,12 +35,12 @@ void inventory::init()
 
 	//_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
 	//_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
-	//_vItem[2] = ITEMMANAGER->findItem("³´");
-	//_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
-	//_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
-	//_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
-	//_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
-	//_vItem[7] = ITEMMANAGER->findItem("Ä®");
+	_vItem[2] = ITEMMANAGER->findItem("³´");
+	_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
+	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
+	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
+	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
+	_vItem[7] = ITEMMANAGER->findItem("Ä®");
 	//_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
 	//_vItem[9] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
 	//_vItem[10] = ITEMMANAGER->findItem("¼Ò³ª¹« ¾¾¾Ñ");
