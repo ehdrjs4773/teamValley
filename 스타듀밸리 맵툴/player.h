@@ -42,8 +42,6 @@ private:
 	int hpBarX;
 	int Damage;
 
-
-
 	bool isShowInventory;
 
 	bool isOpenPlayerStorageCover;
@@ -173,6 +171,8 @@ public:
 
 	void countTime();
 	void resetClock();
+
+	void resetPlayer();
 
 	bool checkFullyGrown(tagTile tile);
 	

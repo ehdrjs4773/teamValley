@@ -46,7 +46,7 @@ HRESULT player::init()
 	//stock->addPlayerStock(STOCK_BROWNCHICKEN);
 	//stock->addPlayerStock(STOCK_WHITECHICKEN);
 
-	currentMap = MAP_FARM;
+	currentMap = MAP_HOUSE;
 
 	isShowInventory = false;
 	isOpenPlayerStorageCover = false;
@@ -1029,6 +1029,27 @@ void player::resetClock()
 	darkAlpha = .0f;
 }
 
+void player::resetPlayer()
+{
+	this->init();
+	/*_tile[TILEY][TILEX] = {};
+	currentMap = MAP_HOUSE;
+	timeCount = 0;
+	hour = 0;
+	minute = 0;
+	date = 0;
+	money = 0;
+	year = 0;
+	blinkCount = 0;
+	arrowAngle = 0;
+	day = MON;
+	currentSeason = SPRING;
+	currentWeather = SUNNY;
+	speed = darkAlpha = centerY = centerX = .0f;
+	currentX = currentY = MouseIndexX = MouseIndexY = count = index = playerEnergy = energyBarX = 0;
+	playerHp = hpBarX = Damage = 0;*/
+}
+
 bool player::checkFullyGrown(tagTile tile)
 {
 	switch (tile.seedType)
@@ -1202,6 +1223,9 @@ bool player::checkFullyGrown(tagTile tile)
 
 void player::loadPlayerData()
 {
+	//플레이어 데이터 리셋
+	resetPlayer();
+
 	//플레이어 데이터 불러오기
 	date = INIDATA->loadDataInteger("save/playerData", "PLAYER", "date");
 	year = INIDATA->loadDataInteger("save/playerData", "PLAYER", "year");
