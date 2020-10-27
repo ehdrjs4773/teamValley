@@ -47,6 +47,8 @@ void inHouseScene::update()
 	cout << _ptMouse.x << " " << _ptMouse.y << endl;
 	cout << PLAYER->getCenterX() << " " << PLAYER->getCenterY() << endl;
 	cout<<endl;
+	
+	blanket();
 }
 
 void inHouseScene::render()
@@ -59,64 +61,34 @@ void inHouseScene::render()
 
 	PLAYER->playerStatusRender(getMemDC());
 
-	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
+	if (PLAYER->getCenterX() >= 855.0f && 
+		PLAYER->getCenterX() <= 880.0f && 
+		PLAYER->getCenterY() >= 855.0f && 
+		PLAYER->getCenterY() <= 880.0f)
 	{
-		if(!PLAYER->getIsShowInventory())
+		if (!PLAYER->getIsShowInventory()) //인벤토리가 안떠있을때 
 		{
-			PLAYER->setIsShowSleepingOption(true);
+			if (isShowSleepingOption)
+			{
+				IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
 
-			IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
-			
-			if (PtInRect(&noBox, _ptMouse))
-			{
-				IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
-				RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
-				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-			
-				if (INPUT->GetKeyDown(VK_LBUTTON))
+				if (PtInRect(&noBox, _ptMouse)) //아니요에 닿으면 
 				{
-					isShowSleepingOption = false;
+					IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
+					RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
+					FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 				}
-			}
-			if (PtInRect(&yesBox, _ptMouse))
-			{
-				IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
-				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
-				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-			
 				if (PtInRect(&yesBox, _ptMouse))
 				{
-					if (INPUT->GetKeyDown(VK_LBUTTON))
-					{
-						PLAYER->setIsSprinkled(false);
-						savePlayer();
-						if (!SWITCHMANAGER->getFade())
-						{
-							SWITCHMANAGER->startFade(855.0f, 865.0f);
-						}
-						PLAYER->resetClock();
-						isShowSleepingOption = false;
-					}
+					IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
+					RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
+					FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 				}
-			}
-		}
-		else if (!isShowSleepingOption)
-		{
-			if (checkCount == 0 || INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				isShowSleepingOption = true;
-			}
-		}
-		checkCount++;
-	}
-	else
-	{
-		PLAYER->setIsShowSleepingOption(false);
-		checkCount = 0;
-	}
-	//Rectangle(getMemDC(), yesBox);
-	//Rectangle(getMemDC(), noBox);
 
+			}
+
+		}
+	}
 }
 
 void inHouseScene::playerMove()
@@ -124,6 +96,7 @@ void inHouseScene::playerMove()
 	if (INPUT->GetKey('W'))
 	{
 		if (GetPixel(IMAGEMANAGER->findImage("아침 집 충돌")->getMemDC(), PLAYER->getCenterX(), PLAYER->getCenterY()) != RGB(255, 0, 0))
+		
 		{
 			if (!SOUNDMANAGER->isPlaySound("movewood"))
 			{
@@ -198,4 +171,47 @@ void inHouseScene::savePlayer()
 	PLAYER->saveBox();
 }
 
+void inHouseScene::blanket()
+{
 
+	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
+	{
+		if (checkCount == 0) //안닿으면
+		{
+			isShowSleepingOption = true; //트루? 
+		}
+
+		PLAYER->setIsShowSleepingOption(true);
+
+		if (PtInRect(&noBox, _ptMouse)) //아니요에 닿으면 
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				isShowSleepingOption = false; //폴스다
+			}
+		}
+		if (PtInRect(&yesBox, _ptMouse)) //예스에 닿으면
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				PLAYER->setIsSprinkled(false);
+				savePlayer();
+				if (!SWITCHMANAGER->getFade())
+				{
+					SWITCHMANAGER->startFade(855.0f, 865.0f);
+				}
+				PLAYER->resetClock();
+				isShowSleepingOption = false; //폴스다.
+			}
+		}
+		checkCount++;
+	}
+	else //범위밖이면 
+	{
+		isShowSleepingOption = false;
+		PLAYER->setIsShowSleepingOption(false);
+		checkCount = 0;
+	}
+
+
+}

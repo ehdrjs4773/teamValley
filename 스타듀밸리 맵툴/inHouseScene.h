@@ -23,6 +23,7 @@ public:
 	void render();
 
 	void playerMove();
+	void blanket();
 
 	void savePlayer();
 };
