@@ -41,6 +41,19 @@ HRESULT shop::init(NPC_KIND npckind)
 			{
 				_vItem.erase(_vItem.begin() + i);
 			}
+			else if (_vItem[i].item_kind == ITEM_ORE)
+			{
+				_vItem.erase(_vItem.begin() + i);
+
+			}
+			else if (_vItem[i].item_kind == ITEM_SPRINKLER)
+			{
+				_vItem.erase(_vItem.begin() + i);
+			}
+			else if (_vItem[i].item_kind == ITEM_STONEFENCEDOOR || _vItem[i].item_kind == ITEM_WOODENFENCEDOOR)
+			{
+				_vItem.erase(_vItem.begin() + i);
+			}
 			else i++;
 		}
 		else
@@ -348,6 +361,7 @@ void shop::render()
 			case ITEM_STONEFENCEDOOR:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
+				break;
 			case ITEM_SKILL:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "SKILL", sizeof("SKILL"));
