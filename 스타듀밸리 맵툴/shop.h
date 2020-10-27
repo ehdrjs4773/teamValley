@@ -31,12 +31,25 @@ private:
 	RECT rc_scroll;
 	image *scroll_img;
 	image *scrollbar_img;
-
 	RECT down_BT;
 	RECT up_BT;
 	int current_index;
 	RECT rc_shop;
 	image *_shop_image;
+
+	bool sell_ispopup;
+	bool sell_isok;
+	RECT sell_popup;
+	RECT sell_ok;
+	RECT sell_cancel;
+	RECT sell_plus;
+	RECT sell_minus;
+	RECT sell_max;
+	RECT sell_min;
+
+	int sell_amount;
+	int sell_amount_max;
+	int sell_index;
 
 	HBRUSH brush;
 	HBRUSH oBrush;
