@@ -40,7 +40,7 @@ void switchSceneManager::fade()
 {
 	if (isFadeOut && !isFadeIn)
 	{
-		alpha += 3;
+		alpha += 6;
 		if (alpha > 250)
 		{
 			alpha = 255;
@@ -55,7 +55,7 @@ void switchSceneManager::fade()
 	}
 	else if (!isFadeOut && isFadeIn)
 	{
-		alpha -= 3;
+		alpha -= 6;
 		if (alpha < 0)
 		{
 			alpha = 0;

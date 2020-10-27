@@ -85,7 +85,10 @@ void shopScene::update()
 	{
 		PLAYER->update();
 		
-		playerMove();
+		if (!PLAYER->getIsShowInventory())
+		{
+			playerMove();
+		}
 
 		_itemNpc->update();
 
