@@ -965,9 +965,9 @@ void inventory::_vItemUpdate()
 						}
 					}
 				}
-				if (_vItem[i].item_kind == ITEM_SKILL)
+				if (INPUT->GetKeyDown(VK_RBUTTON))
 				{
-					if (INPUT->GetKeyDown(VK_RBUTTON))
+					if (_vItem[i].item_image != NULL && _vItem[i].item_kind == ITEM_SKILL)
 					{
 						int skillcheck = 0;
 						for (int k = 0; k < PLAYER->getvCurrentSkill().size(); k++)
@@ -987,6 +987,7 @@ void inventory::_vItemUpdate()
 										tagItem temp;
 									temp.item_image = NULL;
 									_vItem[i] = temp;
+									
 								}
 							}
 						}
