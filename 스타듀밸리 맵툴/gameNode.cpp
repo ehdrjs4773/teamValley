@@ -105,12 +105,13 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 		_ptMouse.y = HIWORD(lParam);
 		break;
 	case WM_KEYDOWN:
-		switch (wParam)
-		{
-		case VK_ESCAPE:
-			PostMessage(hWnd, WM_DESTROY, 0, 0);
-			break;
-		}
+		//ESC 키로 게임 꺼지는거 조절
+		//switch (wParam)
+		//{
+		//case VK_ESCAPE:
+		//	PostMessage(hWnd, WM_DESTROY, 0, 0);
+		//	break;
+		//}
 		break;
 	case WM_MOUSEWHEEL:
 		if ((SHORT)HIWORD(wParam) > 0)

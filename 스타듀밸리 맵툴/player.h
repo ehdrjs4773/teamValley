@@ -89,6 +89,8 @@ public:
 	void skill_slot(HDC hdc) { _skill->render(hdc); }
 	void skillUpdate() { _skill->update(); }
 
+	void closeInvenPage() { isShowInventory = false; }
+
 	skill* getskill() { return _skill; }
 	vector<tagSkill> getvSkill() { return _skill->getvSkill(); }
 	vector<tagSkill>& getvCurrentSkill() { return _skill->getvCurrentSkill(); }

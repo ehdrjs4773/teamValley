@@ -198,6 +198,17 @@ void monster::release()
 
 void monster::update()
 {
+	if (INPUT->GetKeyDown(VK_F4))
+	{
+		if (isShowRect)
+		{
+			isShowRect = false;
+		}
+		else
+		{
+			isShowRect = true;
+		}
+	}
 	//HP 0 이하로 안떨어지게
 	if (currentHp <= 0)
 	{
@@ -267,11 +278,14 @@ void monster::render()
 		}
 	}
 
-	FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
-	FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
-	for (int i = 0; i < _finalList.size(); i++)
+	if (isShowRect)
 	{
-		FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
+		FrameRect(CAMERAMANAGER->getMemDC(), _startNode->rc, RGB(0, 255, 0));
+		FrameRect(CAMERAMANAGER->getMemDC(), _endNode->rc, RGB(255, 0, 0));
+		for (int i = 0; i < _finalList.size(); i++)
+		{
+			FrameRect(CAMERAMANAGER->getMemDC(), _finalList[i]->rc, RGB(255, 0, 255));
+		}
 	}
 	
 	hpBarRender();

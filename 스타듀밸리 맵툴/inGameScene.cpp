@@ -819,9 +819,12 @@ void inGameScene::playerInteraction()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
-			//수확
-			harvest();
-			checkHacked();
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP)
+			{
+				//수확
+				harvest();
+				checkHacked();
+			}
 		}
 	}
 }
@@ -1006,11 +1009,12 @@ void inGameScene::cutdownTree()
 					dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
 				}
 
+				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-				tagTree temp;
-				memset(&temp, 0, sizeof(temp));
-				_tile[MouseIndexY][MouseIndexX].tree = temp;
+				//tagTree temp;
+				//memset(&temp, 0, sizeof(temp));
+				//_tile[MouseIndexY][MouseIndexX].tree = temp;
 			}
 		}
 
@@ -1082,7 +1086,7 @@ void inGameScene::breakStone()
 				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
 			}
 		}
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP)
+		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
 		{
 			if (PLAYER->getEnergy() > 0)
 			{
@@ -1091,9 +1095,12 @@ void inGameScene::breakStone()
 				_tile[MouseIndexY][MouseIndexX].terrain = TR_SOIL;
 				_tile[MouseIndexY][MouseIndexX].isWet = false;
 				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 1;
+				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 1;
 				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
 				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
 				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				checkHacked();
 			}
 		}
 	}
