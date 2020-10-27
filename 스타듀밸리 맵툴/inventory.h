@@ -97,6 +97,8 @@ public:
 	tagItem getMoveItem() { return _MouseItem; }
 	RECT getPlayerTool(int i ) { return _playerTool[i]; }
 	RECT getqucikRect() { return _quickSlotRect; }
+
+	RECT getKettleBar() { return _kettleBar; }
 	
 	void setMouseItem(tagItem item) { _MouseItem = item; }
 

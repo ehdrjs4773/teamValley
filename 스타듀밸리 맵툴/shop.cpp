@@ -142,6 +142,14 @@ void shop::render()
 				}
 			}
 		}
+		if (_vInven->at(i).toolKind == TOOL_KETTLE)
+		{
+			_inven->getKettleBar();
+
+			brush = CreateSolidBrush(RGB(40, 140, 230));
+			FillRect(getMemDC(), &_inven->getKettleBar(), brush);
+			DeleteObject(brush);
+		}
 	
 	}
 	PLAYER->getInventory()->inven_item_info(getMemDC());
@@ -364,6 +372,11 @@ void shop::sell()
 				(*_vInven)[i].buy_price = NULL;
 				(*_vInven)[i].amount -= 1;
 				if ((*_vInven)[i].amount <= 0) (*_vInven)[i].amount = 0;
+
+				if (_vItem[i].toolKind == TOOL_KETTLE)
+				{
+					_inven->getKettleBar();
+				}
 			}
 		}
 	}

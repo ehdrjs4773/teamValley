@@ -904,6 +904,7 @@ void inventory::_vItemUpdate()
 								_vItem[i] = _MouseItem;
 								_MouseItem = exchangeItem;
 							}
+
 						}
 
 						else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
@@ -912,6 +913,11 @@ void inventory::_vItemUpdate()
 							pushItem.item_image = NULL;
 							_MouseItem = _vItem[i];
 							_vItem[i] = pushItem;
+						}
+
+						if (_MouseItem.toolKind == TOOL_KETTLE)
+						{
+							_kettleBar = RectMake(_playerTool[i].left + 3, _playerTool[i].bottom - 7, waterAmount, 4);
 						}
 					}
 

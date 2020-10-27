@@ -38,6 +38,9 @@ private:
 	RECT rc_shop;
 	image *_shop_image;
 
+	HBRUSH brush;
+	HBRUSH oBrush;
+
 	vector<SLOT> _vslot;
 	typedef vector<tagItem>::iterator vi_SLOT;
 	vi_SLOT _viSlot;
