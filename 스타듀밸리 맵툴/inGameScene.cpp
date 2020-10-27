@@ -60,7 +60,7 @@ HRESULT inGameScene::init()
 	{
 		SOUNDMANAGER->stop("town");
 	}
-	load();
+	//load();
 
 	return S_OK;
 }

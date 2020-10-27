@@ -62,7 +62,7 @@ public:
 	void playerInteraction();
 	void breakStone();
 	void cutGrass();
-	void useLadder();
+	void useLadder(int i, int j);
 	void useElevator(); 
 
 	void renderMap();
@@ -83,5 +83,6 @@ public:
 	void setMonsterList();
 	void spawnMonster();
 	void playerMonsterCollision();
+	void wallMonsterColliison();
 };
 
