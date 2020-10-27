@@ -84,7 +84,6 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
-
 	void setIsShowSleepingOption(bool a) { isShowSleepingOption = a; }
 
 	void skill_slot(HDC hdc) { _skill->render(hdc); }

@@ -59,50 +59,50 @@ void inHouseScene::render()
 
 	PLAYER->playerStatusRender(getMemDC());
 
-	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
+	if (PLAYER->getCenterX() >= 855.0f
+		&& PLAYER->getCenterX() <= 880.0f
+		&& PLAYER->getCenterY() >= 855.0f
+		&& PLAYER->getCenterY() <= 880.0f)
 	{
-		if(!PLAYER->getIsShowInventory())
-		{
-			PLAYER->setIsShowSleepingOption(true);
+		PLAYER->setIsShowSleepingOption(true);
 
-			IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
-			
-			if (PtInRect(&noBox, _ptMouse))
+		IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
+
+		if (PtInRect(&noBox, _ptMouse))
+		{
+			IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
+			RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
+			FrameRect(getMemDC(), temp, RGB(255, 0, 0));
+
+			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
-				RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
-				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-			
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					isShowSleepingOption = false;
-				}
+				isShowSleepingOption = false;
 			}
+		}
+		if (PtInRect(&yesBox, _ptMouse))
+		{
+			IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
+			RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
+			FrameRect(getMemDC(), temp, RGB(255, 0, 0));
+
 			if (PtInRect(&yesBox, _ptMouse))
 			{
-				IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
-				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
-				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-			
-				if (PtInRect(&yesBox, _ptMouse))
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
-					if (INPUT->GetKeyDown(VK_LBUTTON))
+					PLAYER->setIsSprinkled(false);
+					savePlayer();
+					if (!SWITCHMANAGER->getFade())
 					{
-						PLAYER->setIsSprinkled(false);
-						savePlayer();
-						if (!SWITCHMANAGER->getFade())
-						{
-							SWITCHMANAGER->startFade(855.0f, 865.0f);
-						}
-						PLAYER->resetClock();
-						isShowSleepingOption = false;
+						SWITCHMANAGER->startFade(855.0f, 865.0f);
 					}
+					PLAYER->resetClock();
+					isShowSleepingOption = false;
 				}
 			}
 		}
 		else if (!isShowSleepingOption)
 		{
-			if (checkCount == 0 || INPUT->GetKeyDown(VK_LBUTTON))
+			if (checkCount == 0)
 			{
 				isShowSleepingOption = true;
 			}
@@ -114,9 +114,6 @@ void inHouseScene::render()
 		PLAYER->setIsShowSleepingOption(false);
 		checkCount = 0;
 	}
-	//Rectangle(getMemDC(), yesBox);
-	//Rectangle(getMemDC(), noBox);
-
 }
 
 void inHouseScene::playerMove()

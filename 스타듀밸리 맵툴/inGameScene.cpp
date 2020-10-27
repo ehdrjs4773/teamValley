@@ -1322,7 +1322,7 @@ void inGameScene::plantSeed()
 {
 	//작물 심기
 	if (!(PLAYER->getCurrentInven()->seedKind == SEED_PINETREE || PLAYER->getCurrentInven()->seedKind == SEED_MAPLETREE || PLAYER->getCurrentInven()->seedKind == SEED_OAKTREE)
-		&& _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
+		&& _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED && _tile[MouseIndexY][MouseIndexX].objType == OTY_NONE)
 	{
 		PLAYER->setState(CARRYSTAND);
 		if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
