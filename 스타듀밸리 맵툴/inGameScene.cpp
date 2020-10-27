@@ -819,8 +819,11 @@ void inGameScene::playerInteraction()
 			|| ((MouseIndexX == currentIndexX - 1 || MouseIndexX == currentIndexX + 1)
 				&& (MouseIndexY == currentIndexY - 1 || MouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
 		{
-			//수확
-			harvest();
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP)
+			{
+				//수확
+				harvest();
+			}
 		}
 	}
 }
@@ -1005,11 +1008,12 @@ void inGameScene::cutdownTree()
 					dropItem(_tile[MouseIndexY][MouseIndexX], "나무");
 				}
 
+				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-				tagTree temp;
-				memset(&temp, 0, sizeof(temp));
-				_tile[MouseIndexY][MouseIndexX].tree = temp;
+				//tagTree temp;
+				//memset(&temp, 0, sizeof(temp));
+				//_tile[MouseIndexY][MouseIndexX].tree = temp;
 			}
 		}
 

@@ -347,15 +347,15 @@ void inventory::quickSlot(HDC hdc)
 						}
 					}
 				}
-				if (_vItem[i].toolKind == TOOL_KETTLE)
-				{
-					_kettleBar = RectMake(_playerTool[i].left + 3, _playerTool[i].bottom - 7, waterAmount, 4);
+			}
+			if (_vItem[i].toolKind == TOOL_KETTLE)
+			{
+				_kettleBar = RectMake(_playerTool[i].left + 3, _playerTool[i].bottom - 7, waterAmount, 4);
 
-					brush = CreateSolidBrush(RGB(40, 140, 230));
-					FillRect(hdc, &_kettleBar, brush);
-					DeleteObject(brush);
+				brush = CreateSolidBrush(RGB(40, 140, 230));
+				FillRect(hdc, &_kettleBar, brush);
+				DeleteObject(brush);
 
-				}
 			}
 
 			if (PtInRect(&_playerTool[i], _ptMouse))
