@@ -30,7 +30,9 @@ void mainScene::update()
 			frameY[0] = 1;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				SCENEMANAGER->loadScene("인게임화면");
+				PLAYER->init();
+				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->startFade(820.0f, 865.0f);
 			}
 		}
 		else frameY[0] = 0;
@@ -41,8 +43,7 @@ void mainScene::update()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				PLAYER->loadPlayerData();
-
-
+				PLAYER->closeInvenPage();
 				SWITCHMANAGER->changeScene("집안화면");
 				SWITCHMANAGER->startFade(820.0f, 865.0f);
 			}
@@ -64,7 +65,8 @@ void mainScene::update()
 			frameY[3] = 1;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				exit(0);
+				PostQuitMessage(0);
+				//exit(0);
 			}
 		}
 		else frameY[3] = 0;

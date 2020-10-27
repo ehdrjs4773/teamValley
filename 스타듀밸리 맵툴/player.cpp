@@ -88,20 +88,14 @@ void  player::update()
 		}
 	}
 	
-	if (INPUT->GetKeyDown('E'))
+	if (!isOpenPlayerStorageCover)
 	{
-		if(!isShowInventory) SOUNDMANAGER->play("menuopen");
+		if (!isShowInventory) SOUNDMANAGER->play("menuopen");
 		else SOUNDMANAGER->play("menuclose");
 
-		if (!isOpenPlayerStorageCover)
+		if (!isShowInventory)
 		{
-			if (isShowInventory)
-			{
-				isShowInventory = false;
-				_inventory->setInvenToryMove(false);
-				_inventory->setInvenPage(false);
-			}
-			else
+			if (INPUT->GetKeyDown('E'))
 			{
 				_inventory->setInvenToryMove(true);
 				isShowInventory = true;
@@ -109,6 +103,22 @@ void  player::update()
 			}
 		}
 	}
+	
+	if (!isOpenPlayerStorageCover)
+	{
+		if (!isShowInventory) SOUNDMANAGER->play("menuopen");
+		else SOUNDMANAGER->play("menuclose");
+		if (isShowInventory)
+		{
+			if (INPUT->GetKeyDown(VK_ESCAPE) || INPUT->GetKeyDown('E'))
+			{
+				isShowInventory = false;
+				_inventory->setInvenToryMove(false);
+				_inventory->setInvenPage(false);
+			}
+		}
+	}
+	
 	if (INPUT->GetKeyDown('B'))
 	{
 		hour += 1;
@@ -119,9 +129,8 @@ void  player::update()
 	if (INPUT->GetKey('N'))
 	{
 		darkAlpha += 0.47222;
-		//cout << darkAlpha << endl;
+		cout << darkAlpha << endl;
 	}
-
 
 	//플레이어 현재 맵 체크
 	setCurrentMap();
@@ -143,7 +152,6 @@ void  player::update()
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
 	//rc = RectMakeCenter(centerX, centerY, 16, 32);
-
 
 	_inventory->update();
 

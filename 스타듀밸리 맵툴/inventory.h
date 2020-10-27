@@ -30,6 +30,7 @@ private:
 	BOOL _isPlayerPage;	   //누르면 플레이어페이지
 	RECT _isPlayerRect;    //스킬렉트
 	RECT _quickSlotRect;   //퀵슬롯 이미지렉트
+	RECT _exitRect;		   //나가기 버튼
 
 	RECT _playerTool[12];
 

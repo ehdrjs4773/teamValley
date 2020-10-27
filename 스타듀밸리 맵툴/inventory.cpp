@@ -7,9 +7,7 @@ void inventory::init()
 	_isShopOpen = false;
 	currentSkillNumber = 0;
 
-
-	
-		for (int i = 0; i < INVENMAX; i++)
+	for (int i = 0; i < INVENMAX; i++)
 	{
 		tagItem temp; // ÇÃ·¹ÀÌ¾î ÀÎº¥
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
@@ -76,6 +74,7 @@ void inventory::update()
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
+	_exitRect = RectMake(440, 50, 50, 50);
 	_vItemUpdate();
 	
 	if (isShowTemp)
@@ -151,23 +150,19 @@ void inventory::update()
 		}
 	}
 
-
 	//if(_vItem[i].item_image == NULL) setInvenImage(i, _vItem[i].itemName);
-
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-	
 }
 
 void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º¸Ã¢ (ÀÌ»óÇÏ°Ô ¼öÁ¤ÇÏÁö¸¶)
 {
-
 	if (_isInvenPage)
 	{
 		inventory2_img = IMAGEMANAGER->findImage("ÀÎº¥Åä¸®");
 		inventory2_img->render(hdc, 225, 40);
-
 		for (int i = 0; i < _vItem.size(); i++)
 		{
+			//FrameRect(hdc, _vItem[i].rc,RGB(0,0,0));
 			if (_vItem[i].item_image != NULL)
 			{
 				if (_vItem[i].isFrame)
@@ -178,18 +173,23 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 					FillRect(hdc, &_kettleBar, brush);
 					DeleteObject(brush);
 
-
 					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX)
 					{
-
 						if (_vItem[i].amount >= 0)
 						{
 							char str[64];
 							wsprintf(str, "%d", _vItem[i].amount);
-
-							textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 0;
+							}
+							else
+							{
+								left = 10;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 						}
-						//Rectangle(hdc, _vItem[i].rc);
 					}
 				}
 				else
@@ -199,11 +199,18 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 					{
 						char str[64];
 						wsprintf(str, "%d", _vItem[i].amount);
-
-						textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+						int left = 0;
+						if (_vItem[i].amount < 10)
+						{
+							left = 0;
+						}
+						else
+						{
+							left = 10;
+						}
+						textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 					}
 				}
-			
 			}
 		}
 	}
@@ -221,7 +228,6 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 		{
 			if (_vItem[i].item_image != NULL)
 			{
-
 				if (_vItem[i].isFrame)
 				{
 					//Rectangle(hdc, _vItem[i].rc);
@@ -236,8 +242,16 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 						{
 							char str[64];
 							wsprintf(str, "%d", _vItem[i].amount);
-
-							textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 5;
+							}
+							else
+							{
+								left = 15;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 27, str, RGB(0, 0, 0));
 						}
 					}
 				}
@@ -250,49 +264,20 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 						{
 							char str[64];
 							wsprintf(str, "%d", _vItem[i].amount);
-
-							textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 5;
+							}
+							else
+							{
+								left = 15;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 27, str, RGB(0, 0, 0));
 						}
 					}
 				}
 			}
-
-			if (PtInRect(&_vItem[i].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					if (_vItem[i].item_image != NULL) // ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é
-					{
-						if (_MouseItem.item_image != NULL) // ¸¶¿ì½º¿¡ ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é
-						{
-							tagItem exchangeItem; // ±³È¯¿ë ¾ÆÀÌÅÛ
-							exchangeItem = _vItem[i];
-							_vItem[i] = _MouseItem;
-							_MouseItem = exchangeItem;
-						}
-
-						else if (_MouseItem.item_image == NULL) // ¸¶¿ì½º¿¡ ¾ÆÀÌÅÛÀÌ ¾øÀ¸¸é
-						{
-							tagItem pushItem;
-							pushItem.item_image = NULL;
-							_MouseItem = _vItem[i];
-							_vItem[i] = pushItem;
-						}
-					}
-
-					else if (_vItem[i].item_image == NULL)
-					{
-						if (_MouseItem.item_image != NULL)
-						{
-							tagItem clearItem;
-							clearItem.item_image = NULL;
-							_vItem[i] = _MouseItem;
-							_MouseItem = clearItem;
-						}
-					}
-				}
-			}
-
 		}
 	}
 
@@ -327,8 +312,16 @@ void inventory::quickSlot(HDC hdc)
 						{
 							char str[64];
 							wsprintf(str, "%d", _vItem[i].amount);
-
-							textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 10;
+							}
+							else
+							{
+								left = 20;
+							}
+							textOut(hdc, _playerTool[i].right - left, _playerTool[i].top + 25, str, RGB(0, 0, 0));
 						}
 					}
 				}
@@ -341,8 +334,16 @@ void inventory::quickSlot(HDC hdc)
 						{
 							char str[64];
 							wsprintf(str, "%d", _vItem[i].amount);
-
-							textOut(hdc, _playerTool[i].left + 30, _playerTool[i].top + 30, str, RGB(0, 0, 0));
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 10;
+							}
+							else
+							{
+								left = 20;
+							}
+							textOut(hdc, _playerTool[i].right - left, _playerTool[i].top + 25, str, RGB(0, 0, 0));
 						}
 					}
 				}
@@ -511,8 +512,16 @@ void inventory::renderStorageInventory(HDC hdc)
 					{
 						char str[64];
 						wsprintf(str, "%d", _vStorageItem[i].amount);
-
-						textOut(hdc, _vStorageItem[i].rc.left + 30, _vStorageItem[i].rc.top + 30, str, RGB(0, 0, 0));
+						int left = 0;
+						if (_vStorageItem[i].amount < 10)
+						{
+							left = 10;
+						}
+						else
+						{
+							left = 20;
+						}
+						textOut(hdc, _vStorageItem[i].rc.right - left, _vStorageItem[i].rc.top + 25, str, RGB(0, 0, 0));
 					}
 				}
 			}
@@ -526,8 +535,16 @@ void inventory::renderStorageInventory(HDC hdc)
 				{
 					char str[64];
 					wsprintf(str, "%d", _vStorageItem[i].amount);
-
-					textOut(hdc, _vStorageItem[i].rc.left + 30, _vStorageItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vStorageItem[i].amount < 10)
+					{
+						left = 10;
+					}
+					else
+					{
+						left = 20;
+					}
+					textOut(hdc, _vStorageItem[i].rc.right - left, _vStorageItem[i].rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -555,8 +572,16 @@ void inventory::renderStorageInventory(HDC hdc)
 				{
 					char str[64];
 					wsprintf(str, "%d", _vItem[i].amount);
-		
-					textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vItem[i].amount < 10)
+					{
+						left = 10;
+					}
+					else
+					{
+						left = 20;
+					}
+					textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -569,8 +594,16 @@ void inventory::renderStorageInventory(HDC hdc)
 				{
 					char str[64];
 					wsprintf(str, "%d", _vItem[i].amount);
-		
-					textOut(hdc, _vItem[i].rc.left + 30, _vItem[i].rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vItem[i].amount < 10)
+					{
+						left = 10;
+					}
+					else
+					{
+						left = 20;
+					}
+					textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -855,6 +888,15 @@ void inventory::_vItemUpdate()
 				_isCraftPage = true;
 			}
 		}
+		else if (PtInRect(&_exitRect, _ptMouse) && !_isShopOpen)
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				SOUNDMANAGER->play("select");
+				SWITCHMANAGER->changeScene("½ºÅ¸Æ®È­¸é");
+				SWITCHMANAGER->startFade(.0f, .0f);
+			}
+		}
 	}
 	
 
@@ -880,7 +922,6 @@ void inventory::_vItemUpdate()
 	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
-
 		for (int i = 0; i < _vItem.size(); i++)
 		{
 			if (PtInRect(&_vItem[i].rc, _ptMouse))
@@ -905,7 +946,6 @@ void inventory::_vItemUpdate()
 								_MouseItem = exchangeItem;
 							}
 						}
-
 						else if (_MouseItem.item_image == NULL) // ¸¶¿ì½º¿¡ ¾ÆÀÌÅÛÀÌ ¾øÀ¸¸é
 						{
 							tagItem pushItem;
@@ -914,7 +954,6 @@ void inventory::_vItemUpdate()
 							_vItem[i] = pushItem;
 						}
 					}
-
 					else if (_vItem[i].item_image == NULL)
 					{
 						if (_MouseItem.item_image != NULL)
@@ -926,7 +965,6 @@ void inventory::_vItemUpdate()
 						}
 					}
 				}
-
 				if (_vItem[i].item_kind == ITEM_SKILL)
 				{
 					if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -947,14 +985,13 @@ void inventory::_vItemUpdate()
 								{
 									PLAYER->getvCurrentSkill().push_back(PLAYER->getvSkill()[k]); \
 										tagItem temp;
-										temp.item_image = NULL;
-										_vItem[i] = temp;
+									temp.item_image = NULL;
+									_vItem[i] = temp;
 								}
 							}
 						}
 					}
 				}
-
 			}
 		}
 	}
