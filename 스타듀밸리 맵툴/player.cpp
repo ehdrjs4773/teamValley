@@ -24,7 +24,7 @@ HRESULT player::init()
 
 	speed = 1.5f;
 
-	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지2.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
 
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
@@ -93,7 +93,7 @@ void  player::update()
 		if (!isShowInventory) SOUNDMANAGER->play("menuopen");
 		else SOUNDMANAGER->play("menuclose");
 
-		if (!isShowInventory)
+		if (!isShowInventory && !isShowSleepingOption)
 		{
 			if (INPUT->GetKeyDown('E'))
 			{
@@ -356,7 +356,7 @@ void player::playerAnimation()
 			if (count % 10 == 0)
 			{
 				index += 1;
-				if (index > 7)
+				if (index > 5)
 				{
 					index = 0;
 				}
@@ -366,7 +366,7 @@ void player::playerAnimation()
 			if (count % 10 == 0)
 			{
 				index += 1;
-				if (index > 6)
+				if (index > 5)
 				{
 					index = 0;
 				}				
@@ -1674,3 +1674,4 @@ void player::weatherRender(HDC hdc)
 		IMAGEMANAGER->alphaRender("페이드", hdc, 0, 0, darkAlpha);
 	}
 }
+
