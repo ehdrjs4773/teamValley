@@ -48,7 +48,6 @@ private:
 	vector<node*> _closeList;			//길을 찾은 노드들을 담아둘 벡터
 	vector<node*> _finalList;			//클로즈리스트에 담겨있는 노드들을 리버스시켜서 담아둘 벡터
 
-	
 	int _count;							//시작노드, 종료노드를 한번씩만 선택하기 위한 변수
 	bool _isFind;						//길 찾았냐?
 
@@ -65,15 +64,16 @@ private:
 	float currentHp;
 
 	float centerX, centerY;
+	int currentX, currentY;
 	float speed;
 	float angle;
 
 	bool isMove;
 	bool isLocked;
 	
-	bool getdamage;
-	int DamageDelay;
+	bool getdamage;	
 	bool isDead;
+	int DamageDelay;
 
 	int aniCount;
 	int aniIndexX, aniIndexY;
@@ -108,6 +108,10 @@ public:
 
 	void checkDir();
 
+	float getCenterX() { return centerX; }
+	float getCenterY() { return centerY; }
+	int getCurrentX() { return currentX; }
+	int getCurrentY() { return currentY; }
 	void setCenterX(float cX) { centerX = cX; }
 	void setCenterY(float cY) { centerY = cY; }
 	RECT getRc() { return rc; }
@@ -123,6 +127,10 @@ public:
 	bool getDamage() { return getdamage; }
 	bool getisDead() { return isDead; }
 	void hpBarRender();
+
+	bool getIsLocked() { return isLocked; }
+	void setIsLocked(bool locked) { isLocked = locked; }
+
 
 	/*중요함수*/
 		//길찾기 함수

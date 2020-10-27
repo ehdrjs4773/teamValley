@@ -90,7 +90,6 @@ void mineScene::update()
 		}
 	}
 
-
 	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
 	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
 
@@ -140,6 +139,7 @@ void mineScene::update()
 	{
 		iter->update();
 	}
+	wallMonsterColliison();
 }
 
 void mineScene::render()
@@ -291,6 +291,15 @@ void mineScene::playerMove()
 				}
 				PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
 			}
+			else if (_tile[upIndexY][upIndexX].objFrameX == 0 && _tile[upIndexY][upIndexX].objFrameY == 7)
+			{
+				SWITCHMANAGER->changeScene("인게임화면");
+				SWITCHMANAGER->startFade(288.0f, 64.0f);
+			}
+			else
+			{
+				useLadder(upIndexY, upIndexX);
+			}
 		}
 	}
 	if (INPUT->GetKey('S'))
@@ -315,6 +324,10 @@ void mineScene::playerMove()
 					PLAYER->setState(RUN);
 				}
 				PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+			}
+			else
+			{
+				useLadder(downIndexY, downIndexX);
 			}
 		}
 	}
@@ -341,6 +354,10 @@ void mineScene::playerMove()
 				}
 				PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 			}
+			else
+			{
+				useLadder(leftIndexY, leftIndexX);
+			}
 		}
 	}
 	if (INPUT->GetKey('D'))
@@ -365,6 +382,10 @@ void mineScene::playerMove()
 					PLAYER->setState(RUN);
 				}
 				PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+			}
+			else
+			{
+				useLadder(rightIndexY, rightIndexX);
 			}
 		}
 	}
@@ -545,12 +566,11 @@ void mineScene::playerInteraction()
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
 	{
-		//층 이동하기
-		useLadder();
-
-		//마을로 돌아가기
-		useElevator();
-
+		////층 이동하기
+		//useLadder();
+		//
+		////마을로 돌아가기
+		//useElevator();
 	}
 }
 
@@ -690,20 +710,15 @@ void mineScene::cutGrass()
 	}
 }
 
-void mineScene::useLadder()
+void mineScene::useLadder(int i, int j)
 {
-	if (((mouseIndexX == currentIndexX + 1 || mouseIndexX == currentIndexX - 1) && mouseIndexY == currentIndexY)
-		|| (mouseIndexX == currentIndexX && (mouseIndexY == currentIndexY + 1 || mouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
-		|| ((mouseIndexX == currentIndexX - 1 || mouseIndexX == currentIndexX + 1)
-			&& (mouseIndexY == currentIndexY - 1 || mouseIndexY == currentIndexY + 1))) //대각선 4 타일일때
+	if (_tile[i][j].objType == OTY_MINELADDER)
 	{
-		if (_tile[mouseIndexY][mouseIndexX].objType == OTY_MINELADDER)
-		{
-			SOUNDMANAGER->play("stairDown", 0.2f);
-			currentFloor++;
-			this->init();
-			float tempX, tempY;
-			switch (currentFloor)
+		SOUNDMANAGER->play("stairDown", 0.2f);
+		currentFloor++;
+		this->init();
+		float tempX, tempY;
+		switch (currentFloor)
 			{
 			case 0:
 				break;
@@ -744,15 +759,14 @@ void mineScene::useLadder()
 			default:
 				break;
 			}
-			SWITCHMANAGER->changeScene("광산화면");
-			SWITCHMANAGER->startFade(tempX, tempY);
-		}
-		else if (_tile[mouseIndexY][mouseIndexX].objFrameX==3 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
-		{
-			SOUNDMANAGER->play("stairDown", 0.2f);
-			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(288.0f, 64.0f);
-		}
+		SWITCHMANAGER->changeScene("광산화면");
+		SWITCHMANAGER->startFade(tempX, tempY);
+	}
+	else if (_tile[i][j].objFrameX==3 && _tile[i][j].objFrameY == 7)
+	{
+		SOUNDMANAGER->play("stairDown", 0.2f);
+		SWITCHMANAGER->changeScene("인게임화면");
+		SWITCHMANAGER->startFade(288.0f, 64.0f);
 	}
 }
 
@@ -1040,4 +1054,39 @@ void mineScene::playerMonsterCollision()
 			}
 		}
 	}
+}
+
+void mineScene::wallMonsterColliison()
+{
+	for (auto iter : vMonster)
+	{
+		if (iter->getIsLocked())
+		{
+			RECT temp;
+			for (int i = 0; i < 50; i++)
+			{
+				for (int j = 0; j < 50; j++)
+				{
+					if (IntersectRect(&temp, &iter->getRc(), &_tile[i][j].rc))
+					{
+						if (_tile[i][j].obj != OBJ_NONE)
+						{
+							float x, y;
+							x = _tile[iter->getCurrentY()][iter->getCurrentX()].rc.left +
+								(_tile[iter->getCurrentY()][iter->getCurrentX()].rc.right -
+									_tile[iter->getCurrentY()][iter->getCurrentX()].rc.left);
+							y = _tile[iter->getCurrentY()][iter->getCurrentX()].rc.top +
+								(_tile[iter->getCurrentY()][iter->getCurrentX()].rc.bottom -
+									_tile[iter->getCurrentY()][iter->getCurrentX()].rc.top);
+
+							iter->setCenterX(x);
+							iter->setCenterY(y);
+							iter->setIsLocked(false);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 }

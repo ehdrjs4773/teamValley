@@ -922,6 +922,12 @@ void inventory::_vItemUpdate()
 	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
+		if (_MouseItem.toolKind == TOOL_KETTLE)
+		{
+			_kettleBar = RectMake(_MouseItem.rc.left + 3, _MouseItem.rc.bottom - 7, waterAmount, 4);
+		}
+		
+		
 		for (int i = 0; i < _vItem.size(); i++)
 		{
 			if (PtInRect(&_vItem[i].rc, _ptMouse))
@@ -944,7 +950,15 @@ void inventory::_vItemUpdate()
 								exchangeItem = _vItem[i];
 								_vItem[i] = _MouseItem;
 								_MouseItem = exchangeItem;
+
+
+
+
+						
+
+						
 							}
+
 
 						}
 						else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
@@ -955,10 +969,9 @@ void inventory::_vItemUpdate()
 							_vItem[i] = pushItem;
 						}
 
-						if (_MouseItem.toolKind == TOOL_KETTLE)
-						{
-							_kettleBar = RectMake(_playerTool[i].left + 3, _playerTool[i].bottom - 7, waterAmount, 4);
-						}
+
+
+
 					}
 					else if (_vItem[i].item_image == NULL)
 					{
