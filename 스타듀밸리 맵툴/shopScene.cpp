@@ -34,6 +34,11 @@ HRESULT shopScene::init()
 	_npcPtr[0] = _itemNpc;
 	_npcPtr[1] = _skillNpc;
 
+	if (!SOUNDMANAGER->isPlaySound("³óÀå"))
+	{
+		SOUNDMANAGER->stop("³óÀå");
+	}
+
 	this->update();
 	return S_OK;
 }

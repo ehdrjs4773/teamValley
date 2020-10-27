@@ -90,13 +90,14 @@ void  player::update()
 	
 	if (!isOpenPlayerStorageCover)
 	{
-		if (!isShowInventory) SOUNDMANAGER->play("menuopen");
-		else SOUNDMANAGER->play("menuclose");
 
 		if (!isShowInventory && !isShowSleepingOption)
 		{
 			if (INPUT->GetKeyDown('E'))
 			{
+				if (!isShowInventory) SOUNDMANAGER->play("menuopen");
+				else SOUNDMANAGER->play("menuclose");
+
 				_inventory->setInvenToryMove(true);
 				isShowInventory = true;
 				_inventory->setInvenPage(true);
@@ -106,12 +107,13 @@ void  player::update()
 	
 	if (!isOpenPlayerStorageCover)
 	{
-		if (!isShowInventory) SOUNDMANAGER->play("menuopen");
-		else SOUNDMANAGER->play("menuclose");
+
 		if (isShowInventory)
 		{
 			if (INPUT->GetKeyDown(VK_ESCAPE) || INPUT->GetKeyDown('E'))
 			{
+				if (!isShowInventory) SOUNDMANAGER->play("menuopen");
+				else SOUNDMANAGER->play("menuclose");
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);

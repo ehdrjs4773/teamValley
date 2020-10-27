@@ -198,6 +198,9 @@ void monster::release()
 
 void monster::update()
 {
+	currentX = centerX / 16;
+	currentY = centerY / 16;
+
 	if (INPUT->GetKeyDown(VK_F4))
 	{
 		if (isShowRect)
