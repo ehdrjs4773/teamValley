@@ -1,49 +1,130 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  mineScene.cpp
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(60): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(61): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(66): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(84): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(149): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(196): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(198): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(214): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(237): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(239): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(273): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(274): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(307): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(308): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(336): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(337): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(365): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(366): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(411): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(412): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(667): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(670): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(673): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(676): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(679): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(681): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(840): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(841): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(848): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(864): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(868): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(904): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(945): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(944): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(944): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1075): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1078): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  inventory.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(82): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(104): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(137): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(143): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(163): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(227): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(445): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(488): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(637): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(637): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(640): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(640): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(643): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(643): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(646): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(646): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(649): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(649): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(652): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(652): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(655): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(655): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(658): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(658): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(661): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(661): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(664): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(664): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(667): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(667): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(670): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(670): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(673): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(673): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(676): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(676): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(679): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(679): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(682): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(682): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(684): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(684): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(716): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(716): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(719): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(719): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(722): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(722): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(725): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(725): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(728): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(728): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(731): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(731): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(734): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(734): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(737): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(737): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(740): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(740): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(743): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(743): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(746): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(746): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(749): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(749): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(752): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(752): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(755): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(755): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(758): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(758): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(761): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(761): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(763): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(763): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(798): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(798): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(801): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(801): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(804): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(804): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(807): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(807): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(810): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(810): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(813): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(813): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(816): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(816): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(819): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(819): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(822): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(822): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(825): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(825): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(828): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(828): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(831): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(831): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(834): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(834): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(837): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(837): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(840): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(840): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(843): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(843): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(845): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(845): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(912): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(931): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(992): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1001): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1020): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1028): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1043): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1051): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1067): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   코드를 생성하고 있습니다.
-  4 of 2043 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  2 of 2043 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\Program\Desktop\Stardew Valley\스타듀밸리 맵툴\Release\Stardew Valley.exe
