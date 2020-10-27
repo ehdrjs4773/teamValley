@@ -107,68 +107,8 @@ void shop::update()
 	_inven->update();
 
 	sell();
-	if (sell_ispopup)
-	{
-		if (PtInRect(&sell_plus, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_amount++;
-				if (sell_amount > sell_amount_max)
-				{
-					sell_amount = sell_amount_max;
-				}
-			}
-		}
 
-		if (PtInRect(&sell_minus, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_amount--;
-				if (sell_amount <= 0)
-				{
-					sell_amount = 0;
-				}
-
-			}
-		}
-
-		if (PtInRect(&sell_cancel, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_ispopup = false;
-
-			}
-		}
-
-		if (PtInRect(&sell_ok, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_ispopup = false;
-				sell_isok = true;
-			}
-		}
-
-		if (PtInRect(&sell_max, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_amount = sell_amount_max;
-			}
-		}
-
-		if (PtInRect(&sell_min, _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				sell_amount = 0;
-			}
-		}
-	}
-	else
+	if (!sell_ispopup)
 	{
 		buy();
 
@@ -185,10 +125,12 @@ void shop::update()
 				}
 			}
 			else _isClose = false;
+			if (INPUT->GetKeyDown(VK_ESCAPE))
+			{
+				_isClose = true;
+			}
 		}
 	}
-	
-
 
 }
 
@@ -453,6 +395,15 @@ void shop::render()
 		TextOut(getMemDC(), sell_ok.left, sell_ok.top, sell_display,strlen(sell_display));
 		sprintf(sell_display, "CANCEL");
 		TextOut(getMemDC(), sell_cancel.left, sell_cancel.top, sell_display, strlen(sell_display));
+		sprintf(sell_display, "MAX");
+		TextOut(getMemDC(), sell_max.left, sell_max.top, sell_display, strlen(sell_display));
+		sprintf(sell_display, "MIN");
+		TextOut(getMemDC(), sell_min.left, sell_min.top, sell_display, strlen(sell_display));
+		sprintf(sell_display, "+");
+		TextOut(getMemDC(), sell_plus.left, sell_plus.top, sell_display, strlen(sell_display));
+		sprintf(sell_display, "-");
+		TextOut(getMemDC(), sell_minus.left, sell_minus.top, sell_display, strlen(sell_display));
+
 	}
 }
 
@@ -502,7 +453,73 @@ void shop::sell()
 			sell_index = -1;
 		}
 	}
+	//»óÁ¡ ÆÈ¶§ ÆË¾÷ °ü·Ã ºÎºÐ
+	if (sell_ispopup)
+	{
+		if (PtInRect(&sell_plus, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount++;
+				if (sell_amount > sell_amount_max)
+				{
+					sell_amount = sell_amount_max;
+				}
+			}
+		}
 
+		if (PtInRect(&sell_minus, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount--;
+				if (sell_amount <= 0)
+				{
+					sell_amount = 0;
+				}
+
+			}
+		}
+
+		if (PtInRect(&sell_cancel, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_ispopup = false;
+
+			}
+		}
+		
+		if (INPUT->GetKeyDown(VK_ESCAPE))
+		{
+			sell_ispopup = false;
+		}
+
+		if (PtInRect(&sell_ok, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_ispopup = false;
+				sell_isok = true;
+			}
+		}
+
+		if (PtInRect(&sell_max, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount = sell_amount_max;
+			}
+		}
+
+		if (PtInRect(&sell_min, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount = 0;
+			}
+		}
+	}
 }
 
 void shop::buy()
