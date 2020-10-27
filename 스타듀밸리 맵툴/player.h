@@ -62,6 +62,7 @@ private:
 
 	inventory* _inventory;
 
+	bool isShowSleepingOption =false;
 	bool isSprinkled;
 	bool isHit;
 	int hitCount = 0;
@@ -83,6 +84,8 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
+
+	void setIsShowSleepingOption(bool a) { isShowSleepingOption = a; }
 
 	void skill_slot(HDC hdc) { _skill->render(hdc); }
 	void skillUpdate() { _skill->update(); }
@@ -195,5 +198,6 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
+
 };
 

@@ -5,6 +5,21 @@ HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
 
+	sell_ispopup = false;
+	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
+	sell_ok = RectMakeCenter(WINSIZEX / 2 - 100, WINSIZEY / 2 + 50, 100, 50);
+	sell_cancel = RectMakeCenter(WINSIZEX / 2 + 100, WINSIZEY / 2 + 50, 100, 50);
+
+	sell_plus = RectMakeCenter(WINSIZEX / 2 + 125, WINSIZEY / 2 - 25, 25, 25);
+	sell_minus = RectMakeCenter(WINSIZEX / 2 - 125, WINSIZEY / 2 - 25, 25, 25);
+
+	sell_max = RectMakeCenter(WINSIZEX / 2 + 150, WINSIZEY / 2 - 25, 25, 25);
+	sell_min = RectMakeCenter(WINSIZEX / 2 - 150, WINSIZEY / 2 - 25, 25, 25);
+
+	sell_amount = 0;
+	sell_amount_max = 0;
+	sell_index = -1;
+
 	buyFail = false;
 	buy_count = 0;
 
@@ -54,6 +69,7 @@ HRESULT shop::init(NPC_KIND npckind)
 	//상점 사이즈
 	rc_shop = RectMake(100, 50, 900, 320);
 	rc_exit = RectMake(980, 40, 30, 33);
+
 	//초기 슬롯
 
 	for (int i = 0; i < 4; i++)
@@ -91,25 +107,94 @@ void shop::update()
 	_inven->update();
 
 	sell();
-	buy();
-	shop_scroll();
-
-	if (!is_click)
+	if (sell_ispopup)
 	{
-		if (PtInRect(&rc_exit, _ptMouse))
+		if (PtInRect(&sell_plus, _ptMouse))
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				_isClose = true;
-				is_click = false;
+				sell_amount++;
+				if (sell_amount > sell_amount_max)
+				{
+					sell_amount = sell_amount_max;
+				}
 			}
 		}
-		else _isClose = false;
+
+		if (PtInRect(&sell_minus, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount--;
+				if (sell_amount <= 0)
+				{
+					sell_amount = 0;
+				}
+
+			}
+		}
+
+		if (PtInRect(&sell_cancel, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_ispopup = false;
+
+			}
+		}
+
+		if (PtInRect(&sell_ok, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_ispopup = false;
+				sell_isok = true;
+			}
+		}
+
+		if (PtInRect(&sell_max, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount = sell_amount_max;
+			}
+		}
+
+		if (PtInRect(&sell_min, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				sell_amount = 0;
+			}
+		}
 	}
+	else
+	{
+		buy();
+
+		shop_scroll();
+
+		if (!is_click)
+		{
+			if (PtInRect(&rc_exit, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					_isClose = true;
+					is_click = false;
+				}
+			}
+			else _isClose = false;
+		}
+	}
+	
+
+
 }
 
 void shop::render()
-{//플레이어 인벤토리 출력
+{
+	//플레이어 인벤토리 출력
 	PLAYER->getInventory()->shopInvenRender(getMemDC());
 
 	for (int i = 0; i < _vInven->size(); i++)
@@ -153,6 +238,7 @@ void shop::render()
 	
 	}
 	PLAYER->getInventory()->inven_item_info(getMemDC());
+
 	//상점 창 테두리 출력
 	_shop_image = IMAGEMANAGER->findImage("상점");
 	_shop_image->render(getMemDC(), rc_shop.left, rc_shop.top);
@@ -175,6 +261,7 @@ void shop::render()
 		}
 	}
 	}
+	//돈없을때 흔들리는거
 	else
 	{	
 		int moving=4;
@@ -219,10 +306,9 @@ void shop::render()
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
 
 		if (!_vslot[i].on_cursor)
-		{	
+		{
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
-
 		}
 		else
 		{
@@ -276,7 +362,7 @@ void shop::render()
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
 			case ITEM_TOOL:
-
+				
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "TOOL", sizeof("TOOL"));
 				break;
@@ -349,6 +435,25 @@ void shop::render()
 
 		}
 	}
+
+	if (sell_ispopup)
+	{
+		Rectangle(getMemDC(), sell_popup);
+		Rectangle(getMemDC(), sell_ok);
+		Rectangle(getMemDC(), sell_cancel);
+		Rectangle(getMemDC(), sell_plus);
+		Rectangle(getMemDC(), sell_minus);
+		Rectangle(getMemDC(), sell_max);
+		Rectangle(getMemDC(), sell_min);
+
+		char sell_display[256];
+		sprintf(sell_display, "%d", sell_amount);
+		TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, sell_display, strlen(sell_display));
+		sprintf(sell_display, "OK");
+		TextOut(getMemDC(), sell_ok.left, sell_ok.top, sell_display,strlen(sell_display));
+		sprintf(sell_display, "CANCEL");
+		TextOut(getMemDC(), sell_cancel.left, sell_cancel.top, sell_display, strlen(sell_display));
+	}
 }
 
 void shop::sell()
@@ -359,25 +464,42 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				if (!SOUNDMANAGER->isPlaySound("purchase"))
-				{
-					SOUNDMANAGER->play("purchase", 0.2f);
-				}
-				if ((*_vInven)[i].item_image == NULL) continue;
-				PLAYER->setMoney(PLAYER->getMoney() + _vInven->at(i).sell_price);
-				(*_vInven)[i].item_image = NULL;
-				(*_vInven)[i].item_info = "";
-				(*_vInven)[i].item_kind = ITEM_ENDITEM;
-				(*_vInven)[i].sell_price = NULL;
-				(*_vInven)[i].buy_price = NULL;
-				(*_vInven)[i].amount -= 1;
-				if ((*_vInven)[i].amount <= 0) (*_vInven)[i].amount = 0;
-
-				if (_vItem[i].toolKind == TOOL_KETTLE)
-				{
-					_inven->getKettleBar();
-				}
+				sell_amount = 0;
+				sell_ispopup = true;
+				sell_index = i;
+				sell_amount_max = (*_vInven)[i].amount;
 			}
+		}
+		if (sell_isok == true)
+		{
+			if (!SOUNDMANAGER->isPlaySound("purchase"))
+			{
+				SOUNDMANAGER->play("purchase", 0.2f);
+			}
+			if ((*_vInven)[i].item_image == NULL) continue;
+			if ((*_vInven)[sell_index].amount >= 1)
+			{
+				PLAYER->setMoney(PLAYER->getMoney() + (_vInven->at(sell_index).sell_price * sell_amount));
+				(*_vInven)[sell_index].amount -= sell_amount;
+			}
+			else
+			{
+				PLAYER->setMoney(PLAYER->getMoney() + _vInven->at(sell_index).sell_price);
+				(*_vInven)[sell_index].item_image = NULL;
+				(*_vInven)[sell_index].item_info = "";
+				(*_vInven)[sell_index].item_kind = ITEM_ENDITEM;
+				(*_vInven)[sell_index].sell_price = NULL;
+				(*_vInven)[sell_index].buy_price = NULL;
+				(*_vInven)[sell_index].amount -= 1;
+			}
+			if ((*_vInven)[sell_index].amount <= 0) (*_vInven)[sell_index].amount = 0;
+
+			if (_vItem[sell_index].toolKind == TOOL_KETTLE)
+			{
+				_inven->getKettleBar();
+			}
+			sell_isok = false;
+			sell_index = -1;
 		}
 	}
 

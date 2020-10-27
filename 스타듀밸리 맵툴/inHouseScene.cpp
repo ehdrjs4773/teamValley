@@ -61,16 +61,18 @@ void inHouseScene::render()
 
 	if (PLAYER->getCenterX() >= 855.0f && PLAYER->getCenterX() <= 880.0f && PLAYER->getCenterY() >= 855.0f && PLAYER->getCenterY() <= 880.0f)
 	{
-		if (isShowSleepingOption)
+		if(!PLAYER->getIsShowInventory())
 		{
-			IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
+			PLAYER->setIsShowSleepingOption(true);
 
+			IMAGEMANAGER->render("자는옵션", getMemDC(), 116, WINSIZEY - 374);
+			
 			if (PtInRect(&noBox, _ptMouse))
 			{
 				IMAGEMANAGER->render("자는옵션아니요", getMemDC(), 116, WINSIZEY - 374);
 				RECT temp{ noBox.left,noBox.top,noBox.right,noBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-
+			
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
 					isShowSleepingOption = false;
@@ -81,7 +83,7 @@ void inHouseScene::render()
 				IMAGEMANAGER->render("자는옵션네", getMemDC(), 116, WINSIZEY - 374);
 				RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
 				FrameRect(getMemDC(), temp, RGB(255, 0, 0));
-
+			
 				if (PtInRect(&yesBox, _ptMouse))
 				{
 					if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -109,6 +111,7 @@ void inHouseScene::render()
 	}
 	else
 	{
+		PLAYER->setIsShowSleepingOption(false);
 		checkCount = 0;
 	}
 	//Rectangle(getMemDC(), yesBox);

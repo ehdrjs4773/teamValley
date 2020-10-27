@@ -922,6 +922,7 @@ void inventory::_vItemUpdate()
 	else if (_isInvenPage)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
+		
 		if (_MouseItem.toolKind == TOOL_KETTLE)
 		{
 			_kettleBar = RectMake(_MouseItem.rc.left + 3, _MouseItem.rc.bottom - 7, waterAmount, 4);
