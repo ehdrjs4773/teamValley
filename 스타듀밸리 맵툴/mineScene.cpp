@@ -294,7 +294,7 @@ void mineScene::playerMove()
 			else if (_tile[upIndexY][upIndexX].objFrameX == 0 && _tile[upIndexY][upIndexX].objFrameY == 7)
 			{
 				SWITCHMANAGER->changeScene("인게임화면");
-				SWITCHMANAGER->startFade(288.0f, 64.0f);
+				SWITCHMANAGER->startFade(96.0f, 96.0f);
 			}
 			else
 			{
@@ -759,7 +759,7 @@ void mineScene::useLadder(int i, int j)
 		SWITCHMANAGER->changeScene("광산화면");
 		SWITCHMANAGER->startFade(tempX, tempY);
 	}
-	else if (_tile[i][j].objFrameX==3 && _tile[i][j].objFrameY == 7)
+	else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 7)
 	{
 		SOUNDMANAGER->play("stairDown", 0.2f);
 		SWITCHMANAGER->changeScene("인게임화면");
