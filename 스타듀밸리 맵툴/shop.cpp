@@ -118,7 +118,7 @@ HRESULT shop::init(NPC_KIND npckind)
 	//플레이어 인벤토리 렌더용 렉트 초기화
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		playerItem[i] = RectMake(336 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+		playerItem[i] = RectMake(336 + 46 * (i % 12), 394 + 48 * (i / 12), 35, 35);
 	}
 
 	//상점 탭
@@ -209,7 +209,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 10;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 20;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 30;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -222,8 +235,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 10;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 20;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 30;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
