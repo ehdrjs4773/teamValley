@@ -278,6 +278,46 @@ void inventoryCraft::update()
 			_vCraftItem[9].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 		}
 	}
+
+	//허수아비 1-9번 
+	//for (int i = 1; i < 10; i++)
+	//{
+	//	if (_inven->getvInven()[_isWood].amount >= 2*i+8 && _inven->getvInven()[_isRock].amount >= i+3)
+	//	{
+	//		_vCraftItem[i + 2].item_image = IMAGEMANAGER->findImage("아이템제작");
+	//		_vCraftItem[i + 7].item_image = IMAGEMANAGER->findImage("아이템제작");
+
+	//		if (PtInRect(&_vCraftItem[i + 2].rc, _ptMouse) || PtInRect(&_vCraftItem[i + 7].rc, _ptMouse))
+	//		{
+	//			if (INPUT->GetKeyDown(VK_LBUTTON))
+	//			{
+	//				tagItem scarecrow;
+	//				scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
+	//				scarecrow.item_info = "허수아비";
+	//				scarecrow.indexX = i + 2;
+	//				scarecrow.indexY = 0;
+	//				scarecrow.item_kind = ITEM_SCARECROW;
+	//				scarecrow.isFrame = true;
+	//				scarecrow.amount = 1;
+
+	//				_inven->setMouseItem(scarecrow);
+	//				_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
+	//				_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 5);
+
+	//			}
+	//		}
+	//	}
+	//	else if (_inven->getvInven()[_isWood].amount < 2 * i + 8 || _inven->getvInven()[_isRock].amount < i + 3)
+	//	{
+	//		if (_vCraftItem[i + 2].item_image != IMAGEMANAGER->findImage("아이템제작알파") &&
+	//			_vCraftItem[i + 7].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+	//		{
+	//			_vCraftItem[i + 2].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+	//			_vCraftItem[i + 7].item_image = IMAGEMANAGER->findImage("아이템제작알파");
+	//		}
+	//	}
+	//}
+
 	
 
 	//용광로 만들기 
