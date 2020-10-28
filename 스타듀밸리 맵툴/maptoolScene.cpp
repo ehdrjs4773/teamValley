@@ -767,6 +767,27 @@ void maptoolScene::setMap()
 						_tile[i + tileY][j + tileX].obj = OBJ_DESTRUCTIBLE;
 						_tile[i + tileY][j + tileX].objType = OTY_STONEFENCE;
 					}
+					else if (_currentTile.x == 26 && _currentTile.y == 9)
+					{
+						_tile[i + tileY][j + tileX].objFrameX = _currentTile.x;
+						_tile[i + tileY][j + tileX].objFrameY = _currentTile.y;
+						_tile[i + tileY][j + tileX].obj = OBJ_BUILDING;
+						_tile[i + tileY][j + tileX].objType = OTY_SHOP;
+						
+						for (int y = 0; y < 6; y++)
+						{
+							for (int x = 0; x < 10; x++)
+							{
+								if (i + tileY - y >= 0 && j + tileX + x < 50)
+								{
+									_tile[i + tileY - y][j + tileX + x].objFrameX = _currentTile.x + x;
+									_tile[i + tileY - y][j + tileX + x].objFrameY = _currentTile.y - y;
+									_tile[i + tileY - y][j + tileX + x].obj = OBJ_BUILDING;
+									_tile[i + tileY - y][j + tileX + x].objType = OTY_SHOP;
+								}
+							}
+						}
+					}
 					checkFence(i + tileY, j + tileX);
 				}
 
@@ -1602,8 +1623,8 @@ void maptoolScene::showMapTile()
 		{
 			for (int j = 0; j < DISPLAYX; j++)
 			{
-				if (i + tileY < 50 && j + tileX < 50)
-				{
+				//if (i + tileY < 50 && j + tileX < 50)
+				//{
 					switch (_currentSeason)
 					{
 					case SPRING:
@@ -1621,8 +1642,25 @@ void maptoolScene::showMapTile()
 						{
 							if (_tile[i + tileY][j + tileX].obj == OBJ_BUILDING)
 							{
-								IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-									_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+								if (_tile[i + tileY][j + tileX].objType == OTY_SHOP)
+								{
+									for (int y = 6; y < 10; y++)
+									{
+										if (i - y >= 0)
+										{
+											IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+												_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY - y);
+										}
+										
+									}
+									IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+										_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+								}
+								else
+								{
+									IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+										_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
+								}
 							}
 							else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
 							{
@@ -1848,7 +1886,7 @@ void maptoolScene::showMapTile()
 						}
 						break;
 					}
-				}
+				//}
 			}
 		}
 	}
