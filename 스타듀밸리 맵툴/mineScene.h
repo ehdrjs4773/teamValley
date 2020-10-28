@@ -17,6 +17,8 @@ private:
 	int hpCount[TILEY][TILEX] = {};
 
 	int currentFloor;
+	
+	int loadCount = 0;
 
 	int currentIndexX, currentIndexY;
 	int mouseIndexX, mouseIndexY;

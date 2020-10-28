@@ -3,7 +3,6 @@
 
 mineScene::mineScene()
 {
-	currentFloor = 1;  //최초 로드시 초기화 방지 카운트
 	monsterCount = 0;
 
 	//미리 슬라임, 버그, 서펜트 3종류 프리셋 만들어놓음
@@ -13,6 +12,12 @@ mineScene::mineScene()
 
 HRESULT mineScene::init()
 {
+	if (loadCount == 0)
+	{
+		currentFloor = 1;  //최초 로드시 초기화 방지 카운트
+
+		loadCount++;
+	}
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
@@ -293,8 +298,10 @@ void mineScene::playerMove()
 			}
 			else if (_tile[upIndexY][upIndexX].objFrameX == 0 && _tile[upIndexY][upIndexX].objFrameY == 7)
 			{
+				loadCount = 0;
 				SWITCHMANAGER->changeScene("인게임화면");
 				SWITCHMANAGER->startFade(96.0f, 96.0f);
+
 			}
 			else
 			{
@@ -761,6 +768,7 @@ void mineScene::useLadder(int i, int j)
 	}
 	else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 7)
 	{
+		loadCount = 0;
 		SOUNDMANAGER->play("stairDown", 0.2f);
 		SWITCHMANAGER->changeScene("인게임화면");
 		SWITCHMANAGER->startFade(96.0f, 96.0f);
@@ -776,6 +784,7 @@ void mineScene::useElevator()
 	{
 		if (_tile[mouseIndexY][mouseIndexX].objFrameX == 0 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
 		{
+			loadCount = 0;
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(96.0f, 96.0f);
 		}
