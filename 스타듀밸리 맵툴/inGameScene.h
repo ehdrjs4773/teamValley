@@ -55,6 +55,7 @@ public:
 
 	void playerMove();
 	void moveScene();
+	void shareTileData();
 
 	void checkPlayerTile();
 	void playerInteraction();

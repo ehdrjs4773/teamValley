@@ -1,44 +1,544 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  stdafx.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.h(61): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.h(62): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Stock.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(57): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(61): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(75): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(81): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(85): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(89): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(139): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(244): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(250): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(256): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(262): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(268): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\stock.cpp(279): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  bullet.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(51): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(66): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(83): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(90): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(96): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(150): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(164): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(180): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(195): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(253): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(267): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\bullet.cpp(281): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  camera.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\camera.cpp(71): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cameraManager.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(25): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(56): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(57): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(62): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(66): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\cameramanager.cpp(78): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  effectManager.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(67): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(81): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(103): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(113): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(133): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(144): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(143): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(190): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(191): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(219): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(220): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\effectmanager.cpp(222): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  gameNode.cpp
+  image.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(716): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(717): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(754): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(755): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(802): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(810): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(811): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(830): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(829): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(853): warning C4244: '초기화 중': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(861): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(862): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(885): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\image.cpp(884): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  imageManager.cpp
+  inBuildingScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(21): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(53): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(63): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(74): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inbuildingscene.cpp(87): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   inGameScene.cpp
 c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(105): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(166): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(233): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(235): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(250): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(252): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(266): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(501): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(502): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(533): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(534): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(565): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(566): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(597): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(598): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(705): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(706): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1144): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1147): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1150): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1153): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1156): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1158): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2282): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2306): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2316): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2317): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2324): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2340): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2344): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2366): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2366): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2363): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2636): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2638): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(171): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(238): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(240): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(255): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(257): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(271): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(506): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(507): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(538): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(539): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(570): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(571): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(602): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(603): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(709): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(710): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1140): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1143): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1146): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1152): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(1154): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2311): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2335): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2345): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2346): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2353): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2369): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2373): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2395): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2395): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2392): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2665): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\ingamescene.cpp(2667): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  inHouseScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(101): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(115): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(125): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(136): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inhousescene.cpp(149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iniData.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inidata.cpp(38): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inidata.cpp(52): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inidata.cpp(52): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inidata.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inidata.cpp(102): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  input.cpp
+  inventory.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(82): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(104): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(137): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(143): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(163): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(227): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(445): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(488): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(637): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(637): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(640): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(640): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(643): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(643): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(646): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(646): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(649): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(649): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(652): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(652): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(655): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(655): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(658): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(658): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(661): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(661): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(664): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(664): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(667): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(667): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(670): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(670): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(673): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(673): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(676): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(676): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(679): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(679): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(682): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(682): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(684): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(684): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(716): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(716): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(719): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(719): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(722): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(722): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(725): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(725): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(728): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(728): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(731): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(731): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(734): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(734): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(737): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(737): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(740): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(740): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(743): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(743): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(746): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(746): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(749): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(749): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(752): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(752): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(755): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(755): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(758): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(758): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(761): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(761): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(763): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(763): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(798): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(798): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(801): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(801): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(804): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(804): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(807): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(807): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(810): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(810): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(813): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(813): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(816): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(816): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(819): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(819): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(822): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(822): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(825): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(825): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(828): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(828): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(831): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(831): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(834): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(834): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(837): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(837): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(840): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(840): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(843): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(843): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(845): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(845): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(916): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(936): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(997): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1006): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1025): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1033): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1048): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1056): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventory.cpp(1072): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  inventoryCraft.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(120): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(377): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(407): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(437): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(461): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(484): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(507): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(507): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(508): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(508): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(533): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(533): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(534): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(534): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(557): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(557): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(558): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(558): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(559): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(559): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(598): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(598): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(599): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(599): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(600): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(600): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(638): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(638): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(639): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(639): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(640): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(640): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(679): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(679): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(680): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(680): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(681): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(681): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  itemManager.cpp
+  loading.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(41): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(42): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(77): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(78): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(163): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(163): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(170): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(195): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(209): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(224): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\loading.cpp(224): warning C4244: '인수': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  loadingScene.cpp
+  mainGame.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mainScene.cpp
+  컴파일하고 있습니다...
+  maptoolScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\maptoolscene.cpp(1108): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\maptoolscene.cpp(1109): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\maptoolscene.cpp(1113): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\maptoolscene.cpp(1117): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mineScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(17): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(60): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(61): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(66): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(84): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(134): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(149): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(196): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(198): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(214): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(237): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(239): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(273): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(274): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(307): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(308): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(336): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(337): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(365): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(366): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(411): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(412): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(665): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(668): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(671): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(674): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(677): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(679): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(837): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(838): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(845): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(861): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(865): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(901): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(942): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(941): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(941): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1072): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1075): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  monster.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(8): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(9): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(13): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(15): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(44): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(45): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(201): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(202): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(235): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(236): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(240): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(278): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(288): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(301): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(304): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(307): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(391): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(392): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(393): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(432): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(441): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(495): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.cpp(506): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  npc.cpp
+  player.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(13): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(14): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(16): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(130): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(143): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(144): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(146): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(150): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(151): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(197): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(753): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(756): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(759): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(762): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(770): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(773): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(776): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(779): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(787): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(790): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(793): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(796): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(804): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(807): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(810): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(813): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(821): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(824): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(827): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(830): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(838): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(841): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(844): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(847): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(855): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(858): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(861): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(864): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(874): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(877): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(880): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(883): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(891): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(894): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(897): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(900): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(908): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(911): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(914): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(917): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(983): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(1232): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(1307): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(1303): warning C4101: 'mapStr' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(1376): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\player.cpp(1668): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  playerData.cpp
+  progressBar.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(15): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(16): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(19): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\progressbar.cpp(40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  random.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\random.cpp(46): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  sceneManager.cpp
+  shop.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(38): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(101): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(159): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(253): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(285): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(305): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(321): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(321): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(326): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(326): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(331): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(331): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(336): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(336): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(340): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(340): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(344): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(344): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(347): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(347): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(351): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(351): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(355): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(355): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(359): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(359): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(363): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(363): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(367): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(367): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(371): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(371): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(412): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(541): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(647): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(656): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(680): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shop.cpp(683): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  shopScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(8): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(99): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(100): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(116): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(174): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(180): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(199): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(205): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(225): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(231): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(250): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\shopscene.cpp(256): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  skill.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(62): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(104): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(123): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(127): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(131): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(135): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\skill.cpp(139): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  soundManager.cpp
+  switchSceneManager.cpp
+  timeManager.cpp
+  util.cpp
+  winMain.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  3 of 2045 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  133 of 2048 functions ( 6.5%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    6 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\Program\Desktop\Stardew Valley\스타듀밸리 맵툴\Release\Stardew Valley.exe

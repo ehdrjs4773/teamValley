@@ -17,10 +17,13 @@ HRESULT player::init()
 
 	playerHp = 138;
 	playerEnergy = 138;
-	Damage= 2;
+	totalHpDmg = 0;
+	totalEnergyDmg = 0;
 
-	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, 138);
-	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, 138);
+	Damage = 2;
+
+	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, playerHp);
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, playerEnergy);
 
 	speed = 1.5f;
 
@@ -147,8 +150,6 @@ void  player::update()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	//rc = RectMakeCenter(centerX, centerY, 16, 32);
-
 	_inventory->update();
 
 	if (!isShowInventory)
@@ -158,6 +159,10 @@ void  player::update()
 	_inventory->getInventoryCraft()->materialUpdate();
 
 	closePlayerStorageCover();
+
+	limitEnergy();
+	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88 + totalHpDmg, 20, playerHp);
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88 + totalEnergyDmg, 20, playerEnergy);
 }
 
 void player::render()
@@ -319,7 +324,6 @@ void player::hpBarRender(HDC hdc)
 void player::playerAnimation()
 {
 	count++;
-
 	switch (_pState)
 	{
 	case STAND:
@@ -329,7 +333,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 10 == 0)
+			if (count % aniCountControl == 0)
 			{
 				index += 1;
 				if (index > 5)
@@ -339,7 +343,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 10 == 0)
+			if (count % aniCountControl == 0)
 			{
 				index += 1;
 				if (index > 5)
@@ -349,7 +353,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 10 == 0)
+			if (count % aniCountControl == 0)
 			{
 				index += 1;
 				if (index > 5)
@@ -359,7 +363,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 10 == 0)
+			if (count % aniCountControl == 0)
 			{
 				index += 1;
 				if (index > 5)
@@ -374,7 +378,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -384,7 +388,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -394,7 +398,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 3)
@@ -404,7 +408,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 2)
@@ -420,7 +424,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -430,7 +434,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -440,7 +444,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 3)
@@ -450,7 +454,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -466,7 +470,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -476,7 +480,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -486,7 +490,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -496,7 +500,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -511,7 +515,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -521,7 +525,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -531,7 +535,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -541,7 +545,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 6)
@@ -556,7 +560,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -566,7 +570,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -576,7 +580,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 2)
@@ -586,7 +590,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 11)
@@ -601,7 +605,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -611,7 +615,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -621,7 +625,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 2)
@@ -631,7 +635,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 11)
@@ -646,7 +650,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -656,7 +660,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -666,7 +670,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 2)
@@ -676,7 +680,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -691,7 +695,7 @@ void player::playerAnimation()
 		switch (_pDirection)
 		{
 		case RIGHT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -701,7 +705,7 @@ void player::playerAnimation()
 			}
 			break;
 		case LEFT:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 4)
@@ -711,7 +715,7 @@ void player::playerAnimation()
 			}
 			break;
 		case UP:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -721,7 +725,7 @@ void player::playerAnimation()
 			}
 			break;
 		case DOWN:
-			if (count % 5 == 0)
+			if (count % aniCountControl2 == 0)
 			{
 				index++;
 				if (index > 5)
@@ -736,7 +740,6 @@ void player::playerAnimation()
 		index = 0;
 		break;
 	}
-
 }
 
 void player::playerRender()
@@ -1311,8 +1314,7 @@ void player::savePlayerData()
 void player::savePlayerInven()
 {
 	resetHpBar();
-	resetEnergyBar();
-
+	resetEnergy();
 
 	vector<tagItem> temp;
 	temp = _inventory->getvInven();
@@ -1520,13 +1522,10 @@ void player::saveMap()
 
 	HANDLE file;
 	DWORD write;
-	TCHAR saveMapName[MAX_PATH] = "save/save.map";
+	TCHAR saveMapName[MAX_PATH] = "save/tomato.map";
 	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
-
-
-
 }
 
 void player::saveBox()
@@ -1667,6 +1666,27 @@ void player::weatherRender(HDC hdc)
 	if (currentMap != MAP_MINE)
 	{
 		IMAGEMANAGER->alphaRender("∆‰¿ÃµÂ", hdc, 0, 0, darkAlpha);
+	}
+}
+
+void player::limitEnergy()
+{
+	if (playerEnergy <= 0 && playerEnergy >= -20)
+	{
+		speed = 0.5f;
+		aniCountControl = 15;
+		aniCountControl2 = 10;
+	}
+	else if (playerEnergy < -20)
+	{
+		saveMap();
+		savePlayerData();
+		savePlayerInven();
+		savePlayerStock();
+	}
+	else
+	{
+		speed = 1.5f;
 	}
 }
 
