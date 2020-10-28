@@ -4,7 +4,7 @@
 HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
-	
+	tab_sel = false;
 	// ÆÇ¸Å °ü·Ã Ã¢
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
@@ -128,7 +128,7 @@ HRESULT shop::init(NPC_KIND npckind)
 
 	for (int i = 0; i < 2; i++)
 	{
-		tab[i] = RectMake(120 + (40 * i), 35, 40, 35);
+		tab[i] = RectMake(120 + (65 * i), 25, 65, 45);
 	}
 
 	return S_OK;
@@ -159,12 +159,14 @@ void shop::update()
 						_vItem.clear();
 						_vItem = _vSeed;
 						current_index = 0;
+						tab_sel = false;
 					}
 					else
 					{
 						_vItem.clear();
 						_vItem = _vTool;
 						current_index = 0;
+						tab_sel = true;
 					}
 				}
 			}
@@ -448,13 +450,23 @@ void shop::render()
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
 		}
 	}
-	//ÅÜ Ãâ·Â
+	//ÅÇ Ãâ·Â
 	if (_npcKind == ITEM_NPC)
 	{
-		Rectangle(getMemDC(), tab[0]);
+		if (!tab_sel)
+		{
+			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top+5);
+			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top);
+		}
+		else
+		{
+			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top);
+			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top + 5);
+		}
+		/*Rectangle(getMemDC(), tab[0]);
 		Rectangle(getMemDC(), tab[1]);
 		TextOut(getMemDC(), tab[0].left, tab[0].top, "¾¾¾Ñ", strlen("¾¾¾Ñ"));
-		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));
+		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));*/
 	}
 
 	if (is_click)

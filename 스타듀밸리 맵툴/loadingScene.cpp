@@ -148,6 +148,8 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("돈통", "Images/shop/돈통.bmp", 185, 55, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점테이블", "Images/shop/shop_table.bmp", 75, 46, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("판매UI", "Images/shop/sellBox.bmp", 400, 200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점씨앗탭", "Images/shop/씨앗아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점도구탭", "Images/shop/도구아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
