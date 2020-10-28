@@ -105,7 +105,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("제작창", "Images/inventory/Craftinven.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작", "Images/inventory/CraftObject.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작스몰", "Images/inventory/CraftObjectSmall.bmp", 96,80, 6, 5, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 240, 80, 6, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 240, 40, 6, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작알파", "Images/inventory/CraftObjectAlpha.bmp", 240, 200, 6, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("제작중인 아이템", "Images/inventory/goodsInProgress.bmp", 32, 32, true, RGB(255, 0, 255));
 
@@ -147,6 +147,8 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점인벤토리1", "Images/shop/inventory1.bmp", 608, 188, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돈통", "Images/shop/돈통.bmp", 185, 55, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점테이블", "Images/shop/shop_table.bmp", 75, 46, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("판매UI", "Images/shop/sellBox.bmp", 400, 200, true, RGB(255, 0, 255));
+
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
 	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 34, 138, 1, 6);
