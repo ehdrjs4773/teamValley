@@ -40,22 +40,16 @@ HRESULT shop::init(NPC_KIND npckind)
 	{
 		if (_npcKind == ITEM_NPC)
 		{
-			/*if (_vItem[i].item_kind == ITEM_SKILL)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else if (_vItem[i].item_kind == ITEM_ORE)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else if (_vItem[i].item_kind == ITEM_SPRINKLER1)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else i++;*/
+
 			if (_vItem[i].item_kind == ITEM_SEED)
 			{
-				_vSeed.push_back(_vItem[i]);
+				if (_vItem[i].seedKind == SEED_PINETREE ||
+					_vItem[i].seedKind == SEED_MAPLETREE ||
+					_vItem[i].seedKind == SEED_OAKTREE)
+				{
+					i++;
+				}
+				else _vSeed.push_back(_vItem[i]);
 			}
 			else if (_vItem[i].item_kind == ITEM_TOOL)
 			{
