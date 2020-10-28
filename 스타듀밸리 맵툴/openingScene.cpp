@@ -3,9 +3,11 @@
 #include <Vfw.h>
 #pragma comment(lib, "vfw32.lib")
 
+
 HRESULT openingScene::init()
 {
 	SOUNDMANAGER->stop("¸ÞÀÎÀ½¾Ç");
+	SOUNDMANAGER->play("¿ÀÇÁ´×");
 	if (hWndAVI)
 	{
 		MCIWndClose(hWndAVI);
