@@ -1623,8 +1623,8 @@ void maptoolScene::showMapTile()
 		{
 			for (int j = 0; j < DISPLAYX; j++)
 			{
-				if (i + tileY < 50 && j + tileX < 50)
-				{
+				//if (i + tileY < 50 && j + tileX < 50)
+				//{
 					switch (_currentSeason)
 					{
 					case SPRING:
@@ -1886,7 +1886,7 @@ void maptoolScene::showMapTile()
 						}
 						break;
 					}
-				}
+				//}
 			}
 		}
 	}
