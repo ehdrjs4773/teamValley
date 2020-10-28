@@ -1674,6 +1674,7 @@ void player::limitEnergy()
 	if (playerEnergy <= 0 && playerEnergy >= -20)
 	{
 		speed = 0.5f;
+		totalEnergyDmg = 138;
 		aniCountControl = 15;
 		aniCountControl2 = 10;
 	}
