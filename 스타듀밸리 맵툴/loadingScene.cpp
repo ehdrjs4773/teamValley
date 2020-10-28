@@ -165,6 +165,10 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("바위게", "Images/monster/RockCrab.bmp", 64, 120, 4, 5);
 	IMAGEMANAGER->addFrameImage("도마뱀", "Images/monster/Serpent.bmp", 288, 64, 9, 2);
 	IMAGEMANAGER->addImage("몬스터hp바", "Images/monster/monHpbar.bmp", 16, 4);
+
+	//마법사의 성
+	IMAGEMANAGER->addImage("마법사성내부", "Images/tower/마법사의성.bmp", 600, 300, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("마법사성내부충돌", "Images/tower/마법사의성(충돌).bmp", 600, 300, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()
@@ -206,4 +210,5 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("toolSwap", "Sounds/toolSwap.mp3", false, false);
 	SOUNDMANAGER->addSound("spike", "Sounds/spike.mp3", false, false);
 	SOUNDMANAGER->addSound("hitPlayer", "Sounds/hitPlayer.mp3", false, false);
+	SOUNDMANAGER->addSound("오프닝", "Sounds/차량소리.mp3", false, false);
 }

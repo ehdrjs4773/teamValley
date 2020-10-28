@@ -104,7 +104,8 @@ enum PORTAL
 	PT_CHICKENHOUSE,
 	PT_BARN,
 	PT_SHOP,
-	PT_MINE
+	PT_MINE,
+	PT_TOWER
 };
 
 //타일구조체

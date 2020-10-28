@@ -1,19 +1,21 @@
 #pragma once
 #include "gameNode.h"
 #include "npc.h"
-class shopScene : public gameNode
+class towerScene :
+    public gameNode
 {
-	shop* _itemShop;
+	shop* _skillShop;
 
 	RECT _rc_player;
 	POINT _pos;
 
-	npc* _itemNpc;
-	
+	npc* _skillNpc;
+
 	npc* _npcPtr;
+
 	POINT temp;
 
-	bool _isShopClicked;
+	bool _isSkillClicked;
 
 public:
 	HRESULT init();

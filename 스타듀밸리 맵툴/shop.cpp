@@ -78,8 +78,11 @@ HRESULT shop::init(NPC_KIND npckind)
 
 		}
 	}
-	_vItem.clear();
-	_vItem = _vSeed;
+	if (_npcKind == ITEM_NPC)
+	{
+		_vItem.clear();
+		_vItem = _vSeed;
+	}
 
 	_vInven = _inven->getInven();
 
@@ -143,27 +146,30 @@ void shop::update()
 	_inven->update();
 
 	sell();
-	for (int i = 0; i < 2; i++)
+	if (_npcKind == ITEM_NPC)
 	{
-		if (PtInRect(&tab[i], _ptMouse))
+		for (int i = 0; i < 2; i++)
 		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			if (PtInRect(&tab[i], _ptMouse))
 			{
-				if (i == 0)
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
-					_vItem.clear();
-					_vItem = _vSeed;
-					current_index = 0;
-				}
-				else
-				{
-					_vItem.clear();
-					_vItem = _vTool;
-					current_index = 0;
+					if (i == 0)
+					{
+						_vItem.clear();
+						_vItem = _vSeed;
+						current_index = 0;
+					}
+					else
+					{
+						_vItem.clear();
+						_vItem = _vTool;
+						current_index = 0;
+					}
 				}
 			}
-		}
 
+		}
 	}
 
 	if (!sell_ispopup)
@@ -443,10 +449,14 @@ void shop::render()
 		}
 	}
 	//ÅÜ Ãâ·Â
-	Rectangle(getMemDC(), tab[0]);
-	Rectangle(getMemDC(), tab[1]);
-	TextOut(getMemDC(), tab[0].left, tab[0].top, "¾¾¾Ñ", strlen("¾¾¾Ñ"));
-	TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));
+	if (_npcKind == ITEM_NPC)
+	{
+		Rectangle(getMemDC(), tab[0]);
+		Rectangle(getMemDC(), tab[1]);
+		TextOut(getMemDC(), tab[0].left, tab[0].top, "¾¾¾Ñ", strlen("¾¾¾Ñ"));
+		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));
+	}
+
 	if (is_click)
 	{
 		if (_vItem[click_index].isFrame)

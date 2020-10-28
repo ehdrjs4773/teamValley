@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "shopScene.h"
-POINT temp;
 
 HRESULT shopScene::init()
 {
@@ -10,10 +9,6 @@ HRESULT shopScene::init()
 	_itemShop = new shop;
 	_itemShop->init(ITEM_NPC);
 
-	_skillShop = new shop;
-	_skillShop->init(SKILL_NPC);
-
-	_isSkillClicked = false;
 	_isShopClicked = false;
 
 	_pos.x = 270;
@@ -25,14 +20,7 @@ HRESULT shopScene::init()
 	_itemNpc->init(ITEM_NPC);
 	_itemNpc->setPos(270, 220);
 
-	//_itemNpc->setPos(310, 240);
-	
-	_skillNpc = new npc;
-	_skillNpc->init(SKILL_NPC);
-	_skillNpc->setPos(450, 240);
-
-	_npcPtr[0] = _itemNpc;
-	_npcPtr[1] = _skillNpc;
+	_npcPtr = _itemNpc;
 
 	if (!SOUNDMANAGER->isPlaySound("농장"))
 	{
@@ -56,7 +44,6 @@ void shopScene::update()
 	}
 
 	_itemNpc->update();
-	_skillNpc->update();
 
 	//상점 나가기 포탈
 	if (PLAYER->getCenterY() >= 338)
@@ -75,12 +62,6 @@ void shopScene::update()
 		_isShopClicked = !_itemShop->shopClose();
 		PLAYER->getInventory()->isShopOpen(_isShopClicked);
 	}
-	else if (_isSkillClicked)
-	{
-		_skillShop->update();
-		_isSkillClicked = !_skillShop->shopClose();
-		PLAYER->getInventory()->isShopOpen(_isSkillClicked);
-	}
 	else
 	{
 		PLAYER->update();
@@ -92,7 +73,6 @@ void shopScene::update()
 
 		_itemNpc->update();
 
-		_skillNpc->update();
 
 		_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
 
@@ -106,13 +86,6 @@ void shopScene::update()
 				_isShopClicked = true;
 			}
 		}
-		if (PtInRect(&_skillNpc->getRC(), temp))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				_isSkillClicked = true;
-			}
-		}
 		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	}
 }
@@ -121,29 +94,23 @@ void shopScene::render()
 {
 	IMAGEMANAGER->render("상점실내", CAMERAMANAGER->getMemDC());
 	bool isFront = true;
-	
-	for (int i = 0; i < 2; i++)
+
+	if (_npcPtr->getPos().x <= PLAYER->getCenterX() + 8 && _npcPtr->getPos().x + 16 >= PLAYER->getCenterX() - 8)
 	{
-		if (_npcPtr[i]->getPos().x <= PLAYER->getCenterX() + 8 && _npcPtr[i]->getPos().x + 16 >= PLAYER->getCenterX() - 8)
+		if (_npcPtr->getPos().y <= PLAYER->getCenterY() - 16)
 		{
-			if (_npcPtr[i]->getPos().y <= PLAYER->getCenterY() - 16)
-			{
-				isFront = true;
-			}
-			else
-			{
-				isFront = false;
-			}
+			isFront = true;
+		}
+		else
+		{
+			isFront = false;
 		}
 	}
 
 	if (isFront == false) PLAYER->render();
 	
-	for (int i = 0; i < 2; i++)
-	{
-		_npcPtr[i]->render();
-	}
-	
+	_npcPtr->render();
+
 	if (isFront == true) PLAYER->render();
 
 	if (PLAYER->getCenterY() + 32 >= 238 && PLAYER->getCenterY() <= 270)
@@ -156,10 +123,6 @@ void shopScene::render()
 	if (_isShopClicked)
 	{
 		_itemShop->render();
-	}
-	else if (_isSkillClicked)
-	{
-		_skillShop->render();
 	}
 	else
 	{
@@ -177,7 +140,7 @@ void shopScene::playerMove()
 				bool iscoli = false;
 				for (int i = 0; i < 2; i++)
 				{
-					if (IntersectRect(&temp, &_npcPtr[i]->getRC(), &RectMake(PLAYER->getCenterX()-8, PLAYER->getCenterY(), 16, 1)))
+					if (IntersectRect(&temp, &_npcPtr->getRC(), &RectMake(PLAYER->getCenterX()-8, PLAYER->getCenterY(), 16, 1)))
 					{
 						iscoli = true;
 					}
@@ -202,7 +165,7 @@ void shopScene::playerMove()
 				bool iscoli = false;
 				for (int i = 0; i < 2; i++)
 				{
-					if (IntersectRect(&temp, &_npcPtr[i]->getRC(), &RectMake(PLAYER->getCenterX() - 8, PLAYER->getCenterY() + 16, 16, 1)))
+					if (IntersectRect(&temp, &_npcPtr->getRC(), &RectMake(PLAYER->getCenterX() - 8, PLAYER->getCenterY() + 16, 16, 1)))
 					{
 						iscoli = true;
 					}
@@ -228,7 +191,7 @@ void shopScene::playerMove()
 				bool iscoli = false;
 				for (int i = 0; i < 2; i++)
 				{
-					if (IntersectRect(&temp, &_npcPtr[i]->getRC(), &RectMake(PLAYER->getCenterX() - 8, PLAYER->getCenterY(), 1, 16)))
+					if (IntersectRect(&temp, &_npcPtr->getRC(), &RectMake(PLAYER->getCenterX() - 8, PLAYER->getCenterY(), 1, 16)))
 					{
 						iscoli = true;
 					}
@@ -253,7 +216,7 @@ void shopScene::playerMove()
 				bool iscoli = false;
 				for (int i = 0; i < 2; i++)
 				{
-					if (IntersectRect(&temp, &_npcPtr[i]->getRC(), &RectMake(PLAYER->getCenterX() + 8, PLAYER->getCenterY(), 1, 16)))
+					if (IntersectRect(&temp, &_npcPtr->getRC(), &RectMake(PLAYER->getCenterX() + 8, PLAYER->getCenterY(), 1, 16)))
 					{
 						iscoli = true;
 					}

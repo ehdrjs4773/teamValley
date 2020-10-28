@@ -103,6 +103,9 @@
     <Filter Include="메인 씬">
       <UniqueIdentifier>{87ef43df-c57a-4e43-a3a2-0adb83382829}</UniqueIdentifier>
     </Filter>
+    <Filter Include="마법사의성 씬">
+      <UniqueIdentifier>{40dd6457-4eab-40ed-93ef-46a1e5f6d70c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="openingScene.cpp">
       <Filter>메인 씬</Filter>
+    </ClCompile>
+    <ClCompile Include="towerScene.cpp">
+      <Filter>마법사의성 씬</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="openingScene.h">
       <Filter>메인 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="towerScene.h">
+      <Filter>마법사의성 씬</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
