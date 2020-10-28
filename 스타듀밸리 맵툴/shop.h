@@ -37,6 +37,7 @@ private:
 	RECT rc_shop;
 	image *_shop_image;
 
+	//판매창 관련 부분
 	bool sell_ispopup;
 	bool sell_isok;
 	RECT sell_popup;
@@ -52,6 +53,12 @@ private:
 	int sell_amount_max;
 	int sell_index;
 	int sell_item_frameX, sell_item_frameY;
+	//
+	
+	//상점 텝 부분
+	RECT tab[2];
+	vector<tagItem> _vSeed;
+	vector<tagItem> _vTool;
 
 	HBRUSH brush;
 	HBRUSH oBrush;
@@ -63,6 +70,7 @@ private:
 	vector<tagItem> _vItem;
 	typedef vector<tagItem>::iterator vi_ITEM;
 	vi_ITEM _viItem;
+
 
 	vector<tagItem>* _vInven;
 
