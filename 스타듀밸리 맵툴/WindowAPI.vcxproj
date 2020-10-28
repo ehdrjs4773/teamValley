@@ -193,6 +193,7 @@
     <ClInclude Include="switchSceneManager.h" />
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
+    <ClInclude Include="towerScene.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +241,7 @@
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="switchSceneManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
+    <ClCompile Include="towerScene.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
