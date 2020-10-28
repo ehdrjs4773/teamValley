@@ -1651,7 +1651,6 @@ void maptoolScene::showMapTile()
 											IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
 												_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY - y);
 										}
-										
 									}
 									IMAGEMANAGER->frameRender("건물", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 										_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
