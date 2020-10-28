@@ -35,7 +35,7 @@ void inHouseScene::update()
 		{
 			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(416.0f, 912.0f); // 플레이어가 인게임에서 호출될 장소 
+			SWITCHMANAGER->startFade(368.0f, 560.0f); // 플레이어가 인게임에서 호출될 장소 
 		}
 	}
 

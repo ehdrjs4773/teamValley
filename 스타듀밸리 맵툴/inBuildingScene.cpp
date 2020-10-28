@@ -65,7 +65,7 @@ void inBuildingScene::playerMove()
 			if (!SWITCHMANAGER->getFade())
 			{
 				SWITCHMANAGER->changeScene("인게임화면");
-				SWITCHMANAGER->startFade(592.0f, 1120.0f);
+				SWITCHMANAGER->startFade(576.0f, 448.0f);
 			}
 		}
 	}
