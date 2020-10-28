@@ -31,11 +31,13 @@ HRESULT inGameScene::init()
 		checkPlayerTile();
 		loadCount = 1;
 
-		_tile[56][26].portal = PT_HOUSE;
-		_tile[69][37].portal = PT_BARN;
+		_tile[31][23].portal = PT_HOUSE;
+		_tile[29][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
-		_tile[20][50].portal = PT_SHOP;
+		_tile[12][41].portal = PT_SHOP;
+		_tile[12][40].portal = PT_SHOP;
 		_tile[3][18].portal = PT_MINE;
+		_tile[3][6].portal = PT_MINE;
 
 		isSprinkled = false;
 
@@ -153,9 +155,9 @@ void inGameScene::update()
 		shareTileData();
 	}
 
-	cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "   "
-		<< boolalpha << _tile[MouseIndexY][MouseIndexX].isFullyGrown << "   "
-		<< _tile[MouseIndexY][MouseIndexX].objFrameX << endl;
+	//cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "   "
+	//	<< boolalpha << _tile[MouseIndexY][MouseIndexX].isFullyGrown << "   "
+	//	<< _tile[MouseIndexY][MouseIndexX].objFrameX << endl;
 }
 
 void inGameScene::render()
@@ -842,7 +844,7 @@ void inGameScene::playerInteraction()
 			}
 		}
 	
-		cout << MouseIndexX << "\t" << MouseIndexY << "\t" << _ptMouse.x << "\t" << _ptMouse.y << endl;
+		cout << currentIndexX << "\t" << currentIndexY << "\t" <<endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -1636,7 +1638,7 @@ void inGameScene::sprinklerWork()
 {
 	if (!isSprinkled)
 	{
-		cout << "work" << endl;
+		//cout << "work" << endl;
 		for (int i = 0; i < TILEY; i++)
 		{
 			for (int j = 0; j < TILEX; j++)

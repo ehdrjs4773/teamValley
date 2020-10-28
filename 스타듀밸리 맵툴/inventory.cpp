@@ -114,7 +114,7 @@ void inventory::update()
 	{
 		for (int i = 0; i < _vItem.size(); i++) // E´©¸£¸é ³ª¿À´Â Á¦ÀÛÃ¢
 		{
-			_vItem[i].rc = RectMake(270 + 55 * (i % 12), 405 + 65 * (i / 12), 40, 40);
+			_vItem[i].rc = RectMake(267 + 55 * (i % 12), 405 + 57 * (i / 12), 40, 40);
 			if (_vItem[i].toolKind == TOOL_KETTLE)
 			{
 				_kettleBar = RectMake(_vItem[i].rc.left + 3, _vItem[i].rc.bottom - 7, waterAmount, 4);
@@ -184,9 +184,13 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 							{
 								left = 0;
 							}
-							else
+							else if (_vItem[i].amount >= 10 && _vItem[i].amount < 100)
 							{
 								left = 10;
+							}
+							else if (_vItem[i].amount >= 100)
+							{
+								left = 20;
 							}
 							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 						}
@@ -204,9 +208,13 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 						{
 							left = 0;
 						}
-						else
+						else if (_vItem[i].amount >= 10 && _vItem[i].amount < 100)
 						{
 							left = 10;
+						}
+						else if (_vItem[i].amount >= 100)
+						{
+							left = 20;
 						}
 						textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 					}
@@ -245,13 +253,17 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 							int left = 0;
 							if (_vItem[i].amount < 10)
 							{
-								left = 5;
+								left = 0;
 							}
-							else
+							else if(_vItem[i].amount >= 10 && _vItem[i].amount <100)
 							{
-								left = 15;
+								left = 10;
 							}
-							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 27, str, RGB(0, 0, 0));
+							else if (_vItem[i].amount >= 100)
+							{
+								left = 20;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 						}
 					}
 				}
@@ -267,13 +279,17 @@ void inventory::render(HDC hdc)// ´Ü¼øÇÑ ÇÃ·¹ÀÌ¾î¸¸À» À§ÇÑ ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸® Á¤º
 							int left = 0;
 							if (_vItem[i].amount < 10)
 							{
-								left = 5;
+								left = 0;
 							}
-							else
+							else if (_vItem[i].amount >= 10 && _vItem[i].amount < 100)
 							{
-								left = 15;
+								left = 10;
 							}
-							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 27, str, RGB(0, 0, 0));
+							else if (_vItem[i].amount >= 100)
+							{
+								left = 20;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 						}
 					}
 				}

@@ -4,7 +4,8 @@
 HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
-
+	
+	// 판매 관련 창
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
 	sell_ok = RectMakeCenter(WINSIZEX / 2 - 100, WINSIZEY / 2 + 50, 100, 50);
@@ -22,6 +23,7 @@ HRESULT shop::init(NPC_KIND npckind)
 	sell_item_frameX = sell_item_frameY = 0;
 	sell_item_img = nullptr;
 
+	//구매
 	buyFail = false;
 	buy_count = 0;
 
@@ -34,12 +36,11 @@ HRESULT shop::init(NPC_KIND npckind)
 	_isClose = false;
 
 	_vItem = ITEMMANAGER->getItem();
-
 	for (int i = 0; i < _vItem.size(); i)
 	{
 		if (_npcKind == ITEM_NPC)
 		{
-			if (_vItem[i].item_kind == ITEM_SKILL)
+			/*if (_vItem[i].item_kind == ITEM_SKILL)
 			{
 				_vItem.erase(_vItem.begin() + i);
 			}
@@ -51,7 +52,16 @@ HRESULT shop::init(NPC_KIND npckind)
 			{
 				_vItem.erase(_vItem.begin() + i);
 			}
-			else i++;
+			else i++;*/
+			if (_vItem[i].item_kind == ITEM_SEED)
+			{
+				_vSeed.push_back(_vItem[i]);
+			}
+			else if (_vItem[i].item_kind == ITEM_TOOL)
+			{
+				_vTool.push_back(_vItem[i]);
+			}
+			i++;
 		}
 		else
 		{
@@ -62,6 +72,8 @@ HRESULT shop::init(NPC_KIND npckind)
 			else i++;
 		}
 	}
+	_vItem.clear();
+	_vItem = _vSeed;
 
 	_vInven = _inven->getInven();
 
@@ -76,15 +88,15 @@ HRESULT shop::init(NPC_KIND npckind)
 	scrollbar_img = IMAGEMANAGER->addImage("스크롤바","Images/shop/scrollbar.bmp", (float)up_BT.left, (float)up_BT.bottom + 10, 19, 380);
 	
 	//상점 사이즈
-	rc_shop = RectMake(100, 50, 900, 320);
-	rc_exit = RectMake(980, 40, 30, 33);
+	rc_shop = RectMake(100, 70, 900, 320);
+	rc_exit = RectMake(980, 60, 30, 33);
 
 	//초기 슬롯
 
 	for (int i = 0; i < 4; i++)
 	{
 		SLOT slot;
-		slot.rc = RectMake(rc_shop.left+15, 60 + (70*i), 875, 70);
+		slot.rc = RectMake(rc_shop.left+15, 80 + (70*i), 875, 70);
 		slot.slot_image = IMAGEMANAGER->findImage("상점슬롯");
 		slot.on_cursor = false;
 		_vslot.push_back(slot);
@@ -100,7 +112,14 @@ HRESULT shop::init(NPC_KIND npckind)
 	//플레이어 인벤토리 렌더용 렉트 초기화
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		playerItem[i] = RectMake(336 + 46 * (i % 12), 394 + 50 * (i / 12), 40, 40);
+		playerItem[i] = RectMake(336 + 46 * (i % 12), 394 + 48 * (i / 12), 35, 35);
+	}
+
+	//상점 탭
+
+	for (int i = 0; i < 2; i++)
+	{
+		tab[i] = RectMake(120 + (40 * i), 35, 40, 35);
 	}
 
 	return S_OK;
@@ -118,6 +137,28 @@ void shop::update()
 	_inven->update();
 
 	sell();
+	for (int i = 0; i < 2; i++)
+	{
+		if (PtInRect(&tab[i], _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				if (i == 0)
+				{
+					_vItem.clear();
+					_vItem = _vSeed;
+					current_index = 0;
+				}
+				else
+				{
+					_vItem.clear();
+					_vItem = _vTool;
+					current_index = 0;
+				}
+			}
+		}
+
+	}
 
 	if (!sell_ispopup)
 	{
@@ -162,7 +203,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 10;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 20;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 30;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -175,8 +229,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 10;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 20;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 30;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 25, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -198,17 +264,17 @@ void shop::render()
 	image* money_pocket = IMAGEMANAGER->findImage("돈통");
 	if (buyFail == false)
 	{
-	money_pocket->render(getMemDC(), 100, 348);
+	money_pocket->render(getMemDC(), 100, 368);
 	int count = 0;
 	int print_money = 0;
-	if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 365, 0, print_money);
+	if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 385, 0, print_money);
 	else
 	{
 		money = PLAYER->getMoney();
 		while (money)
 		{
 			print_money = money % 10;
-			IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 365, print_money, 0);
+			IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 385, print_money, 0);
 			money = money / 10;
 			count++;
 		}
@@ -223,15 +289,15 @@ void shop::render()
 		int print_money = 0;
 		while (moving)
 		{
-			money_pocket->render(getMemDC(), 100+shake, 348);
-			if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 365, 0, print_money);
+			money_pocket->render(getMemDC(), 100+shake, 368);
+			if (PLAYER->getMoney() <= 0) IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250, 385, 0, print_money);
 			else
 			{
 				money = PLAYER->getMoney();
 				while (money)
 				{
 					print_money = money % 10;
-					IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 365, print_money, 0);
+					IMAGEMANAGER->findImage("돈숫자")->frameRender(getMemDC(), 250 - (17 * count), 385, print_money, 0);
 					money = money / 10;
 					count++;
 				}
@@ -361,7 +427,11 @@ void shop::render()
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
 		}
 	}
-
+	//텝 출력
+	Rectangle(getMemDC(), tab[0]);
+	Rectangle(getMemDC(), tab[1]);
+	TextOut(getMemDC(), tab[0].left, tab[0].top, "씨앗", strlen("씨앗"));
+	TextOut(getMemDC(), tab[1].left, tab[1].top, "툴", strlen("툴"));
 	if (is_click)
 	{
 		if (_vItem[click_index].isFrame)

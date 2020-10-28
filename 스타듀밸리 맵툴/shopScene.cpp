@@ -65,7 +65,7 @@ void shopScene::update()
 		{
 			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(800.0f, 340.0f);
+			SWITCHMANAGER->startFade(384.0f, 192.0f);
 		}
 	}
 

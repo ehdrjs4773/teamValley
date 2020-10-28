@@ -205,4 +205,5 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("toolSwap", "Sounds/toolSwap.mp3", false, false);
 	SOUNDMANAGER->addSound("spike", "Sounds/spike.mp3", false, false);
 	SOUNDMANAGER->addSound("hitPlayer", "Sounds/hitPlayer.mp3", false, false);
+	SOUNDMANAGER->addSound("오프닝", "Sounds/차량소리.mp3", false, false);
 }
