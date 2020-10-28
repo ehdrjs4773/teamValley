@@ -31,7 +31,7 @@ void mainScene::update()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				PLAYER->init();
-				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->changeScene("오프닝화면");
 				SWITCHMANAGER->startFade(820.0f, 865.0f);
 			}
 		}
