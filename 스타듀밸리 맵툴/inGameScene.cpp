@@ -186,7 +186,7 @@ void inGameScene::load()
 
 	HANDLE file;
 	DWORD read;
-	sprintf(saveName, "save/test.map");
+	sprintf(saveName, "save/tomato.map");
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
@@ -279,8 +279,25 @@ void inGameScene::renderObjects(int i, int j)
 		{
 			if (_tile[i][j].obj == OBJ_BUILDING)
 			{
-				IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				if (_tile[i][j].objType == OTY_SHOP)
+				{
+					for (int y = 6; y < 10; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else
+				{
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
 			}
 			else if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
 				|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
@@ -1223,6 +1240,8 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
 			}
+			PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+				PLAYER->getCurrentInven()->amount - 1);
 		}
 	}
 	checkFence();
@@ -1619,6 +1638,9 @@ void inGameScene::plantSeed()
 					_tile[MouseIndexY][MouseIndexX].tree.treeType = TREE_OAK;
 				}
 
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
 				_tile[MouseIndexY][MouseIndexX].grownLevel = 0;
 				_tile[MouseIndexY][MouseIndexX].isFullyGrown = false;
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
@@ -1774,6 +1796,9 @@ void inGameScene::setSprinkler()
 			//스프링클러
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_SPRINKLER)
 			{
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_DESTRUCTIBLE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_SPRINKLER;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = PLAYER->getCurrentInven()->indexX;
