@@ -1055,22 +1055,6 @@ bool player::checkFullyGrown(tagTile tile)
 	{
 	case SEED_NONE:
 		break;
-	case SEED_PARSNIP:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_CAULIFLOWER:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_GARLIC:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_RHUBARB:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
 	case SEED_TOMATO:
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
@@ -1087,30 +1071,6 @@ bool player::checkFullyGrown(tagTile tile)
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
 		break;
-	case SEED_EGGPLANT:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_PUMPKIN:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_YAM:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_BEET:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_ANCIENTFRUIT:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_TULIP:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
 	case SEED_POPPY:
 		if (tile.grownLevel == 5) { return true; }
 		else { return false; }
@@ -1119,32 +1079,12 @@ bool player::checkFullyGrown(tagTile tile)
 		if (tile.grownLevel == 5) { return true; }
 		else { return false; }
 		break;
-	case SEED_SWEETGEMBERRY:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_STRAWBERRY:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
 	case SEED_GRAPE:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_COFFEEBEAN:
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
 		break;
 	case SEED_GREENBEAN:
 		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_POTATO:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_KALE:
-		if (tile.grownLevel == 5) { return true; }
 		else { return false; }
 		break;
 	case SEED_MELON:
@@ -1167,39 +1107,11 @@ bool player::checkFullyGrown(tagTile tile)
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
 		break;
-	case SEED_ARTICHOKE:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_BOKCHOY:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_CRANBERRY:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_BLUEJAZZ:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
 	case SEED_SUMMERSPANGLE:
 		if (tile.grownLevel == 5) { return true; }
 		else { return false; }
 		break;
-	case SEED_FAIRYROSE:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
 	case SEED_HOPS:
-		if (tile.grownLevel == 6) { return true; }
-		else { return false; }
-		break;
-	case SEED_AMARANTH:
-		if (tile.grownLevel == 5) { return true; }
-		else { return false; }
-		break;
-	case SEED_CATUS:
 		if (tile.grownLevel == 6) { return true; }
 		else { return false; }
 		break;
@@ -1399,30 +1311,12 @@ void player::saveMap()
 			{
 				if ((_tile[i][j].seedType == SEED_TOMATO
 					|| _tile[i][j].seedType == SEED_HOTPEPPER
-					|| _tile[i][j].seedType == SEED_STARFRUIT
-					|| _tile[i][j].seedType == SEED_EGGPLANT
-					|| _tile[i][j].seedType == SEED_ANCIENTFRUIT
-					|| _tile[i][j].seedType == SEED_SWEETGEMBERRY
-					|| _tile[i][j].seedType == SEED_STRAWBERRY
 					|| _tile[i][j].seedType == SEED_GRAPE
-					|| _tile[i][j].seedType == SEED_COFFEEBEAN)
-					&& _tile[i][j].objFrameX == 7)
-				{
-					if (_tile[i][j].isWet)
-					{
-						_tile[i][j].grownLevel += 1;
-						_tile[i][j].objFrameX -= 1;
-						_tile[i - 1][j].ovlFrameX -= 1;
-					}
-				}
-				else if ((_tile[i][j].seedType == SEED_GREENBEAN
+					||_tile[i][j].seedType == SEED_GREENBEAN
 					|| _tile[i][j].seedType == SEED_BLUEBERRY
 					|| _tile[i][j].seedType == SEED_CORN
-					|| _tile[i][j].seedType == SEED_ARTICHOKE
-					|| _tile[i][j].seedType == SEED_CRANBERRY
-					|| _tile[i][j].seedType == SEED_HOPS
-					|| _tile[i][j].seedType == SEED_CATUS)
-					&& _tile[i][j].objFrameX == 15)
+					|| _tile[i][j].seedType == SEED_HOPS)
+					&& _tile[i][j].objFrameX == 7)
 				{
 					if (_tile[i][j].isWet)
 					{
@@ -1684,10 +1578,11 @@ void player::limitEnergy()
 		savePlayerData();
 		savePlayerInven();
 		savePlayerStock();
+		SWITCHMANAGER->changeScene("집안화면");
+		SWITCHMANAGER->startFade(762.0f, 887.0f);
 	}
 	else
 	{
 		speed = 1.5f;
 	}
 }
-
