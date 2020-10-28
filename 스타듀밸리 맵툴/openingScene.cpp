@@ -5,6 +5,7 @@
 
 HRESULT openingScene::init()
 {
+	SOUNDMANAGER->stop("∏ﬁ¿Œ¿Ωæ«");
 	if (hWndAVI)
 	{
 		MCIWndClose(hWndAVI);
@@ -26,6 +27,7 @@ HRESULT openingScene::init()
 		GetClientRect(_hWnd, &rt);
 		SetWindowPos(hWndAVI, NULL, 0, 0, rt.right, rt.bottom, SWP_NOZORDER| SWP_NOMOVE);
 		MCIWndPlay(hWndAVI);
+		
 	}
 
 
