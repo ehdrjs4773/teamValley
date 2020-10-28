@@ -41,8 +41,6 @@ void inHouseScene::update()
 
 	PLAYER->update();
 
-
-
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 	playerMove();
 	PLAYER->playerAnimation();
@@ -164,12 +162,7 @@ void inHouseScene::playerMove()
 		{
 			PLAYER->setState(STAND);
 		}
-
-
-
 	}
-
-
 }
 
 void inHouseScene::savePlayer()
@@ -222,6 +215,4 @@ void inHouseScene::blanket()
 		PLAYER->setIsShowSleepingOption(false);
 		checkCount = 0;
 	}
-
-
 }
