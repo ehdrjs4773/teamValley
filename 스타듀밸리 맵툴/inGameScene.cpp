@@ -34,8 +34,9 @@ HRESULT inGameScene::init()
 		_tile[31][23].portal = PT_HOUSE;
 		_tile[29][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
+		_tile[12][41].portal = PT_SHOP;
 		_tile[12][40].portal = PT_SHOP;
-		_tile[14][11].portal = PT_SHOP;
+		_tile[3][18].portal = PT_MINE;
 		_tile[3][6].portal = PT_MINE;
 
 		isSprinkled = false;
