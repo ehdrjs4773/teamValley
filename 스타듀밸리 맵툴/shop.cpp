@@ -394,29 +394,30 @@ void shop::render()
 
 	if (sell_ispopup)
 	{
-		Rectangle(getMemDC(), sell_popup);
-		Rectangle(getMemDC(), sell_ok);
-		Rectangle(getMemDC(), sell_cancel);
-		Rectangle(getMemDC(), sell_plus);
-		Rectangle(getMemDC(), sell_minus);
-		Rectangle(getMemDC(), sell_max);
-		Rectangle(getMemDC(), sell_min);
+		IMAGEMANAGER->render("ÆÇ¸ÅUI", getMemDC(), sell_popup.left, sell_popup.top);
+		FrameRect(getMemDC(), sell_popup, RGB(0,0,0));
+		FrameRect(getMemDC(), sell_ok, RGB(0, 0, 0));
+		FrameRect(getMemDC(), sell_cancel, RGB(0, 0, 0));
+		FrameRect(getMemDC(), sell_plus, RGB(0, 0, 0));
+		FrameRect(getMemDC(), sell_minus, RGB(0, 0, 0));
+		FrameRect(getMemDC(), sell_max, RGB(0, 0, 0));
+		FrameRect(getMemDC(), sell_min, RGB(0, 0, 0));
 
 		char sell_display[256];
 		sprintf(sell_display, "%d", sell_amount);
 		TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, sell_display, strlen(sell_display));
-		sprintf(sell_display, "OK");
-		TextOut(getMemDC(), sell_ok.left, sell_ok.top, sell_display,strlen(sell_display));
-		sprintf(sell_display, "CANCEL");
-		TextOut(getMemDC(), sell_cancel.left, sell_cancel.top, sell_display, strlen(sell_display));
-		sprintf(sell_display, "MAX");
-		TextOut(getMemDC(), sell_max.left, sell_max.top, sell_display, strlen(sell_display));
-		sprintf(sell_display, "MIN");
-		TextOut(getMemDC(), sell_min.left, sell_min.top, sell_display, strlen(sell_display));
-		sprintf(sell_display, "+");
-		TextOut(getMemDC(), sell_plus.left, sell_plus.top, sell_display, strlen(sell_display));
-		sprintf(sell_display, "-");
-		TextOut(getMemDC(), sell_minus.left, sell_minus.top, sell_display, strlen(sell_display));
+		//sprintf(sell_display, "OK");
+		//TextOut(getMemDC(), sell_ok.left, sell_ok.top, sell_display,strlen(sell_display));
+		//sprintf(sell_display, "CANCEL");
+		//TextOut(getMemDC(), sell_cancel.left, sell_cancel.top, sell_display, strlen(sell_display));
+		//sprintf(sell_display, "MAX");
+		//TextOut(getMemDC(), sell_max.left, sell_max.top, sell_display, strlen(sell_display));
+		//sprintf(sell_display, "MIN");
+		//TextOut(getMemDC(), sell_min.left, sell_min.top, sell_display, strlen(sell_display));
+		//sprintf(sell_display, "+");
+		//TextOut(getMemDC(), sell_plus.left, sell_plus.top, sell_display, strlen(sell_display));
+		//sprintf(sell_display, "-");
+		//TextOut(getMemDC(), sell_minus.left, sell_minus.top, sell_display, strlen(sell_display));
 
 	}
 }

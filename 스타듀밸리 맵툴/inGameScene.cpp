@@ -186,7 +186,7 @@ void inGameScene::load()
 
 	HANDLE file;
 	DWORD read;
-	sprintf(saveName, "save/save.map");
+	sprintf(saveName, "save/test.map");
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
@@ -489,7 +489,10 @@ void inGameScene::playerMove()
 					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_SEED
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GREENBEAN
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_HOPS
-						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE))
+						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE)
+					|| (_tile[rightIndexY][rightIndexX].objType == OTY_TREE
+						&& !_tile[rightIndexY][rightIndexX].isFullyGrown
+						&& _tile[rightIndexY][rightIndexX].grownLevel == 0))
 				{
 					PLAYER->setDirection(RIGHT);
 
@@ -518,7 +521,10 @@ void inGameScene::playerMove()
 					|| (_tile[leftIndexY][leftIndexX].obj == OBJ_SEED
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GREENBEAN
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_HOPS
-						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE))
+						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE)
+					|| (_tile[leftIndexY][leftIndexX].objType == OTY_TREE
+						&& !_tile[leftIndexY][leftIndexX].isFullyGrown
+						&& _tile[leftIndexY][leftIndexX].grownLevel == 0))
 				{
 					PLAYER->setDirection(LEFT);
 
@@ -547,7 +553,10 @@ void inGameScene::playerMove()
 					|| (_tile[upIndexY][upIndexX].obj == OBJ_SEED
 						&& _tile[upIndexY][upIndexX].seedType != SEED_GREENBEAN
 						&& _tile[upIndexY][upIndexX].seedType != SEED_HOPS
-						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE))
+						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE) 
+					|| (_tile[upIndexY][upIndexX].objType == OTY_TREE
+							&& !_tile[upIndexY][upIndexX].isFullyGrown
+						&& _tile[upIndexY][upIndexX].grownLevel == 0))
 				{
 					PLAYER->setDirection(UP);
 
@@ -576,7 +585,10 @@ void inGameScene::playerMove()
 					|| (_tile[downIndexY][downIndexX].obj == OBJ_SEED
 						&& _tile[downIndexY][downIndexX].seedType != SEED_GREENBEAN
 						&& _tile[downIndexY][downIndexX].seedType != SEED_HOPS
-						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE))
+						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE)
+					|| (_tile[downIndexY][downIndexX].objType == OTY_TREE 
+						&& !_tile[downIndexY][downIndexX].isFullyGrown
+						&& _tile[downIndexY][downIndexX].grownLevel == 0))
 				{
 					PLAYER->setDirection(DOWN);
 
