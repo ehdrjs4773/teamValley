@@ -215,6 +215,9 @@
     <ClCompile Include="skill.cpp">
       <Filter>플레이어\스킬</Filter>
     </ClCompile>
+    <ClCompile Include="openingScene.cpp">
+      <Filter>메인 씬</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -334,6 +337,9 @@
     <ClInclude Include="monster.h" />
     <ClInclude Include="skill.h">
       <Filter>플레이어\스킬</Filter>
+    </ClInclude>
+    <ClInclude Include="openingScene.h">
+      <Filter>메인 씬</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("집안화면", new inHouseScene);
 	SCENEMANAGER->addScene("광산화면", new mineScene);
 	SCENEMANAGER->addScene("마법사타워화면", new towerScene);
+	SCENEMANAGER->addScene("오프닝화면", new openingScene);
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
 
@@ -72,25 +73,30 @@ void mainGame::update()
 void mainGame::render()
 {
 	//흰색 빈 비트맵 (이것은 렌더에 그냥 두기)
-	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
-//=============================================================
-	
-	//글자색 배경 없애기
-	SetBkMode(getMemDC(), TRANSPARENT);
 
-	//씬매니져 렌더
-	SCENEMANAGER->render();
+	if(SCENEMANAGER->getCurrentSceneName() != "오프닝화면")
+	{
+		PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+		//=============================================================
 
-	//페이드 렌더
-	SWITCHMANAGER->render(getMemDC());
+			//글자색 배경 없애기
+		SetBkMode(getMemDC(), TRANSPARENT);
 
-	//타임매니져 렌더
-	TIME->render(getMemDC());
+		//씬매니져 렌더
+		SCENEMANAGER->render();
 
-	IMAGEMANAGER->findImage("커서")->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, 0, 0);
-	
-//=============================================================
-	//백버퍼의 내용을 화면DC에 그린다 (이것도 렌더에 그냥 두기)
-	this->getBackBuffer()->render(getHDC());
+		//페이드 렌더
+		SWITCHMANAGER->render(getMemDC());
+
+		//타임매니져 렌더
+		TIME->render(getMemDC());
+
+		IMAGEMANAGER->findImage("커서")->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, 0, 0);
+
+		//=============================================================
+			//백버퍼의 내용을 화면DC에 그린다 (이것도 렌더에 그냥 두기)
+		this->getBackBuffer()->render(getHDC());
+	}
+
 }
 
