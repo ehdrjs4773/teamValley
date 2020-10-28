@@ -186,7 +186,7 @@ void inGameScene::load()
 
 	HANDLE file;
 	DWORD read;
-	sprintf(saveName, "save/test.map");
+	sprintf(saveName, "save/save.map");
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
