@@ -26,6 +26,7 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("건물안화면", new inBuildingScene);
 	SCENEMANAGER->addScene("집안화면", new inHouseScene);
 	SCENEMANAGER->addScene("광산화면", new mineScene);
+	SCENEMANAGER->addScene("마법사타워화면", new towerScene);
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
 

@@ -10,6 +10,7 @@
 #include "inBuildingScene.h"
 #include "inHouseScene.h"
 #include "mineScene.h"
+#include "towerScene.h"
 
 class mainGame : public gameNode
 {

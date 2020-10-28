@@ -39,6 +39,8 @@ HRESULT inGameScene::init()
 		_tile[3][18].portal = PT_MINE;
 		_tile[3][6].portal = PT_MINE;
 
+		_tile[14][11].portal = PT_TOWER;
+
 		isSprinkled = false;
 
 		for (int i = 0; i < TILEY; i++)
@@ -686,6 +688,13 @@ void inGameScene::moveScene()
 		shareTileData();
 		SWITCHMANAGER->changeScene("광산화면");
 		SWITCHMANAGER->startFade(390.0f, 166.0f);
+	}
+	else if (_tile[currentIndexY][currentIndexX].portal == PT_TOWER)
+	{
+		//집으로 넘어갈때 타일 정보 넘겨줌
+		SOUNDMANAGER->play("doorOpen", 0.2f);
+		SWITCHMANAGER->changeScene("마법사타워화면");
+		SWITCHMANAGER->startFade(360.0f, 265.0f);
 	}
 }
 
