@@ -8,17 +8,19 @@ HRESULT shop::init(NPC_KIND npckind)
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
 	sell_ok = RectMakeCenter(WINSIZEX / 2 - 100, WINSIZEY / 2 + 50, 100, 50);
-	sell_cancel = RectMakeCenter(WINSIZEX / 2 + 100, WINSIZEY / 2 + 50, 100, 50);
+	sell_cancel = RectMakeCenter(WINSIZEX / 2 + 107, WINSIZEY / 2 + 50, 100, 50);
 
-	sell_plus = RectMakeCenter(WINSIZEX / 2 + 125, WINSIZEY / 2 - 25, 25, 25);
-	sell_minus = RectMakeCenter(WINSIZEX / 2 - 125, WINSIZEY / 2 - 25, 25, 25);
+	sell_plus = RectMake(WINSIZEX / 2 + 85, WINSIZEY / 2 - 42, 30, 30);
+	sell_minus = RectMake(WINSIZEX / 2 - 110, WINSIZEY / 2 - 42, 30, 30);
 
-	sell_max = RectMakeCenter(WINSIZEX / 2 + 150, WINSIZEY / 2 - 25, 25, 25);
-	sell_min = RectMakeCenter(WINSIZEX / 2 - 150, WINSIZEY / 2 - 25, 25, 25);
+	sell_max = RectMake(WINSIZEX / 2 + 115, WINSIZEY / 2 - 42, 40, 30);
+	sell_min = RectMake(WINSIZEX / 2 - 150, WINSIZEY / 2 - 42, 40, 30);
 
 	sell_amount = 0;
 	sell_amount_max = 0;
 	sell_index = -1;
+	sell_item_frameX = sell_item_frameY = 0;
+	sell_item_img = nullptr;
 
 	buyFail = false;
 	buy_count = 0;
@@ -117,6 +119,8 @@ void shop::release()
 
 void shop::update()
 {
+	cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
+
 	_inven->update();
 
 	sell();
@@ -402,22 +406,14 @@ void shop::render()
 		FrameRect(getMemDC(), sell_minus, RGB(0, 0, 0));
 		FrameRect(getMemDC(), sell_max, RGB(0, 0, 0));
 		FrameRect(getMemDC(), sell_min, RGB(0, 0, 0));
-
+		sell_item_img->setX(WINSIZEX / 2 - 15);
+		sell_item_img->setY(WINSIZEY / 2 - 60);
+		Rectangle(getMemDC(), sell_item_img->boudingBoxWithFrame());
+		sell_item_img->frameRender(getMemDC(), sell_item_img->getX(), sell_item_img->getY(), sell_item_frameX, sell_item_frameY);
+		
 		char sell_display[256];
 		sprintf(sell_display, "%d", sell_amount);
 		TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, sell_display, strlen(sell_display));
-		//sprintf(sell_display, "OK");
-		//TextOut(getMemDC(), sell_ok.left, sell_ok.top, sell_display,strlen(sell_display));
-		//sprintf(sell_display, "CANCEL");
-		//TextOut(getMemDC(), sell_cancel.left, sell_cancel.top, sell_display, strlen(sell_display));
-		//sprintf(sell_display, "MAX");
-		//TextOut(getMemDC(), sell_max.left, sell_max.top, sell_display, strlen(sell_display));
-		//sprintf(sell_display, "MIN");
-		//TextOut(getMemDC(), sell_min.left, sell_min.top, sell_display, strlen(sell_display));
-		//sprintf(sell_display, "+");
-		//TextOut(getMemDC(), sell_plus.left, sell_plus.top, sell_display, strlen(sell_display));
-		//sprintf(sell_display, "-");
-		//TextOut(getMemDC(), sell_minus.left, sell_minus.top, sell_display, strlen(sell_display));
 
 	}
 }
@@ -434,6 +430,9 @@ void shop::sell()
 				sell_ispopup = true;
 				sell_index = i;
 				sell_amount_max = (*_vInven)[i].amount;
+				sell_item_img = (*_vInven)[i].item_image;
+				sell_item_frameX = (*_vInven)[i].indexX;
+				sell_item_frameY = (*_vInven)[i].indexY;
 			}
 		}
 		if (sell_isok == true)

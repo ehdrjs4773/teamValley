@@ -46,10 +46,12 @@ private:
 	RECT sell_minus;
 	RECT sell_max;
 	RECT sell_min;
-
+	image* sell_item_img;
+	
 	int sell_amount;
 	int sell_amount_max;
 	int sell_index;
+	int sell_item_frameX, sell_item_frameY;
 
 	HBRUSH brush;
 	HBRUSH oBrush;

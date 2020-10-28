@@ -890,12 +890,16 @@ void inventory::_vItemUpdate()
 		}
 		else if (PtInRect(&_exitRect, _ptMouse) && !_isShopOpen)
 		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			if (PLAYER->getIsShowInventory())
 			{
-				SOUNDMANAGER->play("select");
-				SWITCHMANAGER->changeScene("스타트화면");
-				SWITCHMANAGER->startFade(.0f, .0f);
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					SOUNDMANAGER->play("select");
+					SWITCHMANAGER->changeScene("스타트화면");
+					SWITCHMANAGER->startFade(.0f, .0f);
+				}
 			}
+			
 		}
 	}
 	
