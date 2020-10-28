@@ -60,7 +60,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("광산오브젝트 노말다크", "Images/맵툴/mineObject_NormalDark.bmp", 256, 288, 16, 18);
 	IMAGEMANAGER->addFrameImage("광산오브젝트 프로스트", "Images/맵툴/mineObject_Frost.bmp", 256, 288, 16, 18);
 	IMAGEMANAGER->addFrameImage("광산오브젝트 프로스트다크", "Images/맵툴/mineObject_FrostDark.bmp", 256, 288, 16, 18);
-	IMAGEMANAGER->addFrameImage("건물", "Images/맵툴/건물.bmp", 416, 416, 26, 26);
+	IMAGEMANAGER->addFrameImage("건물", "Images/맵툴/건물.bmp", 576, 416, 36, 26);
 	IMAGEMANAGER->addImage("배경", "Images/background.bmp", WINSIZEX, WINSIZEY);
 	IMAGEMANAGER->addImage("세이브", "Images/save.bmp", 100, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("로드", "Images/load.bmp", 100, 50, true, RGB(255, 0, 255));
