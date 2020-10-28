@@ -17,6 +17,7 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("광물아이템", "Images/BMP/광물아이템.bmp", 640, 200, 16, 5);
 	IMAGEMANAGER->addFrameImage("스프링클러", "Images/BMP/스프링클러.bmp", 16, 48, 1, 3);
 	IMAGEMANAGER->addFrameImage("스프링클러아이템", "Images/BMP/스프링클러아이템.bmp", 40, 120, 1, 3);
+	IMAGEMANAGER->addFrameImage("펜스", "Images/펜스/펜스아이템.bmp", 80, 40, 2, 1);
 
 	addSkill();
 	addSeed();
@@ -89,7 +90,7 @@ void itemManager::addFruit()
 	addFruit("열매", ITEM_FRUIT, 7, 0, SEED_SUMMERSPANGLE, "여름별꽃", 0, 220);
 	addFruit("열매", ITEM_FRUIT, 0, 1, SEED_HOTPEPPER, "고추", 0, 70);
 	addFruit("열매", ITEM_FRUIT, 1, 1, SEED_CORN, "옥수수", 0, 80);
-	addFruit("열매", ITEM_FRUIT, 2, 1, SEED_BLUEBERRY, "블루베리", 0, 30);
+	addFruit("열매", ITEM_FRUIT, 2, 1, SEED_BLUEBERRY, "블루베리", 0, 30); 
 	addFruit("열매", ITEM_FRUIT, 3, 1, SEED_SUNFLOWER, "해바라기", 0, 250);
 	addFruit("열매", ITEM_FRUIT, 4, 1, SEED_REDCABBAGE, "적양배추", 0, 280);
 	addFruit("열매", ITEM_FRUIT, 5, 1, SEED_GRAPE, "포도", 0, 100);
@@ -101,7 +102,7 @@ void itemManager::addObject()
 	addObjectItem("열매", ITEM_DEBRIS, 3, 2, "돌", 0, 5);
 	addObjectItem("열매", ITEM_DEBRIS, 4, 2, "나무", 0, 5);
 	addObjectItem("펜스", ITEM_WOODENFENCE, 0, 0, "나무울타리", 0, 5);
-	addObjectItem("펜스", ITEM_STONEFENCE, 0, 0, "석재울타리", 0, 5);
+	addObjectItem("펜스", ITEM_STONEFENCE, 1, 0, "석재울타리", 0, 5);
 }
 
 void itemManager::addSkill()

@@ -40,6 +40,11 @@ HRESULT shop::init(NPC_KIND npckind)
 	{
 		if (_npcKind == ITEM_NPC)
 		{
+			/*if (_vItem[i].item_kind == ITEM_TOOL)
+			{
+				_vTool.push_back(_vItem[i]);
+			}*/
+
 			if (_vItem[i].item_kind == ITEM_SEED)
 			{
 				if (_vItem[i].seedKind == SEED_PINETREE ||
@@ -50,10 +55,16 @@ HRESULT shop::init(NPC_KIND npckind)
 				}
 				else _vSeed.push_back(_vItem[i]);
 			}
-			else if (_vItem[i].item_kind == ITEM_TOOL)
+			else if (_vItem[i].item_kind == ITEM_SPRINKLER1 ||
+				_vItem[i].item_kind == ITEM_SPRINKLER2 ||
+				_vItem[i].item_kind == ITEM_SPRINKLER3 ||
+				_vItem[i].item_kind == ITEM_WOODENFENCE ||
+				_vItem[i].item_kind == ITEM_STONEFENCE
+				)
 			{
 				_vTool.push_back(_vItem[i]);
 			}
+			
 			i++;
 		}
 		else
@@ -529,10 +540,6 @@ void shop::sell()
 			}
 			if ((*_vInven)[sell_index].amount <= 0) (*_vInven)[sell_index].amount = 0;
 
-			if (_vItem[sell_index].toolKind == TOOL_KETTLE)
-			{
-				_inven->getKettleBar();
-			}
 			sell_isok = false;
 			sell_index = -1;
 		}
