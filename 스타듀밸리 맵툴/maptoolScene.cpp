@@ -1662,14 +1662,14 @@ void maptoolScene::showMapTile()
 										_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 								}
 							}
-							else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_WOODENFENCE)
 							{
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 							}
-							else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_STONEFENCE)
 							{
 								IMAGEMANAGER->findImage("µ¹Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
@@ -1723,14 +1723,14 @@ void maptoolScene::showMapTile()
 								IMAGEMANAGER->frameRender("°Ç¹°", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 							}
-							else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_WOODENFENCE)
 							{
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 							}
-							else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_STONEFENCE)
 							{
 								IMAGEMANAGER->findImage("µ¹Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
@@ -1783,14 +1783,14 @@ void maptoolScene::showMapTile()
 								IMAGEMANAGER->frameRender("°Ç¹°", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 							}
-							else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_WOODENFENCE)
 							{
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 							}
-							else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_STONEFENCE)
 							{
 								IMAGEMANAGER->findImage("µ¹Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
@@ -1843,14 +1843,14 @@ void maptoolScene::showMapTile()
 								IMAGEMANAGER->frameRender("°Ç¹°", getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i + tileY][j + tileX].objFrameX, _tile[i + tileY][j + tileX].objFrameY);
 							}
-							else if (_tile[i][j].objType == OTY_WOODENFENCE || _tile[i][j].objType == OTY_WOODENFENCEDOOR || _tile[i][j].objType == OTY_WOODENFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_WOODENFENCE)
 							{
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 								IMAGEMANAGER->findImage("³ª¹«Ææ½º")->frameRender(getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY - 1);
 							}
-							else if (_tile[i][j].objType == OTY_STONEFENCE || _tile[i][j].objType == OTY_STONEFENCEDOOR || _tile[i][j].objType == OTY_STONEFENCEDOOROPEN)
+							else if (_tile[i][j].objType == OTY_STONEFENCE)
 							{
 								IMAGEMANAGER->findImage("µ¹Ææ½º")->frameRender(getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 									_tile[i][j].objFrameX, _tile[i][j].objFrameY);

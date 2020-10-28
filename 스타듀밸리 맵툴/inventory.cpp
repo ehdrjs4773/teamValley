@@ -651,14 +651,8 @@ void inventory::inven_item_info(HDC hdc)
 				case ITEM_WOODENFENCE:
 					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
 					break;
-				case ITEM_WOODENFENCEDOOR:
-					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
-					break;
 				case ITEM_STONEFENCE:
 					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_STONEFENCEDOOR:
-					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
 					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
@@ -730,14 +724,8 @@ void inventory::quickinven_item_info(HDC hdc)
 				case ITEM_WOODENFENCE:
 					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
 					break;
-				case ITEM_WOODENFENCEDOOR:
-					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
-					break;
 				case ITEM_STONEFENCE:
 					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_STONEFENCEDOOR:
-					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
 					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
@@ -812,14 +800,8 @@ void inventory::storage_item_info(HDC hdc)
 				case ITEM_WOODENFENCE:
 					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
 					break;
-				case ITEM_WOODENFENCEDOOR:
-					sprintf(temp_info[0], "WOODENFENCE DOOR", sizeof("WOODENFENCE DOOR"));
-					break;
 				case ITEM_STONEFENCE:
 					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_STONEFENCEDOOR:
-					sprintf(temp_info[0], "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
 					break;
 				case ITEM_SKILL:
 					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
@@ -899,10 +881,8 @@ void inventory::_vItemUpdate()
 					SWITCHMANAGER->startFade(.0f, .0f);
 				}
 			}
-			
 		}
 	}
-	
 
 	if (_isShopOpen)
 	{
@@ -955,16 +935,7 @@ void inventory::_vItemUpdate()
 								exchangeItem = _vItem[i];
 								_vItem[i] = _MouseItem;
 								_MouseItem = exchangeItem;
-
-
-
-
-						
-
-						
 							}
-
-
 						}
 						else if (_MouseItem.item_image == NULL) // 마우스에 아이템이 없으면
 						{
@@ -973,10 +944,6 @@ void inventory::_vItemUpdate()
 							_MouseItem = _vItem[i];
 							_vItem[i] = pushItem;
 						}
-
-
-
-
 					}
 					else if (_vItem[i].item_image == NULL)
 					{
@@ -1020,65 +987,62 @@ void inventory::_vItemUpdate()
 			}
 		}
 	}
-	else if(isShowTemp)
+	else if (isShowTemp)
 	{
-	 for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
-	 {
-		 if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
-		 {
-			 if (INPUT->GetKeyDown(VK_LBUTTON))
-			 {
-				 if (_vStorageItem[i].item_image != NULL)
-				 {
-					 for (int j = 0; j < _vItem.size(); j++)
-					 {
+		for (int i = 0; i < _vStorageItem.size(); i++) //창고 벡터 식 
+		{
+			if (PtInRect(&_vStorageItem[i].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					if (_vStorageItem[i].item_image != NULL)
+					{
+						for (int j = 0; j < _vItem.size(); j++)
+						{
 
-						 if (_vItem[j].item_image == NULL)
-						 {
-							 _vItem[j] = _vStorageItem[i];
-							 _vStorageItem[i] = _MouseItem;
-						 }
+							if (_vItem[j].item_image == NULL)
+							{
+								_vItem[j] = _vStorageItem[i];
+								_vStorageItem[i] = _MouseItem;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
+		{
+			if (PtInRect(&_vItem[i].rc, _ptMouse))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					if (_vItem[i].item_image != NULL)
+					{
+						for (int j = 0; j < _vStorageItem.size(); j++)
+						{
 
+							if (_vStorageItem[j].item_image == NULL)
+							{
+								_vStorageItem[j] = _vItem[i];
+								_vStorageItem[j].item_info = _vItem[i].item_info;
+								_vItem[i] = _MouseItem;
+							}
 
-					 }
-				 }
-			 }
-		 }
-	 }
-	 for (int i = 0; i < _vItem.size(); i++) //창고 벡터 식 
-	 {
-		 if (PtInRect(&_vItem[i].rc, _ptMouse))
-		 {
-			 if (INPUT->GetKeyDown(VK_LBUTTON))
-			 {
-				 if (_vItem[i].item_image != NULL)
-				 {
-					 for (int j = 0; j < _vStorageItem.size(); j++)
-					 {
+						}
+					}
+				}
+			}
+		}
 
-						 if (_vStorageItem[j].item_image == NULL)
-						 {
-							 _vStorageItem[j] = _vItem[i];
-							 _vStorageItem[j].item_info = _vItem[i].item_info;
-							 _vItem[i] = _MouseItem;
-						 }
-
-					 }
-				 }
-			 }
-		 }
-	 }
-
-	 for (int i = 0; i < _vStorageItem.size(); i++)
-	 {
-		 if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
-		 {
-			 _vStorageItem[i - 1] = _vStorageItem[i];
-			 _vStorageItem[i] = _MouseItem;
-		 }
-	 }
+		for (int i = 0; i < _vStorageItem.size(); i++)
+		{
+			if (i > 0 && _vStorageItem[i - 1].item_image == NULL)
+			{
+				_vStorageItem[i - 1] = _vStorageItem[i];
+				_vStorageItem[i] = _MouseItem;
+			}
+		}
 	}
-
 }
 
 void inventory::shopInvenRender(HDC hdc)
@@ -1089,7 +1053,7 @@ void inventory::shopInvenRender(HDC hdc)
 void inventory::setInvenItem(int i, tagItem item)
 {
 	_vItem[i] = item;
-	if (item.item_info == "구리조각" || item.item_info == "철조각" || item.item_info == "금조각" || item.item_info == "석탄")
+	if (item.item_info == "구리조각" || item.item_info == "철조각" || item.item_info == "금조각")
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("광물아이템");
 	}
@@ -1119,7 +1083,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if (_vItem[i].item_kind == ITEM_SEED)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("씨앗");
-		if (_vItem[i].seedKind == SEED_COFFEEBEAN || _vItem[i].seedKind == SEED_PINETREE || _vItem[i].seedKind == SEED_MAPLETREE || _vItem[i].seedKind == SEED_OAKTREE)
+		if (_vItem[i].seedKind == SEED_PINETREE || _vItem[i].seedKind == SEED_MAPLETREE || _vItem[i].seedKind == SEED_OAKTREE)
 		{
 			_vItem[i].item_image = IMAGEMANAGER->findImage("열매");
 		}
@@ -1144,8 +1108,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 		_vItem[i].item_info = ITEMMANAGER->findItem(_vItem[i].item_kind, _vItem[i].indexX);
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
-	else if (_vItem[i].item_kind == ITEM_WOODENFENCE || _vItem[i].item_kind == ITEM_STONEFENCE
-		|| _vItem[i].item_kind == ITEM_WOODENFENCEDOOR || _vItem[i].item_kind == ITEM_STONEFENCEDOOR)
+	else if (_vItem[i].item_kind == ITEM_WOODENFENCE || _vItem[i].item_kind == ITEM_STONEFENCE)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("펜스");
 		_vItem[i].item_info = ITEMMANAGER->findItem(_vItem[i].item_kind);
@@ -1196,22 +1159,26 @@ void inventory::setvInven(int i, tagSaveItem item)
 		}
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
-	else if (_vItem[i].item_kind == ITEM_SPRINKLER)
+	else if (_vItem[i].item_kind == ITEM_SPRINKLER1)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
-		switch (_vItem[i].indexY)
-		{
-		case 0:
-			_vItem[i].item_info = "기본스프링클러";
-			break;
-		case 1:
-			_vItem[i].item_info = "강화스프링클러";
-			break;
-		case 2:
-			_vItem[i].item_info = "고급스프링클러";
-			break;
-		}
+
+		_vItem[i].item_info = "기본스프링클러";
 		_vItem[i].itemName = _vItem[i].item_info;
+	}
+	else if (_vItem[i].item_kind == ITEM_SPRINKLER2)
+	{
+	_vItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+	
+	_vItem[i].item_info = "강화스프링클러";
+	_vItem[i].itemName = _vItem[i].item_info;
+	}
+	else if (_vItem[i].item_kind == ITEM_SPRINKLER3)
+	{
+	_vItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+
+	_vItem[i].item_info = "고급스프링클러";
+	_vItem[i].itemName = _vItem[i].item_info;
 	}
 }
 
@@ -1239,7 +1206,7 @@ void inventory::setvBoxInven(int i, tagItem item)
 	else if (_vStorageItem[i].item_kind == ITEM_SEED)
 	{
 		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("씨앗");
-		if (_vStorageItem[i].seedKind == SEED_COFFEEBEAN || _vStorageItem[i].seedKind == SEED_PINETREE || _vStorageItem[i].seedKind == SEED_MAPLETREE || _vStorageItem[i].seedKind == SEED_OAKTREE)
+		if (_vStorageItem[i].seedKind == SEED_PINETREE || _vStorageItem[i].seedKind == SEED_MAPLETREE || _vStorageItem[i].seedKind == SEED_OAKTREE)
 		{
 			_vStorageItem[i].item_image = IMAGEMANAGER->findImage("열매");
 		}
@@ -1264,8 +1231,7 @@ void inventory::setvBoxInven(int i, tagItem item)
 		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind, _vStorageItem[i].indexX);
 		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
 	}
-	else if (_vStorageItem[i].item_kind == ITEM_WOODENFENCE || _vStorageItem[i].item_kind == ITEM_STONEFENCE
-		|| _vStorageItem[i].item_kind == ITEM_WOODENFENCEDOOR || _vStorageItem[i].item_kind == ITEM_STONEFENCEDOOR)
+	else if (_vStorageItem[i].item_kind == ITEM_WOODENFENCE || _vStorageItem[i].item_kind == ITEM_STONEFENCE)
 	{
 		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("펜스");
 		_vStorageItem[i].item_info = ITEMMANAGER->findItem(_vStorageItem[i].item_kind);
@@ -1316,21 +1282,25 @@ void inventory::setvBoxInven(int i, tagItem item)
 		}
 		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
 	}
-	else if (_vStorageItem[i].item_kind == ITEM_SPRINKLER)
+	else if (_vStorageItem[i].item_kind == ITEM_SPRINKLER1)
 	{
-		_vStorageItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
-		switch (_vStorageItem[i].indexY)
-		{
-		case 0:
-			_vStorageItem[i].item_info = "기본스프링클러";
-			break;
-		case 1:
-			_vStorageItem[i].item_info = "강화스프링클러";
-			break;
-		case 2:
-			_vStorageItem[i].item_info = "고급스프링클러";
-			break;
-		}
-		_vStorageItem[i].itemName = _vStorageItem[i].item_info;
+	_vStorageItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+
+	_vStorageItem[i].item_info = "기본스프링클러";
+	_vStorageItem[i].itemName = _vItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_SPRINKLER2)
+	{
+	_vStorageItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+
+	_vStorageItem[i].item_info = "강화스프링클러";
+	_vStorageItem[i].itemName = _vItem[i].item_info;
+	}
+	else if (_vStorageItem[i].item_kind == ITEM_SPRINKLER3)
+	{
+	_vStorageItem[i].item_image = IMAGEMANAGER->findImage("스프링클러");
+
+	_vStorageItem[i].item_info = "고급스프링클러";
+	_vStorageItem[i].itemName = _vItem[i].item_info;
 	}
 }

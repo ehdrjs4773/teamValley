@@ -46,13 +46,8 @@ HRESULT shop::init(NPC_KIND npckind)
 			else if (_vItem[i].item_kind == ITEM_ORE)
 			{
 				_vItem.erase(_vItem.begin() + i);
-
 			}
-			else if (_vItem[i].item_kind == ITEM_SPRINKLER)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else if (_vItem[i].item_kind == ITEM_STONEFENCEDOOR || _vItem[i].item_kind == ITEM_WOODENFENCEDOOR)
+			else if (_vItem[i].item_kind == ITEM_SPRINKLER1)
 			{
 				_vItem.erase(_vItem.begin() + i);
 			}
@@ -65,7 +60,6 @@ HRESULT shop::init(NPC_KIND npckind)
 				_vItem.erase(_vItem.begin() + i);
 			}
 			else i++;
-
 		}
 	}
 
@@ -358,19 +352,10 @@ void shop::render()
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
 				break;
-			case ITEM_WOODENFENCEDOOR:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
-				break;
-			case ITEM_STONEFENCEDOOR:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
-				break;
 			case ITEM_SKILL:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "SKILL", sizeof("SKILL"));
 				break;
-
 			}
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);

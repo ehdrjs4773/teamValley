@@ -6,16 +6,12 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addImage("rusty_sword", "Images/sword/rusty_sword.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("galaxy_sword", "Images/sword/galaxy_sword.bmp", 55, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("pencil", "Images/sword/pencil.bmp", 55, 45, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 360, 160, 9, 4);
-	IMAGEMANAGER->addFrameImage("¾¾¾Ñhold", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛHold.bmp", 144, 64, 9, 4);
-	IMAGEMANAGER->addFrameImage("¿­¸Å", "Images/BMP/¿­¸Å.bmp", 640, 120, 16, 3);
-	IMAGEMANAGER->addFrameImage("¿­¸Å(¶¥)", "Images/BMP/¿­¸Å(¶¥).bmp", 256, 48, 16, 3);
+	IMAGEMANAGER->addFrameImage("¾¾¾Ñ", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛ.bmp", 320, 80, 8, 2);
+	IMAGEMANAGER->addFrameImage("¾¾¾Ñhold", "Images/BMP/¾¾¾Ñ¾ÆÀÌÅÛsmall.bmp", 128, 32, 8, 2);
+	IMAGEMANAGER->addFrameImage("¿­¸Å", "Images/BMP/¿­¸Å.bmp", 320, 120, 8, 3);
+	IMAGEMANAGER->addFrameImage("¿­¸Å(¶¥)", "Images/BMP/¿­¸Åsmall.bmp", 128, 48, 8, 3);
 	IMAGEMANAGER->addFrameImage("µµ±¸", "Images/BMP/µµ±¸.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("³ª¹«", "Images/BMP/³ª¹«2.bmp", 144, 640, 9, 40);
-	IMAGEMANAGER->addFrameImage("³ª¹«Ææ½º", "Images/Ææ½º/³ª¹«Ææ½º.bmp", 48, 352, 3, 22);
-	IMAGEMANAGER->addFrameImage("µ¹Ææ½º", "Images/Ææ½º/µ¹Ææ½º.bmp", 48, 352, 3, 22);
-	IMAGEMANAGER->addFrameImage("Ææ½º", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ.bmp", 80, 40, 2, 1);
-	IMAGEMANAGER->addFrameImage("Ææ½º(¶¥)", "Images/Ææ½º/Ææ½º¾ÆÀÌÅÛ(¶¥).bmp", 32, 16, 2, 1);
 	IMAGEMANAGER->addImage("½ºÅ³ºÏ", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("±¤¹°", "Images/BMP/±¤¹°.bmp", 256, 80, 16, 5);
 	IMAGEMANAGER->addFrameImage("±¤¹°¾ÆÀÌÅÛ", "Images/BMP/±¤¹°¾ÆÀÌÅÛ.bmp", 640, 200, 16, 5);
@@ -29,9 +25,9 @@ HRESULT itemManager::init()
 	addTool();
 	addObject();
 	addOre();
-	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER, true, 0, 0, "±âº»½ºÇÁ¸µÅ¬·¯");
-	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER, true, 0, 1, "°­È­½ºÇÁ¸µÅ¬·¯");
-	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER, true, 0, 2, "°í±Þ½ºÇÁ¸µÅ¬·¯");
+	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER1, true, 0, 0, "±âº»½ºÇÁ¸µÅ¬·¯");
+	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER2, true, 0, 1, "°­È­½ºÇÁ¸µÅ¬·¯");
+	addSprinkler("½ºÇÁ¸µÅ¬·¯¾ÆÀÌÅÛ", ITEM_SPRINKLER3, true, 0, 2, "°í±Þ½ºÇÁ¸µÅ¬·¯");
 
 	return S_OK;
 }
@@ -42,42 +38,25 @@ void itemManager::release()
 
 void itemManager::addSeed()
 {
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 0, SEED_PARSNIP, "ÆÄ½º´Õ ¾¾¾Ñ",100,50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 0, SEED_GREENBEAN, "¿ÏµÎÄá ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 0, SEED_CAULIFLOWER, "ÄÝ¸®ÇÃ¶ó¿ö ¾¾¾Ñ" , 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 0, SEED_POTATO, "°¨ÀÚ ¾¾¾Ñ",100,50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 0, SEED_GARLIC, "¸¶´Ã ¾¾¾Ñ",100,50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 0, SEED_KALE, "ÄÉÀÏ ¾¾¾Ñ",100,50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 0, SEED_BEET, "ºñÆ® ¾¾¾Ñ",100,50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 7, 0, SEED_MELON, "¸á·Ð ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 8, 0, SEED_BLUEJAZZ, "ºí·çÀçÁî ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 1, SEED_SWEETGEMBERRY, "´ÞÄÞº¸¼®º£¸® ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 1, SEED_BLUEBERRY, "ºí·çº£¸® ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 1, SEED_HOTPEPPER, "°íÃß ¾¾¾Ñ", 100, 50);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 1, SEED_WHEAT, "¹Ð ¾¾¾Ñ",200,100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 1, SEED_RADISH, "¹« ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 1, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 7, 1, SEED_CORN, "¿Á¼ö¼ö ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 8, 1, SEED_FAIRYROSE, "¿äÁ¤Àå¹Ì ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 2, SEED_EGGPLANT, "°¡Áö ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 2, SEED_ARTICHOKE, "¾ÆÆ¼ÃÊÅ© ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 2, SEED_PUMPKIN, "È£¹Ú ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 2, SEED_BOKCHOY, "Ã»°æÃ¤ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 2, SEED_YAM, "Âü¸¶ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 2, SEED_CRANBERRY, "Å©·£º£¸® ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 2, SEED_STRAWBERRY, "µþ±â ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 7, 2, SEED_ANCIENTFRUIT, "°í´ë°úÀÏ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 8, 2, SEED_POPPY, "¾ç±Íºñ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 3, SEED_TULIP, "Æ«¸³ ¾¾¾Ñ", 200, 100);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 3, SEED_AMARANTH, "¾Æ¸¶¶õ½º ¾¾¾Ñ",300,150);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 3, SEED_GRAPE, "Æ÷µµ ¾¾¾Ñ", 300, 150);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 3, SEED_HOPS, "È© ¾¾¾Ñ", 300, 150);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 3, SEED_RANDOM, "¾¾¾Ñ ¸ðÀ½", 300, 150);
-	addSeed("¿­¸Å", ITEM_SEED, 3, 1, SEED_COFFEEBEAN, "Ä¿ÇÇÄá ¾¾¾Ñ", 300, 150);
-	addSeed("¿­¸Å", ITEM_SEED, 7, 2, SEED_PINETREE, "¼Ò³ª¹« ¾¾¾Ñ", 300, 150);
-	addSeed("¿­¸Å", ITEM_SEED, 8, 2, SEED_MAPLETREE, "´ÜÇ³³ª¹« ¾¾¾Ñ", 300, 150);
-	addSeed("¿­¸Å", ITEM_SEED, 9, 2, SEED_OAKTREE, "Âü³ª¹« ¾¾¾Ñ", 300, 150);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 0, SEED_HOPS, "È© ¾¾¾Ñ", 25, 15);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 0, SEED_RADISH, "¹« ¾¾¾Ñ", 40, 25);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 0, SEED_WHEAT, "¹Ð ¾¾¾Ñ", 10, 5);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 0, SEED_TOMATO, "Åä¸¶Åä ¾¾¾Ñ", 50, 40);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 0, SEED_GREENBEAN, "¿ÏµÎÄá ¾¾¾Ñ", 40, 30);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 0, SEED_MELON, "¸á·Ð ¾¾¾Ñ", 80, 60);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 0, SEED_POPPY, "¾ç±Íºñ ¾¾¾Ñ", 140, 120);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 7, 0, SEED_SUMMERSPANGLE, "¿©¸§º°²É ¾¾¾Ñ", 90, 75);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 1, SEED_HOTPEPPER, "°íÃß ¾¾¾Ñ", 90, 75);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 1, SEED_CORN, "¿Á¼ö¼ö ¾¾¾Ñ", 155, 130);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 1, SEED_BLUEBERRY, "ºí·çº£¸® ¾¾¾Ñ", 80, 60);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 1, SEED_BLUEBERRY, "ÇØ¹Ù¶ó±â ¾¾¾Ñ", 80, 60);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß ¾¾¾Ñ", 100, 80);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 1, SEED_GRAPE, "Æ÷µµ ¾¾¾Ñ", 150, 125);
+	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 1, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷ ¾¾¾Ñ", 400, 250);
+
+	addSeed("¿­¸Å", ITEM_SEED, 0, 2, SEED_PINETREE, "¼Ò³ª¹« ¾¾¾Ñ", 0, 20);
+	addSeed("¿­¸Å", ITEM_SEED, 1, 2, SEED_MAPLETREE, "´ÜÇ³³ª¹« ¾¾¾Ñ", 0, 20);
+	addSeed("¿­¸Å", ITEM_SEED, 2, 2, SEED_OAKTREE, "Âü³ª¹« ¾¾¾Ñ", 0, 20);
 }
 
 void itemManager::addWeapon()
@@ -100,54 +79,29 @@ void itemManager::addTool()
 
 void itemManager::addFruit()
 {
-	addFruit("¿­¸Å", ITEM_FRUIT, 0, 0, SEED_PARSNIP, "ÆÄ½º´Õ", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 1, 0, SEED_CAULIFLOWER, "ÄÝ¸®ÇÃ¶ó¿ö", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 2, 0, SEED_GARLIC, "¸¶´Ã", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 3, 0, SEED_RHUBARB, "´ëÈ²", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 4, 0, SEED_TOMATO, "Åä¸¶Åä", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 5, 0, SEED_HOTPEPPER, "°íÃß", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 6, 0, SEED_RADISH, "¹«", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 7, 0, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 8, 0, SEED_EGGPLANT, "°¡Áö", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 9, 0, SEED_PUMPKIN, "È£¹Ú", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 10, 0, SEED_YAM, "Âü¸¶", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 11, 0, SEED_BEET, "ºñÆ®", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 12, 0, SEED_ANCIENTFRUIT, "°í´ë°úÀÏ", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 13, 0, SEED_TULIP, "Æ«¸³", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 14, 0, SEED_POPPY, "¾ç±Íºñ", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 15, 0, SEED_SUNFLOWER, "ÇØ¹Ù¶ó±â", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 0, 1, SEED_SWEETGEMBERRY, "´ÞÄÞº¸¼®º£¸®", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 1, 1, SEED_STRAWBERRY, "µþ±â", 300, 150);
-	addFruit("¿­¸Å", ITEM_FRUIT, 2, 1, SEED_GRAPE, "Æ÷µµ", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 3, 1, SEED_COFFEEBEAN, "Ä¿ÇÇÄá", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 4, 1, SEED_GREENBEAN, "¿ÏµÎÄá", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 5, 1, SEED_POTATO, "°¨ÀÚ", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 6, 1, SEED_KALE, "ÄÉÀÏ", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 7, 1, SEED_MELON, "¸á·Ð", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 8, 1, SEED_BLUEBERRY, "ºí·çº£¸®", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 9, 1, SEED_WHEAT, "¹Ð", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 10, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß", 500, 250);
-	addFruit("¿­¸Å", ITEM_FRUIT, 11, 1, SEED_CORN, "¿Á¼ö¼ö", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 12, 1, SEED_ARTICHOKE, "¾ÆÆ¼ÃÊÅ©", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 13, 1, SEED_BOKCHOY, "Ã»°æÃ¤", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 14, 1, SEED_CRANBERRY, "Å©·£º£¸®", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 15, 1, SEED_BLUEJAZZ, "ºí·çÀçÁî", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 0, 2, SEED_SUMMERSPANGLE, "¿©¸§º°²É", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 1, 2, SEED_FAIRYROSE, "¿äÁ¤Àå¹Ì", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 2, 2, SEED_HOPS, "È©", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 3, 2, SEED_AMARANTH, "¾Æ¸¶¶õ½º", 750, 370);
-	addFruit("¿­¸Å", ITEM_FRUIT, 4, 2, SEED_CATUS, "¼±ÀÎÀå¿­¸Å", 750, 370);
+	addFruit("¿­¸Å", ITEM_FRUIT, 0, 0, SEED_HOPS, "È©", 0, 20);
+	addFruit("¿­¸Å", ITEM_FRUIT, 1, 0, SEED_RADISH, "¹«", 0, 110);
+	addFruit("¿­¸Å", ITEM_FRUIT, 2, 0, SEED_WHEAT, "¹Ð", 0, 35);
+	addFruit("¿­¸Å", ITEM_FRUIT, 3, 0, SEED_TOMATO, "Åä¸¶Åä", 0, 60);
+	addFruit("¿­¸Å", ITEM_FRUIT, 4, 0, SEED_GREENBEAN, "¿ÏµÎÄá", 0, 35);
+	addFruit("¿­¸Å", ITEM_FRUIT, 5, 0, SEED_MELON, "¸á·Ð", 0, 250);
+	addFruit("¿­¸Å", ITEM_FRUIT, 6, 0, SEED_POPPY, "¾ç±Íºñ", 0, 275);
+	addFruit("¿­¸Å", ITEM_FRUIT, 7, 0, SEED_SUMMERSPANGLE, "¿©¸§º°²É", 0, 220);
+	addFruit("¿­¸Å", ITEM_FRUIT, 0, 1, SEED_HOTPEPPER, "°íÃß", 0, 70);
+	addFruit("¿­¸Å", ITEM_FRUIT, 1, 1, SEED_CORN, "¿Á¼ö¼ö", 0, 80);
+	addFruit("¿­¸Å", ITEM_FRUIT, 2, 1, SEED_BLUEBERRY, "ºí·çº£¸®", 0, 30);
+	addFruit("¿­¸Å", ITEM_FRUIT, 3, 1, SEED_SUNFLOWER, "ÇØ¹Ù¶ó±â", 0, 250);
+	addFruit("¿­¸Å", ITEM_FRUIT, 4, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß", 0, 280);
+	addFruit("¿­¸Å", ITEM_FRUIT, 5, 1, SEED_GRAPE, "Æ÷µµ", 0, 100);
+	addFruit("¿­¸Å", ITEM_FRUIT, 6, 1, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷", 0, 750);
 }
 
 void itemManager::addObject()
 {
-	addObjectItem("¿­¸Å", ITEM_DEBRIS, 5, 2, "µ¹", 1000, 500);
-	addObjectItem("¿­¸Å", ITEM_DEBRIS, 6, 2, "³ª¹«", 1000, 500);
-	addObjectItem("¿­¸Å", ITEM_DEBRIS, 10, 2, "´Ü´ÜÇÑ³ª¹«", 1000, 500);
-	addObjectItem("Ææ½º", ITEM_WOODENFENCE, 0, 0, "³ª¹«¿ïÅ¸¸®", 1000, 500);
-	addObjectItem("Ææ½º", ITEM_STONEFENCE, 1, 0, "¼®Àç¿ïÅ¸¸®", 1000, 500);
-	addObjectItem("Ææ½º", ITEM_WOODENFENCEDOOR, 0, 0, "³ª¹«¿ïÅ¸¸®¹®", 1000, 500);
-	addObjectItem("Ææ½º", ITEM_STONEFENCEDOOR, 1, 0, "¼®Àç¿ïÅ¸¸®¹®", 1000, 500);
+	addObjectItem("¿­¸Å", ITEM_DEBRIS, 3, 2, "µ¹", 0, 5);
+	addObjectItem("¿­¸Å", ITEM_DEBRIS, 4, 2, "³ª¹«", 0, 5);
+	addObjectItem("Ææ½º", ITEM_WOODENFENCE, 0, 0, "³ª¹«¿ïÅ¸¸®", 0, 5);
+	addObjectItem("Ææ½º", ITEM_STONEFENCE, 0, 0, "¼®Àç¿ïÅ¸¸®", 0, 5);
 }
 
 void itemManager::addSkill()
@@ -164,7 +118,6 @@ void itemManager::addOre()
 {
 	addOre("±¤¹°", ITEM_ORE, true, 6, 3, "±¸¸®Á¶°¢");
 	addOre("±¤¹°", ITEM_ORE, true, 8, 3, "Ã¶Á¶°¢");
-	addOre("±¤¹°", ITEM_ORE, true, 10, 3, "¼®Åº");
 	addOre("±¤¹°", ITEM_ORE, true, 12, 3, "±ÝÁ¶°¢");
 }
 
@@ -296,7 +249,7 @@ void itemManager::addSprinkler(const char * strKey, ITEM _ITEMKIND, bool _isFram
 {
 	tagItem temp;
 	temp.item_image = IMAGEMANAGER->findImage(strKey);
-	temp.item_kind = ITEM_SPRINKLER;
+	temp.item_kind = ITEM_SPRINKLER1;
 	temp.isFrame = _isFrame;
 	temp.indexX = _indexX;
 	temp.indexY = _indexY;
@@ -361,23 +314,21 @@ const char * itemManager::findItem(ITEM itemKind, int indexX)
 	{
 		if (indexX == 6) { return "±¸¸®Á¶°¢"; }
 		if (indexX == 8) { return "Ã¶Á¶°¢"; }
-		if (indexX == 10) { return "¼®Åº"; }
 		if (indexX == 12) { return "±ÝÁ¶°¢"; }
 	}
 	else if (itemKind == ITEM_DEBRIS)
 	{
-		if (indexX == 5) { return "µ¹"; }
-		if (indexX == 6) { return "³ª¹«"; }
-		if (indexX == 10) { return "´Ü´ÜÇÑ³ª¹«"; }
+		if (indexX == 3) { return "µ¹"; }
+		if (indexX == 4) { return "³ª¹«"; }
 	}
 }
 
 const char * itemManager::findItem(ITEM itemKind)
 {
 	if (itemKind == ITEM_WOODENFENCE) { return "³ª¹«¿ïÅ¸¸®"; }
-	if (itemKind == ITEM_WOODENFENCEDOOR) { return "³ª¹«¿ïÅ¸¸®¹®"; }
 	if (itemKind == ITEM_STONEFENCE) { return "¼®Àç¿ïÅ¸¸®"; }
-	if (itemKind == ITEM_STONEFENCEDOOR) { return "¼®Àç¿ïÅ¸¸®¹®"; }
+	
+	return nullptr;
 }
 
 const char * itemManager::findItem(TOOL toolKind)
