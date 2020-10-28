@@ -209,7 +209,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 5;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 15;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 25;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
 				}
 			}
 		}
@@ -222,8 +235,20 @@ void shop::render()
 				{
 					char str[64];
 					wsprintf(str, "%d", _vInven->at(i).amount);
-
-					textOut(getMemDC(), _vInven->at(i).rc.left + 30, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
+					int left = 0;
+					if (_vInven->at(i).amount < 10)
+					{
+						left = 5;
+					}
+					else if (_vInven->at(i).amount >= 10 && _vInven->at(i).amount < 100)
+					{
+						left = 15;
+					}
+					else if (_vInven->at(i).amount >= 100)
+					{
+						left = 25;
+					}
+					textOut(getMemDC(), _vInven->at(i).rc.right - left, _vInven->at(i).rc.top + 30, str, RGB(0, 0, 0));
 				}
 			}
 		}
