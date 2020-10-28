@@ -37,10 +37,13 @@ private:
 	int count;
 	int index;
 	int playerEnergy;
-	int energyBarX;
 	int playerHp;
+	int totalHpDmg = 0;
+	int totalEnergyDmg = 0;
 	int hpBarX;
 	int Damage;
+	int aniCountControl = 10;
+	int aniCountControl2 = 5;
 
 	bool isShowInventory;
 
@@ -83,6 +86,8 @@ public:
 	void moneyRender(HDC hdc);
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
+
+	void limitEnergy();
 
 	void setIsShowSleepingOption(bool a) { isShowSleepingOption = a; }
 
@@ -139,16 +144,14 @@ public:
 
 	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
-	void setHp(int PlayerHp) { playerHp = PlayerHp; }
-	void setEnergy(int PlayerEnergy) { playerEnergy = PlayerEnergy; }
+	void setHp(int dmg) { playerHp -= dmg; totalHpDmg += dmg / 2; }
+	void setEnergy(int dmg) { playerEnergy -= dmg; totalEnergyDmg += dmg / 2; }
 	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
-	void resetHpBar() { frontHpBar = RectMakeCenter(1200 - 95, 600 - 88, 20, 138); }
-	void resetEnergyBar() { frontEnergyBar = RectMakeCenter(1200 - 55, 600 - 88, 20, 138); }
+	void resetHpBar() { playerHp = 138, totalHpDmg = 0; }
+	void resetEnergy() { playerEnergy = 138; totalEnergyDmg = 0; }
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }
 	void setWaterAmount(int waterAmount) { _inventory->setWaterAmount(waterAmount); }
-
-
 
 	DIRECTION getDirection() { return _pDirection; }
 	void setDirection(DIRECTION dir) { _pDirection = dir; }

@@ -148,6 +148,11 @@ void inGameScene::update()
 
 	moveScene();
 
+	if (PLAYER->getEnergy() < -10)
+	{
+		shareTileData();
+	}
+
 	cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "   "
 		<< boolalpha << _tile[MouseIndexY][MouseIndexX].isFullyGrown << "   "
 		<< _tile[MouseIndexY][MouseIndexX].objFrameX << endl;
@@ -668,13 +673,7 @@ void inGameScene::moveScene()
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_HOUSE)
 	{
 		//집으로 넘어갈때 타일 정보 넘겨줌
-		for (int i = 0; i < TILEY; i++)
-		{
-			for (int j = 0; j < TILEX; j++)
-			{
-				PLAYER->saveTile(i, j, _tile[i][j]);
-			}
-		}
+		shareTileData();
 		SOUNDMANAGER->play("doorOpen", 0.2f);
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(762.0f,887.0f);
@@ -682,15 +681,20 @@ void inGameScene::moveScene()
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_MINE)
 	{
 		//집으로 넘어갈때 타일 정보 넘겨줌
-		for (int i = 0; i < TILEY; i++)
-		{
-			for (int j = 0; j < TILEX; j++)
-			{
-				PLAYER->saveTile(i, j, _tile[i][j]);
-			}
-		}
+		shareTileData();
 		SWITCHMANAGER->changeScene("광산화면");
 		SWITCHMANAGER->startFade(390.0f, 166.0f);
+	}
+}
+
+void inGameScene::shareTileData()
+{
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			PLAYER->saveTile(i, j, _tile[i][j]);
+		}
 	}
 }
  
@@ -873,10 +877,9 @@ void inGameScene::hackGround()
 			_tile[MouseIndexY][MouseIndexX].terrainFrameX = 20;
 			_tile[MouseIndexY][MouseIndexX].terrainFrameY = 12;
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 
 			checkHacked();
@@ -950,12 +953,6 @@ void inGameScene::cutdownTree()
 				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 				{
 					_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
-
-					if (PLAYER->getEnergy() > 0)
-					{
-						PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-						PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
-					}
 				}
 				else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
 				{
@@ -1015,6 +1012,10 @@ void inGameScene::cutdownTree()
 					_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
 				}
 			}
+			if (PLAYER->getEnergy() > -20)
+			{
+				PLAYER->setEnergy(PLAYER->getDamage());
+			}
 		}
 
 		//나무 둥치
@@ -1024,12 +1025,6 @@ void inGameScene::cutdownTree()
 			if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 			{
 				_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
-
-				if (PLAYER->getEnergy() > 0)
-				{
-					PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-					PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
-				}
 			}
 			else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
 			{
@@ -1041,9 +1036,10 @@ void inGameScene::cutdownTree()
 				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-				//tagTree temp;
-				//memset(&temp, 0, sizeof(temp));
-				//_tile[MouseIndexY][MouseIndexX].tree = temp;
+			}
+			if (PLAYER->getEnergy() > -20)
+			{
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 		}
 
@@ -1055,10 +1051,9 @@ void inGameScene::cutdownTree()
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 		}
 	}
@@ -1083,10 +1078,9 @@ void inGameScene::breakStone()
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_WOODENFENCE)
@@ -1096,10 +1090,9 @@ void inGameScene::breakStone()
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONEFENCE)
@@ -1109,10 +1102,9 @@ void inGameScene::breakStone()
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 		}
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_CROP || _tile[MouseIndexY][MouseIndexX].terrain == TR_HACKED)
@@ -1127,9 +1119,13 @@ void inGameScene::breakStone()
 				_tile[MouseIndexY][MouseIndexX].terrainFrameX = 1;
 				_tile[MouseIndexY][MouseIndexX].terrainFrameY = 1;
 				_tile[MouseIndexY - 1][MouseIndexX].objOver = OVR_NONE;
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+
 				checkHacked();
+				
+				if (PLAYER->getEnergy() > -20)
+				{
+					PLAYER->setEnergy(PLAYER->getDamage());
+				}
 			}
 		}
 	}
@@ -1171,10 +1167,9 @@ void inGameScene::cutGrass()
 
 						_tile[i - 1][j].objOver = OVR_NONE;
 
-						if (PLAYER->getEnergy() > 0)
+						if (PLAYER->getEnergy() > -20)
 						{
-							PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-							PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+							PLAYER->setEnergy(PLAYER->getDamage());
 						}
 					}
 					if (_tile[i][j].objType == OTY_CROP &&
@@ -1192,6 +1187,11 @@ void inGameScene::cutGrass()
 						_tile[i][j].isFullyGrown = false;
 
 						_tile[i - 1][j].objOver = OVR_NONE;
+
+						if (PLAYER->getEnergy() > -20)
+						{
+							PLAYER->setEnergy(PLAYER->getDamage());
+						}
 					}
 				}
 			}
@@ -1215,6 +1215,14 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_WOODENFENCE;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
+
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
+				if (PLAYER->getEnergy() > -20)
+				{
+					PLAYER->setEnergy(PLAYER->getDamage());
+				}
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCE)
 			{
@@ -1223,8 +1231,15 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCE;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 3;
-			}
 
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
+				if (PLAYER->getEnergy() > -20)
+				{
+					PLAYER->setEnergy(PLAYER->getDamage());
+				}
+			}
 
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCEDOOR)
 			{
@@ -1232,6 +1247,14 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_WOODENFENCEDOOR;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
+				if (PLAYER->getEnergy() > -20)
+				{
+					PLAYER->setEnergy(PLAYER->getDamage());
+				}
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCEDOOR)
 			{
@@ -1239,9 +1262,16 @@ void inGameScene::setFence()
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_STONEFENCEDOOR;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 11;
+
+				PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+					PLAYER->getCurrentInven()->amount - 1);
+
+				if (PLAYER->getEnergy() > -20)
+				{
+					PLAYER->setEnergy(PLAYER->getDamage());
+				}
 			}
-			PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
-				PLAYER->getCurrentInven()->amount - 1);
+			
 		}
 	}
 	checkFence();
@@ -1324,10 +1354,9 @@ void inGameScene::waterGround()
 			SOUNDMANAGER->play("water", 0.2f);
 			PLAYER->setWaterAmount(PLAYER->getWaterAmount() - 2);
 
-			if (PLAYER->getEnergy() > 0)
+			if (PLAYER->getEnergy() > -20)
 			{
-				PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-				PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+				PLAYER->setEnergy(PLAYER->getDamage());
 			}
 
 			_tile[MouseIndexY][MouseIndexX].isWet = true;

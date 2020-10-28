@@ -587,10 +587,9 @@ void mineScene::breakStone()
 		{
 			if (_tile[mouseIndexY][mouseIndexX].objType == OTY_STONE)
 			{
-				if (PLAYER->getEnergy() > 0)
+				if (PLAYER->getEnergy() > -20)
 				{
-					PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-					PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+					PLAYER->setEnergy(PLAYER->getDamage());
 				}
 
 				const char* str = {};
@@ -621,10 +620,9 @@ void mineScene::breakStone()
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
-				if (PLAYER->getEnergy() > 0)
+				if (PLAYER->getEnergy() > -20)
 				{
-					PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-					PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+					PLAYER->setEnergy(PLAYER->getDamage());
 				}
 
 				hpCount[mouseIndexY][mouseIndexX]--;
@@ -685,10 +683,9 @@ void mineScene::cutGrass()
 				{
 					if (_tile[i][j].objType == OTY_WEED)
 					{
-						if (PLAYER->getEnergy() > 0)
+						if (PLAYER->getEnergy() > -20)
 						{
-							PLAYER->setEnergyBarX(PLAYER->getEnergyBarX() + PLAYER->getDamage());
-							PLAYER->setEnergy(PLAYER->getEnergy() - PLAYER->getDamage());
+							PLAYER->setEnergy(PLAYER->getDamage());
 						}
 
 						_tile[i][j].obj = OBJ_NONE;
@@ -1049,7 +1046,7 @@ void mineScene::playerMonsterCollision()
 			else
 			{
 				SOUNDMANAGER->play("hitPlayer", 0.3f);
-				PLAYER->setHpBarX(PLAYER->getHpBarX() + iter->getDmg() * 2);
+				PLAYER->setHp(iter->getDmg() * 2);
 				PLAYER->setIsHit(true);
 			}
 		}
