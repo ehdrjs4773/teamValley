@@ -763,7 +763,7 @@ void mineScene::useLadder(int i, int j)
 	{
 		SOUNDMANAGER->play("stairDown", 0.2f);
 		SWITCHMANAGER->changeScene("인게임화면");
-		SWITCHMANAGER->startFade(288.0f, 64.0f);
+		SWITCHMANAGER->startFade(96.0f, 96.0f);
 	}
 }
 
@@ -777,7 +777,7 @@ void mineScene::useElevator()
 		if (_tile[mouseIndexY][mouseIndexX].objFrameX == 0 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
 		{
 			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(288.0f, 64.0f);
+			SWITCHMANAGER->startFade(96.0f, 96.0f);
 		}
 	}
 }
