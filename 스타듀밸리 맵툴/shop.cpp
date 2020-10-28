@@ -40,14 +40,13 @@ HRESULT shop::init(NPC_KIND npckind)
 	{
 		if (_npcKind == ITEM_NPC)
 		{
-
 			if (_vItem[i].item_kind == ITEM_SEED)
 			{
 				if (_vItem[i].seedKind == SEED_PINETREE ||
 					_vItem[i].seedKind == SEED_MAPLETREE ||
-					_vItem[i].seedKind == SEED_OAKTREE)
+					_vItem[i].seedKind == SEED_OAKTREE ||
+					_vItem[i].seedKind == SEED_TOMATO)
 				{
-					i++;
 				}
 				else _vSeed.push_back(_vItem[i]);
 			}
