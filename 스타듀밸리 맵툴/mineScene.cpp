@@ -121,11 +121,10 @@ void mineScene::update()
 
 	checkCurrentTile(); 
 	PLAYER->update();
-	if (PLAYER->getisSkill())
-	{
-		skillSelect();
-	}
-	else playerInteraction();
+
+	skillSelect();
+
+	playerInteraction();
 
 	PLAYER->playerAnimation();
 	
@@ -922,7 +921,7 @@ void mineScene::skillClick()
 void mineScene::skillSelect()
 {
 	PLAYER->skillUpdate();
-	PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
+	PLAYER->getskill()->setSkill(PLAYER->getCurrentSlotNumber());
 }
 
 void mineScene::setMonsterList()
