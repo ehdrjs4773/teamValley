@@ -173,7 +173,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 					FillRect(hdc, &_kettleBar, brush);
 					DeleteObject(brush);
 
-					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX && _vItem[i].item_kind != ITEM_SKILL)
 					{
 						if (_vItem[i].amount >= 0)
 						{
@@ -199,24 +199,27 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				else
 				{
 					_vItem[i].item_image->render(hdc, _vItem[i].rc.left, _vItem[i].rc.top);
-					if (_vItem[i].amount >= 0)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_BOX && _vItem[i].item_kind != ITEM_SKILL)
 					{
-						char str[64];
-						wsprintf(str, "%d", _vItem[i].amount);
-						int left = 0;
-						if (_vItem[i].amount < 10)
+						if (_vItem[i].amount >= 0)
 						{
-							left = 0;
+							char str[64];
+							wsprintf(str, "%d", _vItem[i].amount);
+							int left = 0;
+							if (_vItem[i].amount < 10)
+							{
+								left = 0;
+							}
+							else if (_vItem[i].amount >= 10 && _vItem[i].amount < 100)
+							{
+								left = 10;
+							}
+							else if (_vItem[i].amount >= 100)
+							{
+								left = 20;
+							}
+							textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 						}
-						else if (_vItem[i].amount >= 10 && _vItem[i].amount < 100)
-						{
-							left = 10;
-						}
-						else if (_vItem[i].amount >= 100)
-						{
-							left = 20;
-						}
-						textOut(hdc, _vItem[i].rc.right - left, _vItem[i].rc.top + 25, str, RGB(0, 0, 0));
 					}
 				}
 			}
@@ -322,7 +325,7 @@ void inventory::quickSlot(HDC hdc)
 				if (_vItem[i].isFrame)
 				{
 					_vItem[i].item_image->frameRender(hdc, _playerTool[i].left, _playerTool[i].top, _vItem[i].indexX, _vItem[i].indexY);
-					if (_vItem[i].item_kind != ITEM_TOOL)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_SKILL)
 					{
 						if (_vItem[i].amount >= 0)
 						{
@@ -344,7 +347,7 @@ void inventory::quickSlot(HDC hdc)
 				else
 				{
 					_vItem[i].item_image->render(hdc, _playerTool[i].left, _playerTool[i].top);
-					if (_vItem[i].item_kind != ITEM_TOOL)
+					if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_SKILL)
 					{
 						if (_vItem[i].amount >= 0)
 						{
@@ -521,7 +524,7 @@ void inventory::renderStorageInventory(HDC hdc)
 		if (_vStorageItem[i].isFrame)
 		{
 			_vStorageItem[i].item_image->frameRender(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top, _vStorageItem[i].indexX, _vStorageItem[i].indexY);
-			if (_vStorageItem[i].item_kind != ITEM_TOOL)
+			if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_SKILL)
 			{
 				{
 					if (_vStorageItem[i].amount >= 0)
@@ -545,7 +548,7 @@ void inventory::renderStorageInventory(HDC hdc)
 		else
 		{
 			_vStorageItem[i].item_image->render(hdc, _vStorageItem[i].rc.left, _vStorageItem[i].rc.top);
-			if (_vStorageItem[i].item_kind != ITEM_TOOL)
+			if (_vItem[i].item_kind != ITEM_TOOL && _vItem[i].item_kind != ITEM_SKILL)
 			{
 				if (_vStorageItem[i].amount >= 0)
 				{
@@ -972,7 +975,7 @@ void inventory::_vItemUpdate()
 						}
 					}
 				}
-				if (INPUT->GetKeyDown(VK_RBUTTON))
+				/*if (INPUT->GetKeyDown(VK_RBUTTON))
 				{
 					if (_vItem[i].item_image != NULL && _vItem[i].item_kind == ITEM_SKILL)
 					{
@@ -999,7 +1002,7 @@ void inventory::_vItemUpdate()
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}

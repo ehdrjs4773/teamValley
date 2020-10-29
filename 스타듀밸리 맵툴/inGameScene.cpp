@@ -36,10 +36,9 @@ HRESULT inGameScene::init()
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
 		_tile[12][40].portal = PT_SHOP;
-		_tile[3][18].portal = PT_MINE;
 		_tile[3][6].portal = PT_MINE;
-
-		_tile[14][11].portal = PT_TOWER;
+		_tile[12][12].portal = PT_TOWER;
+		_tile[12][11].portal = PT_TOWER;
 
 		isSprinkled = false;
 
@@ -2066,8 +2065,8 @@ void inGameScene::ejectItem()
 void inGameScene::skillClick()
 {
 
-	if (PLAYER->getisSkill())
-	{
+	//if (PLAYER->getisSkill())
+	//{
 		for (int i = 0; i < TILEY; i++)
 		{
 			for (int j = 0; j < TILEX; j++)
@@ -2092,18 +2091,18 @@ void inGameScene::skillClick()
 				}
 			}
 		}
-	}
+//	}
 
 }
 
 void inGameScene::skillSelect()
 {
-	if (PLAYER->getisSkill())
-	{
+	//if (PLAYER->getisSkill())
+	//{
 		PLAYER->skillUpdate();
 
-		PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
-	}
+		PLAYER->getskill()->setSkill(PLAYER->getCurrentSlotNumber());
+	//}
 }
 
 void inGameScene::checkHacked()

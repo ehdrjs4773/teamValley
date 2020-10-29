@@ -40,69 +40,28 @@ void skill::render(HDC hdc)
 
 void skill::update()
 {
-	if (!PLAYER->getIsShowInventory())
+	if (!PLAYER->getIsShowInventory() && !PtInRect(&PLAYER->getInventory()->getqucikRect(), _ptMouse))
 	{
 		skillSelect();
 
 		skillActive();
-
 	}
 }
 
 void skill::skillSelect()
 {
-	if (_isShield)
-	{
-		_count++;
-		if (_count % 180 == 0)
-		{
-			_isShield = false;
-		}
-	}
-	for (int i = 0; i < _vSkill.size(); i++)
-	{
-		if (PtInRect(&_skillSlot[i], _ptMouse))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
-			{
-				_isClick = true;
-				skill_state = _vCurrentSkill[i].skillKind;
-				if (skill_state == SKILL_SHIELD)
-				{
-					if (!_isShield)
-					{
-						_isShield = true;
-						_count = 0;
-						if (!SOUNDMANAGER->isPlaySound("shield"))
-						{
-							SOUNDMANAGER->play("shield", 0.2f);
-						}
-						EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
-					}
-				}
-				_save_i = i;
-				cout << "skill " << i << "is activated !" << "\n";
-			}
-		}
-	}
 
+	skill_state = SKILL_END;
 	if (_num >= 0)
 	{
-		_isClick = true;
-
-		skill_state = _vCurrentSkill[_num].skillKind;
-
-		if (skill_state == SKILL_SHIELD)
+		if (PLAYER->getInventory()->getvInven()[_num].item_kind == ITEM_SKILL)
 		{
-			if (!_isShield)
-			{
-				_isShield = true;
-				if (!SOUNDMANAGER->isPlaySound("shield"))
-				{
-					SOUNDMANAGER->play("shield", 0.2f);
-				}
-				EFFECTMANAGER->skillCol("쉴드", PLAYER->getCenterX(), PLAYER->getCenterY());
-			}
+			_isClick = true;
+			if (PLAYER->getInventory()->getvInven()[_num].item_info == "폭발 검") skill_state = SKILL_EXPLOSION;
+			if (PLAYER->getInventory()->getvInven()[_num].item_info == "스파이크 검") skill_state = SKILL_SPIKES;
+			if (PLAYER->getInventory()->getvInven()[_num].item_info == "불 검") skill_state = SKILL_FIRE;
+			if (PLAYER->getInventory()->getvInven()[_num].item_info == "블랙홀 검") skill_state = SKILL_BLACKHOLE;
+			if (PLAYER->getInventory()->getvInven()[_num].item_info == "파이어볼 검") skill_state = SKILL_FIRE_BALL;
 		}
 	}
 }
