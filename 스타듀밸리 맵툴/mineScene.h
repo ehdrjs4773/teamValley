@@ -77,7 +77,7 @@ public:
 	void setOre(int i, int j);
 	void getItem(tagItem item);
 	void ejectItem();
-	void dropItem(tagTile tile, const char* itemInfo);
+	void dropItem(tagTile tile, ITEM itemKind, int indexX);
 	
 	void skillClick();
 	void skillSelect();

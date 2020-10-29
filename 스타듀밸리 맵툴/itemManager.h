@@ -8,6 +8,9 @@ class itemManager :
 private:
 	vector<tagItem> _vItem;
 
+	vector<vector<string>> itemData;
+	vector<string> itemDataLine;
+
 public:
 	HRESULT init();
 	void release();
@@ -19,6 +22,11 @@ public:
 	void addObject();
 	void addSkill();
 	void addOre();
+
+	void readItemCSV();
+	void tokItemDataLine();
+	void addCSVItem();
+	void stringTokenize(const string& str, vector<string>& tokens, const string& delimiters = ",");
 
 	//아이템 추가하는 함수
 	void addItem(
@@ -106,6 +114,8 @@ public:
 		int _sellPrice = 0);
 
 	vector<tagItem> getItem() { return _vItem; }
+	tagItem	findDropItem(ITEM itemKind, int indexX);
+	tagItem	findDropItem(ITEM itemKind, SEED seedKind);
 	tagItem findItem(const char* strKey);
 	tagItem findItemByKind(ITEM itemKind, int indexX);
 	const char* findItem(ITEM itemKind, SEED seedKind);

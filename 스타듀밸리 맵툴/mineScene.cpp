@@ -598,14 +598,12 @@ void mineScene::breakStone()
 					PLAYER->setEnergy(PLAYER->getDamage());
 				}
 
-				const char* str = {};
 				int number = 0;
 
 				number = RANDOM->range(4);
 				for (int i = 0; i < number; i++)
 				{
-					RANDOM->range(1, 5) == 0 ? str = "¼®Åº" : str = "µ¹";
-					dropItem(_tile[mouseIndexY][mouseIndexX], str);
+					dropItem(_tile[mouseIndexY][mouseIndexX], ITEM_DEBRIS, 3);
 				}
 				if (RANDOM->range(20) == 0)
 				{
@@ -634,18 +632,18 @@ void mineScene::breakStone()
 				hpCount[mouseIndexY][mouseIndexX]--;
 				if (hpCount[mouseIndexY][mouseIndexX] <= 0)
 				{
-					const char* str = {};
+					int tempIndexX = 0;
 					int number = 0;
 				
-					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 6) { str = "±¸¸®Á¶°¢"; }
-					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 7) { str = "Ã¶Á¶°¢"; }
-					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 8) { str = "±ÝÁ¶°¢"; }
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 6) { tempIndexX = 6; }
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 7) { tempIndexX = 8; }
+					if (_tile[mouseIndexY][mouseIndexX].objFrameX == 8) { tempIndexX = 12; }
 				
 					number = RANDOM->range(1, 4);
 				
 					for (int i = 0; i < number; i++)
 					{
-						dropItem(_tile[mouseIndexY][mouseIndexX], str);
+						dropItem(_tile[mouseIndexY][mouseIndexX], ITEM_ORE, tempIndexX);
 					}
 					_tile[mouseIndexY][mouseIndexX].obj = OBJ_NONE;
 					_tile[mouseIndexY][mouseIndexX].objType = OTY_NONE;
@@ -819,7 +817,8 @@ void mineScene::getItem(tagItem item)
 	bool isAdded = false;
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PLAYER->getInven()->at(i).item_info == item.item_info)
+		if (PLAYER->getInven()->at(i).item_kind == item.item_kind
+			&& PLAYER->getInven()->at(i).indexX == item.indexX)
 		{
 			PLAYER->setInvenItemAmount(i, PLAYER->getInven()->at(i).amount + 1);
 			isAdded = true;
@@ -833,7 +832,17 @@ void mineScene::getItem(tagItem item)
 		{
 			if (PLAYER->getInven()->at(i).item_image == NULL)
 			{
-				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
+				tagItem temp;
+				temp = item;
+				if (item.item_kind == ITEM_DEBRIS)
+				{
+					temp.item_image = IMAGEMANAGER->findImage("¿­¸Å");
+				}
+				else if (item.item_kind == ITEM_ORE)
+				{
+					temp.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
+				}
+				PLAYER->setInvenItem(i, temp);
 				break;
 			}
 		}
@@ -878,30 +887,19 @@ void mineScene::ejectItem()
 	}
 }
 
-void mineScene::dropItem(tagTile tile, const char * itemInfo)
+void mineScene::dropItem(tagTile tile, ITEM itemKind, int indexX)
 {
 	tagItemOnField temp;
-	temp.item = ITEMMANAGER->findItem(itemInfo);
-	if (itemInfo == "¼®Åº")
-	{
-		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
-	}
-	else if(itemInfo == "±¸¸®Á¶°¢")
-	{
-		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
-	}
-	else if (itemInfo == "Ã¶Á¶°¢")
-	{
-		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
-	}
-	else if (itemInfo == "±ÝÁ¶°¢")
-	{
-		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
-	}
-	else if (itemInfo == "µ¹")
+	temp.item = ITEMMANAGER->findDropItem(itemKind, indexX);
+	if (itemKind == ITEM_DEBRIS)
 	{
 		temp.item.item_image = IMAGEMANAGER->findImage("¿­¸Å(¶¥)");
 	}
+	else if(itemKind == ITEM_ORE)
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("±¤¹°");
+	}
+	//ÃßÈÄ Ãß°¡
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
 	temp.centerY = (float)tile.rc.top + (tile.rc.bottom - tile.rc.top);
