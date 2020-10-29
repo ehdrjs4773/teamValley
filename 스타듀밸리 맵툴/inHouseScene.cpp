@@ -85,9 +85,7 @@ void inHouseScene::render()
 					RECT temp{ yesBox.left,yesBox.top,yesBox.right,yesBox.bottom };
 					FrameRect(getMemDC(), temp, RGB(255, 0, 0));
 				}
-
 			}
-
 		}
 	}
 }

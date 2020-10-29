@@ -176,6 +176,7 @@ void itemManager::addCSVItem()
 			temp.indexY = (atoi)(itemData[i][11].c_str());
 			temp.amount = (atoi)(itemData[i][12].c_str());
 			temp.isFrame = (atoi)(itemData[i][13].c_str());
+			temp.grow = (atoi)(itemData[i][14].c_str());
 
 			_vItem.push_back(temp);
 	}
