@@ -942,7 +942,6 @@ void player::playerAnimation()
 	}
 }
 
-
 void player::playerRender()
 {
 	switch (_pState)
@@ -1185,7 +1184,6 @@ void player::playerRender()
 		break;
 	}
 }
-
 
 void player::openPlayerStorageCover()
 {
@@ -1831,14 +1829,13 @@ void player::weatherRender(HDC hdc)
 
 void player::limitEnergy()
 {
-	if (playerEnergy <= 0 && playerEnergy >= -20)
+	if (playerEnergy <= 20 && playerEnergy > 0)
 	{
 		speed = 0.5f;
-		totalEnergyDmg = 138;
 		aniCountControl = 15;
 		aniCountControl2 = 10;
 	}
-	else if (playerEnergy < -20)
+	else if (playerEnergy <= 0)
 	{
 		saveMap();
 		savePlayerData();
@@ -1850,5 +1847,7 @@ void player::limitEnergy()
 	else
 	{
 		speed = 1.5f;
+		aniCountControl = 10;
+		aniCountControl2 = 5;
 	}
 }
