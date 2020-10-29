@@ -57,7 +57,7 @@ void towerScene::update()
 		{
 			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(384.0f, 192.0f);
+			SWITCHMANAGER->startFade(176.0f, 224.0f);
 		}
 	}
 
