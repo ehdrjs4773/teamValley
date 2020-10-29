@@ -129,6 +129,7 @@ void  player::update()
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);
+				_inventory->setCraftPage(false);
 			}
 		}
 	}

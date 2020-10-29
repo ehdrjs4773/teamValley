@@ -149,6 +149,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("판매UI", "Images/shop/sellBox.bmp", 400, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점씨앗탭", "Images/shop/씨앗아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점도구탭", "Images/shop/도구아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점판매테두리", "Images/shop/sellImageBox.bmp", 60, 60);
 
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
