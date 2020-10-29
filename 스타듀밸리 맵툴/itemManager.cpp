@@ -28,11 +28,8 @@ HRESULT itemManager::init()
 	addCSVItem();
 
 	addSkill();
-	addSeed();
-	addFruit();
 	addWeapon();
 	addTool();
-	addObject();
 	addOre();
 
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");

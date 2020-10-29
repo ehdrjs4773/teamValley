@@ -31,8 +31,15 @@ HRESULT inGameScene::init()
 		checkPlayerTile();
 		loadCount = 1;
 
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				_tile[i][j].portal = PT_NONE;
+			}
+		}
 		_tile[31][23].portal = PT_HOUSE;
-		_tile[29][39].portal = PT_BARN;
+		_tile[27][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
 		_tile[12][40].portal = PT_SHOP;
@@ -297,9 +304,67 @@ void inGameScene::renderObjects(int i, int j)
 								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
 						}
 					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 				}
-				IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				else if (_tile[i][j].objType == OTY_TOWER && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 10; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_HOUSE && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 4; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_WELL && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 4; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_BARN && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 5; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else
+				{
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				
 			}
 			else if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
 				|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
