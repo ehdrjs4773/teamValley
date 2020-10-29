@@ -1,151 +1,49 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v150\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  inventory.cpp
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(82): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(104): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(115): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(137): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(143): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(163): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(238): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(464): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(507): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(656): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(656): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(659): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(659): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(662): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(662): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(665): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(665): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(668): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(668): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(671): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(671): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(674): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(674): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(677): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(677): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(680): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(680): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(683): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(683): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(686): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(686): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(689): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(689): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(692): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(692): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(695): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(695): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(697): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(697): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(729): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(729): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(732): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(732): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(735): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(735): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(738): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(738): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(741): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(741): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(744): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(744): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(747): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(747): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(750): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(750): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(753): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(753): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(756): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(756): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(759): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(759): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(762): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(762): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(765): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(765): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(768): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(768): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(770): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(770): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(805): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(805): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(808): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(808): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(811): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(811): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(814): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(814): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(817): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(817): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(820): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(820): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(823): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(823): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(826): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(826): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(829): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(829): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(832): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(832): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(835): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(835): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(838): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(838): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(841): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(841): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(844): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(844): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(846): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(846): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(915): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(935): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(1011): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(1019): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(1032): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(1040): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\inventory.cpp(1056): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  shop.cpp
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(39): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(114): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(206): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(325): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(357): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(387): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(403): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(403): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(408): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(408): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(413): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(413): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(418): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(418): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(422): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(422): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(426): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(426): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(429): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(429): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(433): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(433): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(437): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(437): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(441): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(441): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(445): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(445): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(508): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(633): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(739): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(748): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(772): warning C4018: '>': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_27\documents\teamvalley\스타듀밸리 맵툴\shop.cpp(775): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  mineScene.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(118): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\monster.h(122): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(22): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(65): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(66): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(71): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(89): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(138): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(153): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(200): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(202): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(218): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(241): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(243): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(277): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(278): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(313): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(314): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(342): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(343): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(371): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(372): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(417): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(418): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(669): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(672): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(675): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(678): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(681): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(683): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(854): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(855): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(862): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(878): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(882): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(907): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(948): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(947): warning C4101: 'y' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(947): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1078): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\minescene.cpp(1081): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  1 of 2072 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 2333 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  WindowAPI.vcxproj -> C:\Users\kga_27\Documents\teamValley\스타듀밸리 맵툴\Release\Stardew Valley.exe
+  WindowAPI.vcxproj -> C:\Users\Program\Desktop\Stardew Valley\스타듀밸리 맵툴\Release\Stardew Valley.exe

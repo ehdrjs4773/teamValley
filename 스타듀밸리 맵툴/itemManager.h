@@ -114,6 +114,8 @@ public:
 		int _sellPrice = 0);
 
 	vector<tagItem> getItem() { return _vItem; }
+	tagItem	findDropItem(ITEM itemKind, int indexX);
+	tagItem	findDropItem(ITEM itemKind, SEED seedKind);
 	tagItem findItem(const char* strKey);
 	tagItem findItemByKind(ITEM itemKind, int indexX);
 	const char* findItem(ITEM itemKind, SEED seedKind);

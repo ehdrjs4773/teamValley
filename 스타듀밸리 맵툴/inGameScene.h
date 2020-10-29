@@ -76,8 +76,8 @@ public:
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);
 	void getItem(tagItem item);
-	void dropFruit(tagTile tile, SEED seedType);
-	void dropItem(tagTile tile, const char* itemInfo);
+	void dropFruit(tagTile tile, ITEM itemKind, SEED seedType);
+	void dropItem(tagTile tile, ITEM itemKind, int indexX);
 	void ejectItem();
 
 	void skillClick();

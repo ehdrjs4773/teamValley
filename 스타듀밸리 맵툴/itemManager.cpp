@@ -23,6 +23,10 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("스프링클러아이템", "Images/BMP/스프링클러아이템.bmp", 40, 120, 1, 3);
 	IMAGEMANAGER->addFrameImage("펜스", "Images/펜스/펜스아이템.bmp", 80, 40, 2, 1);
 
+	readItemCSV();
+
+	addCSVItem();
+
 	addSkill();
 	addSeed();
 	addFruit();
@@ -30,6 +34,7 @@ HRESULT itemManager::init()
 	addTool();
 	addObject();
 	addOre();
+
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER2, true, 0, 1, "강화스프링클러");
 	addSprinkler("스프링클러아이템", ITEM_SPRINKLER3, true, 0, 2, "고급스프링클러");
@@ -43,7 +48,6 @@ void itemManager::release()
 
 void itemManager::addSeed()
 {
-	addCSVItem();
 	//addSeed("씨앗", ITEM_SEED, 0, 0, SEED_HOPS, "홉 씨앗", 25, 15);
 	//addSeed("씨앗", ITEM_SEED, 1, 0, SEED_RADISH, "무 씨앗", 40, 25);
 	//addSeed("씨앗", ITEM_SEED, 2, 0, SEED_WHEAT, "밀 씨앗", 10, 5);
@@ -60,9 +64,9 @@ void itemManager::addSeed()
 	//addSeed("씨앗", ITEM_SEED, 5, 1, SEED_GRAPE, "포도 씨앗", 150, 125);
 	//addSeed("씨앗", ITEM_SEED, 6, 1, SEED_STARFRUIT, "스타후르츠 씨앗", 400, 250);
 
-	addSeed("열매", ITEM_SEED, 0, 2, SEED_PINETREE, "소나무 씨앗", 0, 20);
-	addSeed("열매", ITEM_SEED, 1, 2, SEED_MAPLETREE, "단풍나무 씨앗", 0, 20);
-	addSeed("열매", ITEM_SEED, 2, 2, SEED_OAKTREE, "참나무 씨앗", 0, 20);
+	//addSeed("열매", ITEM_SEED, 0, 2, SEED_PINETREE, "소나무 씨앗", 0, 20);
+	//addSeed("열매", ITEM_SEED, 1, 2, SEED_MAPLETREE, "단풍나무 씨앗", 0, 20);
+	//addSeed("열매", ITEM_SEED, 2, 2, SEED_OAKTREE, "참나무 씨앗", 0, 20);
 }
 
 void itemManager::addWeapon()
@@ -85,29 +89,29 @@ void itemManager::addTool()
 
 void itemManager::addFruit()
 {
-	addFruit("열매", ITEM_FRUIT, 0, 0, SEED_HOPS, "홉", 0, 20);
-	addFruit("열매", ITEM_FRUIT, 1, 0, SEED_RADISH, "무", 0, 110);
-	addFruit("열매", ITEM_FRUIT, 2, 0, SEED_WHEAT, "밀", 0, 35);
-	addFruit("열매", ITEM_FRUIT, 3, 0, SEED_TOMATO, "토마토", 0, 60);
-	addFruit("열매", ITEM_FRUIT, 4, 0, SEED_GREENBEAN, "완두콩", 0, 35);
-	addFruit("열매", ITEM_FRUIT, 5, 0, SEED_MELON, "멜론", 0, 250);
-	addFruit("열매", ITEM_FRUIT, 6, 0, SEED_POPPY, "양귀비", 0, 275);
-	addFruit("열매", ITEM_FRUIT, 7, 0, SEED_SUMMERSPANGLE, "여름별꽃", 0, 220);
-	addFruit("열매", ITEM_FRUIT, 0, 1, SEED_HOTPEPPER, "고추", 0, 70);
-	addFruit("열매", ITEM_FRUIT, 1, 1, SEED_CORN, "옥수수", 0, 80);
-	addFruit("열매", ITEM_FRUIT, 2, 1, SEED_BLUEBERRY, "블루베리", 0, 30); 
-	addFruit("열매", ITEM_FRUIT, 3, 1, SEED_SUNFLOWER, "해바라기", 0, 250);
-	addFruit("열매", ITEM_FRUIT, 4, 1, SEED_REDCABBAGE, "적양배추", 0, 280);
-	addFruit("열매", ITEM_FRUIT, 5, 1, SEED_GRAPE, "포도", 0, 100);
-	addFruit("열매", ITEM_FRUIT, 6, 1, SEED_STARFRUIT, "스타후르츠", 0, 750);
+	//addFruit("열매", ITEM_FRUIT, 0, 0, SEED_HOPS, "홉", 0, 20);
+	//addFruit("열매", ITEM_FRUIT, 1, 0, SEED_RADISH, "무", 0, 110);
+	//addFruit("열매", ITEM_FRUIT, 2, 0, SEED_WHEAT, "밀", 0, 35);
+	//addFruit("열매", ITEM_FRUIT, 3, 0, SEED_TOMATO, "토마토", 0, 60);
+	//addFruit("열매", ITEM_FRUIT, 4, 0, SEED_GREENBEAN, "완두콩", 0, 35);
+	//addFruit("열매", ITEM_FRUIT, 5, 0, SEED_MELON, "멜론", 0, 250);
+	//addFruit("열매", ITEM_FRUIT, 6, 0, SEED_POPPY, "양귀비", 0, 275);
+	//addFruit("열매", ITEM_FRUIT, 7, 0, SEED_SUMMERSPANGLE, "여름별꽃", 0, 220);
+	//addFruit("열매", ITEM_FRUIT, 0, 1, SEED_HOTPEPPER, "고추", 0, 70);
+	//addFruit("열매", ITEM_FRUIT, 1, 1, SEED_CORN, "옥수수", 0, 80);
+	//addFruit("열매", ITEM_FRUIT, 2, 1, SEED_BLUEBERRY, "블루베리", 0, 30); 
+	//addFruit("열매", ITEM_FRUIT, 3, 1, SEED_SUNFLOWER, "해바라기", 0, 250);
+	//addFruit("열매", ITEM_FRUIT, 4, 1, SEED_REDCABBAGE, "적양배추", 0, 280);
+	//addFruit("열매", ITEM_FRUIT, 5, 1, SEED_GRAPE, "포도", 0, 100);
+	//addFruit("열매", ITEM_FRUIT, 6, 1, SEED_STARFRUIT, "스타후르츠", 0, 750);
 }
 
 void itemManager::addObject()
 {
-	addObjectItem("열매", ITEM_DEBRIS, 3, 2, "돌", 0, 5);
-	addObjectItem("열매", ITEM_DEBRIS, 4, 2, "나무", 0, 5);
-	addObjectItem("펜스", ITEM_WOODENFENCE, 0, 0, "나무울타리", 0, 5);
-	addObjectItem("펜스", ITEM_STONEFENCE, 1, 0, "석재울타리", 0, 5);
+	//addObjectItem("열매", ITEM_DEBRIS, 3, 2, "돌", 0, 5);
+	//addObjectItem("열매", ITEM_DEBRIS, 4, 2, "나무", 0, 5);
+	//addObjectItem("펜스", ITEM_WOODENFENCE, 0, 0, "나무울타리", 0, 5);
+	//addObjectItem("펜스", ITEM_STONEFENCE, 1, 0, "석재울타리", 0, 5);
 }
 
 void itemManager::addSkill()
@@ -121,21 +125,26 @@ void itemManager::addSkill()
 
 void itemManager::addOre()
 {
-	addOre("광물", ITEM_ORE, true, 6, 3, "구리조각");
-	addOre("광물", ITEM_ORE, true, 8, 3, "철조각");
-	addOre("광물", ITEM_ORE, true, 12, 3, "금조각");
+	//addOre("광물", ITEM_ORE, true, 6, 3, "구리조각");
+	//addOre("광물", ITEM_ORE, true, 8, 3, "철조각");
+	//addOre("광물", ITEM_ORE, true, 12, 3, "금조각");
 }
 
 void itemManager::readItemCSV()
 {
 	fstream fs;
 	string buf;
-
+	int a = 0;
 	fs.open("save/itemData.csv", ios::in);
 
 	while (!fs.eof())
 	{
 		getline(fs, buf, '\n');
+		if (a == 0)
+		{
+			a++;
+			continue;
+		}
 		itemDataLine.push_back(buf);
 	}
 	tokItemDataLine();
@@ -144,16 +153,16 @@ void itemManager::readItemCSV()
 
 void itemManager::tokItemDataLine()
 {
-	string buf;
 	for (int i = 0; i < itemDataLine.size(); i++)
 	{
-		stringTokenize(itemDataLine[i], itemData[i]);
+		vector<string> temp;
+		stringTokenize(itemDataLine[i], temp);
 	}
 }
 
 void itemManager::addCSVItem()
 {
-	for (int i = 0; i < itemData.size(); i++)
+	for (int i = 0; i < itemData.size() - 1; i++)
 	{
 			tagItem temp;
 			temp.item_image = IMAGEMANAGER->findImage(itemData[i][0]);
@@ -170,6 +179,8 @@ void itemManager::addCSVItem()
 			temp.indexY = (atoi)(itemData[i][11].c_str());
 			temp.amount = (atoi)(itemData[i][12].c_str());
 			temp.isFrame = (atoi)(itemData[i][13].c_str());
+
+			_vItem.push_back(temp);
 	}
 }
 
@@ -189,6 +200,7 @@ void itemManager::stringTokenize(const string & str, vector<string>& tokens, con
 		//다음 구분자가 아닌 글자를 찾는다
 		pos = str.find_first_of(delimiters, lastPos);
 	}
+	itemData.push_back(tokens);
 }
 
 void itemManager::addItem(const char* strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char* _itemInfo, int _buyPrice, int _sellPrice)
@@ -328,6 +340,28 @@ void itemManager::addSprinkler(const char * strKey, ITEM _ITEMKIND, bool _isFram
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
 	_vItem.push_back(temp);
+}
+
+tagItem itemManager::findDropItem(ITEM itemKind, int indexX)
+{
+	for (auto iter : _vItem)
+	{
+		if (iter.item_kind == itemKind && iter.indexX == indexX)
+		{
+			return iter;
+		}
+	}
+}
+
+tagItem itemManager::findDropItem(ITEM itemKind, SEED seedKind)
+{
+	for (auto iter : _vItem)
+	{
+		if (iter.item_kind == itemKind && iter.seedKind == seedKind)
+		{
+			return iter;
+		}
+	}
 }
 
 tagItem itemManager::findItem(const char* strKey)

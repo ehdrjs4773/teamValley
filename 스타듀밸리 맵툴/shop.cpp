@@ -403,17 +403,14 @@ void shop::render()
 				sprintf(temp, "WEAPON", sizeof("WEAPON"));
 				break;
 			case ITEM_TOOL:
-				
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "TOOL", sizeof("TOOL"));
 				break;
 			case ITEM_BIGCRAFTABLE:
-
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "BIGCRAFTABLE", sizeof("BIGCRAFTABLE"));
 				break;
 			case ITEM_RESOURCE:
-
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "RESOURCE", sizeof("RESOURCE"));
 				break;
@@ -424,7 +421,8 @@ void shop::render()
 			case ITEM_SEED:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "SEED", sizeof("SEED"));
-			case 	ITEM_FRUIT:
+				break;
+			case ITEM_FRUIT:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "FRUIT", sizeof("FRUIT"));
 				break;

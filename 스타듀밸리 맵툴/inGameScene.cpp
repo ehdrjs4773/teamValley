@@ -846,7 +846,7 @@ void inGameScene::playerInteraction()
 			}
 		}
 	
-		cout << currentIndexX << "\t" << currentIndexY << "\t" <<endl;
+		//cout << currentIndexX << "\t" << currentIndexY << "\t" <<endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -917,18 +917,18 @@ void inGameScene::cutdownTree()
 						{
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "¼Ò³ª¹« ¾¾¾Ñ");
+								dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_PINETREE);
 							}
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "´ÜÇ³³ª¹« ¾¾¾Ñ");
+								dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_MAPLETREE);
 							}
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "Âü³ª¹« ¾¾¾Ñ");
+								dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_OAKTREE);
 							}
 						}
-						dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+						dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
 					}
 					_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
 					if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
@@ -985,7 +985,7 @@ void inGameScene::cutdownTree()
 			{
 				for (int i = 0; i < 3; i++)
 				{
-					dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+					dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
 				}
 
 				_tile[MouseIndexY][MouseIndexX].seedType = SEED_NONE;
@@ -1002,7 +1002,7 @@ void inGameScene::cutdownTree()
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
 		{
 			SOUNDMANAGER->play("³ª¹«Âï±â", 0.2f);
-			dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+			dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
@@ -1029,7 +1029,7 @@ void inGameScene::breakStone()
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONE)
 		{
 			SOUNDMANAGER->play("removeRock", 0.2f);
-			dropItem(_tile[MouseIndexY][MouseIndexX], "µ¹");
+			dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 3);
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
@@ -1041,7 +1041,7 @@ void inGameScene::breakStone()
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_WOODENFENCE)
 		{
 			SOUNDMANAGER->play("removeRock", 0.2f);
-			dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«¿ïÅ¸¸®");
+			dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_WOODENFENCE, 0);
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
@@ -1053,7 +1053,7 @@ void inGameScene::breakStone()
 		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_STONEFENCE)
 		{
 			SOUNDMANAGER->play("removeRock", 0.2f);
-			dropItem(_tile[MouseIndexY][MouseIndexX], "¼®Àç¿ïÅ¸¸®");
+			dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_STONEFENCE, 1);
 			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
 			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
 
@@ -1131,7 +1131,7 @@ void inGameScene::cutGrass()
 						&& _tile[i][j].isFullyGrown == true)
 					{
 						SOUNDMANAGER->play("removeGrass", 0.2f);
-						dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+						dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
 						_tile[i][j].obj = OBJ_NONE;
 						_tile[i][j].objType = OTY_NONE;
 						_tile[i][j].seedType = SEED_NONE;
@@ -1475,7 +1475,7 @@ void inGameScene::harvest()
 	if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 	{
 		SOUNDMANAGER->play("harvest", 0.2f);
-		dropFruit(_tile[MouseIndexY][MouseIndexX], _tile[MouseIndexY][MouseIndexX].seedType);
+		dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
 		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
@@ -1526,18 +1526,18 @@ void inGameScene::attack()
 						{
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "¼Ò³ª¹« ¾¾¾Ñ");
+								dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_PINETREE);
 							}
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_MAPLE)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "´ÜÇ³³ª¹« ¾¾¾Ñ");
+								dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_MAPLETREE);
 							}
 							if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_OAK)
 							{
-								dropItem(_tile[MouseIndexY][MouseIndexX], "Âü³ª¹« ¾¾¾Ñ");
+								dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_SEED, SEED_OAKTREE);
 							}
 						}
-						dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+						dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
 					}
 					_tile[MouseIndexY][MouseIndexX].objType = OTY_TREETRUNK;
 					if (_tile[MouseIndexY][MouseIndexX].tree.treeType == TREE_PINE)
@@ -1554,40 +1554,40 @@ void inGameScene::attack()
 					{
 						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexX = 2;
 						_tile[MouseIndexY][MouseIndexX].tree.bodyIndexY = 7;
+						_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
 					}
-					_tile[MouseIndexY][MouseIndexX].tree.hp = 3;
 				}
 			}
-		}
 
-		//³ª¹« µÕÄ¡
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
-		{
-			if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
+			//³ª¹« µÕÄ¡
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_TREETRUNK)
 			{
-				_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
-			}
-			else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
-			{
-				for (int i = 0; i < 3; i++)
+				if (_tile[MouseIndexY][MouseIndexX].tree.hp > 0)
 				{
-					dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
+					_tile[MouseIndexY][MouseIndexX].tree.hp -= 1;
 				}
+				else if (_tile[MouseIndexY][MouseIndexX].tree.hp == 0)
+				{
+					for (int i = 0; i < 3; i++)
+					{
+						dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
+					}
 
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-				tagTree temp;
-				memset(&temp, 0, sizeof(temp));
-				_tile[MouseIndexY][MouseIndexX].tree = temp;
+					_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+					_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+					tagTree temp;
+					memset(&temp, 0, sizeof(temp));
+					_tile[MouseIndexY][MouseIndexX].tree = temp;
+				}
 			}
-		}
 
-		//³ª¹µ°¡Áö
-		if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
-		{
-			dropItem(_tile[MouseIndexY][MouseIndexX], "³ª¹«");
-			_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
-			_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			//³ª¹µ°¡Áö
+			if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BRANCH)
+			{
+				dropItem(_tile[MouseIndexY][MouseIndexX], ITEM_DEBRIS, 4);
+				_tile[MouseIndexY][MouseIndexX].obj = OBJ_NONE;
+				_tile[MouseIndexY][MouseIndexX].objType = OTY_NONE;
+			}
 		}
 	}
 }
@@ -1913,10 +1913,10 @@ void inGameScene::getItem(tagItem item)
 	}
 }
 
-void inGameScene::dropFruit(tagTile tile, SEED seedType)
+void inGameScene::dropFruit(tagTile tile, ITEM itemKind, SEED seedType)
 {
 	const char* str = nullptr;
-	switch (seedType)
+	/*switch (seedType)
 	{
 	case SEED_NONE:
 		break;
@@ -1965,12 +1965,21 @@ void inGameScene::dropFruit(tagTile tile, SEED seedType)
 	case SEED_HOPS:
 		str = "È©";
 		break;
+	case SEED_PINETREE:
+		str = "¼Ò³ª¹« ¾¾¾Ñ";
+		break;
+	case SEED_MAPLETREE:
+		str = "´ÜÇ³³ª¹« ¾¾¾Ñ";
+		break;
+	case SEED_OAKTREE:
+		str = "Âü³ª¹« ¾¾¾Ñ";
+		break;
 	default:
 		break;
-	}
+	}*/
 
 	tagItemOnField temp;
-	temp.item = ITEMMANAGER->findItem(str);
+	temp.item = ITEMMANAGER->findDropItem(itemKind, seedType);
 	temp.item.item_image = IMAGEMANAGER->findImage("¿­¸Å(¶¥)");
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
@@ -1984,10 +1993,10 @@ void inGameScene::dropFruit(tagTile tile, SEED seedType)
 	_vItemOnField.push_back(temp);
 }
 
-void inGameScene::dropItem(tagTile tile, const char * itemInfo)
+void inGameScene::dropItem(tagTile tile, ITEM itemKind, int indexX)
 {
 	tagItemOnField temp;
-	temp.item = ITEMMANAGER->findItem(itemInfo);
+	temp.item = ITEMMANAGER->findDropItem(itemKind, indexX);
 	if (temp.item.item_kind == ITEM_WOODENFENCE || temp.item.item_kind == ITEM_STONEFENCE)
 	{
 		temp.item.item_image = IMAGEMANAGER->findImage("Ææ½º(¶¥)");
