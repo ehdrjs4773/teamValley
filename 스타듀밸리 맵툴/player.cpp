@@ -30,6 +30,12 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
 
+	IMAGEMANAGER->addFrameImage("blackholeSword", "Images/마법검/blackholeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("explosionSword", "Images/마법검/explosionSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("fireballSword", "Images/마법검/fireballSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("fireSword", "Images/마법검/fireSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("spikeSword", "Images/마법검/spikeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
@@ -736,6 +742,231 @@ void player::playerAnimation()
 			break;
 		}
 		break;
+	/*case 블랙홀:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;
+	case 폭발:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;
+	case 파이어볼:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;
+	case 파이어:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;
+	case 스파이크:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					index = 0;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					index = 0;
+				}
+			}
+			break;
+		}
+		break;*/
 	case CARRYSTAND:
 		index = 0;
 		break;
@@ -917,8 +1148,89 @@ void player::playerRender()
 			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 20);
 			break;
 		}
+	/*case 블랙홀:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case 폭발:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case 파이어볼:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case 파이어:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case 스파이크:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}*/
 
 	}
+
 }
 
 void player::openPlayerStorageCover()

@@ -62,6 +62,11 @@ private:
 	image* backEnergyBar;
 	image* playerStorage;
 	image* _cutdownTree;
+	image* blackholeSword;
+	image* explosionSword;
+	image* fireballSword;
+	image* fireSword;
+	image* spikeSword;
 
 	inventory* _inventory;
 

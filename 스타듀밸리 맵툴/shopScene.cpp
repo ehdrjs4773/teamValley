@@ -18,6 +18,7 @@ HRESULT shopScene::init()
 
 	_itemNpc = new npc;
 	_itemNpc->init(ITEM_NPC);
+
 	_itemNpc->setPos(270, 220);
 
 	_npcPtr = _itemNpc;
