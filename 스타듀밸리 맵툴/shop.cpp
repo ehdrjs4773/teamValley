@@ -502,8 +502,8 @@ void shop::render()
 		FrameRect(getMemDC(), sell_min, RGB(0, 0, 0));
 		sell_item_img->setX(WINSIZEX / 2 - 15);
 		sell_item_img->setY(WINSIZEY / 2 - 60);
-		Rectangle(getMemDC(), sell_item_img->boudingBoxWithFrame());
-		sell_item_img->frameRender(getMemDC(), sell_item_img->getX(), sell_item_img->getY(), sell_item_frameX, sell_item_frameY);
+		IMAGEMANAGER->render("상점판매테두리", getMemDC(), sell_item_img->boudingBoxWithFrame().left-10, sell_item_img->boudingBoxWithFrame().top);
+		sell_item_img->frameRender(getMemDC(), sell_item_img->getX(), sell_item_img->getY()+10, sell_item_frameX, sell_item_frameY);
 		
 		char sell_display[256];
 		sprintf(sell_display, "%d", sell_amount);
