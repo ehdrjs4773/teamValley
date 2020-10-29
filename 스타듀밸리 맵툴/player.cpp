@@ -30,6 +30,21 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
 
+	IMAGEMANAGER->addFrameImage("blackholeSword", "Images/마법검/blackholeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	blackholeSword = IMAGEMANAGER->findImage("blackholeSword");
+
+	IMAGEMANAGER->addFrameImage("explosionSword", "Images/마법검/explosionSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	explosionSword = IMAGEMANAGER->findImage("explosionSword");
+
+	IMAGEMANAGER->addFrameImage("fireballSword", "Images/마법검/fireballSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	fireballSword = IMAGEMANAGER->findImage("fireballSword");
+
+	IMAGEMANAGER->addFrameImage("fireSword", "Images/마법검/fireSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	fireSword = IMAGEMANAGER->findImage("fireSword");
+
+	IMAGEMANAGER->addFrameImage("spikeSword", "Images/마법검/spikeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	spikeSword = IMAGEMANAGER->findImage("spikeSword");
+
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
@@ -163,6 +178,8 @@ void  player::update()
 	limitEnergy();
 	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88 + totalHpDmg, 20, playerHp);
 	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88 + totalEnergyDmg, 20, playerEnergy);
+
+
 }
 
 void player::render()
@@ -369,7 +386,7 @@ void player::playerAnimation()
 				if (index > 5)
 				{
 					index = 0;
-				}				
+				}
 			}
 			break;
 		}
@@ -419,7 +436,6 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-
 	case CUTDOWNTREE:
 		switch (_pDirection)
 		{
@@ -465,7 +481,6 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-
 	case CUTGRASS:
 		switch (_pDirection)
 		{
@@ -646,7 +661,204 @@ void player::playerAnimation()
 			break;
 		}
 		break;
-	case ATTACK:
+	case P_SKILL_BLACKHOLE:
+		if (_skill->getPointX() >= currentX)
+		{
+			_pDirection = RIGHT;
+		}
+		else if (_skill->getPointX() < currentX)
+		{
+			_pDirection = LEFT;
+		}
+
+		if (_skill->getPointY() >= currentY)
+		{
+			_pDirection = DOWN;
+		}
+		else if (_skill->getPointY() < currentY)
+		{
+			_pDirection = UP;
+		}
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
+	case P_SKILL_EXPLOSION:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
+	case P_SKILL_FIRE_BALL:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
+	case P_SKILL_FIRE:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case LEFT:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case UP:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 2)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		case DOWN:
+			if (count % aniCountControl2 == 0)
+			{
+				index++;
+				if (index > 5)
+				{
+					_pState = STAND;
+				}
+			}
+			break;
+		}
+		break;
+	case P_SKILL_SPIKES:
 		switch (_pDirection)
 		{
 		case RIGHT:
@@ -692,6 +904,7 @@ void player::playerAnimation()
 		}
 		break;
 	case CARRY:
+	{
 		switch (_pDirection)
 		{
 		case RIGHT:
@@ -740,7 +953,9 @@ void player::playerAnimation()
 		index = 0;
 		break;
 	}
+	}
 }
+
 
 void player::playerRender()
 {
@@ -867,20 +1082,84 @@ void player::playerRender()
 		break;
 	case FILLWATER:
 		break;
-	case ATTACK:
+	case P_SKILL_BLACKHOLE:
 		switch (_pDirection)
 		{
 		case RIGHT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 29);
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
 			break;
 		case LEFT:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 30);
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
 			break;
 		case UP:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 31);
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
 			break;
 		case DOWN:
-			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 28);
+			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case P_SKILL_EXPLOSION:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case P_SKILL_FIRE_BALL:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case P_SKILL_FIRE:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
+			break;
+		}
+	case P_SKILL_SPIKES:
+		switch (_pDirection)
+		{
+		case RIGHT:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 1);
+			break;
+		case LEFT:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 2);
+			break;
+		case UP:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 3);
+			break;
+		case DOWN:
+			spikeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
 		break;
@@ -917,9 +1196,10 @@ void player::playerRender()
 			move->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 20);
 			break;
 		}
-
+		break;
 	}
 }
+
 
 void player::openPlayerStorageCover()
 {

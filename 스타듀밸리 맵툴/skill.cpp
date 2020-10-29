@@ -80,22 +80,27 @@ void skill::skillActive()
 			case SKILL_EXPLOSION:
 				SOUNDMANAGER->play("explosion", 0.2f);
 				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
+				PLAYER->setState(P_SKILL_EXPLOSION);
 				break;
 			case SKILL_SPIKES:
 				SOUNDMANAGER->play("spike", 0.2f);
 				EFFECTMANAGER->skillCol("스파이크", pointX, pointY);
+				PLAYER->setState(P_SKILL_SPIKES);
 				break;
 			case SKILL_FIRE:
 				SOUNDMANAGER->play("fireSpell", 0.2f);
 				EFFECTMANAGER->skillCol("파이어", pointX, pointY);
+				PLAYER->setState(P_SKILL_FIRE);
 				break;
 			case SKILL_BLACKHOLE:
 				SOUNDMANAGER->play("blackHole", 0.2f);
 				EFFECTMANAGER->skillCol("블랙홀", pointX, pointY);
+				PLAYER->setState(P_SKILL_BLACKHOLE);
 				break;
 			case SKILL_FIRE_BALL:
 				SOUNDMANAGER->play("fireball", 0.2f);
 				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
+				PLAYER->setState(P_SKILL_FIRE_BALL);
 				break;
 			}
 		}
