@@ -55,6 +55,7 @@ private:
 	STATE _pState;
 	DIRECTION _pDirection;
 	TOOL _pTool;
+	SKILL _pSkill;
 	
 	image* move;
 	image* state;
