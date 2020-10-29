@@ -79,17 +79,17 @@ void  player::release()
 
 void  player::update()
 {
-	if (!isShowInventory)
-	{
-		if (INPUT->GetKeyDown(VK_TAB))
-		{
-			if (isSkill) isSkill = false;
-			else {
-				_inventory->setCurrentSlotNumber(0);
-				isSkill = true;
-			}
-		}
-	}
+	//if (!isShowInventory)
+	//{
+	//	if (INPUT->GetKeyDown(VK_TAB))
+	//	{
+	//		if (isSkill) isSkill = false;
+	//		else {
+	//			_inventory->setCurrentSlotNumber(0);
+	//			isSkill = true;
+	//		}
+	//	}
+	//}
 	
 	if (!isOpenPlayerStorageCover)
 	{

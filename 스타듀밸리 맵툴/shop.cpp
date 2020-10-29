@@ -209,7 +209,7 @@ void shop::render()
 		if (_vInven->at(i).isFrame)
 		{
 			_vInven->at(i).item_image->frameRender(getMemDC(), playerItem[i].left, playerItem[i].top, _vInven->at(i).indexX, _vInven->at(i).indexY);
-			if (_vInven->at(i).item_kind != ITEM_TOOL)
+			if (_vInven->at(i).item_kind != ITEM_TOOL && _vInven->at(i).item_kind != ITEM_SKILL)
 			{
 				if (_vInven->at(i).amount >= 0)
 				{
@@ -235,7 +235,7 @@ void shop::render()
 		else
 		{
 			_vInven->at(i).item_image->render(getMemDC(), playerItem[i].left, playerItem[i].top);
-			if (_vInven->at(i).item_kind != ITEM_TOOL)
+			if (_vInven->at(i).item_kind != ITEM_TOOL && _vInven->at(i).item_kind != ITEM_SKILL)
 			{
 				if (_vInven->at(i).amount >= 0)
 				{
@@ -358,11 +358,21 @@ void shop::render()
 	{
 		if (_vItem[i + current_index].isFrame)
 		{
-			_vItem[i + current_index].item_image->frameRender(getMemDC(), _vslot[i].rc.left + 23, _vslot[i].rc.top + 15, _vItem[i + current_index].indexX, _vItem[i + current_index].indexY);
+			if (_npcKind == SKILL_NPC)
+			{
+				_vItem[i + current_index].item_image->frameRender(getMemDC(), _vslot[i].rc.left + 33, _vslot[i].rc.top + 15, _vItem[i + current_index].indexX, _vItem[i + current_index].indexY);
+			}
+			else _vItem[i + current_index].item_image->frameRender(getMemDC(), _vslot[i].rc.left + 23, _vslot[i].rc.top + 15, _vItem[i + current_index].indexX, _vItem[i + current_index].indexY);
+
 		}
 		else
 		{
-			_vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 16, _vslot[i].rc.top + 13);
+			if (_npcKind == SKILL_NPC)
+			{
+				_vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 26, _vslot[i].rc.top + 13);
+
+			}
+			else _vItem[i + current_index].item_image->render(getMemDC(), _vslot[i].rc.left + 16, _vslot[i].rc.top + 13);
 		}
 	}
 
@@ -463,17 +473,22 @@ void shop::render()
 		if (_vItem[click_index].isFrame)
 		{
 			_vItem[click_index].item_image->frameRender(getMemDC(), _ptMouse.x, _ptMouse.y, _vItem[click_index].indexX, _vItem[click_index].indexY);
-			char str[64];
-			wsprintf(str, "%d", buy_count);
-			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+			if (_vItem[click_index].item_kind != ITEM_TOOL && _vItem[click_index].item_kind != ITEM_SKILL)
+			{
+				char str[64];
+				wsprintf(str, "%d", buy_count);
+				textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+			}
 		}
 		else
 		{
 			_vItem[click_index].item_image->render(getMemDC(), _ptMouse.x, _ptMouse.y);
-			char str[64];
-			wsprintf(str, "%d", buy_count);
-			textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
-
+			if (_vItem[click_index].item_kind != ITEM_TOOL && _vItem[click_index].item_kind != ITEM_SKILL)
+			{
+				char str[64];
+				wsprintf(str, "%d", buy_count);
+				textOut(getMemDC(), _ptMouse.x + 30, _ptMouse.y + 30, str, RGB(0, 0, 0));
+			}
 		}
 	}
 

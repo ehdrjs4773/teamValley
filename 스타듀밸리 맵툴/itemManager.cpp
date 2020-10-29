@@ -12,7 +12,11 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("열매(땅)", "Images/BMP/열매small.bmp", 128, 48, 8, 3);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("나무", "Images/BMP/나무2.bmp", 144, 640, 9, 40);
-	IMAGEMANAGER->addImage("스킬북", "Images/skill/book.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("불_검", "Images/skill/불_검.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("블랙홀_검", "Images/skill/블랙홀_검.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("스파이크_검", "Images/skill/스파이크_검.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("파이어볼_검", "Images/skill/파이어볼_검.bmp", 40, 40, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("폭발_검", "Images/skill/폭발_검.bmp", 40, 40, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("광물", "Images/BMP/광물.bmp", 256, 80, 16, 5);
 	IMAGEMANAGER->addFrameImage("광물아이템", "Images/BMP/광물아이템.bmp", 640, 200, 16, 5);
 	IMAGEMANAGER->addFrameImage("스프링클러", "Images/BMP/스프링클러.bmp", 16, 48, 1, 3);
@@ -107,12 +111,11 @@ void itemManager::addObject()
 
 void itemManager::addSkill()
 {
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_EXPLOSION, false, "EXPLOSION", 1000, 500);
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_SPIKES, false, "SPIKES", 1000, 500);
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_FIRE, false, "FIRE", 1000, 500);
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_SHIELD, false, "SHIELD", 1000, 500);
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_BLACKHOLE, false, "BLACKHOLE", 1000, 500);
-	addWeapon("스킬북", ITEM_SKILL, WEAPON_FIREBALL, false, "FIRE_BALL", 1000, 500);
+	addWeapon("폭발_검", ITEM_SKILL, WEAPON_EXPLOSION, false, "EXPLOSION", 1000, 500);
+	addWeapon("스파이크_검", ITEM_SKILL, WEAPON_SPIKES, false, "SPIKES", 1000, 500);
+	addWeapon("불_검", ITEM_SKILL, WEAPON_FIRE, false, "FIRE", 1000, 500);
+	addWeapon("블랙홀_검", ITEM_SKILL, WEAPON_BLACKHOLE, false, "BLACKHOLE", 1000, 500);
+	addWeapon("파이어볼_검", ITEM_SKILL, WEAPON_FIREBALL, false, "FIRE_BALL", 1000, 500);
 }
 
 void itemManager::addOre()
