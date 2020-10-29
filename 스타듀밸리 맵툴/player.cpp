@@ -129,6 +129,7 @@ void  player::update()
 				isShowInventory = false;
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);
+				_inventory->setCraftPage(false);
 			}
 		}
 	}
@@ -662,23 +663,7 @@ void player::playerAnimation()
 		}
 		break;
 	case P_SKILL_BLACKHOLE:
-		if (_skill->getPointX() >= currentX)
-		{
-			_pDirection = RIGHT;
-		}
-		else if (_skill->getPointX() < currentX)
-		{
-			_pDirection = LEFT;
-		}
-
-		if (_skill->getPointY() >= currentY)
-		{
-			_pDirection = DOWN;
-		}
-		else if (_skill->getPointY() < currentY)
-		{
-			_pDirection = UP;
-		}
+		
 		switch (_pDirection)
 		{
 		case RIGHT:

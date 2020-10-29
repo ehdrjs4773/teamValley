@@ -3,7 +3,8 @@ class skill
 {
 private:
 	int frameX, frameY;
-	
+	int MouseIndexX, MouseIndexY;
+
 	float pointX;
 	float pointY;
 	bool _isActive;
