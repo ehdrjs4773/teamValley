@@ -57,6 +57,7 @@ private:
 	
 	//ªÛ¡° ≈‹ ∫Œ∫–
 	RECT tab[2];
+	bool tab_sel;
 	vector<tagItem> _vSeed;
 	vector<tagItem> _vTool;
 

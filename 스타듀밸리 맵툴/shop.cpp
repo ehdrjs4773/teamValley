@@ -4,7 +4,7 @@
 HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
-	
+	tab_sel = false;
 	// ÆÇ¸Å °ü·Ã Ã¢
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
@@ -40,32 +40,31 @@ HRESULT shop::init(NPC_KIND npckind)
 	{
 		if (_npcKind == ITEM_NPC)
 		{
-			/*if (_vItem[i].item_kind == ITEM_SKILL)
+			/*if (_vItem[i].item_kind == ITEM_TOOL)
 			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else if (_vItem[i].item_kind == ITEM_ORE)
-			{
-				_vItem.erase(_vItem.begin() + i);
+				_vTool.push_back(_vItem[i]);
+			}*/
 
-			}
-			else if (_vItem[i].item_kind == ITEM_SPRINKLER)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else if (_vItem[i].item_kind == ITEM_STONEFENCEDOOR || _vItem[i].item_kind == ITEM_WOODENFENCEDOOR)
-			{
-				_vItem.erase(_vItem.begin() + i);
-			}
-			else i++;*/
 			if (_vItem[i].item_kind == ITEM_SEED)
 			{
-				_vSeed.push_back(_vItem[i]);
+				if (_vItem[i].seedKind == SEED_PINETREE ||
+					_vItem[i].seedKind == SEED_MAPLETREE ||
+					_vItem[i].seedKind == SEED_OAKTREE ||
+					_vItem[i].seedKind == SEED_TOMATO)
+				{
+				}
+				else _vSeed.push_back(_vItem[i]);
 			}
-			else if (_vItem[i].item_kind == ITEM_TOOL)
+			else if (_vItem[i].item_kind == ITEM_SPRINKLER1 ||
+				_vItem[i].item_kind == ITEM_SPRINKLER2 ||
+				_vItem[i].item_kind == ITEM_SPRINKLER3 ||
+				_vItem[i].item_kind == ITEM_WOODENFENCE ||
+				_vItem[i].item_kind == ITEM_STONEFENCE
+				)
 			{
 				_vTool.push_back(_vItem[i]);
 			}
+			
 			i++;
 		}
 		else
@@ -75,7 +74,6 @@ HRESULT shop::init(NPC_KIND npckind)
 				_vItem.erase(_vItem.begin() + i);
 			}
 			else i++;
-
 		}
 	}
 	if (_npcKind == ITEM_NPC)
@@ -128,7 +126,7 @@ HRESULT shop::init(NPC_KIND npckind)
 
 	for (int i = 0; i < 2; i++)
 	{
-		tab[i] = RectMake(120 + (40 * i), 35, 40, 35);
+		tab[i] = RectMake(120 + (65 * i), 25, 65, 45);
 	}
 
 	return S_OK;
@@ -159,12 +157,14 @@ void shop::update()
 						_vItem.clear();
 						_vItem = _vSeed;
 						current_index = 0;
+						tab_sel = false;
 					}
 					else
 					{
 						_vItem.clear();
 						_vItem = _vTool;
 						current_index = 0;
+						tab_sel = true;
 					}
 				}
 			}
@@ -430,31 +430,32 @@ void shop::render()
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
 				break;
-			case ITEM_WOODENFENCEDOOR:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
-				break;
-			case ITEM_STONEFENCEDOOR:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "STONEFENCE DOOR", sizeof("STONEFENCE DOOR"));
-				break;
 			case ITEM_SKILL:
 				memset(temp, 0, sizeof(temp));
 				sprintf(temp, "SKILL", sizeof("SKILL"));
 				break;
-
 			}
 			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
 		}
 	}
-	//ÅÜ Ãâ·Â
+	//ÅÇ Ãâ·Â
 	if (_npcKind == ITEM_NPC)
 	{
-		Rectangle(getMemDC(), tab[0]);
+		if (!tab_sel)
+		{
+			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top+5);
+			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top);
+		}
+		else
+		{
+			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top);
+			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top + 5);
+		}
+		/*Rectangle(getMemDC(), tab[0]);
 		Rectangle(getMemDC(), tab[1]);
 		TextOut(getMemDC(), tab[0].left, tab[0].top, "¾¾¾Ñ", strlen("¾¾¾Ñ"));
-		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));
+		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));*/
 	}
 
 	if (is_click)
@@ -539,10 +540,6 @@ void shop::sell()
 			}
 			if ((*_vInven)[sell_index].amount <= 0) (*_vInven)[sell_index].amount = 0;
 
-			if (_vItem[sell_index].toolKind == TOOL_KETTLE)
-			{
-				_inven->getKettleBar();
-			}
 			sell_isok = false;
 			sell_index = -1;
 		}

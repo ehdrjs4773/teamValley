@@ -84,7 +84,6 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("인벤토리_아이템", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
-	IMAGEMANAGER->addFrameImage("씨앗", "Images/BMP/씨앗아이템.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
@@ -93,7 +92,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("창고닫기버튼", "Images/inventory/닫기버튼.bmp", 44, 44, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addFrameImage("농장장애물", "Images/BMP/farmObstacles.bmp", 96, 176, 6, 11);
-	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 256, 784, 16, 49);
+	IMAGEMANAGER->addFrameImage("작물", "Images/BMP/작물.bmp", 128, 544, 8, 34);
 
 	IMAGEMANAGER->addImage("큰외양간", "Images/맵/대형외양간.bmp", 1600, 1600);
 	IMAGEMANAGER->addImage("큰외양간 충돌", "Images/맵/대형외양간 충돌.bmp", 1600, 1600);
@@ -148,6 +147,8 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("돈통", "Images/shop/돈통.bmp", 185, 55, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점테이블", "Images/shop/shop_table.bmp", 75, 46, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("판매UI", "Images/shop/sellBox.bmp", 400, 200, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점씨앗탭", "Images/shop/씨앗아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점도구탭", "Images/shop/도구아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
