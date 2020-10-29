@@ -40,6 +40,9 @@ void skill::render(HDC hdc)
 
 void skill::update()
 {
+	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
+	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
+
 	if (!PLAYER->getIsShowInventory() && !PtInRect(&PLAYER->getInventory()->getqucikRect(), _ptMouse))
 	{
 		skillSelect();
@@ -75,6 +78,25 @@ void skill::skillActive()
 			_isClick = false;
 			pointX = (float)CAMERAMANAGER->getX() + (float)((float)_ptMouse.x / WINSIZEX * 480);
 			pointY = (float)CAMERAMANAGER->getY() + (float)((float)_ptMouse.y / WINSIZEY * 230);
+
+			if (MouseIndexY > PLAYER->getCurrentY())
+			{
+				PLAYER->setDirection(DOWN);
+			}
+			if (MouseIndexY < PLAYER->getCurrentY())
+			{
+				PLAYER->setDirection(UP);
+			}
+			if (MouseIndexX > PLAYER->getCurrentX())
+			{
+				PLAYER->setDirection(RIGHT); 
+			}
+			if (MouseIndexX < PLAYER->getCurrentX())
+			{
+				PLAYER->setDirection(LEFT);
+			}
+
+
 			switch (skill_state)
 			{
 			case SKILL_EXPLOSION:
