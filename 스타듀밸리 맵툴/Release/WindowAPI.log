@@ -1,2 +1,47 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  inventoryCraft.cpp
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(119): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(306): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(336): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(366): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(390): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(412): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(435): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(435): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(436): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(436): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(461): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(461): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(462): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(462): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(485): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(485): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(486): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(486): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(487): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(487): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(526): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(526): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(527): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(527): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(528): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(528): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(566): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(566): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(567): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(567): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(568): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(568): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(607): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(607): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(608): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(608): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(609): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\program\desktop\stardew valley\스타듀밸리 맵툴\inventorycraft.cpp(609): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  코드를 생성하고 있습니다.
+  1 of 2330 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\Program\Desktop\Stardew Valley\스타듀밸리 맵툴\Release\Stardew Valley.exe
