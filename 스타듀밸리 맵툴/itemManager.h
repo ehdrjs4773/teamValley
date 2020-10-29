@@ -8,6 +8,9 @@ class itemManager :
 private:
 	vector<tagItem> _vItem;
 
+	vector<vector<string>> itemData;
+	vector<string> itemDataLine;
+
 public:
 	HRESULT init();
 	void release();
@@ -19,6 +22,11 @@ public:
 	void addObject();
 	void addSkill();
 	void addOre();
+
+	void readItemCSV();
+	void tokItemDataLine();
+	void addCSVItem();
+	void stringTokenize(const string& str, vector<string>& tokens, const string& delimiters = ",");
 
 	//아이템 추가하는 함수
 	void addItem(

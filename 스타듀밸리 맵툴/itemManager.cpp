@@ -39,21 +39,22 @@ void itemManager::release()
 
 void itemManager::addSeed()
 {
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 0, SEED_HOPS, "È© ¾¾¾Ñ", 25, 15);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 0, SEED_RADISH, "¹« ¾¾¾Ñ", 40, 25);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 0, SEED_WHEAT, "¹Ð ¾¾¾Ñ", 10, 5);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 0, SEED_TOMATO, "Åä¸¶Åä ¾¾¾Ñ", 50, 40);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 0, SEED_GREENBEAN, "¿ÏµÎÄá ¾¾¾Ñ", 40, 30);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 0, SEED_MELON, "¸á·Ð ¾¾¾Ñ", 80, 60);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 0, SEED_POPPY, "¾ç±Íºñ ¾¾¾Ñ", 140, 120);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 7, 0, SEED_SUMMERSPANGLE, "¿©¸§º°²É ¾¾¾Ñ", 90, 75);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 0, 1, SEED_HOTPEPPER, "°íÃß ¾¾¾Ñ", 90, 75);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 1, 1, SEED_CORN, "¿Á¼ö¼ö ¾¾¾Ñ", 155, 130);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 2, 1, SEED_BLUEBERRY, "ºí·çº£¸® ¾¾¾Ñ", 80, 60);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 3, 1, SEED_BLUEBERRY, "ÇØ¹Ù¶ó±â ¾¾¾Ñ", 80, 60);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 4, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß ¾¾¾Ñ", 100, 80);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 5, 1, SEED_GRAPE, "Æ÷µµ ¾¾¾Ñ", 150, 125);
-	addSeed("¾¾¾Ñ", ITEM_SEED, 6, 1, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷ ¾¾¾Ñ", 400, 250);
+	addCSVItem();
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 0, 0, SEED_HOPS, "È© ¾¾¾Ñ", 25, 15);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 1, 0, SEED_RADISH, "¹« ¾¾¾Ñ", 40, 25);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 2, 0, SEED_WHEAT, "¹Ð ¾¾¾Ñ", 10, 5);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 3, 0, SEED_TOMATO, "Åä¸¶Åä ¾¾¾Ñ", 50, 40);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 4, 0, SEED_GREENBEAN, "¿ÏµÎÄá ¾¾¾Ñ", 40, 30);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 5, 0, SEED_MELON, "¸á·Ð ¾¾¾Ñ", 80, 60);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 6, 0, SEED_POPPY, "¾ç±Íºñ ¾¾¾Ñ", 140, 120);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 7, 0, SEED_SUMMERSPANGLE, "¿©¸§º°²É ¾¾¾Ñ", 90, 75);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 0, 1, SEED_HOTPEPPER, "°íÃß ¾¾¾Ñ", 90, 75);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 1, 1, SEED_CORN, "¿Á¼ö¼ö ¾¾¾Ñ", 155, 130);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 2, 1, SEED_BLUEBERRY, "ºí·çº£¸® ¾¾¾Ñ", 80, 60);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 3, 1, SEED_SUNFLOWER, "ÇØ¹Ù¶ó±â ¾¾¾Ñ", 80, 60);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 4, 1, SEED_REDCABBAGE, "Àû¾ç¹èÃß ¾¾¾Ñ", 100, 80);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 5, 1, SEED_GRAPE, "Æ÷µµ ¾¾¾Ñ", 150, 125);
+	//addSeed("¾¾¾Ñ", ITEM_SEED, 6, 1, SEED_STARFRUIT, "½ºÅ¸ÈÄ¸£Ã÷ ¾¾¾Ñ", 400, 250);
 
 	addSeed("¿­¸Å", ITEM_SEED, 0, 2, SEED_PINETREE, "¼Ò³ª¹« ¾¾¾Ñ", 0, 20);
 	addSeed("¿­¸Å", ITEM_SEED, 1, 2, SEED_MAPLETREE, "´ÜÇ³³ª¹« ¾¾¾Ñ", 0, 20);
@@ -120,6 +121,71 @@ void itemManager::addOre()
 	addOre("±¤¹°", ITEM_ORE, true, 6, 3, "±¸¸®Á¶°¢");
 	addOre("±¤¹°", ITEM_ORE, true, 8, 3, "Ã¶Á¶°¢");
 	addOre("±¤¹°", ITEM_ORE, true, 12, 3, "±ÝÁ¶°¢");
+}
+
+void itemManager::readItemCSV()
+{
+	fstream fs;
+	string buf;
+
+	fs.open("save/itemData.csv", ios::in);
+
+	while (!fs.eof())
+	{
+		getline(fs, buf, '\n');
+		itemDataLine.push_back(buf);
+	}
+	tokItemDataLine();
+	fs.close();
+}
+
+void itemManager::tokItemDataLine()
+{
+	string buf;
+	for (int i = 0; i < itemDataLine.size(); i++)
+	{
+		stringTokenize(itemDataLine[i], itemData[i]);
+	}
+}
+
+void itemManager::addCSVItem()
+{
+	for (int i = 0; i < itemData.size(); i++)
+	{
+			tagItem temp;
+			temp.item_image = IMAGEMANAGER->findImage(itemData[i][0]);
+			temp.item_kind = (ITEM)(atoi)(itemData[i][1].c_str());
+			temp.toolKind = (TOOL)(atoi)(itemData[i][2].c_str());
+			temp.seedKind = (SEED)(atoi)(itemData[i][3].c_str());
+			temp.weaponKind = (WEAPON)(atoi)(itemData[i][4].c_str());
+			temp.itemName = itemData[i][5].c_str();
+			temp.item_info = itemData[i][6].c_str();
+			temp.buy_price = (atoi)(itemData[i][7].c_str());
+			temp.sell_price = (atoi)(itemData[i][8].c_str());
+			temp.waterAmount = (atoi)(itemData[i][9].c_str());
+			temp.indexX = (atoi)(itemData[i][10].c_str());
+			temp.indexY = (atoi)(itemData[i][11].c_str());
+			temp.amount = (atoi)(itemData[i][12].c_str());
+			temp.isFrame = (atoi)(itemData[i][13].c_str());
+	}
+}
+
+void itemManager::stringTokenize(const string & str, vector<string>& tokens, const string & delimiters)
+{
+	//¸Ç Ã¹ ±ÛÀÚ°¡ ±¸ºÐÀÚÀÎ °æ¿ì ¹«½Ã
+	string::size_type lastPos = str.find_first_not_of(delimiters, 0);
+	//±¸ºÐÀÚ°¡ ¾Æ´Ñ Ã¹ ±ÛÀÚ¸¦ Ã£´Â´Ù
+	string::size_type pos = str.find_first_of(delimiters, lastPos);
+
+	while (string::npos != pos || string::npos != lastPos)
+	{
+		//ÅäÅ«À» Ã£¾Æ º¤ÅÍ¿¡ Ãß°¡
+		tokens.push_back(str.substr(lastPos, pos - lastPos));
+		//±¸ºÐÀÚ¸¦ ¶Ù¾î³Ñ´Â´Ù
+		lastPos = str.find_first_not_of(delimiters, pos);
+		//´ÙÀ½ ±¸ºÐÀÚ°¡ ¾Æ´Ñ ±ÛÀÚ¸¦ Ã£´Â´Ù
+		pos = str.find_first_of(delimiters, lastPos);
+	}
 }
 
 void itemManager::addItem(const char* strKey, ITEM _itemKind, bool _isFrame, int _indexX, int _indexY, TOOL _toolKind, SEED _seedKind, const char* _itemInfo, int _buyPrice, int _sellPrice)
