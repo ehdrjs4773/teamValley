@@ -2065,8 +2065,8 @@ void inGameScene::ejectItem()
 void inGameScene::skillClick()
 {
 
-	if (PLAYER->getisSkill())
-	{
+	//if (PLAYER->getisSkill())
+	//{
 		for (int i = 0; i < TILEY; i++)
 		{
 			for (int j = 0; j < TILEX; j++)
@@ -2091,18 +2091,18 @@ void inGameScene::skillClick()
 				}
 			}
 		}
-	}
+//	}
 
 }
 
 void inGameScene::skillSelect()
 {
-	if (PLAYER->getisSkill())
-	{
+	//if (PLAYER->getisSkill())
+	//{
 		PLAYER->skillUpdate();
 
-		PLAYER->getskill()->setSkill(PLAYER->getCurrentSkillNumber());
-	}
+		PLAYER->getskill()->setSkill(PLAYER->getCurrentSlotNumber());
+	//}
 }
 
 void inGameScene::checkHacked()
