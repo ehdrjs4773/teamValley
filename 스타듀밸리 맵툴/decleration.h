@@ -229,6 +229,7 @@ struct tagItem {
 	int waterAmount;
 	int indexX, indexY;
 	int amount;
+	int grow;
 	bool isFrame;
 };
 
