@@ -73,6 +73,7 @@ private:
 
 	bool isShowSleepingOption =false;
 	bool isSprinkled;
+	bool isNewGame;
 	bool isHit;
 	int hitCount = 0;
 
@@ -94,6 +95,8 @@ public:
 	void weatherRender(HDC hdc);
 
 	void limitEnergy();
+
+	void setIsNewGame(bool a) { isNewGame = a; }
 
 	void setIsShowSleepingOption(bool a) { isShowSleepingOption = a; }
 

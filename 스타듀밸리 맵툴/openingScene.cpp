@@ -49,8 +49,8 @@ void openingScene::update()
 			hWndAVI = 0;
 		}
 		SCENEMANAGER->loadScene("집안화면");
+		movieCount = 0;
 	}
-	cout << movieCount << endl;
 }
 
 void openingScene::release()

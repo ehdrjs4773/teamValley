@@ -3,6 +3,7 @@
 
 HRESULT player::init()
 {
+	isNewGame = true;
 	isSkill = false;
 
 	index = 0;
@@ -59,10 +60,10 @@ HRESULT player::init()
 
 	_skill = new skill();
 	_skill->init();
-	//stock->addPlayerStock(STOCK_BROWNCOW);
-	//stock->addPlayerStock(STOCK_WHITECOW);
-	//stock->addPlayerStock(STOCK_BROWNCHICKEN);
-	//stock->addPlayerStock(STOCK_WHITECHICKEN);
+	stock->addPlayerStock(STOCK_BROWNCOW);
+	stock->addPlayerStock(STOCK_BROWNCOW);
+	stock->addPlayerStock(STOCK_WHITECOW);
+	stock->addPlayerStock(STOCK_WHITECOW);
 
 	currentMap = MAP_HOUSE;
 
