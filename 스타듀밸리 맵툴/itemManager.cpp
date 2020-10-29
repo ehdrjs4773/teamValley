@@ -32,9 +32,9 @@ HRESULT itemManager::init()
 	addTool();
 	addOre();
 
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER2, true, 0, 1, "강화스프링클러");
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER3, true, 0, 2, "고급스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER2, true, 0, 1, "강화스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER3, true, 0, 2, "고급스프링클러");
 
 	return S_OK;
 }
