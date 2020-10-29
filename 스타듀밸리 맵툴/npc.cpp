@@ -65,7 +65,7 @@ void npc::move()
 		{
 			_stop = true;
 			random = RANDOM->range(1, 4);
-			cout << "random : " << " \t" <<  random << endl;	
+			//cout << "random : " << " \t" <<  random << endl;	
 		}
 	}
 

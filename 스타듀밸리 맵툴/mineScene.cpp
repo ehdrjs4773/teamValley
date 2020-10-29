@@ -793,7 +793,6 @@ void mineScene::loadMap()
 	HANDLE file;
 	DWORD read;
 	sprintf(saveName, "save/dungeon%d.map", currentFloor);
-	cout << saveName << endl;
 	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
@@ -948,7 +947,6 @@ void mineScene::spawnMonster()
 	while (vMonster.size() < monsterCount)
 	{
 		int rand = RANDOM->range(10);
-		cout << rand << endl;
 		
 		if (rand >= 0 && rand < 4)
 		{

@@ -230,6 +230,9 @@ struct tagItem {
 	int indexX, indexY;
 	int amount;
 	int grow;
+	int exp;
+	int hpRecover;
+	int energyRecover;
 	bool isFrame;
 };
 

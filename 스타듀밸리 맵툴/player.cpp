@@ -3,7 +3,6 @@
 
 HRESULT player::init()
 {
-	isNewGame = true;
 	isSkill = false;
 
 	index = 0;
@@ -18,6 +17,10 @@ HRESULT player::init()
 
 	playerHp = 138;
 	playerEnergy = 138;
+
+	MAXHP = 138;
+	MAXENERGY = 138;
+
 	totalHpDmg = 0;
 	totalEnergyDmg = 0;
 
@@ -1549,7 +1552,7 @@ void player::savePlayerStock()
 	tagStock tempStock[5];
 	memset(tempStock, 0, sizeof(tempStock));
 
-	for (int i = 0; i < stock->getStock().size(); i++)
+	for (int i = 0; i < stock->getStock().size() - 1; i++)
 	{
 		tempStock[i] = temp[i];
 	}
@@ -1709,6 +1712,12 @@ void player::saveBox()
 void player::saveTile(int i, int j, tagTile tile)
 {
 	_tile[i][j] = tile;
+}
+
+tagTile player::giveTileData(int i, int j)
+{
+	cout << i << "\t" << j << "\t" << "gave Tile Data" << endl;
+	return _tile[i][j];
 }
 
 void player::clockRender(HDC hdc)

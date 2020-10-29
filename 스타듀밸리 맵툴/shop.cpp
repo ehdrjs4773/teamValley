@@ -139,7 +139,7 @@ void shop::release()
 
 void shop::update()
 {
-	cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
+	//cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
 
 	_inven->update();
 

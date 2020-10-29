@@ -43,7 +43,6 @@ void openingScene::update()
 	{
 		if (hWndAVI)
 		{
-
 			MCIWndClose(hWndAVI);
 			MCIWndDestroy(hWndAVI);
 			hWndAVI = 0;
