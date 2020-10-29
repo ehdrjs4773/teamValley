@@ -71,8 +71,6 @@ private:
 	vector<tagItem> _vItem;
 	typedef vector<tagItem>::iterator vi_ITEM;
 	vi_ITEM _viItem;
-
-
 	vector<tagItem>* _vInven;
 
 public:

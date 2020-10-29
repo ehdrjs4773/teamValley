@@ -230,6 +230,7 @@ struct tagItem {
 	int indexX, indexY;
 	int amount;
 	bool isFrame;
+	int grow;
 };
 
 struct tagItemOnField {
