@@ -5,6 +5,9 @@ HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
 	tab_sel = false;
+	shopLevel = PLAYER->getShopGrade();
+	total_sell = PLAYER->getTotalSell();
+
 	// 판매 관련 창
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
@@ -171,7 +174,22 @@ void shop::update()
 
 		}
 	}
-
+	cout << "shopLevel : " << shopLevel << "\t" << "total_sell : " << total_sell << "\n";
+	if (total_sell < 1000)
+	{
+		shopLevel = 3;
+		PLAYER->setShopGrade(shopLevel);
+	}
+	else if (total_sell < 2000)
+	{
+		shopLevel = 2;
+		PLAYER->setShopGrade(shopLevel);
+	}
+	else
+	{
+		shopLevel = 1;
+		PLAYER->setShopGrade(shopLevel);
+	}
 	if (!sell_ispopup)
 	{
 		buy();
@@ -335,16 +353,26 @@ void shop::render()
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
 		
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
-		if (!_vslot[i].on_cursor)
+		cout << "name : " << _vItem[i+current_index].itemName << "\t" << "grade : " <<_vItem[i + current_index].grade << endl;
+		if (_vItem[i + current_index].grade >= PLAYER->getShopGrade())
 		{
-			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
-			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+			if (!_vslot[i].on_cursor)
+			{
+				_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
+				_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+			}
+			else
+			{
+				_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
+				_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+			}
 		}
 		else
 		{
-			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
+			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점못사");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
+
 
 		DrawText(getMemDC(), name, strlen(name), &rc_name, NULL);
 		DrawText(getMemDC(), money, strlen(money), &rc_money, NULL);
@@ -352,9 +380,7 @@ void shop::render()
 	}
 	IMAGEMANAGER->findImage("상점닫기")->render(getMemDC(), rc_exit.left, rc_exit.top);
 
-
 	//아이템 이미지 출력
-
 	for (int i = 0; i < _vslot.size(); i++)
 	{
 		if (_vItem[i + current_index].isFrame)
@@ -573,6 +599,9 @@ void shop::sell()
 			{
 				PLAYER->setMoney(PLAYER->getMoney() + (_vInven->at(sell_index).sell_price * sell_amount));
 				(*_vInven)[sell_index].amount -= sell_amount;
+				//누적판매
+				total_sell += (_vInven->at(sell_index).sell_price * sell_amount);
+				PLAYER->setTotalSell(total_sell);
 			}
 			else
 			{
@@ -666,31 +695,33 @@ void shop::buy()
 		if (PtInRect(&_vslot[i].rc, _ptMouse))
 		{
 			_vslot[i].on_cursor = true;
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			if (PLAYER->getShopGrade() <= _vItem[i + current_index].grade)
 			{
-				if (!SOUNDMANAGER->isPlaySound("purchase"))
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
-					SOUNDMANAGER->play("purchase", 0.2f);
-				}
-				if (is_click && (i + current_index != click_index)) continue;
-				else
-				{
-					click_index = i + current_index;
-					if (_vItem[click_index].buy_price > PLAYER->getMoney())
+					if (!SOUNDMANAGER->isPlaySound("purchase"))
 					{
-						buyFail = true;
-						if (is_click == true) continue;
-						is_click = false;
+						SOUNDMANAGER->play("purchase", 0.2f);
 					}
-					else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
+					if (is_click && (i + current_index != click_index)) continue;
+					else
 					{
-						PLAYER->setMoney(PLAYER->getMoney() - _vItem[click_index].buy_price);
-						buy_count++;
-						is_click = true;
+						click_index = i + current_index;
+						if (_vItem[click_index].buy_price > PLAYER->getMoney())
+						{
+							buyFail = true;
+							if (is_click == true) continue;
+							is_click = false;
+						}
+						else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
+						{
+							PLAYER->setMoney(PLAYER->getMoney() - _vItem[click_index].buy_price);
+							buy_count++;
+							is_click = true;
+						}
 					}
 				}
 			}
-			
 		}
 		else _vslot[i].on_cursor = false;
 	}
@@ -722,6 +753,7 @@ void shop::buy()
 						(*_vInven)[i].hpRecover = _vItem[click_index].hpRecover;
 						(*_vInven)[i].exp = _vItem[click_index].exp;
 						(*_vInven)[i].grow = _vItem[click_index].grow;
+						(*_vInven)[i].grade = _vItem[click_index].grade;
 						is_click = false;
 						buy_count = 0;
 					}

@@ -137,6 +137,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점닫기", "Images/shop/exit.bmp", 30, 33);
 	IMAGEMANAGER->addImage("상점슬롯", "Images/shop_itemslot.bmp", 875, 70, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점못사", "Images/shop_itemslot_ban.bmp",875,70, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점슬롯클릭", "Images/shop_itemslot_click.bmp", 875, 70, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("아이템정보", "Images/shop/item_info.bmp", 260, 210, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("업버튼", "Images/shop/up_BT.bmp", 50, 50, true, RGB(255, 0, 255));

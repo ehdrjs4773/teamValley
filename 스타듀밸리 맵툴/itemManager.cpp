@@ -180,6 +180,7 @@ void itemManager::addCSVItem()
 			temp.exp = (atoi)(itemData[i][15].c_str());
 			temp.hpRecover = (atoi)(itemData[i][16].c_str());
 			temp.energyRecover = (atoi)(itemData[i][17].c_str());
+			temp.grade = (atoi)(itemData[i][18].c_str());
 
 			_vItem.push_back(temp);
 	}

@@ -80,6 +80,14 @@ private:
 	int hitCount = 0;
 	int inGameLoadCount = 0;
 
+	int playerFarmingLevel;
+	int playerCombatLevel;
+	int farmingExp;
+	int MaxFarmingExp;
+	int combatExp;
+	int MaxCombatExp;
+	int shopGrade;
+	int totalSell;
 public:
 	HRESULT init();
 	void release();
@@ -98,7 +106,12 @@ public:
 	void weatherRender(HDC hdc);
 
 	void limitEnergy();
-
+	void setMaxExp();
+	void levelUp();
+	void setShopGrade(int _grade) { shopGrade = _grade; }
+	int getShopGrade() { return shopGrade; }
+	void setTotalSell(int _sell) { totalSell = _sell; }
+	int getTotalSell() { return totalSell; }
 	bool getIsNewGame() { return isNewGame; }
 	void setIsNewGame(bool a) { isNewGame = a; }
 	int getLoadCount() { return inGameLoadCount; }
@@ -164,8 +177,8 @@ public:
 	void recoverEnergy(int rec);
 	void setEnergy(int dmg) { playerEnergy -= dmg; totalEnergyDmg += dmg / 2; }
 	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
-	void resetHpBar() { playerHp = 138, totalHpDmg = 0; }
-	void resetEnergy() { playerEnergy = 138; totalEnergyDmg = 0; }
+	void resetHpBar() { playerHp = MAXHP, totalHpDmg = 0; }
+	void resetEnergy() { playerEnergy = MAXENERGY; totalEnergyDmg = 0; }
 
 	int getWaterAmount() { return _inventory->getWaterAmount(); }
 	void setWaterAmount(int waterAmount) { _inventory->setWaterAmount(waterAmount); }
@@ -217,7 +230,5 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
-	tagTile giveTileData(int i, int j);
-
 };
 

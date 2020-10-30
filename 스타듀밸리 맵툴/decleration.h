@@ -232,6 +232,7 @@ struct tagItem {
 	int exp;
 	int hpRecover;
 	int energyRecover;
+	int grade;
 	bool isFrame;
 };
 
@@ -251,6 +252,7 @@ struct tagSaveItem {
 	int energyRecover;
 	int grow;
 	int exp;
+	int grade;
 	bool isFrame;
 };
 

@@ -15,14 +15,18 @@ HRESULT player::init()
 
 	playerHoldItem = RectMakeCenter(centerX - 8, centerY - 48, 16, 16);
 
-	playerHp = 138.0f;
-	playerEnergy = 138.0f;
+	playerHp = 100.0f;
+	playerEnergy = 100.0f;
 
-	MAXHP = 138.0f;
-	MAXENERGY = 138.0f;
+	MAXHP = 100.0f;
+	MAXENERGY = 100.0f;
 
 	totalHpDmg = 0;
 	totalEnergyDmg = 0;
+
+	playerFarmingLevel  = playerCombatLevel = 1;
+	farmingExp = combatExp = 0;
+	MaxFarmingExp = MaxCombatExp = 100;
 
 	speed = 1.5f;
 
@@ -88,7 +92,8 @@ HRESULT player::init()
 	arrowAngle = 18;
 	blinkCount = 0;
 	darkAlpha = .0f;
-
+	shopGrade = 3;
+	totalSell = 0;
 	return S_OK;
 }
 
@@ -98,7 +103,7 @@ void  player::release()
 
 void  player::update()
 {
-	//cout << playerEnergy << "\t" << totalEnergyDmg << "\t" << MAXENERGY << endl;
+	cout << playerEnergy << "\t" << totalEnergyDmg << "\t" << MAXENERGY << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
@@ -108,6 +113,7 @@ void  player::update()
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * totalHpDmg));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  totalEnergyDmg));
 	
+	levelUp();
 	//if (!isShowInventory)
 	//{
 	//	if (INPUT->GetKeyDown(VK_TAB))
@@ -1446,10 +1452,19 @@ void player::loadPlayerData()
 	currentSeason = (SEASON)INIDATA->loadDataInteger("save/playerData", "PLAYER", "currentSeason");
 	currentWeather = (WEATHER)INIDATA->loadDataInteger("save/playerData", "PLAYER", "currentWeather");
 	money = INIDATA->loadDataInteger("save/playerData", "PLAYER", "money");
-	
+	playerFarmingLevel = INIDATA->loadDataInteger("save/playerData", "PLAYER", "farmingLV");
+	farmingExp = INIDATA->loadDataInteger("save/playerData", "PLAYER", "farmingExp");
+	playerCombatLevel = INIDATA->loadDataInteger("save/playerData", "PLAYER", "combatLv");
+	combatExp = INIDATA->loadDataInteger("save/playerData", "PLAYER", "combatExp");
+	shopGrade = INIDATA->loadDataInteger("save/playerData", "PLAYER", "shopGrade");
+	totalSell = INIDATA->loadDataInteger("save/playerData", "PLAYER", "totalSell");
 	loadInven();
 	loadStock();
 	loadBoxInven();
+
+	setMaxExp();
+	playerHp = MAXHP;
+	playerEnergy = MAXENERGY;
 }
 
 void player::loadInven()
@@ -1514,6 +1529,7 @@ void player::loadStock()
 void player::savePlayerData()
 {
 	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
+	char fLvStr[64],fExpStr[64], cLvStr[64], cExpStr[64], arrShopGrade[64], arrTotalSell[64];
 	INIDATA->addData("PLAYER", "date", _itoa(date, dateStr, 10));
 	INIDATA->addData("PLAYER", "year", _itoa(year, yearStr, 10));
 	INIDATA->addData("PLAYER", "day", _itoa(day, dayStr, 10));
@@ -1521,6 +1537,12 @@ void player::savePlayerData()
 	INIDATA->addData("PLAYER", "currentSeason", _itoa((int)currentSeason, seasonStr, 10));
 	INIDATA->addData("PLAYER", "currentWeather", _itoa((int)currentWeather, weatherStr, 10));
 	INIDATA->addData("PLAYER", "money", _itoa(money, moneyStr, 10));
+	INIDATA->addData("PLAYER", "farmingLv", _itoa(playerFarmingLevel, fLvStr, 10));
+	INIDATA->addData("PLAYER", "farmingExp", _itoa(farmingExp, fExpStr, 10));
+	INIDATA->addData("PLAYER", "combatLv", _itoa(playerCombatLevel, cLvStr, 10));
+	INIDATA->addData("PLAYER", "combatExp", _itoa(combatExp, cExpStr, 10));
+	INIDATA->addData("PLAYER", "shopGrade", _itoa(shopGrade, arrShopGrade, 10));
+	INIDATA->addData("PLAYER", "totalSell", _itoa(totalSell, arrTotalSell, 10));
 	INIDATA->saveINI();
 }
 
@@ -1555,6 +1577,8 @@ void player::savePlayerInven()
 			tempItem[i].energyRecover = 0;
 			tempItem[i].grow = 0;
 			tempItem[i].exp = 0;
+			tempItem[i].grade = 0;
+
 		}
 		else
 		{
@@ -1574,6 +1598,8 @@ void player::savePlayerInven()
 			tempItem[i].energyRecover = temp[i].energyRecover;
 			tempItem[i].grow = temp[i].grow;
 			tempItem[i].exp = temp[i].exp;
+			tempItem[i].grade = temp[i].grade;
+
 		}
 	}
 
@@ -1756,12 +1782,6 @@ void player::saveTile(int i, int j, tagTile tile)
 	_tile[i][j] = tile;
 }
 
-tagTile player::giveTileData(int i, int j)
-{
-	cout << i << "\t" << j << "\t" << "gave Tile Data" << endl;
-	return _tile[i][j];
-}
-
 void player::clockRender(HDC hdc)
 {
 	IMAGEMANAGER->render("시계", hdc, 980, 20);
@@ -1888,10 +1908,11 @@ void player::limitEnergy()
 	}
 	else if (playerEnergy <= 0)
 	{
-		saveMap();
 		savePlayerData();
 		savePlayerInven();
 		savePlayerStock();
+		saveMap();
+		saveBox();
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(762.0f, 887.0f);
 	}
@@ -1900,5 +1921,111 @@ void player::limitEnergy()
 		speed = 1.5f;
 		aniCountControl = 10;
 		aniCountControl2 = 5;
+	}
+}
+
+void player::setMaxExp()
+{
+	switch (playerFarmingLevel)
+	{
+	case 1:
+		MaxFarmingExp = 100;
+		MAXENERGY = 100;
+		break;
+	case 2:
+		MaxFarmingExp = 300;
+		MAXENERGY = 110;
+		break;		  
+	case 3:			  
+		MaxFarmingExp = 500;
+		MAXENERGY = 120;
+		break;		  
+	case 4:			  
+		MaxFarmingExp = 700;
+		MAXENERGY = 130;
+		break;		  
+	case 5:			  
+		MaxFarmingExp = 900;
+		MAXENERGY = 140;
+		break;		  
+	case 6:			  
+		MaxFarmingExp = 1100;
+		MAXENERGY = 150;
+		break;		  
+	case 7:			  
+		MaxFarmingExp = 1300;
+		MAXENERGY = 160;
+		break;		  
+	case 8:			  
+		MaxFarmingExp = 1500;
+		MAXENERGY = 170;
+		break;		  
+	case 9:			  
+		MaxFarmingExp = 1700;
+		MAXENERGY = 180;
+		break;		  
+	case 10:		  
+		MaxFarmingExp = 1900;
+		MAXENERGY = 190;
+		break;
+	}
+	switch (playerCombatLevel)
+	{
+	case 1:
+		MaxCombatExp = 100;
+		MAXHP = 100;
+		break;
+	case 2:
+		MaxCombatExp = 300;
+		MAXHP = 110;
+		break;
+	case 3:
+		MaxCombatExp = 500;
+		MAXHP = 120;
+		break;
+	case 4:
+		MaxCombatExp = 700;
+		MAXHP = 130;
+		break;
+	case 5:
+		MaxCombatExp = 900;
+		MAXHP = 140;
+		break;
+	case 6:
+		MaxCombatExp = 1100;
+		MAXHP = 150;
+		break;
+	case 7:
+		MaxCombatExp = 1300;
+		MAXHP = 160;
+		break;
+	case 8:
+		MaxCombatExp = 1500;
+		MAXHP = 170;
+		break;
+	case 9:
+		MaxCombatExp = 1700;
+		MAXHP = 180;
+		break;
+	case 10:
+		MaxCombatExp = 1900;
+		MAXHP = 190;
+		break;
+	}
+}
+
+void player::levelUp()
+{
+	if (farmingExp >= MaxFarmingExp && playerFarmingLevel < 10)
+	{
+		playerFarmingLevel += 1;
+		farmingExp = 0;
+		setMaxExp();
+	}
+	else if (combatExp >= MaxCombatExp && playerCombatLevel < 10)
+	{
+		playerCombatLevel += 1;
+		combatExp = 0;
+		setMaxExp();
 	}
 }

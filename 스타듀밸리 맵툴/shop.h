@@ -15,6 +15,9 @@ class shop :
 private:
 	NPC_KIND _npcKind;
 
+	int shopLevel;
+	int total_sell;
+
 	bool buyFail;
 	int buy_count;
 
