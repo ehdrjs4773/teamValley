@@ -67,10 +67,10 @@ HRESULT player::init()
 
 	_skill = new skill();
 	_skill->init();
-	stock->addPlayerStock(STOCK_BROWNCOW);
-	stock->addPlayerStock(STOCK_BROWNCOW);
-	stock->addPlayerStock(STOCK_WHITECOW);
-	stock->addPlayerStock(STOCK_WHITECOW);
+	//stock->addPlayerStock(STOCK_BROWNCOW);
+	//stock->addPlayerStock(STOCK_BROWNCOW);
+	//stock->addPlayerStock(STOCK_WHITECOW);
+	//stock->addPlayerStock(STOCK_WHITECOW);
 
 	currentMap = MAP_HOUSE;
 
