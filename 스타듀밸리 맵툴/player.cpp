@@ -2168,42 +2168,52 @@ void player::setMaxExp()
 	case 1:
 		MaxCombatExp = 100;
 		MAXHP = 100;
+		attackDmg = 10;
 		break;
 	case 2:
 		MaxCombatExp = 300;
 		MAXHP = 110;
+		attackDmg = 11;
 		break;
 	case 3:
 		MaxCombatExp = 500;
 		MAXHP = 120;
+		attackDmg = 12;
 		break;
 	case 4:
 		MaxCombatExp = 700;
 		MAXHP = 130;
+		attackDmg = 13;
 		break;
 	case 5:
 		MaxCombatExp = 900;
 		MAXHP = 140;
+		attackDmg = 14;
 		break;
 	case 6:
 		MaxCombatExp = 1100;
 		MAXHP = 150;
+		attackDmg = 15;
 		break;
 	case 7:
 		MaxCombatExp = 1300;
 		MAXHP = 160;
+		attackDmg = 16;
 		break;
 	case 8:
 		MaxCombatExp = 1500;
 		MAXHP = 170;
+		attackDmg = 17;
 		break;
 	case 9:
 		MaxCombatExp = 1700;
 		MAXHP = 180;
+		attackDmg = 18;
 		break;
 	case 10:
 		MaxCombatExp = 1900;
 		MAXHP = 190;
+		attackDmg = 19;
 		break;
 	}
 }

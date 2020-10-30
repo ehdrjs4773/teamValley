@@ -90,6 +90,8 @@ private:
 	int shopGrade;
 	int totalSell;
 	int dropItemNum = 1;
+	int attackDmg = 10;
+
 
 public:
 	HRESULT init();
@@ -239,5 +241,8 @@ public:
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
 	void makeCropGrow(int i, int j);
+
+	int getAtk() { return attackDmg; }
+	void setAtk(int a) { attackDmg = a; }
 };
 
