@@ -34,6 +34,10 @@ private:
 
 	RECT _playerTool[12];
 
+	RECT _warningRC;
+	RECT _waring_yes;
+	RECT _waring_no;
+
 	int MouseIndexX, MouseIndexY;
 	int currentSlotNumber;
 	int currentSkillNumber;
@@ -41,7 +45,8 @@ private:
 
 	bool _isShopOpen;
 	bool _isShowCloseButton;
-
+	bool _isWarning;
+	bool _isExit;
 public:
 	void init();
 	void release();
@@ -58,6 +63,8 @@ public:
 	void storage_item_info(HDC hdc);
 
 	void shopInvenRender(HDC hdc);
+	bool getIsWarning() { return _isWarning; }
+	void setIsWarning(bool _is) {_isWarning = _is; }
 
 	bool isShowTemp;
 	bool isShowStorageTemp;

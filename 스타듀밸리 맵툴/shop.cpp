@@ -142,7 +142,6 @@ void shop::release()
 
 void shop::update()
 {
-	//cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
 
 	_inven->update();
 
@@ -174,7 +173,6 @@ void shop::update()
 
 		}
 	}
-	cout << "shopLevel : " << shopLevel << "\t" << "total_sell : " << total_sell << "\n";
 	if (total_sell < 1000)
 	{
 		shopLevel = 3;
@@ -351,9 +349,7 @@ void shop::render()
 		memset(money, 0, sizeof(money));
 		sprintf(name, _vItem[i + current_index].item_info, sizeof(_vItem[i + current_index].item_info));
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
-		
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
-		cout << "name : " << _vItem[i+current_index].itemName << "\t" << "grade : " <<_vItem[i + current_index].grade << endl;
 		if (_vItem[i + current_index].grade >= PLAYER->getShopGrade())
 		{
 			if (!_vslot[i].on_cursor)
@@ -372,7 +368,18 @@ void shop::render()
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("»óÁ¡¸ø»ç");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
-
+		if (_vItem[i+current_index].grade == 3)
+		{
+			IMAGEMANAGER->render("º°1", getMemDC(), rc_name.right, _vslot[i].rc.top+8);
+		}
+		else if (_vItem[i+ current_index].grade == 2)
+		{
+			IMAGEMANAGER->render("º°2", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
+		}
+		else
+		{
+			IMAGEMANAGER->render("º°3", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
+		}
 
 		DrawText(getMemDC(), name, strlen(name), &rc_name, NULL);
 		DrawText(getMemDC(), money, strlen(money), &rc_money, NULL);
@@ -511,7 +518,7 @@ void shop::render()
 	{
 		if (!tab_sel)
 		{
-			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top+5);
+			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top + 5);
 			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top);
 		}
 		else
@@ -519,12 +526,24 @@ void shop::render()
 			IMAGEMANAGER->render("»óÁ¡¾¾¾ÑÅÇ", getMemDC(), tab[0].left, tab[0].top);
 			IMAGEMANAGER->render("»óÁ¡µµ±¸ÅÇ", getMemDC(), tab[1].left, tab[1].top + 5);
 		}
-		/*Rectangle(getMemDC(), tab[0]);
-		Rectangle(getMemDC(), tab[1]);
-		TextOut(getMemDC(), tab[0].left, tab[0].top, "¾¾¾Ñ", strlen("¾¾¾Ñ"));
-		TextOut(getMemDC(), tab[1].left, tab[1].top, "Åø", strlen("Åø"));*/
 	}
-
+	image* temp = IMAGEMANAGER->findImage("ÇöÀçº°Å×µÎ¸®");
+	temp->setX(WINSIZEX / 2 - 200);
+	temp->setY(25);
+	temp->render(getMemDC(),temp->getX(),temp->getY());
+	textOut(getMemDC(),temp->boudingBox().left+10, temp->boudingBox().top+10, "ÇöÀç µî±Þ", RGB(0,0,0));
+	if (PLAYER->getShopGrade() == 3)
+	{
+		IMAGEMANAGER->render("ÇöÀçº°1", getMemDC(), temp->boudingBox().left + 150,37);
+	}
+	else if (PLAYER->getShopGrade() == 3)
+	{
+		IMAGEMANAGER->render("ÇöÀçº°2", getMemDC(), temp->boudingBox().left + 150,37);
+	}
+	else
+	{
+		IMAGEMANAGER->render("ÇöÀçº°3", getMemDC(), temp->boudingBox().left + 150,37);
+	}
 	if (is_click)
 	{
 		if (_vItem[click_index].isFrame)
