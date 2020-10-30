@@ -13,7 +13,7 @@ HRESULT mainGame::init()
 	hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET,
 		0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("DOSGothic"));
 	oldFont = (HFONT)SelectObject(getMemDC(), hFont);
-	//DeleteObject(oldFont);
+
 	/*앞으로 메인게임은 각각의 씬들만 관리를 한다*/
 	/*이곳에서 각각의 씬들을 추가하고 현재씬을 설정한다*/
 

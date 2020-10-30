@@ -234,6 +234,7 @@ struct tagItem {
 	int hpRecover;
 	int energyRecover;
 	bool isFrame;
+	int grow;
 };
 
 struct tagSaveItem {

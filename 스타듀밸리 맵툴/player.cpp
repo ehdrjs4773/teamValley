@@ -312,10 +312,6 @@ void player::InventoryRender(HDC hdc)
 			_inventory->quickSlot(hdc);
 			_inventory->quickinven_item_info(hdc);
 		}
-		else
-		{
-			_inventory->quickSkillSlot(hdc);
-		}
 	}
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
