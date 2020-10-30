@@ -133,7 +133,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("어린양", "Images/가축/어린양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("털깎인양", "Images/가축/털깎인양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("양", "Images/가축/양.bmp", 128, 192, 4, 6);
-	
+	IMAGEMANAGER->addFrameImage("할아버지", "Images/npc/할아버지.bmp", 64, 128, 4, 4);
 	//상점
 	IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점닫기", "Images/shop/exit.bmp", 30, 33);
