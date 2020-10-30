@@ -103,12 +103,15 @@ void  player::release()
 
 void  player::update()
 {
-	cout << playerEnergy << "\t" << totalEnergyDmg << "\t" << MAXENERGY << endl;
+	//cout << MAXENERGY << "\t" << MaxFarmingExp << "\t" << farmingExp << "\t" << dropItemNum << "\t" << playerFarmingLevel << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
-		playerEnergy -= 2;
-		totalEnergyDmg += 2;
+		//playerEnergy -= 2;
+		//totalEnergyDmg += 2;
+
+		playerFarmingLevel++;
+		setMaxExp();
 	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * totalHpDmg));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  totalEnergyDmg));
@@ -125,7 +128,7 @@ void  player::update()
 	//		}
 	//	}
 	//}
-	cout << _pState << endl;
+
 	if (!isOpenPlayerStorageCover)
 	{
 		if (!isShowInventory && !isShowSleepingOption)
@@ -1931,42 +1934,52 @@ void player::setMaxExp()
 	case 1:
 		MaxFarmingExp = 100;
 		MAXENERGY = 100;
+		dropItemNum = 1;
 		break;
 	case 2:
 		MaxFarmingExp = 300;
 		MAXENERGY = 110;
+		dropItemNum = 1;
 		break;		  
 	case 3:			  
 		MaxFarmingExp = 500;
 		MAXENERGY = 120;
+		dropItemNum = 1;
 		break;		  
 	case 4:			  
 		MaxFarmingExp = 700;
 		MAXENERGY = 130;
+		dropItemNum = 1;
 		break;		  
 	case 5:			  
 		MaxFarmingExp = 900;
 		MAXENERGY = 140;
+		dropItemNum = 2;
 		break;		  
 	case 6:			  
 		MaxFarmingExp = 1100;
 		MAXENERGY = 150;
+		dropItemNum = 2;
 		break;		  
 	case 7:			  
 		MaxFarmingExp = 1300;
 		MAXENERGY = 160;
+		dropItemNum = 2;
 		break;		  
 	case 8:			  
 		MaxFarmingExp = 1500;
 		MAXENERGY = 170;
+		dropItemNum = 2;
 		break;		  
 	case 9:			  
 		MaxFarmingExp = 1700;
 		MAXENERGY = 180;
+		dropItemNum = 2;
 		break;		  
 	case 10:		  
 		MaxFarmingExp = 1900;
 		MAXENERGY = 190;
+		dropItemNum = 3;
 		break;
 	}
 	switch (playerCombatLevel)

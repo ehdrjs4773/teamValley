@@ -88,6 +88,8 @@ private:
 	int MaxCombatExp;
 	int shopGrade;
 	int totalSell;
+	int dropItemNum = 1;
+
 public:
 	HRESULT init();
 	void release();
@@ -105,6 +107,9 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
+	int getDropItemNum() { return dropItemNum; }
+	void setFarmingExp(int a) { farmingExp += a; }
+	void setCombatExp(int a) { combatExp += a; }
 	void limitEnergy();
 	void setMaxExp();
 	void levelUp();

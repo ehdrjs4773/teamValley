@@ -174,7 +174,7 @@ void shop::update()
 
 		}
 	}
-	cout << "shopLevel : " << shopLevel << "\t" << "total_sell : " << total_sell << "\n";
+	//cout << "shopLevel : " << shopLevel << "\t" << "total_sell : " << total_sell << "\n";
 	if (total_sell < 1000)
 	{
 		shopLevel = 3;
