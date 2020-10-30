@@ -220,6 +220,25 @@ void monster::update()
 		isDead = true;
 		isMove = false;
 
+		//죽으면 플레이어 경험치 획득
+		switch (monsterType)
+		{
+		case MTYPE_NONE:
+			break;
+		case MTYPE_SLIME:
+			PLAYER->setCombatExp(20);
+			break;
+		case MTYPE_BUG:
+			PLAYER->setCombatExp(50);
+			break;
+		case MTYPE_ROCKCRAB:
+			PLAYER->setCombatExp(130);
+			break;
+		case MTYPE_SERPENT:
+			PLAYER->setCombatExp(190);
+			break;
+		}
+
 	}
 	//데미지 받으면 다음 데미지 받을떄까지 딜레이
 	if (getdamage)

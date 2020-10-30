@@ -1616,8 +1616,10 @@ void inGameScene::harvest()
 		}
 
 		//°æÇèÄ¡ »ó½Â
-		PLAYER->setFarmingExp(ITEMMANAGER->findDropItem(ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType).exp);
-		
+		if (_tile[MouseIndexY][MouseIndexX].seedType != SEED_NONE)
+		{
+			PLAYER->setFarmingExp(ITEMMANAGER->findDropItem(ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType).exp);
+		}
 		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE

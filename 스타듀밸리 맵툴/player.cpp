@@ -103,7 +103,7 @@ void  player::release()
 
 void  player::update()
 {
-	//cout << MAXENERGY << "\t" << MaxFarmingExp << "\t" << farmingExp << "\t" << dropItemNum << "\t" << playerFarmingLevel << endl;
+	cout << playerEnergy << "\t" << frontEnergyBar.top << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
@@ -113,8 +113,8 @@ void  player::update()
 		playerFarmingLevel++;
 		setMaxExp();
 	}
-	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * totalHpDmg));
-	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  totalEnergyDmg));
+	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
+	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
 	
 	levelUp();
 	//if (!isShowInventory)
@@ -1660,6 +1660,8 @@ void player::saveMap()
 			
 			//다자랐는지 확인
 			_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
+
+			_tile[i][j].isWet = false;
 		}
 	}
 
@@ -2024,10 +2026,10 @@ void player::clockRender(HDC hdc)
 		}
 	}
 
-	sprintf(yearStr, "%d년", year);
+	//sprintf(yearStr, "%d년", year);
 	sprintf(dateStr, "%d일", date);
-	textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
-	textOut(hdc, 1120, 34, dateStr, RGB(0, 0, 0));
+	//textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
+	textOut(hdc, 1090, 34, dateStr, RGB(0, 0, 0));
 }
 
 void player::moneyRender(HDC hdc)
