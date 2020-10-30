@@ -12,7 +12,7 @@ HRESULT inGameScene::init()
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	isShopOpen = false;
-	//getPlayerTileData();
+
 	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
 	{
 		load();
@@ -32,7 +32,7 @@ HRESULT inGameScene::init()
 				_tile[i][j].portal = PT_NONE;
 			}
 		}
-		_tile[31][23].portal = PT_HOUSE;
+		_tile[29][23].portal = PT_HOUSE;
 		_tile[27][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
@@ -156,6 +156,8 @@ void inGameScene::update()
 	{
 		shareTileData();
 	}
+
+	cout << _tile[MouseIndexY][MouseIndexX].objFrameX << "\t" << _tile[MouseIndexY][MouseIndexX].objFrameY << endl;
 }
 
 void inGameScene::render()
@@ -579,7 +581,16 @@ void inGameScene::playerMove()
 						&& _tile[rightIndexY][rightIndexX].seedType != SEED_GRAPE)
 					|| (_tile[rightIndexY][rightIndexX].objType == OTY_TREE
 						&& !_tile[rightIndexY][rightIndexX].isFullyGrown
-						&& _tile[rightIndexY][rightIndexX].grownLevel == 0))
+						&& _tile[rightIndexY][rightIndexX].grownLevel == 0)
+					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_BUILDING 
+						&& _tile[rightIndexY][rightIndexX].objType == OTY_HOUSE
+						&& ((_tile[rightIndexY][rightIndexX].objFrameX == 13 
+							|| _tile[rightIndexY][rightIndexX].objFrameX == 14 
+							|| _tile[rightIndexY][rightIndexX].objFrameX == 15)
+							&& 
+							(_tile[rightIndexY][rightIndexX].objFrameY == 8
+							|| _tile[rightIndexY][rightIndexX].objFrameY == 7
+							|| _tile[rightIndexY][rightIndexX].objFrameY == 9))))
 				{
 					PLAYER->setDirection(RIGHT);
 
@@ -611,7 +622,16 @@ void inGameScene::playerMove()
 						&& _tile[leftIndexY][leftIndexX].seedType != SEED_GRAPE)
 					|| (_tile[leftIndexY][leftIndexX].objType == OTY_TREE
 						&& !_tile[leftIndexY][leftIndexX].isFullyGrown
-						&& _tile[leftIndexY][leftIndexX].grownLevel == 0))
+						&& _tile[leftIndexY][leftIndexX].grownLevel == 0)
+					|| (_tile[leftIndexY][leftIndexX].obj == OBJ_BUILDING
+						&& _tile[leftIndexY][leftIndexX].objType == OTY_HOUSE
+						&& ((_tile[leftIndexY][leftIndexX].objFrameX == 13
+							|| _tile[leftIndexY][leftIndexX].objFrameX == 14
+							|| _tile[leftIndexY][leftIndexX].objFrameX == 15)
+							&&
+							(_tile[leftIndexY][leftIndexX].objFrameY == 8
+								|| _tile[leftIndexY][leftIndexX].objFrameY == 7
+								|| _tile[leftIndexY][leftIndexX].objFrameY == 9))))
 				{
 					PLAYER->setDirection(LEFT);
 
@@ -643,7 +663,16 @@ void inGameScene::playerMove()
 						&& _tile[upIndexY][upIndexX].seedType != SEED_GRAPE) 
 					|| (_tile[upIndexY][upIndexX].objType == OTY_TREE
 							&& !_tile[upIndexY][upIndexX].isFullyGrown
-						&& _tile[upIndexY][upIndexX].grownLevel == 0))
+						&& _tile[upIndexY][upIndexX].grownLevel == 0)
+					|| (_tile[upIndexY][upIndexX].obj == OBJ_BUILDING
+						&& _tile[upIndexY][upIndexX].objType == OTY_HOUSE
+						&& ((_tile[upIndexY][upIndexX].objFrameX == 13
+							|| _tile[upIndexY][upIndexX].objFrameX == 14
+							|| _tile[upIndexY][upIndexX].objFrameX == 15)
+							&&
+							(_tile[upIndexY][upIndexX].objFrameY == 8
+								|| _tile[upIndexY][upIndexX].objFrameY == 7
+								|| _tile[upIndexY][upIndexX].objFrameY == 9))))
 				{
 					PLAYER->setDirection(UP);
 
@@ -675,7 +704,16 @@ void inGameScene::playerMove()
 						&& _tile[downIndexY][downIndexX].seedType != SEED_GRAPE)
 					|| (_tile[downIndexY][downIndexX].objType == OTY_TREE 
 						&& !_tile[downIndexY][downIndexX].isFullyGrown
-						&& _tile[downIndexY][downIndexX].grownLevel == 0))
+						&& _tile[downIndexY][downIndexX].grownLevel == 0)
+					|| (_tile[downIndexY][downIndexX].obj == OBJ_BUILDING
+						&& _tile[downIndexY][downIndexX].objType == OTY_HOUSE
+						&& ((_tile[downIndexY][downIndexX].objFrameX == 13
+							|| _tile[downIndexY][downIndexX].objFrameX == 14
+							|| _tile[downIndexY][downIndexX].objFrameX == 15)
+							&&
+							(_tile[downIndexY][downIndexX].objFrameY == 8
+								|| _tile[downIndexY][downIndexX].objFrameY == 7
+								|| _tile[downIndexY][downIndexX].objFrameY == 9))))
 				{
 					PLAYER->setDirection(DOWN);
 

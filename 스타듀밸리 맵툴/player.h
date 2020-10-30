@@ -23,7 +23,8 @@ private:
 	Stock* stock;
 	MAP currentMap;
 
-	int MAXHP, MAXENERGY;
+	float MAXHP, MAXENERGY;
+	float playerHp, playerEnergy;
 
 	int timeCount, hour, minute, date, money, year, blinkCount;
 	int arrowAngle;
@@ -38,8 +39,7 @@ private:
 	float speed;
 	int count;
 	int index;
-	int playerEnergy;
-	int playerHp;
+	
 	int totalHpDmg = 0;
 	int totalEnergyDmg = 0;
 	int hpBarX;
@@ -159,33 +159,9 @@ public:
 
 	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
-	void recoverHp(int rec) { 
-		if (playerHp + rec <= MAXHP)
-		{
-			playerHp += rec;
-			totalHpDmg -= rec / 2;
-		}
-		else
-		{
-			playerHp = MAXHP;
-			totalHpDmg = 0;
-		}
-		
-	}
+	void recoverHp(int rec);
 	void setHp(int dmg) { playerHp -= dmg; totalHpDmg += dmg / 2; }
-	void recoverEnergy(int rec) { 
-		if (playerEnergy += rec <= MAXENERGY)
-		{
-			playerEnergy += rec;
-			totalEnergyDmg -= rec / 2;
-		}
-		else
-		{
-			playerEnergy = MAXENERGY;
-			totalEnergyDmg = 0;
-		}
-		
-	}
+	void recoverEnergy(int rec);
 	void setEnergy(int dmg) { playerEnergy -= dmg; totalEnergyDmg += dmg / 2; }
 	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
 	void resetHpBar() { playerHp = 138, totalHpDmg = 0; }

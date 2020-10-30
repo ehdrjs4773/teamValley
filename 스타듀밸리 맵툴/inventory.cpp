@@ -1141,6 +1141,8 @@ void inventory::setvInven(int i, tagSaveItem item)
 	_vItem[i].sell_price = item.sell_price;
 	_vItem[i].toolKind = item.toolKind;
 	_vItem[i].waterAmount = item.waterAmount;
+	_vItem[i].hpRecover = item.hpRecover;
+	_vItem[i].energyRecover = item.energyRecover;
 
 
 	if (_vItem[i].item_kind == ITEM_TOOL)
