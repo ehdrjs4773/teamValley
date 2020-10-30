@@ -13,7 +13,7 @@ void inventory::init()
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
-		cout << &_vItem[i] << endl;
+		//y << &_vItem[i] << endl;
 	}
 
 	for (int i = 0; i < STORAGEMAX; i++)
@@ -300,8 +300,15 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 		}
 	}
 
-	if (_MouseItem.item_image)_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
+	if (_MouseItem.item_image)
+	{
+		if (_MouseItem.isFrame)
+		{
+			_MouseItem.item_image->frameRender(hdc, _MouseItem.rc.left, _MouseItem.rc.top, _MouseItem.indexX, _MouseItem.indexY);
+		}
+		else _MouseItem.item_image->render(hdc, _MouseItem.rc.left, _MouseItem.rc.top);
 
+	}
 }  // 단순한 플레이어만을 위한 플레이어 인벤토리 정보창 (이상하게 수정하지마)
 
 void inventory::invenToryRender(HDC hdc) // 밑에 뜨게 하는 인벤토리 (위에꺼 배고 다른걸 다 이거로 처리하면 편하잖아-_ -);
@@ -642,64 +649,97 @@ void inventory::inven_item_info(HDC hdc)
 			if (_vItem[i].item_image != NULL)
 			{
 				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
-				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
-				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+				RECT temp1;
+				RECT temp2;
+
+				if (_isShopOpen)
+				{
+					 temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y -150, 200, 70);
+					 temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+					 IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
+
+				}
+				else
+				{
+					 temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+					 temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+					 IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+
+				}
 
 				SetTextColor(hdc, RGB(0, 0, 0));
 
 				memset(temp_info, 0, sizeof(temp_info));
 
-				switch (_vItem[i].item_kind)
+				sprintf(temp_info[1], "판매가 : %d 원", _vItem[i].sell_price);
+				if (_vItem[i].item_kind == ITEM_SEED)
 				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
+					sprintf(temp_info[0], "\n성장 기간 : %d 일", _vItem[i].grow);
+					strcat_s(temp_info[1], temp_info[0]);
+					sprintf(temp_info[0], "\n경험치 : %d exp", _vItem[i].exp);
+					strcat_s(temp_info[1], temp_info[0]);
 				}
-				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
+				else if (_vItem[i].item_kind == ITEM_FRUIT)
+				{
+					if (_vItem[i].hpRecover != 0) sprintf(temp_info[0], "\n효과 : HP %d 회복", _vItem[i].hpRecover);
+					else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vItem[i].energyRecover);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i].item_kind == ITEM_TOOL)
+				{
+					sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i].item_kind == ITEM_SKILL)
+				{
+					switch (_vItem[i].weaponKind)
+					{
+					case WEAPON_EXPLOSION:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_SPIKES:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIRE:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_BLACKHOLE:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIREBALL:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 4);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					default:
+						break;
+					}
+				}
 
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 			}
 		}
@@ -715,65 +755,83 @@ void inventory::quickinven_item_info(HDC hdc)
 			if (_vItem[i].item_image != NULL)
 			{
 				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 50);
-				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 70);
+				RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 100);
 				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
 
 				SetTextColor(hdc, RGB(0, 0, 0));
 
 				memset(temp_info, 0, sizeof(temp_info));
 
-				switch (_vItem[i].item_kind)
+				sprintf(temp_info[1], "판매가 : %d 원", _vItem[i].sell_price);
+				if (_vItem[i].item_kind == ITEM_SEED)
 				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
+					sprintf(temp_info[0], "\n성장 기간 : %d 일", _vItem[i].grow);
+					strcat_s(temp_info[1], temp_info[0]);
+					sprintf(temp_info[0], "\n경험치 : %d exp", _vItem[i].exp);
+					strcat_s(temp_info[1], temp_info[0]);
 				}
-				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
+				else if (_vItem[i].item_kind == ITEM_FRUIT)
+				{
+					if (_vItem[i].hpRecover != 0) sprintf(temp_info[0], "\n효과 : HP %d 회복", _vItem[i].hpRecover);
+					else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vItem[i].energyRecover);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i].item_kind == ITEM_TOOL)
+				{
+					sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i].item_kind == ITEM_SKILL)
+				{
+					switch (_vItem[i].weaponKind)
+					{
+					case WEAPON_EXPLOSION:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_SPIKES:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIRE:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_BLACKHOLE:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIREBALL:
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 4);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					default:
+						break;
+					}
+				}
 
-
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 
 			}
@@ -790,66 +848,85 @@ void inventory::storage_item_info(HDC hdc)
 		{
 			if (_vStorageItem[i].item_image != NULL)
 			{
-				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
-				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
-				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+					char temp_info[2][256];
+					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+					RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+					IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
 
-				SetTextColor(hdc, RGB(0, 0, 0));
+					SetTextColor(hdc, RGB(0, 0, 0));
 
-				memset(temp_info, 0, sizeof(temp_info));
+					memset(temp_info, 0, sizeof(temp_info));
 
-				switch (_vStorageItem[i].item_kind)
-				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
-				}
-				sprintf(temp_info[1],_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));
+					sprintf(temp_info[1], "판매가 : %d 원", _vStorageItem[i].sell_price);
+					if (_vStorageItem[i].item_kind == ITEM_SEED)
+					{
+						sprintf(temp_info[0], "\n성장 기간 : %d 일", _vStorageItem[i].grow);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n경험치 : %d exp", _vStorageItem[i].exp);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vStorageItem[i].item_kind == ITEM_FRUIT)
+					{
+						if (_vStorageItem[i].hpRecover != 0) sprintf(temp_info[0], "\n효과 : HP %d 회복", _vStorageItem[i].hpRecover);
+						else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vStorageItem[i].energyRecover);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vStorageItem[i].item_kind == ITEM_TOOL)
+					{
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vStorageItem[i].item_kind == ITEM_SKILL)
+					{
+						switch (_vStorageItem[i].weaponKind)
+						{
+						case WEAPON_EXPLOSION:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 1);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 1);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_SPIKES:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_FIRE:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_BLACKHOLE:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_FIREBALL:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 4);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						default:
+							break;
+						}
+					}
 
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
-				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+					DrawText(hdc, _vStorageItem[i].itemName, strlen(_vStorageItem[i].itemName), &temp1, NULL);
+					DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 			}
 		}
 	}
@@ -895,6 +972,7 @@ void inventory::_vItemUpdate()
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					PLAYER->setLoadCount(0);
 					SOUNDMANAGER->play("select");
 					SWITCHMANAGER->changeScene("스타트화면");
 					SWITCHMANAGER->startFade(.0f, .0f);
@@ -975,34 +1053,6 @@ void inventory::_vItemUpdate()
 						}
 					}
 				}
-				/*if (INPUT->GetKeyDown(VK_RBUTTON))
-				{
-					if (_vItem[i].item_image != NULL && _vItem[i].item_kind == ITEM_SKILL)
-					{
-						int skillcheck = 0;
-						for (int k = 0; k < PLAYER->getvCurrentSkill().size(); k++)
-						{
-							if (_vItem[i].item_info == PLAYER->getvCurrentSkill()[k].skill_info)
-							{
-								skillcheck++;
-							}
-						}
-						if (skillcheck == 0)
-						{
-							for (int k = 0; k < PLAYER->getvSkill().size(); k++)
-							{
-								if (PLAYER->getvSkill()[k].skill_info == _vItem[i].item_info)
-								{
-									PLAYER->getvCurrentSkill().push_back(PLAYER->getvSkill()[k]); \
-										tagItem temp;
-									temp.item_image = NULL;
-									_vItem[i] = temp;
-									
-								}
-							}
-						}
-					}
-				}*/
 			}
 		}
 	}
@@ -1091,7 +1141,10 @@ void inventory::setvInven(int i, tagSaveItem item)
 	_vItem[i].sell_price = item.sell_price;
 	_vItem[i].toolKind = item.toolKind;
 	_vItem[i].waterAmount = item.waterAmount;
-
+	_vItem[i].hpRecover = item.hpRecover;
+	_vItem[i].energyRecover = item.energyRecover;
+	_vItem[i].exp = item.exp;
+	_vItem[i].grow = item.grow;
 
 	if (_vItem[i].item_kind == ITEM_TOOL)
 	{

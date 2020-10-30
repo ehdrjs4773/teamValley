@@ -229,6 +229,28 @@ struct tagItem {
 	int indexX, indexY;
 	int amount;
 	int grow;
+	int exp;
+	int hpRecover;
+	int energyRecover;
+	bool isFrame;
+};
+
+struct tagSaveItem {
+	RECT rc;
+	ITEM item_kind;
+	TOOL toolKind;
+	SEED seedKind;
+	const char* itemName;
+
+	int buy_price;
+	int sell_price;
+	int waterAmount;
+	int indexX, indexY;
+	int amount;
+	int hpRecover;
+	int energyRecover;
+	int grow;
+	int exp;
 	bool isFrame;
 };
 
@@ -262,21 +284,6 @@ struct tagStock {
 	bool isFullyGrown;
 	bool isSheared;
 	bool isMove;
-};
-
-struct tagSaveItem {
-	RECT rc;
-	ITEM item_kind;
-	TOOL toolKind;
-	SEED seedKind;
-	const char* itemName;
-
-	int buy_price;
-	int sell_price;
-	int waterAmount;
-	int indexX, indexY;
-	int amount;
-	bool isFrame;
 };
 
 struct tagEffect 

@@ -23,6 +23,9 @@ private:
 	Stock* stock;
 	MAP currentMap;
 
+	float MAXHP, MAXENERGY;
+	float playerHp, playerEnergy;
+
 	int timeCount, hour, minute, date, money, year, blinkCount;
 	int arrowAngle;
 	DAYOFWEEK day;
@@ -36,8 +39,7 @@ private:
 	float speed;
 	int count;
 	int index;
-	int playerEnergy;
-	int playerHp;
+	
 	int totalHpDmg = 0;
 	int totalEnergyDmg = 0;
 	int hpBarX;
@@ -73,9 +75,10 @@ private:
 
 	bool isShowSleepingOption =false;
 	bool isSprinkled;
-	bool isNewGame;
+	bool isNewGame = true;
 	bool isHit;
 	int hitCount = 0;
+	int inGameLoadCount = 0;
 
 public:
 	HRESULT init();
@@ -96,7 +99,10 @@ public:
 
 	void limitEnergy();
 
+	bool getIsNewGame() { return isNewGame; }
 	void setIsNewGame(bool a) { isNewGame = a; }
+	int getLoadCount() { return inGameLoadCount; }
+	void setLoadCount(int a) { inGameLoadCount = a; }
 
 	void setIsShowSleepingOption(bool a) { isShowSleepingOption = a; }
 
@@ -153,7 +159,9 @@ public:
 
 	void setEnergyBarX(int energyBar) { frontEnergyBar.top = energyBar; }
 	void setHpBarX(int hpbar) { frontHpBar.top = hpbar; }
+	void recoverHp(int rec);
 	void setHp(int dmg) { playerHp -= dmg; totalHpDmg += dmg / 2; }
+	void recoverEnergy(int rec);
 	void setEnergy(int dmg) { playerEnergy -= dmg; totalEnergyDmg += dmg / 2; }
 	void setHpBarBot(int barBot) { frontHpBar.bottom = barBot; }
 	void resetHpBar() { playerHp = 138, totalHpDmg = 0; }
@@ -209,6 +217,7 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
+	tagTile giveTileData(int i, int j);
 
 };
 

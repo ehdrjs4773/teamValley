@@ -109,7 +109,7 @@ void inventoryCraft::materialUpdate()
 			}
 		}
 	}
-	cout << _isWood << "  " << _isRock << "  " << _isCopper << "  " << _isIron << "  " << _isGold << endl;
+	//cout << _isWood << "  " << _isRock << "  " << _isCopper << "  " << _isIron << "  " << _isGold << endl;
 }
 
 void inventoryCraft::update()

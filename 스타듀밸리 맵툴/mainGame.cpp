@@ -13,7 +13,7 @@ HRESULT mainGame::init()
 	hFont = CreateFont(20, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET,
 		0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("DOSGothic"));
 	oldFont = (HFONT)SelectObject(getMemDC(), hFont);
-	//DeleteObject(oldFont);
+
 	/*앞으로 메인게임은 각각의 씬들만 관리를 한다*/
 	/*이곳에서 각각의 씬들을 추가하고 현재씬을 설정한다*/
 
@@ -65,6 +65,8 @@ void mainGame::update()
 
 	//사운드매니져 업데이트 (이게 없으면 사운드매니져 제대로 동작하지 않는다!!!)
 	SOUNDMANAGER->update();
+
+	//cout << boolalpha << PLAYER->getIsNewGame() << PLAYER->getLoadCount() << endl;
 }
 
 //=============================================================

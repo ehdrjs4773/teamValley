@@ -49,7 +49,7 @@ void towerScene::update()
 	}
 
 	_skillNpc->update();
-	cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
+	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
 	//상점 나가기 포탈
 	if (PLAYER->getCenterY() >= 270)
 	{

@@ -10,6 +10,11 @@ HRESULT mainScene::init()
 	}
 
 	SOUNDMANAGER->play("¸ÞÀÎÀ½¾Ç",0.3f);
+	if (SOUNDMANAGER->isPlaySound("³óÀå")) { SOUNDMANAGER->stop("³óÀå");	}
+	if (SOUNDMANAGER->isPlaySound("springDay")) { SOUNDMANAGER->stop("springDay");	}
+	if (SOUNDMANAGER->isPlaySound("night")) { SOUNDMANAGER->stop("night");	}
+	if (SOUNDMANAGER->isPlaySound("bugCave")) { SOUNDMANAGER->stop("bugCave");	}
+	if (SOUNDMANAGER->isPlaySound("town")) { SOUNDMANAGER->stop("town");	}
 
 	return S_OK;
 }
@@ -30,6 +35,7 @@ void mainScene::update()
 			frameY[0] = 1;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				PLAYER->setIsNewGame(true);
 				PLAYER->init();
 				SWITCHMANAGER->changeScene("¿ÀÇÁ´×È­¸é");
 				SWITCHMANAGER->startFade(820.0f, 865.0f);
@@ -42,6 +48,7 @@ void mainScene::update()
 			frameY[1] = 1;
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
+				PLAYER->setIsNewGame(false);
 				PLAYER->loadPlayerData();
 				PLAYER->closeInvenPage();
 				SWITCHMANAGER->changeScene("Áý¾ÈÈ­¸é");

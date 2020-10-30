@@ -6,7 +6,6 @@
 class inGameScene : public gameNode
 {
 private:
-	static TCHAR saveName[MAX_PATH];
 	tagTile _tile[TILEY][TILEX]; 
 
 	//∂•ø° ∂≥æÓ¡¯ æ∆¿Ã≈€øÎ ∫§≈Õ
@@ -71,6 +70,7 @@ public:
 	void setFence();
 	void setSprinkler();
 	void sprinklerWork();
+	void eatFruit();
 
 	void makeCropGrow();
 	bool checkFullyGrown(tagTile tile);

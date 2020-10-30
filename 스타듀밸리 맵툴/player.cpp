@@ -3,7 +3,6 @@
 
 HRESULT player::init()
 {
-	isNewGame = true;
 	isSkill = false;
 
 	index = 0;
@@ -16,17 +15,21 @@ HRESULT player::init()
 
 	playerHoldItem = RectMakeCenter(centerX - 8, centerY - 48, 16, 16);
 
-	playerHp = 138;
-	playerEnergy = 138;
+	playerHp = 138.0f;
+	playerEnergy = 138.0f;
+
+	MAXHP = 138.0f;
+	MAXENERGY = 138.0f;
+
 	totalHpDmg = 0;
 	totalEnergyDmg = 0;
 
+	speed = 1.5f;
+
 	Damage = 2;
 
-	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, playerHp);
-	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, playerEnergy);
-
-	speed = 1.5f;
+	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, (138 / MAXHP * playerHp));
+	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, (138 / MAXENERGY * playerEnergy));
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
@@ -95,6 +98,16 @@ void  player::release()
 
 void  player::update()
 {
+	//cout << playerEnergy << "\t" << totalEnergyDmg << "\t" << MAXENERGY << endl;
+	//cout << _inventory->getvInven()[1].energyRecover << endl;
+	if (INPUT->GetKeyDown(VK_F9))
+	{
+		playerEnergy -= 2;
+		totalEnergyDmg += 2;
+	}
+	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * totalHpDmg));
+	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  totalEnergyDmg));
+	
 	//if (!isShowInventory)
 	//{
 	//	if (INPUT->GetKeyDown(VK_TAB))
@@ -178,10 +191,6 @@ void  player::update()
 	closePlayerStorageCover();
 
 	limitEnergy();
-	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88 + totalHpDmg, 20, playerHp);
-	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88 + totalEnergyDmg, 20, playerEnergy);
-
-
 }
 
 void player::render()
@@ -303,10 +312,6 @@ void player::InventoryRender(HDC hdc)
 			_inventory->quickSlot(hdc);
 			_inventory->quickinven_item_info(hdc);
 		}
-		else
-		{
-			_inventory->quickSkillSlot(hdc);
-		}
 	}
 	//Rectangle(CAMERAMANAGER->getMemDC(), rc);
 
@@ -338,6 +343,34 @@ void player::hpBarRender(HDC hdc)
 	brush = CreateSolidBrush(RGB(255, 30, 6));
 	FillRect(hdc, &frontHpBar, brush);
 	DeleteObject(brush);
+}
+
+void player::recoverHp(int rec)
+{
+	if (playerHp + rec <= MAXHP)
+	{
+		playerHp += rec;
+		totalHpDmg -= rec / 2;
+	}
+	else if (playerHp + rec > MAXHP)
+	{
+		playerHp = MAXHP;
+		totalHpDmg = 0;
+	}
+}
+
+void player::recoverEnergy(int rec)
+{
+	if (playerEnergy + rec <= MAXENERGY)
+	{
+		playerEnergy += rec;
+		totalEnergyDmg -= rec / 2;
+	}
+	else if (playerEnergy + rec > MAXENERGY)
+	{
+		playerEnergy = MAXENERGY;
+		totalEnergyDmg = 0;
+	}
 }
 
 void player::playerAnimation()
@@ -942,7 +975,6 @@ void player::playerAnimation()
 	}
 }
 
-
 void player::playerRender()
 {
 	switch (_pState)
@@ -1189,7 +1221,6 @@ void player::playerRender()
 		break;
 	}
 }
-
 
 void player::openPlayerStorageCover()
 {
@@ -1520,6 +1551,10 @@ void player::savePlayerInven()
 			tempItem[i].sell_price = 0;
 			tempItem[i].toolKind = (TOOL)0;
 			tempItem[i].waterAmount = 0;
+			tempItem[i].hpRecover = 0;
+			tempItem[i].energyRecover = 0;
+			tempItem[i].grow = 0;
+			tempItem[i].exp = 0;
 		}
 		else
 		{
@@ -1535,6 +1570,10 @@ void player::savePlayerInven()
 			tempItem[i].sell_price = temp[i].sell_price;
 			tempItem[i].toolKind = temp[i].toolKind;
 			tempItem[i].waterAmount = temp[i].waterAmount;
+			tempItem[i].hpRecover = temp[i].hpRecover;
+			tempItem[i].energyRecover = temp[i].energyRecover;
+			tempItem[i].grow = temp[i].grow;
+			tempItem[i].exp = temp[i].exp;
 		}
 	}
 
@@ -1555,7 +1594,7 @@ void player::savePlayerStock()
 	tagStock tempStock[5];
 	memset(tempStock, 0, sizeof(tempStock));
 
-	for (int i = 0; i < stock->getStock().size(); i++)
+	for (int i = 0; i < stock->getStock().size() - 1; i++)
 	{
 		tempStock[i] = temp[i];
 	}
@@ -1717,6 +1756,12 @@ void player::saveTile(int i, int j, tagTile tile)
 	_tile[i][j] = tile;
 }
 
+tagTile player::giveTileData(int i, int j)
+{
+	cout << i << "\t" << j << "\t" << "gave Tile Data" << endl;
+	return _tile[i][j];
+}
+
 void player::clockRender(HDC hdc)
 {
 	IMAGEMANAGER->render("시계", hdc, 980, 20);
@@ -1835,14 +1880,13 @@ void player::weatherRender(HDC hdc)
 
 void player::limitEnergy()
 {
-	if (playerEnergy <= 0 && playerEnergy >= -20)
+	if (playerEnergy <= 20 && playerEnergy > 0)
 	{
 		speed = 0.5f;
-		totalEnergyDmg = 138;
 		aniCountControl = 15;
 		aniCountControl2 = 10;
 	}
-	else if (playerEnergy < -20)
+	else if (playerEnergy <= 0)
 	{
 		saveMap();
 		savePlayerData();
@@ -1854,5 +1898,7 @@ void player::limitEnergy()
 	else
 	{
 		speed = 1.5f;
+		aniCountControl = 10;
+		aniCountControl2 = 5;
 	}
 }
