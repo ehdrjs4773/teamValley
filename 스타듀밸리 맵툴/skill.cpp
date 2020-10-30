@@ -67,6 +67,8 @@ void skill::skillSelect()
 			if (PLAYER->getInventory()->getvInven()[_num].item_info == "파이어볼 검") skill_state = SKILL_FIRE_BALL;
 		}
 	}
+
+	cout << skill_state << endl;
 }
 
 void skill::skillActive()

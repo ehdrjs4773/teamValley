@@ -200,6 +200,7 @@ void shop::update()
 
 void shop::render()
 {
+
 	//플레이어 인벤토리 출력
 	PLAYER->getInventory()->shopInvenRender(getMemDC());
 
@@ -268,7 +269,6 @@ void shop::render()
 		}
 	
 	}
-	PLAYER->getInventory()->inven_item_info(getMemDC());
 
 	//상점 창 테두리 출력
 	_shop_image = IMAGEMANAGER->findImage("상점");
@@ -352,6 +352,7 @@ void shop::render()
 	}
 	IMAGEMANAGER->findImage("상점닫기")->render(getMemDC(), rc_exit.left, rc_exit.top);
 
+
 	//아이템 이미지 출력
 
 	for (int i = 0; i < _vslot.size(); i++)
@@ -382,7 +383,9 @@ void shop::render()
 	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
 
 	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
-	
+
+	PLAYER->getInventory()->inven_item_info(getMemDC());
+
 	//아이템 정보 출력
 	for (int i = 0; i < _vslot.size(); i++)
 
@@ -392,65 +395,90 @@ void shop::render()
 
 		if (_vslot[i].on_cursor)
 		{
-			IMAGEMANAGER->findImage("아이템정보")->render(getMemDC(), _ptMouse.x + 25, _ptMouse.y + 25);
-
-			SetTextColor(getMemDC(), RGB(0, 0, 0));
-
-			char temp[256];
-
-			switch (_vItem[i + current_index].item_kind)
+			if (_vItem[i+current_index].item_image != NULL)
 			{
-			case ITEM_WEAPON:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "WEAPON", sizeof("WEAPON"));
-				break;
-			case ITEM_TOOL:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "TOOL", sizeof("TOOL"));
-				break;
-			case ITEM_BIGCRAFTABLE:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "BIGCRAFTABLE", sizeof("BIGCRAFTABLE"));
-				break;
-			case ITEM_RESOURCE:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "RESOURCE", sizeof("RESOURCE"));
-				break;
-			case ITEM_FORAGE:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "FORAGE", sizeof("FORAGE"));
-				break;
-			case ITEM_SEED:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "SEED", sizeof("SEED"));
-				break;
-			case ITEM_FRUIT:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "FRUIT", sizeof("FRUIT"));
-				break;
-			case ITEM_DEBRIS:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "DEBRIS", sizeof("DEBRIS"));
-				break;
-			case ITEM_WOODENFENCE:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "WOODENFENCE", sizeof("WOODENFENCE"));
-				break;
-			case ITEM_STONEFENCE:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "STONEFENCE", sizeof("STONEFENCE"));
-				break;
-			case ITEM_SKILL:
-				memset(temp, 0, sizeof(temp));
-				sprintf(temp, "SKILL", sizeof("SKILL"));
-				break;
-			}
+				char temp_info[2][256];
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+				RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+				IMAGEMANAGER->findImage("아이템정보")->render(getMemDC(), _ptMouse.x + 25, _ptMouse.y + 25);
 
-			DrawText(getMemDC(), _vItem[i + current_index].itemName, strlen(_vItem[i + current_index].itemName), &temp1, NULL);
-			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
-	
+				SetTextColor(getMemDC(), RGB(0, 0, 0));
+
+				memset(temp_info, 0, sizeof(temp_info));
+
+				if (_vItem[i + current_index].item_kind == ITEM_SEED)
+				{
+					sprintf(temp_info[0], "성장 기간 : %d 일", _vItem[i + current_index].grow);
+					strcat_s(temp_info[1], temp_info[0]);
+					sprintf(temp_info[0], "\n경험치 : %d exp", _vItem[i + current_index].exp);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i + current_index].item_kind == ITEM_FRUIT)
+				{
+					if (_vItem[i + current_index].hpRecover != 0) sprintf(temp_info[0], "효과 : HP %d 회복", _vItem[i + current_index].hpRecover);
+					else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vItem[i + current_index].energyRecover);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i + current_index].item_kind == ITEM_TOOL)
+				{
+					sprintf(temp_info[0], "소모 스테미너 : %d ", 2);
+					strcat_s(temp_info[1], temp_info[0]);
+				}
+				else if (_vItem[i + current_index].item_kind == ITEM_SKILL)
+				{
+					switch (_vItem[i + current_index].weaponKind)
+					{
+					case WEAPON_EXPLOSION:
+						sprintf(temp_info[0], "소모 스테미너 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 1);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_SPIKES:
+						sprintf(temp_info[0], "소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIRE:
+						sprintf(temp_info[0], "소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_BLACKHOLE:
+						sprintf(temp_info[0], "소모 스테미너 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 3);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					case WEAPON_FIREBALL:
+						sprintf(temp_info[0], "소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n데미지 : %d ", 4);
+						strcat_s(temp_info[1], temp_info[0]);
+						break;
+					default:
+						break;
+					}
+				}
+
+				DrawText(getMemDC(), _vItem[i + current_index].itemName, strlen(_vItem[i + current_index].itemName), &temp1, NULL);
+				DrawText(getMemDC(), temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+			}
 		}
 	}
+			
 
 	//탭 출력
 	if (_npcKind == ITEM_NPC)
@@ -690,7 +718,10 @@ void shop::buy()
 						(*_vInven)[i].weaponKind = _vItem[click_index].weaponKind;
 						(*_vInven)[i].sell_price = _vItem[click_index].sell_price;
 						(*_vInven)[i].amount = buy_count;
-
+						(*_vInven)[i].energyRecover = _vItem[click_index].energyRecover;
+						(*_vInven)[i].hpRecover = _vItem[click_index].hpRecover;
+						(*_vInven)[i].exp = _vItem[click_index].exp;
+						(*_vInven)[i].grow = _vItem[click_index].grow;
 						is_click = false;
 						buy_count = 0;
 					}

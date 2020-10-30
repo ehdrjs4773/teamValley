@@ -124,7 +124,7 @@ void  player::update()
 	//		}
 	//	}
 	//}
-	
+	cout << _pState << endl;
 	if (!isOpenPlayerStorageCover)
 	{
 		if (!isShowInventory && !isShowSleepingOption)
@@ -1121,6 +1121,7 @@ void player::playerRender()
 			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_EXPLOSION:
 		switch (_pDirection)
 		{
@@ -1137,6 +1138,7 @@ void player::playerRender()
 			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_FIRE_BALL:
 		switch (_pDirection)
 		{
@@ -1153,6 +1155,7 @@ void player::playerRender()
 			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_FIRE:
 		switch (_pDirection)
 		{
@@ -1169,6 +1172,7 @@ void player::playerRender()
 			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_SPIKES:
 		switch (_pDirection)
 		{
@@ -1567,6 +1571,8 @@ void player::savePlayerInven()
 			tempItem[i].waterAmount = 0;
 			tempItem[i].hpRecover = 0;
 			tempItem[i].energyRecover = 0;
+			tempItem[i].grow = 0;
+			tempItem[i].exp = 0;
 		}
 		else
 		{
@@ -1584,6 +1590,8 @@ void player::savePlayerInven()
 			tempItem[i].waterAmount = temp[i].waterAmount;
 			tempItem[i].hpRecover = temp[i].hpRecover;
 			tempItem[i].energyRecover = temp[i].energyRecover;
+			tempItem[i].grow = temp[i].grow;
+			tempItem[i].exp = temp[i].exp;
 		}
 	}
 

@@ -90,7 +90,6 @@ enum STATE
 	BREAKSTONE,
 	SPRAYWATER,
 	FILLWATER,
-	ATTACK,
 	CARRY,
 	CARRYSTAND,
 	INVEN,
@@ -250,6 +249,8 @@ struct tagSaveItem {
 	int amount;
 	int hpRecover;
 	int energyRecover;
+	int grow;
+	int exp;
 	bool isFrame;
 };
 
