@@ -1,31 +1,15 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  inventoryCraft.cpp
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(119): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(308): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(338): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(368): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(392): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(414): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(436): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(436): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(437): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(437): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(460): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(460): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(461): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(461): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(462): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(462): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(500): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(500): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(501): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(501): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(502): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(502): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  inHouseScene.cpp
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(98): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(122): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(133): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inhousescene.cpp(146): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  0 of 2334 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 2340 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\Nia Kim\Downloads\새 폴더\스타듀밸리 맵툴\Release\Stardew Valley.exe
