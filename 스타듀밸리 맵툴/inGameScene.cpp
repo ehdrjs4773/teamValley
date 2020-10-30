@@ -904,8 +904,14 @@ void inGameScene::playerInteraction()
 				//과일 먹기
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_FRUIT)
 				{
-					PLAYER->setDirection(DOWN);
-					eatFruit();
+					if (PLAYER->getCurrentInven()->seedKind != SEED_HOPS
+						&& PLAYER->getCurrentInven()->seedKind != SEED_WHEAT
+						&& PLAYER->getCurrentInven()->seedKind != SEED_POPPY
+						&& PLAYER->getCurrentInven()->seedKind != SEED_SUMMERSPANGLE)
+					{
+						PLAYER->setDirection(DOWN);
+						eatFruit();
+					}
 				}
 
 				//제작아이템 설치
@@ -1764,7 +1770,7 @@ void inGameScene::makeCropGrow()
 					|| _tile[i][j].seedType == SEED_BLUEBERRY
 					|| _tile[i][j].seedType == SEED_CORN
 					|| _tile[i][j].seedType == SEED_HOPS)
-					&& (_tile[i][j].objFrameX == 7 || _tile[i][j].objFrameX == 15))
+					&& _tile[i][j].objFrameX == 7)
 				{
 					_tile[i][j].grownLevel += 1;
 					_tile[i][j].objFrameX -= 1;

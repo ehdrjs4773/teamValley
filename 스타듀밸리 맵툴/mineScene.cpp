@@ -175,6 +175,7 @@ void mineScene::savePlayer()
 	PLAYER->savePlayerData();
 	PLAYER->saveMap();
 	PLAYER->saveBox();
+	PLAYER->setLoadCount(0);
 }
 
 void mineScene::setCurrentSlotNumber(int mouseWheel)

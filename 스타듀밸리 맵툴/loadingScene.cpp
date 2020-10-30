@@ -119,6 +119,8 @@ void loadingScene::loadingImage()
 
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("레벨버튼small", "Images/inventory/levelButtonSmall.bmp", 24, 30);
+	IMAGEMANAGER->addImage("레벨버튼big", "Images/inventory/levelButtonBig.bmp", 46, 30);
 	
 	//가축
 	IMAGEMANAGER->addFrameImage("갈색닭", "Images/가축/갈색닭.bmp", 64, 96, 4, 6);

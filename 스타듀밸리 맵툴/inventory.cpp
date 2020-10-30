@@ -259,6 +259,90 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	else if (_isPlayerPage)
 	{
 		IMAGEMANAGER->render("스킬창", hdc, 225, 40);
+
+		//농사 레벨
+		if (PLAYER->getFarmingLv() < 5)
+		{
+			for (int i = 0; i < PLAYER->getFarmingLv(); i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+		}
+		else if (PLAYER->getFarmingLv() == 5)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+		}
+		else if (PLAYER->getFarmingLv() < 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+			for (int j = 0; j < PLAYER->getFarmingLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 132);
+			}
+		}
+		else if (PLAYER->getFarmingLv() == 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+			for (int j = 0; j < PLAYER->getFarmingLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 729 + 4 * 32, 132);
+		}
+
+		//전투레벨
+		if (PLAYER->getCombatLv() < 5)
+		{
+			for (int i = 0; i < PLAYER->getFarmingLv(); i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+		}
+		else if (PLAYER->getCombatLv() == 5)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+		}
+		else if (PLAYER->getCombatLv() < 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+			for (int j = 0; j < PLAYER->getCombatLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 180);
+			}
+		}
+		else if (PLAYER->getCombatLv() == 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+			for (int j = 0; j < PLAYER->getCombatLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 729 + 4 * 32, 180);
+		}
 	}
 	else if (_isCraftPage)
 	{
