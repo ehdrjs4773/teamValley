@@ -13,7 +13,7 @@ void inventory::init()
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
-		cout << &_vItem[i] << endl;
+		//y << &_vItem[i] << endl;
 	}
 
 	for (int i = 0; i < STORAGEMAX; i++)
@@ -749,6 +749,7 @@ void inventory::_vItemUpdate()
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					PLAYER->setLoadCount(0);
 					SOUNDMANAGER->play("select");
 					SWITCHMANAGER->changeScene("스타트화면");
 					SWITCHMANAGER->startFade(.0f, .0f);

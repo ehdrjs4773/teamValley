@@ -3,7 +3,6 @@
 
 HRESULT player::init()
 {
-	isNewGame = true;
 	isSkill = false;
 
 	index = 0;
@@ -18,6 +17,10 @@ HRESULT player::init()
 
 	playerHp = 138;
 	playerEnergy = 138;
+
+	MAXHP = 138;
+	MAXENERGY = 138;
+
 	totalHpDmg = 0;
 	totalEnergyDmg = 0;
 
@@ -938,7 +941,6 @@ void player::playerAnimation()
 	}
 }
 
-
 void player::playerRender()
 {
 	switch (_pState)
@@ -1181,7 +1183,6 @@ void player::playerRender()
 		break;
 	}
 }
-
 
 void player::openPlayerStorageCover()
 {
@@ -1547,7 +1548,7 @@ void player::savePlayerStock()
 	tagStock tempStock[5];
 	memset(tempStock, 0, sizeof(tempStock));
 
-	for (int i = 0; i < stock->getStock().size(); i++)
+	for (int i = 0; i < stock->getStock().size() - 1; i++)
 	{
 		tempStock[i] = temp[i];
 	}
@@ -1709,6 +1710,12 @@ void player::saveTile(int i, int j, tagTile tile)
 	_tile[i][j] = tile;
 }
 
+tagTile player::giveTileData(int i, int j)
+{
+	cout << i << "\t" << j << "\t" << "gave Tile Data" << endl;
+	return _tile[i][j];
+}
+
 void player::clockRender(HDC hdc)
 {
 	IMAGEMANAGER->render("½Ã°è", hdc, 980, 20);
@@ -1827,14 +1834,13 @@ void player::weatherRender(HDC hdc)
 
 void player::limitEnergy()
 {
-	if (playerEnergy <= 0 && playerEnergy >= -20)
+	if (playerEnergy <= 20 && playerEnergy > 0)
 	{
 		speed = 0.5f;
-		totalEnergyDmg = 138;
 		aniCountControl = 15;
 		aniCountControl2 = 10;
 	}
-	else if (playerEnergy < -20)
+	else if (playerEnergy <= 0)
 	{
 		saveMap();
 		savePlayerData();
@@ -1846,5 +1852,7 @@ void player::limitEnergy()
 	else
 	{
 		speed = 1.5f;
+		aniCountControl = 10;
+		aniCountControl2 = 5;
 	}
 }

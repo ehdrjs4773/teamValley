@@ -11,8 +11,7 @@ HRESULT inHouseScene::init()
 
 	isShowSleepingOption = false;
 	checkCount = 0;
-
-
+	
 	SOUNDMANAGER->stop("¸ÞÀÎÀ½¾Ç");
 
 	this->update();
@@ -45,9 +44,9 @@ void inHouseScene::update()
 	playerMove();
 	PLAYER->playerAnimation();
 
-	cout << _ptMouse.x << " " << _ptMouse.y << endl;
-	cout << PLAYER->getCenterX() << " " << PLAYER->getCenterY() << endl;
-	cout<<endl;
+	//cout << _ptMouse.x << " " << _ptMouse.y << endl;
+	//cout << PLAYER->getCenterX() << " " << PLAYER->getCenterY() << endl;
+	//cout<<endl;
 	
 	blanket();
 }
