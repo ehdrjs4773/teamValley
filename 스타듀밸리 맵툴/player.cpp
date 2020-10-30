@@ -106,7 +106,7 @@ void  player::update()
 	//		}
 	//	}
 	//}
-	
+	cout << _pState << endl;
 	if (!isOpenPlayerStorageCover)
 	{
 		if (!isShowInventory && !isShowSleepingOption)
@@ -1084,6 +1084,7 @@ void player::playerRender()
 			blackholeSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_EXPLOSION:
 		switch (_pDirection)
 		{
@@ -1100,6 +1101,7 @@ void player::playerRender()
 			explosionSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_FIRE_BALL:
 		switch (_pDirection)
 		{
@@ -1116,6 +1118,7 @@ void player::playerRender()
 			fireballSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_FIRE:
 		switch (_pDirection)
 		{
@@ -1132,6 +1135,7 @@ void player::playerRender()
 			fireSword->frameRender(CAMERAMANAGER->getMemDC(), centerX - 24, centerY - 32, index, 0);
 			break;
 		}
+		break;
 	case P_SKILL_SPIKES:
 		switch (_pDirection)
 		{

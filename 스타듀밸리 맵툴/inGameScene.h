@@ -69,7 +69,6 @@ public:
 	void breakStone();
 	void cutGrass();
 	void setFence();
-	void attack();
 	void setSprinkler();
 	void sprinklerWork();
 
