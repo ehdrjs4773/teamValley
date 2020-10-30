@@ -250,6 +250,8 @@ struct tagSaveItem {
 	int amount;
 	int hpRecover;
 	int energyRecover;
+	int grow;
+	int exp;
 	bool isFrame;
 };
 

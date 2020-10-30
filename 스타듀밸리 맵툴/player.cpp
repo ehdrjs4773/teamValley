@@ -1549,6 +1549,8 @@ void player::savePlayerInven()
 			tempItem[i].waterAmount = 0;
 			tempItem[i].hpRecover = 0;
 			tempItem[i].energyRecover = 0;
+			tempItem[i].grow = 0;
+			tempItem[i].exp = 0;
 		}
 		else
 		{
@@ -1566,6 +1568,8 @@ void player::savePlayerInven()
 			tempItem[i].waterAmount = temp[i].waterAmount;
 			tempItem[i].hpRecover = temp[i].hpRecover;
 			tempItem[i].energyRecover = temp[i].energyRecover;
+			tempItem[i].grow = temp[i].grow;
+			tempItem[i].exp = temp[i].exp;
 		}
 	}
 
