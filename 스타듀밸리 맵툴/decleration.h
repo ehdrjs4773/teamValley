@@ -229,7 +229,12 @@ struct tagItem {
 	int waterAmount;
 	int indexX, indexY;
 	int amount;
+	int grow;
+	int exp;
+	int hpRecover;
+	int energyRecover;
 	bool isFrame;
+	int grow;
 };
 
 struct tagItemOnField {

@@ -28,16 +28,13 @@ HRESULT itemManager::init()
 	addCSVItem();
 
 	addSkill();
-	addSeed();
-	addFruit();
 	addWeapon();
 	addTool();
-	addObject();
 	addOre();
 
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER2, true, 0, 1, "강화스프링클러");
-	addSprinkler("스프링클러아이템", ITEM_SPRINKLER3, true, 0, 2, "고급스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER1, true, 0, 0, "기본스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER2, true, 0, 1, "강화스프링클러");
+	//addSprinkler("스프링클러아이템", ITEM_SPRINKLER3, true, 0, 2, "고급스프링클러");
 
 	return S_OK;
 }
@@ -179,6 +176,10 @@ void itemManager::addCSVItem()
 			temp.indexY = (atoi)(itemData[i][11].c_str());
 			temp.amount = (atoi)(itemData[i][12].c_str());
 			temp.isFrame = (atoi)(itemData[i][13].c_str());
+			temp.grow = (atoi)(itemData[i][14].c_str());
+			temp.exp = (atoi)(itemData[i][15].c_str());
+			temp.hpRecover = (atoi)(itemData[i][16].c_str());
+			temp.energyRecover = (atoi)(itemData[i][17].c_str());
 
 			_vItem.push_back(temp);
 	}

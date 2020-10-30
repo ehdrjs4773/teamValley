@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "inGameScene.h"
 
-TCHAR inGameScene::saveName[MAX_PATH];
-
 inGameScene::inGameScene()
 {
-	loadCount = 0;  //최초 로드시 초기화 방지 카운트
+	loadCount = PLAYER->getLoadCount();  //최초 로드시 초기화 방지 카운트
 }
 
 HRESULT inGameScene::init()
@@ -14,7 +12,7 @@ HRESULT inGameScene::init()
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	isShopOpen = false;
-
+	//getPlayerTileData();
 	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
 	{
 		load();
@@ -22,17 +20,20 @@ HRESULT inGameScene::init()
 
 		changeSeason(SPRING);
 
-		SOUNDMANAGER->stop("메인음악"); 
-		SOUNDMANAGER->stop("bugCave");
-		SOUNDMANAGER->stop("town");
-
 		isShowRect = false;
 
 		checkPlayerTile();
-		loadCount = 1;
+		PLAYER->setLoadCount(1);
 
+		for (int i = 0; i < TILEY; i++)
+		{
+			for (int j = 0; j < TILEX; j++)
+			{
+				_tile[i][j].portal = PT_NONE;
+			}
+		}
 		_tile[31][23].portal = PT_HOUSE;
-		_tile[29][39].portal = PT_BARN;
+		_tile[27][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
 		_tile[12][40].portal = PT_SHOP;
@@ -63,7 +64,6 @@ HRESULT inGameScene::init()
 	{
 		SOUNDMANAGER->stop("town");
 	}
-	//load();
 
 	return S_OK;
 }
@@ -74,6 +74,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	loadCount = PLAYER->getLoadCount();
 	isSprinkled = PLAYER->getIsSprinkled();
 	sprinklerWork();
 	if (!SOUNDMANAGER->isPlaySound("농장"))
@@ -155,10 +156,6 @@ void inGameScene::update()
 	{
 		shareTileData();
 	}
-
-	//cout << _tile[MouseIndexY][MouseIndexX].grownLevel << "   "
-	//	<< boolalpha << _tile[MouseIndexY][MouseIndexX].isFullyGrown << "   "
-	//	<< _tile[MouseIndexY][MouseIndexX].objFrameX << endl;
 }
 
 void inGameScene::render()
@@ -194,8 +191,19 @@ void inGameScene::load()
 
 	HANDLE file;
 	DWORD read;
-	sprintf(saveName, "save/tomato.map");
-	file = CreateFile(saveName, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	//TCHAR saveName[MAX_PATH];
+	if (PLAYER->getIsNewGame())
+	{
+		//sprintf(saveName, "save/newGame.map");
+		file = CreateFile("save/newGame.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		PLAYER->setIsNewGame(false);
+	}
+	else
+	{
+		//sprintf(saveName, "save/tomato.map");
+		file = CreateFile("save/tomato.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	}
+	
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
 	CloseHandle(file);
 }
@@ -297,9 +305,67 @@ void inGameScene::renderObjects(int i, int j)
 								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
 						}
 					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 				}
-				IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				else if (_tile[i][j].objType == OTY_TOWER && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 10; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_HOUSE && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 4; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_WELL && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 4; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else if (_tile[i][j].objType == OTY_BARN && _tile[i][j].objType != _tile[i - 1][j].objType)
+				{
+					for (int y = 1; y < 5; y++)
+					{
+						if (i - y >= 0)
+						{
+							IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i - y][j].rc.left, _tile[i - y][j].rc.top,
+								_tile[i][j].objFrameX, _tile[i][j].objFrameY - y);
+						}
+					}
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				else
+				{
+					IMAGEMANAGER->frameRender("건물", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+						_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				}
+				
 			}
 			else if (_tile[i][j].objType == OTY_STONE || _tile[i][j].objType == OTY_LARGESTONE
 				|| _tile[i][j].objType == OTY_BRANCH || _tile[i][j].objType == OTY_HARDTREE
@@ -651,19 +717,20 @@ void inGameScene::playerMove()
 			}
 		}
 	}
-	
 }
 
 void inGameScene::moveScene()
 {
 	if (_tile[currentIndexY][currentIndexX].portal == PT_BARN)
 	{
+		shareTileData();
 		SOUNDMANAGER->play("doorOpen", 0.2f);
 		SWITCHMANAGER->changeScene("건물안화면");
 		SWITCHMANAGER->startFade(780.0f, 890.0f);
 	}
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_SHOP)
 	{
+		shareTileData();
 		SOUNDMANAGER->play("doorOpen", 0.2f);
 		isShopOpen = true;
 		SWITCHMANAGER->changeScene("상점씬");
@@ -780,11 +847,15 @@ void inGameScene::playerInteraction()
 					cutGrass();
 				}
 				//씨 심기
-
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED)
 				{
 					plantSeed();
-
+				}
+				//과일 먹기
+				if (PLAYER->getCurrentInven()->item_kind == ITEM_FRUIT)
+				{
+					PLAYER->setDirection(DOWN);
+					eatFruit();
 				}
 
 				//제작아이템 설치
@@ -845,8 +916,6 @@ void inGameScene::playerInteraction()
 				}
 			}
 		}
-	
-		//cout << currentIndexX << "\t" << currentIndexY << "\t" <<endl;
 	}
 
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -1640,7 +1709,6 @@ void inGameScene::sprinklerWork()
 {
 	if (!isSprinkled)
 	{
-		//cout << "work" << endl;
 		for (int i = 0; i < TILEY; i++)
 		{
 			for (int j = 0; j < TILEX; j++)
@@ -1692,6 +1760,15 @@ void inGameScene::sprinklerWork()
 		isSprinkled = true;
 		cout << "end" << endl;
 	}
+}
+
+void inGameScene::eatFruit()
+{
+	PLAYER->recoverHp(PLAYER->getCurrentInven()->hpRecover);
+	PLAYER->recoverEnergy(PLAYER->getCurrentInven()->energyRecover);
+
+	PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+		PLAYER->getCurrentInven()->amount - 1);
 }
 
 void inGameScene::makeCropGrow()
@@ -1906,7 +1983,6 @@ void inGameScene::getItem(tagItem item)
 			if ((*PLAYER->getInven())[i].item_image == NULL)
 			{
 				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
-				//cout << PLAYER->getInven(i)->item_info << endl;
 				break;
 			}
 		}
@@ -1915,69 +1991,6 @@ void inGameScene::getItem(tagItem item)
 
 void inGameScene::dropFruit(tagTile tile, ITEM itemKind, SEED seedType)
 {
-	const char* str = nullptr;
-	/*switch (seedType)
-	{
-	case SEED_NONE:
-		break;
-	case SEED_TOMATO:
-		str = "토마토";
-		break;
-	case SEED_HOTPEPPER:
-		str = "고추";
-		break;
-	case SEED_RADISH:
-		str = "무";
-		break;
-	case SEED_STARFRUIT:
-		str = "스타후르츠";
-		break;
-	case SEED_POPPY:
-		str = "양귀비";
-		break;
-	case SEED_SUNFLOWER:
-		str = "해바라기";
-		break;
-	case SEED_GRAPE:
-		str = "포도";
-		break;
-	case SEED_GREENBEAN:
-		str = "완두콩";
-		break;
-	case SEED_MELON:
-		str = "멜론";
-		break;
-	case SEED_BLUEBERRY:
-		str = "블루베리";
-		break;
-	case SEED_WHEAT:
-		str = "밀";
-		break;
-	case SEED_REDCABBAGE:
-		str = "적양배추";
-		break;
-	case SEED_CORN:
-		str = "옥수수";
-		break;
-	case SEED_SUMMERSPANGLE:
-		str = "여름별꽃";
-		break;
-	case SEED_HOPS:
-		str = "홉";
-		break;
-	case SEED_PINETREE:
-		str = "소나무 씨앗";
-		break;
-	case SEED_MAPLETREE:
-		str = "단풍나무 씨앗";
-		break;
-	case SEED_OAKTREE:
-		str = "참나무 씨앗";
-		break;
-	default:
-		break;
-	}*/
-
 	tagItemOnField temp;
 	temp.item = ITEMMANAGER->findDropItem(itemKind, seedType);
 	temp.item.item_image = IMAGEMANAGER->findImage("열매(땅)");
@@ -2705,8 +2718,8 @@ INT_PTR inGameScene::DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 		switch (LOWORD(wParam))
 		{
 		case IDOK:
-			memset(saveName, 0, sizeof(saveName));
-			GetDlgItemText(hWnd, IDC_EDIT1, saveName, MAX_PATH);
+			//memset(saveName, 0, sizeof(saveName));
+			//GetDlgItemText(hWnd, IDC_EDIT1, saveName, MAX_PATH);
 		case IDCANCEL:
 			EndDialog(hWnd, IDOK);
 			return TRUE;

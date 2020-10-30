@@ -43,14 +43,20 @@ void openingScene::update()
 	{
 		if (hWndAVI)
 		{
-
 			MCIWndClose(hWndAVI);
 			MCIWndDestroy(hWndAVI);
 			hWndAVI = 0;
 		}
+		SOUNDMANAGER->stop("오프닝");
 		SCENEMANAGER->loadScene("집안화면");
+		movieCount = 0;
 	}
-	cout << movieCount << endl;
+
+	if (INPUT->GetKeyDown(VK_LBUTTON))
+	{
+		movieCount = 1700;
+	}
+
 }
 
 void openingScene::release()

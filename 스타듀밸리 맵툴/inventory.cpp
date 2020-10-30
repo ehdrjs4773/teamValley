@@ -13,7 +13,7 @@ void inventory::init()
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
 		_vItem.push_back(temp);
-		cout << &_vItem[i] << endl;
+		//y << &_vItem[i] << endl;
 	}
 
 	for (int i = 0; i < STORAGEMAX; i++)
@@ -650,56 +650,10 @@ void inventory::inven_item_info(HDC hdc)
 
 				memset(temp_info, 0, sizeof(temp_info));
 
-				switch (_vItem[i].item_kind)
-				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
-				}
-				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
+				sprintf(temp_info[1], "판매가 : %d", _vItem[i].sell_price);
+				strcat_s(temp_info[1], "\n성장기간 : ");
 
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 			}
 		}
@@ -721,59 +675,10 @@ void inventory::quickinven_item_info(HDC hdc)
 
 				SetTextColor(hdc, RGB(0, 0, 0));
 
-				memset(temp_info, 0, sizeof(temp_info));
+				sprintf(temp_info[1], "판매가 : %d", _vItem[i].sell_price);
+				strcat_s(temp_info[1], "\n성장기간 : ");
 
-				switch (_vItem[i].item_kind)
-				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
-				}
-				sprintf(temp_info[1], _vItem[i].item_info, sizeof(_vItem[i].item_info));
-
-
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 
 			}
@@ -797,58 +702,7 @@ void inventory::storage_item_info(HDC hdc)
 
 				SetTextColor(hdc, RGB(0, 0, 0));
 
-				memset(temp_info, 0, sizeof(temp_info));
-
-				switch (_vStorageItem[i].item_kind)
-				{
-				case ITEM_WEAPON:
-					sprintf(temp_info[0], "WEAPON", sizeof("WEAPON"));
-					break;
-				case ITEM_TOOL:
-					sprintf(temp_info[0], "TOOL", sizeof("TOOL"));
-					break;
-				case ITEM_SEED:
-					sprintf(temp_info[0], "SEED", sizeof("SEED"));
-					break;
-				case ITEM_FRUIT:
-					sprintf(temp_info[0], "FRUIT", sizeof("FRUIT"));
-					break;
-				case ITEM_DEBRIS:
-					sprintf(temp_info[0], "DEBRIS", sizeof("DEBRIS"));
-					break;
-				case ITEM_WOODENFENCE:
-					sprintf(temp_info[0], "WOODENFENCE", sizeof("WOODENFENCE"));
-					break;
-				case ITEM_STONEFENCE:
-					sprintf(temp_info[0], "STONEFENCE", sizeof("STONEFENCE"));
-					break;
-				case ITEM_SKILL:
-					sprintf(temp_info[0], "SKILL", sizeof("SKILL"));
-					break;
-				case ITEM_BOX:
-					sprintf(temp_info[0], "BOX", sizeof("BOX"));
-					break;
-				case ITEM_FEEDBUCKET:
-					sprintf(temp_info[0], "FEED BUCKET", sizeof("FEED BUCKET"));
-					break;
-				case ITEM_BEEFARM:
-					sprintf(temp_info[0], "BEE FARM", sizeof("BEE FARM"));
-					break;
-				case ITEM_SCARECROW:
-					sprintf(temp_info[0], "SCARECROW", sizeof("SCARECROW"));
-					break;
-				case ITEM_BLASTFURNACE:
-					sprintf(temp_info[0], "BLAST FURNACE", sizeof("BLAST FURNACE"));
-					break;
-				case ITEM_PICKLEDBARREL:
-					sprintf(temp_info[0], "PICKLED BARREL", sizeof("PICKLED BARREL"));
-				case ITEM_ORE:
-					sprintf(temp_info[0], "ORE", sizeof("ORE"));
-					break;
-				}
-				sprintf(temp_info[1],_vStorageItem[i].item_info, sizeof(_vStorageItem[i].item_info));
-
-				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
+				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
 				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
 			}
 		}
@@ -895,6 +749,7 @@ void inventory::_vItemUpdate()
 			{
 				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
+					PLAYER->setLoadCount(0);
 					SOUNDMANAGER->play("select");
 					SWITCHMANAGER->changeScene("스타트화면");
 					SWITCHMANAGER->startFade(.0f, .0f);

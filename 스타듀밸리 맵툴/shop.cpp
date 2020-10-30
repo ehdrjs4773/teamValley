@@ -139,7 +139,7 @@ void shop::release()
 
 void shop::update()
 {
-	cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
+	//cout << " x : " << _ptMouse.x << "\t" << "y : " << _ptMouse.y << "\n";
 
 	_inven->update();
 
@@ -335,7 +335,6 @@ void shop::render()
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
 		
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
-
 		if (!_vslot[i].on_cursor)
 		{
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
@@ -346,6 +345,7 @@ void shop::render()
 			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
 			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 		}
+
 		DrawText(getMemDC(), name, strlen(name), &rc_name, NULL);
 		DrawText(getMemDC(), money, strlen(money), &rc_money, NULL);
 
@@ -382,14 +382,16 @@ void shop::render()
 	scrollbar_img->render(getMemDC(), up_BT.left + 15, up_BT.bottom + 10);
 
 	scroll_img->render(getMemDC(), rc_scroll.left, rc_scroll.top);
-
+	
 	//아이템 정보 출력
 	for (int i = 0; i < _vslot.size(); i++)
+
 	{
+		RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
+		RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
+
 		if (_vslot[i].on_cursor)
 		{
-			RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
-			RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
 			IMAGEMANAGER->findImage("아이템정보")->render(getMemDC(), _ptMouse.x + 25, _ptMouse.y + 25);
 
 			SetTextColor(getMemDC(), RGB(0, 0, 0));
@@ -443,10 +445,13 @@ void shop::render()
 				sprintf(temp, "SKILL", sizeof("SKILL"));
 				break;
 			}
-			DrawText(getMemDC(), temp, strlen(temp), &temp1, NULL);
+
+			DrawText(getMemDC(), _vItem[i + current_index].itemName, strlen(_vItem[i + current_index].itemName), &temp1, NULL);
 			DrawText(getMemDC(), _vItem[i + current_index].item_info, strlen(_vItem[i + current_index].item_info), &temp2, NULL);
+	
 		}
 	}
+
 	//탭 출력
 	if (_npcKind == ITEM_NPC)
 	{
