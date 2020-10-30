@@ -1551,6 +1551,8 @@ void player::savePlayerInven()
 			tempItem[i].energyRecover = 0;
 			tempItem[i].grow = 0;
 			tempItem[i].exp = 0;
+			tempItem[i].grade = 0;
+
 		}
 		else
 		{
@@ -1570,6 +1572,8 @@ void player::savePlayerInven()
 			tempItem[i].energyRecover = temp[i].energyRecover;
 			tempItem[i].grow = temp[i].grow;
 			tempItem[i].exp = temp[i].exp;
+			tempItem[i].grade = temp[i].grade;
+
 		}
 	}
 

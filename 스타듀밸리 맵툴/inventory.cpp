@@ -30,7 +30,6 @@ void inventory::init()
 	isShowTemp = false;
 	isShowStorageTemp = false;
 	_isShowCloseButton = false;
-
 	//_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
 	//_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
 	_vItem[2] = ITEMMANAGER->findItem("³´");
@@ -39,6 +38,10 @@ void inventory::init()
 	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
 	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
 	_vItem[7] = ITEMMANAGER->findItem("Ä®");
+	for (int i = 2; i < 8; i++)
+	{
+		_vItem[i].amount = 1;
+	}
 	//_vItem[8] = ITEMMANAGER->findItem("³ª¹«¿ïÅ¸¸®");
 	//_vItem[9] = ITEMMANAGER->findItem("¼®Àç¿ïÅ¸¸®");
 	//_vItem[10] = ITEMMANAGER->findItem("¼Ò³ª¹« ¾¾¾Ñ");
@@ -1145,6 +1148,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	_vItem[i].energyRecover = item.energyRecover;
 	_vItem[i].exp = item.exp;
 	_vItem[i].grow = item.grow;
+	_vItem[i].grade = item.grade;
 
 	if (_vItem[i].item_kind == ITEM_TOOL)
 	{
