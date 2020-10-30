@@ -154,11 +154,12 @@ void inventory::update()
 			_vItem[i] = nullitem;
 		}
 	}
+	cout << "x : " << _ptMouse.x << "y : " << _ptMouse.y << endl;
 
 	if (_isWarning)
 	{
-		_waring_yes = RectMake(370, 205, 110, 55);
-		_waring_no = RectMake(535, 205, 110, 55);
+		_waring_yes = RectMake(450, 365, 110, 55);
+		_waring_no = RectMake(615, 365, 110, 55);
 
 		if (PtInRect(&_waring_yes, _ptMouse))
 		{
@@ -332,7 +333,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 
 	if (_isWarning)
 	{
-		IMAGEMANAGER->render("인벤경고창", hdc, 300, 40);
+		IMAGEMANAGER->render("인벤경고창", hdc, 380, 200);
 	}
 
 	if (_MouseItem.item_image)

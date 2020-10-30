@@ -172,22 +172,23 @@ void shop::update()
 			}
 
 		}
-	}
+	
 
-	if (total_sell < 1000)
-	{
-		shopLevel = 3;
-		PLAYER->setShopGrade(shopLevel);
-	}
-	else if (total_sell < 2000)
-	{
-		shopLevel = 2;
-		PLAYER->setShopGrade(shopLevel);
-	}
-	else
-	{
-		shopLevel = 1;
-		PLAYER->setShopGrade(shopLevel);
+		if (total_sell < 1000)
+		{
+			shopLevel = 3;
+			PLAYER->setShopGrade(shopLevel);
+		}
+		else if (total_sell < 2000)
+		{
+			shopLevel = 2;
+			PLAYER->setShopGrade(shopLevel);
+		}
+		else
+		{
+			shopLevel = 1;
+			PLAYER->setShopGrade(shopLevel);
+		}
 	}
 	if (!sell_ispopup)
 	{
@@ -351,7 +352,28 @@ void shop::render()
 		sprintf(name, _vItem[i + current_index].item_info, sizeof(_vItem[i + current_index].item_info));
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
-		if (_vItem[i + current_index].grade >= PLAYER->getShopGrade())
+		if (_npcKind == ITEM_NPC)
+		{
+			if (_vItem[i + current_index].grade >= PLAYER->getShopGrade())
+			{
+				if (!_vslot[i].on_cursor)
+				{
+					_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯");
+					_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+				}
+				else
+				{
+					_vslot[i].slot_image = IMAGEMANAGER->findImage("상점슬롯클릭");
+					_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+				}
+			}
+			else
+			{
+				_vslot[i].slot_image = IMAGEMANAGER->findImage("상점못사");
+				_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
+			}
+		}
+		else
 		{
 			if (!_vslot[i].on_cursor)
 			{
@@ -364,24 +386,23 @@ void shop::render()
 				_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
 			}
 		}
-		else
+		if (_npcKind == ITEM_NPC)
 		{
-			_vslot[i].slot_image = IMAGEMANAGER->findImage("상점못사");
-			_vslot[i].slot_image->render(getMemDC(), _vslot[i].rc.left, _vslot[i].rc.top);
-		}
-		if (_vItem[i+current_index].grade == 3)
-		{
-			IMAGEMANAGER->render("별1", getMemDC(), rc_name.right, _vslot[i].rc.top+8);
-		}
-		else if (_vItem[i+ current_index].grade == 2)
-		{
-			IMAGEMANAGER->render("별2", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
-		}
-		else
-		{
-			IMAGEMANAGER->render("별3", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
-		}
+			if (_vItem[i + current_index].grade == 3)
+			{
+				IMAGEMANAGER->render("별1", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
+			}
+			else if (_vItem[i + current_index].grade == 2)
+			{
+				IMAGEMANAGER->render("별2", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
+			}
+			else
+			{
+				IMAGEMANAGER->render("별3", getMemDC(), rc_name.right, _vslot[i].rc.top + 8);
+			}
 
+		}
+	
 		DrawText(getMemDC(), name, strlen(name), &rc_name, NULL);
 		DrawText(getMemDC(), money, strlen(money), &rc_money, NULL);
 
@@ -528,23 +549,27 @@ void shop::render()
 			IMAGEMANAGER->render("상점도구탭", getMemDC(), tab[1].left, tab[1].top + 5);
 		}
 	}
-	image* temp = IMAGEMANAGER->findImage("현재별테두리");
-	temp->setX(WINSIZEX / 2 - 200);
-	temp->setY(25);
-	temp->render(getMemDC(),temp->getX(),temp->getY());
-	textOut(getMemDC(),temp->boudingBox().left+10, temp->boudingBox().top+10, "현재 등급", RGB(0,0,0));
-	if (PLAYER->getShopGrade() == 3)
+	if (_npcKind == ITEM_NPC)
 	{
-		IMAGEMANAGER->render("현재별1", getMemDC(), temp->boudingBox().left + 150,37);
+		image* temp = IMAGEMANAGER->findImage("현재별테두리");
+		temp->setX(WINSIZEX / 2 - 200);
+		temp->setY(25);
+		temp->render(getMemDC(), temp->getX(), temp->getY());
+		textOut(getMemDC(), temp->boudingBox().left + 10, temp->boudingBox().top + 10, "현재 등급", RGB(0, 0, 0));
+		if (PLAYER->getShopGrade() == 3)
+		{
+			IMAGEMANAGER->render("현재별1", getMemDC(), temp->boudingBox().left + 150, 37);
+		}
+		else if (PLAYER->getShopGrade() == 3)
+		{
+			IMAGEMANAGER->render("현재별2", getMemDC(), temp->boudingBox().left + 150, 37);
+		}
+		else
+		{
+			IMAGEMANAGER->render("현재별3", getMemDC(), temp->boudingBox().left + 150, 37);
+		}
 	}
-	else if (PLAYER->getShopGrade() == 3)
-	{
-		IMAGEMANAGER->render("현재별2", getMemDC(), temp->boudingBox().left + 150,37);
-	}
-	else
-	{
-		IMAGEMANAGER->render("현재별3", getMemDC(), temp->boudingBox().left + 150,37);
-	}
+
 	if (is_click)
 	{
 		if (_vItem[click_index].isFrame)
