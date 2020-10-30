@@ -224,32 +224,32 @@ void effectManager::skillCol(string effectName, int centerX, int centerY)
 	if (temp.effectType == EFT_SKILL_EXPLOSION)
 	{
 		temp.indexY = 0;
-		temp.skillDamage = 2;
+		temp.skillDamage = PLAYER->getAtk() * 1;
 	}
 	if (temp.effectType == EFT_SKILL_SPIKES)
 	{
 		temp.indexY = 1;
-		temp.skillDamage = 1;
+		temp.skillDamage = PLAYER->getAtk() * 2;
 	}
 	if (temp.effectType == EFT_SKILL_FIRE)
 	{
 		temp.indexY = 2;
-		temp.skillDamage = 1;
+		temp.skillDamage = PLAYER->getAtk() * 3;
 	}
 	if (temp.effectType == EFT_SKILL_SHIELD)
 	{
-		temp.indexY = 3;
+		temp.indexY = PLAYER->getAtk() * 10;
 	}
 	if (temp.effectType == EFT_SKILL_BLACKHOLE)
 	{
 		temp.indexY = 4;
-		temp.skillDamage = 4;
+		temp.skillDamage = PLAYER->getAtk() * 3;
 
 	}
 	if (temp.effectType == EFT_SKILL_FIRE_BALL)
 	{
 		temp.indexY = 5;
-		temp.skillDamage =1;
+		temp.skillDamage = PLAYER->getAtk() * 4;
 		temp.centerX = PLAYER->getCenterX() + cosf(temp.angle) * 50 - 20;
 		temp.centerY = PLAYER->getCenterY() + -sinf(temp.angle) * 50 - 20;
 	}
