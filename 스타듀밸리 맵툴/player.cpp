@@ -92,7 +92,8 @@ HRESULT player::init()
 	arrowAngle = 18;
 	blinkCount = 0;
 	darkAlpha = .0f;
-
+	shopGrade = 3;
+	totalSell = 0;
 	return S_OK;
 }
 
@@ -1455,7 +1456,8 @@ void player::loadPlayerData()
 	farmingExp = INIDATA->loadDataInteger("save/playerData", "PLAYER", "farmingExp");
 	playerCombatLevel = INIDATA->loadDataInteger("save/playerData", "PLAYER", "combatLv");
 	combatExp = INIDATA->loadDataInteger("save/playerData", "PLAYER", "combatExp");
-	
+	shopGrade = INIDATA->loadDataInteger("save/playerData", "PLAYER", "shopGrade");
+	totalSell = INIDATA->loadDataInteger("save/playerData", "PLAYER", "totalSell");
 	loadInven();
 	loadStock();
 	loadBoxInven();
@@ -1527,7 +1529,7 @@ void player::loadStock()
 void player::savePlayerData()
 {
 	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
-	char fLvStr[64],fExpStr[64], cLvStr[64], cExpStr[64];
+	char fLvStr[64],fExpStr[64], cLvStr[64], cExpStr[64], arrShopGrade[64], arrTotalSell[64];
 	INIDATA->addData("PLAYER", "date", _itoa(date, dateStr, 10));
 	INIDATA->addData("PLAYER", "year", _itoa(year, yearStr, 10));
 	INIDATA->addData("PLAYER", "day", _itoa(day, dayStr, 10));
@@ -1539,6 +1541,8 @@ void player::savePlayerData()
 	INIDATA->addData("PLAYER", "farmingExp", _itoa(farmingExp, fExpStr, 10));
 	INIDATA->addData("PLAYER", "combatLv", _itoa(playerCombatLevel, cLvStr, 10));
 	INIDATA->addData("PLAYER", "combatExp", _itoa(combatExp, cExpStr, 10));
+	INIDATA->addData("PLAYER", "shopGrade", _itoa(shopGrade, arrShopGrade, 10));
+	INIDATA->addData("PLAYER", "totalSell", _itoa(totalSell, arrTotalSell, 10));
 	INIDATA->saveINI();
 }
 

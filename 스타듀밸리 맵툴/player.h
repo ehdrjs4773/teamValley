@@ -86,7 +86,8 @@ private:
 	int MaxFarmingExp;
 	int combatExp;
 	int MaxCombatExp;
-
+	int shopGrade;
+	int totalSell;
 public:
 	HRESULT init();
 	void release();
@@ -107,7 +108,10 @@ public:
 	void limitEnergy();
 	void setMaxExp();
 	void levelUp();
-
+	void setShopGrade(int _grade) { shopGrade = _grade; }
+	int getShopGrade() { return shopGrade; }
+	void setTotalSell(int _sell) { totalSell = _sell; }
+	int getTotalSell() { return totalSell; }
 	bool getIsNewGame() { return isNewGame; }
 	void setIsNewGame(bool a) { isNewGame = a; }
 	int getLoadCount() { return inGameLoadCount; }

@@ -5,8 +5,8 @@ HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
 	tab_sel = false;
-	shopLevel = 3;
-	total_sell = 0;
+	shopLevel = PLAYER->getShopGrade();
+	total_sell = PLAYER->getTotalSell();
 
 	// 판매 관련 창
 	sell_ispopup = false;
@@ -178,14 +178,17 @@ void shop::update()
 	if (total_sell < 1000)
 	{
 		shopLevel = 3;
+		PLAYER->setShopGrade(shopLevel);
 	}
 	else if (total_sell < 2000)
 	{
 		shopLevel = 2;
+		PLAYER->setShopGrade(shopLevel);
 	}
 	else
 	{
 		shopLevel = 1;
+		PLAYER->setShopGrade(shopLevel);
 	}
 	if (!sell_ispopup)
 	{
@@ -350,7 +353,8 @@ void shop::render()
 		sprintf(money, "%d", _vItem[i + current_index].buy_price);
 		
 		SetTextColor(getMemDC(), RGB(0, 0, 0));
-		if (_vItem[i + current_index].grade >= 3)
+		cout << "name : " << _vItem[i+current_index].itemName << "\t" << "grade : " <<_vItem[i + current_index].grade << endl;
+		if (_vItem[i + current_index].grade >= PLAYER->getShopGrade())
 		{
 			if (!_vslot[i].on_cursor)
 			{
@@ -597,6 +601,7 @@ void shop::sell()
 				(*_vInven)[sell_index].amount -= sell_amount;
 				//누적판매
 				total_sell += (_vInven->at(sell_index).sell_price * sell_amount);
+				PLAYER->setTotalSell(total_sell);
 			}
 			else
 			{
@@ -690,31 +695,33 @@ void shop::buy()
 		if (PtInRect(&_vslot[i].rc, _ptMouse))
 		{
 			_vslot[i].on_cursor = true;
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			if (PLAYER->getShopGrade() <= _vItem[i + current_index].grade)
 			{
-				if (!SOUNDMANAGER->isPlaySound("purchase"))
+				if (INPUT->GetKeyDown(VK_LBUTTON))
 				{
-					SOUNDMANAGER->play("purchase", 0.2f);
-				}
-				if (is_click && (i + current_index != click_index)) continue;
-				else
-				{
-					click_index = i + current_index;
-					if (_vItem[click_index].buy_price > PLAYER->getMoney())
+					if (!SOUNDMANAGER->isPlaySound("purchase"))
 					{
-						buyFail = true;
-						if (is_click == true) continue;
-						is_click = false;
+						SOUNDMANAGER->play("purchase", 0.2f);
 					}
-					else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
+					if (is_click && (i + current_index != click_index)) continue;
+					else
 					{
-						PLAYER->setMoney(PLAYER->getMoney() - _vItem[click_index].buy_price);
-						buy_count++;
-						is_click = true;
+						click_index = i + current_index;
+						if (_vItem[click_index].buy_price > PLAYER->getMoney())
+						{
+							buyFail = true;
+							if (is_click == true) continue;
+							is_click = false;
+						}
+						else if (_vItem[click_index].buy_price <= PLAYER->getMoney())
+						{
+							PLAYER->setMoney(PLAYER->getMoney() - _vItem[click_index].buy_price);
+							buy_count++;
+							is_click = true;
+						}
 					}
 				}
 			}
-			
 		}
 		else _vslot[i].on_cursor = false;
 	}
