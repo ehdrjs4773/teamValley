@@ -940,19 +940,19 @@ void mineScene::skillSelect()
 
 void mineScene::setMonsterList()
 {
-	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 10, 5, .8f);
+	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 30, 5, .8f);
 	presetSlime->init();
 	monsterList.push_back(presetSlime);
 
-	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 5, 5, .4f);
+	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 70, 7, .4f);
 	presetBug->init();
 	monsterList.push_back(presetBug);
 
-	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 8, 5, .4f);
+	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 150, 9, .4f);
 	presetRockCrab->init();
 	monsterList.push_back(presetRockCrab);
 
-	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, .4f);
+	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 220, 10, .6f);
 	presetSerpent->init();
 	monsterList.push_back(presetSerpent);
 }
