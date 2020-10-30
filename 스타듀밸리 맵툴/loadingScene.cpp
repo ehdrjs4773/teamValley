@@ -179,6 +179,9 @@ void loadingScene::loadingImage()
 	//마법사의 성
 	IMAGEMANAGER->addImage("마법사성내부", "Images/tower/마법사의성.bmp", 600, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("마법사성내부충돌", "Images/tower/마법사의성(충돌).bmp", 600, 300, true, RGB(255, 0, 255));
+
+	//달력
+	IMAGEMANAGER->addImage("달력", "Images/달력.bmp", 600, 400, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()

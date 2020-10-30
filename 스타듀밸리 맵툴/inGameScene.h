@@ -34,6 +34,7 @@ private:
 	bool isShowRect;
 	bool isShopOpen;
 	bool isSprinkled;
+	bool isShowCalender = false;
 
 public:
 	inGameScene();

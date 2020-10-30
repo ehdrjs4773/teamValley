@@ -1057,6 +1057,8 @@ void mineScene::playerMonsterCollision()
 			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
 			{
 				SOUNDMANAGER->play("death", 0.2f);
+
+				loadCount = 0;
 				PLAYER->setIsSprinkled(false);
 				savePlayer();
 				PLAYER->resetClock();

@@ -173,6 +173,7 @@ void shop::update()
 
 		}
 	}
+
 	if (total_sell < 1000)
 	{
 		shopLevel = 3;

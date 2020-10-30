@@ -82,6 +82,8 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	//cout << MouseIndexX << "\t" << MouseIndexY << endl;
+
 	loadCount = PLAYER->getLoadCount();
 	isSprinkled = PLAYER->getIsSprinkled();
 	sprinklerWork();
@@ -191,6 +193,10 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+	if (isShowCalender)
+	{
+		IMAGEMANAGER->render("달력", getMemDC(), WINSIZEX / 2 - 300, WINSIZEY / 2 - 200);
+	}
 }
 
 void inGameScene::load()
@@ -549,7 +555,7 @@ void inGameScene::renderTree(int i, int j)
 
 void inGameScene::playerMove()
 {
-	if (!PLAYER->getInventoryMove())
+	if (!PLAYER->getInventoryMove() && !isShowCalender)
 	{
 		if (_tile[currentIndexY][currentIndexX].terrain == TR_GROUND)
 		{
@@ -928,9 +934,15 @@ void inGameScene::playerInteraction()
 					fillWater();
 				}
 			}
-			//스프링클러 설치
 
+			//스프링클러 설치
 			setSprinkler();	
+
+			//달력창 띄우기
+			if (MouseIndexX == 38 && (MouseIndexY == 10 || MouseIndexY == 11))
+			{
+				isShowCalender = true;
+			}
 
 			if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 				|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -953,6 +965,13 @@ void inGameScene::playerInteraction()
 
 					PLAYER->getInventory()->getInventoryCraft()->blastFurnace();
 				}
+			}
+		}
+		if (isShowCalender)
+		{
+			if (INPUT->GetKeyDown(VK_ESCAPE))
+			{
+				isShowCalender = false;
 			}
 		}
 	}
@@ -1583,7 +1602,16 @@ void inGameScene::harvest()
 	if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 	{
 		SOUNDMANAGER->play("harvest", 0.2f);
-		dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
+
+		//플레이어 스킬 만큼 개수 늘어남
+		for (int i = 0; i < PLAYER->getDropItemNum(); i++)
+		{
+			dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
+		}
+
+		//경험치 상승
+		PLAYER->setFarmingExp(ITEMMANAGER->findDropItem(ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType).exp);
+		
 		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
