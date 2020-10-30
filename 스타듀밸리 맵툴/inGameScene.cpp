@@ -65,6 +65,14 @@ HRESULT inGameScene::init()
 		SOUNDMANAGER->stop("town");
 	}
 
+	for (int i = 0; i < TILEY; i++)
+	{
+		for (int j = 0; j < TILEX; j++)
+		{
+			PLAYER->saveTile(i, j, _tile[i][j]);
+		}
+	}
+
 	return S_OK;
 }
 
@@ -156,8 +164,6 @@ void inGameScene::update()
 	{
 		shareTileData();
 	}
-
-	cout << _tile[MouseIndexY][MouseIndexX].objFrameX << "\t" << _tile[MouseIndexY][MouseIndexX].objFrameY << endl;
 }
 
 void inGameScene::render()

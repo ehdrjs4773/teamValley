@@ -868,20 +868,36 @@ void mineScene::ejectItem()
 		}
 		if (_vItemOnField[i].isOnGround)
 		{
-			if (getDistance(_vItemOnField[i].centerX, _vItemOnField[i].centerY, PLAYER->getCenterX(), PLAYER->getCenterY()) < 100)
+			int a = 0;
+			for (int i = 0; i < 36; i++)
 			{
-				_vItemOnField[i].speed += 0.05f;
-				_vItemOnField[i].angle = -atan2f(PLAYER->getCenterY() - _vItemOnField[i].centerY, PLAYER->getCenterX() - _vItemOnField[i].centerX);
-				_vItemOnField[i].centerX += cosf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
-				_vItemOnField[i].centerY += -sinf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
-				_vItemOnField[i].rc = RectMakeCenter(_vItemOnField[i].centerX, _vItemOnField[i].centerY, 16, 16);
+				if (PLAYER->getInven(i)->item_image != NULL) a++;
+			}
+			if (a != 36)
+			{
+				if (getDistance(_vItemOnField[i].centerX, _vItemOnField[i].centerY, PLAYER->getCenterX(), PLAYER->getCenterY()) < 100)
+				{
+					_vItemOnField[i].speed += 0.05f;
+					_vItemOnField[i].angle = -atan2f(PLAYER->getCenterY() - _vItemOnField[i].centerY, PLAYER->getCenterX() - _vItemOnField[i].centerX);
+					_vItemOnField[i].centerX += cosf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
+					_vItemOnField[i].centerY += -sinf(_vItemOnField[i].angle) * _vItemOnField[i].speed;
+					_vItemOnField[i].rc = RectMakeCenter(_vItemOnField[i].centerX, _vItemOnField[i].centerY, 16, 16);
+				}
 			}
 		}
 
 		if (PtInRect(&getItemRc, PointMake(_vItemOnField[i].centerX, _vItemOnField[i].centerY)))
 		{
-			getItem(_vItemOnField[i].item);
-			_vItemOnField.erase(_vItemOnField.begin() + i);
+			int a = 0;
+			for (int i = 0; i < 36; i++)
+			{
+				if (PLAYER->getInven(i)->item_image != NULL) a++;
+			}
+			if (a != 36)
+			{
+				getItem(_vItemOnField[i].item);
+				_vItemOnField.erase(_vItemOnField.begin() + i);
+			}
 		}
 	}
 }
