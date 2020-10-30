@@ -102,7 +102,7 @@ void inGameScene::update()
 
 	PLAYER->update();
 
-	skillSelect();
+	//skillSelect();
 
 	checkPlayerTile();
 

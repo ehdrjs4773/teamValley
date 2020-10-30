@@ -85,6 +85,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addImage("인벤경고창", "Images/beforeExit.bmp", 420, 280);
 
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("인벤토리 아이템창", "Images/inventory/inventory_item.bmp", 750, 550, true, RGB(255, 0, 255));
@@ -153,7 +154,13 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점씨앗탭", "Images/shop/씨앗아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점도구탭", "Images/shop/도구아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점판매테두리", "Images/shop/sellImageBox.bmp", 60, 60);
-
+	IMAGEMANAGER->addImage("현재별테두리", "Images/shop/current_star.bmp", 300, 45);
+	IMAGEMANAGER->addImage("별1", "Images/shop/별1.bmp", 177, 57);
+	IMAGEMANAGER->addImage("별2", "Images/shop/별2.bmp", 177, 57);
+	IMAGEMANAGER->addImage("별3", "Images/shop/별3.bmp", 177, 57);
+	IMAGEMANAGER->addImage("현재별1", "Images/shop/별1small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("현재별2", "Images/shop/별2small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("현재별3", "Images/shop/별3small.bmp", 59, 19);
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
 	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 34, 138, 1, 6);
