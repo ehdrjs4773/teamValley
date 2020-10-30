@@ -169,6 +169,7 @@ void inHouseScene::savePlayer()
 	PLAYER->savePlayerData();
 	PLAYER->saveMap();
 	PLAYER->saveBox();
+	PLAYER->setLoadCount(0);
 }
 
 void inHouseScene::blanket()

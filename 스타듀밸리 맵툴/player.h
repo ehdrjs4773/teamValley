@@ -16,6 +16,7 @@ private:
 	RECT frontHpBar;
 	RECT playerInven;
 	RECT playerHoldItem;
+	RECT levelButton[10];
 
 	skill* _skill;
 	bool isSkill;
@@ -108,7 +109,9 @@ public:
 	void weatherRender(HDC hdc);
 
 	int getDropItemNum() { return dropItemNum; }
+	int getFarmingLv() { return playerFarmingLevel; }
 	void setFarmingExp(int a) { farmingExp += a; }
+	int getCombatLv() { return playerCombatLevel; }
 	void setCombatExp(int a) { combatExp += a; }
 	void limitEnergy();
 	void setMaxExp();
@@ -235,5 +238,6 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
+	void makeCropGrow(int i, int j);
 };
 

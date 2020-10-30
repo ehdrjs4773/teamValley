@@ -1285,7 +1285,7 @@ void player::setCurrentMap()
 void player::countTime()
 {
 	timeCount++;
-	if (timeCount % 120 == 0)
+	if (timeCount % 30 == 0)
 	{
 		minute++;
 		if (hour > 17 || hour < 4)
@@ -1311,6 +1311,16 @@ void player::countTime()
 		//date += 1;
 		day = (DAYOFWEEK)(day + 1);
 		hour = 0;
+	}
+	if (hour == 2)
+	{
+		this->savePlayerInven();
+		this->savePlayerStock();
+		this->savePlayerData();
+		this->saveMap();
+		this->saveBox();
+		SWITCHMANAGER->changeScene("집안화면");
+		SWITCHMANAGER->startFade(855.0f, 865.0f);
 	}
 	if (date > 30)
 	{
@@ -1341,6 +1351,7 @@ void player::resetClock()
 void player::resetPlayer()
 {
 	this->init();
+	setMaxExp();
 	/*_tile[TILEY][TILEX] = {};
 	currentMap = MAP_HOUSE;
 	timeCount = 0;
@@ -1643,119 +1654,17 @@ void player::saveMap()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) continue;
+			//작물 자라게 하기
+			makeCropGrow(i, j);
 			
-			if (!_tile[i][j].isFullyGrown)
-			{
-				if ((_tile[i][j].seedType == SEED_TOMATO
-					|| _tile[i][j].seedType == SEED_HOTPEPPER
-					|| _tile[i][j].seedType == SEED_GRAPE
-					||_tile[i][j].seedType == SEED_GREENBEAN
-					|| _tile[i][j].seedType == SEED_BLUEBERRY
-					|| _tile[i][j].seedType == SEED_CORN
-					|| _tile[i][j].seedType == SEED_HOPS)
-					&& _tile[i][j].objFrameX == 7)
-				{
-					if (_tile[i][j].isWet)
-					{
-						_tile[i][j].grownLevel += 1;
-						_tile[i][j].objFrameX -= 1;
-						_tile[i - 1][j].ovlFrameX -= 1;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_PINETREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 6;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 7;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 6;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 8;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_MAPLETREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 3;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 4;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 3;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 5;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_OAKTREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 0;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 1;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 0;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 2;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else
-				{
-					if (_tile[i][j].isWet)
-					{
-						_tile[i][j].grownLevel += 1;
-						_tile[i][j].objFrameX += 1;
-						_tile[i - 1][j].ovlFrameX += 1;
-					}
-				}
-				_tile[i][j].isWet = false;
-
-				//다자랐는지 확인
-				_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
-			}
+			//다자랐는지 확인
+			_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
 		}
 	}
 
 	HANDLE file;
 	DWORD write;
-	TCHAR saveMapName[MAX_PATH] = "save/tomato.map";
-	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile("save/tomato.map", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
 }
@@ -1783,6 +1692,276 @@ void player::saveBox()
 void player::saveTile(int i, int j, tagTile tile)
 {
 	_tile[i][j] = tile;
+}
+
+void player::makeCropGrow(int i, int j)
+{
+	if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) { return; }
+	else
+	{
+		if (!_tile[i][j].isFullyGrown)
+		{
+			if ((_tile[i][j].seedType == SEED_TOMATO
+				|| _tile[i][j].seedType == SEED_HOTPEPPER
+				|| _tile[i][j].seedType == SEED_GRAPE
+				|| _tile[i][j].seedType == SEED_GREENBEAN
+				|| _tile[i][j].seedType == SEED_BLUEBERRY
+				|| _tile[i][j].seedType == SEED_CORN
+				|| _tile[i][j].seedType == SEED_HOPS)
+				&& _tile[i][j].objFrameX == 7)
+			{
+				if (_tile[i][j].isWet)
+				{
+					_tile[i][j].grownLevel += 1;
+					_tile[i][j].objFrameX -= 1;
+					_tile[i - 1][j].ovlFrameX -= 1;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_PINETREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 6;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 7;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 6;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 8;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_MAPLETREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 3;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 4;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 3;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 5;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_OAKTREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 0;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 1;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 0;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 2;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else
+			{
+				if (_tile[i][j].isWet)
+				{
+					switch (_tile[i][j].seedType)
+					{
+					case SEED_TOMATO:
+						_tile[i][j].grownLevel += 3;
+						_tile[i][j].objFrameX += 3;
+						_tile[i - 1][j].ovlFrameX += 3;
+						break;
+					case SEED_HOTPEPPER:
+						_tile[i][j].grownLevel += 3;
+						_tile[i][j].objFrameX += 3;
+						_tile[i - 1][j].ovlFrameX += 3;
+						break;
+					case SEED_RADISH:
+						if (_tile[i][j].grownLevel == 3)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 3;
+							_tile[i][j].objFrameX += 3;
+							_tile[i - 1][j].ovlFrameX += 3;
+						}
+						break;
+					case SEED_STARFRUIT:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_POPPY:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_SUNFLOWER:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_GRAPE:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_GREENBEAN:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_MELON:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_BLUEBERRY:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_WHEAT:
+							_tile[i][j].grownLevel += 5;
+							_tile[i][j].objFrameX += 5;
+							_tile[i - 1][j].ovlFrameX += 5;
+						break;
+					case SEED_REDCABBAGE:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_CORN:
+						if (_tile[i][j].grownLevel == 0)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_SUMMERSPANGLE:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_HOPS:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					default:
+						_tile[i][j].grownLevel += 1;
+						_tile[i][j].objFrameX += 1;
+						_tile[i - 1][j].ovlFrameX += 1;
+						break;
+					}
+				}
+			}
+			_tile[i][j].isWet = false;
+		}
+	}
 }
 
 void player::clockRender(HDC hdc)
@@ -1911,6 +2090,7 @@ void player::limitEnergy()
 	}
 	else if (playerEnergy <= 0)
 	{
+		inGameLoadCount = 0;
 		savePlayerData();
 		savePlayerInven();
 		savePlayerStock();
