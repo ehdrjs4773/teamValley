@@ -107,11 +107,9 @@ void  player::update()
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
-		//playerEnergy -= 2;
-		//totalEnergyDmg += 2;
-
-		playerFarmingLevel++;
-		setMaxExp();
+		playerEnergy = MAXENERGY;
+		//playerFarmingLevel++;
+		//setMaxExp();
 	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
