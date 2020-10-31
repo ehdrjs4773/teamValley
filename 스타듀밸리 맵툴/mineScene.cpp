@@ -1041,9 +1041,8 @@ void mineScene::spawnMonster()
 		
 		if (currentFloor == 1)								//1Ãþ
 		{
-			spawnSerpent();
 			//½½¶óÀÓ¸¸ »ý¼º
-			//spawnSlime();
+			spawnSlime();
 		}
 		else if (currentFloor > 1 && currentFloor < 4)		//2 ~ 3 Ãþ
 		{
