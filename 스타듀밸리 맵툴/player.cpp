@@ -67,10 +67,14 @@ HRESULT player::init()
 
 	_skill = new skill();
 	_skill->init();
-	//stock->addPlayerStock(STOCK_BROWNCOW);
-	//stock->addPlayerStock(STOCK_BROWNCOW);
-	//stock->addPlayerStock(STOCK_WHITECOW);
-	//stock->addPlayerStock(STOCK_WHITECOW);
+
+	if (isNewGame)
+	{
+		stock->addPlayerStock(STOCK_BROWNCOW);
+		stock->addPlayerStock(STOCK_BROWNCOW);
+		stock->addPlayerStock(STOCK_WHITECOW);
+		stock->addPlayerStock(STOCK_WHITECOW);
+	}
 
 	currentMap = MAP_HOUSE;
 
@@ -85,7 +89,7 @@ HRESULT player::init()
 	hour = 6;
 	minute = 0;
 	money = 100000;
-	currentSeason = SPRING;
+	currentSeason = SUMMER;
 	currentWeather = SUNNY;
 	date = 1;
 	day = MON;
@@ -103,12 +107,20 @@ void  player::release()
 
 void  player::update()
 {
-	cout << playerCombatLevel << "\t" << combatExp << "\t" << playerFarmingLevel << "\t" << farmingExp << endl;
+	//cout << playerCombatLevel << "\t" << combatExp << "\t" << playerFarmingLevel << "\t" << farmingExp << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
 		playerEnergy = MAXENERGY;
 		playerHp = MAXHP;
+	}
+	if (INPUT->GetKeyDown(VK_F4))
+	{
+		date = 12;
+	}
+	if (INPUT->GetKeyDown(VK_F5))
+	{
+		date = 17;
 	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
@@ -170,12 +182,9 @@ void  player::update()
 
 	//플레이어 현재 맵 체크
 	setCurrentMap();
-
+	
 	//가축 움직임
-	if (currentMap == MAP_BARN)
-	{
-		stock->update();
-	}
+	stock->update();
 
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
@@ -1632,10 +1641,14 @@ void player::savePlayerStock()
 	tagStock tempStock[5];
 	memset(tempStock, 0, sizeof(tempStock));
 
-	for (int i = 0; i < stock->getStock().size() - 1; i++)
+	if (!stock->getStock().empty())
 	{
-		tempStock[i] = temp[i];
+		for (int i = 0; i < stock->getStock().size(); i++)
+		{
+			tempStock[i] = temp[i];
+		}
 	}
+	
 
 	HANDLE file;
 	DWORD write;

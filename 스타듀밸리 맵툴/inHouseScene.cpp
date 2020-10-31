@@ -198,12 +198,12 @@ void inHouseScene::blanket()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				PLAYER->setIsSprinkled(false);
-				savePlayer();
 				if (!SWITCHMANAGER->getFade())
 				{
 					SWITCHMANAGER->startFade(855.0f, 865.0f);
 				}
 				PLAYER->resetClock();
+				savePlayer();
 				isShowSleepingOption = false; //Æú½º´Ù.
 			}
 		}

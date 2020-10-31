@@ -118,8 +118,8 @@ void Stock::addPlayerStock(STOCKTYPE stockType)
 	tagStock temp;
 	temp = findStock(stockType);
 	temp.isFullyGrown = true;
-	temp.centerX = 800;
-	temp.centerY = 800;
+	temp.centerX = RANDOM->range(750, 850);
+	temp.centerY = RANDOM->range(750, 850);
 	_vPlayerStock.push_back(temp);
 }
 
