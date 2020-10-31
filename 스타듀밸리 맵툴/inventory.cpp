@@ -776,14 +776,14 @@ void inventory::inven_item_info(HDC hdc)
 
 					if (_isShopOpen)
 					{
-						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y - 150, 200, 70);
+						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y - 150, 200, 50);
 						temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
 						IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
 
 					}
 					else
 					{
-						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 						temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
 						IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
 
@@ -879,7 +879,7 @@ void inventory::quickinven_item_info(HDC hdc)
 			if (_vItem[i].item_image != NULL)
 			{
 				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 70);
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 50);
 				RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 100);
 				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
 
@@ -973,7 +973,7 @@ void inventory::storage_item_info(HDC hdc)
 			if (_vStorageItem[i].item_image != NULL)
 			{
 					char temp_info[2][256];
-					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 					RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
 					IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
 

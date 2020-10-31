@@ -453,7 +453,7 @@ void shop::render()
 			if (_vItem[i+current_index].item_image != NULL)
 			{
 				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 				RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
 				IMAGEMANAGER->findImage("아이템정보")->render(getMemDC(), _ptMouse.x + 25, _ptMouse.y + 25);
 
@@ -560,7 +560,7 @@ void shop::render()
 		{
 			IMAGEMANAGER->render("현재별1", getMemDC(), temp->boudingBox().left + 150, 37);
 		}
-		else if (PLAYER->getShopGrade() == 3)
+		else if (PLAYER->getShopGrade() == 2)
 		{
 			IMAGEMANAGER->render("현재별2", getMemDC(), temp->boudingBox().left + 150, 37);
 		}
