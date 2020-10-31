@@ -161,6 +161,12 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("현재별1", "Images/shop/별1small.bmp", 59, 19);
 	IMAGEMANAGER->addImage("현재별2", "Images/shop/별2small.bmp", 59, 19);
 	IMAGEMANAGER->addImage("현재별3", "Images/shop/별3small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("대화창", "Images/초상화대사.bmp", 950, 280);
+	IMAGEMANAGER->addImage("마법사기본", "Images/NPC/마법사기본.bmp", 200, 180);
+	IMAGEMANAGER->addImage("마법사웃음", "Images/NPC/마법사웃음.bmp", 220, 200);
+	IMAGEMANAGER->addImage("상점기본", "Images/NPC/상점기본.bmp", 200, 160);
+	IMAGEMANAGER->addImage("할아버지기본", "Images/NPC/할아버지기본.bmp", 220, 200);
+	IMAGEMANAGER->addImage("할아버지웃음", "Images/NPC/할아버지웃음.bmp", 220, 200);
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
 	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 34, 138, 1, 6);

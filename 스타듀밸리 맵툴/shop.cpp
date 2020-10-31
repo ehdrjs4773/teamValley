@@ -7,7 +7,6 @@ HRESULT shop::init(NPC_KIND npckind)
 	tab_sel = false;
 	shopLevel = PLAYER->getShopGrade();
 	total_sell = PLAYER->getTotalSell();
-
 	// 판매 관련 창
 	sell_ispopup = false;
 	sell_popup = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 400, 200);
@@ -144,8 +143,12 @@ void shop::update()
 {
 
 	_inven->update();
+	
+	if (!is_click)
+	{
+		sell();
+	}
 
-	sell();
 	if (_npcKind == ITEM_NPC)
 	{
 		for (int i = 0; i < 2; i++)

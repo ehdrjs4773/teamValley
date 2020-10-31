@@ -20,7 +20,6 @@ private:
 
 	bool buyFail;
 	int buy_count;
-
 	//플레이어 인벤토리 렌더용 렉트
 	RECT playerItem[INVENMAX];
 	int money;

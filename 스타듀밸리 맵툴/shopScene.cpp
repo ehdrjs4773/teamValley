@@ -27,7 +27,20 @@ HRESULT shopScene::init()
 	{
 		SOUNDMANAGER->stop("농장");
 	}
+	//대화창 출력 기준
+	_isTalk = false;
+	//대화 저장
+	memset(temp_script, 0, sizeof(temp_script));
+	temp_script[0] = "환영합니다. 여러가지 팔고 있으니 둘러보세요.";
+	temp_script[1] = "다음에 또 오세요 ~";
+	
+	for (int i = 0; i < 10; i++)
+	{
+		if (temp_script[i] == NULL) break;
+		script.push_back(temp_script[i]);
+	}
 
+	script_count = 0;
 	this->update();
 	return S_OK;
 }
@@ -43,52 +56,76 @@ void shopScene::update()
 	{
 		SOUNDMANAGER->play("town", 0.05f);
 	}
-
 	_itemNpc->update();
-
-	//상점 나가기 포탈
-	if (PLAYER->getCenterY() >= 338)
+	if (_isTalk)
 	{
-		if (!SWITCHMANAGER->getFade())
+		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
-			SOUNDMANAGER->play("doorOpen", 0.2f);
-			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(640.0f, 224.0f);
+			script_count++;
+			if (script_count == 1)
+			{
+				_isTalk = false;
+				_isShopClicked = true;
+			}
+			else if (script_count > 1)
+			{
+				script_count = 0;
+				_isTalk = false;
+			}
 		}
-	}
-
-	if (_isShopClicked)
-	{
-		_itemShop->update();
-		_isShopClicked = !_itemShop->shopClose();
-		PLAYER->getInventory()->isShopOpen(_isShopClicked);
 	}
 	else
 	{
-		PLAYER->update();
-		
-		if (!PLAYER->getIsShowInventory())
+		//상점 나가기 포탈
+		if (PLAYER->getCenterY() >= 338)
 		{
-			playerMove();
-		}
-
-		_itemNpc->update();
-
-
-		_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
-
-		temp.x = CAMERAMANAGER->getX() + (float)_ptMouse.x / (float)WINSIZEX * 480;
-		temp.y = CAMERAMANAGER->getY() + (float)_ptMouse.y / (float)WINSIZEY * (float)230;
-
-		if (PtInRect(&_itemNpc->getRC(), temp))
-		{
-			if (INPUT->GetKeyDown(VK_LBUTTON))
+			if (!SWITCHMANAGER->getFade())
 			{
-				_isShopClicked = true;
+				SOUNDMANAGER->play("doorOpen", 0.2f);
+				SWITCHMANAGER->changeScene("인게임화면");
+				SWITCHMANAGER->startFade(640.0f, 224.0f);
 			}
 		}
-		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+
+		if (_isShopClicked)
+		{
+			_itemShop->update();
+			_isShopClicked = !_itemShop->shopClose();
+			PLAYER->getInventory()->isShopOpen(_isShopClicked);
+			if (_itemShop->shopClose())
+			{
+				_isTalk = true;
+			}
+		}
+		else
+		{
+			PLAYER->update();
+
+			if (!PLAYER->getIsShowInventory())
+			{
+				playerMove();
+			}
+
+			_itemNpc->update();
+
+
+			_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
+
+			temp.x = CAMERAMANAGER->getX() + (float)_ptMouse.x / (float)WINSIZEX * 480;
+			temp.y = CAMERAMANAGER->getY() + (float)_ptMouse.y / (float)WINSIZEY * (float)230;
+
+			if (PtInRect(&_itemNpc->getRC(), temp))
+			{
+				if (INPUT->GetKeyDown(VK_LBUTTON))
+				{
+					//_isShopClicked = true;
+					_isTalk = true;
+				}
+			}
+			CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+		}
 	}
+
 }
 
 void shopScene::render()
@@ -128,6 +165,12 @@ void shopScene::render()
 	else
 	{
 		PLAYER->playerStatusRender(getMemDC());
+	}
+	if (_isTalk)
+	{
+		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		IMAGEMANAGER->render("상점기본", getMemDC(), 735, 310);
+		textOut(getMemDC(), 120, 300, script[script_count], RGB(0, 0, 0));
 	}
 }
 
