@@ -66,6 +66,7 @@ public:
 	void cutGrass();
 	void useLadder(int i, int j);
 	void useElevator(); 
+	void eatFruit();
 
 	void renderMap();
 	void renderTerrain();
@@ -81,6 +82,7 @@ public:
 	
 	void skillClick();
 	void skillSelect();
+
 
 	void setMonsterList();
 	void spawnMonster();

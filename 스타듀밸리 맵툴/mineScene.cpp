@@ -79,6 +79,13 @@ void mineScene::update()
 					{
 						if (!(iter->getDamage()))
 						{
+							if (iter->getMonsterType() == MTYPE_SERPENT)
+							{
+								if (!SOUNDMANAGER->isPlaySound("serpentHit"))
+								{
+									SOUNDMANAGER->play("serpentHit");
+								}
+							}
 							iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
 							iter->setDamage(true);
 						}
@@ -603,6 +610,19 @@ void mineScene::playerInteraction()
 
 			//풀 베기 
 			cutGrass();
+
+			//과일 먹기
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_FRUIT)
+			{
+				if (PLAYER->getCurrentInven()->seedKind != SEED_HOPS
+					&& PLAYER->getCurrentInven()->seedKind != SEED_WHEAT
+					&& PLAYER->getCurrentInven()->seedKind != SEED_POPPY
+					&& PLAYER->getCurrentInven()->seedKind != SEED_SUMMERSPANGLE)
+				{
+					PLAYER->setDirection(DOWN);
+					eatFruit();
+				}
+			}
 		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -824,6 +844,19 @@ void mineScene::useElevator()
 			SWITCHMANAGER->startFade(96.0f, 96.0f);
 		}
 	}
+}
+
+void mineScene::eatFruit()
+{
+	if (!SOUNDMANAGER->isPlaySound("eat"))
+	{
+		SOUNDMANAGER->play("eat");
+	}
+	PLAYER->recoverHp(PLAYER->getCurrentInven()->hpRecover);
+	PLAYER->recoverEnergy(PLAYER->getCurrentInven()->energyRecover);
+
+	PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+		PLAYER->getCurrentInven()->amount - 1);
 }
 
 void mineScene::loadMap()

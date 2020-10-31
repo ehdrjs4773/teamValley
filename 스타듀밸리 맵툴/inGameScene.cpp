@@ -1749,6 +1749,10 @@ void inGameScene::sprinklerWork()
 
 void inGameScene::eatFruit()
 {
+	if (!SOUNDMANAGER->isPlaySound("eat"))
+	{
+		SOUNDMANAGER->play("eat");
+	}
 	PLAYER->recoverHp(PLAYER->getCurrentInven()->hpRecover);
 	PLAYER->recoverEnergy(PLAYER->getCurrentInven()->energyRecover);
 

@@ -232,4 +232,7 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("spike", "Sounds/spike.mp3", false, false);
 	SOUNDMANAGER->addSound("hitPlayer", "Sounds/hitPlayer.mp3", false, false);
 	SOUNDMANAGER->addSound("오프닝", "Sounds/차량소리.mp3", false, false);
+	SOUNDMANAGER->addSound("serpentDead", "Sounds/serpentDie.mp3", false, false);
+	SOUNDMANAGER->addSound("serpentHit", "Sounds/serpentHit.mp3", false, false);
+	SOUNDMANAGER->addSound("eat", "Sounds/eat.mp3", false, false);
 }
