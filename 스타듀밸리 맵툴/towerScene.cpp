@@ -27,7 +27,7 @@ HRESULT towerScene::init()
 	_npcPtr = _skillNpc;
 	//_npcPtr[1] = _skillNpc;
 
-	if (!SOUNDMANAGER->isPlaySound("³óÀå"))
+	if (SOUNDMANAGER->isPlaySound("³óÀå"))
 	{
 		SOUNDMANAGER->stop("³óÀå");
 	}
@@ -43,10 +43,10 @@ void towerScene::release()
 
 void towerScene::update()
 {
-	if (!SOUNDMANAGER->isPlaySound("town"))
-	{
-		SOUNDMANAGER->play("town", 0.05f);
-	}
+	//if (!SOUNDMANAGER->isPlaySound("town"))
+	//{
+	//	SOUNDMANAGER->play("town", 0.05f);
+	//}
 
 	_skillNpc->update();
 	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
@@ -69,6 +69,8 @@ void towerScene::update()
 	}
 	else
 	{
+		setCurrentSlotNumber(_mouseWheel);
+
 		PLAYER->update();
 
 		if (!PLAYER->getIsShowInventory())
@@ -235,5 +237,21 @@ void towerScene::playerMove()
 			SOUNDMANAGER->stop("movewood");
 		}
 		PLAYER->setState(STAND);
+	}
+}
+
+void towerScene::setCurrentSlotNumber(int mouseWheel)
+{
+	if (mouseWheel > 0)
+	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
+		_mouseWheel = 0;
+	}
+	else if (mouseWheel < 0)
+	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
+		_mouseWheel = 0;
 	}
 }

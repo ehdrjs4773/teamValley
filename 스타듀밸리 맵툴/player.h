@@ -112,9 +112,9 @@ public:
 
 	int getDropItemNum() { return dropItemNum; }
 	int getFarmingLv() { return playerFarmingLevel; }
-	void setFarmingExp(int a) { farmingExp += a; }
+	void setFarmingExp(int a) { farmingExp += a; levelUp(); }
 	int getCombatLv() { return playerCombatLevel; }
-	void setCombatExp(int a) { combatExp += a; }
+	void setCombatExp(int a) { combatExp += a; levelUp(); }
 	void limitEnergy();
 	void setMaxExp();
 	void levelUp();

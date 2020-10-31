@@ -84,6 +84,11 @@ public:
 
 	void setMonsterList();
 	void spawnMonster();
+	void spawnSlime();
+	void spawnRockCrab();
+	void spawnBug();
+	void spawnSerpent();
+
 	void playerMonsterCollision();
 	void wallMonsterColliison();
 };

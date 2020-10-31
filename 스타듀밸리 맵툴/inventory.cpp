@@ -74,7 +74,8 @@ void inventory::update()
 {
 	if (INPUT->GetKeyDown(VK_F8))
 	{
-		_vItem[20] = ITEMMANAGER->findItem("기본스프링클러");
+		PLAYER->setFarmingExp(100);
+		PLAYER->setCombatExp(100);
 	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
@@ -154,7 +155,7 @@ void inventory::update()
 			_vItem[i] = nullitem;
 		}
 	}
-	cout << "x : " << _ptMouse.x << "y : " << _ptMouse.y << endl;
+	//cout << "x : " << _ptMouse.x << "y : " << _ptMouse.y << endl;
 
 	if (_isWarning)
 	{
@@ -305,7 +306,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 		//전투레벨
 		if (PLAYER->getCombatLv() < 5)
 		{
-			for (int i = 0; i < PLAYER->getFarmingLv(); i++)
+			for (int i = 0; i < PLAYER->getCombatLv(); i++)
 			{
 				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
 			}

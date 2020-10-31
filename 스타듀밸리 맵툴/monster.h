@@ -107,7 +107,8 @@ public:
 	void attack();
 
 	void checkDir();
-
+	
+	MONTYPE getMonsterType() { return monsterType; }
 	float getCenterX() { return centerX; }
 	float getCenterY() { return centerY; }
 	int getCurrentX() { return currentX; }

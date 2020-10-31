@@ -57,7 +57,7 @@ void skill::skillSelect()
 		}
 	}
 
-	cout << skill_state << endl;
+	//cout << skill_state << endl;
 }
 
 void skill::skillActive()

@@ -103,13 +103,12 @@ void  player::release()
 
 void  player::update()
 {
-	cout << playerEnergy << "\t" << frontEnergyBar.top << endl;
+	cout << playerCombatLevel << "\t" << combatExp << "\t" << playerFarmingLevel << "\t" << farmingExp << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
 		playerEnergy = MAXENERGY;
-		//playerFarmingLevel++;
-		//setMaxExp();
+		playerHp = MAXHP;
 	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));

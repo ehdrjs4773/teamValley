@@ -25,6 +25,7 @@ public:
 	void render();
 
 	void playerMove();
+	void setCurrentSlotNumber(int mouseWheel);
 
 };
 

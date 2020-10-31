@@ -23,7 +23,7 @@ HRESULT shopScene::init()
 
 	_npcPtr = _itemNpc;
 
-	if (!SOUNDMANAGER->isPlaySound("³óÀå"))
+	if (SOUNDMANAGER->isPlaySound("³óÀå"))
 	{
 		SOUNDMANAGER->stop("³óÀå");
 	}
@@ -56,6 +56,9 @@ void shopScene::update()
 	{
 		SOUNDMANAGER->play("town", 0.05f);
 	}
+
+	setCurrentSlotNumber(_mouseWheel);
+
 	_itemNpc->update();
 	if (_isTalk)
 	{
@@ -285,4 +288,20 @@ void shopScene::playerMove()
 			}
 			PLAYER->setState(STAND);
 		}
+}
+
+void shopScene::setCurrentSlotNumber(int mouseWheel)
+{
+	if (mouseWheel > 0)
+	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() - 1);
+		_mouseWheel = 0;
+	}
+	else if (mouseWheel < 0)
+	{
+		SOUNDMANAGER->play("toolSwap", 0.2f);
+		PLAYER->setCurrentSlotNumber(PLAYER->getCurrentSlotNumber() + 1);
+		_mouseWheel = 0;
+	}
 }

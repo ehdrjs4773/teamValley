@@ -295,13 +295,7 @@ void inventoryCraft::blastFurnace()
 	{
 		if (_inven->getvInven()[_isCopper].amount >= 5)
 		{
-			tagItem copperIngot;
-			copperIngot.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
-			copperIngot.item_info = "±¸¸®ÁÖ±«";
-			copperIngot.indexX = 6;
-			copperIngot.indexY = 4;
-			copperIngot.isFrame = true;
-			copperIngot.amount = 1;
+			tagItem copperIngot = ITEMMANAGER->findItemByKind(ITEM_INGOT, 6);
 
 			_inven->setInvenItemAmount(_isCopper, _inven->getvInven()[_isCopper].amount - 5);
 
@@ -325,13 +319,7 @@ void inventoryCraft::blastFurnace()
 	{
 		if (_inven->getvInven()[_isIron].amount >= 5)
 		{
-			tagItem ironIngot;
-			ironIngot.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
-			ironIngot.item_info = "Ã¶ÁÖ±«";
-			ironIngot.indexX = 8;
-			ironIngot.indexY = 4;
-			ironIngot.isFrame = true;
-			ironIngot.amount = 1;
+			tagItem ironIngot = ITEMMANAGER->findItemByKind(ITEM_INGOT, 8);
 
 			_inven->setInvenItemAmount(_isIron, _inven->getvInven()[_isIron].amount - 5);
 
@@ -355,13 +343,7 @@ void inventoryCraft::blastFurnace()
 	{
 		if (_inven->getvInven()[_isGold].amount >= 5) 
 		{
-			tagItem goldIngot;
-			goldIngot.item_image = IMAGEMANAGER->findImage("±¤¹°¾ÆÀÌÅÛ");
-			goldIngot.item_info = "±ÝÁÖ±«";
-			goldIngot.indexX = 12;
-			goldIngot.indexY = 4;
-			goldIngot.isFrame = true;
-			goldIngot.amount = 1;
+			tagItem goldIngot = ITEMMANAGER->findItemByKind(ITEM_INGOT, 12);
 			
 			_inven->setInvenItemAmount(_isGold, _inven->getvInven()[_isGold].amount - 5);
 
