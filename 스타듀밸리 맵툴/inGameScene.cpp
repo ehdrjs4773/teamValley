@@ -131,7 +131,7 @@ void inGameScene::update()
 	}
 
 	PLAYER->update();
-
+	cout << "player is met : " << PLAYER->getIsMet() << endl;
 	//skillSelect();
 
 	checkPlayerTile();

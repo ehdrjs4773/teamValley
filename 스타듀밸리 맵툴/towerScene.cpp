@@ -57,7 +57,10 @@ HRESULT towerScene::init()
 	{
 		script.push_back(temp[i]);
 	}
-
+	if (PLAYER->getIsMet())
+	{
+		script_count = 16;
+	}
 	this->update();
 	return S_OK;
 }
@@ -73,52 +76,55 @@ void towerScene::update()
 	//{
 	//	SOUNDMANAGER->play("town", 0.05f);
 	//}
-
+	cout << PLAYER->getIsMet();
 	_skillNpc->update();
 	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
-	if (_isTalk && !PLAYER->getIsMet())
+	if (!PLAYER->getIsMet())
 	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
+		if (_isTalk)
 		{
-			script_count++;
-			//if (script_count <= 15)
-			//{
-			//	_isTalk = false;
-			//	_isSkillClicked = true;
-			//}
-			if (script_count == 5)
+			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				for (int i = 0; i < INVENMAX; i++)
+				script_count++;
+				//if (script_count <= 15)
+				//{
+				//	_isTalk = false;
+				//	_isSkillClicked = true;
+				//}
+				if (script_count == 5)
 				{
-					if ((*PLAYER->getInven())[i].item_image == NULL)
+					for (int i = 0; i < INVENMAX; i++)
 					{
-						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("Æø¹ß_°Ë"));
-						break;
+						if ((*PLAYER->getInven())[i].item_image == NULL)
+						{
+							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("Æø¹ß_°Ë"));
+							break;
+						}
 					}
 				}
-			}
-			else if (script_count == 11)
-			{
-				for (int i = 0; i < INVENMAX; i++)
+				else if (script_count == 11)
 				{
-					if ((*PLAYER->getInven())[i].item_image == NULL)
+					for (int i = 0; i < INVENMAX; i++)
 					{
-						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
-						break;
+						if ((*PLAYER->getInven())[i].item_image == NULL)
+						{
+							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
+							break;
+						}
 					}
 				}
-			}
-			else if (script_count > 15)
-			{
-				_isTalk = false;
-				//_isSkillClicked = true;
-				PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("Æø¹ß_°Ë"));
-				PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("°î±ªÀÌ"));
-				PLAYER->setIsMet(true);
+				else if (script_count > 15)
+				{
+					_isTalk = false;
+					//_isSkillClicked = true;
+					//PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("Æø¹ß_°Ë"));
+					//PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("°î±ªÀÌ"));
+					PLAYER->setIsMet(true);
+				}
 			}
 		}
 	}
-	else if(_isTalk && PLAYER->getIsMet())
+	else if(_isTalk)
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
@@ -136,6 +142,7 @@ void towerScene::update()
 			}
 		}
 	}
+
 	//»óÁ¡ ³ª°¡±â Æ÷Å»
 	if (PLAYER->getCenterY() >= 270)
 	{
