@@ -630,16 +630,17 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(RIGHT);
 
-					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET || PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+					for (int i = 0; i < 9; i++)
 					{
-						PLAYER->setState(CARRY);
-					}
-					else
-					{
-						PLAYER->setState(RUN);
+						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+						{
+							PLAYER->setState(CARRY);
+						}
+						else
+						{
+							PLAYER->setState(RUN);
+						}
 					}
 					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 				}
@@ -671,16 +672,17 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(LEFT);
 
-					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET || PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+					for (int i = 0; i < 9; i++)
 					{
-						PLAYER->setState(CARRY);
-					}
-					else
-					{
-						PLAYER->setState(RUN);
+						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+						{
+							PLAYER->setState(CARRY);
+						}
+						else
+						{
+							PLAYER->setState(RUN);
+						}
 					}
 					PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
 				}
@@ -712,16 +714,17 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(UP);
 
-					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET || PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+					for (int i = 0; i < 9; i++)
 					{
-						PLAYER->setState(CARRY);
-					}
-					else
-					{
-						PLAYER->setState(RUN);
+						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+						{
+							PLAYER->setState(CARRY);
+						}
+						else
+						{
+							PLAYER->setState(RUN);
+						}
 					}
 					PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
 				}
@@ -753,17 +756,19 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(DOWN);
 
-					if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET || PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-						PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+					for (int i = 0; i < 9; i++)
 					{
-						PLAYER->setState(CARRY);
+						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+						{
+							PLAYER->setState(CARRY);
+						}
+						else
+						{
+							PLAYER->setState(RUN);
+						}
 					}
-					else
-					{
-						PLAYER->setState(RUN);
-					}
+
 					PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
 				}
 			}
@@ -951,12 +956,15 @@ void inGameScene::playerInteraction()
 				}
 
 				//제작아이템 설치
-				if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX || PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET ||
-					PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-					PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW || PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+				for (int i = 0; i < 9; i++)
 				{
-					setEquipment();
+					if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
+						PLAYER->getCurrentInven()->scarecrowKind==i)
+					{
+						setEquipment();
+					}
 				}
+
 
 				//펜스 설치
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_WOODENFENCE || PLAYER->getCurrentInven()->item_kind == ITEM_STONEFENCE)
@@ -1382,48 +1390,27 @@ void inGameScene::setEquipment()
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_BOX;
 				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-			}
-			if (PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET) //먹이통일때
-			{
-				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_FEEDBUCKET;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 1;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-			}
-			if (PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW) //허수아비일때
-			{
-				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 3;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE) //용광로일때 
 			{
 				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 				_tile[MouseIndexY][MouseIndexX].objType = OTY_BLASTFURNACE;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 4;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-			}
-			if (PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM) //양봉장일때 
-			{
-				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_BEEFARM;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 2;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
-			}
-			if (PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL) //절임통일때 
-			{
-				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_PICKLEDBARREL;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 5;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 1;
+				_tile[MouseIndexY][MouseIndexX].objFrameX = 1;
+				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 			}
 
+			for (int i = 0; i < 9; i++)
+			{
+				if (PLAYER->getCurrentInven()->scarecrowKind == i) //허수아비일때
+				{
+					SOUNDMANAGER->play("movewood", 0.4f);
+					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
+					_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
+					_tile[MouseIndexY][MouseIndexX].objFrameX = i+2;
+					_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+				}
+			}
 			tagItem temp = {};
 			PLAYER->setInvenItem(PLAYER->getCurrentSlotNumber(),temp);
 		}

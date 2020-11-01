@@ -12,6 +12,9 @@ public:
 	tagItem _CraftItem;
 	vector<tagItem> _vCraftItem;
 
+	tagItem _CraftEventItem;
+	vector<tagItem> _vCraftEventItem;
+
 	RECT goodsInProgress;
 
 	int initCount = 0;
@@ -32,6 +35,7 @@ public :
 	void release();
 	void render(HDC hdc);
 	void craftInven_item_info(HDC hdc);
+	void craftEventInven_item_info(HDC hdc);
 	void blastFurnace();
 	void materialUpdate();
 

@@ -259,43 +259,20 @@ void player::playerCarryItem(HDC hdc)
 		{
 			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top-16,
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY+1);
-		}
-		else if (getCurrentInven()->item_kind == ITEM_FEEDBUCKET)
-		{
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
-				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
-		}
-		else if (getCurrentInven()->item_kind == ITEM_BEEFARM)
-		{
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
-				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
-		}
-		else if (getCurrentInven()->item_kind == ITEM_SCARECROW)
-		{
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
-				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
 		}
 		else if (getCurrentInven()->item_kind == ITEM_BLASTFURNACE)
 		{
 			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
 		}
-		else if (getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+
+		for(int i=0;i<9;i++)
 		{
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
-				getCurrentInven()->indexX, getCurrentInven()->indexY);
-			IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
-				getCurrentInven()->indexX, getCurrentInven()->indexY + 1);
+			if (getCurrentInven()->scarecrowKind == i)
+			{
+				IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+					getCurrentInven()->indexX, getCurrentInven()->indexY);
+			}
 		}
 	}
 	
