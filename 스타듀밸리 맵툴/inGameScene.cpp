@@ -2725,7 +2725,7 @@ void inGameScene::setEventGround()
 				_tile[i][j].terrainFrameY = 1;
 			}
 
-			terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
 	for (int i = 26; i < 35; i++)
@@ -2768,7 +2768,7 @@ void inGameScene::setEventGround()
 				_tile[i][j].terrainFrameY = 1;
 			}
 
-			terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
 }
@@ -2780,6 +2780,7 @@ void inGameScene::resetOriginalGround()
 		for (int j = 2; j < 23; j++)
 		{
 			_tile[i][j] = tileSave[i][j];
+			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
 	for (int i = 26; i < 35; i++)
@@ -2787,6 +2788,7 @@ void inGameScene::resetOriginalGround()
 		for (int j = 10; j < 17; j++)
 		{
 			_tile[i][j] = tileSave[i][j];
+			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
 }
