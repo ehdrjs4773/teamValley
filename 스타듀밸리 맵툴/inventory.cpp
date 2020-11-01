@@ -349,8 +349,7 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	{
 		_inventoryCraft->update();
 		IMAGEMANAGER->render("제작창", hdc, 225, 40);
-		_inventoryCraft->render(hdc);
-
+		
 		for (int i = 0; i < _vItem.size(); i++)
 		{
 			if (_vItem[i].item_image != NULL)
@@ -414,6 +413,8 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				}
 			}
 		}
+		
+		_inventoryCraft->render(hdc);
 	}
 
 	if (_isWarning)
