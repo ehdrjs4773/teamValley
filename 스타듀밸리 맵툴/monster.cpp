@@ -53,7 +53,7 @@ void monster::move()
 		float destX = PLAYER->getCenterX();
 		float destY = PLAYER->getCenterY();
 		float tempAngle = getAngle(centerX, centerY, destX, destY);
-		if (angle < tempAngle + 0.1f)
+		if (angle < tempAngle - 0.1f)
 		{
 			angle += 0.05f;
 		}
@@ -219,7 +219,6 @@ void monster::update()
 
 		isDead = true;
 		isMove = false;
-
 	}
 	//데미지 받으면 다음 데미지 받을떄까지 딜레이
 	if (getdamage)

@@ -22,6 +22,8 @@ HRESULT itemManager::init()
 	IMAGEMANAGER->addFrameImage("스프링클러", "Images/BMP/스프링클러.bmp", 16, 48, 1, 3);
 	IMAGEMANAGER->addFrameImage("스프링클러아이템", "Images/BMP/스프링클러아이템.bmp", 40, 120, 1, 3);
 	IMAGEMANAGER->addFrameImage("펜스", "Images/펜스/펜스아이템.bmp", 80, 40, 2, 1);
+	IMAGEMANAGER->addFrameImage("몬스터소재", "Images/monster/몬스터소재.bmp", 160, 40, 4, 1);
+	IMAGEMANAGER->addFrameImage("몬스터소재small", "Images/monster/몬스터소재small.bmp", 64, 16, 4, 1);
 
 	readItemCSV();
 

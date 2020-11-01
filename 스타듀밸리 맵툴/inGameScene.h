@@ -7,6 +7,7 @@ class inGameScene : public gameNode
 {
 private:
 	tagTile _tile[TILEY][TILEX]; 
+	tagTile tileSave[TILEY][TILEX];
 
 	//∂•ø° ∂≥æÓ¡¯ æ∆¿Ã≈€øÎ ∫§≈Õ
 	vector<tagItemOnField> _vItemOnField;
@@ -34,11 +35,11 @@ private:
 	bool isShowRect;
 	bool isShopOpen;
 	bool isSprinkled;
+	bool isShowCalender = false;
 
 public:
 	inGameScene();
 	
-
 	HRESULT init();
 	void release();
 	void update();
@@ -87,6 +88,9 @@ public:
 
 	void setRandomObstacles();
 	void changeGrass();
+
+	void setEventGround();
+	void resetOriginalGround();
 
 	void setCurrentSlotNumber(int mouseWheel);
 	TERRAIN terrainSelect(int frameX, int frameY);

@@ -34,7 +34,9 @@ void inHouseScene::update()
 		{
 			SOUNDMANAGER->play("doorOpen", 0.2f);
 			SWITCHMANAGER->changeScene("인게임화면");
-			SWITCHMANAGER->startFade(384.0f, 496.0f); // 플레이어가 인게임에서 호출될 장소 
+			SWITCHMANAGER->startFade(376.0f, 472.0f); // 플레이어가 인게임에서 호출될 장소 
+			//SWITCHMANAGER->startFade(650.0f, 192.0f); // 상점 디버그용 
+
 		}
 	}
 
@@ -169,6 +171,7 @@ void inHouseScene::savePlayer()
 	PLAYER->savePlayerData();
 	PLAYER->saveMap();
 	PLAYER->saveBox();
+	PLAYER->setLoadCount(0);
 }
 
 void inHouseScene::blanket()
@@ -195,12 +198,12 @@ void inHouseScene::blanket()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				PLAYER->setIsSprinkled(false);
-				savePlayer();
 				if (!SWITCHMANAGER->getFade())
 				{
 					SWITCHMANAGER->startFade(855.0f, 865.0f);
 				}
 				PLAYER->resetClock();
+				savePlayer();
 				isShowSleepingOption = false; //폴스다.
 			}
 		}

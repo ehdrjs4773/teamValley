@@ -85,6 +85,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
+	IMAGEMANAGER->addImage("인벤경고창", "Images/beforeExit.bmp", 420, 280);
 
 	IMAGEMANAGER->addImage("상점인벤토리", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("인벤토리 아이템창", "Images/inventory/inventory_item.bmp", 750, 550, true, RGB(255, 0, 255));
@@ -118,6 +119,8 @@ void loadingScene::loadingImage()
 
 	//플레이어 인벤토리
 	IMAGEMANAGER->addImage("플레이어 퀵슬롯", "Images/inventory/playerQuickslot.bmp", 565, 69, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("레벨버튼small", "Images/inventory/levelButtonSmall.bmp", 24, 30);
+	IMAGEMANAGER->addImage("레벨버튼big", "Images/inventory/levelButtonBig.bmp", 46, 30);
 	
 	//가축
 	IMAGEMANAGER->addFrameImage("갈색닭", "Images/가축/갈색닭.bmp", 64, 96, 4, 6);
@@ -132,7 +135,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addFrameImage("어린양", "Images/가축/어린양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("털깎인양", "Images/가축/털깎인양.bmp", 128, 192, 4, 6);
 	IMAGEMANAGER->addFrameImage("양", "Images/가축/양.bmp", 128, 192, 4, 6);
-	
+	IMAGEMANAGER->addFrameImage("할아버지", "Images/npc/할아버지.bmp", 64, 128, 4, 4);
 	//상점
 	IMAGEMANAGER->addImage("상점", "Images/shop.bmp", 900, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점닫기", "Images/shop/exit.bmp", 30, 33);
@@ -151,7 +154,19 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("상점씨앗탭", "Images/shop/씨앗아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점도구탭", "Images/shop/도구아이콘.bmp", 65, 45, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점판매테두리", "Images/shop/sellImageBox.bmp", 60, 60);
-
+	IMAGEMANAGER->addImage("현재별테두리", "Images/shop/current_star.bmp", 300, 45);
+	IMAGEMANAGER->addImage("별1", "Images/shop/별1.bmp", 177, 57);
+	IMAGEMANAGER->addImage("별2", "Images/shop/별2.bmp", 177, 57);
+	IMAGEMANAGER->addImage("별3", "Images/shop/별3.bmp", 177, 57);
+	IMAGEMANAGER->addImage("현재별1", "Images/shop/별1small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("현재별2", "Images/shop/별2small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("현재별3", "Images/shop/별3small.bmp", 59, 19);
+	IMAGEMANAGER->addImage("대화창", "Images/초상화대사.bmp", 950, 280);
+	IMAGEMANAGER->addImage("마법사기본", "Images/NPC/마법사기본.bmp", 200, 180);
+	IMAGEMANAGER->addImage("마법사웃음", "Images/NPC/마법사웃음.bmp", 220, 200);
+	IMAGEMANAGER->addImage("상점기본", "Images/NPC/상점기본.bmp", 200, 160);
+	IMAGEMANAGER->addImage("할아버지기본", "Images/NPC/할아버지기본.bmp", 220, 200);
+	IMAGEMANAGER->addImage("할아버지웃음", "Images/NPC/할아버지웃음.bmp", 220, 200);
 	//시계
 	IMAGEMANAGER->addFrameImage("계절", "Images/시계/계절.bmp", 35, 92, 1, 4);
 	IMAGEMANAGER->addFrameImage("날씨", "Images/시계/날씨.bmp", 34, 138, 1, 6);
@@ -172,6 +187,9 @@ void loadingScene::loadingImage()
 	//마법사의 성
 	IMAGEMANAGER->addImage("마법사성내부", "Images/tower/마법사의성.bmp", 600, 300, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("마법사성내부충돌", "Images/tower/마법사의성(충돌).bmp", 600, 300, true, RGB(255, 0, 255));
+
+	//달력
+	IMAGEMANAGER->addImage("달력", "Images/달력.bmp", 600, 400, true, RGB(255, 0, 255));
 }
 
 void loadingScene::loadingSound()
@@ -214,4 +232,7 @@ void loadingScene::loadingSound()
 	SOUNDMANAGER->addSound("spike", "Sounds/spike.mp3", false, false);
 	SOUNDMANAGER->addSound("hitPlayer", "Sounds/hitPlayer.mp3", false, false);
 	SOUNDMANAGER->addSound("오프닝", "Sounds/차량소리.mp3", false, false);
+	SOUNDMANAGER->addSound("serpentDead", "Sounds/serpentDie.mp3", false, false);
+	SOUNDMANAGER->addSound("serpentHit", "Sounds/serpentHit.mp3", false, false);
+	SOUNDMANAGER->addSound("eat", "Sounds/eat.mp3", false, false);
 }

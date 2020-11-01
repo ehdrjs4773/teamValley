@@ -67,10 +67,14 @@ HRESULT player::init()
 
 	_skill = new skill();
 	_skill->init();
-	stock->addPlayerStock(STOCK_BROWNCOW);
-	stock->addPlayerStock(STOCK_BROWNCOW);
-	stock->addPlayerStock(STOCK_WHITECOW);
-	stock->addPlayerStock(STOCK_WHITECOW);
+
+	if (isNewGame)
+	{
+		stock->addPlayerStock(STOCK_BROWNCOW);
+		stock->addPlayerStock(STOCK_BROWNCOW);
+		stock->addPlayerStock(STOCK_WHITECOW);
+		stock->addPlayerStock(STOCK_WHITECOW);
+	}
 
 	currentMap = MAP_HOUSE;
 
@@ -85,7 +89,7 @@ HRESULT player::init()
 	hour = 6;
 	minute = 0;
 	money = 100000;
-	currentSeason = SPRING;
+	currentSeason = SUMMER;
 	currentWeather = SUNNY;
 	date = 1;
 	day = MON;
@@ -103,15 +107,23 @@ void  player::release()
 
 void  player::update()
 {
-	cout << playerEnergy << "\t" << totalEnergyDmg << "\t" << MAXENERGY << endl;
+	//cout << playerCombatLevel << "\t" << combatExp << "\t" << playerFarmingLevel << "\t" << farmingExp << endl;
 	//cout << _inventory->getvInven()[1].energyRecover << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
-		playerEnergy -= 2;
-		totalEnergyDmg += 2;
+		playerEnergy = MAXENERGY;
+		playerHp = MAXHP;
 	}
-	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * totalHpDmg));
-	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  totalEnergyDmg));
+	if (INPUT->GetKeyDown(VK_F4))
+	{
+		date = 12;
+	}
+	if (INPUT->GetKeyDown(VK_F5))
+	{
+		date = 17;
+	}
+	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
+	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
 	
 	levelUp();
 	//if (!isShowInventory)
@@ -125,7 +137,7 @@ void  player::update()
 	//		}
 	//	}
 	//}
-	cout << _pState << endl;
+
 	if (!isOpenPlayerStorageCover)
 	{
 		if (!isShowInventory && !isShowSleepingOption)
@@ -150,6 +162,7 @@ void  player::update()
 				_inventory->setInvenToryMove(false);
 				_inventory->setInvenPage(false);
 				_inventory->setCraftPage(false);
+				_inventory->setIsWarning(false);
 			}
 		}
 	}
@@ -169,12 +182,9 @@ void  player::update()
 
 	//플레이어 현재 맵 체크
 	setCurrentMap();
-
+	
 	//가축 움직임
-	if (currentMap == MAP_BARN)
-	{
-		stock->update();
-	}
+	stock->update();
 
 	currentX = centerX / 16;
 	currentY = (centerY + 8) / 16;
@@ -1282,7 +1292,7 @@ void player::setCurrentMap()
 void player::countTime()
 {
 	timeCount++;
-	if (timeCount % 120 == 0)
+	if (timeCount % 30 == 0)
 	{
 		minute++;
 		if (hour > 17 || hour < 4)
@@ -1308,6 +1318,16 @@ void player::countTime()
 		//date += 1;
 		day = (DAYOFWEEK)(day + 1);
 		hour = 0;
+	}
+	if (hour == 2)
+	{
+		this->savePlayerInven();
+		this->savePlayerStock();
+		this->savePlayerData();
+		this->saveMap();
+		this->saveBox();
+		SWITCHMANAGER->changeScene("집안화면");
+		SWITCHMANAGER->startFade(855.0f, 865.0f);
 	}
 	if (date > 30)
 	{
@@ -1338,6 +1358,7 @@ void player::resetClock()
 void player::resetPlayer()
 {
 	this->init();
+	setMaxExp();
 	/*_tile[TILEY][TILEX] = {};
 	currentMap = MAP_HOUSE;
 	timeCount = 0;
@@ -1620,10 +1641,14 @@ void player::savePlayerStock()
 	tagStock tempStock[5];
 	memset(tempStock, 0, sizeof(tempStock));
 
-	for (int i = 0; i < stock->getStock().size() - 1; i++)
+	if (!stock->getStock().empty())
 	{
-		tempStock[i] = temp[i];
+		for (int i = 0; i < stock->getStock().size(); i++)
+		{
+			tempStock[i] = temp[i];
+		}
 	}
+	
 
 	HANDLE file;
 	DWORD write;
@@ -1640,119 +1665,19 @@ void player::saveMap()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) continue;
+			//작물 자라게 하기
+			makeCropGrow(i, j);
 			
-			if (!_tile[i][j].isFullyGrown)
-			{
-				if ((_tile[i][j].seedType == SEED_TOMATO
-					|| _tile[i][j].seedType == SEED_HOTPEPPER
-					|| _tile[i][j].seedType == SEED_GRAPE
-					||_tile[i][j].seedType == SEED_GREENBEAN
-					|| _tile[i][j].seedType == SEED_BLUEBERRY
-					|| _tile[i][j].seedType == SEED_CORN
-					|| _tile[i][j].seedType == SEED_HOPS)
-					&& _tile[i][j].objFrameX == 7)
-				{
-					if (_tile[i][j].isWet)
-					{
-						_tile[i][j].grownLevel += 1;
-						_tile[i][j].objFrameX -= 1;
-						_tile[i - 1][j].ovlFrameX -= 1;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_PINETREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 6;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 7;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 6;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 8;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_MAPLETREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 3;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 4;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 3;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 5;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else if (_tile[i][j].seedType == SEED_OAKTREE)
-				{
-					_tile[i][j].grownLevel += 1;
-					if (_tile[i][j].grownLevel == 1)
-					{
-						_tile[i][j].tree.bodyIndexX = 0;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 2)
-					{
-						_tile[i][j].tree.bodyIndexX = 1;
-						_tile[i][j].tree.bodyIndexY = 8;
-					}
-					else if (_tile[i][j].grownLevel == 3)
-					{
-						_tile[i][j].tree.bodyIndexX = 0;
-						_tile[i][j].tree.bodyIndexY = 7;
-					}
-					else if (_tile[i][j].grownLevel == 4)
-					{
-						_tile[i][j].tree.bodyIndexX = 2;
-						_tile[i][j].tree.bodyIndexY = 9;
-					}
-				}
-				else
-				{
-					if (_tile[i][j].isWet)
-					{
-						_tile[i][j].grownLevel += 1;
-						_tile[i][j].objFrameX += 1;
-						_tile[i - 1][j].ovlFrameX += 1;
-					}
-				}
-				_tile[i][j].isWet = false;
+			//다자랐는지 확인
+			_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
 
-				//다자랐는지 확인
-				_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
-			}
+			_tile[i][j].isWet = false;
 		}
 	}
 
 	HANDLE file;
 	DWORD write;
-	TCHAR saveMapName[MAX_PATH] = "save/tomato.map";
-	file = CreateFile(saveMapName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	file = CreateFile("save/tomato.map", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
 }
@@ -1780,6 +1705,276 @@ void player::saveBox()
 void player::saveTile(int i, int j, tagTile tile)
 {
 	_tile[i][j] = tile;
+}
+
+void player::makeCropGrow(int i, int j)
+{
+	if (_tile[i][j].obj != OBJ_SEED && _tile[i][j].objType != OTY_TREE) { return; }
+	else
+	{
+		if (!_tile[i][j].isFullyGrown)
+		{
+			if ((_tile[i][j].seedType == SEED_TOMATO
+				|| _tile[i][j].seedType == SEED_HOTPEPPER
+				|| _tile[i][j].seedType == SEED_GRAPE
+				|| _tile[i][j].seedType == SEED_GREENBEAN
+				|| _tile[i][j].seedType == SEED_BLUEBERRY
+				|| _tile[i][j].seedType == SEED_CORN
+				|| _tile[i][j].seedType == SEED_HOPS)
+				&& _tile[i][j].objFrameX == 7)
+			{
+				if (_tile[i][j].isWet)
+				{
+					_tile[i][j].grownLevel += 1;
+					_tile[i][j].objFrameX -= 1;
+					_tile[i - 1][j].ovlFrameX -= 1;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_PINETREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 6;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 7;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 6;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 8;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_MAPLETREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 3;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 4;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 3;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 5;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else if (_tile[i][j].seedType == SEED_OAKTREE)
+			{
+				_tile[i][j].grownLevel += 1;
+				if (_tile[i][j].grownLevel == 1)
+				{
+					_tile[i][j].tree.bodyIndexX = 0;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 2)
+				{
+					_tile[i][j].tree.bodyIndexX = 1;
+					_tile[i][j].tree.bodyIndexY = 8;
+				}
+				else if (_tile[i][j].grownLevel == 3)
+				{
+					_tile[i][j].tree.bodyIndexX = 0;
+					_tile[i][j].tree.bodyIndexY = 7;
+				}
+				else if (_tile[i][j].grownLevel == 4)
+				{
+					_tile[i][j].tree.bodyIndexX = 2;
+					_tile[i][j].tree.bodyIndexY = 9;
+				}
+			}
+			else
+			{
+				if (_tile[i][j].isWet)
+				{
+					switch (_tile[i][j].seedType)
+					{
+					case SEED_TOMATO:
+						_tile[i][j].grownLevel += 3;
+						_tile[i][j].objFrameX += 3;
+						_tile[i - 1][j].ovlFrameX += 3;
+						break;
+					case SEED_HOTPEPPER:
+						_tile[i][j].grownLevel += 3;
+						_tile[i][j].objFrameX += 3;
+						_tile[i - 1][j].ovlFrameX += 3;
+						break;
+					case SEED_RADISH:
+						if (_tile[i][j].grownLevel == 3)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 3;
+							_tile[i][j].objFrameX += 3;
+							_tile[i - 1][j].ovlFrameX += 3;
+						}
+						break;
+					case SEED_STARFRUIT:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_POPPY:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_SUNFLOWER:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_GRAPE:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_GREENBEAN:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_MELON:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_BLUEBERRY:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_WHEAT:
+							_tile[i][j].grownLevel += 5;
+							_tile[i][j].objFrameX += 5;
+							_tile[i - 1][j].ovlFrameX += 5;
+						break;
+					case SEED_REDCABBAGE:
+						_tile[i][j].grownLevel += 2;
+						_tile[i][j].objFrameX += 2;
+						_tile[i - 1][j].ovlFrameX += 2;
+						break;
+					case SEED_CORN:
+						if (_tile[i][j].grownLevel == 0)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_SUMMERSPANGLE:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					case SEED_HOPS:
+						if (_tile[i][j].grownLevel == 0 || _tile[i][j].grownLevel == 2)
+						{
+							_tile[i][j].grownLevel += 2;
+							_tile[i][j].objFrameX += 2;
+							_tile[i - 1][j].ovlFrameX += 2;
+						}
+						else
+						{
+							_tile[i][j].grownLevel += 1;
+							_tile[i][j].objFrameX += 1;
+							_tile[i - 1][j].ovlFrameX += 1;
+						}
+						break;
+					default:
+						_tile[i][j].grownLevel += 1;
+						_tile[i][j].objFrameX += 1;
+						_tile[i - 1][j].ovlFrameX += 1;
+						break;
+					}
+				}
+			}
+			_tile[i][j].isWet = false;
+		}
+	}
 }
 
 void player::clockRender(HDC hdc)
@@ -1841,10 +2036,10 @@ void player::clockRender(HDC hdc)
 		}
 	}
 
-	sprintf(yearStr, "%d년", year);
+	//sprintf(yearStr, "%d년", year);
 	sprintf(dateStr, "%d일", date);
-	textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
-	textOut(hdc, 1120, 34, dateStr, RGB(0, 0, 0));
+	//textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
+	textOut(hdc, 1090, 34, dateStr, RGB(0, 0, 0));
 }
 
 void player::moneyRender(HDC hdc)
@@ -1908,6 +2103,7 @@ void player::limitEnergy()
 	}
 	else if (playerEnergy <= 0)
 	{
+		inGameLoadCount = 0;
 		savePlayerData();
 		savePlayerInven();
 		savePlayerStock();
@@ -1931,42 +2127,52 @@ void player::setMaxExp()
 	case 1:
 		MaxFarmingExp = 100;
 		MAXENERGY = 100;
+		dropItemNum = 1;
 		break;
 	case 2:
 		MaxFarmingExp = 300;
 		MAXENERGY = 110;
+		dropItemNum = 1;
 		break;		  
 	case 3:			  
 		MaxFarmingExp = 500;
 		MAXENERGY = 120;
+		dropItemNum = 1;
 		break;		  
 	case 4:			  
 		MaxFarmingExp = 700;
 		MAXENERGY = 130;
+		dropItemNum = 1;
 		break;		  
 	case 5:			  
 		MaxFarmingExp = 900;
 		MAXENERGY = 140;
+		dropItemNum = 2;
 		break;		  
 	case 6:			  
 		MaxFarmingExp = 1100;
 		MAXENERGY = 150;
+		dropItemNum = 2;
 		break;		  
 	case 7:			  
 		MaxFarmingExp = 1300;
 		MAXENERGY = 160;
+		dropItemNum = 2;
 		break;		  
 	case 8:			  
 		MaxFarmingExp = 1500;
 		MAXENERGY = 170;
+		dropItemNum = 2;
 		break;		  
 	case 9:			  
 		MaxFarmingExp = 1700;
 		MAXENERGY = 180;
+		dropItemNum = 2;
 		break;		  
 	case 10:		  
 		MaxFarmingExp = 1900;
 		MAXENERGY = 190;
+		dropItemNum = 3;
 		break;
 	}
 	switch (playerCombatLevel)
@@ -1974,42 +2180,52 @@ void player::setMaxExp()
 	case 1:
 		MaxCombatExp = 100;
 		MAXHP = 100;
+		attackDmg = 10;
 		break;
 	case 2:
 		MaxCombatExp = 300;
 		MAXHP = 110;
+		attackDmg = 11;
 		break;
 	case 3:
 		MaxCombatExp = 500;
 		MAXHP = 120;
+		attackDmg = 12;
 		break;
 	case 4:
 		MaxCombatExp = 700;
 		MAXHP = 130;
+		attackDmg = 13;
 		break;
 	case 5:
 		MaxCombatExp = 900;
 		MAXHP = 140;
+		attackDmg = 14;
 		break;
 	case 6:
 		MaxCombatExp = 1100;
 		MAXHP = 150;
+		attackDmg = 15;
 		break;
 	case 7:
 		MaxCombatExp = 1300;
 		MAXHP = 160;
+		attackDmg = 16;
 		break;
 	case 8:
 		MaxCombatExp = 1500;
 		MAXHP = 170;
+		attackDmg = 17;
 		break;
 	case 9:
 		MaxCombatExp = 1700;
 		MAXHP = 180;
+		attackDmg = 18;
 		break;
 	case 10:
 		MaxCombatExp = 1900;
 		MAXHP = 190;
+		attackDmg = 19;
 		break;
 	}
 }

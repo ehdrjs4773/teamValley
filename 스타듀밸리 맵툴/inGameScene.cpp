@@ -73,6 +73,15 @@ HRESULT inGameScene::init()
 		}
 	}
 
+	if (PLAYER->getDate() == 12)
+	{
+		setEventGround();
+	}
+	else if (PLAYER->getDate() == 17)
+	{
+		resetOriginalGround();
+	}
+
 	return S_OK;
 }
 
@@ -82,6 +91,8 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
+	cout << MouseIndexX << "\t" << MouseIndexY << endl;
+
 	loadCount = PLAYER->getLoadCount();
 	isSprinkled = PLAYER->getIsSprinkled();
 	sprinklerWork();
@@ -100,7 +111,7 @@ void inGameScene::update()
 
 	PLAYER->update();
 
-	skillSelect();
+	//skillSelect();
 
 	checkPlayerTile();
 
@@ -136,21 +147,6 @@ void inGameScene::update()
 	if (INPUT->GetKeyDown(VK_F3))
 	{
 		changeSeason(SPRING);
-		changeGrass();
-	}
-	if (INPUT->GetKeyDown(VK_F4))
-	{
-		changeSeason(SUMMER);
-		changeGrass();
-	}
-	if (INPUT->GetKeyDown(VK_F5))
-	{
-		changeSeason(AUTUMN);
-		changeGrass();
-	}
-	if (INPUT->GetKeyDown(VK_F6))
-	{
-		changeSeason(WINTER);
 		changeGrass();
 	}
 	if (INPUT->GetKeyDown(VK_F7))
@@ -191,6 +187,10 @@ void inGameScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+	if (isShowCalender)
+	{
+		IMAGEMANAGER->render("달력", getMemDC(), WINSIZEX / 2 - 300, WINSIZEY / 2 - 200);
+	}
 }
 
 void inGameScene::load()
@@ -203,7 +203,7 @@ void inGameScene::load()
 	if (PLAYER->getIsNewGame())
 	{
 		//sprintf(saveName, "save/newGame.map");
-		file = CreateFile("save/newGame.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		file = CreateFile("save/newGame1.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		PLAYER->setIsNewGame(false);
 	}
 	else
@@ -549,7 +549,7 @@ void inGameScene::renderTree(int i, int j)
 
 void inGameScene::playerMove()
 {
-	if (!PLAYER->getInventoryMove())
+	if (!PLAYER->getInventoryMove() && !isShowCalender)
 	{
 		if (_tile[currentIndexY][currentIndexX].terrain == TR_GROUND)
 		{
@@ -898,8 +898,14 @@ void inGameScene::playerInteraction()
 				//과일 먹기
 				if (PLAYER->getCurrentInven()->item_kind == ITEM_FRUIT)
 				{
-					PLAYER->setDirection(DOWN);
-					eatFruit();
+					if (PLAYER->getCurrentInven()->seedKind != SEED_HOPS
+						&& PLAYER->getCurrentInven()->seedKind != SEED_WHEAT
+						&& PLAYER->getCurrentInven()->seedKind != SEED_POPPY
+						&& PLAYER->getCurrentInven()->seedKind != SEED_SUMMERSPANGLE)
+					{
+						PLAYER->setDirection(DOWN);
+						eatFruit();
+					}
 				}
 
 				//제작아이템 설치
@@ -928,9 +934,15 @@ void inGameScene::playerInteraction()
 					fillWater();
 				}
 			}
-			//스프링클러 설치
 
+			//스프링클러 설치
 			setSprinkler();	
+
+			//달력창 띄우기
+			if (MouseIndexX == 38 && (MouseIndexY == 10 || MouseIndexY == 11))
+			{
+				isShowCalender = true;
+			}
 
 			if (((MouseIndexX == currentIndexX + 1 || MouseIndexX == currentIndexX - 1) && MouseIndexY == currentIndexY)
 				|| (MouseIndexX == currentIndexX && (MouseIndexY == currentIndexY + 1 || MouseIndexY == currentIndexY - 1)) //상하좌우 4타일일때
@@ -953,6 +965,13 @@ void inGameScene::playerInteraction()
 
 					PLAYER->getInventory()->getInventoryCraft()->blastFurnace();
 				}
+			}
+		}
+		if (isShowCalender)
+		{
+			if (INPUT->GetKeyDown(VK_ESCAPE))
+			{
+				isShowCalender = false;
 			}
 		}
 	}
@@ -1583,7 +1602,28 @@ void inGameScene::harvest()
 	if (_tile[MouseIndexY][MouseIndexX].isFullyGrown)
 	{
 		SOUNDMANAGER->play("harvest", 0.2f);
-		dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
+
+		//플레이어 스킬 만큼 개수 늘어남
+		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_BLUEBERRY)
+		{
+			for (int i = 0; i < 3 * PLAYER->getDropItemNum(); i++)
+			{
+				dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < PLAYER->getDropItemNum(); i++)
+			{
+				dropFruit(_tile[MouseIndexY][MouseIndexX], ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType);
+			}
+		}
+
+		//경험치 상승
+		if (_tile[MouseIndexY][MouseIndexX].seedType != SEED_NONE)
+		{
+			PLAYER->setFarmingExp(ITEMMANAGER->findDropItem(ITEM_FRUIT, _tile[MouseIndexY][MouseIndexX].seedType).exp);
+		}
 		if (_tile[MouseIndexY][MouseIndexX].seedType == SEED_TOMATO
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_HOTPEPPER
 			|| _tile[MouseIndexY][MouseIndexX].seedType == SEED_GRAPE
@@ -1713,6 +1753,10 @@ void inGameScene::sprinklerWork()
 
 void inGameScene::eatFruit()
 {
+	if (!SOUNDMANAGER->isPlaySound("eat"))
+	{
+		SOUNDMANAGER->play("eat");
+	}
 	PLAYER->recoverHp(PLAYER->getCurrentInven()->hpRecover);
 	PLAYER->recoverEnergy(PLAYER->getCurrentInven()->energyRecover);
 
@@ -1736,7 +1780,7 @@ void inGameScene::makeCropGrow()
 					|| _tile[i][j].seedType == SEED_BLUEBERRY
 					|| _tile[i][j].seedType == SEED_CORN
 					|| _tile[i][j].seedType == SEED_HOPS)
-					&& (_tile[i][j].objFrameX == 7 || _tile[i][j].objFrameX == 15))
+					&& _tile[i][j].objFrameX == 7)
 				{
 					_tile[i][j].grownLevel += 1;
 					_tile[i][j].objFrameX -= 1;
@@ -2606,6 +2650,145 @@ void inGameScene::changeGrass()
 		}
 	}
 	
+}
+
+void inGameScene::setEventGround()
+{
+	for (int i = 15; i < 26; i++)
+	{
+		for (int j = 2; j < 23; j++)
+		{
+			tileSave[i][j] = _tile[i][j];
+			_tile[i][j].obj = OBJ_NONE;
+			_tile[i][j].objType = OTY_NONE;
+			_tile[i][j].grownLevel = 0;
+			_tile[i][j].isFullyGrown = false;
+			_tile[i][j].objOver = OVR_NONE;
+			_tile[i][j].seedType = SEED_NONE;
+			tagTree temp;
+			memset(&temp, 0, sizeof(tagTree));
+			_tile[i][j].tree = temp;
+
+			if (j == 2 && i == 15)
+			{
+				_tile[i][j].terrainFrameX = 0;
+				_tile[i][j].terrainFrameY = 2;
+			}
+			else if ((j == 3 && i == 15) || (j == 4 && i == 15))
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 2;
+			}
+			else if (i == 15)
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
+			}
+			else if (j == 5 && i == 15)
+			{
+				_tile[i][j].terrainFrameX = 5;
+				_tile[i][j].terrainFrameY = 0;
+			}
+			else if (j == 2 && i == 25)
+			{
+				_tile[i][j].terrainFrameX = 0;
+				_tile[i][j].terrainFrameY = 4;
+			}
+			else if (j == 2)
+			{
+				_tile[i][j].terrainFrameX = 0;
+				_tile[i][j].terrainFrameY = 3;
+			}
+			else if ((j >= 3 && j < 10) && i == 25)
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 4;
+			}
+			else if (j == 10 && i == 25)
+			{
+				_tile[i][j].terrainFrameX = 3;
+				_tile[i][j].terrainFrameY = 0;
+			}
+			else if (j == 16 && i == 25)
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
+			}
+			else if (j >= 17 && j <= 22 && i == 25)
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 4;
+			}
+			else
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
+			}
+
+			terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+		}
+	}
+	for (int i = 26; i < 35; i++)
+	{
+		for (int j = 10; j < 17; j++)
+		{
+			tileSave[i][j] = _tile[i][j];
+			_tile[i][j].obj = OBJ_NONE;
+			_tile[i][j].objType = OTY_NONE;
+			_tile[i][j].grownLevel = 0;
+			_tile[i][j].isFullyGrown = false;
+			_tile[i][j].objOver = OVR_NONE;
+			_tile[i][j].seedType = SEED_NONE;
+			tagTree temp;
+			memset(&temp, 0, sizeof(tagTree));
+			_tile[i][j].tree = temp;
+			if (j == 10 && i == 34)
+			{
+				_tile[i][j].terrainFrameX = 2;
+				_tile[i][j].terrainFrameY = 2;
+			}
+			else if (j == 10)
+			{
+				_tile[i][j].terrainFrameX = 0;
+				_tile[i][j].terrainFrameY = 3;
+			}
+			else if (j == 16 && i == 34)
+			{
+				_tile[i][j].terrainFrameX = 4;
+				_tile[i][j].terrainFrameY = 0;
+			}
+			else if (j == 16)
+			{
+				_tile[i][j].terrainFrameX = 3;
+				_tile[i][j].terrainFrameY = 3;
+			}
+			else
+			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
+			}
+
+			terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
+		}
+	}
+}
+
+void inGameScene::resetOriginalGround()
+{
+	for (int i = 15; i < 26; i++)
+	{
+		for (int j = 2; j < 23; j++)
+		{
+			_tile[i][j] = tileSave[i][j];
+		}
+	}
+	for (int i = 26; i < 35; i++)
+	{
+		for (int j = 10; j < 17; j++)
+		{
+			_tile[i][j] = tileSave[i][j];
+		}
+	}
 }
 
 void inGameScene::setCurrentSlotNumber(int mouseWheel)

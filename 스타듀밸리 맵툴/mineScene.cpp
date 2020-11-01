@@ -21,7 +21,6 @@ HRESULT mineScene::init()
 	CAMERAMANAGER->init(TILEX * TILESIZE, TILEY * TILESIZE, 30 * 16, 15 * 16);
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
-	monsterCount = RANDOM->range(3, 8);
 	loadMap();
 	checkCurrentTile();
 
@@ -53,6 +52,7 @@ HRESULT mineScene::init()
 
 	this->update();
 
+
 	return S_OK;
 }
 
@@ -65,61 +65,118 @@ void mineScene::update()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	//몬스터 스킬 충돌
-	if (!EFFECTMANAGER->getvEffect().empty())
+	if (!PLAYER->getIsShowInventory())
 	{
-		for (int i = 0; i < EFFECTMANAGER->getvEffect().size(); i++)
+		//몬스터 스킬 충돌
+		if (!EFFECTMANAGER->getvEffect().empty())
 		{
-			for (auto iter : vMonster)
+			for (int i = 0; i < EFFECTMANAGER->getvEffect().size(); i++)
 			{
-				RECT temp;
-				if (IntersectRect(&temp, &iter->getRc(), &EFFECTMANAGER->getvEffect()[i].rc))
+				for (auto iter : vMonster)
 				{
-					if (!(iter->getDamage()))
+					RECT temp;
+					if (IntersectRect(&temp, &iter->getRc(), &EFFECTMANAGER->getvEffect()[i].rc))
 					{
-						iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
-						iter->setDamage(true);
+						if (!(iter->getDamage()))
+						{
+							if (iter->getMonsterType() == MTYPE_SERPENT)
+							{
+								if (!SOUNDMANAGER->isPlaySound("serpentHit"))
+								{
+									SOUNDMANAGER->play("serpentHit");
+								}
+							}
+							iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
+							iter->setDamage(true);
+						}
 					}
 				}
 			}
 		}
-	}
 
-	//몬스터 죽음
-	for (int i = 0; i < vMonster.size(); i++)
-	{
-		if (vMonster[i]->getisDead())
+		//몬스터 죽음
+		for (int i = 0; i < vMonster.size(); i++)
 		{
-			SOUNDMANAGER->play("monsterdead", 0.2f);
-			vMonster.erase(vMonster.begin() + i);
+			if (vMonster[i]->getisDead())
+			{
+				if (vMonster[i]->getMonsterType() == MTYPE_SERPENT)
+				{
+					SOUNDMANAGER->play("serpentDead", 0.4f);
+				}
+				else
+				{
+					SOUNDMANAGER->play("monsterDead", 0.4f);
+				}
+				
+				//죽으면 플레이어 경험치 획득
+				switch (vMonster[i]->getMonsterType())
+				{
+				case MTYPE_NONE:
+					break;
+				case MTYPE_SLIME:
+					PLAYER->setCombatExp(20);
+					dropItem(_tile[vMonster[i]->getCurrentY()][vMonster[i]->getCurrentX()], ITEM_MATERIAL, 0);
+					break;
+				case MTYPE_BUG:
+					PLAYER->setCombatExp(50);
+					dropItem(_tile[vMonster[i]->getCurrentY()][vMonster[i]->getCurrentX()], ITEM_MATERIAL, 2);
+					break;
+				case MTYPE_ROCKCRAB:
+					PLAYER->setCombatExp(130);
+					dropItem(_tile[vMonster[i]->getCurrentY()][vMonster[i]->getCurrentX()], ITEM_MATERIAL, 1);
+					break;
+				case MTYPE_SERPENT:
+					PLAYER->setCombatExp(190);
+					dropItem(_tile[vMonster[i]->getCurrentY()][vMonster[i]->getCurrentX()], ITEM_MATERIAL, 3);
+					break;
+				}
+				vMonster.erase(vMonster.begin() + i);
+			}
 		}
-	}
 
-	if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
-	else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
+		if (currentFloor > 0 && currentFloor <= 5) { str = "광산 노말"; objStr = "광산오브젝트 노말"; }
+		else if (currentFloor > 5 && currentFloor <= 10) { str = "광산 노말다크"; objStr = "광산오브젝트 노말다크"; }
 
-	if (!SOUNDMANAGER->isPlaySound("bugCave"))
-	{
-		SOUNDMANAGER->play("bugCave", 0.05f);
-	}
-	
-	if (INPUT->GetKeyDown(VK_F1))
-	{
-		if (isShowRect)
+		if (!SOUNDMANAGER->isPlaySound("bugCave"))
 		{
-			isShowRect = false;
+			SOUNDMANAGER->play("bugCave", 0.05f);
 		}
-		else
+
+		if (INPUT->GetKeyDown(VK_F1))
 		{
-			isShowRect = true;
+			if (isShowRect)
+			{
+				isShowRect = false;
+			}
+			else
+			{
+				isShowRect = true;
+			}
 		}
-	}
-	if (INPUT->GetKeyDown(VK_F2))
-	{
-		setRandomObstacles();
+		if (INPUT->GetKeyDown(VK_F2))
+		{
+			setRandomObstacles();
+		}
+
+		playerMonsterCollision();
+
+		setCurrentSlotNumber(_mouseWheel);
+
+		if (PLAYER->getState() == STAND || PLAYER->getState() == RUN || PLAYER->getState() == CARRY || PLAYER->getState() == CARRYSTAND)
+		{
+			this->playerMove();
+			CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
+		}
+		this->ejectItem();
+
+		for (auto iter : vMonster)
+		{
+			iter->update();
+		}
+		wallMonsterColliison();
 	}
 
-	checkCurrentTile(); 
+	checkCurrentTile();
 	PLAYER->update();
 
 	skillSelect();
@@ -127,23 +184,7 @@ void mineScene::update()
 	playerInteraction();
 
 	PLAYER->playerAnimation();
-	
-	playerMonsterCollision();
 
-	setCurrentSlotNumber(_mouseWheel);
-
-	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN || PLAYER->getState() == CARRY || PLAYER->getState() == CARRYSTAND)
-	{
-		this->playerMove();
-		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
-	}
-	this->ejectItem();
-
-	for (auto iter : vMonster)
-	{
-		iter->update();
-	}
-	wallMonsterColliison();
 }
 
 void mineScene::render()
@@ -175,6 +216,7 @@ void mineScene::savePlayer()
 	PLAYER->savePlayerData();
 	PLAYER->saveMap();
 	PLAYER->saveBox();
+	PLAYER->setLoadCount(0);
 }
 
 void mineScene::setCurrentSlotNumber(int mouseWheel)
@@ -568,6 +610,19 @@ void mineScene::playerInteraction()
 
 			//풀 베기 
 			cutGrass();
+
+			//과일 먹기
+			if (PLAYER->getCurrentInven()->item_kind == ITEM_FRUIT)
+			{
+				if (PLAYER->getCurrentInven()->seedKind != SEED_HOPS
+					&& PLAYER->getCurrentInven()->seedKind != SEED_WHEAT
+					&& PLAYER->getCurrentInven()->seedKind != SEED_POPPY
+					&& PLAYER->getCurrentInven()->seedKind != SEED_SUMMERSPANGLE)
+				{
+					PLAYER->setDirection(DOWN);
+					eatFruit();
+				}
+			}
 		}
 	}
 	if (INPUT->GetKeyDown(VK_RBUTTON))
@@ -607,10 +662,13 @@ void mineScene::breakStone()
 				}
 				if (RANDOM->range(20) == 0)
 				{
-					_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE;
+					if (currentFloor < 9)
+					{
+						_tile[mouseIndexY][mouseIndexX].obj = OBJ_INDESTRUCTIBLE;
 						_tile[mouseIndexY][mouseIndexX].objType = OTY_MINELADDER;
 						_tile[mouseIndexY][mouseIndexX].objFrameX = 6;
 						_tile[mouseIndexY][mouseIndexX].objFrameY = 12;
+					}
 				}
 				else
 				{
@@ -624,7 +682,7 @@ void mineScene::breakStone()
 			}
 			else if (_tile[mouseIndexY][mouseIndexX].objType == OTY_ORE)
 			{
-				if (PLAYER->getEnergy() > -20)
+				if (PLAYER->getEnergy() > 0)
 				{
 					PLAYER->setEnergy(PLAYER->getDamage());
 				}
@@ -788,6 +846,19 @@ void mineScene::useElevator()
 	}
 }
 
+void mineScene::eatFruit()
+{
+	if (!SOUNDMANAGER->isPlaySound("eat"))
+	{
+		SOUNDMANAGER->play("eat");
+	}
+	PLAYER->recoverHp(PLAYER->getCurrentInven()->hpRecover);
+	PLAYER->recoverEnergy(PLAYER->getCurrentInven()->energyRecover);
+
+	PLAYER->setInvenItemAmount(PLAYER->getCurrentSlotNumber(),
+		PLAYER->getCurrentInven()->amount - 1);
+}
+
 void mineScene::loadMap()
 {
 	HANDLE file;
@@ -840,6 +911,10 @@ void mineScene::getItem(tagItem item)
 				else if (item.item_kind == ITEM_ORE)
 				{
 					temp.item_image = IMAGEMANAGER->findImage("광물아이템");
+				}
+				else if (item.item_kind == ITEM_MATERIAL)
+				{
+					temp.item_image = IMAGEMANAGER->findImage("몬스터소재");
 				}
 				PLAYER->setInvenItem(i, temp);
 				break;
@@ -914,6 +989,10 @@ void mineScene::dropItem(tagTile tile, ITEM itemKind, int indexX)
 	{
 		temp.item.item_image = IMAGEMANAGER->findImage("광물");
 	}
+	else if (itemKind == ITEM_MATERIAL)
+	{
+		temp.item.item_image = IMAGEMANAGER->findImage("몬스터소재small");
+	}
 	//추후 추가
 	temp.centerX = (float)tile.rc.left + (tile.rc.right - tile.rc.left);
 	temp.origCenterX = temp.centerX;
@@ -939,111 +1018,205 @@ void mineScene::skillSelect()
 
 void mineScene::setMonsterList()
 {
-	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 10, 5, .8f);
+	monster* presetSlime = new monster(MTYPE_SLIME, 0, 0, 30, 5, .8f);
 	presetSlime->init();
 	monsterList.push_back(presetSlime);
 
-	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 5, 5, .4f);
+	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 70, 7, .4f);
 	presetBug->init();
 	monsterList.push_back(presetBug);
 
-	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 8, 5, .4f);
+	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 150, 9, .4f);
 	presetRockCrab->init();
 	monsterList.push_back(presetRockCrab);
 
-	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 20, 15, .4f);
+	monster* presetSerpent = new monster(MTYPE_SERPENT, 0, 0, 220, 10, .6f);
 	presetSerpent->init();
 	monsterList.push_back(presetSerpent);
 }
 
 void mineScene::spawnMonster()
 {
-	int idxX, idxY;
-	float x, y;
+	//층수에 따라 몬스터 개수 뽑기
+	switch (currentFloor)
+	{
+	case 1:
+		monsterCount = RANDOM->range(2, 4);
+		break;
+	case 2:
+		monsterCount = RANDOM->range(2, 5);
+		break;
+	case 3:
+		monsterCount = RANDOM->range(3, 5);
+		break;
+	case 4:
+		monsterCount = RANDOM->range(3, 6);
+		break;
+	case 5:
+		monsterCount = RANDOM->range(3, 6);
+		break;
+	case 6:
+		monsterCount = RANDOM->range(3, 7);
+		break;
+	case 7:
+		monsterCount = RANDOM->range(4, 7);
+		break;
+	case 8:
+		monsterCount = RANDOM->range(4, 8);
+		break;
+	case 9:
+		monsterCount = RANDOM->range(4, 8);
+		break;
+	}
 	while (vMonster.size() < monsterCount)
 	{
 		int rand = RANDOM->range(10);
 		
-		if (rand >= 0 && rand < 4)
+		if (currentFloor == 1)								//1층
 		{
-		ONE:
-			idxX = RANDOM->range(0, 50);
-			idxY = RANDOM->range(0, 50);
-
-			if (_tile[idxY][idxX].obj == OBJ_NONE)
+			//슬라임만 생성
+			spawnSlime();
+		}
+		else if (currentFloor > 1 && currentFloor < 4)		//2 ~ 3 층
+		{
+			//70% 슬라임 30% 바위게
+			if (rand  < 7)
 			{
-				monster* temp = new monster(*monsterList[0]);
-				temp->setCenterX((float)idxX * 16.0f - 8.0f);
-				temp->setCenterY((float)idxY * 16.0f - 8.0f);
-				temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
-				temp->setSpeed(0.8f);
-				vMonster.push_back(temp);
+				spawnSlime();
 			}
 			else
 			{
-				goto ONE;
+				spawnRockCrab();
 			}
 		}
-		else if (rand >= 4 && rand < 7)
+		else if (currentFloor >= 4 && currentFloor < 7)		//4 ~ 6층
 		{
-		TWO:
-			idxX = RANDOM->range(0, 50);
-			idxY = RANDOM->range(0, 50);
-
-			if (_tile[idxY][idxX].obj == OBJ_NONE)
+			//40% 슬라임 30% 바위게 30% 벌레
+			if (rand < 4)
 			{
-				monster* temp = new monster(*monsterList[1]);
-				temp->setCenterX((float)idxX * 16.0f - 8.0f);
-				temp->setCenterY((float)idxY * 16.0f - 8.0f);
-				temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
-				temp->setSpeed(0.8f);
-				vMonster.push_back(temp);
+				spawnSlime();
+			}
+			else if (rand >= 4 && rand < 7)
+			{
+				spawnRockCrab();
 			}
 			else
 			{
-				goto TWO;
+				spawnBug();
 			}
 		}
-		else if (rand >= 7 && rand < 10)
+		else if (currentFloor >= 7 && currentFloor < 10)	//7 ~ 9층
 		{
-		THREE:
-			idxX = RANDOM->range(0, 50);
-			idxY = RANDOM->range(0, 50);
-
-			if (_tile[idxY][idxX].obj == OBJ_NONE)
+			//10% 슬라임 30% 바위게 30% 벌레 30% 뱀
+			if (rand < 1)
 			{
-				monster* temp = new monster(*monsterList[2]);
-				temp->setCenterX((float)idxX * 16.0f - 8.0f);
-				temp->setCenterY((float)idxY * 16.0f - 8.0f);
-				temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
-				temp->setSpeed(0.8f);
-				vMonster.push_back(temp);
+				spawnSlime();
+			}
+			else if (rand >= 1 && rand < 4)
+			{
+				spawnRockCrab();
+			}
+			else if (rand >= 4 && rand < 7)
+			{
+				spawnBug();
 			}
 			else
 			{
-				goto THREE;
+				spawnSerpent();
 			}
 		}
-		else
-		{
-		FOUR:
-			idxX = RANDOM->range(0, 50);
-			idxY = RANDOM->range(0, 50);
+	}
+}
 
-			if (_tile[idxY][idxX].obj == OBJ_NONE)
-			{
-				monster* temp = new monster(*monsterList[3]);
-				temp->setCenterX((float)idxX * 16.0f - 8.0f);
-				temp->setCenterY((float)idxY * 16.0f - 8.0f);
-				temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
-				temp->setSpeed(2.0f);
-				vMonster.push_back(temp);
-			}
-			else
-			{
-				goto FOUR;
-			}
-		}
+void mineScene::spawnSlime()
+{
+	int idxX, idxY;
+	float x, y;
+ONE:
+	idxX = RANDOM->range(0, 50);
+	idxY = RANDOM->range(0, 50);
+
+	if (_tile[idxY][idxX].obj == OBJ_NONE)
+	{
+		monster* temp = new monster(*monsterList[0]);
+		temp->setCenterX((float)idxX * 16.0f - 8.0f);
+		temp->setCenterY((float)idxY * 16.0f - 8.0f);
+		temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
+		temp->setSpeed(0.8f);
+		vMonster.push_back(temp);
+	}
+	else
+	{
+		goto ONE;
+	}
+}
+
+void mineScene::spawnRockCrab()
+{
+	int idxX, idxY;
+	float x, y;
+THREE:
+	idxX = RANDOM->range(0, 50);
+	idxY = RANDOM->range(0, 50);
+
+	if (_tile[idxY][idxX].obj == OBJ_NONE)
+	{
+		monster* temp = new monster(*monsterList[2]);
+		temp->setCenterX((float)idxX * 16.0f - 8.0f);
+		temp->setCenterY((float)idxY * 16.0f - 8.0f);
+		temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
+		temp->setSpeed(0.8f);
+		vMonster.push_back(temp);
+	}
+	else
+	{
+		goto THREE;
+	}
+}
+
+void mineScene::spawnBug()
+{
+	int idxX, idxY;
+	float x, y;
+TWO:
+	idxX = RANDOM->range(0, 50);
+	idxY = RANDOM->range(0, 50);
+
+	if (_tile[idxY][idxX].obj == OBJ_NONE)
+	{
+		monster* temp = new monster(*monsterList[1]);
+		temp->setCenterX((float)idxX * 16.0f - 8.0f);
+		temp->setCenterY((float)idxY * 16.0f - 8.0f);
+		temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
+		temp->setSpeed(0.8f);
+		vMonster.push_back(temp);
+	}
+	else
+	{
+		goto TWO;
+	}
+}
+
+void mineScene::spawnSerpent()
+{
+	int idxX, idxY;
+	float x, y;
+FOUR:
+	idxX = RANDOM->range(0, 50);
+	idxY = RANDOM->range(0, 50);
+
+	if (_tile[idxY][idxX].obj == OBJ_NONE)
+	{
+		monster* temp = new monster(*monsterList[3]);
+		temp->setCenterX((float)idxX * 16.0f - 8.0f);
+		temp->setCenterY((float)idxY * 16.0f - 8.0f);
+		temp->setRc((float)idxX * 16.0f - 8.0f, (float)idxY * 16.0f - 8.0f);
+		temp->setSpeed(1.0f);
+		vMonster.push_back(temp);
+	}
+	else
+	{
+		goto FOUR;
 	}
 }
 
@@ -1057,6 +1230,8 @@ void mineScene::playerMonsterCollision()
 			if (PLAYER->getHpBarX() + iter->getDmg() * 2 > 580)
 			{
 				SOUNDMANAGER->play("death", 0.2f);
+
+				loadCount = 0;
 				PLAYER->setIsSprinkled(false);
 				savePlayer();
 				PLAYER->resetClock();

@@ -62,6 +62,8 @@ void inventory::init()
 	{
 		_playerTool[i] = RectMake(333 + i * 45, 535, 40, 40);
 	}
+	_isWarning = false;
+	_isExit = false;
 }
 
 void inventory::release()
@@ -72,7 +74,8 @@ void inventory::update()
 {
 	if (INPUT->GetKeyDown(VK_F8))
 	{
-		_vItem[20] = ITEMMANAGER->findItem("기본스프링클러");
+		PLAYER->setFarmingExp(100);
+		PLAYER->setCombatExp(100);
 	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
@@ -152,7 +155,33 @@ void inventory::update()
 			_vItem[i] = nullitem;
 		}
 	}
+	//cout << "x : " << _ptMouse.x << "y : " << _ptMouse.y << endl;
 
+	if (_isWarning)
+	{
+		_waring_yes = RectMake(450, 365, 110, 55);
+		_waring_no = RectMake(615, 365, 110, 55);
+
+		if (PtInRect(&_waring_yes, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isWarning = false;
+				PLAYER->setLoadCount(0);
+				SOUNDMANAGER->play("select");
+				SWITCHMANAGER->changeScene("스타트화면");
+				SWITCHMANAGER->startFade(.0f, .0f);
+			}
+		}
+		if (PtInRect(&_waring_no, _ptMouse))
+		{
+			if (INPUT->GetKeyDown(VK_LBUTTON))
+			{
+				_isWarning = false;
+			}
+		}
+	}
+	
 	//if(_vItem[i].item_image == NULL) setInvenImage(i, _vItem[i].itemName);
 	if(_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 }
@@ -231,6 +260,90 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 	else if (_isPlayerPage)
 	{
 		IMAGEMANAGER->render("스킬창", hdc, 225, 40);
+
+		//농사 레벨
+		if (PLAYER->getFarmingLv() < 5)
+		{
+			for (int i = 0; i < PLAYER->getFarmingLv(); i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+		}
+		else if (PLAYER->getFarmingLv() == 5)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+		}
+		else if (PLAYER->getFarmingLv() < 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+			for (int j = 0; j < PLAYER->getFarmingLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 132);
+			}
+		}
+		else if (PLAYER->getFarmingLv() == 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 132);
+			for (int j = 0; j < PLAYER->getFarmingLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 132);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 729 + 4 * 32, 132);
+		}
+
+		//전투레벨
+		if (PLAYER->getCombatLv() < 5)
+		{
+			for (int i = 0; i < PLAYER->getCombatLv(); i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+		}
+		else if (PLAYER->getCombatLv() == 5)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+		}
+		else if (PLAYER->getCombatLv() < 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+			for (int j = 0; j < PLAYER->getCombatLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 180);
+			}
+		}
+		else if (PLAYER->getCombatLv() == 10)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 551 + i * 31, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 551 + 4 * 31, 180);
+			for (int j = 0; j < PLAYER->getCombatLv() - 5; j++)
+			{
+				IMAGEMANAGER->render("레벨버튼small", hdc, 729 + j * 32, 180);
+			}
+			IMAGEMANAGER->render("레벨버튼big", hdc, 729 + 4 * 32, 180);
+		}
 	}
 	else if (_isCraftPage)
 	{
@@ -301,6 +414,11 @@ void inventory::render(HDC hdc)// 단순한 플레이어만을 위한 플레이어 인벤토리 정�
 				}
 			}
 		}
+	}
+
+	if (_isWarning)
+	{
+		IMAGEMANAGER->render("인벤경고창", hdc, 380, 200);
 	}
 
 	if (_MouseItem.item_image)
@@ -645,108 +763,112 @@ void inventory::renderStorageInventory(HDC hdc)
 
 void inventory::inven_item_info(HDC hdc)
 {
-	for (int i = 0; i < INVENMAX; i++)
+	if (!_isWarning)
 	{
-		if (PtInRect(&_vItem[i].rc, _ptMouse))
+		for (int i = 0; i < INVENMAX; i++)
 		{
-			if (_vItem[i].item_image != NULL)
+			if (PtInRect(&_vItem[i].rc, _ptMouse))
 			{
-				char temp_info[2][256];
-				RECT temp1;
-				RECT temp2;
-
-				if (_isShopOpen)
+				if (_vItem[i].item_image != NULL)
 				{
-					 temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y -150, 200, 70);
-					 temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
-					 IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
+					char temp_info[2][256];
+					RECT temp1;
+					RECT temp2;
 
-				}
-				else
-				{
-					 temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
-					 temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
-					 IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
-
-				}
-
-				SetTextColor(hdc, RGB(0, 0, 0));
-
-				memset(temp_info, 0, sizeof(temp_info));
-
-				sprintf(temp_info[1], "판매가 : %d 원", _vItem[i].sell_price);
-				if (_vItem[i].item_kind == ITEM_SEED)
-				{
-					sprintf(temp_info[0], "\n성장 기간 : %d 일", _vItem[i].grow);
-					strcat_s(temp_info[1], temp_info[0]);
-					sprintf(temp_info[0], "\n경험치 : %d exp", _vItem[i].exp);
-					strcat_s(temp_info[1], temp_info[0]);
-				}
-				else if (_vItem[i].item_kind == ITEM_FRUIT)
-				{
-					if (_vItem[i].hpRecover != 0) sprintf(temp_info[0], "\n효과 : HP %d 회복", _vItem[i].hpRecover);
-					else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vItem[i].energyRecover);
-					strcat_s(temp_info[1], temp_info[0]);
-				}
-				else if (_vItem[i].item_kind == ITEM_TOOL)
-				{
-					sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
-					strcat_s(temp_info[1], temp_info[0]);
-				}
-				else if (_vItem[i].item_kind == ITEM_SKILL)
-				{
-					switch (_vItem[i].weaponKind)
+					if (_isShopOpen)
 					{
-					case WEAPON_EXPLOSION:
-						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 1);
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n데미지 : %d ", 1);
-						strcat_s(temp_info[1], temp_info[0]);
-						break;
-					case WEAPON_SPIKES:
-						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n데미지 : %d ", 2);
-						strcat_s(temp_info[1], temp_info[0]);
-						break;
-					case WEAPON_FIRE:
-						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n데미지 : %d ", 3);
-						strcat_s(temp_info[1], temp_info[0]);
-						break;
-					case WEAPON_BLACKHOLE:
-						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 3);
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n데미지 : %d ", 3);
-						strcat_s(temp_info[1], temp_info[0]);
-						break;
-					case WEAPON_FIREBALL:
-						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
-						strcat_s(temp_info[1], temp_info[0]);
-						sprintf(temp_info[0], "\n데미지 : %d ", 4);
-						strcat_s(temp_info[1], temp_info[0]);
-						break;
-					default:
-						break;
-					}
-				}
+						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y - 150, 200, 50);
+						temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+						IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
 
-				DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
-				DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+					}
+					else
+					{
+						temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
+						temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
+						IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
+
+					}
+
+					SetTextColor(hdc, RGB(0, 0, 0));
+
+					memset(temp_info, 0, sizeof(temp_info));
+
+					sprintf(temp_info[1], "판매가 : %d 원", _vItem[i].sell_price);
+					if (_vItem[i].item_kind == ITEM_SEED)
+					{
+						sprintf(temp_info[0], "\n성장 기간 : %d 일", _vItem[i].grow);
+						strcat_s(temp_info[1], temp_info[0]);
+						sprintf(temp_info[0], "\n경험치 : %d exp", _vItem[i].exp);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vItem[i].item_kind == ITEM_FRUIT)
+					{
+						if (_vItem[i].hpRecover != 0) sprintf(temp_info[0], "\n효과 : HP %d 회복", _vItem[i].hpRecover);
+						else sprintf(temp_info[0], "\n열매효과 : HP %d 회복", _vItem[i].energyRecover);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vItem[i].item_kind == ITEM_TOOL)
+					{
+						sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+						strcat_s(temp_info[1], temp_info[0]);
+					}
+					else if (_vItem[i].item_kind == ITEM_SKILL)
+					{
+						switch (_vItem[i].weaponKind)
+						{
+						case WEAPON_EXPLOSION:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 1);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(폭발) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 1);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_SPIKES:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(스파이크) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_FIRE:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(불) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_BLACKHOLE:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(블랙홀) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 3);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						case WEAPON_FIREBALL:
+							sprintf(temp_info[0], "\n소모 스테미너 : %d ", 2);
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n스킬(화염구) 사용 가능 ");
+							strcat_s(temp_info[1], temp_info[0]);
+							sprintf(temp_info[0], "\n데미지 : %d ", 4);
+							strcat_s(temp_info[1], temp_info[0]);
+							break;
+						default:
+							break;
+						}
+					}
+
+					DrawText(hdc, _vItem[i].itemName, strlen(_vItem[i].itemName), &temp1, NULL);
+					DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp2, NULL);
+				}
 			}
 		}
 	}
+	
 }
 
 void inventory::quickinven_item_info(HDC hdc)
@@ -758,7 +880,7 @@ void inventory::quickinven_item_info(HDC hdc)
 			if (_vItem[i].item_image != NULL)
 			{
 				char temp_info[2][256];
-				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 70);
+				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + -150, 200, 50);
 				RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 100);
 				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y - 170);
 
@@ -852,7 +974,7 @@ void inventory::storage_item_info(HDC hdc)
 			if (_vStorageItem[i].item_image != NULL)
 			{
 					char temp_info[2][256];
-					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 70);
+					RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 					RECT temp2 = RectMake(temp1.left, temp1.bottom, 250, 200);
 					IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
 
@@ -937,7 +1059,7 @@ void inventory::storage_item_info(HDC hdc)
 
 void inventory::_vItemUpdate()
 {
-	if (!isShowTemp)
+	if (!isShowTemp && !_isWarning)
 	{
 		if (PtInRect(&_isInvenRect, _ptMouse) && !_isShopOpen)
 		{
@@ -973,13 +1095,12 @@ void inventory::_vItemUpdate()
 		{
 			if (PLAYER->getIsShowInventory())
 			{
+				
 				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					PLAYER->setLoadCount(0);
-					SOUNDMANAGER->play("select");
-					SWITCHMANAGER->changeScene("스타트화면");
-					SWITCHMANAGER->startFade(.0f, .0f);
+				{	_isWarning = true;
+
 				}
+
 			}
 		}
 	}
@@ -1003,7 +1124,7 @@ void inventory::_vItemUpdate()
 			}
 		}
 	}
-	else if (_isInvenPage)
+	else if (_isInvenPage && !_isWarning)
 	{
 		if (_MouseItem.item_image) _MouseItem.rc = RectMake(_ptMouse.x, _ptMouse.y, _MouseItem.item_image->getFrameWidth(), _MouseItem.item_image->getFrameHeight());
 		

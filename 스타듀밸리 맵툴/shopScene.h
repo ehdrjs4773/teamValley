@@ -14,7 +14,10 @@ class shopScene : public gameNode
 	POINT temp;
 
 	bool _isShopClicked;
-
+	bool _isTalk;
+	const char* temp_script[10];
+	vector<const char*> script;
+	int script_count;
 public:
 	HRESULT init();
 	void release();
@@ -22,6 +25,7 @@ public:
 	void render();
 
 	void playerMove();
+	void setCurrentSlotNumber(int mouseWheel);
 
 };
 

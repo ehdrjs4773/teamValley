@@ -14,13 +14,6 @@ void skill::init()
 	_isActive = false;
 	_isClick = false;
 
-	addSkill("스킬이미지", "EXPLOSION", SKILL_EXPLOSION, 8, false);
-	addSkill("스킬이미지", "SPIKES", SKILL_SPIKES, 8, false,1);
-	addSkill("스킬이미지", "FIRE", SKILL_FIRE, 8, false,2);
-	addSkill("스킬이미지", "SHIELD", SKILL_SHIELD, 7, false,3);
-	addSkill("스킬이미지", "BLACKHOLE", SKILL_BLACKHOLE, 7, false,4);
-	addSkill("스킬이미지", "FIRE_BALL", SKILL_FIRE_BALL, 7, false,5);
-	_vCurrentSkill.push_back(_vSkill[0]);
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -31,10 +24,6 @@ void skill::init()
 
 void skill::render(HDC hdc)
 {
-	for (int i = 0; i < _vCurrentSkill.size(); i++)
-	{
-		_vCurrentSkill[i].image->frameRender(hdc, _skillSlot[i].left, _skillSlot[i].top, _vCurrentSkill[i].indexX, 0);
-	}
 
 }
 
@@ -68,7 +57,7 @@ void skill::skillSelect()
 		}
 	}
 
-	cout << skill_state << endl;
+	//cout << skill_state << endl;
 }
 
 void skill::skillActive()

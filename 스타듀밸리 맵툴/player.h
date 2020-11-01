@@ -16,6 +16,7 @@ private:
 	RECT frontHpBar;
 	RECT playerInven;
 	RECT playerHoldItem;
+	RECT levelButton[10];
 
 	skill* _skill;
 	bool isSkill;
@@ -88,6 +89,10 @@ private:
 	int MaxCombatExp;
 	int shopGrade;
 	int totalSell;
+	int dropItemNum = 1;
+	int attackDmg = 10;
+
+
 public:
 	HRESULT init();
 	void release();
@@ -105,6 +110,11 @@ public:
 	void arrowRender(HDC hdc);
 	void weatherRender(HDC hdc);
 
+	int getDropItemNum() { return dropItemNum; }
+	int getFarmingLv() { return playerFarmingLevel; }
+	void setFarmingExp(int a) { farmingExp += a; levelUp(); }
+	int getCombatLv() { return playerCombatLevel; }
+	void setCombatExp(int a) { combatExp += a; levelUp(); }
 	void limitEnergy();
 	void setMaxExp();
 	void levelUp();
@@ -230,5 +240,9 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
+	void makeCropGrow(int i, int j);
+
+	int getAtk() { return attackDmg; }
+	void setAtk(int a) { attackDmg = a; }
 };
 
