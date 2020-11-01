@@ -48,6 +48,8 @@ private:
 	int aniCountControl = 10;
 	int aniCountControl2 = 5;
 
+	bool isMet;
+
 	bool isShowInventory;
 
 	bool isOpenPlayerStorageCover;
@@ -244,5 +246,8 @@ public:
 
 	int getAtk() { return attackDmg; }
 	void setAtk(int a) { attackDmg = a; }
+
+	bool getIsMet() { return isMet; }
+	void setIsMet(bool _is) { isMet = _is; }
 };
 

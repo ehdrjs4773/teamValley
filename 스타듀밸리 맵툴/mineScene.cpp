@@ -49,6 +49,10 @@ HRESULT mineScene::init()
 			}
 		}
 	}
+	script[0] = "아무리 봐도 마법 연구에 실패해서 만들어진 \n생명체 같은데?";
+	script[1] = "마법사 녀석, 나한테 뒷처리를 떠넘기다니...";
+	script[2] = "돈이라도 주니까 한다.";
+	script_count = 0;
 
 	this->update();
 
@@ -64,7 +68,18 @@ void mineScene::update()
 {
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
-
+	
+	if (_isTalk)
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			script_count++;
+			if (script_count > 2)
+			{
+				_isTalk = false;
+			}
+		}
+	}
 	if (!PLAYER->getIsShowInventory())
 	{
 		//몬스터 스킬 충돌
@@ -207,6 +222,12 @@ void mineScene::render()
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
+	if (_isTalk)
+	{
+		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		RECT tempRC = RectMake(120, 320, 800, 300);
+		DrawText(getMemDC(), script[script_count], strlen(script[script_count]),&tempRC,NULL);
+	}
 }
 
 void mineScene::savePlayer()

@@ -316,6 +316,12 @@ struct tagSkill
 	bool isActive;
 };
 
+struct tagScript
+{
+	image* image;
+	const char* name;
+	const char* script;
+};
 
 enum NPC_KIND {
 

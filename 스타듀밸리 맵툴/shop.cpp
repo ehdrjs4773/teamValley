@@ -49,13 +49,27 @@ HRESULT shop::init(NPC_KIND npckind)
 
 			if (_vItem[i].item_kind == ITEM_SEED)
 			{
-				if (_vItem[i].seedKind == SEED_PINETREE ||
-					_vItem[i].seedKind == SEED_MAPLETREE ||
-					_vItem[i].seedKind == SEED_OAKTREE ||
-					_vItem[i].seedKind == SEED_TOMATO)
+				if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
 				{
+					if (_vItem[i].seedKind == SEED_PINETREE ||
+						_vItem[i].seedKind == SEED_MAPLETREE ||
+						_vItem[i].seedKind == SEED_OAKTREE
+						)
+					{
+					}
+					else _vSeed.push_back(_vItem[i]);
 				}
-				else _vSeed.push_back(_vItem[i]);
+				
+				else
+				{
+					if (_vItem[i].seedKind == SEED_PINETREE ||
+						_vItem[i].seedKind == SEED_MAPLETREE ||
+						_vItem[i].seedKind == SEED_OAKTREE ||
+						_vItem[i].seedKind == SEED_TOMATO)
+					{
+					}
+					else _vSeed.push_back(_vItem[i]);
+				}
 			}
 			else if (_vItem[i].item_kind == ITEM_SPRINKLER1 ||
 				_vItem[i].item_kind == ITEM_SPRINKLER2 ||
@@ -141,6 +155,7 @@ void shop::release()
 
 void shop::update()
 {
+	cout << current_index << endl;
 
 	_inven->update();
 	
@@ -627,7 +642,7 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_RBUTTON))
 			{
-				sell_amount = 0;
+				sell_amount = 1;
 				sell_ispopup = true;
 				sell_index = i;
 				sell_amount_max = (*_vInven)[i].amount;
@@ -645,10 +660,25 @@ void shop::sell()
 			if ((*_vInven)[i].item_image == NULL) continue;
 			if ((*_vInven)[sell_index].amount >= 1)
 			{
-				PLAYER->setMoney(PLAYER->getMoney() + (_vInven->at(sell_index).sell_price * sell_amount));
 				(*_vInven)[sell_index].amount -= sell_amount;
 				//누적판매
-				total_sell += (_vInven->at(sell_index).sell_price * sell_amount);
+				if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
+				{
+					if ((*_vInven)[sell_index].item_kind == ITEM_FRUIT && (*_vInven)[sell_index].seedKind == 1)
+					{
+						total_sell += ((_vInven->at(sell_index).sell_price+30) * sell_amount);
+						PLAYER->setMoney(PLAYER->getMoney() + ((_vInven->at(sell_index).sell_price+30) * sell_amount));
+					}
+					else {
+						total_sell += (_vInven->at(sell_index).sell_price * sell_amount);
+						PLAYER->setMoney(PLAYER->getMoney() + ((_vInven->at(sell_index).sell_price) * sell_amount));
+					}
+				}
+				else
+				{
+					total_sell += (_vInven->at(sell_index).sell_price * sell_amount);
+					PLAYER->setMoney(PLAYER->getMoney() + ((_vInven->at(sell_index).sell_price) * sell_amount));
+				}
 				PLAYER->setTotalSell(total_sell);
 			}
 			else
@@ -687,9 +717,9 @@ void shop::sell()
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
 				sell_amount--;
-				if (sell_amount <= 0)
+				if (sell_amount <= 1)
 				{
-					sell_amount = 0;
+					sell_amount = 1;
 				}
 
 			}
@@ -730,7 +760,7 @@ void shop::sell()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				sell_amount = 0;
+				sell_amount = 1;
 			}
 		}
 	}

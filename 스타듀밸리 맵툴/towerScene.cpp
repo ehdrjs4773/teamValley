@@ -31,6 +31,32 @@ HRESULT towerScene::init()
 	{
 		SOUNDMANAGER->stop("농장");
 	}
+	_isTalk = false;
+	tagScript temp[20];
+	memset(&temp, 0, sizeof(temp));
+	temp[0] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","흠. 낯선이여. 내 연구실에는 무슨 용건으로\n 찾아온겐가."};
+	temp[1] = { IMAGEMANAGER->findImage(""),"플레이어","특이해보이는 건물이 있길래 들어와봤는데 \n연구실이었군요."};
+	temp[2] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","그렇다네 이곳은 마법을 탐구하는 \n연구실이지." };
+	temp[3] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","이곳까지 찾아올 정도면 자네 많이 안 바쁜 \n모양이군." };
+	temp[4] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","먼 발걸음을 해줬으니 자네에게 특별히 \n선물을 주지." };
+	temp[5] = { IMAGEMANAGER->findImage(""),"플레이어","마법사가 검을 줬다." };
+	temp[6] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","내 연구실을 빠져나와 이동하면 동굴이 \n하나 있을 걸세." };
+	temp[7] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","그 동굴 안에는 마법 생물체가 많아." };
+	temp[8] = { IMAGEMANAGER->findImage("마법사웃음"),"마법사","생물체를 잡아 증거물을 가져오면 \n돈을 주겠네." };
+	temp[9] = { IMAGEMANAGER->findImage("마법사웃음"),"마법사","자네가 잡기 쉽게 검에 마법도 걸어주지. \n어떤가?" };
+	temp[10] = {  IMAGEMANAGER->findImage(""),"플레이어","이렇게까지 하시는 이유라도 있습니까? \n그 생물체는 혹시 마법 연구에 실패해서..." };
+	temp[11] = {  IMAGEMANAGER->findImage(""),"플레이어","마법사가 갑자기 다급하게 곡괭이를 줬다." };
+	temp[12] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","...에헴. 동굴 안에 생물체만 있지 않을걸세.\n 돌도 있고 광석도 있지." };
+	temp[13] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","이 곡괭이를 사용하면 캘 수 있을걸세." };
+	temp[14] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","이야기는 끝. 나는 마저 연구를 해야하니\n 이만 나가주게." };
+	temp[15] = { IMAGEMANAGER->findImage(""),"플레이어","결국 내가 궁금한건 해결이 안되었잖아?" };
+	temp[16] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","자네 무슨 볼 일로 왔는가?" };
+	temp[17] = { IMAGEMANAGER->findImage("마법사기본"),"마법사","잘 가게나." };
+
+	for (int i = 0; i < 18; i++)
+	{
+		script.push_back(temp[i]);
+	}
 
 	this->update();
 	return S_OK;
@@ -50,6 +76,66 @@ void towerScene::update()
 
 	_skillNpc->update();
 	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
+	if (_isTalk && !PLAYER->getIsMet())
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			script_count++;
+			//if (script_count <= 15)
+			//{
+			//	_isTalk = false;
+			//	_isSkillClicked = true;
+			//}
+			if (script_count == 5)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("폭발_검"));
+						break;
+					}
+				}
+			}
+			else if (script_count == 11)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("곡괭이"));
+						break;
+					}
+				}
+			}
+			else if (script_count > 15)
+			{
+				_isTalk = false;
+				//_isSkillClicked = true;
+				PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("폭발_검"));
+				PLAYER->getInventory()->getvInven().push_back(ITEMMANAGER->findItem("곡괭이"));
+				PLAYER->setIsMet(true);
+			}
+		}
+	}
+	else if(_isTalk && PLAYER->getIsMet())
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			cout << script_count << endl;
+			script_count++;
+			if (script_count == 17)
+			{
+				_isTalk = false;
+				_isSkillClicked = true;	
+			}
+			else if(script_count > 17)
+			{
+				_isTalk = false;
+				script_count = 16;
+			}
+		}
+	}
 	//상점 나가기 포탈
 	if (PLAYER->getCenterY() >= 270)
 	{
@@ -66,6 +152,10 @@ void towerScene::update()
 		_skillShop->update();
 		_isSkillClicked = !_skillShop->shopClose();
 		PLAYER->getInventory()->isShopOpen(_isSkillClicked);
+		if (_skillShop->shopClose())
+		{
+			_isTalk = true;
+		}
 	}
 	else
 	{
@@ -89,7 +179,8 @@ void towerScene::update()
 		{
 			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				_isSkillClicked = true;
+				//_isSkillClicked = true;
+				_isTalk = true;
 			}
 		}
 		CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
@@ -130,6 +221,14 @@ void towerScene::render()
 	{
 		PLAYER->playerStatusRender(getMemDC());
 	}
+	 if (_isTalk)
+	 {
+		 IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		 RECT tempRC = RectMake(120,320,800,300);
+		 if(script[script_count].name == "마법사") script[script_count].image->render(getMemDC(), 735, 310);
+		 DrawText(getMemDC(), script[script_count].script, strlen(script[script_count].script), &tempRC, NULL);
+		 //textOut(getMemDC(), 120, 320, script[script_count].script, RGB(0, 0, 0));
+	 }
 }
 
 void towerScene::playerMove()

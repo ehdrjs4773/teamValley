@@ -57,7 +57,6 @@ void shopScene::update()
 		SOUNDMANAGER->play("town", 0.05f);
 	}
 
-	setCurrentSlotNumber(_mouseWheel);
 
 	_itemNpc->update();
 	if (_isTalk)
@@ -110,6 +109,7 @@ void shopScene::update()
 			}
 
 			_itemNpc->update();
+			setCurrentSlotNumber(_mouseWheel);
 
 
 			_rc_player = RectMake(_pos.x, _pos.y, 16, 32);
@@ -173,7 +173,7 @@ void shopScene::render()
 	{
 		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
 		IMAGEMANAGER->render("상점기본", getMemDC(), 735, 310);
-		textOut(getMemDC(), 120, 300, script[script_count], RGB(0, 0, 0));
+		textOut(getMemDC(), 120, 320, script[script_count], RGB(0, 0, 0));
 	}
 }
 

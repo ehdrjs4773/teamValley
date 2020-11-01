@@ -42,7 +42,9 @@ private:
 	int monsterCount;
 
 	int MouseIndexX, MouseIndexY;
-
+	bool _isTalk = true;
+	int script_count;
+	const char* script[3];
 public:
 	mineScene();
 
