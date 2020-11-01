@@ -1,28 +1,15 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  inventoryCraft.cpp
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(120): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(294): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(318): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(342): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(366): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(378): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(388): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(410): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(410): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(411): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(411): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(434): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(434): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(435): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(435): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(436): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(436): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(474): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(474): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  inHouseScene.cpp
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(46): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(101): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(115): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(125): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(136): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inhousescene.cpp(149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  3 of 2383 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 2446 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\jayki\OneDrive\바탕 화면\StardewValley - 모작\스타듀밸리 맵툴\Release\Stardew Valley.exe

@@ -232,6 +232,7 @@ void mineScene::render()
 
 void mineScene::savePlayer()
 {
+	PLAYER->resetClock();
 	PLAYER->savePlayerInven();
 	PLAYER->savePlayerStock();
 	PLAYER->savePlayerData();
