@@ -81,6 +81,22 @@ enum TOOL
 	TOOL_FISHINGROD //낚시대
 };
 
+enum SCARECROW
+{
+	SCARECROW_1,
+	SCARECROW_2,
+	SCARECROW_3,
+	SCARECROW_4,
+	SCARECROW_5,
+	SCARECROW_6,
+	SCARECROW_7,
+	SCARECROW_8,
+	SCARECROW_9,//일반
+	SCARECROW_10,
+	SCARECROW_11,
+	SCARECROW_12 //이벤트 
+};
+
 //플레이어
 enum STATE
 {
@@ -222,6 +238,7 @@ struct tagItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
+	SCARECROW scarecrowKind;
 	WEAPON weaponKind = WEAPON_NONE;
 	const char* itemName;
 	const char* item_info;
