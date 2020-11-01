@@ -798,7 +798,7 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 		{
 			if (_vCraftItem[i].item_image != NULL)
 			{
-				char temp_info[3][256];
+				char temp_info[4][256];
 				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
 				RECT temp3 = RectMake(temp2.left + 40, temp2.top, 160, 40);
@@ -876,9 +876,50 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
 					}
 				}
+				else if (PtInRect(&_vCraftItem[i].rc, _ptMouse) && i >= 11 && i <= 13)
+				{
+					sprintf(temp_info[0], "이벤트 허수아비 %d", i - 10);
+					sprintf(temp_info[1], ": 나무 %d개", (i - 10) * 10 + 10);
+					sprintf(temp_info[2], ": 돌 %d개", ((i - 10) + 1) * 5);
+					sprintf(temp_info[3], ": 토마토 %d개", ((i - 10) * 5) + 15);
+
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 4, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
+
+					if (_isWood != NULL || _isRock != NULL)
+					{
+						if (_inven->getvInven()[_isWood].amount < 2 * (i - 2) + 10)
+						{
+							SetTextColor(hdc, RGB(255, 0, 0));
+							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
+						}
+						else if (_inven->getvInven()[_isWood].amount >= 2 * (i - 2) + 10)
+						{
+							SetTextColor(hdc, RGB(0, 0, 0));
+							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
+						}
+
+						if (_inven->getvInven()[_isRock].amount < i + 2)
+						{
+							SetTextColor(hdc, RGB(255, 0, 0));
+							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
+						}
+						else if (_inven->getvInven()[_isRock].amount >= i + 2)
+						{
+							SetTextColor(hdc, RGB(0, 0, 0));
+							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
+						}
+					}
+					else
+					{
+						SetTextColor(hdc, RGB(255, 0, 0));
+						DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
+						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
+					}
+				}
 				else if (PtInRect(&_vCraftItem[i].rc, _ptMouse)) //허수아비 렉트에 닿으면 
 				{
-					sprintf(temp_info[0], "허수아비", sizeof("허수아비"));
+					sprintf(temp_info[0], "허수아비 %d", i - 2);
 					sprintf(temp_info[1], ": 나무 %d개",  2* (i-2) + 10);
 					sprintf(temp_info[2], ": 돌 %d개", i+2);
 
