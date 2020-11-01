@@ -4,6 +4,7 @@
 HRESULT player::init()
 {
 	isSkill = false;
+	isMet = false;
 
 	index = 0;
 	count = 0;

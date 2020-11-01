@@ -12,7 +12,8 @@ HRESULT inGameScene::init()
 	CAMERAMANAGER->cameraMove(PLAYER->getCenterX(), PLAYER->getCenterY());
 
 	isShopOpen = false;
-
+	_isTalk = false;
+	_isTalked = false;
 	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
 	{
 		load();
@@ -91,8 +92,28 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	cout << MouseIndexX << "\t" << MouseIndexY << endl;
-
+	//cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	//if (INPUT->GetKeyDown(VK_TAB))
+	//{
+	//	for (int i = 0; i < INVENMAX; i++)
+	//	{
+	//		if ((*PLAYER->getInven())[i].item_image == NULL)
+	//		{
+	//			tagItem tempItem = ITEMMANAGER->findItem(WEAPON_EXPLOSION);
+	//			(*PLAYER->getInven())[i] = tempItem;
+	//			PLAYER->setInvenItem(i, tempItem);
+	//
+	//			break;
+	//		}
+	//	}
+	//}
+	if (_isTalk)
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			_isTalk = false;
+		}
+	}
 	loadCount = PLAYER->getLoadCount();
 	isSprinkled = PLAYER->getIsSprinkled();
 	sprinklerWork();
@@ -160,6 +181,7 @@ void inGameScene::update()
 	{
 		shareTileData();
 	}
+
 }
 
 void inGameScene::render()
@@ -190,6 +212,14 @@ void inGameScene::render()
 	if (isShowCalender)
 	{
 		IMAGEMANAGER->render("달력", getMemDC(), WINSIZEX / 2 - 300, WINSIZEY / 2 - 200);
+	}
+
+	if (_isTalk)
+	{
+		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		RECT tempRC = RectMake(120, 320, 800, 300);
+		const char* tempText = "알 수 없는 기운이 느껴진다.\n특이한 건물과 관련 있는걸까?";
+		DrawText(getMemDC(),tempText,strlen(tempText),&tempRC,NULL);
 	}
 }
 
@@ -791,14 +821,25 @@ void inGameScene::moveScene()
 		shareTileData();
 		SOUNDMANAGER->play("doorOpen", 0.2f);
 		SWITCHMANAGER->changeScene("집안화면");
-		SWITCHMANAGER->startFade(762.0f,887.0f);
+		SWITCHMANAGER->startFade(762.0f, 887.0f);
 	}
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_MINE)
 	{
-		//집으로 넘어갈때 타일 정보 넘겨줌
-		shareTileData();
-		SWITCHMANAGER->changeScene("광산화면");
-		SWITCHMANAGER->startFade(390.0f, 166.0f);
+		if (PLAYER->getIsMet())
+		{
+			//집으로 넘어갈때 타일 정보 넘겨줌
+			shareTileData();
+			SWITCHMANAGER->changeScene("광산화면");
+			SWITCHMANAGER->startFade(390.0f, 166.0f);
+		}
+		else
+		{
+			if (_isTalked == false)
+			{
+				_isTalk = true;
+				_isTalked = true;
+			}
+		}
 	}
 	else if (_tile[currentIndexY][currentIndexX].portal == PT_TOWER)
 	{
@@ -807,6 +848,7 @@ void inGameScene::moveScene()
 		SWITCHMANAGER->changeScene("마법사타워화면");
 		SWITCHMANAGER->startFade(360.0f, 265.0f);
 	}
+	else _isTalked = false;
 }
 
 void inGameScene::shareTileData()
