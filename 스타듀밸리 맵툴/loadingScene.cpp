@@ -104,12 +104,10 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("스킬창", "Images/inventory/skill.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("제작창", "Images/inventory/Craftinven.bmp", 750, 550, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작", "Images/inventory/CraftObject.bmp", 440, 80, 11, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("아이템제작스몰", "Images/inventory/CraftObjectSmall.bmp", 112, 64, 7, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("아이템제작스몰", "Images/inventory/CraftObjectSmall1.bmp", 176, 32, 11, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템", "Images/inventory/Craftitem.bmp", 560, 40, 14, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("아이템제작알파", "Images/inventory/CraftObjectAlpha.bmp", 440, 80, 11, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("제작중인 아이템", "Images/inventory/goodsInProgress.bmp", 32, 32, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("이벤트아이템제작", "Images/inventory/CraftObject.bmp", 280, 160, 7, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("이벤트아이템제작알파", "Images/inventory/CraftObjectAlpha.bmp", 280, 160, 7, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("토마토아이템제작", "Images/inventory/CraftTomato.bmp", 120, 80, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("토마토아이템제작알파", "Images/inventory/CraftTomatoAlpha.bmp", 120, 80, 3, 1, true, RGB(255, 0, 255));
 

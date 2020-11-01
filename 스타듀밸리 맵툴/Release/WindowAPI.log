@@ -1,71 +1,33 @@
-<<<<<<< HEAD
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-  inGameScene.cpp
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(12): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(128): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(175): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(257): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(259): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(274): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(276): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(290): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(579): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(580): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(621): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(622): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(663): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(664): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(705): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(706): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(831): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(832): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1227): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1230): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1233): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1236): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1239): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1241): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1979): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2003): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2013): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2014): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2021): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2044): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2049): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2079): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2079): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2076): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2349): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2351): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다.
-  0 of 2384 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-=======
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
   inventoryCraft.cpp
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(120): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(294): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(318): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(342): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(366): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(378): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(388): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(410): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(410): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(411): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(411): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(434): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(434): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(435): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(435): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(436): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(436): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(474): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\jayki\onedrive\바탕 화면\stardewvalley - 모작\스타듀밸리 맵툴\inventorycraft.cpp(474): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(43): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(153): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(167): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(706): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(730): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(754): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(778): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(790): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(803): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(807): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(817): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(839): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(839): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(840): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(840): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(863): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(863): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(864): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(864): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(865): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(865): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(992): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(1015): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(1015): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
+  loadingScene.cpp
   코드를 생성하고 있습니다.
-  3 of 2383 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
->>>>>>> e3f373ee9d12e8f5a88df7705e73dc0f370aca2f
+  1 of 2384 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  WindowAPI.vcxproj -> C:\Users\jayki\OneDrive\바탕 화면\StardewValley - 모작\스타듀밸리 맵툴\Release\Stardew Valley.exe
+  WindowAPI.vcxproj -> C:\Users\Nia Kim\Downloads\새 폴더\스타듀밸리 맵툴\Release\Stardew Valley.exe

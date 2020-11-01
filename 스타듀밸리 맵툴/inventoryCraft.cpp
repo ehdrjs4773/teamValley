@@ -14,14 +14,14 @@ void inventoryCraft::init()
 	
 	}
 
-	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 17)
+	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
 	{
 		for (int i = 0; i < 3; i++)
 		{
 			_CraftEventItem.item_image = IMAGEMANAGER->findImage("토마토아이템제작알파");
 			_CraftEventItem.indexX = i;
 			_CraftEventItem.indexY = 1;
-			_CraftEventItem.rc = RectMake(250 + i % 3 * 50, 210, 40, 80);
+			_CraftEventItem.rc = RectMake(250 + i % 11 * 50, 210, 40, 80);
 			_vCraftEventItem.push_back(_CraftEventItem);
 		
 		}
@@ -121,8 +121,29 @@ void inventoryCraft::materialUpdate()
 				}
 			}
 		}
+		//	else if (_inven->getvInven()[i].item_kind == ITEM_FRUIT)
+		//	{
+		//		if (_isTomato == NULL)
+		//		{
+		//			if (_inven->getvInven()[i].indexX == 12 && _inven->getvInven()[i].indexY == 3)
+		//			{
+		//				_isTomato = i;
+
+		//			}
+		//		}
+		//		else
+		//		{
+		//			if (_inven->getvInven()[_isTomato].amount <= 0)
+		//			{
+		//				_isTomato = NULL;
+		//			}
+		//		}
+
+		//	}
+		//}
+
+		//cout << _isWood << "  " << _isRock << "  " << _isCopper << "  " << _isIron << "  " << _isGold << endl;
 	}
-	//cout << _isWood << "  " << _isRock << "  " << _isCopper << "  " << _isIron << "  " << _isGold << endl;
 }
 
 void inventoryCraft::update()
@@ -140,7 +161,8 @@ void inventoryCraft::update()
 			}
 			_vCraftItem[i].rc = RectMake(250 + i % 11 * 50, 130, 40, 80);
 		}
-		if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 17)
+
+		if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
 		{
 			for (int i = 0; i < _vCraftEventItem.size(); i++)
 			{
@@ -151,7 +173,7 @@ void inventoryCraft::update()
 				else
 				{
 				}
-				_vCraftEventItem[i].rc = RectMake(250 + i % 3 * 50, 210, 40, 80);
+				_vCraftEventItem[i].rc = RectMake(250 + i % 11 * 50, 210, 40, 80);
 			}
 		}
 		initCount = 1;
@@ -627,7 +649,7 @@ void inventoryCraft::update()
 
 
 	//이벤트용 허수아비 1-3번
-	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 17)
+	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
 	{
 		if (_isWood != NULL && _isRock != NULL && _isTomato != NULL)
 		{
@@ -763,7 +785,7 @@ void inventoryCraft::render(HDC hdc)
 		//Rectangle(hdc, _vCraftItem[i].rc); 
 	}
 
-	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 17)
+	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
 	{
 		for (int i = 0; i < _vCraftEventItem.size(); i++)
 		{
@@ -973,11 +995,12 @@ void inventoryCraft::craftEventInven_item_info(HDC hdc)
 		{
 			if (_vCraftEventItem[i].item_image != NULL)
 			{
-				char temp_info[3][256];
+				char temp_info[4][256];
 				RECT temp1 = RectMake(_ptMouse.x + 35, _ptMouse.y + 45, 200, 50);
 				RECT temp2 = RectMake(temp1.left, temp1.bottom, 200, 100);
-				RECT temp3 = RectMake(temp2.left + 40, temp2.top, 160, 40);
-				RECT temp4 = RectMake(temp2.left + 40, temp3.bottom, 160, 40);
+				RECT temp3 = RectMake(temp2.left + 40, temp2.top, 160, 30); //재료1
+				RECT temp4 = RectMake(temp2.left + 40, temp3.bottom, 160, 30); //재료2
+				RECT temp5 = RectMake(temp2.left + 40, temp4.bottom, 160, 30); //재료3
 
 				IMAGEMANAGER->findImage("아이템정보")->render(hdc, _ptMouse.x + 25, _ptMouse.y + 25);
 
@@ -989,14 +1012,16 @@ void inventoryCraft::craftEventInven_item_info(HDC hdc)
 				{
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 4, 2);
 					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
+					//토마토이미지 IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
 
 					sprintf(temp_info[0], "허수아비", sizeof("허수아비"));
 					sprintf(temp_info[1], ": 나무 %d개", i*10+ 20);
 					sprintf(temp_info[2], ": 돌 %d개", i*5 + 10);
+					sprintf(temp_info[3], ": 토마토 %d개", i * 5 + 20);
 
 					if (_isWood != NULL || _isRock != NULL)
 					{
-						if (_inven->getvInven()[_isWood].amount < i * 10 + 20)
+						if (_inven->getvInven()[_isWood].amount < i * 10 + 20) //나무
 						{
 							SetTextColor(hdc, RGB(255, 0, 0));
 							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
@@ -1007,7 +1032,7 @@ void inventoryCraft::craftEventInven_item_info(HDC hdc)
 							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
 						}
 
-						if (_inven->getvInven()[_isRock].amount < i * 5 + 10)
+						if (_inven->getvInven()[_isRock].amount < i * 5 + 10) //돌 
 						{
 							SetTextColor(hdc, RGB(255, 0, 0));
 							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
@@ -1017,15 +1042,26 @@ void inventoryCraft::craftEventInven_item_info(HDC hdc)
 							SetTextColor(hdc, RGB(0, 0, 0));
 							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
 						}
+
+						if (_inven->getvInven()[_isTomato].amount < i * 5 + 20) //토마토 
+						{
+							SetTextColor(hdc, RGB(255, 0, 0));
+							DrawText(hdc, temp_info[3], strlen(temp_info[1]), &temp4, NULL);
+						}
+						else if (_inven->getvInven()[_isTomato].amount >= i * 5 + 10)
+						{
+							SetTextColor(hdc, RGB(0, 0, 0));
+							DrawText(hdc, temp_info[3], strlen(temp_info[1]), &temp4, NULL);
+						}
 					}
 					else
 					{
 						SetTextColor(hdc, RGB(255, 0, 0));
 						DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
 						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
+						DrawText(hdc, temp_info[3], strlen(temp_info[3]), &temp5, NULL);
 					}
 				}
-
 				SetTextColor(hdc, RGB(0, 0, 0));
 				DrawText(hdc, temp_info[0], strlen(temp_info[0]), &temp1, NULL);
 			}
