@@ -21,6 +21,7 @@ public:
 	int _isIron;
 	int _isCopper;
 	int _isGold;
+	INT _isTomato;
 
 	bool _isTemp3;
 	bool _isTemp4;
