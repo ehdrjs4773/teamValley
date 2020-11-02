@@ -92,7 +92,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	//cout << MouseIndexX << "\t" << MouseIndexY << endl;
 	//if (INPUT->GetKeyDown(VK_TAB))
 	//{
 	//	for (int i = 0; i < INVENMAX; i++)

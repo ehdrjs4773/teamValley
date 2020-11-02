@@ -124,6 +124,10 @@ void  player::update()
 	{
 		date = 17;
 	}
+	if (INPUT->GetKeyDown(VK_F8))
+	{
+		hour = 18;
+	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
 	
@@ -1309,10 +1313,12 @@ void player::countTime()
 		SWITCHMANAGER->changeScene("집안화면");
 		SWITCHMANAGER->startFade(835.0f, 865.0f);
 	}
-	if (date > 30)
+	if (date == 28)
 	{
-		//currentSeason = (SEASON)(currentSeason + 1);
-		date = 1;
+		_pState = STAND;
+		_pDirection = DOWN;
+		SWITCHMANAGER->changeScene("엔딩화면");
+		SWITCHMANAGER->startFade(WINSIZEX/2, WINSIZEY/2);
 	}
 	if (currentSeason > 3)
 	{
@@ -2088,13 +2094,14 @@ void player::limitEnergy()
 	else if (playerEnergy <= 0)
 	{
 		inGameLoadCount = 0;
+		resetClock();
 		savePlayerData();
 		savePlayerInven();
 		savePlayerStock();
 		saveMap();
 		saveBox();
 		SWITCHMANAGER->changeScene("집안화면");
-		SWITCHMANAGER->startFade(762.0f, 887.0f);
+		SWITCHMANAGER->startFade(845.0f, 855.0f);
 	}
 	else
 	{
