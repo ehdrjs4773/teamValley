@@ -18,7 +18,6 @@ class towerScene :
 	bool _isSkillClicked;
 	bool _isTalk;
 	const char* temp_script[20];
-	//vector<const char*> script;
 	int script_count = 0;
 	vector<tagScript> script;
 public:

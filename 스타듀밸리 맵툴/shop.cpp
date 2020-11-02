@@ -5,6 +5,7 @@ HRESULT shop::init(NPC_KIND npckind)
 {
 	_npcKind = npckind;
 	tab_sel = false;
+	sell_isFrame = false;
 	shopLevel = PLAYER->getShopGrade();
 	total_sell = PLAYER->getTotalSell();
 	// 판매 관련 창
@@ -625,7 +626,11 @@ void shop::render()
 		sell_item_img->setX(WINSIZEX / 2 - 15);
 		sell_item_img->setY(WINSIZEY / 2 - 60);
 		IMAGEMANAGER->render("상점판매테두리", getMemDC(), sell_item_img->boudingBoxWithFrame().left-10, sell_item_img->boudingBoxWithFrame().top);
-		sell_item_img->frameRender(getMemDC(), sell_item_img->getX(), sell_item_img->getY()+10, sell_item_frameX, sell_item_frameY);
+		if (sell_isFrame)
+		{
+			sell_item_img->frameRender(getMemDC(), sell_item_img->getX(), sell_item_img->getY()+10, sell_item_frameX, sell_item_frameY);
+		}
+		else sell_item_img->render(getMemDC(), sell_item_img->getX(), sell_item_img->getY() + 10);
 		
 		char sell_display[256];
 		sprintf(sell_display, "%d", sell_amount);
@@ -649,6 +654,8 @@ void shop::sell()
 				sell_item_img = (*_vInven)[i].item_image;
 				sell_item_frameX = (*_vInven)[i].indexX;
 				sell_item_frameY = (*_vInven)[i].indexY;
+				sell_isFrame = (*_vInven)[i].isFrame;
+
 			}
 		}
 		if (sell_isok == true)
