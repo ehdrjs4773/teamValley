@@ -13,17 +13,19 @@ void inventoryCraft::init()
 		_vCraftItem.push_back(_CraftItem);
 	}
 
-	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
+	if (isadded == false)
 	{
 		for (int i = 0; i < 3; i++)
 		{
 			_CraftEventItem.item_image = IMAGEMANAGER->findImage("토마토아이템제작알파");
 			_CraftEventItem.indexX = i;
-			_CraftEventItem.indexY = 1;
+			_CraftEventItem.indexY = 0;
 			_CraftEventItem.rc = RectMake(250 + i % 11 * 50, 210, 40, 80);
 			_vCraftEventItem.push_back(_CraftEventItem);
 		}
+		isadded = true;
 	}
+	
 
 	_isWood = NULL;
 	_isRock = NULL;
@@ -79,6 +81,7 @@ void inventoryCraft::materialUpdate()
 				{
 					_isCopper = i;
 				}
+
 			}
 			else
 			{
@@ -93,8 +96,8 @@ void inventoryCraft::materialUpdate()
 				if (_inven->getvInven()[i].indexX == 8 && _inven->getvInven()[i].indexY == 3)
 				{
 					_isIron = i;
-
 				}
+				
 			}
 			else
 			{
@@ -105,11 +108,13 @@ void inventoryCraft::materialUpdate()
 			}
 			if (_isGold == NULL)
 			{
+
 				if (_inven->getvInven()[i].indexX == 12 && _inven->getvInven()[i].indexY == 3)
 				{
 					_isGold = i;
 
 				}
+				
 			}
 			else
 			{
@@ -119,29 +124,31 @@ void inventoryCraft::materialUpdate()
 				}
 			}
 		}
-		//	else if (_inven->getvInven()[i].item_kind == ITEM_FRUIT)
-		//	{
-		//		if (_isTomato == NULL)
-		//		{
-		//			if (_inven->getvInven()[i].indexX == 12 && _inven->getvInven()[i].indexY == 3)
-		//			{
-		//				_isTomato = i;
+		else if (_inven->getvInven()[i].item_kind == ITEM_FRUIT)
+		{
+			if (_isTomato == NULL)
+			{
+				if (_inven->getvInven()[i].seedKind == SEED_TOMATO)
+				{
 
-		//			}
-		//		}
-		//		else
-		//		{
-		//			if (_inven->getvInven()[_isTomato].amount <= 0)
-		//			{
-		//				_isTomato = NULL;
-		//			}
-		//		}
+					if (_inven->getvInven()[i].indexX == 3 && _inven->getvInven()[i].indexY == 0)
+					{
+						_isTomato = i;
+					}
+				}
+			}
+			else
+			{
+				if (_inven->getvInven()[_isTomato].amount <= 0)
+				{
+					_isTomato = NULL;
+				}
+			}
 
-		//	}
-		//}
+		}
+	}
 
 		//cout << _isWood << "  " << _isRock << "  " << _isCopper << "  " << _isIron << "  " << _isGold << endl;
-	}
 }
 
 void inventoryCraft::update()
@@ -159,21 +166,6 @@ void inventoryCraft::update()
 			}
 			_vCraftItem[i].rc = RectMake(250 + i % 11 * 50, 130, 40, 80);
 		}
-
-		if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
-		{
-			for (int i = 0; i < _vCraftEventItem.size(); i++)
-			{
-				if (_vCraftEventItem[i].item_image == NULL)
-				{
-					_vCraftEventItem[i].item_image = IMAGEMANAGER->findImage("토마토아이템제작알파");
-				}
-				else
-				{
-				}
-				_vCraftEventItem[i].rc = RectMake(250 + i % 11 * 50, 210, 40, 80);
-			}
-		}
 		initCount = 1;
 	}
 
@@ -190,7 +182,7 @@ void inventoryCraft::update()
 					tagItem box;
 					box.item_image = IMAGEMANAGER->findImage("아이템");
 					box.item_info = "상자";
-					box.itemName= "상자";
+					//box.itemName= "상자";
 					box.indexX = 0;
 					box.indexY = 0;
 					box.item_kind = ITEM_BOX;
@@ -225,7 +217,7 @@ void inventoryCraft::update()
 					tagItem blastfurnace;
 					blastfurnace.item_image = IMAGEMANAGER->findImage("아이템");
 					blastfurnace.item_info = "용광로";
-					blastfurnace.itemName = "용광로";
+					//blastfurnace.itemName = "용광로";
 					blastfurnace.indexX = 1;
 					blastfurnace.indexY = 0;
 					blastfurnace.item_kind = ITEM_BLASTFURNACE;
@@ -252,7 +244,7 @@ void inventoryCraft::update()
 	{
 		for (int i = 1; i < 10; i++)
 		{
-			if (_inven->getvInven()[_isWood].amount >= 2 * i + 8 && _inven->getvInven()[_isRock].amount >= i + 3)
+			if (_inven->getvInven()[_isWood].amount >= (2 * i + 8) && _inven->getvInven()[_isRock].amount >= i + 3)
 			{
 				_vCraftItem[i + 1].item_image = IMAGEMANAGER->findImage("아이템제작");
 
@@ -271,8 +263,8 @@ void inventoryCraft::update()
 						scarecrow.amount = 1;
 
 						_inven->setMouseItem(scarecrow);
-						_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 2 * i + 8);
-						_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - i + 3);
+						_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - (2 * i + 8));
+						_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - (i + 3));
 					}
 				}
 			}
@@ -301,18 +293,19 @@ void inventoryCraft::update()
 					{
 						if (INPUT->GetKeyDown(VK_LBUTTON))
 						{
-							tagItem scarecrow;
-							scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-							scarecrow.item_info = "허수아비";
-							scarecrow.indexX = i;
-							scarecrow.indexY = 0;
-							//scarecrow.scarecrowKind = (SCARECROW)i+10;
-							scarecrow.isFrame = true;
-							scarecrow.amount = 1;
+							tagItem tomatoScarecrow;
+							tomatoScarecrow.item_image = IMAGEMANAGER->findImage("아이템");
+							tomatoScarecrow.item_info = "허수아비";
+							tomatoScarecrow.indexX = i;
+							tomatoScarecrow.indexY = 0;
+							tomatoScarecrow.scarecrowKind = (SCARECROW)(i + 10);
+							tomatoScarecrow.isFrame = true;
+							tomatoScarecrow.amount = 1;
 
-							_inven->setMouseItem(scarecrow);
-							_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 15);
-							_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 5);
+							_inven->setMouseItem(tomatoScarecrow);
+							_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - (10 * i + 20));
+							_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - (5 * i + 10));
+							_inven->setInvenItemAmount(_isTomato, _inven->getvInven()[_isRock].amount - (5 * i + 20));
 						}
 					}
 				}
@@ -427,11 +420,8 @@ void inventoryCraft::render(HDC hdc)
 	{
 		for (int i = 0; i < _vCraftEventItem.size(); i++)
 		{
-			if (_vCraftEventItem[i].item_image != NULL)
-			{
 				_vCraftEventItem[i].item_image->frameRender(hdc, _vCraftEventItem[i].rc.left, _vCraftEventItem[i].rc.top, _vCraftEventItem[i].indexX, _vCraftEventItem[i].indexY);
 				craftEventInven_item_info(hdc);
-			}
 			//Rectangle(hdc, _vCraftEventItem[i].rc); 
 		}
 	}
@@ -605,13 +595,13 @@ void inventoryCraft::craftEventInven_item_info(HDC hdc)
 
 				memset(temp_info, 0, sizeof(temp_info));
 
-				if (PtInRect(&_vCraftEventItem[0].rc, _ptMouse)) //토마토 허수아비 렉트에 닿으면
+				if (PtInRect(&_vCraftEventItem[i].rc, _ptMouse)) //토마토 허수아비 렉트에 닿으면
 				{
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 4, 2);
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
-					//토마토이미지 IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp3.top-5, 4, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp4.top-5, 3, 2);
+					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp5.top-5, 3, 0);
 
-					sprintf(temp_info[0], "허수아비", sizeof("허수아비"));
+					sprintf(temp_info[0], "토마토 허수아비 %d", i + 1);
 					sprintf(temp_info[1], ": 나무 %d개", i*10+ 20);
 					sprintf(temp_info[2], ": 돌 %d개", i*5 + 10);
 					sprintf(temp_info[3], ": 토마토 %d개", i * 5 + 20);

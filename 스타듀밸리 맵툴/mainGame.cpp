@@ -28,6 +28,7 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("광산화면", new mineScene);
 	SCENEMANAGER->addScene("마법사타워화면", new towerScene);
 	SCENEMANAGER->addScene("오프닝화면", new openingScene);
+	SCENEMANAGER->addScene("엔딩화면", new endingScene);
 	/*현재씬*/
 	SCENEMANAGER->loadScene("로딩화면");
 

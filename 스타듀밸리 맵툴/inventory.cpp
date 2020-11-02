@@ -73,12 +73,25 @@ void inventory::release()
 
 void inventory::update()
 {
+<<<<<<< HEAD
 	if (INPUT->GetKeyDown(VK_F8))
 	{
 		PLAYER->setFarmingExp(100);
 		PLAYER->setCombatExp(100);
 	}
 
+=======
+	for (int i = 0; i < INVENMAX; i++)
+	{
+		if (_vItem[i].item_image == NULL)
+		{
+			tagItem temp;
+			memset(&temp, 0, sizeof(temp));
+			_vItem[i] = temp;
+		}
+		//y << &_vItem[i] << endl;
+	}
+>>>>>>> 4190b0eb68a5edf2debbccf936080982c8cc921b
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
@@ -1257,6 +1270,14 @@ void inventory::setInvenItem(int i, tagItem item)
 
 void inventory::setvInven(int i, tagSaveItem item)
 {
+	if (item.item_kind == ITEM_SEED)
+	{
+		_vItem[i] = ITEMMANAGER->findDropItem(item.item_kind, item.seedKind);
+	}
+	else
+	{
+		_vItem[i] = ITEMMANAGER->findDropItem(item.item_kind, item.indexX);
+	}
 	_vItem[i].amount = item.amount;
 	_vItem[i].buy_price = item.buy_price;
 	_vItem[i].indexX = item.indexX;

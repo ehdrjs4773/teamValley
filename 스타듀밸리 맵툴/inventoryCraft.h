@@ -28,6 +28,7 @@ public:
 
 	bool _isTemp3;
 	bool _isTemp4;
+	bool isadded = false;
 
 public :
 	void init();
