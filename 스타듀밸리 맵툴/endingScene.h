@@ -3,7 +3,7 @@
 
 class endingScene : public gameNode
 {
-private:
+public:
 	int movieCount = 0;
 	HWND g_hMCIWnd;
 	HWND hWndAVI = 0;//AVI

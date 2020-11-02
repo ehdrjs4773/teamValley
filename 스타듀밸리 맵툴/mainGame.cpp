@@ -77,7 +77,7 @@ void mainGame::render()
 {
 	//흰색 빈 비트맵 (이것은 렌더에 그냥 두기)
 
-	if(SCENEMANAGER->getCurrentSceneName() != "오프닝화면")
+	if(SCENEMANAGER->getCurrentSceneName() != "오프닝화면" && SCENEMANAGER->getCurrentSceneName() != "엔딩화면")
 	{
 		PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 		//=============================================================

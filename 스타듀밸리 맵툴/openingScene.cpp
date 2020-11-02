@@ -8,20 +8,21 @@ HRESULT openingScene::init()
 {
 	SOUNDMANAGER->stop("메인음악");
 	SOUNDMANAGER->play("오프닝");
-		if (hWndAVI)
+	if (hWndAVI)
 	{
 		MCIWndClose(hWndAVI);
 		MCIWndDestroy(hWndAVI);
 		hWndAVI = 0;
 	}
 
-	char szAVIFilename[] = "video/opening.avi";
+	char szAVIFilename[] = "video/opening2.avi";
 
 	// hWndAVI를 생성
 	hWndAVI = MCIWndCreate(_hWnd, _hInstance,
 		MCIWNDF_NOTIFYANSI | MCIWNDF_NOMENU |
 		MCIWNDF_NOTIFYALL | MCIWNDF_NOPLAYBAR,
 		szAVIFilename);
+
 	// 사이즈 맞춰서.. 
 	if (hWndAVI)
 	{

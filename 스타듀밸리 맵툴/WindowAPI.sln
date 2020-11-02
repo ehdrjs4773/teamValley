@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameFramework2D", "WindowAPI.vcxproj", "{5CFDEF9B-DA94-4BF5-A033-6A6386FC4E29}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Stardew Valley", "WindowAPI.vcxproj", "{5CFDEF9B-DA94-4BF5-A033-6A6386FC4E29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCBB44C4-1FF7-4D72-83D4-2A3D38208BAE}"
+	ProjectSection(SolutionItems) = preProject
+		endingScene.cpp = endingScene.cpp
+		endingScene.h = endingScene.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

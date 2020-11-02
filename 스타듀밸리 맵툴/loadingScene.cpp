@@ -82,7 +82,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("광산오브젝트버튼", "Images/광산오브젝트.bmp", 100, 50);
 
 	IMAGEMANAGER->addImage("인벤토리_아이템", "Images/shop/inventory.bmp", 750, 200, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("메인화면", "Images/메인화면.bmp", 1200, 600, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("메인화면", "Images/메인화면 글자 변경본.bmp", 1200, 600, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("선택", "Images/메인화면선택.bmp", 696, 242, 4, 2);
 	IMAGEMANAGER->addFrameImage("도구", "Images/BMP/도구.bmp", 360, 160, 9, 4);
 	IMAGEMANAGER->addImage("인벤경고창", "Images/beforeExit.bmp", 420, 280);

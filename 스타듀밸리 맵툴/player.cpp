@@ -126,7 +126,7 @@ void  player::update()
 	}
 	if (INPUT->GetKeyDown(VK_F8))
 	{
-		hour = 18;
+		date = 27;
 	}
 	frontHpBar.top = (WINSIZEY - 156 + ((138 / MAXHP) * (MAXHP - playerHp)));
 	frontEnergyBar.top = (WINSIZEY - 156 + ((138 / MAXENERGY) *  (MAXENERGY - playerEnergy)));
