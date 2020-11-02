@@ -278,7 +278,14 @@ void inGameScene::render()
 
 	//이펙트 렌더
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
-	
+	if (PLAYER->getHour() > 22 || PLAYER->getHour() < 10)
+	{
+		IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 480, 0, 0);
+			if ((currentIndexX > 20 && currentIndexX < 23) && (currentIndexY == 31 || currentIndexY == 32))
+			{
+				PLAYER->render();
+			}
+	}
 	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
 	//IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472, 0, 0);
 	CAMERAMANAGER->render(getMemDC());
@@ -395,7 +402,6 @@ void inGameScene::renderMap()
 			renderObjects(i, j);
 		}
 	}
-	if(PLAYER->getHour() > 22 || PLAYER->getHour() < 10) IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472, 0, 0);
 
 	//플레이어 렌더
 	PLAYER->render();
@@ -708,7 +714,7 @@ void inGameScene::playerMove()
 								|| _tile[rightIndexY][rightIndexX].objFrameY == 7
 								|| _tile[rightIndexY][rightIndexX].objFrameY == 9))))
 				{
-					if (rightIndexX == 22 && (rightIndexY == 30))
+					if (rightIndexX == 22 && (rightIndexY == 31))
 					{
 						
 					}
@@ -758,7 +764,7 @@ void inGameScene::playerMove()
 								|| _tile[leftIndexY][leftIndexX].objFrameY == 9)) 
 								))
 				{
-					if (leftIndexX == 22 && (leftIndexY == 30))
+					if (leftIndexX == 22 && (leftIndexY == 31))
 					{
 
 					}
@@ -808,7 +814,7 @@ void inGameScene::playerMove()
 								|| _tile[upIndexY][upIndexX].objFrameY == 7
 								|| _tile[upIndexY][upIndexX].objFrameY == 9))))
 				{
-					if (upIndexX == 22 && (upIndexY == 30))
+					if (upIndexX == 22 && (upIndexY == 31))
 					{
 
 					}
@@ -858,7 +864,7 @@ void inGameScene::playerMove()
 								|| _tile[downIndexY][downIndexX].objFrameY == 9)))
 					|| (downIndexX == 22 && (downIndexY == 30 || downIndexY == 31)))
 				{
-					if (downIndexX == 22 && (downIndexY == 30))
+					if (downIndexX == 22 && (downIndexY == 31))
 					{
 
 					}
