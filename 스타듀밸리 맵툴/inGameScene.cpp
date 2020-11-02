@@ -1399,7 +1399,7 @@ void inGameScene::setEquipment()
 					SOUNDMANAGER->play("movewood", 0.4f);
 					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 					_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
-					_tile[MouseIndexY][MouseIndexX].objFrameX = i+2;
+					_tile[MouseIndexY][MouseIndexX].objFrameX = i+1;
 					_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 				}
 			}
