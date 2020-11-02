@@ -232,7 +232,7 @@ void mineScene::render()
 	PLAYER->playerStatusRender(getMemDC());
 	if (_isTalk)
 	{
-		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		IMAGEMANAGER->render("플레이어대사창", getMemDC(), 80, 275);
 		RECT tempRC = RectMake(120, 320, 800, 300);
 		DrawText(getMemDC(), script[script_count], strlen(script[script_count]),&tempRC,NULL);
 	}

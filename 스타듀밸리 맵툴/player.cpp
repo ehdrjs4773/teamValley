@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "player.h"
 
 HRESULT player::init()
@@ -37,14 +37,29 @@ HRESULT player::init()
 	frontHpBar = RectMakeCenter(WINSIZEX - 95, WINSIZEY - 88, 20, (138 / MAXHP * playerHp));
 	frontEnergyBar = RectMakeCenter(WINSIZEX - 55, WINSIZEY - 88, 20, (138 / MAXENERGY * playerEnergy));
 
-	IMAGEMANAGER->addFrameImage("playerMove", "Images/ÇÃ·¹ÀÌ¾îÀÌ¹ÌÁö3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("playerMove", "Images/í”Œë ˆì´ì–´ì´ë¯¸ì§€3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
+
+	IMAGEMANAGER->addFrameImage("blackholeSword", "Images/ë§ˆë²•ê²€/blackholeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	blackholeSword = IMAGEMANAGER->findImage("blackholeSword");
+
+	IMAGEMANAGER->addFrameImage("explosionSword", "Images/ë§ˆë²•ê²€/explosionSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	explosionSword = IMAGEMANAGER->findImage("explosionSword");
+
+	IMAGEMANAGER->addFrameImage("fireballSword", "Images/ë§ˆë²•ê²€/fireballSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	fireballSword = IMAGEMANAGER->findImage("fireballSword");
+
+	IMAGEMANAGER->addFrameImage("fireSword", "Images/ë§ˆë²•ê²€/fireSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	fireSword = IMAGEMANAGER->findImage("fireSword");
+
+	IMAGEMANAGER->addFrameImage("spikeSword", "Images/ë§ˆë²•ê²€/spikeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
+	spikeSword = IMAGEMANAGER->findImage("spikeSword");
 
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
 
 	IMAGEMANAGER->addImage("backEnergyBar", "Images/BMP/backEnergyBar.bmp", 40, 188, true, RGB(255, 0, 255));
-	playerStorage = IMAGEMANAGER->findImage("ÇÃ·¹ÀÌ¾î Ã¢°í");
+	playerStorage = IMAGEMANAGER->findImage("í”Œë ˆì´ì–´ ì°½ê³ ");
 
 	_inventory = new inventory;
 	_inventory->init();
@@ -171,10 +186,10 @@ void  player::update()
 		cout << darkAlpha << endl;
 	}
 
-	//ÇÃ·¹ÀÌ¾î ÇöÀç ¸Ê Ã¼Å©
+	//í”Œë ˆì´ì–´ í˜„ì¬ ë§µ ì²´í¬
 	setCurrentMap();
 	
-	//°¡Ãà ¿òÁ÷ÀÓ
+	//ê°€ì¶• ì›€ì§ì„
 	stock->update();
 
 	currentX = centerX / 16;
@@ -235,23 +250,23 @@ void player::playerCarryItem(HDC hdc)
 		{
 			if (getCurrentInven()->seedKind == SEED_PINETREE || getCurrentInven()->seedKind == SEED_MAPLETREE || getCurrentInven()->seedKind == SEED_OAKTREE)
 			{
-				IMAGEMANAGER->findImage("¿­¸Å(¶¥)")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				IMAGEMANAGER->findImage("ì—´ë§¤(ë•…)")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
 			else
 			{
-				IMAGEMANAGER->findImage("¾¾¾Ñhold")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
+				IMAGEMANAGER->findImage("ì”¨ì•—hold")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
 		}
 		else if (getCurrentInven()->item_kind == ITEM_BOX)
 		{
-			IMAGEMANAGER->findImage("¾ÆÀÌÅÛÁ¦ÀÛ½º¸ô")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top-16,
+			IMAGEMANAGER->findImage("ì•„ì´í…œì œì‘ìŠ¤ëª°")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top-16,
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
 		}
 		else if (getCurrentInven()->item_kind == ITEM_BLASTFURNACE)
 		{
-			IMAGEMANAGER->findImage("¾ÆÀÌÅÛÁ¦ÀÛ½º¸ô")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+			IMAGEMANAGER->findImage("ì•„ì´í…œì œì‘ìŠ¤ëª°")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
 		}
 
@@ -259,7 +274,7 @@ void player::playerCarryItem(HDC hdc)
 		{
 			if (getCurrentInven()->scarecrowKind == i)
 			{
-				IMAGEMANAGER->findImage("¾ÆÀÌÅÛÁ¦ÀÛ½º¸ô")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+				IMAGEMANAGER->findImage("ì•„ì´í…œì œì‘ìŠ¤ëª°")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
 		}
@@ -277,7 +292,7 @@ void player::playerStatusRender(HDC hdc)
 	arrowRender(hdc);
 	weatherRender(hdc);
 
-	if (SCENEMANAGER->getCurrentSceneName() == "±¤»êÈ­¸é")
+	if (SCENEMANAGER->getCurrentSceneName() == "ê´‘ì‚°í™”ë©´")
 	{
 		hpBarRender(hdc);
 	}
@@ -1208,7 +1223,7 @@ void player::playerRender()
 
 void player::openPlayerStorageCover()
 {
-	//ÇÃ·¹ÀÌ¾î Ã¢°í»óÀÚ
+	//í”Œë ˆì´ì–´ ì°½ê³ ìƒì
 	if(!isOpenPlayerStorageCover)
 	{
 		_inventory->setIsShowTemp(true);
@@ -1235,23 +1250,23 @@ void player::closePlayerStorageCover()
 
 void player::setCurrentMap()
 {
-	if (SWITCHMANAGER->getCurrentScene() == "»óÁ¡¾À")
+	if (SWITCHMANAGER->getCurrentScene() == "ìƒì ì”¬")
 	{
 		currentMap = MAP_SHOP;
 	}
-	else if (SWITCHMANAGER->getCurrentScene() == "ÀÎ°ÔÀÓÈ­¸é")
+	else if (SWITCHMANAGER->getCurrentScene() == "ì¸ê²Œì„í™”ë©´")
 	{
 		currentMap = MAP_FARM;
 	}
-	else if (SWITCHMANAGER->getCurrentScene() == "°Ç¹°¾ÈÈ­¸é")
+	else if (SWITCHMANAGER->getCurrentScene() == "ê±´ë¬¼ì•ˆí™”ë©´")
 	{
 		currentMap = MAP_BARN;
 	}
-	else if (SWITCHMANAGER->getCurrentScene() == "Áı¾ÈÈ­¸é")
+	else if (SWITCHMANAGER->getCurrentScene() == "ì§‘ì•ˆí™”ë©´")
 	{
 		currentMap = MAP_HOUSE;
 	}
-	else if (SWITCHMANAGER->getCurrentScene() == "±¤»êÈ­¸é")
+	else if (SWITCHMANAGER->getCurrentScene() == "ê´‘ì‚°í™”ë©´")
 	{
 		currentMap = MAP_MINE;
 	}
@@ -1295,14 +1310,14 @@ void player::countTime()
 		this->savePlayerData();
 		this->saveMap();
 		this->saveBox();
-		SWITCHMANAGER->changeScene("Áı¾ÈÈ­¸é");
+		SWITCHMANAGER->changeScene("ì§‘ì•ˆí™”ë©´");
 		SWITCHMANAGER->startFade(835.0f, 865.0f);
 	}
 	if (date == 28)
 	{
 		_pState = STAND;
 		_pDirection = DOWN;
-		SWITCHMANAGER->changeScene("¿£µùÈ­¸é");
+		SWITCHMANAGER->changeScene("ì—”ë”©í™”ë©´");
 		SWITCHMANAGER->startFade(WINSIZEX/2, WINSIZEY/2);
 	}
 	if (currentSeason > 3)
@@ -1433,10 +1448,10 @@ bool player::checkFullyGrown(tagTile tile)
 
 void player::loadPlayerData()
 {
-	//ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ¸®¼Â
+	//í”Œë ˆì´ì–´ ë°ì´í„° ë¦¬ì…‹
 	resetPlayer();
 
-	//ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ºÒ·¯¿À±â
+	//í”Œë ˆì´ì–´ ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
 	date = INIDATA->loadDataInteger("save/playerData", "PLAYER", "date");
 	year = INIDATA->loadDataInteger("save/playerData", "PLAYER", "year");
 	day = (DAYOFWEEK)INIDATA->loadDataInteger("save/playerData", "PLAYER", "day");
@@ -1464,7 +1479,7 @@ void player::loadPlayerData()
 
 void player::loadInven()
 {
-	//ÀÎº¥ ºÒ·¯¿À±â
+	//ì¸ë²¤ ë¶ˆëŸ¬ì˜¤ê¸°
 	HANDLE file1;
 	DWORD read1;
 	tagSaveItem LoadItem[36] = {};
@@ -1483,7 +1498,7 @@ void player::loadInven()
 
 void player::loadBoxInven()
 {
-	//¹Ú½º ºÒ·¯¿À±â
+	//ë°•ìŠ¤ ë¶ˆëŸ¬ì˜¤ê¸°
 	HANDLE file1;
 	DWORD read1;
 	tagItem LoadItem[36] = {};
@@ -1502,7 +1517,7 @@ void player::loadBoxInven()
 
 void player::loadStock()
 {
-	//°¡Ãà ºÒ·¯¿À±â
+	//ê°€ì¶• ë¶ˆëŸ¬ì˜¤ê¸°
 	HANDLE file;
 	DWORD read;
 	tagStock tempStock[5];
@@ -1642,10 +1657,10 @@ void player::saveMap()
 	{
 		for (int j = 0; j < TILEX; j++)
 		{
-			//ÀÛ¹° ÀÚ¶ó°Ô ÇÏ±â
+			//ì‘ë¬¼ ìë¼ê²Œ í•˜ê¸°
 			makeCropGrow(i, j);
 			
-			//´ÙÀÚ¶ú´ÂÁö È®ÀÎ
+			//ë‹¤ìëëŠ”ì§€ í™•ì¸
 			_tile[i][j].isFullyGrown = checkFullyGrown(_tile[i][j]);
 
 			_tile[i][j].isWet = false;
@@ -1956,7 +1971,7 @@ void player::makeCropGrow(int i, int j)
 
 void player::clockRender(HDC hdc)
 {
-	IMAGEMANAGER->render("½Ã°è", hdc, 980, 20);
+	IMAGEMANAGER->render("ì‹œê³„", hdc, 980, 20);
 
 	char dayStr[64];	
 	char hourStr[64];
@@ -1967,25 +1982,25 @@ void player::clockRender(HDC hdc)
 	switch (day)
 	{
 	case MON:
-		sprintf(dayStr, "¿ù");
+		sprintf(dayStr, "ì›”");
 		break;
 	case TUE:
-		sprintf(dayStr, "È­");
+		sprintf(dayStr, "í™”");
 		break;
 	case WED:
-		sprintf(dayStr, "¼ö");
+		sprintf(dayStr, "ìˆ˜");
 		break;
 	case THU:
-		sprintf(dayStr, "¸ñ");
+		sprintf(dayStr, "ëª©");
 		break;
 	case FRI:
-		sprintf(dayStr, "±İ");
+		sprintf(dayStr, "ê¸ˆ");
 		break;
 	case SAT:
-		sprintf(dayStr, "Åä");
+		sprintf(dayStr, "í† ");
 		break;
 	case SUN:
-		sprintf(dayStr, "ÀÏ");
+		sprintf(dayStr, "ì¼");
 		break;
 	}
 	textOut(hdc, 1055, 98, dayStr, RGB(0, 0, 0));
@@ -2013,8 +2028,8 @@ void player::clockRender(HDC hdc)
 		}
 	}
 
-	//sprintf(yearStr, "%d³â", year);
-	sprintf(dateStr, "%dÀÏ", date);
+	//sprintf(yearStr, "%dë…„", year);
+	sprintf(dateStr, "%dì¼", date);
 	//textOut(hdc, 1065, 34, yearStr, RGB(0, 0, 0));
 	textOut(hdc, 1090, 34, dateStr, RGB(0, 0, 0));
 }
@@ -2027,17 +2042,17 @@ void player::moneyRender(HDC hdc)
 	while (b > 0)
 	{
 		a = b % 10;
-		IMAGEMANAGER->frameRender("µ·¼ıÀÚ", hdc, 1144 - (17 * i), 148, a, 0);
+		IMAGEMANAGER->frameRender("ëˆìˆ«ì", hdc, 1144 - (17 * i), 148, a, 0);
 
 		b /= 10;
 		i++;
 	}
 	if (money <= 0)
 	{
-		IMAGEMANAGER->frameRender("µ·¼ıÀÚ", hdc, 1144, 148, 0, 0);
+		IMAGEMANAGER->frameRender("ëˆìˆ«ì", hdc, 1144, 148, 0, 0);
 	}
 
-	//µ· 0º¸´Ù ÀÛÀ¸¸é 0À¸·Î °íÁ¤
+	//ëˆ 0ë³´ë‹¤ ì‘ìœ¼ë©´ 0ìœ¼ë¡œ ê³ ì •
 	if (money < 0)
 	{
 		money = 0;
@@ -2056,17 +2071,17 @@ void player::arrowRender(HDC hdc)
 		arrowAngle = 18 - (hour - 6);
 	}*/
 
-	IMAGEMANAGER->frameRender("½Ã°è¹Ù´Ã", hdc, 984, 14, arrowAngle, 0);
+	IMAGEMANAGER->frameRender("ì‹œê³„ë°”ëŠ˜", hdc, 984, 14, arrowAngle, 0);
 }
 
 void player::weatherRender(HDC hdc)
 {
-	IMAGEMANAGER->frameRender("³¯¾¾", hdc, 1061, 64, 0, currentWeather);
-	IMAGEMANAGER->frameRender("°èÀı", hdc, 1127, 64, 0, currentSeason);
+	IMAGEMANAGER->frameRender("ë‚ ì”¨", hdc, 1061, 64, 0, currentWeather);
+	IMAGEMANAGER->frameRender("ê³„ì ˆ", hdc, 1127, 64, 0, currentSeason);
 
 	if (currentMap != MAP_MINE)
 	{
-		IMAGEMANAGER->alphaRender("ÆäÀÌµå", hdc, 0, 0, darkAlpha);
+		IMAGEMANAGER->alphaRender("í˜ì´ë“œ", hdc, 0, 0, darkAlpha);
 	}
 }
 
@@ -2087,7 +2102,7 @@ void player::limitEnergy()
 		savePlayerStock();
 		saveMap();
 		saveBox();
-		SWITCHMANAGER->changeScene("Áı¾ÈÈ­¸é");
+		SWITCHMANAGER->changeScene("ì§‘ì•ˆí™”ë©´");
 		SWITCHMANAGER->startFade(845.0f, 855.0f);
 	}
 	else
