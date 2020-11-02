@@ -205,7 +205,6 @@ void inGameScene::render()
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 	
 	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
-	IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 340.0f, 472.0f, 0, 0);
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -444,38 +443,28 @@ void inGameScene::renderObjects(int i, int j)
 				IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 				
-				if (_tile[i][j].objFrameX == 0 && _tile[i][j].objFrameY == 1) //상자
+				if (_tile[i][j].objType==OTY_BOX) //상자
 				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i-1][j].rc.left, _tile[i-1][j].rc.top,
-						0,2);
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-						0,3);
+						0,0);
 				}
-				else if (_tile[i][j].objFrameX == 1 && _tile[i][j].objFrameY == 1) //먹이통
+				else if (_tile[i][j].objType==OTY_BLASTFURNACE) //용광로
 				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						1, 0);
 				}
-				else if (_tile[i][j].objFrameX == 2 && _tile[i][j].objFrameY == 1) //양봉장
-				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-						2, 0);
-				}
-				//else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
+				
+				//for(int i=0;i<9;i++)
 				//{
-				//	IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-				//		3, 0);
+				//	if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
+				//	{
+				//		IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+				//			3, 0);
+				//	}
+
 				//}
-				else if (_tile[i][j].objFrameX == 4 && _tile[i][j].objFrameY == 1) //용광로
-				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-						4, 0);
-				}
-				else if (_tile[i][j].objFrameX == 4 && _tile[i][j].objFrameY == 1) //절임통
-				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-						5, 0);
-				}
+
+
 			}
 			else if (_tile[i][j].objType == OTY_TREE || _tile[i][j].objType == OTY_TREETRUNK)
 			{
@@ -631,9 +620,8 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(RIGHT);
 
-					for (int i = 0; i < 9; i++)
+					for (int i = 1; i < 10; i++)
 					{
-						
 						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
 						{
@@ -643,7 +631,6 @@ void inGameScene::playerMove()
 						{
 							PLAYER->setState(RUN);
 						}
-						
 					}
 					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 				}
@@ -675,7 +662,7 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(LEFT);
 
-					for (int i = 0; i < 9; i++)
+					for (int i = 1; i < 10; i++)
 					{
 						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -717,7 +704,7 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(UP);
 
-					for (int i = 0; i < 9; i++)
+					for (int i = 1; i < 10; i++)
 					{
 						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -759,7 +746,7 @@ void inGameScene::playerMove()
 				{
 					PLAYER->setDirection(DOWN);
 
-					for (int i = 0; i < 9; i++)
+					for (int i = 1; i < 10; i++)
 					{
 						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -876,26 +863,28 @@ void inGameScene::playerInteraction()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-		PLAYER->getCurrentInven()->item_kind == ITEM_FEEDBUCKET|| PLAYER->getCurrentInven()->item_kind == ITEM_BEEFARM||
-		PLAYER->getCurrentInven()->item_kind == ITEM_SCARECROW|| PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE||
-		PLAYER->getCurrentInven()->item_kind == ITEM_PICKLEDBARREL)
+	for (int i = 1; i < 10; i++)
 	{
-		if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
+		if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+			PLAYER->getCurrentInven()->scarecrowKind == i || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE)
 		{
-			PLAYER->setState(CARRYSTAND);
-		}
-	}
-	else
-	{
-		if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
-		{
-			if (PLAYER->getState() == STAND || PLAYER->getState() == CARRYSTAND)
+			if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
 			{
-				PLAYER->setState(STAND);
+				PLAYER->setState(CARRYSTAND);
+			}
+		}
+		else
+		{
+			if (!INPUT->GetKey('W') && !INPUT->GetKey('S') && !INPUT->GetKey('A') && !INPUT->GetKey('D'))
+			{
+				if (PLAYER->getState() == STAND || PLAYER->getState() == CARRYSTAND)
+				{
+					PLAYER->setState(STAND);
+				}
 			}
 		}
 	}
+
 
 	if (!PtInRect(&PLAYER->getInventory()->getqucikRect(), _ptMouse))
 	{
@@ -959,7 +948,7 @@ void inGameScene::playerInteraction()
 				}
 
 				//제작아이템 설치
-				for (int i = 0; i < 9; i++)
+				for (int i = 1; i < 10; i++)
 				{
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
 						PLAYER->getCurrentInven()->scarecrowKind==i)
@@ -1403,7 +1392,7 @@ void inGameScene::setEquipment()
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 			}
 
-			for (int i = 0; i < 9; i++)
+			for (int i = 1; i < 10; i++)
 			{
 				if (PLAYER->getCurrentInven()->scarecrowKind == i) //허수아비일때
 				{
