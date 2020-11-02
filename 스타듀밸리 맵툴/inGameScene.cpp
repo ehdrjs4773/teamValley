@@ -131,7 +131,7 @@ void inGameScene::update()
 	}
 
 	PLAYER->update();
-
+	cout << "player is met : " << PLAYER->getIsMet() << endl;
 	//skillSelect();
 
 	checkPlayerTile();
@@ -1990,9 +1990,9 @@ void inGameScene::getItem(tagItem item)
 	bool isAdded = false;
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PLAYER->getInven()->at(i).item_info == item.item_info)
+		if (PLAYER->getInven(i)->item_kind == item.item_kind && PLAYER->getInven(i)->indexX == item.indexX)
 		{
-			PLAYER->setInvenItemAmount(i, PLAYER->getInven()->at(i).amount + 1);
+			PLAYER->setInvenItemAmount(i, PLAYER->getInven(i)->amount + 1);
 			isAdded = true;
 			break;
 		}
@@ -2004,8 +2004,16 @@ void inGameScene::getItem(tagItem item)
 		{
 			if ((*PLAYER->getInven())[i].item_image == NULL)
 			{
-				PLAYER->setInvenItem(i, ITEMMANAGER->findItem(item.item_info));
-				break;
+				if (item.item_kind == ITEM_SEED)
+				{
+					PLAYER->setInvenItem(i, ITEMMANAGER->findDropItem(item.item_kind, item.seedKind));
+					break;
+				}
+				else
+				{
+					PLAYER->setInvenItem(i, ITEMMANAGER->findDropItem(item.item_kind, item.indexX));
+					break;
+				}
 			}
 		}
 	}

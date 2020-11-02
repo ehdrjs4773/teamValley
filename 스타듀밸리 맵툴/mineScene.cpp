@@ -53,7 +53,10 @@ HRESULT mineScene::init()
 	script[1] = "마법사 녀석, 나한테 뒷처리를 떠넘기다니...";
 	script[2] = "돈이라도 주니까 한다.";
 	script_count = 0;
-
+	if (!PLAYER->getfirstIn())
+	{
+		_isTalk = false;
+	}
 	this->update();
 
 
@@ -68,18 +71,23 @@ void mineScene::update()
 {
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
-	
-	if (_isTalk)
+	cout << PLAYER->getfirstIn() << endl;
+	if (PLAYER->getfirstIn())
 	{
-		if (INPUT->GetKeyDown(VK_LBUTTON))
+		if (_isTalk)
 		{
-			script_count++;
-			if (script_count > 2)
+			if (INPUT->GetKeyDown(VK_LBUTTON))
 			{
-				_isTalk = false;
+				script_count++;
+				if (script_count > 2)
+				{
+					_isTalk = false;
+					PLAYER->setfirstIn(false);
+				}
 			}
 		}
 	}
+	
 	if (!PLAYER->getIsShowInventory())
 	{
 		//몬스터 스킬 충돌

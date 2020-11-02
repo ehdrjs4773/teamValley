@@ -49,14 +49,13 @@ void skill::skillSelect()
 		if (PLAYER->getInventory()->getvInven()[_num].item_kind == ITEM_SKILL)
 		{
 			_isClick = true;
-			if (PLAYER->getInventory()->getvInven()[_num].item_info == "폭발 검") skill_state = SKILL_EXPLOSION;
-			if (PLAYER->getInventory()->getvInven()[_num].item_info == "스파이크 검") skill_state = SKILL_SPIKES;
-			if (PLAYER->getInventory()->getvInven()[_num].item_info == "불 검") skill_state = SKILL_FIRE;
-			if (PLAYER->getInventory()->getvInven()[_num].item_info == "블랙홀 검") skill_state = SKILL_BLACKHOLE;
-			if (PLAYER->getInventory()->getvInven()[_num].item_info == "파이어볼 검") skill_state = SKILL_FIRE_BALL;
+			if (PLAYER->getInventory()->getvInven()[_num].weaponKind == WEAPON_EXPLOSION) skill_state = SKILL_EXPLOSION;
+			if (PLAYER->getInventory()->getvInven()[_num].weaponKind == WEAPON_SPIKES) skill_state = SKILL_SPIKES;
+			if (PLAYER->getInventory()->getvInven()[_num].weaponKind == WEAPON_FIRE) skill_state = SKILL_FIRE;
+			if (PLAYER->getInventory()->getvInven()[_num].weaponKind == WEAPON_BLACKHOLE) skill_state = SKILL_BLACKHOLE;
+			if (PLAYER->getInventory()->getvInven()[_num].weaponKind == WEAPON_FIREBALL) skill_state = SKILL_FIRE_BALL;
 		}
 	}
-
 	//cout << skill_state << endl;
 }
 
@@ -86,7 +85,6 @@ void skill::skillActive()
 			{
 				PLAYER->setDirection(LEFT);
 			}
-
 
 			switch (skill_state)
 			{

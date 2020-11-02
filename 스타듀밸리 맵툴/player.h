@@ -49,6 +49,7 @@ private:
 	int aniCountControl2 = 5;
 
 	bool isMet;
+	bool firstIn;
 
 	bool isShowInventory;
 
@@ -249,5 +250,7 @@ public:
 
 	bool getIsMet() { return isMet; }
 	void setIsMet(bool _is) { isMet = _is; }
+	bool getfirstIn() { return firstIn; }
+	void setfirstIn(bool _is) { firstIn = _is; }
 };
 
