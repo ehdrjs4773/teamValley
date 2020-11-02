@@ -224,6 +224,7 @@
     <ClCompile Include="towerScene.cpp">
       <Filter>마법사의성 씬</Filter>
     </ClCompile>
+    <ClCompile Include="endingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameNode.h">
@@ -350,6 +351,7 @@
     <ClInclude Include="towerScene.h">
       <Filter>마법사의성 씬</Filter>
     </ClInclude>
+    <ClInclude Include="endingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework2D.rc" />

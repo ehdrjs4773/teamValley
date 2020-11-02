@@ -26,25 +26,29 @@ void inBuildingScene::render()
 {
 	IMAGEMANAGER->render("큰외양간", CAMERAMANAGER->getMemDC());
 
-	if (PLAYER->getCenterX() >= 780 && PLAYER->getCenterX() <= 800)
+	if (PLAYER->getHour() > 10 && PLAYER->getHour() < 22)
 	{
-		if (PLAYER->getCenterY() >= 780)
+		if (PLAYER->getCenterX() >= 780 && PLAYER->getCenterX() <= 800)
 		{
-			IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 780, 780, 0, 0);
-			PLAYER->render();
+			if (PLAYER->getCenterY() >= 780)
+			{
+				IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 780, 780, 0, 0);
+				PLAYER->render();
 
+			}
+			else
+			{
+				PLAYER->render();
+				IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 780, 780, 0, 0);
+			}
 		}
 		else
 		{
-			PLAYER->render();
 			IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 780, 780, 0, 0);
+			PLAYER->render();
 		}
 	}
-	else
-	{
-		IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 780, 780, 0, 0);
-		PLAYER->render();
-	}
+	else PLAYER->render();
 
 	CAMERAMANAGER->render(getMemDC());
 

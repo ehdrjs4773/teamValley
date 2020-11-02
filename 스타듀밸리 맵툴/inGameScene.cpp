@@ -280,7 +280,7 @@ void inGameScene::render()
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 	
 	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
-	IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472,0,0);
+	//IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472, 0, 0);
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
@@ -395,9 +395,12 @@ void inGameScene::renderMap()
 			renderObjects(i, j);
 		}
 	}
+	if(PLAYER->getHour() > 22 || PLAYER->getHour() < 10) IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472, 0, 0);
 
 	//플레이어 렌더
 	PLAYER->render();
+
+
 	PLAYER->playerCarryItem(CAMERAMANAGER->getMemDC());
 
 
@@ -695,33 +698,38 @@ void inGameScene::playerMove()
 					|| (_tile[rightIndexY][rightIndexX].objType == OTY_TREE
 						&& !_tile[rightIndexY][rightIndexX].isFullyGrown
 						&& _tile[rightIndexY][rightIndexX].grownLevel == 0)
-					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_BUILDING 
+					|| (_tile[rightIndexY][rightIndexX].obj == OBJ_BUILDING
 						&& _tile[rightIndexY][rightIndexX].objType == OTY_HOUSE
-						&& ((_tile[rightIndexY][rightIndexX].objFrameX == 13 
-							|| _tile[rightIndexY][rightIndexX].objFrameX == 14 
+						&& ((_tile[rightIndexY][rightIndexX].objFrameX == 13
+							|| _tile[rightIndexY][rightIndexX].objFrameX == 14
 							|| _tile[rightIndexY][rightIndexX].objFrameX == 15)
-							&& 
+							&&
 							(_tile[rightIndexY][rightIndexX].objFrameY == 8
-							|| _tile[rightIndexY][rightIndexX].objFrameY == 7
-							|| _tile[rightIndexY][rightIndexX].objFrameY == 9)
-							)) 
-							)
+								|| _tile[rightIndexY][rightIndexX].objFrameY == 7
+								|| _tile[rightIndexY][rightIndexX].objFrameY == 9))))
 				{
-					PLAYER->setDirection(RIGHT);
-
-					for (int i = 1; i < 10; i++)
+					if (rightIndexX == 22 && (rightIndexY == 30))
 					{
-						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
-						{
-							PLAYER->setState(CARRY);
-						}
-						else
-						{
-							PLAYER->setState(RUN);
-						}
+						
 					}
-					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+					else
+					{
+						PLAYER->setDirection(RIGHT);
+
+						for (int i = 1; i < 10; i++)
+						{
+							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+							{
+								PLAYER->setState(CARRY);
+							}
+							else
+							{
+								PLAYER->setState(RUN);
+							}
+						}
+						PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
+					}
 				}
 			}
 		}
@@ -750,21 +758,29 @@ void inGameScene::playerMove()
 								|| _tile[leftIndexY][leftIndexX].objFrameY == 9)) 
 								))
 				{
-					PLAYER->setDirection(LEFT);
-
-					for (int i = 1; i < 10; i++)
+					if (leftIndexX == 22 && (leftIndexY == 30))
 					{
-						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
-						{
-							PLAYER->setState(CARRY);
-						}
-						else
-						{
-							PLAYER->setState(RUN);
-						}
+
 					}
-					PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+					else
+					{
+						PLAYER->setDirection(LEFT);
+
+						for (int i = 1; i < 10; i++)
+						{
+							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+							{
+								PLAYER->setState(CARRY);
+							}
+							else
+							{
+								PLAYER->setState(RUN);
+							}
+						}
+						PLAYER->setCenterX(PLAYER->getCenterX() - PLAYER->getSpeed());
+					}
+
 				}
 			}
 		}
@@ -790,24 +806,30 @@ void inGameScene::playerMove()
 							&&
 							(_tile[upIndexY][upIndexX].objFrameY == 8
 								|| _tile[upIndexY][upIndexX].objFrameY == 7
-								|| _tile[upIndexY][upIndexX].objFrameY == 9)))
-					|| (upIndexX == 22 && (upIndexY == 30 || upIndexY == 31)))
+								|| _tile[upIndexY][upIndexX].objFrameY == 9))))
 				{
-					PLAYER->setDirection(UP);
-
-					for (int i = 1; i < 10; i++)
+					if (upIndexX == 22 && (upIndexY == 30))
 					{
-						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
-						{
-							PLAYER->setState(CARRY);
-						}
-						else
-						{
-							PLAYER->setState(RUN);
-						}
+
 					}
-					PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+					else
+					{
+						PLAYER->setDirection(UP);
+
+						for (int i = 1; i < 10; i++)
+						{
+							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+							{
+								PLAYER->setState(CARRY);
+							}
+							else
+							{
+								PLAYER->setState(RUN);
+							}
+						}
+						PLAYER->setCenterY(PLAYER->getCenterY() - PLAYER->getSpeed());
+					}
 				}
 			}
 		}
@@ -836,22 +858,29 @@ void inGameScene::playerMove()
 								|| _tile[downIndexY][downIndexX].objFrameY == 9)))
 					|| (downIndexX == 22 && (downIndexY == 30 || downIndexY == 31)))
 				{
-					PLAYER->setDirection(DOWN);
-
-					for (int i = 1; i < 10; i++)
+					if (downIndexX == 22 && (downIndexY == 30))
 					{
-						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
-							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
-						{
-							PLAYER->setState(CARRY);
-						}
-						else
-						{
-							PLAYER->setState(RUN);
-						}
-					}
 
-					PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+					}
+					else
+					{
+						PLAYER->setDirection(DOWN);
+
+						for (int i = 1; i < 10; i++)
+						{
+							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
+								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
+							{
+								PLAYER->setState(CARRY);
+							}
+							else
+							{
+								PLAYER->setState(RUN);
+							}
+						}
+
+						PLAYER->setCenterY(PLAYER->getCenterY() + PLAYER->getSpeed());
+					}
 				}
 			}
 		}
