@@ -38,6 +38,10 @@ private:
 	bool isShowCalender = false;
 	bool _isTalk;
 	bool _isTalked;
+	bool _isFirstTalk;
+	const char* temp_script[20];
+	int script_count = 0;
+	vector<tagScript> script;
 public:
 	inGameScene();
 	

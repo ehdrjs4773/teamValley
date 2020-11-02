@@ -11,7 +11,6 @@ void inventoryCraft::init()
 		_CraftItem.indexY = 0;
 		_CraftItem.rc = RectMake(250 + i % 11 * 50, 130, 40, 80);
 		_vCraftItem.push_back(_CraftItem);
-	
 	}
 
 	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
@@ -23,7 +22,6 @@ void inventoryCraft::init()
 			_CraftEventItem.indexY = 1;
 			_CraftEventItem.rc = RectMake(250 + i % 11 * 50, 210, 40, 80);
 			_vCraftEventItem.push_back(_CraftEventItem);
-		
 		}
 	}
 
@@ -179,8 +177,7 @@ void inventoryCraft::update()
 		initCount = 1;
 	}
 
-	//상자 만들기 
-
+	//상자 만들기
 	if (_isWood != NULL)
 	{
 		if (_inven->getvInven()[_isWood].amount >= 10)
@@ -193,6 +190,7 @@ void inventoryCraft::update()
 					tagItem box;
 					box.item_image = IMAGEMANAGER->findImage("아이템");
 					box.item_info = "상자";
+					box.itemName= "상자";
 					box.indexX = 0;
 					box.indexY = 0;
 					box.item_kind = ITEM_BOX;
@@ -227,6 +225,7 @@ void inventoryCraft::update()
 					tagItem blastfurnace;
 					blastfurnace.item_image = IMAGEMANAGER->findImage("아이템");
 					blastfurnace.item_info = "용광로";
+					blastfurnace.itemName = "용광로";
 					blastfurnace.indexX = 1;
 					blastfurnace.indexY = 0;
 					blastfurnace.item_kind = ITEM_BLASTFURNACE;
@@ -249,404 +248,43 @@ void inventoryCraft::update()
 	}
 	
 	//허수아비 1-9번
-	//if (_isWood != NULL && _isRock != NULL)
-	//{
-	//	for (int i = 1; i < 10; i++)
-	//	{
-	//		if (_inven->getvInven()[_isWood].amount >= 2 * i + 8 && _inven->getvInven()[_isRock].amount >= i + 3)
-	//		{
-	//			_vCraftItem[i + 1].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-	//			if (PtInRect(&_vCraftItem[i + 1].rc, _ptMouse))
-	//			{
-	//				if (INPUT->GetKeyDown(VK_LBUTTON))
-	//				{
-	//					tagItem scarecrow;
-	//					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-	//					scarecrow.item_info = "허수아비";
-	//					scarecrow.indexX = i + 1;
-	//					scarecrow.indexY = 0;
-	//					scarecrow.scarecrowKind = i+1;
-	//					scarecrow.isFrame = true;
-	//					scarecrow.amount = 1;
-
-	//					_inven->setMouseItem(scarecrow);
-	//					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 2 * i + 8);
-	//					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - i + 3);
-	//				}
-	//			}
-	//		}
-	//		else if (_inven->getvInven()[_isWood].amount < 2 * i + 8 || _inven->getvInven()[_isRock].amount < i + 3)
-	//		{
-	//			if (_vCraftItem[i + 1].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-	//			{
-	//				_vCraftItem[i + 1].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-	//			}
-	//		}
-	//	}
-	//}
-
-	//허수아비 1번
 	if (_isWood != NULL && _isRock != NULL)
 	{
-		if (_inven->getvInven()[_isWood].amount >=10 && _inven->getvInven()[_isRock].amount >= 4)
+		for (int i = 1; i < 10; i++)
 		{
-			_vCraftItem[2].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[2].rc, _ptMouse))
+			if (_inven->getvInven()[_isWood].amount >= 2 * i + 8 && _inven->getvInven()[_isRock].amount >= i + 3)
 			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 2;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_1;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
+				_vCraftItem[i + 1].item_image = IMAGEMANAGER->findImage("아이템제작");
 
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 10);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 4);
-					if (PLAYER->getEnergy() > -20)
+				if (PtInRect(&_vCraftItem[i + 1].rc, _ptMouse))
+				{
+					if (INPUT->GetKeyDown(VK_LBUTTON))
 					{
-						PLAYER->setEnergy(PLAYER->getDamage());
+						tagItem scarecrow;
+						scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
+						scarecrow.item_info = "허수아비";
+						scarecrow.itemName = "허수아비";
+						scarecrow.indexX = i+1;
+						scarecrow.indexY = 0;
+						scarecrow.scarecrowKind = (SCARECROW)i;
+						scarecrow.isFrame = true;
+						scarecrow.amount = 1;
+
+						_inven->setMouseItem(scarecrow);
+						_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 2 * i + 8);
+						_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - i + 3);
 					}
 				}
 			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 10 || _inven->getvInven()[_isRock].amount < 4)
-		{
-			if (_vCraftItem[2].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
+			else if (_inven->getvInven()[_isWood].amount < 2 * i + 8 || _inven->getvInven()[_isRock].amount < i + 3)
 			{
-				_vCraftItem[2].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 2번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 12 && _inven->getvInven()[_isRock].amount >= 5)
-		{
-			_vCraftItem[3].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[3].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
+				if (_vCraftItem[i + 1].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
 				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 3;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_2;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 10);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 4);
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage()+1);
-					}
+					_vCraftItem[i + 1].item_image = IMAGEMANAGER->findImage("아이템제작알파");
 				}
 			}
 		}
-		else if (_inven->getvInven()[_isWood].amount < 12 || _inven->getvInven()[_isRock].amount < 5)
-		{
-			if (_vCraftItem[3].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[3].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
 	}
-
-	//허수아비 3번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 14 && _inven->getvInven()[_isRock].amount >= 6)
-		{
-			_vCraftItem[4].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[4].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 4;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_3;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 14);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 6);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 2);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 14 || _inven->getvInven()[_isRock].amount < 6)
-		{
-			if (_vCraftItem[4].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[4].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 4번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 16 && _inven->getvInven()[_isRock].amount >= 7)
-		{
-			_vCraftItem[5].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[5].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 5;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_4;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 16);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 7);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 3);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 16 || _inven->getvInven()[_isRock].amount < 7)
-		{
-			if (_vCraftItem[5].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[5].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 5번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 18 && _inven->getvInven()[_isRock].amount >= 8)
-		{
-			_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[6].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 6;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_5;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 18);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 8);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 4);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 18 || _inven->getvInven()[_isRock].amount < 8)
-		{
-			if (_vCraftItem[6].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[6].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 6번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 20 && _inven->getvInven()[_isRock].amount >= 9)
-		{
-			_vCraftItem[7].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[7].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 7;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_6;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 20);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 9);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 5);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 20 || _inven->getvInven()[_isRock].amount < 9)
-		{
-			if (_vCraftItem[7].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[7].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 7번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 22 && _inven->getvInven()[_isRock].amount >= 10)
-		{
-			_vCraftItem[8].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[8].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 8;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_7;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 22);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 10);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 6);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 22 || _inven->getvInven()[_isRock].amount < 10)
-		{
-			if (_vCraftItem[8].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[8].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 8번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 24 && _inven->getvInven()[_isRock].amount >= 11)
-		{
-			_vCraftItem[9].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[9].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 9;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_8;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 24);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 11);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 7);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 24 || _inven->getvInven()[_isRock].amount < 11)
-		{
-			if (_vCraftItem[9].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[9].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-
-	//허수아비 9번
-	if (_isWood != NULL && _isRock != NULL)
-	{
-		if (_inven->getvInven()[_isWood].amount >= 26 && _inven->getvInven()[_isRock].amount >= 12)
-		{
-			_vCraftItem[10].item_image = IMAGEMANAGER->findImage("아이템제작");
-
-			if (PtInRect(&_vCraftItem[10].rc, _ptMouse))
-			{
-				if (INPUT->GetKeyDown(VK_LBUTTON))
-				{
-					tagItem scarecrow;
-					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-					scarecrow.item_info = "허수아비";
-					scarecrow.indexX = 10;
-					scarecrow.indexY = 0;
-					scarecrow.scarecrowKind = SCARECROW_9;
-					scarecrow.isFrame = true;
-					scarecrow.amount = 1;
-
-					_inven->setMouseItem(scarecrow);
-					_inven->setInvenItemAmount(_isWood, _inven->getvInven()[_isWood].amount - 26);
-					_inven->setInvenItemAmount(_isRock, _inven->getvInven()[_isRock].amount - 12);
-
-					if (PLAYER->getEnergy() > -20)
-					{
-						PLAYER->setEnergy(PLAYER->getDamage() + 8);
-					}
-				}
-			}
-		}
-		else if (_inven->getvInven()[_isWood].amount < 26 || _inven->getvInven()[_isRock].amount < 12)
-		{
-			if (_vCraftItem[10].item_image != IMAGEMANAGER->findImage("아이템제작알파"))
-			{
-				_vCraftItem[10].item_image = IMAGEMANAGER->findImage("아이템제작알파");
-			}
-		}
-	}
-		
-
-
-
 
 	//이벤트용 허수아비 1-3번
 	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
@@ -668,7 +306,7 @@ void inventoryCraft::update()
 							scarecrow.item_info = "허수아비";
 							scarecrow.indexX = i;
 							scarecrow.indexY = 0;
-							scarecrow.item_kind = ITEM_SCARECROW;
+							//scarecrow.scarecrowKind = (SCARECROW)i+10;
 							scarecrow.isFrame = true;
 							scarecrow.amount = 1;
 
@@ -898,50 +536,9 @@ void inventoryCraft::craftInven_item_info(HDC hdc)
 						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
 					}
 				}
-				else if (PtInRect(&_vCraftItem[i].rc, _ptMouse) && i >= 11 && i <= 13)
-				{
-					sprintf(temp_info[0], "이벤트 허수아비 %d", i - 10);
-					sprintf(temp_info[1], ": 나무 %d개", (i - 10) * 10 + 10);
-					sprintf(temp_info[2], ": 돌 %d개", ((i - 10) + 1) * 5);
-					sprintf(temp_info[3], ": 토마토 %d개", ((i - 10) * 5) + 15);
-
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top - 5, 4, 2);
-					IMAGEMANAGER->frameRender("열매", hdc, temp2.left + 5, temp2.top + 30, 3, 2);
-
-					if (_isWood != NULL || _isRock != NULL)
-					{
-						if (_inven->getvInven()[_isWood].amount < 2 * (i - 2) + 10)
-						{
-							SetTextColor(hdc, RGB(255, 0, 0));
-							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
-						}
-						else if (_inven->getvInven()[_isWood].amount >= 2 * (i - 2) + 10)
-						{
-							SetTextColor(hdc, RGB(0, 0, 0));
-							DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
-						}
-
-						if (_inven->getvInven()[_isRock].amount < i + 2)
-						{
-							SetTextColor(hdc, RGB(255, 0, 0));
-							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
-						}
-						else if (_inven->getvInven()[_isRock].amount >= i + 2)
-						{
-							SetTextColor(hdc, RGB(0, 0, 0));
-							DrawText(hdc, temp_info[2], strlen(temp_info[1]), &temp4, NULL);
-						}
-					}
-					else
-					{
-						SetTextColor(hdc, RGB(255, 0, 0));
-						DrawText(hdc, temp_info[1], strlen(temp_info[1]), &temp3, NULL);
-						DrawText(hdc, temp_info[2], strlen(temp_info[2]), &temp4, NULL);
-					}
-				}
 				else if (PtInRect(&_vCraftItem[i].rc, _ptMouse)) //허수아비 렉트에 닿으면 
 				{
-					sprintf(temp_info[0], "허수아비 %d", i - 2);
+					sprintf(temp_info[0], "허수아비 %d", i - 1);
 					sprintf(temp_info[1], ": 나무 %d개",  2* (i-2) + 10);
 					sprintf(temp_info[2], ": 돌 %d개", i+2);
 

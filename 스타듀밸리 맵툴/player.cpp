@@ -173,7 +173,7 @@ void  player::update()
 	{
 		hour += 1;
 		money -= 33;
-		currentSeason = (SEASON)(currentSeason + 1);
+		//currentSeason = (SEASON)(currentSeason + 1);
 		currentWeather = (WEATHER)(currentWeather + 1);
 	}
 	if (INPUT->GetKey('N'))
@@ -266,7 +266,7 @@ void player::playerCarryItem(HDC hdc)
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
 		}
 
-		for(int i=0;i<9;i++)
+		for(int i=1;i<10;i++)
 		{
 			if (getCurrentInven()->scarecrowKind == i)
 			{
@@ -1300,23 +1300,24 @@ void player::countTime()
 	}
 	if (hour == 2)
 	{
+		this->resetClock();
 		this->savePlayerInven();
 		this->savePlayerStock();
 		this->savePlayerData();
 		this->saveMap();
 		this->saveBox();
 		SWITCHMANAGER->changeScene("집안화면");
-		SWITCHMANAGER->startFade(855.0f, 865.0f);
+		SWITCHMANAGER->startFade(835.0f, 865.0f);
 	}
 	if (date > 30)
 	{
-		currentSeason = (SEASON)(currentSeason + 1);
+		//currentSeason = (SEASON)(currentSeason + 1);
 		date = 1;
 	}
 	if (currentSeason > 3)
 	{
 		year += 1;
-		currentSeason = (SEASON)0;
+		//currentSeason = (SEASON)0;
 	}
 	if (day > 6)
 	{
@@ -2067,8 +2068,8 @@ void player::arrowRender(HDC hdc)
 
 void player::weatherRender(HDC hdc)
 {
-	IMAGEMANAGER->frameRender("날씨", hdc, 1061, 64, 0, currentSeason);
-	IMAGEMANAGER->frameRender("계절", hdc, 1127, 64, 0, currentWeather);
+	IMAGEMANAGER->frameRender("날씨", hdc, 1061, 64, 0, currentWeather);
+	IMAGEMANAGER->frameRender("계절", hdc, 1127, 64, 0, currentSeason);
 
 	if (currentMap != MAP_MINE)
 	{

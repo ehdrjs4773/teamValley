@@ -76,6 +76,7 @@ void towerScene::update()
 	//{
 	//	SOUNDMANAGER->play("town", 0.05f);
 	//}
+	
 	cout << PLAYER->getIsMet();
 	_skillNpc->update();
 	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
@@ -108,7 +109,7 @@ void towerScene::update()
 					{
 						if ((*PLAYER->getInven())[i].item_image == NULL)
 						{
-							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
+							//PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
 							break;
 						}
 					}

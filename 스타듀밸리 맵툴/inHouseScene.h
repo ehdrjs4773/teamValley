@@ -13,7 +13,6 @@ private:
 	int checkCount;
 
 	bool isShowSleepingOption;
-
 	TCHAR saveName[MAX_PATH];
 
 public:

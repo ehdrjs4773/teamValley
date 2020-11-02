@@ -12,6 +12,7 @@ void inventory::init()
 		tagItem temp; // ÇÃ·¹ÀÌ¾î ÀÎº¥
 		temp.rc = RectMake(265 + 40 * (i % 12), 125 + 55 * (i / 12), 45, 45);
 		temp.item_image = NULL;
+		temp.item_kind = ITEM_NONE;
 		_vItem.push_back(temp);
 		//y << &_vItem[i] << endl;
 	}
@@ -32,12 +33,12 @@ void inventory::init()
 	_isShowCloseButton = false;
 	//_vItem[0] = ITEMMANAGER->findItem("ÆÄ½º´Õ ¾¾¾Ñ");
 	//_vItem[1] = ITEMMANAGER->findItem("¿ÏµÎÄá ¾¾¾Ñ");
-	_vItem[2] = ITEMMANAGER->findItem("³´");
-	_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
-	_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
-	_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
-	_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
-	_vItem[7] = ITEMMANAGER->findItem("Ä®");
+	//_vItem[2] = ITEMMANAGER->findItem("³´");
+	//_vItem[3] = ITEMMANAGER->findItem("È£¹Ì");
+	//_vItem[4] = ITEMMANAGER->findItem("°î±ªÀÌ");
+	//_vItem[5] = ITEMMANAGER->findItem("µµ³¢");
+	//_vItem[6] = ITEMMANAGER->findItem("ÁÖÀüÀÚ");
+	//_vItem[7] = ITEMMANAGER->findItem("Ä®");
 	for (int i = 2; i < 8; i++)
 	{
 		_vItem[i].amount = 1;
@@ -76,6 +77,18 @@ void inventory::update()
 	{
 		PLAYER->setFarmingExp(100);
 		PLAYER->setCombatExp(100);
+	}
+
+
+	for (int i = 0; i < INVENMAX; i++)
+	{
+		if (_vItem[i].item_image == NULL)
+		{
+			tagItem temp;
+			memset(&temp, 0, sizeof(temp));
+			_vItem[i] = temp;
+		}
+		//y << &_vItem[i] << endl;
 	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);

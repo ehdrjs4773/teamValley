@@ -42,6 +42,7 @@ private:
 	//판매창 관련 부분
 	bool sell_ispopup;
 	bool sell_isok;
+	bool sell_isFrame;
 	RECT sell_popup;
 	RECT sell_ok;
 	RECT sell_cancel;
