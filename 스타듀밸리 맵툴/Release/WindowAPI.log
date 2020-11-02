@@ -1,76 +1,123 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 중간 디렉터리(Release\)에 다른 프로젝트(GameFramework2D.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
-<<<<<<< HEAD
-  inventoryCraft.cpp
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(151): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(165): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(344): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(368): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(392): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(416): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(428): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(441): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(445): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(455): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(477): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(477): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(478): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(478): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(501): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(501): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(502): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(502): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(503): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(503): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(589): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(614): warning C4474: 'sprintf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-  c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\inventorycraft.cpp(614): note: 자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
-  코드를 생성하고 있습니다.
-  0 of 2447 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
-=======
   inGameScene.cpp
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(12): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(197): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(287): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(289): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(304): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(306): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(320): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(609): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(610): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(651): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(652): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(693): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(694): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(735): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(736): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(873): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(874): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1272): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1275): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1278): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1281): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1284): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(1286): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2031): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2055): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2065): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2066): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2073): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2096): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2101): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2131): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2131): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2128): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2401): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2403): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(12): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(149): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(197): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(287): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(289): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(304): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(306): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(320): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(599): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(600): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(641): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(642): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(683): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(684): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(725): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(726): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(863): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(864): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1264): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1267): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1270): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1273): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1276): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(1278): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2023): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2047): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2057): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2058): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2065): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2088): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2093): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2123): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2123): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2120): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2393): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\ingamescene.cpp(2395): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  player.cpp
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(15): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(16): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(18): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(38): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(127): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(128): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(181): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(191): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(192): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(194): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(198): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(199): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(243): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(323): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(981): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(984): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(987): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(990): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(998): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1001): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1004): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1007): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1015): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1018): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1021): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1024): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1032): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1035): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1038): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1041): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1049): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1052): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1055): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1058): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1066): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1069): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1072): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1075): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1083): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1086): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1089): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1092): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1102): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1105): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1108): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1111): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1119): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1122): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1125): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1128): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1136): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1139): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1142): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1145): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1153): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1156): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1159): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1162): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1170): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1173): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1176): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1179): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1187): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1190): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1193): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1196): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1204): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1207): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1210): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1213): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1279): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1451): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1538): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1533): warning C4101: 'mapStr' :참조되지 않은 지역 변수입니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1629): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(1970): warning C4101: 'yearStr' :참조되지 않은 지역 변수입니다.
+c:\users\nia kim\downloads\새 폴더\스타듀밸리 맵툴\player.cpp(2075): warning C4244: '인수': 'float'에서 'BYTE'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  2 of 2445 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  5 of 2445 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
->>>>>>> 71e9275a33a42e7e16422d34f3bd9582c4a735a3
+    3 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  WindowAPI.vcxproj -> C:\Users\KGA_9\Desktop\StardewValley\스타듀밸리 맵툴\Release\Stardew Valley.exe
+  WindowAPI.vcxproj -> C:\Users\Nia Kim\Downloads\새 폴더\스타듀밸리 맵툴\Release\Stardew Valley.exe
