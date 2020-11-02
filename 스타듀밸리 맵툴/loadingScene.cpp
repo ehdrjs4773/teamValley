@@ -164,6 +164,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("현재별2", "Images/shop/별2small.bmp", 59, 19);
 	IMAGEMANAGER->addImage("현재별3", "Images/shop/별3small.bmp", 59, 19);
 	IMAGEMANAGER->addImage("대화창", "Images/초상화대화.bmp", 950, 280);
+	IMAGEMANAGER->addImage("플레이어대사창", "Images/플레이어대사창.bmp", 950, 280);
 	IMAGEMANAGER->addImage("마법사기본", "Images/NPC/마법사기본.bmp", 200, 160);
 	IMAGEMANAGER->addImage("마법사웃음", "Images/NPC/마법사웃음.bmp", 200, 160);
 	IMAGEMANAGER->addImage("상점기본", "Images/NPC/상점기본.bmp", 200, 160);

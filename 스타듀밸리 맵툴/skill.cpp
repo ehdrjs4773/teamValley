@@ -42,6 +42,7 @@ void skill::update()
 
 void skill::skillSelect()
 {
+	skill_state = SKILL_END;
 
 	if (_num >= 0)
 	{
@@ -60,6 +61,7 @@ void skill::skillSelect()
 
 void skill::skillActive()
 {
+
 	if(_isClick == true)
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -92,35 +94,30 @@ void skill::skillActive()
 				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
 				PLAYER->setState(P_SKILL_EXPLOSION);
 				PLAYER->setEnergy(2);
-				skill_state = SKILL_END;
 				break;
 			case SKILL_SPIKES:
 				SOUNDMANAGER->play("spike", 0.2f);
 				EFFECTMANAGER->skillCol("스파이크", pointX, pointY);
 				PLAYER->setState(P_SKILL_SPIKES);
 				PLAYER->setEnergy(2);
-				skill_state = SKILL_END;
 				break;
 			case SKILL_FIRE:
 				SOUNDMANAGER->play("fireSpell", 0.2f);
 				EFFECTMANAGER->skillCol("파이어", pointX, pointY);
 				PLAYER->setState(P_SKILL_FIRE);
 				PLAYER->setEnergy(3);
-				skill_state = SKILL_END;
 				break;
 			case SKILL_BLACKHOLE:
 				SOUNDMANAGER->play("blackHole", 0.2f);
 				EFFECTMANAGER->skillCol("블랙홀", pointX, pointY);
 				PLAYER->setState(P_SKILL_BLACKHOLE);
 				PLAYER->setEnergy(3);
-				skill_state = SKILL_END;
 				break;
 			case SKILL_FIRE_BALL:
 				SOUNDMANAGER->play("fireball", 0.2f);
 				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
 				PLAYER->setState(P_SKILL_FIRE_BALL);
 				PLAYER->setEnergy(4);
-				skill_state = SKILL_END;
 				break;
 			}
 		}

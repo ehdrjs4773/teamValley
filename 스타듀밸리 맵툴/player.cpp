@@ -6,7 +6,7 @@ HRESULT player::init()
 	isSkill = false;
 	isMet = false;
 	firstIn = true;
-
+	start = true;
 	index = 0;
 	count = 0;
 	centerX = WINSIZEX / 2;
@@ -39,21 +39,6 @@ HRESULT player::init()
 
 	IMAGEMANAGER->addFrameImage("playerMove", "Images/플레이어이미지3.bmp", 576, 2176, 12, 34, true, RGB(255, 0, 255));
 	move = IMAGEMANAGER->findImage("playerMove");
-
-	IMAGEMANAGER->addFrameImage("blackholeSword", "Images/마법검/blackholeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
-	blackholeSword = IMAGEMANAGER->findImage("blackholeSword");
-
-	IMAGEMANAGER->addFrameImage("explosionSword", "Images/마법검/explosionSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
-	explosionSword = IMAGEMANAGER->findImage("explosionSword");
-
-	IMAGEMANAGER->addFrameImage("fireballSword", "Images/마법검/fireballSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
-	fireballSword = IMAGEMANAGER->findImage("fireballSword");
-
-	IMAGEMANAGER->addFrameImage("fireSword", "Images/마법검/fireSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
-	fireSword = IMAGEMANAGER->findImage("fireSword");
-
-	IMAGEMANAGER->addFrameImage("spikeSword", "Images/마법검/spikeSword.bmp", 576, 384, 12, 6, true, RGB(255, 0, 255));
-	spikeSword = IMAGEMANAGER->findImage("spikeSword");
 
 	IMAGEMANAGER->addImage("backHpBar", "Images/BMP/backHpBar.bmp", 40, 188, true, RGB(255, 0, 255));
 	backHpBar = IMAGEMANAGER->findImage("backHpBar");
@@ -1467,6 +1452,7 @@ void player::loadPlayerData()
 	totalSell = INIDATA->loadDataInteger("save/playerData", "PLAYER", "totalSell");
 	isMet = INIDATA->loadDataInteger("save/playerData", "PLAYER", "NPCMET");
 	firstIn = INIDATA->loadDataInteger("save/playerData", "PLAYER", "FIRSTIN");
+	start = INIDATA->loadDataInteger("save/playerData", "PLAYER", "START");
 	loadInven();
 	loadStock();
 	loadBoxInven();
@@ -1537,7 +1523,7 @@ void player::loadStock()
 
 void player::savePlayerData()
 {
-	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64];
+	char dateStr[64], yearStr[64], dayStr[64], mapStr[64], seasonStr[64], weatherStr[64], darkStr[64], moneyStr[64], arrstart[64];
 	char fLvStr[64],fExpStr[64], cLvStr[64], cExpStr[64], arrShopGrade[64], arrTotalSell[64], arrisMet[64], arrFirstIn[64];
 	INIDATA->addData("PLAYER", "date", _itoa(date, dateStr, 10));
 	INIDATA->addData("PLAYER", "year", _itoa(year, yearStr, 10));
@@ -1554,6 +1540,7 @@ void player::savePlayerData()
 	INIDATA->addData("PLAYER", "totalSell", _itoa(totalSell, arrTotalSell, 10));
 	INIDATA->addData("PLAYER", "NPCMET", _itoa(isMet, arrisMet, 10));
 	INIDATA->addData("PLAYER", "FIRSTIN", _itoa(firstIn, arrFirstIn, 10));
+	INIDATA->addData("PLAYER", "START", _itoa(start, arrstart, 10));
 	INIDATA->saveINI();
 }
 
@@ -1570,7 +1557,7 @@ void player::savePlayerInven()
 
 	for (int i = 0; i < 36; i++)
 	{
-		if (temp[i].itemName == "")
+		if (temp[i].item_image == NULL)
 		{
 			tempItem[i].amount = 0;
 			tempItem[i].buy_price = 0;
@@ -1600,6 +1587,7 @@ void player::savePlayerInven()
 			tempItem[i].isFrame = temp[i].isFrame;
 			tempItem[i].itemName = temp[i].itemName;
 			tempItem[i].item_kind = temp[i].item_kind;
+			tempItem[i].weaponKind = temp[i].weaponKind;
 			tempItem[i].rc = temp[i].rc;
 			tempItem[i].seedKind = temp[i].seedKind;
 			tempItem[i].sell_price = temp[i].sell_price;
@@ -1610,7 +1598,6 @@ void player::savePlayerInven()
 			tempItem[i].grow = temp[i].grow;
 			tempItem[i].exp = temp[i].exp;
 			tempItem[i].grade = temp[i].grade;
-
 		}
 	}
 

@@ -82,7 +82,31 @@ HRESULT inGameScene::init()
 	{
 		resetOriginalGround();
 	}
+	script_count = 0;
+	tagScript temp_script[20];
+	temp_script[0] = {IMAGEMANAGER->findImage("할아버지웃음"),"할아버지","손자 왔어?" };
+	temp_script[1] = { IMAGEMANAGER->findImage(""),"플레이어","할아버지 여전히 멋있으시네요." };
+	temp_script[2] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","나야 항상 그렇지 뭐 ~ \n그나저나 여기에서 방학동안 지낼거라면서\n 맨몸으로 왔어 ?" };
+	temp_script[3] = { IMAGEMANAGER->findImage(""),"플레이어","네?" };
+	temp_script[4] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","아직 농사 지을 준비가 안됐네 ~ \n한번만 알려줄테니 잘 기억해." };
+	temp_script[5] = { IMAGEMANAGER->findImage(""),"플레이어","할아버지께서 씨앗과 호미를 주셨다." };
+	temp_script[6] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","호미 있지? 그걸로 땅 갈아. 그리구 씨 심으면 끝이여 ~" };
+	temp_script[7] = { IMAGEMANAGER->findImage(""),"플레이어","할아버지께서 물뿌리개를 주셨다." };
+	temp_script[8] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","씨 심고 나면 물뿌려 ~" };
+	temp_script[9] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","매일 뿌리다보면 작물이 자랄거여. \n다 자라면 뭐해야겠어. 수확해야겠지?" };
+	temp_script[10] = { IMAGEMANAGER->findImage(""),"플레이어","할아버지께서 낫을 주셨다." };
+	temp_script[11] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","낫을 사용하며 돼. 그리고 얻은 작물은 상점에 팔아버려. \n그럼 돈을 벌거야." };
+	temp_script[12] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","다른 작물도 키워보고 싶으면 상점에서 구매해서 심어. \n개화시기는 다 다르니까 참고하고." };
+	temp_script[13] = { IMAGEMANAGER->findImage(""),"플레이어","할아버지께서 도끼를 주셨다." };
+	temp_script[14] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","주변에 나무 많지? 도끼로 벨 수 있어 ~" };
+	temp_script[14] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","밤에 무리해서 일하지 말고 잠은 자면서 일해야 혀.\n그래야 맑은 정신으로 일어나 아침부터 일하지." };
+	temp_script[15] = { IMAGEMANAGER->findImage(""),"플레이어","감사해요 할아버지!" };
+	temp_script[16] = { IMAGEMANAGER->findImage("할아버지기본"),"할아버지","마지막으로 상점옆에 게시판이 있거든~\n너의 한달 일정이 정리되어 있으니까 틈틈히 보라고 ~~" };
 
+	for (int i = 0; i < 17; i++)
+	{
+		script.push_back(temp_script[i]);
+	}
 	return S_OK;
 }
 
@@ -92,21 +116,67 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	//cout << MouseIndexX << "\t" << MouseIndexY << endl;
-	//if (INPUT->GetKeyDown(VK_TAB))
-	//{
-	//	for (int i = 0; i < INVENMAX; i++)
-	//	{
-	//		if ((*PLAYER->getInven())[i].item_image == NULL)
-	//		{
-	//			tagItem tempItem = ITEMMANAGER->findItem(WEAPON_EXPLOSION);
-	//			(*PLAYER->getInven())[i] = tempItem;
-	//			PLAYER->setInvenItem(i, tempItem);
-	//
-	//			break;
-	//		}
-	//	}
-	//}
+	std::cout << MouseIndexX << "\t" << MouseIndexY << endl;
+
+	if (PLAYER->getstart())
+	{
+		if (INPUT->GetKeyDown(VK_LBUTTON))
+		{
+			script_count++;
+			if (script_count == 5)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("호미"));
+						PLAYER->setInvenItem(i+1, ITEMMANAGER->findItemByKind(ITEM_SEED,2));
+						break;
+					}
+				}
+			}
+			if (script_count == 7)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("주전자"));
+						break;
+					}
+				}
+			}
+			if (script_count == 10)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("낫"));
+						break;
+					}
+				}
+			}
+			if (script_count == 13)
+			{
+				for (int i = 0; i < INVENMAX; i++)
+				{
+					if ((*PLAYER->getInven())[i].item_image == NULL)
+					{
+						PLAYER->setInvenItem(i, ITEMMANAGER->findItem("도끼"));
+						break;
+					}
+				}
+			}
+			if (script_count > 16)
+			{
+				_isFirstTalk = false;
+				PLAYER->setstart(false);
+				SWITCHMANAGER->changeScene("집안화면");
+				SWITCHMANAGER->startFade(820.0f, 860.0f);
+			}
+		}
+	}
 	if (_isTalk)
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
@@ -131,17 +201,22 @@ void inGameScene::update()
 	}
 
 	PLAYER->update();
-	cout << "player is met : " << PLAYER->getIsMet() << endl;
+	//cout << "player is met : " << PLAYER->getIsMet() << endl;
 	//skillSelect();
 
 	checkPlayerTile();
 
 	if (PLAYER->getState() == STAND || PLAYER->getState() == RUN||PLAYER->getState()==CARRY||PLAYER->getState()==CARRYSTAND)
 	{
-		playerMove();
+		if (!PLAYER->getstart() && !_isTalk)
+		{
+			playerMove();
+		}
 	}
-
-	playerInteraction();
+	if (!_isTalk)
+	{
+		playerInteraction();
+	}
 
 	//아이템 바닥에 떨어지게 하는거
 	ejectItem();
@@ -205,7 +280,7 @@ void inGameScene::render()
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 	
 	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
-
+	IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 350, 472,0,0);
 	CAMERAMANAGER->render(getMemDC());
 
 	PLAYER->playerStatusRender(getMemDC());
@@ -216,10 +291,22 @@ void inGameScene::render()
 
 	if (_isTalk)
 	{
-		IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		IMAGEMANAGER->render("플레이어대사창", getMemDC(), 80, 275);
 		RECT tempRC = RectMake(120, 320, 800, 300);
 		const char* tempText = "알 수 없는 기운이 느껴진다.\n특이한 건물과 관련 있는걸까?";
 		DrawText(getMemDC(),tempText,strlen(tempText),&tempRC,NULL);
+	}
+
+	if (PLAYER->getstart())
+	{
+		if (script[script_count].name == "할아버지")
+		{
+			IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+			script[script_count].image->render(getMemDC(), 735, 310);
+		}
+		else IMAGEMANAGER->render("플레이어대사창", getMemDC(), 80, 275);
+		RECT tempRC = RectMake(120, 320, 800, 300);
+		DrawText(getMemDC(), script[script_count].script, strlen(script[script_count].script), &tempRC, NULL);
 	}
 }
 
@@ -616,7 +703,9 @@ void inGameScene::playerMove()
 							&& 
 							(_tile[rightIndexY][rightIndexX].objFrameY == 8
 							|| _tile[rightIndexY][rightIndexX].objFrameY == 7
-							|| _tile[rightIndexY][rightIndexX].objFrameY == 9))))
+							|| _tile[rightIndexY][rightIndexX].objFrameY == 9)
+							)) 
+							)
 				{
 					PLAYER->setDirection(RIGHT);
 
@@ -658,7 +747,8 @@ void inGameScene::playerMove()
 							&&
 							(_tile[leftIndexY][leftIndexX].objFrameY == 8
 								|| _tile[leftIndexY][leftIndexX].objFrameY == 7
-								|| _tile[leftIndexY][leftIndexX].objFrameY == 9))))
+								|| _tile[leftIndexY][leftIndexX].objFrameY == 9)) 
+								))
 				{
 					PLAYER->setDirection(LEFT);
 
@@ -700,7 +790,8 @@ void inGameScene::playerMove()
 							&&
 							(_tile[upIndexY][upIndexX].objFrameY == 8
 								|| _tile[upIndexY][upIndexX].objFrameY == 7
-								|| _tile[upIndexY][upIndexX].objFrameY == 9))))
+								|| _tile[upIndexY][upIndexX].objFrameY == 9)))
+					|| (upIndexX == 22 && (upIndexY == 30 || upIndexY == 31)))
 				{
 					PLAYER->setDirection(UP);
 
@@ -742,7 +833,8 @@ void inGameScene::playerMove()
 							&&
 							(_tile[downIndexY][downIndexX].objFrameY == 8
 								|| _tile[downIndexY][downIndexX].objFrameY == 7
-								|| _tile[downIndexY][downIndexX].objFrameY == 9))))
+								|| _tile[downIndexY][downIndexX].objFrameY == 9)))
+					|| (downIndexX == 22 && (downIndexY == 30 || downIndexY == 31)))
 				{
 					PLAYER->setDirection(DOWN);
 

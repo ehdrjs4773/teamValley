@@ -103,7 +103,7 @@ void shopScene::update()
 		{
 			PLAYER->update();
 
-			if (!PLAYER->getIsShowInventory())
+			if (!PLAYER->getIsShowInventory() && !_isTalk)
 			{
 				playerMove();
 			}
