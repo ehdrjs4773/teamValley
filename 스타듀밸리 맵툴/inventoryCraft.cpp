@@ -40,6 +40,7 @@ void inventoryCraft::init()
 
 void inventoryCraft::materialUpdate()
 {
+	cout << _isWood << "\t" << _inven->getvInven()[_isWood].amount<< endl;
 	for (int i = 0; i < _inven->getvInven().size(); i++)
 	{
 		if (_inven->getvInven()[i].item_kind == ITEM_DEBRIS)
@@ -185,6 +186,7 @@ void inventoryCraft::update()
 	{
 		if (_inven->getvInven()[_isWood].amount >= 10)
 		{
+			cout << "상자 만들기 들어왔다" << endl;
 			_vCraftItem[0].item_image = IMAGEMANAGER->findImage("아이템제작");
 			if (PtInRect(&_vCraftItem[0].rc, _ptMouse))
 			{
@@ -193,6 +195,7 @@ void inventoryCraft::update()
 					tagItem box;
 					box.item_image = IMAGEMANAGER->findImage("아이템");
 					box.item_info = "상자";
+					box.itemName = "상자";
 					box.indexX = 0;
 					box.indexY = 0;
 					box.item_kind = ITEM_BOX;
@@ -227,6 +230,7 @@ void inventoryCraft::update()
 					tagItem blastfurnace;
 					blastfurnace.item_image = IMAGEMANAGER->findImage("아이템");
 					blastfurnace.item_info = "용광로";
+					blastfurnace.itemName = "용광로";
 					blastfurnace.indexX = 1;
 					blastfurnace.indexY = 0;
 					blastfurnace.item_kind = ITEM_BLASTFURNACE;
@@ -300,6 +304,7 @@ void inventoryCraft::update()
 					tagItem scarecrow;
 					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
 					scarecrow.item_info = "허수아비";
+					scarecrow.itemName = "허수아비";
 					scarecrow.indexX = 2;
 					scarecrow.indexY = 0;
 					scarecrow.scarecrowKind = SCARECROW_1;
@@ -339,6 +344,7 @@ void inventoryCraft::update()
 					tagItem scarecrow;
 					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
 					scarecrow.item_info = "허수아비";
+					scarecrow.itemName = "허수아비";
 					scarecrow.indexX = 3;
 					scarecrow.indexY = 0;
 					scarecrow.scarecrowKind = SCARECROW_2;
@@ -378,6 +384,7 @@ void inventoryCraft::update()
 					tagItem scarecrow;
 					scarecrow.item_image = IMAGEMANAGER->findImage("아이템");
 					scarecrow.item_info = "허수아비";
+					scarecrow.itemName = "허수아비";
 					scarecrow.indexX = 4;
 					scarecrow.indexY = 0;
 					scarecrow.scarecrowKind = SCARECROW_3;

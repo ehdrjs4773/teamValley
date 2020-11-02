@@ -218,6 +218,7 @@ void itemManager::addItem(const char* strKey, ITEM _itemKind, bool _isFrame, int
 	temp.toolKind = _toolKind;
 	temp.seedKind = _seedKind;
 	temp.item_info = _itemInfo;
+	temp.itemName = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
 	temp.amount = 1;
@@ -289,6 +290,7 @@ void itemManager::addTool(const char* strKey, ITEM _itemKind, bool _isFrame, int
 	temp.indexY = _indexY;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.toolKind = _toolKind;
+	temp.amount = 1;
 	temp.seedKind = SEED_NONE;
 	temp.itemName = _itemInfo;
 	temp.item_info = _itemInfo;
@@ -307,6 +309,7 @@ void itemManager::addWeapon(const char* strKey, ITEM _itemKind, WEAPON _weaponKi
 	temp.isFrame = _isFrame;
 	temp.rc = RectMakeCenter(0, 0, 0, 0);
 	temp.itemName = _itemInfo;
+	temp.amount = 1;
 	temp.item_info = _itemInfo;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
@@ -341,6 +344,7 @@ void itemManager::addSprinkler(const char * strKey, ITEM _ITEMKIND, bool _isFram
 	temp.indexY = _indexY;
 	temp.item_info = _itemInfo;
 	temp.itemName = _itemInfo;
+	temp.amount = 1;
 	temp.buy_price = _buyPrice;
 	temp.sell_price = _sellPrice;
 	_vItem.push_back(temp);

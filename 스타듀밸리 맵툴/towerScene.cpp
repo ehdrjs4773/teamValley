@@ -98,6 +98,7 @@ void towerScene::update()
 						if ((*PLAYER->getInven())[i].item_image == NULL)
 						{
 							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("Æø¹ß_°Ë"));
+							PLAYER->getInventory()->getvInven()[i].amount = 1;
 							break;
 						}
 					}
@@ -108,7 +109,7 @@ void towerScene::update()
 					{
 						if ((*PLAYER->getInven())[i].item_image == NULL)
 						{
-							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
+							//PLAYER->setInvenItem(i, ITEMMANAGER->findItem("°î±ªÀÌ"));
 							break;
 						}
 					}
