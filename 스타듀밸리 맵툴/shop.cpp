@@ -156,7 +156,7 @@ void shop::release()
 
 void shop::update()
 {
-	cout << current_index << endl;
+	//cout << current_index << endl;
 
 	_inven->update();
 	

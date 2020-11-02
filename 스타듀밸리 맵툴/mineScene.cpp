@@ -71,7 +71,7 @@ void mineScene::update()
 {
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
-	cout << PLAYER->getfirstIn() << endl;
+	//cout << PLAYER->getfirstIn() << endl;
 	if (PLAYER->getfirstIn())
 	{
 		if (_isTalk)

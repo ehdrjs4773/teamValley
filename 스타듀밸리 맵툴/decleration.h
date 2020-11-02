@@ -260,6 +260,7 @@ struct tagSaveItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
+	WEAPON weaponKind;
 	const char* itemName;
 
 	int buy_price;

@@ -50,6 +50,7 @@ private:
 
 	bool isMet;
 	bool firstIn;
+	bool start;
 
 	bool isShowInventory;
 
@@ -252,5 +253,7 @@ public:
 	void setIsMet(bool _is) { isMet = _is; }
 	bool getfirstIn() { return firstIn; }
 	void setfirstIn(bool _is) { firstIn = _is; }
+	bool getstart() { return start; }
+	void setstart(bool _is) { start = _is; }
 };
 

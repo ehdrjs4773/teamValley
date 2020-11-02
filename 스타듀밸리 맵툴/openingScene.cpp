@@ -46,9 +46,10 @@ void openingScene::update()
 			hWndAVI = 0;
 		}
 		SOUNDMANAGER->stop("오프닝");
-		SCENEMANAGER->loadScene("인게임화면");
 		PLAYER->setCenterX(376.0f);
 		PLAYER->setCenterY(472.0f);
+		SCENEMANAGER->loadScene("인게임화면");
+		
 		movieCount = 0;
 	}
 

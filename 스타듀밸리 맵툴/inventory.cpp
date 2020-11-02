@@ -79,17 +79,6 @@ void inventory::update()
 		PLAYER->setCombatExp(100);
 	}
 
-
-	for (int i = 0; i < INVENMAX; i++)
-	{
-		if (_vItem[i].item_image == NULL)
-		{
-			tagItem temp;
-			memset(&temp, 0, sizeof(temp));
-			_vItem[i] = temp;
-		}
-		//y << &_vItem[i] << endl;
-	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
@@ -1276,6 +1265,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	_vItem[i].item_kind = item.item_kind;
 	_vItem[i].rc = item.rc;
 	_vItem[i].seedKind = item.seedKind;
+	_vItem[i].weaponKind = item.weaponKind;
 	_vItem[i].sell_price = item.sell_price;
 	_vItem[i].toolKind = item.toolKind;
 	_vItem[i].waterAmount = item.waterAmount;
@@ -1325,49 +1315,61 @@ void inventory::setvInven(int i, tagSaveItem item)
 		_vItem[i].item_info = ITEMMANAGER->findItem(_vItem[i].item_kind);
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
-	else if (_vItem[i].item_kind == ITEM_SKILL || _vItem[i].item_kind == ITEM_WEAPON)
+	else if (_vItem[i].item_kind == ITEM_BOX)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
+		_vItem[i].item_info = "상자";
+		_vItem[i].itemName = "상자";
+		_vItem[i].item_kind = ITEM_BOX;
+		_vItem[i].isFrame = true;
+		_vItem[i].amount = 1;
+	}
+	else if(_vItem[i].item_kind == ITEM_BLASTFURNACE)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
+		_vItem[i].item_info = "용광로";
+		_vItem[i].itemName = "용광로";
+		_vItem[i].item_kind = ITEM_BLASTFURNACE;
+		_vItem[i].isFrame = true;
+		_vItem[i].amount = 1;
+	}
+	else if (_vItem[i].item_kind == ITEM_SCARECROW)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
+		_vItem[i].item_info = "허수아비";
+		_vItem[i].itemName = "허수아비";
+		_vItem[i].scarecrowKind = (SCARECROW)(_vItem[i].indexX-1);
+		_vItem[i].isFrame = true;
+		_vItem[i].amount = 1;
+	}
+	else if (_vItem[i].item_kind == ITEM_SKILL)
 	{
 		switch (_vItem[i].weaponKind)
 		{
 		case WEAPON_NONE:
 			break;
-		case WEAPON_RUSTYSWORD:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("rusty_sword");
-			_vItem[i].item_info = "녹슨 소드";
-			break;
-		case WEAPON_GALAXYSWORD:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("galaxy_sword");
-			_vItem[i].item_info = "갤럭시 소드";
-			break;
-		case WEAPON_PENCIL:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("pencil");
-			_vItem[i].item_info = "연필";
-			break;
 		case WEAPON_EXPLOSION:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "EXPLOSION";
+			_vItem[i] = ITEMMANAGER->findItem("폭발_검");
 			break;
 		case WEAPON_SPIKES:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "SPIKES";
+			_vItem[i] = ITEMMANAGER->findItem("스파이크_검");
+
 			break;
 		case WEAPON_FIRE:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "FIRE";
-			break;
-		case WEAPON_SHIELD:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "SHIELD";
+			_vItem[i] = ITEMMANAGER->findItem("불_검");
+
 			break;
 		case WEAPON_BLACKHOLE:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "BLACKHOLE";
+			_vItem[i] = ITEMMANAGER->findItem("블랙홀_검");
+
 			break;
 		case WEAPON_FIREBALL:
-			_vItem[i].item_image = IMAGEMANAGER->findImage("스킬북");
-			_vItem[i].item_info = "FIRE_BALL";
+			_vItem[i] = ITEMMANAGER->findItem("파이어볼_검");
 			break;
 		}
+
+		if(_vItem[i].weaponKind == WEAPON_EXPLOSION) _vItem[i] = ITEMMANAGER->findItem("폭발_검");
+
 		_vItem[i].itemName = _vItem[i].item_info;
 	}
 	else if (_vItem[i].item_kind == ITEM_SPRINKLER1)

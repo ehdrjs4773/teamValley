@@ -77,7 +77,7 @@ void towerScene::update()
 	//	SOUNDMANAGER->play("town", 0.05f);
 	//}
 	
-	cout << PLAYER->getIsMet();
+	//cout << PLAYER->getIsMet();
 	_skillNpc->update();
 	//cout << "x : " << PLAYER->getCenterX() << "\t" << "y : " << PLAYER->getCenterY() << endl;
 	if (!PLAYER->getIsMet())
@@ -109,7 +109,7 @@ void towerScene::update()
 					{
 						if ((*PLAYER->getInven())[i].item_image == NULL)
 						{
-							//PLAYER->setInvenItem(i, ITEMMANAGER->findItem("곡괭이"));
+							PLAYER->setInvenItem(i, ITEMMANAGER->findItem("곡괭이"));
 							break;
 						}
 					}
@@ -129,7 +129,7 @@ void towerScene::update()
 	{
 		if (INPUT->GetKeyDown(VK_LBUTTON))
 		{
-			cout << script_count << endl;
+			//cout << script_count << endl;
 			script_count++;
 			if (script_count == 17)
 			{
@@ -171,7 +171,7 @@ void towerScene::update()
 
 		PLAYER->update();
 
-		if (!PLAYER->getIsShowInventory())
+		if (!PLAYER->getIsShowInventory() && !_isTalk)
 		{
 			playerMove();
 		}
@@ -231,7 +231,8 @@ void towerScene::render()
 	}
 	 if (_isTalk)
 	 {
-		 IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		 if(script[script_count].name == "마법사") IMAGEMANAGER->render("대화창", getMemDC(), 80, 275);
+		 else IMAGEMANAGER->render("플레이어대사창", getMemDC(), 80, 275);
 		 RECT tempRC = RectMake(120,320,800,300);
 		 if(script[script_count].name == "마법사") script[script_count].image->render(getMemDC(), 735, 310);
 		 DrawText(getMemDC(), script[script_count].script, strlen(script[script_count].script), &tempRC, NULL);
