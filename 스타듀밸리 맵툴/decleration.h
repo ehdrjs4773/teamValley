@@ -97,6 +97,12 @@ enum SCARECROW
 	SCARECROW_12 //이벤트 
 };
 
+enum ORE
+{
+	IRON,
+	GOLD,
+	COPPER
+};
 //플레이어
 enum STATE
 {
@@ -238,6 +244,7 @@ struct tagItem {
 	ITEM item_kind;
 	TOOL toolKind;
 	SEED seedKind;
+	ORE oreKind;
 	SCARECROW scarecrowKind;
 	WEAPON weaponKind = WEAPON_NONE;
 	const char* itemName;
