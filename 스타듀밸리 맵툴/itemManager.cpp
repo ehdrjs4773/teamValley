@@ -82,7 +82,6 @@ void itemManager::addTool()
 	addTool("도구", ITEM_TOOL, true, 2, 0, TOOL_AX, "도끼", 300, 150);
 	addTool("도구", ITEM_TOOL, true, 3, 0, TOOL_KETTLE, "주전자", 300, 150);
 	addTool("도구", ITEM_TOOL, true, 4, 0, TOOL_FISHINGROD, "낚시대", 300, 150);
-	addTool("도구", ITEM_TOOL, true, 5, 0, TOOL_SWORD, "칼", 300, 150);
 	addTool("도구", ITEM_TOOL, true, 6, 0, TOOL_SICKLE, "낫", 300, 150);
 }
 

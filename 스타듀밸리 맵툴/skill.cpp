@@ -31,7 +31,7 @@ void skill::update()
 {
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
-
+	cout << "player energy : " << PLAYER->getEnergy() << endl;
 	if (!PLAYER->getIsShowInventory() && !PtInRect(&PLAYER->getInventory()->getqucikRect(), _ptMouse))
 	{
 		skillSelect();
@@ -43,7 +43,6 @@ void skill::update()
 void skill::skillSelect()
 {
 
-	skill_state = SKILL_END;
 	if (_num >= 0)
 	{
 		if (PLAYER->getInventory()->getvInven()[_num].item_kind == ITEM_SKILL)
@@ -92,31 +91,36 @@ void skill::skillActive()
 				SOUNDMANAGER->play("explosion", 0.2f);
 				EFFECTMANAGER->skillCol("익스플로전", pointX, pointY);
 				PLAYER->setState(P_SKILL_EXPLOSION);
-				PLAYER->setEnergy(PLAYER->getEnergy() - 2);
+				PLAYER->setEnergy(2);
+				skill_state = SKILL_END;
 				break;
 			case SKILL_SPIKES:
 				SOUNDMANAGER->play("spike", 0.2f);
 				EFFECTMANAGER->skillCol("스파이크", pointX, pointY);
 				PLAYER->setState(P_SKILL_SPIKES);
-				PLAYER->setEnergy(PLAYER->getEnergy() - 2);
+				PLAYER->setEnergy(2);
+				skill_state = SKILL_END;
 				break;
 			case SKILL_FIRE:
 				SOUNDMANAGER->play("fireSpell", 0.2f);
 				EFFECTMANAGER->skillCol("파이어", pointX, pointY);
 				PLAYER->setState(P_SKILL_FIRE);
-				PLAYER->setEnergy(PLAYER->getEnergy() - 3);
+				PLAYER->setEnergy(3);
+				skill_state = SKILL_END;
 				break;
 			case SKILL_BLACKHOLE:
 				SOUNDMANAGER->play("blackHole", 0.2f);
 				EFFECTMANAGER->skillCol("블랙홀", pointX, pointY);
 				PLAYER->setState(P_SKILL_BLACKHOLE);
-				PLAYER->setEnergy(PLAYER->getEnergy() - 3);
+				PLAYER->setEnergy(3);
+				skill_state = SKILL_END;
 				break;
 			case SKILL_FIRE_BALL:
 				SOUNDMANAGER->play("fireball", 0.2f);
 				EFFECTMANAGER->skillCol("파이어볼", pointX, pointY);
 				PLAYER->setState(P_SKILL_FIRE_BALL);
-				PLAYER->setEnergy(PLAYER->getEnergy() - 4);
+				PLAYER->setEnergy(4);
+				skill_state = SKILL_END;
 				break;
 			}
 		}

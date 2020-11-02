@@ -205,6 +205,7 @@ void inGameScene::render()
 	EFFECTMANAGER->render(CAMERAMANAGER->getMemDC());
 	
 	//FrameRect(CAMERAMANAGER->getMemDC(), _tile[MouseIndexY][MouseIndexX].rc, RGB(255, 50, 30));
+	IMAGEMANAGER->frameRender("할아버지", CAMERAMANAGER->getMemDC(), 340.0f, 472.0f, 0, 0);
 
 	CAMERAMANAGER->render(getMemDC());
 
@@ -460,11 +461,11 @@ void inGameScene::renderObjects(int i, int j)
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 						2, 0);
 				}
-				else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
-				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-						3, 0);
-				}
+				//else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
+				//{
+				//	IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+				//		3, 0);
+				//}
 				else if (_tile[i][j].objFrameX == 4 && _tile[i][j].objFrameY == 1) //용광로
 				{
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
@@ -632,6 +633,7 @@ void inGameScene::playerMove()
 
 					for (int i = 0; i < 9; i++)
 					{
+						
 						if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 							PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
 						{
@@ -641,6 +643,7 @@ void inGameScene::playerMove()
 						{
 							PLAYER->setState(RUN);
 						}
+						
 					}
 					PLAYER->setCenterX(PLAYER->getCenterX() + PLAYER->getSpeed());
 				}
