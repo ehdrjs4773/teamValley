@@ -92,7 +92,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	//cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	cout << MouseIndexX << "\t" << MouseIndexY << endl;
 	//if (INPUT->GetKeyDown(VK_TAB))
 	//{
 	//	for (int i = 0; i < INVENMAX; i++)
@@ -2691,9 +2691,9 @@ void inGameScene::changeGrass()
 
 void inGameScene::setEventGround()
 {
-	for (int i = 15; i < 26; i++)
+	for (int i = 16; i < 25; i++)
 	{
-		for (int j = 2; j < 23; j++)
+		for (int j = 2; j < 22; j++)
 		{
 			tileSave[i][j] = _tile[i][j];
 			_tile[i][j].obj = OBJ_NONE;
@@ -2706,27 +2706,27 @@ void inGameScene::setEventGround()
 			memset(&temp, 0, sizeof(tagTree));
 			_tile[i][j].tree = temp;
 
-			if (j == 2 && i == 15)
+			if (j == 2 && i == 16)
 			{
 				_tile[i][j].terrainFrameX = 0;
 				_tile[i][j].terrainFrameY = 2;
 			}
-			else if ((j == 3 && i == 15) || (j == 4 && i == 15))
+			else if ((j >= 3 && j <= 20) && i == 16)
 			{
 				_tile[i][j].terrainFrameX = 1;
 				_tile[i][j].terrainFrameY = 2;
 			}
-			else if (i == 15)
+			else if (j == 21 && i == 16)
 			{
-				_tile[i][j].terrainFrameX = 1;
-				_tile[i][j].terrainFrameY = 1;
+				_tile[i][j].terrainFrameX = 3;
+				_tile[i][j].terrainFrameY = 2;
 			}
-			else if (j == 5 && i == 15)
+			else if (j == 21 && i >= 17 && i <= 24)
 			{
-				_tile[i][j].terrainFrameX = 5;
-				_tile[i][j].terrainFrameY = 0;
+				_tile[i][j].terrainFrameX = 3;
+				_tile[i][j].terrainFrameY = 3;
 			}
-			else if (j == 2 && i == 25)
+			else if (j == 2 && i == 24)
 			{
 				_tile[i][j].terrainFrameX = 0;
 				_tile[i][j].terrainFrameY = 4;
@@ -2736,22 +2736,22 @@ void inGameScene::setEventGround()
 				_tile[i][j].terrainFrameX = 0;
 				_tile[i][j].terrainFrameY = 3;
 			}
-			else if ((j >= 3 && j < 10) && i == 25)
+			else if ((j >= 3 && j < 10) && i == 24)
 			{
 				_tile[i][j].terrainFrameX = 1;
 				_tile[i][j].terrainFrameY = 4;
 			}
-			else if (j == 10 && i == 25)
+			else if (j == 10 && i == 24)
 			{
 				_tile[i][j].terrainFrameX = 3;
 				_tile[i][j].terrainFrameY = 0;
 			}
-			else if (j == 16 && i == 25)
+			else if (j == 12 && i == 24)
 			{
-				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameX = 3;
 				_tile[i][j].terrainFrameY = 1;
 			}
-			else if (j >= 17 && j <= 22 && i == 25)
+			else if (j >= 13 && j <= 20 && i == 24)
 			{
 				_tile[i][j].terrainFrameX = 1;
 				_tile[i][j].terrainFrameY = 4;
@@ -2765,9 +2765,9 @@ void inGameScene::setEventGround()
 			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
-	for (int i = 26; i < 35; i++)
+	for (int i = 25; i < 35; i++)
 	{
-		for (int j = 10; j < 17; j++)
+		for (int j = 10; j < 13; j++)
 		{
 			tileSave[i][j] = _tile[i][j];
 			_tile[i][j].obj = OBJ_NONE;
@@ -2789,12 +2789,12 @@ void inGameScene::setEventGround()
 				_tile[i][j].terrainFrameX = 0;
 				_tile[i][j].terrainFrameY = 3;
 			}
-			else if (j == 16 && i == 34)
+			else if (j == 12 && i == 34)
 			{
 				_tile[i][j].terrainFrameX = 4;
 				_tile[i][j].terrainFrameY = 0;
 			}
-			else if (j == 16)
+			else if (j == 12)
 			{
 				_tile[i][j].terrainFrameX = 3;
 				_tile[i][j].terrainFrameY = 3;
@@ -2812,17 +2812,17 @@ void inGameScene::setEventGround()
 
 void inGameScene::resetOriginalGround()
 {
-	for (int i = 15; i < 26; i++)
+	for (int i = 16; i < 25; i++)
 	{
-		for (int j = 2; j < 23; j++)
+		for (int j = 2; j < 22; j++)
 		{
 			_tile[i][j] = tileSave[i][j];
 			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);
 		}
 	}
-	for (int i = 26; i < 35; i++)
+	for (int i = 25; i < 35; i++)
 	{
-		for (int j = 10; j < 17; j++)
+		for (int j = 10; j < 13; j++)
 		{
 			_tile[i][j] = tileSave[i][j];
 			_tile[i][j].terrain = terrainSelect(_tile[i][j].terrainFrameX, _tile[i][j].terrainFrameY);

@@ -37,8 +37,8 @@ c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2128
 c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2401): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\kga_9\desktop\stardewvalley\스타듀밸리 맵툴\ingamescene.cpp(2403): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  2 of 2445 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 2445 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   WindowAPI.vcxproj -> C:\Users\KGA_9\Desktop\StardewValley\스타듀밸리 맵툴\Release\Stardew Valley.exe

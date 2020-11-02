@@ -12,6 +12,7 @@
 #include "mineScene.h"
 #include "towerScene.h"
 #include "openingScene.h"
+#include "endingScene.h"
 
 class mainGame : public gameNode
 {
