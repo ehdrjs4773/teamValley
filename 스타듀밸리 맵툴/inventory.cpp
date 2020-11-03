@@ -73,7 +73,6 @@ void inventory::release()
 
 void inventory::update()
 {
-<<<<<<< HEAD
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image == NULL)
@@ -83,12 +82,6 @@ void inventory::update()
 			_vItem[i] = temp;
 		}
 		//y << &_vItem[i] << endl;
-=======
-	if (INPUT->GetKeyDown(VK_F8))
-	{
-		PLAYER->setFarmingExp(100);
-		PLAYER->setCombatExp(100);
->>>>>>> ac76b1bc5aa671afa6bdb34960642fe1541271be
 	}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);

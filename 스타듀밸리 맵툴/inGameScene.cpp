@@ -116,7 +116,8 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	std::cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	limitEnergy();
 
 	if (PLAYER->getstart())
 	{
@@ -372,6 +373,15 @@ void inGameScene::changeSeason(SEASON season)
 		imageName = "농장(겨울)";
 		objectImageName = "농장오브젝트(겨울)";
 		break;
+	}
+}
+
+void inGameScene::limitEnergy()
+{
+	if (PLAYER->getEnergy() <= 1)
+	{
+		shareTileData();
+		cout << "Tile Data Shared" << endl;
 	}
 }
 
