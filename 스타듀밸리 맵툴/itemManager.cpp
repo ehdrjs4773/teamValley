@@ -114,11 +114,11 @@ void itemManager::addObject()
 
 void itemManager::addSkill()
 {
-	addWeapon("폭발_검", ITEM_SKILL, WEAPON_EXPLOSION, false, "폭발_검", 1000, 500);
+	addWeapon("폭발_검", ITEM_SKILL, WEAPON_EXPLOSION, false, "폭발_검", 500, 250);
 	addWeapon("스파이크_검", ITEM_SKILL, WEAPON_SPIKES, false, "스파이크_검", 1000, 500);
-	addWeapon("불_검", ITEM_SKILL, WEAPON_FIRE, false, "불_검", 1000, 500);
-	addWeapon("블랙홀_검", ITEM_SKILL, WEAPON_BLACKHOLE, false, "블랙홀_검", 1000, 500);
-	addWeapon("파이어볼_검", ITEM_SKILL, WEAPON_FIREBALL, false, "파이어볼_검", 1000, 500);
+	addWeapon("불_검", ITEM_SKILL, WEAPON_FIRE, false, "불_검", 1500, 750);
+	addWeapon("블랙홀_검", ITEM_SKILL, WEAPON_BLACKHOLE, false, "블랙홀_검", 2000, 1000);
+	addWeapon("파이어볼_검", ITEM_SKILL, WEAPON_FIREBALL, false, "파이어볼_검", 3000, 1500);
 }
 
 void itemManager::addOre()

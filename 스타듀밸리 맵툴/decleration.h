@@ -24,6 +24,7 @@ enum ITEM
 	ITEM_PICKLEDBARREL,
 	ITEM_FEEDBUCKET,
 	ITEM_SCARECROW,
+	ITEM_TOMATOSCARECROW,
 	ITEM_BLASTFURNACE,
 	ITEM_EQUIPMENT,
 	ITEM_MATERIAL,
@@ -325,6 +326,7 @@ struct tagEffect
 	int indexX, indexY;
 	int maxIndex;
 	int skillDamage;
+	bool hit;
 	float centerX, centerY;
 	float angle;
 };

@@ -270,7 +270,7 @@ void player::playerCarryItem(HDC hdc)
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
 		}
 
-		for(int i=1;i<10;i++)
+		for(int i=1;i<13;i++)
 		{
 			if (getCurrentInven()->scarecrowKind == i)
 			{

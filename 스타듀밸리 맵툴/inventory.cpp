@@ -73,6 +73,7 @@ void inventory::release()
 
 void inventory::update()
 {
+<<<<<<< HEAD
 	for (int i = 0; i < INVENMAX; i++)
 	{
 		if (_vItem[i].item_image == NULL)
@@ -84,6 +85,15 @@ void inventory::update()
 		//y << &_vItem[i] << endl;
 	}
 
+=======
+
+	if (INPUT->GetKeyDown(VK_F8))
+	{
+		PLAYER->setFarmingExp(100);
+		PLAYER->setCombatExp(100);
+
+	}
+>>>>>>> 902bfa01c36cf1a8887a2e25635cddb05199c5d3
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
@@ -1331,8 +1341,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if (_vItem[i].item_kind == ITEM_BOX)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "상자";
-		_vItem[i].itemName = "상자";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].item_kind = ITEM_BOX;
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
@@ -1340,8 +1349,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if(_vItem[i].item_kind == ITEM_BLASTFURNACE)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "용광로";
-		_vItem[i].itemName = "용광로";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].item_kind = ITEM_BLASTFURNACE;
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
@@ -1349,9 +1357,16 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if (_vItem[i].item_kind == ITEM_SCARECROW)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "허수아비";
-		_vItem[i].itemName = "허수아비";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].scarecrowKind = (SCARECROW)(_vItem[i].indexX-1);
+		_vItem[i].isFrame = true;
+		_vItem[i].amount = 1;
+	}
+	else if (_vItem[i].item_kind == ITEM_TOMATOSCARECROW)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
+		_vItem[i].itemName = _vItem[i].item_info;
+		_vItem[i].scarecrowKind = (SCARECROW)(_vItem[i].indexX - 1);
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
 	}

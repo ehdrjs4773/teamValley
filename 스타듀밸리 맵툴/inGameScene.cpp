@@ -732,7 +732,7 @@ void inGameScene::playerMove()
 					{
 						PLAYER->setDirection(RIGHT);
 
-						for (int i = 1; i < 10; i++)
+						for (int i = 1; i < 13; i++)
 						{
 							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -782,7 +782,7 @@ void inGameScene::playerMove()
 					{
 						PLAYER->setDirection(LEFT);
 
-						for (int i = 1; i < 10; i++)
+						for (int i = 1; i < 13; i++)
 						{
 							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -832,7 +832,7 @@ void inGameScene::playerMove()
 					{
 						PLAYER->setDirection(UP);
 
-						for (int i = 1; i < 10; i++)
+						for (int i = 1; i < 13; i++)
 						{
 							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -882,7 +882,7 @@ void inGameScene::playerMove()
 					{
 						PLAYER->setDirection(DOWN);
 
-						for (int i = 1; i < 10; i++)
+						for (int i = 1; i < 13; i++)
 						{
 							if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 								PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE || PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -1000,7 +1000,7 @@ void inGameScene::playerInteraction()
 	MouseIndexX = (float)((float)CAMERAMANAGER->getX() / 16) + (float)((float)_ptMouse.x / 40);
 	MouseIndexY = (float)((float)CAMERAMANAGER->getY() / 16) + (float)((float)_ptMouse.y / 40);
 
-	for (int i = 1; i < 10; i++)
+	for (int i = 1; i < 13; i++)
 	{
 		if (PLAYER->getCurrentInven()->item_kind == ITEM_SEED || PLAYER->getCurrentInven()->item_kind == ITEM_BOX ||
 			PLAYER->getCurrentInven()->scarecrowKind == i || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE)
@@ -1085,7 +1085,7 @@ void inGameScene::playerInteraction()
 				}
 
 				//제작아이템 설치
-				for (int i = 1; i < 10; i++)
+				for (int i = 1; i < 13; i++)
 				{
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
 						PLAYER->getCurrentInven()->scarecrowKind == i)
@@ -1528,7 +1528,7 @@ void inGameScene::setEquipment()
 				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 			}
 
-			for (int i = 1; i < 10; i++)
+			for (int i = 1; i < 13; i++)
 			{
 				if (PLAYER->getCurrentInven()->scarecrowKind == i) //허수아비일때
 				{
