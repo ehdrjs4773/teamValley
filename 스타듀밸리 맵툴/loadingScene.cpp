@@ -110,6 +110,7 @@ void loadingScene::loadingImage()
 	IMAGEMANAGER->addImage("제작중인 아이템", "Images/inventory/goodsInProgress.bmp", 32, 32, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("토마토아이템제작", "Images/inventory/CraftTomato.bmp", 120, 80, 3, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("토마토아이템제작알파", "Images/inventory/CraftTomatoAlpha.bmp", 120, 80, 3, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("토마토아이템제작스몰", "Images/inventory/CraftTomatoSmall.bmp", 48, 32, 3, 1, true, RGB(255, 0, 255));
 
 	//플레이어
 	IMAGEMANAGER->addImage("아침 집", "Images/맵/아침 집.bmp", 1600, 1600);
