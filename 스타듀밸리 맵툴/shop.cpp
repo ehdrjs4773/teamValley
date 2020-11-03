@@ -645,17 +645,31 @@ void shop::sell()
 	{
 		if (PtInRect(&(*_vInven)[i].rc, _ptMouse))
 		{
-			if (INPUT->GetKeyDown(VK_RBUTTON))
+			if ((*_vInven)[i].item_kind == ITEM_MATERIAL
+				&& _npcKind == ITEM_NPC)
 			{
-				sell_amount = 1;
-				sell_ispopup = true;
-				sell_index = i;
-				sell_amount_max = (*_vInven)[i].amount;
-				sell_item_img = (*_vInven)[i].item_image;
-				sell_item_frameX = (*_vInven)[i].indexX;
-				sell_item_frameY = (*_vInven)[i].indexY;
-				sell_isFrame = (*_vInven)[i].isFrame;
 
+			}
+			else if((*_vInven)[i].item_kind != ITEM_MATERIAL 
+				&& (*_vInven)[i].item_kind != ITEM_SKILL
+				&& _npcKind == SKILL_NPC)
+			{
+				
+			}
+			else
+			{
+				if (INPUT->GetKeyDown(VK_RBUTTON))
+				{
+					sell_amount = 1;
+					sell_ispopup = true;
+					sell_index = i;
+					sell_amount_max = (*_vInven)[i].amount;
+					sell_item_img = (*_vInven)[i].item_image;
+					sell_item_frameX = (*_vInven)[i].indexX;
+					sell_item_frameY = (*_vInven)[i].indexY;
+					sell_isFrame = (*_vInven)[i].isFrame;
+
+				}
 			}
 		}
 		if (sell_isok == true)
