@@ -1338,8 +1338,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if (_vItem[i].item_kind == ITEM_BOX)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "상자";
-		_vItem[i].itemName = "상자";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].item_kind = ITEM_BOX;
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
@@ -1347,8 +1346,7 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if(_vItem[i].item_kind == ITEM_BLASTFURNACE)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "용광로";
-		_vItem[i].itemName = "용광로";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].item_kind = ITEM_BLASTFURNACE;
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
@@ -1356,9 +1354,16 @@ void inventory::setvInven(int i, tagSaveItem item)
 	else if (_vItem[i].item_kind == ITEM_SCARECROW)
 	{
 		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
-		_vItem[i].item_info = "허수아비";
-		_vItem[i].itemName = "허수아비";
+		_vItem[i].itemName = _vItem[i].item_info;
 		_vItem[i].scarecrowKind = (SCARECROW)(_vItem[i].indexX-1);
+		_vItem[i].isFrame = true;
+		_vItem[i].amount = 1;
+	}
+	else if (_vItem[i].item_kind == ITEM_TOMATOSCARECROW)
+	{
+		_vItem[i].item_image = IMAGEMANAGER->findImage("아이템");
+		_vItem[i].itemName = _vItem[i].item_info;
+		_vItem[i].scarecrowKind = (SCARECROW)(_vItem[i].indexX - 1);
 		_vItem[i].isFrame = true;
 		_vItem[i].amount = 1;
 	}

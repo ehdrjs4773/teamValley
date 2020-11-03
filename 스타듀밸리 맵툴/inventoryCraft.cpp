@@ -259,6 +259,7 @@ void inventoryCraft::update()
 						scarecrow.indexX = i+1;
 						scarecrow.indexY = 0;
 						scarecrow.scarecrowKind = (SCARECROW)i;
+						scarecrow.sell_price = (i*50+150);
 						scarecrow.isFrame = true;
 						scarecrow.amount = 1;
 
@@ -295,10 +296,12 @@ void inventoryCraft::update()
 						{
 							tagItem tomatoScarecrow;
 							tomatoScarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-							tomatoScarecrow.item_info = "허수아비";
+							tomatoScarecrow.item_info = "토마토 허수아비";
+							tomatoScarecrow.itemName = "토마토 허수아비";
 							tomatoScarecrow.indexX = i;
 							tomatoScarecrow.indexY = 0;
 							tomatoScarecrow.scarecrowKind = (SCARECROW)(i + 10);
+							tomatoScarecrow.sell_price = (i * 400 + 800);
 							tomatoScarecrow.isFrame = true;
 							tomatoScarecrow.amount = 1;
 
