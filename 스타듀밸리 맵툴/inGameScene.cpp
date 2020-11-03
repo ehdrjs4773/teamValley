@@ -552,9 +552,6 @@ void inGameScene::renderObjects(int i, int j)
 			}
 			else if (_tile[i][j].obj == OBJ_EQUIPMENT)
 			{
-				IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-					_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-				
 				if (_tile[i][j].objType==OTY_BOX) //상자
 				{
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -565,18 +562,15 @@ void inGameScene::renderObjects(int i, int j)
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						1, 0);
 				}
-				else if (_tile[i][j].objType == OTY_SCARECROW)
+				else if (_tile[i][j].objType == OTY_SCARECROW) //허수아비
+				{
+					IMAGEMANAGER->frameRender("아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
+				}
+				else if (_tile[i][j].objType == OTY_TOMATOSCARECROW) //토마토 허수아비
 				{
 					IMAGEMANAGER->frameRender("토마토아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
 				}
-				//for(int i=0;i<9;i++)
-				//{
-				//	if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
-				//	{
-				//		IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-				//			3, 0);
-				//	}
-				//}
+				
 			}
 			else if (_tile[i][j].objType == OTY_TREE || _tile[i][j].objType == OTY_TREETRUNK)
 			{
@@ -1522,30 +1516,43 @@ void inGameScene::setEquipment()
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX) //상자일때
 			{
 				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_BOX;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+				_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+				_tile[MouseIndexY-1][MouseIndexX].objType = OTY_BOX;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameX = 0;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE) //용광로일때 
 			{
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_BLASTFURNACE;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 1;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+				_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+				_tile[MouseIndexY-1][MouseIndexX].objType = OTY_BLASTFURNACE;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameX = 1;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 			}
 
-			for (int i = 1; i < 13; i++)
+			for (int i = 1; i < 10; i++)
 			{
 				if (PLAYER->getCurrentInven()->scarecrowKind == i) //허수아비일때
 				{
 					SOUNDMANAGER->play("movewood", 0.4f);
-					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-					_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
-					_tile[MouseIndexY][MouseIndexX].objFrameX = i;
-					_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+					_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+					_tile[MouseIndexY-1][MouseIndexX].objType = OTY_SCARECROW;
+					_tile[MouseIndexY-1][MouseIndexX].objFrameX = i+1;
+					_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 				}
 			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				if (PLAYER->getCurrentInven()->scarecrowKind == i+10) //토마토 허수아비일때
+				{
+					SOUNDMANAGER->play("movewood", 0.4f);
+					_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+					_tile[MouseIndexY-1][MouseIndexX].objType = OTY_TOMATOSCARECROW;
+					_tile[MouseIndexY-1][MouseIndexX].objFrameX = i;
+					_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
+				}
+			}
+
 			tagItem temp = {};
 			PLAYER->setInvenItem(PLAYER->getCurrentSlotNumber(),temp);
 		}

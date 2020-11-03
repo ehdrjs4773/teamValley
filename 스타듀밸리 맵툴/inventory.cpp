@@ -73,16 +73,6 @@ void inventory::release()
 
 void inventory::update()
 {
-	//for (int i = 0; i < INVENMAX; i++)
-	//{
-	//	if (_vItem[i].item_image == NULL)
-	//	{
-	//		tagItem temp;
-	//		memset(&temp, 0, sizeof(temp));
-	//		_vItem[i] = temp;
-	//	}
-	//	//y << &_vItem[i] << endl;
-	//}
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
