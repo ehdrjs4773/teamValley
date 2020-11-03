@@ -559,7 +559,10 @@ void inGameScene::renderObjects(int i, int j)
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						1, 0);
 				}
-				
+				else if (_tile[i][j].objType == OTY_SCARECROW)
+				{
+					IMAGEMANAGER->frameRender("아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
+				}
 				//for(int i=0;i<9;i++)
 				//{
 				//	if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 1) //허수아비
@@ -567,10 +570,7 @@ void inGameScene::renderObjects(int i, int j)
 				//		IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
 				//			3, 0);
 				//	}
-
 				//}
-
-
 			}
 			else if (_tile[i][j].objType == OTY_TREE || _tile[i][j].objType == OTY_TREETRUNK)
 			{
@@ -1088,7 +1088,7 @@ void inGameScene::playerInteraction()
 				for (int i = 1; i < 10; i++)
 				{
 					if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX || PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE ||
-						PLAYER->getCurrentInven()->scarecrowKind==i)
+						PLAYER->getCurrentInven()->scarecrowKind == i)
 					{
 						setEquipment();
 					}
@@ -1141,7 +1141,6 @@ void inGameScene::playerInteraction()
 				}
 				else if (_tile[MouseIndexY][MouseIndexX].objType == OTY_BLASTFURNACE)
 				{
-
 					PLAYER->getInventory()->getInventoryCraft()->blastFurnace();
 				}
 			}
@@ -1536,7 +1535,7 @@ void inGameScene::setEquipment()
 					SOUNDMANAGER->play("movewood", 0.4f);
 					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
 					_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
-					_tile[MouseIndexY][MouseIndexX].objFrameX = i+1;
+					_tile[MouseIndexY][MouseIndexX].objFrameX = i;
 					_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
 				}
 			}
@@ -2839,6 +2838,24 @@ void inGameScene::setEventGround()
 			{
 				_tile[i][j].terrainFrameX = 0;
 				_tile[i][j].terrainFrameY = 2;
+			}
+			else if ((j == 6 || j == 12 || j == 17) && i == 20)
+			{
+				_tile[i - 1][j].obj = OBJ_EQUIPMENT;
+				_tile[i - 1][j].objType = OTY_SCARECROW;
+				if (j == 6)
+				{
+					_tile[i - 1][j].objFrameX = 0;
+				}
+				else if (j == 12)
+				{
+					_tile[i - 1][j].objFrameX = 1;
+				}
+				else if (j == 17)
+				{
+					_tile[i - 1][j].objFrameX = 2;
+				}
+				_tile[i - 1][j].objFrameY = 0;
 			}
 			else if ((j >= 3 && j <= 20) && i == 16)
 			{

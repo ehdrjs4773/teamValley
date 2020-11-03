@@ -295,7 +295,8 @@ void inventoryCraft::update()
 						{
 							tagItem tomatoScarecrow;
 							tomatoScarecrow.item_image = IMAGEMANAGER->findImage("아이템");
-							tomatoScarecrow.item_info = "허수아비";
+							tomatoScarecrow.item_info = "토마토 허수아비";
+							tomatoScarecrow.itemName = "토마토 허수아비";
 							tomatoScarecrow.indexX = i;
 							tomatoScarecrow.indexY = 0;
 							tomatoScarecrow.scarecrowKind = (SCARECROW)(i + 10);
