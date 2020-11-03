@@ -179,6 +179,7 @@ enum MAP
 enum WEATHER
 {
 	SUNNY,
+	BREEZE,
 	RAIN,
 	HEAVYRAIN,
 	WINDY,

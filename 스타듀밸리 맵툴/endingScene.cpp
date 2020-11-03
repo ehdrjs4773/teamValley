@@ -42,7 +42,7 @@ void endingScene::update()
 {
 	//cout << movieCount << endl;
 	movieCount++;
-	if (movieCount >= 950)
+	if (movieCount >= 1000)
 	{
 		if (hWndAVI)
 		{
@@ -52,13 +52,14 @@ void endingScene::update()
 		}
 		//SOUNDMANAGER->stop("오프닝");
 		SWITCHMANAGER->changeScene("스타트화면");
-		SWITCHMANAGER->startFade(.0f, .0f);
+		SCENEMANAGER->loadScene("스타트화면");
+		//SWITCHMANAGER->startFade(.0f, .0f);
 		movieCount = 0;
 	}
 
 	if (INPUT->GetKeyDown(VK_LBUTTON))
 	{
-		movieCount = 950;
+		movieCount = 1000;
 	}
 }
 
