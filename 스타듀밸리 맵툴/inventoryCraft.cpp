@@ -186,6 +186,7 @@ void inventoryCraft::update()
 					box.indexX = 0;
 					box.indexY = 0;
 					box.item_kind = ITEM_BOX;
+					box.sell_price = 100;
 					box.isFrame = true;
 					box.amount = 1;
 
@@ -221,6 +222,7 @@ void inventoryCraft::update()
 					blastfurnace.indexX = 1;
 					blastfurnace.indexY = 0;
 					blastfurnace.item_kind = ITEM_BLASTFURNACE;
+					blastfurnace.sell_price = 300;
 					blastfurnace.isFrame = true;
 					blastfurnace.amount = 1;
 

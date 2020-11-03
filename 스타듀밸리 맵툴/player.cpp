@@ -270,11 +270,20 @@ void player::playerCarryItem(HDC hdc)
 				getCurrentInven()->indexX, getCurrentInven()->indexY);
 		}
 
-		for(int i=1;i<13;i++)
+		for(int i=1;i<10;i++)
 		{
 			if (getCurrentInven()->scarecrowKind == i)
 			{
 				IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
+					getCurrentInven()->indexX, getCurrentInven()->indexY);
+			}
+		}
+
+		for (int i = 10; i < 13; i++)
+		{
+			if (getCurrentInven()->scarecrowKind == i)
+			{
+				IMAGEMANAGER->findImage("토마토아이템제작스몰")->frameRender(hdc, playerHoldItem.left, playerHoldItem.top - 16,
 					getCurrentInven()->indexX, getCurrentInven()->indexY);
 			}
 		}
