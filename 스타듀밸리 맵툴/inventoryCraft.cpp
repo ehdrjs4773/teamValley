@@ -406,6 +406,17 @@ void inventoryCraft::release()
 void inventoryCraft::render(HDC hdc)
 {
 	// IMAGEMANAGER->frameRender("아이템제작", hdc, 225, 30);
+
+	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
+	{
+		for (int i = 0; i < _vCraftEventItem.size(); i++)
+		{
+			_vCraftEventItem[i].item_image->frameRender(hdc, _vCraftEventItem[i].rc.left, _vCraftEventItem[i].rc.top, _vCraftEventItem[i].indexX, _vCraftEventItem[i].indexY);
+			craftEventInven_item_info(hdc);
+			//Rectangle(hdc, _vCraftEventItem[i].rc); 
+		}
+	}
+
 	for (int i = 0; i < _vCraftItem.size(); i++)
 	{
 		if (_vCraftItem[i].item_image != NULL)
@@ -416,15 +427,7 @@ void inventoryCraft::render(HDC hdc)
 		//Rectangle(hdc, _vCraftItem[i].rc); 
 	}
 
-	if (PLAYER->getDate() >= 12 && PLAYER->getDate() <= 16)
-	{
-		for (int i = 0; i < _vCraftEventItem.size(); i++)
-		{
-				_vCraftEventItem[i].item_image->frameRender(hdc, _vCraftEventItem[i].rc.left, _vCraftEventItem[i].rc.top, _vCraftEventItem[i].indexX, _vCraftEventItem[i].indexY);
-				craftEventInven_item_info(hdc);
-			//Rectangle(hdc, _vCraftEventItem[i].rc); 
-		}
-	}
+
 
 	if (INPUT->GetToggleKey(VK_F9))
 	{

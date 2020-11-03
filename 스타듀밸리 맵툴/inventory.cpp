@@ -83,6 +83,7 @@ void inventory::update()
 		}
 		//y << &_vItem[i] << endl;
 	}
+
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
