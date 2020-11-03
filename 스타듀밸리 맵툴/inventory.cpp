@@ -74,17 +74,6 @@ void inventory::release()
 void inventory::update()
 {
 
-	for (int i = 0; i < INVENMAX; i++)
-	{
-		if (_vItem[i].item_image == NULL)
-		{
-			tagItem temp;
-			memset(&temp, 0, sizeof(temp));
-			_vItem[i] = temp;
-		}
-		//y << &_vItem[i] << endl;
-	}
-
 	if (INPUT->GetKeyDown(VK_F8))
 	{
 		PLAYER->setFarmingExp(100);
