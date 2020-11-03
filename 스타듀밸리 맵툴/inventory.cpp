@@ -73,27 +73,13 @@ void inventory::release()
 
 void inventory::update()
 {
-<<<<<<< HEAD
-	for (int i = 0; i < INVENMAX; i++)
-	{
-		if (_vItem[i].item_image == NULL)
-		{
-			tagItem temp;
-			memset(&temp, 0, sizeof(temp));
-			_vItem[i] = temp;
-		}
-		//y << &_vItem[i] << endl;
-	}
-
-=======
-
 	if (INPUT->GetKeyDown(VK_F8))
 	{
 		PLAYER->setFarmingExp(100);
 		PLAYER->setCombatExp(100);
 
 	}
->>>>>>> 902bfa01c36cf1a8887a2e25635cddb05199c5d3
+
 	_isInvenRect = RectMake(275, 50, 50, 50);
 	_isPlayerRect = RectMake(330, 50, 50, 50);
 	_isCraftRect = RectMake(385, 50, 50, 50);
