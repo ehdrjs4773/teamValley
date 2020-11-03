@@ -549,11 +549,6 @@ void inGameScene::renderObjects(int i, int j)
 			}
 			else if (_tile[i][j].obj == OBJ_EQUIPMENT)
 			{
-				//IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-				//	_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-				//IMAGEMANAGER->findImage("토마토아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
-				//	_tile[i][j].objFrameX, _tile[i][j].objFrameY);
-				
 				if (_tile[i][j].objType==OTY_BOX) //상자
 				{
 					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
@@ -1517,17 +1512,17 @@ void inGameScene::setEquipment()
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BOX) //상자일때
 			{
 				SOUNDMANAGER->play("movewood", 0.4f);
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_BOX;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 0;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+				_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+				_tile[MouseIndexY-1][MouseIndexX].objType = OTY_BOX;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameX = 0;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 			}
 			if (PLAYER->getCurrentInven()->item_kind == ITEM_BLASTFURNACE) //용광로일때 
 			{
-				_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-				_tile[MouseIndexY][MouseIndexX].objType = OTY_BLASTFURNACE;
-				_tile[MouseIndexY][MouseIndexX].objFrameX = 1;
-				_tile[MouseIndexY][MouseIndexX].objFrameY = 0;
+				_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+				_tile[MouseIndexY-1][MouseIndexX].objType = OTY_BLASTFURNACE;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameX = 1;
+				_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 			}
 
 			for (int i = 1; i < 10; i++)
@@ -1535,8 +1530,8 @@ void inGameScene::setEquipment()
 				if (PLAYER->getCurrentInven()->scarecrowKind == i) //허수아비일때
 				{
 					SOUNDMANAGER->play("movewood", 0.4f);
-					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-					_tile[MouseIndexY][MouseIndexX].objType = OTY_SCARECROW;
+					_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+					_tile[MouseIndexY-1][MouseIndexX].objType = OTY_SCARECROW;
 					_tile[MouseIndexY-1][MouseIndexX].objFrameX = i+1;
 					_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 				}
@@ -1544,11 +1539,11 @@ void inGameScene::setEquipment()
 
 			for (int i = 0; i < 3; i++)
 			{
-				if (PLAYER->getCurrentInven()->scarecrowKind == i+10) //허수아비일때
+				if (PLAYER->getCurrentInven()->scarecrowKind == i+10) //토마토 허수아비일때
 				{
 					SOUNDMANAGER->play("movewood", 0.4f);
-					_tile[MouseIndexY][MouseIndexX].obj = OBJ_EQUIPMENT;
-					_tile[MouseIndexY][MouseIndexX].objType = OTY_TOMATOSCARECROW;
+					_tile[MouseIndexY-1][MouseIndexX].obj = OBJ_EQUIPMENT;
+					_tile[MouseIndexY-1][MouseIndexX].objType = OTY_TOMATOSCARECROW;
 					_tile[MouseIndexY-1][MouseIndexX].objFrameX = i;
 					_tile[MouseIndexY-1][MouseIndexX].objFrameY = 0;
 				}
