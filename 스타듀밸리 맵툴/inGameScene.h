@@ -52,6 +52,7 @@ public:
 	void load();
 	void setTileRect();
 	void changeSeason(SEASON season);
+	void limitEnergy();
 
 	void renderMap();
 	void renderObjects(int i, int j);
