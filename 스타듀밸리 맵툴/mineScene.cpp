@@ -810,6 +810,8 @@ void mineScene::useLadder(int i, int j)
 			case 0:
 				break;
 			case 1: 
+				tempX = 390.0f;
+				tempY = 166.0f;
 				break;
 			case 2:
 				tempX = 435.0f;
@@ -848,6 +850,7 @@ void mineScene::useLadder(int i, int j)
 			}
 		SWITCHMANAGER->changeScene("±¤»êÈ­¸é");
 		SWITCHMANAGER->startFade(tempX, tempY);
+
 	}
 	else if (_tile[i][j].objFrameX == 3 && _tile[i][j].objFrameY == 7)
 	{
