@@ -1341,14 +1341,20 @@ void player::countTime()
 
 void player::resetClock()
 {
-	int rnd = RANDOM->range(5);
 	hour < 24 && hour > 2 ? date += 1 : date = date;
-	hour < 24 ? day = (DAYOFWEEK)(day + 1) : day = day;
+	hour < 24 && hour > 2 ? day = (DAYOFWEEK)(day + 1) : day = day;
 	hour = 6;
 	minute = 0;
-	if (rnd != 1 || rnd != 2 || rnd != 4)
+
+WeatherControl:
+	int rnd = RANDOM->range(6);
+	if (rnd != 2 && rnd != 3 && rnd != 5)
 	{
 		currentWeather = (WEATHER)rnd;
+	}
+	else
+	{
+		goto WeatherControl;
 	}
 
 	darkAlpha = .0f;

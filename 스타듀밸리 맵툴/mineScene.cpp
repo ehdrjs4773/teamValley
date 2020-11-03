@@ -870,6 +870,7 @@ void mineScene::useElevator()
 	{
 		if (_tile[mouseIndexY][mouseIndexX].objFrameX == 0 && _tile[mouseIndexY][mouseIndexX].objFrameY == 7)
 		{
+			currentFloor = 1;
 			loadCount = 0;
 			SWITCHMANAGER->changeScene("인게임화면");
 			SWITCHMANAGER->startFade(96.0f, 96.0f);
@@ -1053,11 +1054,11 @@ void mineScene::setMonsterList()
 	presetSlime->init();
 	monsterList.push_back(presetSlime);
 
-	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 70, 7, .4f);
+	monster* presetBug = new monster(MTYPE_BUG, 0, 0, 150, 7, .4f);
 	presetBug->init();
 	monsterList.push_back(presetBug);
 
-	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 150, 9, .4f);
+	monster* presetRockCrab = new monster(MTYPE_ROCKCRAB, 0, 0, 70, 9, .4f);
 	presetRockCrab->init();
 	monsterList.push_back(presetRockCrab);
 
