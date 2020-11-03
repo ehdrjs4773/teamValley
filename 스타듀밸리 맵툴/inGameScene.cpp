@@ -561,7 +561,7 @@ void inGameScene::renderObjects(int i, int j)
 				}
 				else if (_tile[i][j].objType == OTY_SCARECROW)
 				{
-					IMAGEMANAGER->frameRender("아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
+					IMAGEMANAGER->frameRender("토마토아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
 				}
 				//for(int i=0;i<9;i++)
 				//{
@@ -2841,6 +2841,8 @@ void inGameScene::setEventGround()
 			}
 			else if ((j == 6 || j == 12 || j == 17) && i == 20)
 			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
 				_tile[i - 1][j].obj = OBJ_EQUIPMENT;
 				_tile[i - 1][j].objType = OTY_SCARECROW;
 				if (j == 6)

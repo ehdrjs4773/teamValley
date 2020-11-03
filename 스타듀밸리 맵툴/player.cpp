@@ -1706,14 +1706,7 @@ void player::makeCropGrow(int i, int j)
 	{
 		if (!_tile[i][j].isFullyGrown)
 		{
-			if ((_tile[i][j].seedType == SEED_TOMATO
-				|| _tile[i][j].seedType == SEED_HOTPEPPER
-				|| _tile[i][j].seedType == SEED_GRAPE
-				|| _tile[i][j].seedType == SEED_GREENBEAN
-				|| _tile[i][j].seedType == SEED_BLUEBERRY
-				|| _tile[i][j].seedType == SEED_CORN
-				|| _tile[i][j].seedType == SEED_HOPS)
-				&& _tile[i][j].objFrameX == 7)
+			if (_tile[i][j].objFrameX == 7)
 			{
 				if (_tile[i][j].isWet)
 				{
