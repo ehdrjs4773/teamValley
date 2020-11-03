@@ -100,8 +100,7 @@ void mineScene::update()
 					RECT temp;
 					if (IntersectRect(&temp, &iter->getRc(), &EFFECTMANAGER->getvEffect()[i].rc))
 					{
-						if (!(iter->getDamage()))
-						{
+						if (EFFECTMANAGER->getvEffect()[i].hit == true) continue;
 							if (iter->getMonsterType() == MTYPE_SERPENT)
 							{
 								if (!SOUNDMANAGER->isPlaySound("serpentHit"))
@@ -109,9 +108,8 @@ void mineScene::update()
 									SOUNDMANAGER->play("serpentHit");
 								}
 							}
-							iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
-							iter->setDamage(true);
-						}
+						iter->setHp(iter->getHp() - EFFECTMANAGER->getvEffect()[i].skillDamage);
+						EFFECTMANAGER->getvEffect()[i].hit = true;
 					}
 				}
 			}

@@ -325,6 +325,7 @@ struct tagEffect
 	int indexX, indexY;
 	int maxIndex;
 	int skillDamage;
+	bool hit;
 	float centerX, centerY;
 	float angle;
 };
