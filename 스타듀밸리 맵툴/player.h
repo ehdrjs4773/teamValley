@@ -10,6 +10,7 @@ class player : public singletonBase<player>
 private:
 	//인게임 맵 저장용 타일
 	tagTile _tile[TILEY][TILEX];
+	tagTile _tempSave[TILEY][TILEX];
 
 	RECT rc;
 	RECT frontEnergyBar;
@@ -244,6 +245,7 @@ public:
 	void saveMap();
 	void saveBox();
 	void saveTile(int i, int j, tagTile tile);
+	void saveTempTile(int i, int j, tagTile tile);
 	void makeCropGrow(int i, int j);
 
 	int getAtk() { return attackDmg; }

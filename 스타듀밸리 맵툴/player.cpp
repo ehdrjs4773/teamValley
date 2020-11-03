@@ -1685,6 +1685,12 @@ void player::saveMap()
 	file = CreateFile("save/tomato.map", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	WriteFile(file, _tile, sizeof(_tile), &write, NULL);
 	CloseHandle(file);
+
+	HANDLE tempFile;
+	DWORD write1;
+	tempFile = CreateFile("save/tempSave.map", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	WriteFile(tempFile, _tempSave, sizeof(_tempSave), &write1, NULL);
+	CloseHandle(tempFile);
 }
 
 void player::saveBox()
@@ -1710,6 +1716,11 @@ void player::saveBox()
 void player::saveTile(int i, int j, tagTile tile)
 {
 	_tile[i][j] = tile;
+}
+
+void player::saveTempTile(int i, int j, tagTile tile)
+{
+	_tempSave[i][j] = tile;
 }
 
 void player::makeCropGrow(int i, int j)

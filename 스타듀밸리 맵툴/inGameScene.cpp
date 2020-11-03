@@ -326,7 +326,9 @@ void inGameScene::load()
 	//DialogBox(_hInstance, MAKEINTRESOURCE(IDD_DIALOG1), _hWnd, inGameScene::DlgProc);
 
 	HANDLE file;
+	HANDLE file1;
 	DWORD read;
+	DWORD read1;
 	//TCHAR saveName[MAX_PATH];
 	if (PLAYER->getIsNewGame())
 	{
@@ -339,8 +341,9 @@ void inGameScene::load()
 		//sprintf(saveName, "save/tomato.map");
 		file = CreateFile("save/tomato.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	}
-	
+	file1 = CreateFile("save/tempSave.map", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	ReadFile(file, _tile, sizeof(_tile), &read, NULL);
+	ReadFile(file1, tileSave, sizeof(tileSave), &read1, NULL);
 	CloseHandle(file);
 }
 
@@ -988,6 +991,7 @@ void inGameScene::shareTileData()
 		for (int j = 0; j < TILEX; j++)
 		{
 			PLAYER->saveTile(i, j, _tile[i][j]);
+			PLAYER->saveTempTile(i, j, tileSave[i][j]);
 		}
 	}
 }
@@ -2121,7 +2125,7 @@ void inGameScene::getItem(tagItem item)
 	bool isAdded = false;
 	for (int i = 0; i < INVENMAX; i++)
 	{
-		if (PLAYER->getInven(i)->item_kind == item.item_kind && PLAYER->getInven(i)->indexX == item.indexX)
+		if (PLAYER->getInven(i)->item_kind == item.item_kind && PLAYER->getInven(i)->indexX == item.indexX && PLAYER->getInven(i)->seedKind == item.seedKind)
 		{
 			PLAYER->setInvenItemAmount(i, PLAYER->getInven(i)->amount + 1);
 			isAdded = true;
