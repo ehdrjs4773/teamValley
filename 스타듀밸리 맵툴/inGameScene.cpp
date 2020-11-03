@@ -14,7 +14,8 @@ HRESULT inGameScene::init()
 	isShopOpen = false;
 	_isTalk = false;
 	_isTalked = false;
-	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
+
+	if (PLAYER->getLoadCount() == 0) // 최초 한번만 초기화 해줘라..
 	{
 		load();
 		setTileRect();
@@ -33,7 +34,9 @@ HRESULT inGameScene::init()
 				_tile[i][j].portal = PT_NONE;
 			}
 		}
-		_tile[29][23].portal = PT_HOUSE;
+
+		_tile[29][23].portal = PT_HOUSE; 
+		cout << "set House Portal" << endl;
 		_tile[27][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
@@ -116,7 +119,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	cout << MouseIndexX <<"\t"<<MouseIndexY << endl;
 	limitEnergy();
 
 	if (PLAYER->getstart())
