@@ -14,7 +14,8 @@ HRESULT inGameScene::init()
 	isShopOpen = false;
 	_isTalk = false;
 	_isTalked = false;
-	if (loadCount == 0) // 최초 한번만 초기화 해줘라..
+
+	if (PLAYER->getLoadCount() == 0) // 최초 한번만 초기화 해줘라..
 	{
 		load();
 		setTileRect();
@@ -33,7 +34,9 @@ HRESULT inGameScene::init()
 				_tile[i][j].portal = PT_NONE;
 			}
 		}
-		_tile[29][23].portal = PT_HOUSE;
+
+		_tile[29][23].portal = PT_HOUSE; 
+		cout << "set House Portal" << endl;
 		_tile[27][39].portal = PT_BARN;
 		//_tile[0][i + 14].portal = PT_CHICKENHOUSE;
 		_tile[12][41].portal = PT_SHOP;
@@ -116,7 +119,7 @@ void inGameScene::release()
 
 void inGameScene::update()
 {
-	cout << MouseIndexX << "\t" << MouseIndexY << endl;
+	cout << MouseIndexX <<"\t"<<MouseIndexY << endl;
 	limitEnergy();
 
 	if (PLAYER->getstart())
@@ -546,29 +549,28 @@ void inGameScene::renderObjects(int i, int j)
 			}
 			else if (_tile[i][j].obj == OBJ_EQUIPMENT)
 			{
-				IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-					_tile[i - 1][j].objFrameX, _tile[i-1][j].objFrameY);
-				IMAGEMANAGER->findImage("토마토아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-					_tile[i-1][j].objFrameX, _tile[i-1][j].objFrameY);
+				//IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+				//	_tile[i][j].objFrameX, _tile[i][j].objFrameY);
+				//IMAGEMANAGER->findImage("토마토아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
+				//	_tile[i][j].objFrameX, _tile[i][j].objFrameY);
 				
 				if (_tile[i][j].objType==OTY_BOX) //상자
 				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						0,0);
 				}
 				else if (_tile[i][j].objType==OTY_BLASTFURNACE) //용광로
 				{
-					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
+					IMAGEMANAGER->findImage("아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top,
 						1, 0);
 				}
 				else if (_tile[i][j].objType == OTY_SCARECROW) //허수아비
 				{
-					IMAGEMANAGER->frameRender("아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i-1][j].rc.left, _tile[i-1][j].rc.top, _tile[i-1][j].objFrameX, 0);
+					IMAGEMANAGER->frameRender("아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
 				}
 				else if (_tile[i][j].objType == OTY_TOMATOSCARECROW) //토마토 허수아비
 				{
-					IMAGEMANAGER->findImage("토마토아이템제작스몰")->frameRender(CAMERAMANAGER->getMemDC(), _tile[i - 1][j].rc.left, _tile[i - 1][j].rc.top,
-						_tile[i-1][j].objFrameX, 0);
+					IMAGEMANAGER->frameRender("토마토아이템제작스몰", CAMERAMANAGER->getMemDC(), _tile[i][j].rc.left, _tile[i][j].rc.top, _tile[i][j].objFrameX, 0);
 				}
 				
 			}
@@ -2854,6 +2856,8 @@ void inGameScene::setEventGround()
 			}
 			else if ((j == 6 || j == 12 || j == 17) && i == 20)
 			{
+				_tile[i][j].terrainFrameX = 1;
+				_tile[i][j].terrainFrameY = 1;
 				_tile[i - 1][j].obj = OBJ_EQUIPMENT;
 				_tile[i - 1][j].objType = OTY_SCARECROW;
 				if (j == 6)

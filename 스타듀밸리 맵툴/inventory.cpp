@@ -73,6 +73,7 @@ void inventory::release()
 
 void inventory::update()
 {
+
 	if (INPUT->GetKeyDown(VK_F8))
 	{
 		PLAYER->setFarmingExp(100);

@@ -109,8 +109,7 @@ void  player::release()
 
 void  player::update()
 {
-	//cout << playerCombatLevel << "\t" << combatExp << "\t" << playerFarmingLevel << "\t" << farmingExp << endl;
-	//cout << _inventory->getvInven()[1].energyRecover << endl;
+	cout << inGameLoadCount << endl;
 	if (INPUT->GetKeyDown(VK_F9))
 	{
 		playerEnergy = MAXENERGY;
@@ -1307,7 +1306,7 @@ void player::countTime()
 	}
 	if (hour >= 24)
 	{
-		//date += 1;
+		date += 1;
 		day = (DAYOFWEEK)(day + 1);
 		hour = 0;
 	}
@@ -1342,11 +1341,16 @@ void player::countTime()
 
 void player::resetClock()
 {
-	date++;
+	int rnd = RANDOM->range(5);
+	hour < 24 && hour > 2 ? date += 1 : date = date;
 	hour < 24 ? day = (DAYOFWEEK)(day + 1) : day = day;
 	hour = 6;
 	minute = 0;
-	currentWeather = (WEATHER)RANDOM->range(5);
+	if (rnd != 1 || rnd != 2 || rnd != 4)
+	{
+		currentWeather = (WEATHER)rnd;
+	}
+
 	darkAlpha = .0f;
 }
 
@@ -1715,14 +1719,7 @@ void player::makeCropGrow(int i, int j)
 	{
 		if (!_tile[i][j].isFullyGrown)
 		{
-			if ((_tile[i][j].seedType == SEED_TOMATO
-				|| _tile[i][j].seedType == SEED_HOTPEPPER
-				|| _tile[i][j].seedType == SEED_GRAPE
-				|| _tile[i][j].seedType == SEED_GREENBEAN
-				|| _tile[i][j].seedType == SEED_BLUEBERRY
-				|| _tile[i][j].seedType == SEED_CORN
-				|| _tile[i][j].seedType == SEED_HOPS)
-				&& _tile[i][j].objFrameX == 7)
+			if (_tile[i][j].objFrameX == 7)
 			{
 				if (_tile[i][j].isWet)
 				{
